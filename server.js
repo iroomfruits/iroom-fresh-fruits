@@ -15,6 +15,9 @@ const ENV={
   SMTP_USER:process.env.SMTP_USER||"",
   SMTP_PASSWORD:process.env.SMTP_PASSWORD||"",
   ORDER_EMAIL:process.env.ORDER_EMAIL||"",
+  BREVO_API_KEY:process.env.BREVO_API_KEY||"",
+  BREVO_SENDER_EMAIL:process.env.BREVO_SENDER_EMAIL||"",
+  BREVO_SENDER_NAME:process.env.BREVO_SENDER_NAME||"이룸 fresh fruits",
   SENS_ACCESS_KEY:process.env.SENS_ACCESS_KEY||"",
   SENS_SECRET_KEY:process.env.SENS_SECRET_KEY||"",
   SENS_SERVICE_ID:process.env.SENS_SERVICE_ID||"",
@@ -154,6 +157,40 @@ function buildBandHomepagePosts(s,siteUrlOverride=""){
   return posts;
 }
 
+function brevoSend(s,{to,subject,text}){
+  const apiKey=ENV.BREVO_API_KEY||"";
+  const senderEmail=ENV.BREVO_SENDER_EMAIL||ENV.SMTP_USER||s.settings?.smtpUser||s.settings?.email||"";
+  const senderName=ENV.BREVO_SENDER_NAME||s.settings?.brand||"이룸 fresh fruits";
+  if(!apiKey||!senderEmail||!to)return Promise.resolve({ok:false,skipped:true,reason:"Brevo API 미설정"});
+  return new Promise(resolve=>{
+    const body=JSON.stringify({
+      sender:{name:senderName,email:senderEmail},
+      to:[{email:to}],
+      subject:String(subject||"이룸 fresh fruits 알림"),
+      textContent:String(text||"")
+    });
+    const rq=https.request({
+      hostname:"api.brevo.com",path:"/v3/smtp/email",method:"POST",
+      headers:{"accept":"application/json","api-key":apiKey,"content-type":"application/json","content-length":Buffer.byteLength(body)}
+    },rr=>{
+      let raw="";rr.on("data",c=>raw+=c);rr.on("end",()=>{
+        let data={};try{data=raw?JSON.parse(raw):{}}catch{}
+        if(rr.statusCode>=200&&rr.statusCode<300)return resolve({ok:true,status:rr.statusCode,messageId:data.messageId||""});
+        resolve({ok:false,status:rr.statusCode,error:data.message||raw.slice(0,500)||`Brevo HTTP ${rr.statusCode}`});
+      });
+    });
+    rq.setTimeout(15000,()=>{rq.destroy(new Error("Brevo API timeout"))});
+    rq.on("error",e=>resolve({ok:false,error:e.message}));rq.write(body);rq.end();
+  });
+}
+async function mailSend(s,payload){
+  // Render Free에서는 SMTP outbound 포트가 제한될 수 있으므로 HTTPS API를 우선 사용.
+  if(ENV.BREVO_API_KEY){
+    const r=await brevoSend(s,payload);
+    if(r.ok||!r.skipped)return r;
+  }
+  return smtpSend(s,payload);
+}
 function smtpSend(s,{to,subject,text}){
   const host=getSecret(s,"smtpHost","SMTP_HOST")||"smtp.naver.com";
   const port=Number(ENV.SMTP_PORT||s.settings?.smtpPort||465);
@@ -221,7 +258,7 @@ async function notifyOrder(s,o){
     `배송메모: ${o.deliveryMemo||""}`
   ].join("\n");
   const [mail,sms]=await Promise.allSettled([
-    smtpSend(s,{to:email,subject:`[이룸] 새 주문 ${o.id} · ${o.customer?.name||""}`,text:detail}),
+    mailSend(s,{to:email,subject:`[이룸] 새 주문 ${o.id} · ${o.customer?.name||""}`,text:detail}),
     sensSend(s,{to:phone,content:msg})
   ]);
   return {mail:mail.value||{ok:false},sms:sms.value||{ok:false}};
@@ -232,7 +269,7 @@ async function notifyGroupBuy(s,g,p){
   const phone=ENV.ADMIN_PHONE||s.settings?.adminPhone||s.settings?.phone||"";
   const msg=`[이룸 공구] ${g.title} / ${p.name} / ${p.qty}개`;
   const detail=[msg,`참여번호: ${p.id}`,`접수시간: ${p.createdAt}`,`연락처: ${p.phone}`,`수령방법: ${p.receiveMethod||""}`,`주소: ${p.address||""}`,`메모: ${p.memo||""}`].join("\n");
-  const [mail,sms]=await Promise.allSettled([smtpSend(s,{to:email,subject:`[이룸] 공동구매 참여 · ${g.title}`,text:detail}),sensSend(s,{to:phone,content:msg})]);
+  const [mail,sms]=await Promise.allSettled([mailSend(s,{to:email,subject:`[이룸] 공동구매 참여 · ${g.title}`,text:detail}),sensSend(s,{to:phone,content:msg})]);
   return {mail:mail.value||{ok:false},sms:sms.value||{ok:false}};
 }
 
@@ -420,7 +457,7 @@ if(m==="POST"&&p==="/api/admin/login"){
     const email=ENV.ORDER_EMAIL||s.settings.orderEmail||s.settings.email||"";
     const phone=ENV.ADMIN_PHONE||s.settings.adminPhone||s.settings.phone||"";
     const result={};
-    if(type==="email"||type==="both")result.email=await smtpSend(s,{to:email,subject:"[이룸] 온라인 운영판 메일 테스트",text:"이룸 fresh fruits 온라인 운영판 메일 연동 테스트입니다."});
+    if(type==="email"||type==="both")result.email=await mailSend(s,{to:email,subject:"[이룸] 온라인 운영판 메일 테스트",text:"이룸 fresh fruits 온라인 운영판 메일 연동 테스트입니다."});
     if(type==="sms"||type==="both")result.sms=await sensSend(s,{to:phone,content:"[이룸] 온라인 운영판 문자 연동 테스트"});
     return send(res,200,result);
   }
