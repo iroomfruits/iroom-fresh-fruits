@@ -1,0 +1,12 @@
+{
+  "name": "iroom-fresh-fruits-v35-online",
+  "version": "35.1.0",
+  "private": true,
+  "scripts": {
+    "start": "node start-online.js",
+    "check": "node --check server.js"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
