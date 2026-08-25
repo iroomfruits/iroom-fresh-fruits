@@ -1,13 +1,12 @@
 {
   "name": "이룸 fresh fruits",
   "short_name": "이룸과일",
-  "description": "국내산 제철과일과 프리미엄 선물세트를 만나보는 이룸 fresh fruits 앱",
+  "description": "국내산 제철과일과 프리미엄 과일선물세트",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
-  "background_color": "#fffdfa",
-  "theme_color": "#0b2119",
-  "orientation": "portrait-primary",
+  "background_color": "#ffffff",
+  "theme_color": "#0b3a27",
   "icons": [
     {
       "src": "/icons/icon-192.png",
@@ -20,30 +19,6 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
-    }
-  ],
-  "shortcuts": [
-    {
-      "name": "상품 보기",
-      "short_name": "상품",
-      "url": "/#shop",
-      "icons": [
-        {
-          "src": "/icons/icon-192.png",
-          "sizes": "192x192"
-        }
-      ]
-    },
-    {
-      "name": "찜",
-      "short_name": "찜",
-      "url": "/#wishlist",
-      "icons": [
-        {
-          "src": "/icons/icon-192.png",
-          "sizes": "192x192"
-        }
-      ]
     }
   ]
 }
