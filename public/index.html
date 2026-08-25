@@ -6,6 +6,23 @@
 <title>이룸 fresh fruits | 프리미엄 국내산 과일·선물세트</title>
 <meta name="description" content="국내산 제철과일과 프리미엄 과일선물세트를 엄선해 보내드리는 이룸 fresh fruits.">
 <meta name="theme-color" content="#0b3a27">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="이룸 fresh fruits">
+<meta property="og:title" content="이룸 fresh fruits | 프리미엄 국내산 과일·선물세트">
+<meta property="og:description" content="자연의 신선함을 프리미엄으로 전합니다. 엄선한 국내산 제철과일과 품격 있는 과일선물세트.">
+<meta property="og:url" content="https://iroom-fresh-fruits.onrender.com/">
+<meta property="og:image" content="https://iroom-fresh-fruits.onrender.com/assets/share-luxury-v67.jpg?v=67">
+<meta property="og:image:secure_url" content="https://iroom-fresh-fruits.onrender.com/assets/share-luxury-v67.jpg?v=67">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="이룸 fresh fruits 프리미엄 국내산 과일 선물세트">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="이룸 fresh fruits | 프리미엄 국내산 과일·선물세트">
+<meta name="twitter:description" content="자연의 신선함을 프리미엄으로 전합니다.">
+<meta name="twitter:image" content="https://iroom-fresh-fruits.onrender.com/assets/share-luxury-v67.jpg?v=67">
+
 <link rel="manifest" href="/manifest.webmanifest?v=66">
 <link rel="apple-touch-icon" href="/icons/icon-192.png?v=66">
 <link rel="icon" type="image/png" href="/icons/icon-192.png?v=66">
@@ -100,6 +117,13 @@ footer{background:#0d2d20;color:#fff;padding:42px 0}.foot{display:grid;grid-temp
 <button class="share-float" id="shareFloat">↗ 공유하기</button><div class="share-toast" id="shareToast">링크를 복사했습니다.</div>
 <div class="install-banner" id="installBanner"><img src="/icons/icon-192.png?v=66" alt="이룸 앱 아이콘" style="width:42px;height:42px;border-radius:10px;flex:0 0 auto"><div class="grow"><b>이룸 fresh fruits 앱 설치</b><div style="font-size:12px;opacity:.8">휴대폰 홈 화면에 추가해 빠르게 이용하세요.</div></div><button id="installBannerBtn">설치하기</button><button class="close" id="installClose">×</button></div>
 
+
+<div class="modal" id="shareModal"><div class="modalbox"><div class="modalhead"><h3>공유하기</h3><button data-close>×</button></div>
+<p style="font-size:13px;color:#666;line-height:1.7">아래 주소를 복사해 BAND, 카카오톡, 문자 등에 공유하세요.</p>
+<div class="field"><input id="shareUrlInput" readonly value=""></div>
+<button class="fullbtn" id="copyShareUrl">링크 복사</button>
+</div></div>
+
 <div class="modal" id="loginModal"><div class="modalbox"><div class="modalhead"><h3>로그인</h3><button data-close>×</button></div><div class="field"><label>아이디</label><input id="loginUser"></div><div class="field"><label>비밀번호</label><input id="loginPass" type="password"></div><button class="fullbtn" id="doLogin">로그인</button><p id="loginMsg" style="font-size:12px;color:#b03d3d"></p></div></div>
 <div class="modal" id="searchModal"><div class="modalbox"><div class="modalhead"><h3>상품 검색</h3><button data-close>×</button></div><div class="field"><input id="searchInput" placeholder="배, 사과, 샤인머스켓"></div><div id="searchResults"></div></div></div>
 
@@ -126,7 +150,7 @@ async function shareContent(title,text,url=location.href){
   try{
     if(navigator.share){await navigator.share({title,text,url});trackShare();return}
     if(navigator.clipboard){await navigator.clipboard.writeText(url);toast("공유 링크를 복사했습니다.");trackShare();return}
-    prompt("아래 주소를 복사해 공유하세요.",url);
+    const input=q("#shareUrlInput"); if(input) input.value=url; open("shareModal");
   }catch(e){if(e && e.name!=="AbortError") toast("공유를 다시 시도해주세요.")}
 }
 function trackShare(){
@@ -145,7 +169,11 @@ function showProduct(name){
   q("#detailText").innerHTML="<b>"+p.price.toLocaleString()+"원 ~</b><br>"+p.unit+"<br><br>"+p.desc+"<br><span style='font-size:11px'>※ 제철·산지 상황에 따라 구성과 가격이 달라질 수 있습니다.</span>";
   open("productModal");
 }
-q("#shareBtn").onclick=q("#shareFloat").onclick=()=>shareContent("이룸 fresh fruits","좋은 산지의 제철 과일과 프리미엄 선물세트를 만나보세요.");
+[q("#shareBtn"),q("#shareFloat")].filter(Boolean).forEach(btn=>btn.addEventListener("click",()=>shareContent(
+  "이룸 fresh fruits | 프리미엄 국내산 과일·선물세트",
+  "자연의 신선함을 프리미엄으로 전합니다. 엄선한 국내산 제철과일과 품격 있는 과일선물세트.",
+  location.origin+location.pathname
+)));
 qa(".shareProduct").forEach(b=>b.onclick=e=>{e.stopPropagation();shareProduct(b.dataset.product)});
 qa(".detailBtn").forEach(b=>b.onclick=e=>{e.stopPropagation();showProduct(b.dataset.product)});
 qa(".product").forEach(p=>p.addEventListener("click",e=>{if(e.target.closest("button"))return;showProduct(p.dataset.name)}));
@@ -167,11 +195,13 @@ q("#cartBtn").onclick=()=>{
   if(cart.length){
     const total=cart.reduce((n,x)=>n+x.price*x.qty,0);
     q("#cartContent").innerHTML=cart.map((x,i)=>'<div style="display:flex;justify-content:space-between;border-bottom:1px solid #eee;padding:12px 0"><div><b>'+x.name+'</b><br><small>'+x.qty+'개 · '+(x.price*x.qty).toLocaleString()+'원</small></div><button data-i="'+i+'" class="remove">삭제</button></div>').join("")+'<div class="cart-summary">예상 합계 '+total.toLocaleString()+'원</div><div class="cart-actions"><a class="order" href="/band-order.html">주문하기</a><a class="chat" href="https://open.kakao.com/o/sd7wnrKi" target="_blank">상담하기</a></div>';
-  }else q("#cartContent").innerHTML='<p>장바구니가 비어 있습니다.</p><a class="greenbtn" href="#best" onclick="q(\\'#cartModal\\').classList.remove(\\'open\\')">상품 보러가기</a>';
+  }else q("#cartContent").innerHTML="<p>장바구니가 비어 있습니다.</p><a class=\"greenbtn\" href=\"#best\" id=\"emptyCartShopBtn\">상품 보러가기</a>";
   open("cartModal");
   qa(".remove").forEach(b=>b.onclick=()=>{cart.splice(Number(b.dataset.i),1);localStorage.setItem("iroom_cart_v62",JSON.stringify(cart));badge();q("#cartBtn").click()});
+  const emptyShop=q("#emptyCartShopBtn"); if(emptyShop) emptyShop.onclick=()=>q("#cartModal").classList.remove("open");
 };
 function open(id){q("#"+id).classList.add("open")}qa("[data-close]").forEach(b=>b.onclick=()=>b.closest(".modal").classList.remove("open"));qa(".modal").forEach(m=>m.onclick=e=>{if(e.target===m)m.classList.remove("open")});
+q("#copyShareUrl")?.addEventListener("click",async()=>{const v=q("#shareUrlInput")?.value||location.href;try{await navigator.clipboard.writeText(v);toast("공유 링크를 복사했습니다.");q("#shareModal").classList.remove("open")}catch(e){q("#shareUrlInput")?.select();document.execCommand("copy");toast("공유 링크를 복사했습니다.")}});
 q("#loginBtn").onclick=()=>open("loginModal");q("#myBtn").onclick=q("#myTopBtn").onclick=q("#ordersBtn").onclick=()=>{if(!localStorage.getItem("iroom_member_token"))open("loginModal");else alert("마이페이지/주문조회는 로그인된 계정의 주문내역을 표시합니다.")};
 q("#doLogin").onclick=async()=>{try{const r=await fetch("/api/login",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({username:q("#loginUser").value,password:q("#loginPass").value})});const d=await r.json();if(!r.ok)throw Error(d.error||"로그인 실패");localStorage.setItem("iroom_member_token",d.token);q("#loginMsg").style.color="#246044";q("#loginMsg").textContent="로그인되었습니다."}catch(e){q("#loginMsg").textContent=e.message}};
 q("#customerBtn").onclick=()=>q("#footer").scrollIntoView({behavior:"smooth"});
@@ -180,6 +210,6 @@ q("#searchBtn").onclick=()=>{open("searchModal");q("#searchInput").focus()};q("#
 window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();deferredPrompt=e;q("#installBanner").classList.add("show")});
 async function installApp(){if(deferredPrompt){deferredPrompt.prompt();await deferredPrompt.userChoice;deferredPrompt=null;q("#installBanner").classList.remove("show")}else{const ios=/iphone|ipad|ipod/i.test(navigator.userAgent);alert(ios?"Safari의 공유 버튼 → 홈 화면에 추가를 선택하세요.":"브라우저 메뉴에서 '앱 설치' 또는 '홈 화면에 추가'를 선택하세요.")}}
 q("#installNow").onclick=installApp;q("#installBannerBtn").onclick=installApp;q("#installClose").onclick=()=>q("#installBanner").classList.remove("show");
-if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("/service-worker.js?v=66",{updateViaCache:"none"}).then(reg=>reg.update()).catch(()=>{}))}
+if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("/service-worker.js?v=67",{updateViaCache:"none"}).then(reg=>reg.update()).catch(()=>{}))}
 </script>
 </body></html>
