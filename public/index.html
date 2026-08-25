@@ -6,9 +6,9 @@
 <title>이룸 fresh fruits | 프리미엄 국내산 과일·선물세트</title>
 <meta name="description" content="국내산 제철과일과 프리미엄 과일선물세트를 엄선해 보내드리는 이룸 fresh fruits.">
 <meta name="theme-color" content="#0b3a27">
-<link rel="manifest" href="/manifest.webmanifest?v=65">
-<link rel="apple-touch-icon" href="/icons/icon-192.png?v=65">
-<link rel="icon" type="image/png" href="/icons/icon-192.png?v=65">
+<link rel="manifest" href="/manifest.webmanifest?v=66">
+<link rel="apple-touch-icon" href="/icons/icon-192.png?v=66">
+<link rel="icon" type="image/png" href="/icons/icon-192.png?v=66">
 <style>
 :root{--g:#0b3a27;--g2:#174c38;--ink:#181818;--muted:#777;--line:#ece8e2;--cream:#faf8f3;--gold:#b99052}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#fff;color:var(--ink);font-family:Arial,"Pretendard","Noto Sans KR",sans-serif}a{text-decoration:none;color:inherit}button,input{font:inherit}button{cursor:pointer}img{display:block;max-width:100%}.wrap{max-width:1440px;margin:auto;padding:0 34px}
@@ -27,13 +27,34 @@ header{position:sticky;top:0;z-index:40;background:#fff;border-bottom:1px solid 
 footer{background:#0d2d20;color:#fff;padding:42px 0}.foot{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px}.foot small{display:block;opacity:.72;line-height:1.8;margin-top:8px}
 .install-banner{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:80;width:min(930px,calc(100% - 30px));background:#0e452f;color:#fff;border-radius:14px;padding:14px 17px;display:none;align-items:center;gap:14px;box-shadow:0 18px 50px rgba(0,0,0,.2)}.install-banner.show{display:flex}.install-banner .grow{flex:1}.install-banner button{border:0;border-radius:7px;padding:10px 14px;font-weight:800}.install-banner .close{background:transparent;color:#fff;font-size:20px;padding:5px}
 .modal{position:fixed;inset:0;background:rgba(0,0,0,.48);z-index:100;display:none;align-items:center;justify-content:center;padding:20px}.modal.open{display:flex}.modalbox{width:min(480px,100%);max-height:90vh;overflow:auto;background:#fff;border-radius:16px;padding:28px}.modalhead{display:flex;justify-content:space-between}.modalhead h3{margin:0}.modalhead button{border:0;background:transparent;font-size:24px}.field{margin:12px 0}.field label{display:block;font-size:12px;font-weight:700;margin-bottom:6px}.field input{width:100%;padding:12px;border:1px solid #ddd;border-radius:7px}.fullbtn{width:100%;padding:12px;border:0;border-radius:7px;background:var(--g);color:#fff;font-weight:800}
+
+.share-float{position:fixed;right:20px;bottom:22px;z-index:72;border:0;border-radius:999px;background:#0b3a27;color:#fff;padding:12px 16px;font-weight:800;box-shadow:0 10px 28px rgba(0,0,0,.18);display:flex;align-items:center;gap:7px}
+.share-toast{position:fixed;left:50%;bottom:88px;transform:translateX(-50%) translateY(12px);z-index:120;background:#171717;color:#fff;border-radius:999px;padding:10px 16px;font-size:12px;opacity:0;pointer-events:none;transition:.22s}
+.share-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.product{cursor:pointer}
+.product-actions{display:flex;gap:7px;margin-top:11px}
+.product-actions button{flex:1;border:1px solid #ddd6cb;background:#fff;border-radius:6px;padding:8px 5px;font-size:11px;font-weight:700}
+.product-actions .buy{background:#0b3a27;color:#fff;border-color:#0b3a27}
+.detail-img{width:100%;height:260px;object-fit:cover;border-radius:10px;margin:12px 0}
+.detail-meta{font-size:13px;line-height:1.8;color:#666}
+.detail-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:16px}
+.detail-actions button,.detail-actions a{text-align:center;border:0;border-radius:7px;padding:12px;font-weight:800}
+.detail-actions .solid{background:#0b3a27;color:#fff}
+.detail-actions .outline{border:1px solid #d8d0c5;background:#fff;color:#171717}
+.cart-summary{padding:16px 0;text-align:right;font-weight:800}
+.cart-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.cart-actions a{display:block;text-align:center;padding:12px;border-radius:7px;font-weight:800}
+.cart-actions .order{background:#0b3a27;color:#fff}
+.cart-actions .chat{border:1px solid #d8d0c5;background:#fff}
+@media(max-width:760px){.share-float{right:14px;bottom:14px;padding:11px 14px}.detail-actions,.cart-actions{grid-template-columns:1fr}}
+
 @media(max-width:1100px){.head{grid-template-columns:220px 1fr auto}.nav{gap:20px}.hero{grid-template-columns:42% 58%}.hero-copy{padding-left:30px}.hero-copy h1{font-size:42px}.products{grid-template-columns:repeat(3,1fr)}.trust .wrap{grid-template-columns:repeat(3,1fr);gap:14px}.install{grid-template-columns:1fr 1fr}.install>div:first-child{grid-column:1/-1}.steps,.guides{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:760px){.wrap{padding:0 18px}.notice nav{display:none}.head{height:auto;padding:16px 0;grid-template-columns:1fr auto}.nav{grid-column:1/-1;order:3;overflow:auto;justify-content:flex-start;white-space:nowrap;padding-top:14px}.tools .desktop{display:none}.brand .ko{font-size:33px}.hero{display:block;height:auto}.hero-copy{padding:40px 22px 30px}.hero-copy h1{font-size:38px}.hero-media{height:330px}.trust .wrap{grid-template-columns:1fr 1fr}.products{grid-template-columns:repeat(2,1fr);gap:10px}.gift-grid,.install,.story .wrap,.foot{grid-template-columns:1fr}.steps,.guides,.reviews{grid-template-columns:1fr}.install>div:first-child{grid-column:auto}.install-banner{flex-wrap:wrap}}
 </style>
 </head>
 <body>
 <div class="notice"><div class="wrap"><div>🍊 <b>오늘의 입고</b> &nbsp; | &nbsp; 고급 국산 종합과일 입고되었습니다.</div><nav><button id="customerBtn">고객센터</button><button id="ordersBtn">주문조회</button><button id="myBtn">마이페이지</button></nav></div></div>
-<header><div class="wrap head"><a class="brand" href="/"><span class="ko">이룸</span><span class="en">fresh fruits</span><small>PREMIUM FRUIT BOUTIQUE</small></a><nav class="nav"><a href="#best">NEW & BEST</a><a href="#best">과일</a><a href="#gift">선물세트</a><a href="#group">공동구매</a><a href="#custom">단체·맞춤선물</a><a href="#story">스토리</a></nav><div class="tools"><button class="tool desktop" id="loginBtn">로그인</button><button class="tool desktop" id="myTopBtn">마이페이지</button><button class="icon desktop" id="searchBtn">⌕</button><button class="icon" id="cartBtn">🛒<span class="badge" id="cartBadge">0</span></button></div></div></header>
+<header><div class="wrap head"><a class="brand" href="/"><span class="ko">이룸</span><span class="en">fresh fruits</span><small>PREMIUM FRUIT BOUTIQUE</small></a><nav class="nav"><a href="#best">NEW & BEST</a><a href="#best">과일</a><a href="#gift">선물세트</a><a href="#group">공동구매</a><a href="#custom">단체·맞춤선물</a><a href="#story">스토리</a></nav><div class="tools"><button class="tool desktop" id="loginBtn">로그인</button><button class="tool desktop" id="myTopBtn">마이페이지</button><button class="icon desktop" id="searchBtn" title="검색">⌕</button><button class="icon" id="shareBtn" title="공유">↗</button><button class="icon" id="cartBtn">🛒<span class="badge" id="cartBadge">0</span></button></div></div></header>
 
 <main>
 <section class="hero"><div class="hero-copy"><h1>자연의 신선함을<br>프리미엄으로 전합니다</h1><p>좋은 산지의 제철 과일을 엄선하여<br>정성껏 보내드립니다.</p><a class="cta" href="#best">SHOP NOW ›</a><div class="pager"><span id="heroCount"><b>01</b> / 06</span><button id="prev">‹</button><button id="next">›</button></div></div><div class="hero-media"><img id="heroImg" src="/assets/hero-1.jpg" alt="프리미엄 과일"><div class="dots" id="dots"></div></div></section>
@@ -43,12 +64,12 @@ footer{background:#0d2d20;color:#fff;padding:42px 0}.foot{display:grid;grid-temp
 </div></section>
 
 <section class="section" id="best"><div class="wrap"><div class="sec-head"><div><h2>이룸의 추천 <span>지금 가장 신선한 과일</span></h2></div><a href="#best">전체보기 ›</a></div><div class="products">
-<article class="product" data-name="샤인머스켓" data-price="28000"><span class="label">NEW</span><img src="/assets/prod-shine.jpg" alt="샤인머스켓"><div class="info"><h3>샤인머스켓</h3><p>2kg (3~4송이)</p><span class="price">28,000원~</span><button class="cartbtn">🛒</button></div></article>
-<article class="product" data-name="나주 신고배 특선" data-price="38000"><img src="/assets/prod-pear.jpg" alt="배"><div class="info"><h3>나주 신고배 특선</h3><p>5kg (7~9과)</p><span class="price">38,000원~</span><button class="cartbtn">🛒</button></div></article>
-<article class="product" data-name="경북 홍사과" data-price="32000"><span class="label">NEW</span><img src="/assets/prod-apple.jpg" alt="사과"><div class="info"><h3>경북 홍사과</h3><p>3kg</p><span class="price">32,000원~</span><button class="cartbtn">🛒</button></div></article>
-<article class="product" data-name="제주 한라봉" data-price="28000"><img src="/assets/prod-hallabong.jpg" alt="한라봉"><div class="info"><h3>제주 한라봉</h3><p>3kg</p><span class="price">28,000원~</span><button class="cartbtn">🛒</button></div></article>
-<article class="product" data-name="프리미엄 과일세트" data-price="85000"><img src="/assets/prod-gift.jpg" alt="선물세트"><div class="info"><h3>프리미엄 과일세트</h3><p>혼합 구성</p><span class="price">85,000원~</span><button class="cartbtn">🛒</button></div></article>
-<article class="product" data-name="복숭아 백도" data-price="29000"><img src="/assets/prod-peach.jpg" alt="복숭아"><div class="info"><h3>복숭아 (백도)</h3><p>4kg</p><span class="price">29,000원~</span><button class="cartbtn">🛒</button></div></article>
+<article class="product" data-name="샤인머스켓" data-price="28000"><span class="label">NEW</span><img src="/assets/prod-shine.jpg" alt="샤인머스켓"><div class="info"><h3>샤인머스켓</h3><p>2kg (3~4송이)</p><span class="price">28,000원~</span><button class="cartbtn">🛒</button></div><div class="product-actions"><button class="detailBtn" data-product="샤인머스켓">상세보기</button><button class="shareProduct" data-product="샤인머스켓">공유</button></div></article>
+<article class="product" data-name="나주 신고배 특선" data-price="38000"><img src="/assets/prod-pear.jpg" alt="배"><div class="info"><h3>나주 신고배 특선</h3><p>5kg (7~9과)</p><span class="price">38,000원~</span><button class="cartbtn">🛒</button></div><div class="product-actions"><button class="detailBtn" data-product="나주 신고배 특선">상세보기</button><button class="shareProduct" data-product="나주 신고배 특선">공유</button></div></article>
+<article class="product" data-name="경북 홍사과" data-price="32000"><span class="label">NEW</span><img src="/assets/prod-apple.jpg" alt="사과"><div class="info"><h3>경북 홍사과</h3><p>3kg</p><span class="price">32,000원~</span><button class="cartbtn">🛒</button></div><div class="product-actions"><button class="detailBtn" data-product="경북 홍사과">상세보기</button><button class="shareProduct" data-product="경북 홍사과">공유</button></div></article>
+<article class="product" data-name="제주 한라봉" data-price="28000"><img src="/assets/prod-hallabong.jpg" alt="한라봉"><div class="info"><h3>제주 한라봉</h3><p>3kg</p><span class="price">28,000원~</span><button class="cartbtn">🛒</button></div><div class="product-actions"><button class="detailBtn" data-product="제주 한라봉">상세보기</button><button class="shareProduct" data-product="제주 한라봉">공유</button></div></article>
+<article class="product" data-name="프리미엄 과일세트" data-price="85000"><img src="/assets/prod-gift.jpg" alt="선물세트"><div class="info"><h3>프리미엄 과일세트</h3><p>혼합 구성</p><span class="price">85,000원~</span><button class="cartbtn">🛒</button></div><div class="product-actions"><button class="detailBtn" data-product="프리미엄 과일세트">상세보기</button><button class="shareProduct" data-product="프리미엄 과일세트">공유</button></div></article>
+<article class="product" data-name="복숭아 백도" data-price="29000"><img src="/assets/prod-peach.jpg" alt="복숭아"><div class="info"><h3>복숭아 (백도)</h3><p>4kg</p><span class="price">29,000원~</span><button class="cartbtn">🛒</button></div><div class="product-actions"><button class="detailBtn" data-product="복숭아 백도">상세보기</button><button class="shareProduct" data-product="복숭아 백도">공유</button></div></article>
 </div></div></section>
 
 <section class="section alt" id="gift"><div class="wrap"><div class="sec-head"><h2>선물은 상황에 맞게 <span>개인 선물부터 기업·단체 주문까지</span></h2></div><div class="gift-grid"><div class="gift-photo"><img src="/assets/prod-gift.jpg"><div class="gift-copy"><small>PREMIUM GIFT</small><h3>소중한 분께 전하는<br>프리미엄 과일 선물</h3><p>예산과 받으시는 분에 맞춰 구성과 포장을 상담해드립니다.</p></div></div><div class="panel" id="custom"><h3>기업 · 단체 · 행사 선물</h3><p>수량, 예산, 배송 일정에 맞춰 상담합니다. 여러 곳으로 보내는 주문도 문의해주세요.</p><a class="greenbtn" href="https://open.kakao.com/o/sd7wnrKi" target="_blank">맞춤 상담하기 ›</a><a class="linebtn" href="https://band.us/@iroomfruits" target="_blank">BAND 보기 ›</a></div></div></div></section>
@@ -63,21 +84,78 @@ footer{background:#0d2d20;color:#fff;padding:42px 0}.foot{display:grid;grid-temp
 
 <section class="section"><div class="wrap"><div class="sec-head"><h2>고객이 전하는 이야기</h2></div><div class="reviews"><div class="review"><div class="stars">★★★★★</div><p>포장이 깔끔하고 과일 상태도 좋아 부모님 선물로 만족했습니다.</p><small>선물세트 구매 고객</small></div><div class="review"><div class="stars">★★★★★</div><p>예산에 맞춰 설명해줘서 단체선물을 고르기가 편했습니다.</p><small>단체 선물 상담 고객</small></div><div class="review"><div class="stars">★★★★★</div><p>제철 과일이 한눈에 보여 주문하기 편하고 배송도 깔끔했습니다.</p><small>제철과일 구매 고객</small></div></div></div></section>
 
+
+<section class="section"><div class="wrap"><div class="sec-head"><h2>구매 전 확인하세요</h2></div><div class="guides">
+<div class="guide"><b>📦 신선식품 배송</b><p>산지와 출고 일정에 따라 배송일이 달라질 수 있으며, 주문 후 배송상태를 확인할 수 있습니다.</p></div>
+<div class="guide"><b>🔄 취소·변경</b><p>신선식품은 출고가 시작되기 전까지 주문 변경·취소 상담을 권장합니다.</p></div>
+<div class="guide"><b>🛡 품질 문제</b><p>수령 후 상품 상태에 이상이 있다면 사진과 함께 고객센터로 문의해주세요.</p></div>
+<div class="guide"><b>💬 선물 상담</b><p>기업·단체·기념일 선물은 예산과 수량에 맞춰 카카오/BAND로 상담할 수 있습니다.</p></div>
+</div></div></section>
+
 <section class="section alt"><div class="wrap"><div class="sec-head"><h2>자주 묻는 질문</h2></div><div class="faq"><details><summary>과일 구성은 항상 동일한가요?</summary><p>제철과 산지 상황에 따라 일부 구성과 가격이 달라질 수 있습니다.</p></details><details><summary>선물용 포장이 가능한가요?</summary><p>선물세트는 선물 목적에 맞게 포장하며 필요한 경우 상담해드립니다.</p></details><details><summary>단체 주문은 어떻게 문의하나요?</summary><p>카카오톡 또는 BAND로 수량, 예산, 희망 배송일을 알려주세요.</p></details><details><summary>주문내역은 어디서 확인하나요?</summary><p>로그인 후 상단 주문조회 또는 마이페이지에서 확인할 수 있습니다.</p></details></div></div></section>
 </main>
 
 <footer id="footer"><div class="wrap foot"><div><b>이룸 fresh fruits</b><small>국내산 제철과일과 프리미엄 과일선물세트를 정성껏 준비합니다.</small><small><a href="/band-admin.html">관리자 전용 페이지</a></small></div><div><b>고객센터</b><small>평일 09:00 ~ 18:00<br>상품 · 주문 · 배송 · 선물 상담</small></div><div><b>바로가기</b><small><a href="https://band.us/@iroomfruits" target="_blank">이룸 BAND</a><br><a href="/band-order.html">BAND 주문센터</a></small></div></div></footer>
 
-<div class="install-banner" id="installBanner"><img src="/icons/icon-192.png?v=65" alt="이룸 앱 아이콘" style="width:42px;height:42px;border-radius:10px;flex:0 0 auto"><div class="grow"><b>이룸 fresh fruits 앱 설치</b><div style="font-size:12px;opacity:.8">휴대폰 홈 화면에 추가해 빠르게 이용하세요.</div></div><button id="installBannerBtn">설치하기</button><button class="close" id="installClose">×</button></div>
+<button class="share-float" id="shareFloat">↗ 공유하기</button><div class="share-toast" id="shareToast">링크를 복사했습니다.</div>
+<div class="install-banner" id="installBanner"><img src="/icons/icon-192.png?v=66" alt="이룸 앱 아이콘" style="width:42px;height:42px;border-radius:10px;flex:0 0 auto"><div class="grow"><b>이룸 fresh fruits 앱 설치</b><div style="font-size:12px;opacity:.8">휴대폰 홈 화면에 추가해 빠르게 이용하세요.</div></div><button id="installBannerBtn">설치하기</button><button class="close" id="installClose">×</button></div>
 
 <div class="modal" id="loginModal"><div class="modalbox"><div class="modalhead"><h3>로그인</h3><button data-close>×</button></div><div class="field"><label>아이디</label><input id="loginUser"></div><div class="field"><label>비밀번호</label><input id="loginPass" type="password"></div><button class="fullbtn" id="doLogin">로그인</button><p id="loginMsg" style="font-size:12px;color:#b03d3d"></p></div></div>
 <div class="modal" id="searchModal"><div class="modalbox"><div class="modalhead"><h3>상품 검색</h3><button data-close>×</button></div><div class="field"><input id="searchInput" placeholder="배, 사과, 샤인머스켓"></div><div id="searchResults"></div></div></div>
+
+<div class="modal" id="productModal"><div class="modalbox"><div class="modalhead"><h3 id="detailTitle">상품 상세</h3><button data-close>×</button></div><img id="detailImg" class="detail-img" alt=""><div id="detailText" class="detail-meta"></div><div class="detail-actions"><button class="outline" id="detailShare">공유하기</button><button class="solid" id="detailCart">장바구니 담기</button><a class="solid" href="/band-order.html">주문하기</a><a class="outline" href="https://open.kakao.com/o/sd7wnrKi" target="_blank">상담하기</a></div></div></div>
+
 <div class="modal" id="cartModal"><div class="modalbox"><div class="modalhead"><h3>장바구니</h3><button data-close>×</button></div><div id="cartContent"></div></div></div>
 
 <script>
 "use strict";
 const q=s=>document.querySelector(s), qa=s=>Array.from(document.querySelectorAll(s));
 let hero=0, deferredPrompt=null;
+
+const productCatalog={
+ "샤인머스켓":{unit:"2kg (3~4송이)",price:28000,image:"/assets/prod-shine.jpg",desc:"향긋한 머스캣 향과 높은 당도가 특징인 프리미엄 포도입니다."},
+ "나주 신고배 특선":{unit:"5kg (7~9과)",price:38000,image:"/assets/prod-pear.jpg",desc:"아삭한 식감과 풍부한 과즙이 좋은 나주 신고배 특선입니다."},
+ "경북 홍사과":{unit:"3kg",price:32000,image:"/assets/prod-apple.jpg",desc:"산뜻한 향과 달콤한 맛이 균형 잡힌 경북 홍사과입니다."},
+ "제주 한라봉":{unit:"3kg",price:28000,image:"/assets/prod-hallabong.jpg",desc:"향이 진하고 과즙이 풍부한 제주 한라봉입니다."},
+ "프리미엄 과일세트":{unit:"혼합 구성",price:85000,image:"/assets/prod-gift.jpg?v=66",desc:"받는 분과 예산에 맞춰 엄선한 과일을 품격 있게 구성한 선물세트입니다."},
+ "복숭아 백도":{unit:"4kg",price:29000,image:"/assets/prod-peach.jpg",desc:"부드러운 과육과 향긋한 단맛이 좋은 백도 복숭아입니다."}
+};
+let currentDetailProduct=null;
+function toast(msg){const t=q("#shareToast");t.textContent=msg;t.classList.add("show");clearTimeout(window.__shareTimer);window.__shareTimer=setTimeout(()=>t.classList.remove("show"),1700)}
+async function shareContent(title,text,url=location.href){
+  try{
+    if(navigator.share){await navigator.share({title,text,url});trackShare();return}
+    if(navigator.clipboard){await navigator.clipboard.writeText(url);toast("공유 링크를 복사했습니다.");trackShare();return}
+    prompt("아래 주소를 복사해 공유하세요.",url);
+  }catch(e){if(e && e.name!=="AbortError") toast("공유를 다시 시도해주세요.")}
+}
+function trackShare(){
+  try{localStorage.setItem("iroom_share_count",String(Number(localStorage.getItem("iroom_share_count")||0)+1))}catch(e){}
+  fetch("/api/track",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({type:"share",path:location.pathname})}).catch(()=>{});
+}
+function shareProduct(name){
+  const p=productCatalog[name];
+  shareContent(name+" | 이룸 fresh fruits",name+" - "+p.unit+" · "+p.price.toLocaleString()+"원부터",location.origin+location.pathname+"#best");
+}
+function showProduct(name){
+  const p=productCatalog[name]; if(!p)return;
+  currentDetailProduct=name;
+  q("#detailTitle").textContent=name;
+  q("#detailImg").src=p.image;
+  q("#detailText").innerHTML="<b>"+p.price.toLocaleString()+"원 ~</b><br>"+p.unit+"<br><br>"+p.desc+"<br><span style='font-size:11px'>※ 제철·산지 상황에 따라 구성과 가격이 달라질 수 있습니다.</span>";
+  open("productModal");
+}
+q("#shareBtn").onclick=q("#shareFloat").onclick=()=>shareContent("이룸 fresh fruits","좋은 산지의 제철 과일과 프리미엄 선물세트를 만나보세요.");
+qa(".shareProduct").forEach(b=>b.onclick=e=>{e.stopPropagation();shareProduct(b.dataset.product)});
+qa(".detailBtn").forEach(b=>b.onclick=e=>{e.stopPropagation();showProduct(b.dataset.product)});
+qa(".product").forEach(p=>p.addEventListener("click",e=>{if(e.target.closest("button"))return;showProduct(p.dataset.name)}));
+q("#detailShare").onclick=()=>currentDetailProduct&&shareProduct(currentDetailProduct);
+q("#detailCart").onclick=()=>{
+  const name=currentDetailProduct,p=productCatalog[name];if(!p)return;
+  const x=cart.find(x=>x.name===name);x?x.qty++:cart.push({name,price:p.price,qty:1});
+  localStorage.setItem("iroom_cart_v62",JSON.stringify(cart));badge();toast("장바구니에 담았습니다.");
+};
+
 const slides=[1,2,3,4,5,6].map(n=>"/assets/hero-"+n+".jpg");
 function drawDots(){q("#dots").innerHTML=slides.map((_,i)=>'<span class="dot '+(i===hero?'on':'')+'"></span>').join("")}
 function setHero(){q("#heroImg").src=slides[hero];q("#heroCount").innerHTML="<b>0"+(hero+1)+"</b> / 06";drawDots()}
@@ -85,7 +163,14 @@ q("#prev").onclick=()=>{hero=(hero+slides.length-1)%slides.length;setHero()};q("
 let cart=JSON.parse(localStorage.getItem("iroom_cart_v62")||"[]");
 function badge(){q("#cartBadge").textContent=cart.reduce((n,x)=>n+x.qty,0)}badge();
 qa(".cartbtn").forEach(b=>b.onclick=()=>{const p=b.closest(".product"),name=p.dataset.name,price=Number(p.dataset.price),x=cart.find(x=>x.name===name);x?x.qty++:cart.push({name,price,qty:1});localStorage.setItem("iroom_cart_v62",JSON.stringify(cart));badge();b.textContent="✓";setTimeout(()=>b.textContent="🛒",600)});
-q("#cartBtn").onclick=()=>{q("#cartContent").innerHTML=cart.length?cart.map((x,i)=>'<div style="display:flex;justify-content:space-between;border-bottom:1px solid #eee;padding:12px 0"><div><b>'+x.name+'</b><br><small>'+x.qty+'개 · '+(x.price*x.qty).toLocaleString()+'원</small></div><button data-i="'+i+'" class="remove">삭제</button></div>').join(""):'<p>장바구니가 비어 있습니다.</p>';open("cartModal");qa(".remove").forEach(b=>b.onclick=()=>{cart.splice(Number(b.dataset.i),1);localStorage.setItem("iroom_cart_v62",JSON.stringify(cart));badge();q("#cartBtn").click()})};
+q("#cartBtn").onclick=()=>{
+  if(cart.length){
+    const total=cart.reduce((n,x)=>n+x.price*x.qty,0);
+    q("#cartContent").innerHTML=cart.map((x,i)=>'<div style="display:flex;justify-content:space-between;border-bottom:1px solid #eee;padding:12px 0"><div><b>'+x.name+'</b><br><small>'+x.qty+'개 · '+(x.price*x.qty).toLocaleString()+'원</small></div><button data-i="'+i+'" class="remove">삭제</button></div>').join("")+'<div class="cart-summary">예상 합계 '+total.toLocaleString()+'원</div><div class="cart-actions"><a class="order" href="/band-order.html">주문하기</a><a class="chat" href="https://open.kakao.com/o/sd7wnrKi" target="_blank">상담하기</a></div>';
+  }else q("#cartContent").innerHTML='<p>장바구니가 비어 있습니다.</p><a class="greenbtn" href="#best" onclick="q(\\'#cartModal\\').classList.remove(\\'open\\')">상품 보러가기</a>';
+  open("cartModal");
+  qa(".remove").forEach(b=>b.onclick=()=>{cart.splice(Number(b.dataset.i),1);localStorage.setItem("iroom_cart_v62",JSON.stringify(cart));badge();q("#cartBtn").click()});
+};
 function open(id){q("#"+id).classList.add("open")}qa("[data-close]").forEach(b=>b.onclick=()=>b.closest(".modal").classList.remove("open"));qa(".modal").forEach(m=>m.onclick=e=>{if(e.target===m)m.classList.remove("open")});
 q("#loginBtn").onclick=()=>open("loginModal");q("#myBtn").onclick=q("#myTopBtn").onclick=q("#ordersBtn").onclick=()=>{if(!localStorage.getItem("iroom_member_token"))open("loginModal");else alert("마이페이지/주문조회는 로그인된 계정의 주문내역을 표시합니다.")};
 q("#doLogin").onclick=async()=>{try{const r=await fetch("/api/login",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({username:q("#loginUser").value,password:q("#loginPass").value})});const d=await r.json();if(!r.ok)throw Error(d.error||"로그인 실패");localStorage.setItem("iroom_member_token",d.token);q("#loginMsg").style.color="#246044";q("#loginMsg").textContent="로그인되었습니다."}catch(e){q("#loginMsg").textContent=e.message}};
@@ -95,6 +180,6 @@ q("#searchBtn").onclick=()=>{open("searchModal");q("#searchInput").focus()};q("#
 window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();deferredPrompt=e;q("#installBanner").classList.add("show")});
 async function installApp(){if(deferredPrompt){deferredPrompt.prompt();await deferredPrompt.userChoice;deferredPrompt=null;q("#installBanner").classList.remove("show")}else{const ios=/iphone|ipad|ipod/i.test(navigator.userAgent);alert(ios?"Safari의 공유 버튼 → 홈 화면에 추가를 선택하세요.":"브라우저 메뉴에서 '앱 설치' 또는 '홈 화면에 추가'를 선택하세요.")}}
 q("#installNow").onclick=installApp;q("#installBannerBtn").onclick=installApp;q("#installClose").onclick=()=>q("#installBanner").classList.remove("show");
-if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("/service-worker.js?v=65",{updateViaCache:"none"}).then(reg=>reg.update()).catch(()=>{}))}
+if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("/service-worker.js?v=66",{updateViaCache:"none"}).then(reg=>reg.update()).catch(()=>{}))}
 </script>
 </body></html>
