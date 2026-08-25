@@ -1,10 +1,10 @@
-const CACHE='iroom-v67';
+const CACHE='iroom-v68';
 const STATIC=[
   '/',
   '/index.html',
   '/manifest.webmanifest',
-  '/icons/icon-192.png?v=67',
-  '/icons/icon-512.png?v=67'
+  '/icons/icon-192.png?v=68',
+  '/icons/icon-512.png?v=68'
 ];
 
 self.addEventListener('install', event => {
