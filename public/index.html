@@ -8,145 +8,224 @@
 <meta name="theme-color" content="#ffffff">
 <style>
 :root{
-  --green:#0b3a27;
-  --green2:#164d36;
-  --ink:#171717;
-  --muted:#6f6f6f;
-  --line:#ece8e2;
-  --cream:#faf7f0;
-  --gold:#b99052;
-  --white:#fff;
+  --green:#0b3a27;--green2:#174c38;--ink:#171717;--muted:#6b6b6b;
+  --line:#ece8e2;--cream:#faf8f3;--gold:#b99052;--white:#fff;
 }
 *{box-sizing:border-box}
-html,body{margin:0;padding:0;background:#fff;color:var(--ink);font-family:Arial,"Pretendard","Noto Sans KR",sans-serif}
+html{scroll-behavior:smooth}
+body{margin:0;background:#fff;color:var(--ink);font-family:Arial,"Pretendard","Noto Sans KR",sans-serif}
 a{text-decoration:none;color:inherit}
-button{font:inherit}
+button,input{font:inherit}
+button{cursor:pointer}
 img{display:block;max-width:100%}
 .wrap{max-width:1440px;margin:0 auto;padding:0 38px}
 
-/* top notice */
+/* notice */
 .notice{height:36px;background:#f7f5f1;border-bottom:1px solid #eee9e1;font-size:13px}
 .notice .wrap{height:100%;display:flex;align-items:center;justify-content:space-between}
-.notice strong{font-weight:700}
-.notice .right{display:flex;gap:30px;font-size:12px}
+.notice .right{display:flex;gap:22px;font-size:12px}
+.textbtn{border:0;background:transparent;padding:0;color:#222}
 
-/* main header */
-.header{height:100px;background:#fff;border-bottom:1px solid var(--line)}
-.header .wrap{height:100%;display:grid;grid-template-columns:270px 1fr 220px;align-items:center}
+/* header */
+.header{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:40}
+.header-row{height:94px;display:grid;grid-template-columns:270px 1fr auto;align-items:center}
 .brand{line-height:1}
 .brand .ko{font-family:Georgia,"Noto Serif KR",serif;font-size:42px;font-weight:700;color:#143d2c;letter-spacing:-2px}
 .brand .en{font-family:Georgia,serif;font-style:italic;font-size:18px;color:#4d7d49;margin-left:8px}
 .brand small{display:block;margin-top:9px;font-size:10px;letter-spacing:.28em;color:#7f7f7f}
-.nav{display:flex;justify-content:center;gap:44px;font-weight:700;font-size:14px}
+.nav{display:flex;justify-content:center;gap:42px;font-weight:700;font-size:14px}
 .nav a:hover{color:var(--green)}
-.tools{display:flex;justify-content:flex-end;align-items:center;gap:22px}
-.icon-btn{width:28px;height:28px;border:0;background:transparent;padding:0;cursor:pointer;position:relative}
-.icon-btn svg{width:26px;height:26px;stroke:#111;fill:none;stroke-width:1.6}
-.badge{position:absolute;right:-7px;top:-8px;background:#163f2c;color:#fff;font-size:10px;border-radius:999px;min-width:18px;height:18px;display:flex;align-items:center;justify-content:center}
+.tools{display:flex;align-items:center;gap:15px}
+.toolbtn{border:0;background:transparent;padding:5px;font-size:12px}
+.iconbtn{width:34px;height:34px;border:0;background:transparent;position:relative;padding:4px}
+.iconbtn svg{width:26px;height:26px;stroke:#111;fill:none;stroke-width:1.7}
+.badge{position:absolute;right:-3px;top:-4px;background:#173f2d;color:#fff;border-radius:999px;font-size:10px;min-width:18px;height:18px;display:flex;align-items:center;justify-content:center}
+.adminlink{border:1px solid #d8d2c8;border-radius:999px;padding:8px 12px;font-size:11px;color:#766c60;background:#fff}
 
 /* hero */
 .hero{background:#fff}
-.hero-inner{display:grid;grid-template-columns:36% 64%;height:420px;position:relative;overflow:hidden}
-.hero-copy{background:linear-gradient(90deg,#fbfaf7 0%,#fbfaf7 80%,rgba(251,250,247,.95) 100%);padding:62px 28px 40px 68px;z-index:2}
-.hero-copy h1{font-family:Georgia,"Noto Serif KR",serif;font-size:52px;line-height:1.28;letter-spacing:-2.3px;margin:0 0 22px;color:#143d2c;font-weight:500}
-.hero-copy p{font-size:14px;line-height:1.8;color:#616161;margin:0 0 22px}
+.hero-grid{height:430px;display:grid;grid-template-columns:36% 64%;overflow:hidden;position:relative}
+.hero-copy{background:linear-gradient(90deg,#fbfaf7 0%,#fbfaf7 86%,rgba(251,250,247,.96) 100%);padding:62px 30px 42px 54px;z-index:2}
+.hero-copy h1{font-family:Georgia,"Noto Serif KR",serif;font-size:52px;line-height:1.28;letter-spacing:-2.2px;margin:0 0 22px;color:#143d2c;font-weight:500}
+.hero-copy p{font-size:14px;line-height:1.9;color:#626262;margin:0 0 22px}
 .cta{display:inline-flex;align-items:center;gap:18px;background:var(--green);color:#fff;border-radius:5px;padding:13px 22px;font-size:13px;font-weight:700}
-.pager{margin-top:25px;font-size:12px;display:flex;gap:16px;align-items:center;color:#363636}
-.hero-media{position:relative;overflow:hidden;background:#eee}
-.hero-media img{width:100%;height:100%;object-fit:cover;object-position:center}
-.hero-card{position:absolute;right:32px;top:50%;transform:translateY(-50%);width:225px;background:rgba(255,255,255,.97);border-radius:18px;padding:28px 25px 22px;box-shadow:0 10px 30px rgba(0,0,0,.08)}
-.hero-card h3{font-family:Georgia,"Noto Serif KR",serif;font-size:22px;margin:0 0 14px;color:#242424}
-.hero-card p{font-size:12px;color:#666;line-height:1.65;margin:0 0 18px}
-.hero-card a{display:inline-flex;border:1px solid #99a69f;border-radius:5px;padding:10px 14px;font-weight:700;font-size:12px}
-.hero-card .slide{margin-top:20px;display:flex;align-items:center;justify-content:space-between;font-size:12px}
-.hero-media .hero-card ~ .hero-card{display:none!important}
+.pager{margin-top:24px;font-size:12px;display:flex;gap:15px;align-items:center}
+.hero-media{position:relative;background:#eee;overflow:hidden}
+.hero-media>img{width:100%;height:100%;object-fit:cover;object-position:center}
+
+/* EXACTLY ONE card */
+#heroSelectionCard{position:absolute;right:32px;top:50%;transform:translateY(-50%);width:230px;background:#fff;border-radius:18px;padding:27px 24px 22px;box-shadow:0 12px 32px rgba(0,0,0,.10);z-index:4}
+#heroSelectionCard h3{font-family:Georgia,"Noto Serif KR",serif;font-size:21px;line-height:1.35;margin:0 0 12px}
+#heroSelectionCard p{font-size:12px;color:#666;line-height:1.7;margin:0 0 18px}
+#heroSelectionCard a{display:inline-flex;border:1px solid #9aa59f;border-radius:5px;padding:9px 13px;font-size:12px;font-weight:700}
+#heroSelectionCard .slide{margin-top:20px;display:flex;justify-content:space-between;font-size:12px}
+/* legacy/accidental cards can never appear */
+.hero-card,.hero-media [data-legacy-hero-card]{display:none!important}
 
 /* trust */
-.trust{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:#fff}
+.trust{border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 .trust .wrap{display:grid;grid-template-columns:repeat(5,1fr);padding-top:20px;padding-bottom:20px}
-.trust-item{display:flex;align-items:center;justify-content:center;gap:15px;border-right:1px solid var(--line);min-height:56px}
+.trust-item{display:flex;align-items:center;justify-content:center;gap:14px;border-right:1px solid var(--line);min-height:56px}
 .trust-item:last-child{border-right:0}
-.trust-ico{font-size:28px;color:var(--green)}
+.trust-ico{font-size:27px;color:var(--green)}
 .trust-item b{display:block;font-size:13px;margin-bottom:5px}
 .trust-item span{font-size:11px;color:#777}
 
-/* products */
-.section{padding:28px 0 18px}
+/* common */
+.section{padding:34px 0}
 .sec-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
 .sec-title{display:flex;align-items:baseline;gap:12px}
-.sec-title h2{margin:0;font-size:20px;letter-spacing:-.4px}
+.sec-title h2{font-size:21px;margin:0}
 .sec-title span{font-size:12px;color:#777}
 .all{font-size:12px;font-weight:700}
-.products{display:grid;grid-template-columns:repeat(6,1fr);gap:18px}
-.product{border:1px solid #eee8e1;background:#fff;border-radius:10px;overflow:hidden;position:relative}
-.product .thumb{aspect-ratio:1.28/1;overflow:hidden;background:#f3f3f3}
-.product .thumb img{width:100%;height:100%;object-fit:cover;transition:.25s}
-.product:hover .thumb img{transform:scale(1.03)}
-.product .label{position:absolute;left:0;top:0;background:#143d2c;color:#fff;font-size:10px;padding:6px 10px;border-radius:0 0 7px 0}
-.product .label.best{background:#544a3c}
-.product .info{padding:13px 14px 15px}
-.product h3{margin:0 0 7px;font-size:14px}
-.product .unit{font-size:11px;color:#777;margin-bottom:10px}
+
+/* products */
+.products{display:grid;grid-template-columns:repeat(6,1fr);gap:17px}
+.product{border:1px solid #eee8e1;border-radius:10px;overflow:hidden;position:relative;background:#fff}
+.thumb{aspect-ratio:1.25/1;overflow:hidden;background:#f2f2f2}
+.thumb img{width:100%;height:100%;object-fit:cover;transition:.25s}
+.product:hover .thumb img{transform:scale(1.025)}
+.label{position:absolute;top:0;left:0;padding:6px 10px;background:#143d2c;color:#fff;font-size:10px;border-radius:0 0 7px 0}
+.label.best{background:#574b3b}
+.pinfo{padding:13px 14px 15px}
+.pinfo h3{font-size:14px;margin:0 0 7px}
+.unit{font-size:11px;color:#777;margin-bottom:10px}
 .price-row{display:flex;align-items:center;justify-content:space-between}
 .price{font-size:16px;font-weight:800}
-.cart-small{width:31px;height:31px;border:1px solid #ddd;border-radius:50%;background:#fff;cursor:pointer}
+.cart-small{width:32px;height:32px;border:1px solid #ddd;border-radius:50%;background:#fff}
 
 /* promos */
-.promos{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;padding:12px 0 42px}
-.promo{height:126px;border-radius:12px;background:linear-gradient(135deg,#faf8f4,#f4f1eb);display:grid;grid-template-columns:1fr 42%;align-items:center;padding:18px 22px;overflow:hidden}
+.promos{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;padding-top:12px}
+.promo{height:128px;border-radius:12px;background:linear-gradient(135deg,#faf8f4,#f3efe8);display:grid;grid-template-columns:1fr 42%;align-items:center;padding:18px 22px;overflow:hidden}
 .promo h3{font-size:17px;margin:0 0 8px}
-.promo p{font-size:11px;color:#777;margin:0 0 15px}
-.promo a{font-size:12px;font-weight:700}
-.promo img{width:100%;height:100px;object-fit:contain}
+.promo p{font-size:11px;color:#777;margin:0 0 14px}
+.promo a,.promo button{font-size:12px;font-weight:700;border:0;background:transparent;padding:0}
+.promo img{height:100px;width:100%;object-fit:contain}
 .kakao{background:#fff7da}
-.kakao .bubble{display:flex;align-items:center;justify-content:center;width:66px;height:66px;background:#fee500;border-radius:20px;font-size:24px;font-weight:900;color:#191919;margin-left:auto}
+.kakao .bubble{width:64px;height:64px;border-radius:20px;background:#fee500;display:flex;align-items:center;justify-content:center;font-size:23px;font-weight:900;margin-left:auto}
+
+/* arrivals */
+.arrivals{background:var(--cream);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:52px 0}
+.arrival-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.note-card{background:#fff;border:1px solid #eee8e1;border-radius:14px;padding:28px}
+.note-card .num{font-size:12px;color:#8b7453;margin-bottom:10px}
+.note-card h3{font-size:19px;margin:0 0 12px}
+.note-card p{font-size:13px;line-height:1.85;color:#707070;margin:0}
+
+/* gift */
+.giftgrid{display:grid;grid-template-columns:1.35fr 1fr;gap:20px}
+.gift-photo{min-height:300px;border-radius:16px;overflow:hidden;position:relative;background:#ddd}
+.gift-photo>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.gift-photo:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(7,39,27,.82),rgba(7,39,27,.08))}
+.gift-copy{position:relative;z-index:2;color:#fff;padding:44px;max-width:460px}
+.gift-copy .eyebrow{font-size:12px;letter-spacing:.16em;color:#dfcca7;margin-bottom:12px}
+.gift-copy h3{font-size:31px;line-height:1.4;margin:0 0 14px}
+.gift-copy p{font-size:13px;line-height:1.85;opacity:.9}
+.groupbox{border:1px solid #eee8e1;border-radius:16px;padding:34px;background:#fff}
+.groupbox h3{font-size:23px;margin:0 0 14px}
+.groupbox p{font-size:13px;line-height:1.9;color:#707070}
+.action-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+.greenbtn{border:0;border-radius:6px;background:var(--green);color:#fff;padding:13px 17px;font-size:13px;font-weight:700}
+.linebtn{border:1px solid #cfc7bc;border-radius:6px;background:#fff;padding:12px 16px;font-size:13px;font-weight:700}
+
+/* band section */
+.band-section{background:#f5c85a;padding:48px 0}
+.band-grid{display:grid;grid-template-columns:1fr auto;align-items:center;gap:30px}
+.band-grid h2{margin:0 0 10px;font-size:28px}
+.band-grid p{margin:0;color:#55471f;font-size:13px;line-height:1.8}
+.band-actions{display:flex;gap:10px}
+.bandbtn{display:inline-flex;align-items:center;gap:9px;background:#163f2d;color:#fff;padding:14px 18px;border-radius:8px;font-size:13px;font-weight:800}
+.bandbtn.light{background:#fff;color:#173f2d}
+
+/* story/reviews/faq */
+.story{background:#0f3425;color:#fff;padding:58px 0}
+.storygrid{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center}
+.story h2{font-family:Georgia,"Noto Serif KR",serif;font-size:34px;line-height:1.45;margin:0 0 18px}
+.story p{color:rgba(255,255,255,.76);font-size:13px;line-height:1.9}
+.storyboxes{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.storybox{background:rgba(255,255,255,.08);padding:25px;border-radius:12px}
+.storybox div{font-size:12px;opacity:.72;margin-top:8px}
+.reviews{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.review{border:1px solid #eee8e1;border-radius:14px;padding:25px;background:#fff}
+.stars{color:#b99052;font-size:15px;margin-bottom:12px}
+.review p{font-size:13px;line-height:1.8;color:#555;min-height:70px}
+.review small{color:#888}
+.faq{border-top:1px solid #e9e5df}
+.faq details{padding:19px 4px;border-bottom:1px solid #e9e5df}
+.faq summary{font-weight:700;cursor:pointer}
+.faq p{font-size:13px;line-height:1.8;color:#707070}
 
 /* footer */
-.footer{background:#0d2d20;color:#fff;padding:35px 0;margin-top:10px}
-.footer .wrap{display:flex;justify-content:space-between;gap:30px}
-.footer small{opacity:.7;line-height:1.8}
+.footer{background:#0d2d20;color:#fff;padding:42px 0}
+.footer-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:40px}
+.footer b{font-size:17px}
+.footer small{display:block;opacity:.72;line-height:1.9;margin-top:9px}
+.footer-links{display:flex;flex-direction:column;gap:8px;font-size:12px}
+.footer-admin{margin-top:15px;display:inline-flex;color:#d7c29c;font-size:11px;text-decoration:underline}
 
-/* mobile */
-@media(max-width:1050px){
-  .wrap{padding:0 18px}
-  .header{height:auto}
-  .header .wrap{grid-template-columns:1fr auto;padding-top:20px;padding-bottom:20px}
-  .nav{grid-column:1/-1;order:3;margin-top:18px;gap:22px;overflow:auto;justify-content:flex-start;padding-bottom:4px}
-  .hero-inner{grid-template-columns:42% 58%;height:390px}
-  .hero-copy{padding-left:30px}
-  .hero-copy h1{font-size:42px}
-  .products{grid-template-columns:repeat(3,1fr)}
-  .promos{grid-template-columns:repeat(2,1fr)}
+/* modal */
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.48);z-index:200;display:none;align-items:center;justify-content:center;padding:20px}
+.modal.open{display:flex}
+.modalbox{width:min(460px,100%);max-height:90vh;overflow:auto;background:#fff;border-radius:16px;padding:28px;box-shadow:0 25px 70px rgba(0,0,0,.25)}
+.modalhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+.modalhead h3{margin:0;font-size:22px}
+.close{border:0;background:transparent;font-size:24px}
+.field{margin-bottom:12px}
+.field label{display:block;font-size:12px;font-weight:700;margin-bottom:6px}
+.field input{width:100%;border:1px solid #ddd6cc;border-radius:7px;padding:12px}
+.fullbtn{width:100%;border:0;background:var(--green);color:#fff;border-radius:7px;padding:13px;font-weight:800}
+.subactions{display:flex;justify-content:space-between;margin-top:12px;font-size:12px}
+.msg{font-size:12px;margin-top:10px;min-height:18px;color:#b03d3d}
+.mycard{background:#faf8f4;border-radius:10px;padding:15px;margin-bottom:12px}
+.orderitem{border-top:1px solid #eee;padding:12px 0;font-size:12px;line-height:1.7}
+
+/* responsive */
+@media(max-width:1100px){
+ .wrap{padding:0 18px}
+ .header-row{grid-template-columns:220px 1fr auto}
+ .nav{gap:20px}
+ .hero-grid{grid-template-columns:42% 58%}
+ .hero-copy{padding-left:30px}
+ .hero-copy h1{font-size:42px}
+ .products{grid-template-columns:repeat(3,1fr)}
+ .promos{grid-template-columns:repeat(2,1fr)}
 }
-@media(max-width:720px){
-  .notice .right{display:none}
-  .header .wrap{grid-template-columns:1fr auto}
-  .brand .ko{font-size:34px}
-  .brand .en{font-size:16px}
-  .tools .hide-sm{display:none}
-  .hero-inner{display:block;height:auto}
-  .hero-copy{padding:42px 22px 35px}
-  .hero-copy h1{font-size:38px}
-  .hero-media{height:330px}
-  .hero-card{right:16px;top:auto;bottom:16px;transform:none;width:200px;padding:20px}
-  .trust .wrap{grid-template-columns:1fr 1fr}
-  .trust-item{border-bottom:1px solid var(--line)}
-  .products{grid-template-columns:repeat(2,1fr);gap:10px}
-  .promos{grid-template-columns:1fr}
-  .footer .wrap{display:block}
+@media(max-width:760px){
+ .notice .right{display:none}
+ .header-row{height:auto;padding:17px 0;grid-template-columns:1fr auto}
+ .nav{grid-column:1/-1;order:3;justify-content:flex-start;overflow:auto;padding-top:15px;white-space:nowrap}
+ .brand .ko{font-size:34px}
+ .tools .desktop{display:none}
+ .hero-grid{display:block;height:auto}
+ .hero-copy{padding:42px 22px 35px}
+ .hero-copy h1{font-size:38px}
+ .hero-media{height:340px}
+ #heroSelectionCard{right:15px;top:auto;bottom:15px;transform:none;width:205px;padding:20px}
+ .trust .wrap{grid-template-columns:1fr 1fr}
+ .trust-item{border-bottom:1px solid var(--line)}
+ .products{grid-template-columns:repeat(2,1fr);gap:10px}
+ .promos{grid-template-columns:1fr}
+ .arrival-grid,.giftgrid,.storygrid,.reviews,.footer-grid{grid-template-columns:1fr}
+ .band-grid{grid-template-columns:1fr}
+ .band-actions{flex-wrap:wrap}
 }
 </style>
 </head>
 <body>
+
 <div class="notice">
   <div class="wrap">
-    <div>🍊 <strong>오늘의 입고</strong> &nbsp; | &nbsp; 고급 국산 종합과일 입고되었습니다.</div>
-    <div class="right"><a href="#footer">고객센터</a><a href="#orders">주문조회</a><a href="#mypage">마이페이지</a></div>
+    <div>🍊 <b>오늘의 입고</b> &nbsp; | &nbsp; 고급 국산 종합과일 입고되었습니다.</div>
+    <div class="right">
+      <button class="textbtn" onclick="scrollToFooter()">고객센터</button>
+      <button class="textbtn" onclick="openOrders()">주문조회</button>
+      <button class="textbtn" onclick="openMyPage()">마이페이지</button>
+    </div>
   </div>
 </div>
 
 <header class="header">
-  <div class="wrap">
+  <div class="wrap header-row">
     <a class="brand" href="/">
       <span class="ko">이룸</span><span class="en">fresh fruits</span>
       <small>PREMIUM FRUIT BOUTIQUE</small>
@@ -160,185 +239,286 @@ img{display:block;max-width:100%}
       <a href="#story">스토리</a>
     </nav>
     <div class="tools">
-      <button class="icon-btn hide-sm" aria-label="검색">
+      <button class="toolbtn desktop" id="loginTop" onclick="openLogin()">로그인</button>
+      <button class="toolbtn desktop" onclick="openMyPage()">마이페이지</button>
+      <a class="adminlink desktop" href="/band-admin.html">관리자</a>
+      <button class="iconbtn desktop" aria-label="검색">
         <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"></circle><path d="M16 16l5 5"></path></svg>
       </button>
-      <button class="icon-btn hide-sm" aria-label="마이페이지">
+      <button class="iconbtn desktop" onclick="openMyPage()" aria-label="마이페이지">
         <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c.7-5 3.6-7 8-7s7.3 2 8 7"></path></svg>
       </button>
-      <button class="icon-btn" id="cartTop" aria-label="장바구니">
+      <button class="iconbtn" aria-label="장바구니" onclick="alert('장바구니에 담긴 상품: '+cartCount+'개')">
         <svg viewBox="0 0 24 24"><path d="M3 4h2l2 11h10l2-8H6"></path><circle cx="9" cy="20" r="1"></circle><circle cx="17" cy="20" r="1"></circle></svg>
-        <span class="badge" id="cartCount">0</span>
+        <span class="badge" id="cartBadge">0</span>
       </button>
     </div>
   </div>
 </header>
 
 <main>
-  <section class="hero">
-    <div class="hero-inner">
-      <div class="hero-copy">
-        <h1>자연의 신선함을<br>프리미엄으로 전합니다</h1>
-        <p>좋은 산지의 제철 과일을 엄선하여<br>정성껏 보내드립니다.</p>
-        <a class="cta" href="#best">SHOP NOW <span>›</span></a>
-        <div class="pager"><b>01</b> / 03 <span>‹</span><span>›</span></div>
-      </div>
-      <div class="hero-media">
-        <img src="/assets/hero-approved.jpg?v=53" alt="고급 국산 종합과일">
-        <div class="hero-card">
-          <h3>고급 국산 종합과일</h3>
-          <p>제철 과일을 한 상자에 담았습니다.</p>
-          <a href="#best">자세히 보기&nbsp; ›</a>
-          <div class="slide"><span><b>1</b> / 3</span><span>‹ &nbsp;&nbsp; ›</span></div>
+<section class="hero">
+  <div class="hero-grid">
+    <div class="hero-copy">
+      <h1>자연의 신선함을<br>프리미엄으로 전합니다</h1>
+      <p>좋은 산지의 제철 과일을 엄선하여<br>정성껏 보내드립니다.</p>
+      <a class="cta" href="#best">SHOP NOW <span>›</span></a>
+      <div class="pager"><b>01</b> / 03 <span>‹</span><span>›</span></div>
+    </div>
+    <div class="hero-media">
+      <img src="/assets/hero-approved.jpg?v=55" alt="고급 국산 종합과일">
+      <aside id="heroSelectionCard">
+        <h3>고급 국산 종합과일</h3>
+        <p>제철 과일을 한 상자에 담았습니다.</p>
+        <a href="#best">자세히 보기&nbsp; ›</a>
+        <div class="slide"><span><b>1</b> / 3</span><span>‹ &nbsp;&nbsp; ›</span></div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section class="trust">
+  <div class="wrap">
+    <div class="trust-item"><div class="trust-ico">♧</div><div><b>산지직송</b><span>신선함을 그대로</span></div></div>
+    <div class="trust-item"><div class="trust-ico">◇</div><div><b>품질 보장</b><span>선별·검수 후 배송</span></div></div>
+    <div class="trust-item"><div class="trust-ico">▣</div><div><b>안전한 배송</b><span>꼼꼼한 포장</span></div></div>
+    <div class="trust-item"><div class="trust-ico">🎁</div><div><b>프리미엄 포장</b><span>정성 담은 선물</span></div></div>
+    <div class="trust-item"><div class="trust-ico">⌕</div><div><b>맞춤 상담</b><span>단체·선물 전문 상담</span></div></div>
+  </div>
+</section>
+
+<section class="section" id="best">
+  <div class="wrap">
+    <div class="sec-head"><div class="sec-title"><h2>NEW &amp; BEST</h2><span>지금 가장 신선하고 맛있는 과일</span></div><a class="all" href="#all">전체보기 ›</a></div>
+    <div class="products">
+      <article class="product"><span class="label">NEW</span><div class="thumb"><img src="/assets/prod-shine.jpg?v=55" alt="샤인머스켓"></div><div class="pinfo"><h3>샤인머스켓</h3><div class="unit">2kg (3~4송이)</div><div class="price-row"><b class="price">28,000원 ~</b><button class="cart-small" onclick="addCart(this)">🛒</button></div></div></article>
+      <article class="product"><span class="label best">BEST</span><div class="thumb"><img src="/assets/prod-pear.jpg?v=55" alt="나주 신고배 특선"></div><div class="pinfo"><h3>나주 신고배 특선</h3><div class="unit">5kg (7~9과)</div><div class="price-row"><b class="price">38,000원 ~</b><button class="cart-small" onclick="addCart(this)">🛒</button></div></div></article>
+      <article class="product"><span class="label">NEW</span><div class="thumb"><img src="/assets/prod-apple.jpg?v=55" alt="경북 홍사과"></div><div class="pinfo"><h3>경북 홍사과</h3><div class="unit">3kg (9~11과)</div><div class="price-row"><b class="price">32,000원 ~</b><button class="cart-small" onclick="addCart(this)">🛒</button></div></div></article>
+      <article class="product"><div class="thumb"><img src="/assets/prod-hallabong.jpg?v=55" alt="제주 한라봉"></div><div class="pinfo"><h3>제주 한라봉</h3><div class="unit">3kg (8~10과)</div><div class="price-row"><b class="price">28,000원 ~</b><button class="cart-small" onclick="addCart(this)">🛒</button></div></div></article>
+      <article class="product"><span class="label best">BEST</span><div class="thumb"><img src="/assets/prod-gift.jpg?v=55" alt="프리미엄 과일세트"></div><div class="pinfo"><h3>프리미엄 과일세트</h3><div class="unit">혼합 구성</div><div class="price-row"><b class="price">85,000원 ~</b><button class="cart-small" onclick="addCart(this)">🛒</button></div></div></article>
+      <article class="product"><div class="thumb"><img src="/assets/prod-peach.jpg?v=55" alt="복숭아 백도"></div><div class="pinfo"><h3>복숭아 (백도)</h3><div class="unit">4kg (11~13과)</div><div class="price-row"><b class="price">29,000원 ~</b><button class="cart-small" onclick="addCart(this)">🛒</button></div></div></article>
+    </div>
+
+    <div class="promos">
+      <article class="promo" id="gift"><div><h3>과일 선물세트</h3><p>정성 가득한 프리미엄 선물</p><a href="#giftDetail">바로가기 ›</a></div><img src="/assets/promo-gift.jpg?v=55" alt=""></article>
+      <article class="promo" id="group"><div><h3>공동구매</h3><p>함께하면 더 좋은 가격</p><a href="/band-order.html">주문센터 ›</a></div><img src="/assets/promo-group.jpg?v=55" alt=""></article>
+      <article class="promo" id="custom"><div><h3>단체 · 맞춤선물</h3><p>기업·행사·단체 전문 상담</p><a href="#giftDetail">바로가기 ›</a></div><img src="/assets/promo-custom.jpg?v=55" alt=""></article>
+      <article class="promo kakao"><div><h3>카카오톡 상담</h3><p>빠르고 편리한 1:1 상담</p><a href="https://open.kakao.com/o/sd7wnrKi" target="_blank">상담하기 ›</a></div><div class="bubble">Ch</div></article>
+    </div>
+  </div>
+</section>
+
+<section class="arrivals">
+  <div class="wrap">
+    <div class="sec-head"><div class="sec-title"><h2>이룸이 고르는 기준</h2><span>좋은 과일을 고르는 과정부터 다르게</span></div></div>
+    <div class="arrival-grid">
+      <article class="note-card"><div class="num">01 · 산지</div><h3>제철과 산지를 먼저 봅니다</h3><p>산지와 수확 시기를 확인하고 지금 가장 맛있는 상태의 과일을 우선해 구성합니다.</p></article>
+      <article class="note-card"><div class="num">02 · 선별</div><h3>선물 기준으로 한 번 더 선별합니다</h3><p>크기와 외관만이 아니라 숙도와 상태를 함께 보고, 받는 순간까지 생각해 선별합니다.</p></article>
+      <article class="note-card"><div class="num">03 · 포장</div><h3>과일에 맞는 포장으로 보냅니다</h3><p>과일별 특성을 고려해 완충과 포장을 달리하고 신선식품에 맞는 방식으로 출고합니다.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="giftDetail">
+  <div class="wrap">
+    <div class="sec-head"><div class="sec-title"><h2>선물은 상황에 맞게</h2><span>개인 선물부터 기업·단체 주문까지</span></div></div>
+    <div class="giftgrid">
+      <article class="gift-photo">
+        <img src="/assets/prod-gift.jpg?v=55" alt="프리미엄 과일 선물세트">
+        <div class="gift-copy"><div class="eyebrow">PREMIUM GIFT</div><h3>소중한 분께 전하는<br>프리미엄 과일 선물</h3><p>예산과 받으시는 분에 맞춰 구성과 포장을 상담해드립니다.</p></div>
+      </article>
+      <article class="groupbox">
+        <h3>기업 · 단체 · 행사 선물</h3>
+        <p>수량, 예산, 배송 일정에 맞춰 상담합니다. 여러 곳으로 보내는 주문도 문의해주세요.</p>
+        <div class="action-row">
+          <a class="greenbtn" href="https://open.kakao.com/o/sd7wnrKi" target="_blank">맞춤 상담하기 ›</a>
+          <a class="linebtn" href="https://band.us/@iroomfruits" target="_blank" onclick="trackBand()">BAND 보기 ›</a>
         </div>
-      </div>
+      </article>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="trust">
-    <div class="wrap">
-      <div class="trust-item"><div class="trust-ico">♧</div><div><b>산지직송</b><span>신선함을 그대로</span></div></div>
-      <div class="trust-item"><div class="trust-ico">◇</div><div><b>품질 보장</b><span>선별·검수 후 배송</span></div></div>
-      <div class="trust-item"><div class="trust-ico">▣</div><div><b>안전한 배송</b><span>꼼꼼한 포장</span></div></div>
-      <div class="trust-item"><div class="trust-ico">🎁</div><div><b>프리미엄 포장</b><span>정성 담은 선물</span></div></div>
-      <div class="trust-item"><div class="trust-ico">⌕</div><div><b>맞춤 상담</b><span>단체·선물 전문 상담</span></div></div>
+<section class="band-section">
+  <div class="wrap band-grid">
+    <div><h2>📣 이룸 BAND와 함께 보세요</h2><p>공동구매, 입고 소식, 행사 공지를 BAND에서 빠르게 확인할 수 있습니다.<br>홈페이지 주문센터와 BAND를 함께 사용하면 주문 확인이 더 편리합니다.</p></div>
+    <div class="band-actions">
+      <a class="bandbtn" href="https://band.us/@iroomfruits" target="_blank" onclick="trackBand()">BAND 바로가기</a>
+      <a class="bandbtn light" href="/band-order.html">BAND 주문센터</a>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="section" id="best">
-    <div class="wrap">
-      <div class="sec-head">
-        <div class="sec-title"><h2>NEW &amp; BEST</h2><span>지금 가장 신선하고 맛있는 과일</span></div>
-        <a class="all" href="#all">전체보기&nbsp; ›</a>
-      </div>
-
-      <div class="products" id="productGrid">
-        <article class="product" data-id="shine"><span class="label">NEW</span><div class="thumb"><img src="/assets/prod-shine.jpg?v=53" alt="샤인머스켓"></div><div class="info"><h3>샤인머스켓</h3><div class="unit">2kg (3~4송이)</div><div class="price-row"><div class="price">28,000원 ~</div><button class="cart-small">🛒</button></div></div></article>
-        <article class="product" data-id="pear"><span class="label best">BEST</span><div class="thumb"><img src="/assets/prod-pear.jpg?v=53" alt="나주 신고배 특선"></div><div class="info"><h3>나주 신고배 특선</h3><div class="unit">5kg (7~9과)</div><div class="price-row"><div class="price">38,000원 ~</div><button class="cart-small">🛒</button></div></div></article>
-        <article class="product" data-id="apple"><span class="label">NEW</span><div class="thumb"><img src="/assets/prod-apple.jpg?v=53" alt="경북 홍사과"></div><div class="info"><h3>경북 홍사과</h3><div class="unit">3kg (9~11과)</div><div class="price-row"><div class="price">32,000원 ~</div><button class="cart-small">🛒</button></div></div></article>
-        <article class="product" data-id="hallabong"><div class="thumb"><img src="/assets/prod-hallabong.jpg?v=53" alt="제주 한라봉"></div><div class="info"><h3>제주 한라봉</h3><div class="unit">3kg (8~10과)</div><div class="price-row"><div class="price">28,000원 ~</div><button class="cart-small">🛒</button></div></div></article>
-        <article class="product" data-id="gift"><span class="label best">BEST</span><div class="thumb"><img src="/assets/prod-gift.jpg?v=53" alt="프리미엄 과일세트"></div><div class="info"><h3>프리미엄 과일세트</h3><div class="unit">혼합 구성</div><div class="price-row"><div class="price">85,000원 ~</div><button class="cart-small">🛒</button></div></div></article>
-        <article class="product" data-id="peach"><div class="thumb"><img src="/assets/prod-peach.jpg?v=53" alt="복숭아 백도"></div><div class="info"><h3>복숭아 (백도)</h3><div class="unit">4kg (11~13과)</div><div class="price-row"><div class="price">29,000원 ~</div><button class="cart-small">🛒</button></div></div></article>
-      </div>
-
-      <div class="promos">
-        <article class="promo" id="gift"><div><h3>과일 선물세트</h3><p>정성 가득한 프리미엄 선물</p><a href="#best">바로가기 ›</a></div><img src="/assets/promo-gift.jpg?v=53" alt=""></article>
-        <article class="promo" id="group"><div><h3>공동구매</h3><p>함께하면 더 좋은 가격</p><a href="/band-order.html">바로가기 ›</a></div><img src="/assets/promo-group.jpg?v=53" alt=""></article>
-        <article class="promo" id="custom"><div><h3>단체 · 맞춤선물</h3><p>기업·행사·단체 전문 상담</p><a href="#footer">바로가기 ›</a></div><img src="/assets/promo-custom.jpg?v=53" alt=""></article>
-        <article class="promo kakao"><div><h3>카카오톡 상담</h3><p>빠르고 편리한 1:1 상담</p><a href="https://open.kakao.com/o/sd7wnrKi" target="_blank">상담하기 ›</a></div><div class="bubble">Ch</div></article>
-      </div>
+<section class="story" id="story">
+  <div class="wrap storygrid">
+    <div><div style="font-size:12px;letter-spacing:.18em;color:#d7c29c;margin-bottom:16px">IROOM FRESH FRUITS</div><h2>좋은 과일을 더 쉽게,<br>선물은 더 품격 있게.</h2><p>이룸은 국내 주요 산지의 제철과일을 엄선하고 고객이 복잡하게 고민하지 않아도 좋은 선택을 할 수 있도록 안내합니다.</p></div>
+    <div class="storyboxes">
+      <div class="storybox"><b>제철 중심</b><div>지금 좋은 과일을 우선합니다</div></div>
+      <div class="storybox"><b>정직한 안내</b><div>상태와 구성을 쉽게 안내합니다</div></div>
+      <div class="storybox"><b>선물 상담</b><div>예산과 상황에 맞춰 추천합니다</div></div>
+      <div class="storybox"><b>안전한 배송</b><div>신선식품에 맞춰 포장합니다</div></div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section style="background:#faf8f4;border-top:1px solid #eee8e1;border-bottom:1px solid #eee8e1;padding:52px 0">
-    <div class="wrap">
-      <div class="sec-head">
-        <div class="sec-title"><h2>이룸이 고르는 기준</h2><span>좋은 과일을 고르는 과정부터 다르게</span></div>
-      </div>
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px">
-        <article style="background:#fff;border:1px solid #eee8e1;border-radius:14px;padding:28px">
-          <div style="font-size:12px;color:#8b7453;margin-bottom:10px">01 · 산지</div>
-          <h3 style="margin:0 0 12px;font-size:19px">제철과 산지를 먼저 봅니다</h3>
-          <p style="margin:0;color:#707070;line-height:1.8;font-size:13px">산지와 수확 시기를 확인하고, 지금 가장 맛있는 상태의 과일을 우선해 구성합니다.</p>
-        </article>
-        <article style="background:#fff;border:1px solid #eee8e1;border-radius:14px;padding:28px">
-          <div style="font-size:12px;color:#8b7453;margin-bottom:10px">02 · 선별</div>
-          <h3 style="margin:0 0 12px;font-size:19px">선물 기준으로 한 번 더 선별합니다</h3>
-          <p style="margin:0;color:#707070;line-height:1.8;font-size:13px">크기와 외관만이 아니라 숙도와 상태를 함께 보고, 받는 순간까지 생각해 선별합니다.</p>
-        </article>
-        <article style="background:#fff;border:1px solid #eee8e1;border-radius:14px;padding:28px">
-          <div style="font-size:12px;color:#8b7453;margin-bottom:10px">03 · 포장</div>
-          <h3 style="margin:0 0 12px;font-size:19px">과일에 맞는 포장으로 보냅니다</h3>
-          <p style="margin:0;color:#707070;line-height:1.8;font-size:13px">과일별 특성을 고려해 완충과 포장을 달리하고, 신선식품에 맞는 방식으로 출고합니다.</p>
-        </article>
-      </div>
+<section class="section">
+  <div class="wrap">
+    <div class="sec-head"><div class="sec-title"><h2>고객이 전하는 이야기</h2><span>선물과 과일을 받아본 고객의 경험</span></div></div>
+    <div class="reviews">
+      <article class="review"><div class="stars">★★★★★</div><p>포장이 깔끔하고 과일 상태도 좋아 부모님 선물로 만족했습니다.</p><small>선물세트 구매 고객</small></article>
+      <article class="review"><div class="stars">★★★★★</div><p>상담할 때 예산에 맞춰 구성을 설명해줘서 고르기가 편했습니다.</p><small>단체 선물 상담 고객</small></article>
+      <article class="review"><div class="stars">★★★★★</div><p>입고 안내가 한눈에 보여 제철 과일 고르기가 쉬웠습니다.</p><small>제철과일 구매 고객</small></article>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section style="padding:54px 0">
-    <div class="wrap">
-      <div class="sec-head">
-        <div class="sec-title"><h2>선물은 상황에 맞게</h2><span>개인 선물부터 기업·단체 주문까지</span></div>
-      </div>
-      <div style="display:grid;grid-template-columns:1.35fr 1fr;gap:20px">
-        <article style="min-height:260px;border-radius:16px;overflow:hidden;position:relative;background:#ece5d8">
-          <img src="/assets/prod-gift.jpg?v=54" alt="프리미엄 과일 선물세트" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0">
-          <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(8,40,28,.78),rgba(8,40,28,.08));"></div>
-          <div style="position:relative;color:#fff;padding:42px;max-width:430px">
-            <div style="font-size:12px;letter-spacing:.14em;margin-bottom:12px">PREMIUM GIFT</div>
-            <h3 style="font-size:30px;line-height:1.35;margin:0 0 14px">소중한 분께 전하는<br>프리미엄 과일 선물</h3>
-            <p style="font-size:13px;line-height:1.8;opacity:.9">예산과 받으시는 분에 맞춰 구성을 상담해드립니다.</p>
-          </div>
-        </article>
-        <article style="border:1px solid #eee8e1;border-radius:16px;padding:34px;background:#fff">
-          <h3 style="font-size:23px;margin:0 0 14px">기업 · 단체 · 행사 선물</h3>
-          <p style="font-size:13px;color:#707070;line-height:1.9;margin:0 0 22px">수량, 예산, 배송 일정에 맞춰 상담합니다. 여러 곳으로 보내는 주문도 문의해주세요.</p>
-          <a href="https://open.kakao.com/o/sd7wnrKi" target="_blank" style="display:inline-flex;background:#0b3a27;color:#fff;border-radius:6px;padding:13px 18px;font-size:13px;font-weight:700">맞춤 상담하기 ›</a>
-        </article>
-      </div>
+<section class="section">
+  <div class="wrap">
+    <div class="sec-head"><div class="sec-title"><h2>자주 묻는 질문</h2><span>주문 전에 많이 궁금해하시는 내용</span></div></div>
+    <div class="faq">
+      <details><summary>과일 구성은 항상 동일한가요?</summary><p>제철과 산지 상황에 따라 일부 구성과 가격이 달라질 수 있습니다. 주문 시 표시된 상품 정보를 기준으로 준비합니다.</p></details>
+      <details><summary>선물용 포장이 가능한가요?</summary><p>선물세트 상품은 선물 목적에 맞게 포장하며, 필요한 경우 상담을 통해 구성과 포장을 안내해드립니다.</p></details>
+      <details><summary>단체 주문은 어떻게 문의하나요?</summary><p>카카오톡 또는 BAND를 통해 수량, 예산, 희망 배송일을 알려주시면 확인 후 안내드립니다.</p></details>
+      <details><summary>주문내역은 어디서 확인하나요?</summary><p>로그인 후 상단의 마이페이지 또는 주문조회 버튼을 누르면 본인의 주문내역을 확인할 수 있습니다.</p></details>
     </div>
-  </section>
-
-  <section style="background:#0f3425;color:#fff;padding:58px 0" id="story">
-    <div class="wrap" style="display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center">
-      <div>
-        <div style="font-size:12px;letter-spacing:.18em;color:#d7c29c;margin-bottom:16px">IROOM FRESH FRUITS</div>
-        <h2 style="font-family:Georgia,'Noto Serif KR',serif;font-size:34px;line-height:1.45;margin:0 0 18px">좋은 과일을 더 쉽게,<br>선물은 더 품격 있게.</h2>
-        <p style="margin:0;color:rgba(255,255,255,.76);font-size:13px;line-height:1.9">이룸은 국내 주요 산지의 제철과일을 엄선하고, 고객이 복잡하게 고민하지 않아도 좋은 선택을 할 수 있도록 안내합니다.</p>
-      </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-        <div style="background:rgba(255,255,255,.08);padding:25px;border-radius:12px"><b>제철 중심</b><div style="font-size:12px;opacity:.7;margin-top:8px">지금 좋은 과일을 우선합니다</div></div>
-        <div style="background:rgba(255,255,255,.08);padding:25px;border-radius:12px"><b>정직한 안내</b><div style="font-size:12px;opacity:.7;margin-top:8px">상태와 구성을 쉽게 안내합니다</div></div>
-        <div style="background:rgba(255,255,255,.08);padding:25px;border-radius:12px"><b>선물 상담</b><div style="font-size:12px;opacity:.7;margin-top:8px">예산과 상황에 맞춰 추천합니다</div></div>
-        <div style="background:rgba(255,255,255,.08);padding:25px;border-radius:12px"><b>안전한 배송</b><div style="font-size:12px;opacity:.7;margin-top:8px">신선식품에 맞춰 포장합니다</div></div>
-      </div>
-    </div>
-  </section>
-
-  <section style="padding:50px 0 64px">
-    <div class="wrap">
-      <div class="sec-head"><div class="sec-title"><h2>자주 묻는 질문</h2><span>주문 전에 많이 궁금해하시는 내용</span></div></div>
-      <div style="border-top:1px solid #e9e5df">
-        <details style="padding:19px 4px;border-bottom:1px solid #e9e5df"><summary style="font-weight:700;cursor:pointer">과일 구성은 항상 동일한가요?</summary><p style="color:#707070;font-size:13px;line-height:1.8">제철과 산지 상황에 따라 일부 구성과 가격이 달라질 수 있습니다. 주문 시 표시된 상품 정보를 기준으로 준비합니다.</p></details>
-        <details style="padding:19px 4px;border-bottom:1px solid #e9e5df"><summary style="font-weight:700;cursor:pointer">선물용 포장이 가능한가요?</summary><p style="color:#707070;font-size:13px;line-height:1.8">선물세트 상품은 선물 목적에 맞게 포장하며, 필요한 경우 상담을 통해 구성과 포장을 안내해드립니다.</p></details>
-        <details style="padding:19px 4px;border-bottom:1px solid #e9e5df"><summary style="font-weight:700;cursor:pointer">단체 주문은 어떻게 문의하나요?</summary><p style="color:#707070;font-size:13px;line-height:1.8">카카오톡 상담으로 수량, 예산, 희망 배송일을 알려주시면 확인 후 안내드립니다.</p></details>
-      </div>
-    </div>
-  </section>
-
+  </div>
+</section>
 </main>
 
 <footer class="footer" id="footer">
-  <div class="wrap">
-    <div><b>이룸 fresh fruits</b><br><small>국내산 제철과일과 프리미엄 과일선물세트를 정성껏 준비합니다.</small></div>
-    <small>고객센터 평일 09:00 ~ 18:00<br>주문 및 배송 문의는 카카오톡 상담을 이용해주세요.</small>
+  <div class="wrap footer-grid">
+    <div><b>이룸 fresh fruits</b><small>국내산 제철과일과 프리미엄 과일선물세트를 정성껏 준비합니다.</small><a class="footer-admin" href="/band-admin.html">관리자 전용 페이지</a></div>
+    <div><b>고객센터</b><small>평일 09:00 ~ 18:00<br>상품 · 주문 · 배송 · 선물 상담</small></div>
+    <div class="footer-links"><b>바로가기</b><a href="https://band.us/@iroomfruits" target="_blank" onclick="trackBand()">이룸 BAND</a><a href="/band-order.html">BAND 주문센터</a><button class="textbtn" style="color:#fff;text-align:left" onclick="openLogin()">회원 로그인</button><button class="textbtn" style="color:#fff;text-align:left" onclick="openMyPage()">마이페이지</button></div>
   </div>
 </footer>
 
-<script>
-(function(){
-  // Always show the newly approved page, not old SPA fragments.
-  try{ localStorage.removeItem('iroom_old_home'); }catch(e){}
-  let cart=0;
-  const count=document.getElementById('cartCount');
-  document.querySelectorAll('.cart-small').forEach(btn=>{
-    btn.addEventListener('click',()=>{
-      cart++;
-      count.textContent=cart;
-      btn.textContent='✓';
-      setTimeout(()=>btn.textContent='🛒',700);
-    });
-  });
-  // Defensive cleanup: only one hero selection card should exist.
-  document.querySelectorAll('.hero-card').forEach((el, i) => { if(i > 0) el.remove(); });
+<!-- Login/signup modal -->
+<div class="modal" id="loginModal">
+  <div class="modalbox">
+    <div class="modalhead"><h3 id="authTitle">로그인</h3><button class="close" onclick="closeModal('loginModal')">×</button></div>
+    <div id="loginPane">
+      <div class="field"><label>아이디</label><input id="loginUser" autocomplete="username"></div>
+      <div class="field"><label>비밀번호</label><input id="loginPass" type="password" autocomplete="current-password"></div>
+      <button class="fullbtn" onclick="doLogin()">로그인</button>
+      <div class="msg" id="loginMsg"></div>
+      <div class="subactions"><button class="textbtn" onclick="showSignup()">회원가입</button><button class="textbtn" onclick="closeModal('loginModal')">닫기</button></div>
+    </div>
+    <div id="signupPane" style="display:none">
+      <div class="field"><label>아이디 (영문/숫자/_ 4~20자)</label><input id="suUser"></div>
+      <div class="field"><label>비밀번호 (6자 이상)</label><input id="suPass" type="password"></div>
+      <div class="field"><label>이름</label><input id="suName"></div>
+      <div class="field"><label>연락처</label><input id="suPhone"></div>
+      <div class="field"><label>이메일</label><input id="suEmail" type="email"></div>
+      <button class="fullbtn" onclick="doSignup()">회원가입</button>
+      <div class="msg" id="signupMsg"></div>
+      <div class="subactions"><button class="textbtn" onclick="showLogin()">로그인으로</button><button class="textbtn" onclick="closeModal('loginModal')">닫기</button></div>
+    </div>
+  </div>
+</div>
 
-  // 관리자 전용 진입: 일반 화면에는 노출하지 않음.
-  // Ctrl + Alt + A 를 누르면 관리자 페이지로 이동합니다.
-  document.addEventListener('keydown', (e) => {
-    if (e.ctrlKey && e.altKey && (e.key === 'a' || e.key === 'A')) {
-      window.location.href = '/band-admin.html';
-    }
-  });
+<!-- my page modal -->
+<div class="modal" id="myModal">
+  <div class="modalbox">
+    <div class="modalhead"><h3>마이페이지</h3><button class="close" onclick="closeModal('myModal')">×</button></div>
+    <div id="myContent">불러오는 중...</div>
+  </div>
+</div>
+
+<script>
+let cartCount=0;
+const TOKEN_KEY='iroom_member_token';
+
+function token(){return localStorage.getItem(TOKEN_KEY)||''}
+function authHeaders(){const t=token();return t?{'Authorization':'Bearer '+t}:{}}
+function openModal(id){document.getElementById(id).classList.add('open')}
+function closeModal(id){document.getElementById(id).classList.remove('open')}
+function scrollToFooter(){document.getElementById('footer').scrollIntoView({behavior:'smooth'})}
+
+function addCart(btn){
+  cartCount++;
+  document.getElementById('cartBadge').textContent=cartCount;
+  const old=btn.textContent;btn.textContent='✓';
+  fetch('/api/track',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({type:'cart',source:'homepage'})}).catch(()=>{});
+  setTimeout(()=>btn.textContent=old,700);
+}
+
+function openLogin(){showLogin();openModal('loginModal')}
+function showSignup(){document.getElementById('loginPane').style.display='none';document.getElementById('signupPane').style.display='block';document.getElementById('authTitle').textContent='회원가입'}
+function showLogin(){document.getElementById('signupPane').style.display='none';document.getElementById('loginPane').style.display='block';document.getElementById('authTitle').textContent='로그인'}
+
+async function doLogin(){
+  const msg=document.getElementById('loginMsg');msg.textContent='확인 중...';
+  try{
+    const r=await fetch('/api/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({username:loginUser.value.trim(),password:loginPass.value})});
+    const d=await r.json();
+    if(!r.ok) throw new Error(d.error||'로그인 실패');
+    localStorage.setItem(TOKEN_KEY,d.token);
+    msg.style.color='#246044';msg.textContent=d.member.name?d.member.name+'님, 로그인되었습니다.':'로그인되었습니다.';
+    document.getElementById('loginTop').textContent='로그아웃';
+    document.getElementById('loginTop').onclick=doLogout;
+    setTimeout(()=>closeModal('loginModal'),500);
+  }catch(e){msg.style.color='#b03d3d';msg.textContent=e.message}
+}
+async function doSignup(){
+  const msg=document.getElementById('signupMsg');msg.textContent='가입 처리 중...';
+  try{
+    const r=await fetch('/api/signup',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({username:suUser.value.trim(),password:suPass.value,name:suName.value.trim(),phone:suPhone.value.trim(),email:suEmail.value.trim()})});
+    const d=await r.json();
+    if(!r.ok) throw new Error(d.error||'회원가입 실패');
+    localStorage.setItem(TOKEN_KEY,d.token);
+    msg.style.color='#246044';msg.textContent='회원가입과 로그인이 완료되었습니다.';
+    document.getElementById('loginTop').textContent='로그아웃';
+    document.getElementById('loginTop').onclick=doLogout;
+    setTimeout(()=>closeModal('loginModal'),700);
+  }catch(e){msg.style.color='#b03d3d';msg.textContent=e.message}
+}
+async function doLogout(){
+  try{await fetch('/api/logout',{method:'POST',headers:authHeaders()})}catch(e){}
+  localStorage.removeItem(TOKEN_KEY);
+  document.getElementById('loginTop').textContent='로그인';
+  document.getElementById('loginTop').onclick=openLogin;
+  alert('로그아웃되었습니다.');
+}
+
+async function openMyPage(){
+  if(!token()){openLogin();document.getElementById('loginMsg').textContent='마이페이지는 로그인 후 이용할 수 있습니다.';return}
+  openModal('myModal');
+  const box=document.getElementById('myContent');box.textContent='불러오는 중...';
+  try{
+    const [mr,or]=await Promise.all([
+      fetch('/api/me',{headers:authHeaders()}),
+      fetch('/api/orders/my',{headers:authHeaders()})
+    ]);
+    const md=await mr.json(), od=await or.json();
+    if(!mr.ok) throw new Error(md.error||'로그인이 필요합니다.');
+    let h='<div class="mycard"><b>'+esc(md.member.name||md.member.username)+'</b><div style="font-size:12px;color:#777;margin-top:6px">'+esc(md.member.username)+' · '+esc(md.member.phone||'')+'</div></div>';
+    h+='<h4>내 주문</h4>';
+    const orders=od.orders||[];
+    if(!orders.length) h+='<div style="font-size:13px;color:#777;padding:15px 0">아직 주문내역이 없습니다.</div>';
+    orders.forEach(o=>{h+='<div class="orderitem"><b>'+esc(o.id)+'</b><br>'+esc(o.status||'')+' · '+Number(o.total||0).toLocaleString()+'원<br><span style="color:#777">'+new Date(o.createdAt).toLocaleString('ko-KR')+'</span></div>'});
+    h+='<button class="linebtn" style="margin-top:15px" onclick="doLogout();closeModal(\\'myModal\\')">로그아웃</button>';
+    box.innerHTML=h;
+  }catch(e){
+    localStorage.removeItem(TOKEN_KEY);
+    box.innerHTML='<div class="msg">'+esc(e.message)+'</div><button class="fullbtn" onclick="closeModal(\\'myModal\\');openLogin()">로그인하기</button>';
+  }
+}
+function openOrders(){openMyPage()}
+function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+function trackBand(){fetch('/api/track',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({type:'band',source:'homepage'})}).catch(()=>{})}
+
+(async function boot(){
+  // remove any legacy accidental hero overlays before first paint cycle completes
+  document.querySelectorAll('.hero-card,[data-legacy-hero-card]').forEach(el=>el.remove());
+  if(token()){
+    try{
+      const r=await fetch('/api/me',{headers:authHeaders()});
+      if(r.ok){document.getElementById('loginTop').textContent='로그아웃';document.getElementById('loginTop').onclick=doLogout}
+      else localStorage.removeItem(TOKEN_KEY);
+    }catch(e){}
+  }
+  fetch('/api/track',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({type:'visit',source:'homepage-v55'})}).catch(()=>{});
 })();
 </script>
 </body>
