@@ -49,9 +49,29 @@ table{width:100%;border-collapse:collapse;min-width:800px}th,td{padding:12px;bor
 .imglib{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.imgitem{border:1px solid var(--line);border-radius:10px;overflow:hidden}.imgitem img{width:100%;aspect-ratio:1.2/1;object-fit:cover}.imgitem div{padding:8px;font-size:11px}
 hr{border:0;border-top:1px solid var(--line);margin:18px 0}
 @media(max-width:1000px){.layout{grid-template-columns:1fr}.side{position:static;height:auto}.grid5{grid-template-columns:repeat(2,1fr)}.cards,.grid3{grid-template-columns:1fr}.formgrid,.grid2{grid-template-columns:1fr}.imglib{grid-template-columns:repeat(2,1fr)}}
+
+.admin-gate{position:fixed;inset:0;background:linear-gradient(135deg,#06291d,#124a36);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px}
+.admin-gate.hidden{display:none}
+.admin-login-box{width:min(430px,100%);background:#fff;border-radius:18px;padding:30px;box-shadow:0 25px 80px rgba(0,0,0,.28)}
+.admin-login-box h2{margin:0 0 8px;font-size:25px}
+.admin-login-box p{font-size:13px;color:#6d746f;line-height:1.7;margin:0 0 20px}
+.admin-login-box input{width:100%;border:1px solid #dcd4c8;border-radius:10px;padding:13px;margin-bottom:11px}
+.admin-login-box button{width:100%;border:0;border-radius:10px;background:#082d20;color:#fff;padding:13px;font-weight:800}
+.admin-login-msg{font-size:12px;color:#b03d3d;min-height:18px;margin-top:9px}
 </style>
 </head>
 <body>
+
+<div class="admin-gate" id="adminGate">
+  <div class="admin-login-box">
+    <h2>이룸 관리자 로그인</h2>
+    <p>관리자 전용 페이지입니다. 관리자 비밀번호를 입력해야 설정 화면에 들어갈 수 있습니다.</p>
+    <input id="adminPasswordInput" type="password" placeholder="관리자 비밀번호" autocomplete="current-password">
+    <button id="adminLoginBtn">관리자센터 들어가기</button>
+    <div class="admin-login-msg" id="adminLoginMsg"></div>
+  </div>
+</div>
+
 <div class="top">
   <div class="topbar">
     <h1>이룸 관리자 센터</h1>
@@ -222,6 +242,15 @@ hr{border:0;border-top:1px solid var(--line);margin:18px 0}
       <div class="switch"><input id="stockNotify" type="checkbox"><span>저재고 알림</span></div>
     </div>
   </div>
+
+    <div class="formcard">
+      <h3>관리자 보안</h3>
+      <div class="field"><label>새 관리자 비밀번호</label><input id="newAdminPassword" type="password" placeholder="새 비밀번호"></div>
+      <div class="field"><label>새 비밀번호 확인</label><input id="newAdminPassword2" type="password" placeholder="한 번 더 입력"></div>
+      <button class="ghost" id="changeAdminPasswordBtn" type="button">관리자 비밀번호 변경</button>
+      <div class="small" style="margin-top:8px">서버가 관리자 비밀번호 변경 API를 지원하면 서버에 반영하고, 지원하지 않으면 현재 브라우저 관리자센터 잠금용으로 저장합니다.</div>
+    </div>
+
   <button class="primary" onclick="saveSection()">전체설정 저장</button>
 </section>
 
@@ -257,6 +286,29 @@ hr{border:0;border-top:1px solid var(--line);margin:18px 0}
 
 <script>
 "use strict";
+
+const ADMIN_SESSION_KEY="iroom_admin_session_v61";
+function adminSessionOpen(){return sessionStorage.getItem(ADMIN_SESSION_KEY)==="1"}
+function unlockAdmin(){document.getElementById("adminGate").classList.add("hidden");sessionStorage.setItem(ADMIN_SESSION_KEY,"1")}
+async function verifyAdminPassword(){
+  const input=document.getElementById("adminPasswordInput");
+  const msg=document.getElementById("adminLoginMsg");
+  const password=input.value;
+  if(!password){msg.textContent="비밀번호를 입력하세요.";return}
+  msg.textContent="확인 중...";
+  try{
+    // Use the existing server admin password when available.
+    const r=await fetch("/api/admin/login",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({password})});
+    if(r.ok){unlockAdmin();msg.textContent="";return}
+  }catch(e){}
+  // Fallback: compare with the browser-stored setup password if the current backend has no admin-login route.
+  // Default fallback is intentionally not hard-coded in the page. It must have been saved by the admin once.
+  const saved=localStorage.getItem("iroom_admin_password_v61");
+  if(saved && password===saved){unlockAdmin();msg.textContent="";return}
+  // First-time bootstrap: if no password was saved, accept the site's configured ADMIN_PASSWORD through backend only.
+  msg.textContent="비밀번호가 맞지 않거나 서버 관리자 로그인이 연결되지 않았습니다.";
+}
+
 const LOCAL_KEY="iroom_admin_store_v60";
 let state={
  products:[
@@ -356,9 +408,28 @@ function fillSite(){const s=state.site||{};const map={siteName:"siteName",phone:
 function collectSite(){state.site={siteName:$("#siteName").value,phone:$("#sitePhone").value,email:$("#siteEmail").value,address:$("#siteAddress").value,businessNo:$("#businessNo").value,bankName:$("#bankName").value,bankAccount:$("#bankAccount").value,bankOwner:$("#bankOwner").value,tossClientKey:$("#tossClientKey").value,tossSecretKey:$("#tossSecretKey").value,tossEnabled:$("#tossEnabled").checked,bandUrl:$("#bandUrl").value,kakaoUrl:$("#kakaoUrl").value,naverUrl:$("#naverUrl").value,shippingFee:Number($("#shippingFee").value),freeShippingFrom:Number($("#freeShippingFrom").value),emailNotify:$("#emailNotify").checked,stockNotify:$("#stockNotify").checked}}
 const oldPersist=persist;persist=async function(){if($("#view-banners").classList.contains("active"))collectBanner();if($("#view-site").classList.contains("active"))collectSite();state.event={title:$("#eventTitle").value||state.event.title,period:$("#eventPeriod").value||state.event.period,desc:$("#eventDesc").value||state.event.desc,active:$("#eventActive").checked};state.coupon={name:$("#couponName").value||state.coupon.name,discount:Number($("#couponDiscount").value||state.coupon.discount||0),code:$("#couponCode").value||state.coupon.code,expire:$("#couponExpire").value||state.coupon.expire};return oldPersist()};
 
+
+$("#changeAdminPasswordBtn")?.addEventListener("click",async()=>{
+  const a=$("#newAdminPassword").value,b=$("#newAdminPassword2").value;
+  if(a.length<6)return alert("비밀번호는 6자 이상으로 입력하세요.");
+  if(a!==b)return alert("비밀번호 확인이 일치하지 않습니다.");
+  let serverOk=false;
+  try{
+    const r=await fetch("/api/admin/password",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({password:a})});
+    serverOk=r.ok;
+  }catch(e){}
+  localStorage.setItem("iroom_admin_password_v61",a);
+  alert(serverOk?"관리자 비밀번호가 서버와 이 브라우저에 변경되었습니다.":"현재 브라우저 관리자 잠금 비밀번호로 저장했습니다.");
+  $("#newAdminPassword").value="";$("#newAdminPassword2").value="";
+});
 $("#aiBtn").onclick=async()=>{const p=$("#aiPrompt").value.trim();if(!p)return;$("#aiResult").textContent="작성 중...";try{const r=await fetch("/api/ai",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({prompt:p})});if(r.ok){const d=await r.json();$("#aiResult").textContent=d.text||d.result||JSON.stringify(d);return}}catch(e){}$("#aiResult").textContent="추천 문구: “산지의 신선함을 그대로, 소중한 분께 품격 있게 전하세요. 이룸 fresh fruits가 제철 과일을 엄선해 정성껏 준비합니다.”"};
 
+
+if(adminSessionOpen()) document.getElementById("adminGate").classList.add("hidden");
+document.getElementById("adminLoginBtn").addEventListener("click",verifyAdminPassword);
+document.getElementById("adminPasswordInput").addEventListener("keydown",e=>{if(e.key==="Enter")verifyAdminPassword()});
 load();
+
 </script>
 </body>
 </html>
