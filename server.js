@@ -59,6 +59,8 @@ function money(n){return Number(n||0).toLocaleString("ko-KR")+"원"}
 async function notifyOrder(order,items){
   const c=mailSettings();
   const lines=items.map(i=>`${i.product_name} × ${i.qty} = ${money(i.line_total)}`).join("\n");
+  const status={seller:{sent:false,reason:""},customer:{sent:false,reason:""}};
+
   const seller=`[이룸 새 주문]
 주문번호: ${order.order_no}
 주문자: ${order.customer_name}
@@ -70,16 +72,26 @@ async function notifyOrder(order,items){
 ${lines}
 
 총금액: ${money(order.total_amount)}
-입금계좌: 우리은행 1005-203-135891`;
+입금계좌: 우리은행 1005-203-135891
+예금주: 이룸 fresh fruits`;
 
-  if(c.orderEmail){
-    sendBrevoMail({to:c.orderEmail,subject:`[이룸] 새 주문 ${order.order_no} / ${order.customer_name}`,text:seller})
-      .then(()=>console.log("[ORDER EMAIL] BREVO SENT",order.order_no))
-      .catch(e=>console.error("[ORDER EMAIL] BREVO FAILED",e.message));
-  }else console.warn("[ORDER EMAIL] ORDER_EMAIL_MISSING");
+  if(!c.orderEmail){
+    status.seller.reason="ORDER_EMAIL_MISSING";
+    console.error("[ORDER EMAIL] ORDER_EMAIL_MISSING");
+  }else{
+    try{
+      await sendBrevoMail({to:c.orderEmail,subject:`[이룸] 새 주문 ${order.order_no} / ${order.customer_name}`,text:seller});
+      status.seller.sent=true;
+      console.log("[ORDER EMAIL] BREVO SENT",order.order_no,c.orderEmail);
+    }catch(e){
+      status.seller.reason=e.message;
+      console.error("[ORDER EMAIL] BREVO FAILED",order.order_no,e.message);
+    }
+  }
 
   if(order.email){
-    const customer=`${order.customer_name} 고객님, 주문이 접수되었습니다.
+    const customer=`${order.customer_name} 고객님, 이룸 fresh fruits 주문이 접수되었습니다.
+
 주문번호: ${order.order_no}
 
 ${lines}
@@ -88,97 +100,21 @@ ${lines}
 우리은행 1005-203-135891
 예금주: 이룸 fresh fruits
 
-입금 확인 후 선별·포장해 배송하겠습니다.`;
-    sendBrevoMail({to:order.email,subject:`[이룸 fresh fruits] 주문접수 ${order.order_no}`,text:customer})
-      .then(()=>console.log("[CUSTOMER EMAIL] BREVO SENT",order.order_no))
-      .catch(e=>console.error("[CUSTOMER EMAIL] BREVO FAILED",e.message));
-  }
-}
-
-
-function money(n){ return Number(n||0).toLocaleString("ko-KR")+"원"; }
-
-async function sendOrderEmails(order, items){
-  const orderEmail = process.env.ORDER_EMAIL || "";
-  const smtpHost = process.env.SMTP_HOST || "";
-  const smtpPort = Number(process.env.SMTP_PORT || 587);
-  const smtpUser = process.env.SMTP_USER || "";
-  const smtpPassword = process.env.SMTP_PASSWORD || "";
-  const senderEmail = process.env.BREVO_SENDER_EMAIL || smtpUser || orderEmail;
-  const senderName = process.env.BREVO_SENDER_NAME || "이룸 fresh fruits";
-
-  if(!smtpHost || !smtpUser || !smtpPassword){
-    console.warn("[ORDER EMAIL] SMTP environment variables are incomplete. Order saved without email.");
-    return {ok:false, reason:"smtp_not_configured"};
-  }
-
-  const transporter = nodemailer.createTransport({
-    host:smtpHost,
-    port:smtpPort,
-    secure:smtpPort===465,
-    auth:{user:smtpUser,pass:smtpPassword},
-    tls:{minVersion:"TLSv1.2"}
-  });
-
-  const lines = items.map(i=>`${i.product_name} × ${i.qty} = ${money(i.line_total)}`).join("\n");
-  const adminText =
-`[이룸 fresh fruits 새 주문]
-주문번호: ${order.order_no}
-주문자: ${order.customer_name}
-연락처: ${order.phone}
-이메일: ${order.email||"-"}
-배송지: ${order.postcode||""} ${order.address1||""} ${order.address2||""}
-배송메모: ${order.memo||"-"}
-
-${lines}
-
-총 결제금액: ${money(order.total_amount)}
-결제방법: ${order.payment_method}
-주문상태: ${order.status}`;
-
-  const customerText =
-`${order.customer_name} 고객님, 이룸 fresh fruits 주문이 접수되었습니다.
-
-주문번호: ${order.order_no}
-${lines}
-
-총 금액: ${money(order.total_amount)}
-입금은행: 우리은행
-입금계좌: 1005-203-135891
-예금주: 이룸 fresh fruits
-
 입금 확인 후 정성껏 선별·포장해 배송하겠습니다.`;
-
-  const jobs=[];
-  if(orderEmail){
-    jobs.push(transporter.sendMail({
-      from:`"${senderName}" <${senderEmail}>`,
-      to:orderEmail,
-      subject:`[이룸] 새 주문 ${order.order_no} / ${order.customer_name}`,
-      text:adminText
-    }));
+    try{
+      await sendBrevoMail({to:order.email,subject:`[이룸 fresh fruits] 주문접수 ${order.order_no}`,text:customer});
+      status.customer.sent=true;
+      console.log("[CUSTOMER EMAIL] BREVO SENT",order.order_no,order.email);
+    }catch(e){
+      status.customer.reason=e.message;
+      console.error("[CUSTOMER EMAIL] BREVO FAILED",order.order_no,e.message);
+    }
+  }else{
+    status.customer.reason="CUSTOMER_EMAIL_EMPTY";
   }
-  if(order.email){
-    jobs.push(transporter.sendMail({
-      from:`"${senderName}" <${senderEmail}>`,
-      to:order.email,
-      subject:`[이룸 fresh fruits] 주문접수 ${order.order_no}`,
-      text:customerText
-    }));
-  }
-  if(!jobs.length){
-    console.warn("[ORDER EMAIL] No recipient configured.");
-    return {ok:false, reason:"no_recipient"};
-  }
-  const results=await Promise.allSettled(jobs);
-  const failed=results.filter(x=>x.status==="rejected");
-  if(failed.length){
-    failed.forEach(x=>console.error("[ORDER EMAIL] send failed:",x.reason?.message||x.reason));
-    return {ok:false, reason:"send_failed"};
-  }
-  console.log("[ORDER EMAIL] sent:",order.order_no);
-  return {ok:true};
+  return status;
 }
+
 
 app.use(cookieParser());
 
@@ -455,9 +391,9 @@ app.post("/api/orders", async(req,res)=>{
     const itemsForMail=finalItems.map(x=>({
       product_name:x.p.name,unit_price:x.p.price,qty:x.qty,line_total:x.line
     }));
-    sendOrderEmails(orderForMail,itemsForMail).catch(e=>console.error("[ORDER EMAIL] unexpected:",e.message));
+    const mail_status=await notifyOrder(orderForMail,itemsForMail);
     res.json({
-      ok:true,order_no:ono,total_amount:total,
+      ok:true,order_no:ono,total_amount:total,mail_status,
       bank:{
         name:process.env.BANK_NAME||"우리은행",
         account:process.env.BANK_ACCOUNT||"1005-203-135891",
@@ -549,6 +485,35 @@ app.post("/api/consultations",async(req,res)=>{
   }catch(e){
     console.error("[CONSULTATION] FAILED",e.message);
     res.status(500).json({error:"상담 요청 저장 중 오류가 발생했습니다."});
+  }
+});
+
+app.get("/api/admin/email-status",requireAdmin,(req,res)=>{
+  const c=mailSettings();
+  res.json({
+    order_email_configured:!!c.orderEmail,
+    brevo_api_key_configured:!!c.apiKey,
+    sender_email_configured:!!c.senderEmail,
+    sender_name:c.senderName||"",
+    order_email_masked:c.orderEmail?c.orderEmail.replace(/^(.{2}).*(@.*)$/,"$1***$2"):""
+  });
+});
+
+app.post("/api/admin/email-test",requireAdmin,async(req,res)=>{
+  const c=mailSettings();
+  const to=String(req.body?.to||c.orderEmail||"").trim();
+  if(!to)return res.status(400).json({ok:false,error:"ORDER_EMAIL이 설정되지 않았습니다."});
+  try{
+    await sendBrevoMail({
+      to,
+      subject:"[이룸 fresh fruits] 메일 발송 테스트",
+      text:"이 메일이 도착했다면 Render의 BREVO_API_KEY / BREVO_SENDER_EMAIL / ORDER_EMAIL 설정이 정상입니다."
+    });
+    console.log("[EMAIL TEST] BREVO SENT",to);
+    res.json({ok:true,message:"테스트 메일을 발송했습니다."});
+  }catch(e){
+    console.error("[EMAIL TEST] BREVO FAILED",e.message);
+    res.status(500).json({ok:false,error:e.message});
   }
 });
 
