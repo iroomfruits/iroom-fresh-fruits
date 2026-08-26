@@ -1,4 +1,4 @@
-const CACHE='iroom-v81';
+const CACHE='iroom-v82';
 const CORE=[
   '/',
   '/index.html',
