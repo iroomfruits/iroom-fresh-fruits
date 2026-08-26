@@ -191,8 +191,19 @@ footer{background:#0d2d20;color:#fff;padding:42px 0}.foot{display:grid;grid-temp
 </div></div>
 
 
-<div class="modal" id="signupModal"><div class="modalbox"><div class="modalhead"><h3>회원가입</h3><button data-close>×</button></div>
-<div class="field"><label>이름</label><input id="signupName"></div><div class="field"><label>이메일</label><input id="signupEmail" type="email"></div><div class="field"><label>연락처</label><input id="signupPhone"></div><div class="field"><label>비밀번호 (6자 이상)</label><input id="signupPass" type="password"></div><button class="fullbtn" id="doSignup">회원가입</button><p id="signupMsg" style="font-size:12px;color:#b03d3d"></p></div></div>
+<div class="modal" id="signupModal"><div class="modalbox" style="width:min(620px,100%)">
+<div class="modalhead"><h3>회원가입</h3><button data-close>×</button></div>
+<p style="font-size:12px;color:#777">Enter를 누르면 다음 입력칸으로 이동합니다.</p>
+<div class="field"><label>이름 *</label><input id="signupName" class="signup-next"></div>
+<div class="field"><label>아이디 *</label><input id="signupUser" class="signup-next" autocomplete="username" placeholder="영문 소문자·숫자 4~20자"></div>
+<div class="field"><label>비밀번호 *</label><input id="signupPass" class="signup-next" type="password" autocomplete="new-password"></div>
+<div class="field"><label>이메일</label><input id="signupEmail" class="signup-next" type="email"></div>
+<div class="field"><label>연락처</label><input id="signupPhone" class="signup-next"></div>
+<div style="display:grid;grid-template-columns:160px 1fr;gap:8px;align-items:end"><div class="field"><label>우편번호</label><input id="signupPostcode" class="signup-next"></div><button class="fullbtn" id="signupPostcodeBtn" type="button" style="margin-bottom:9px">주소 검색</button></div>
+<div class="field"><label>주소</label><input id="signupAddress1" class="signup-next"></div>
+<div class="field"><label>상세주소</label><input id="signupAddress2" class="signup-next"></div>
+<button class="fullbtn" id="doSignup">회원가입</button><p id="signupMsg" style="font-size:12px;color:#b03d3d"></p>
+</div></div>
 <div class="modal" id="myOrdersModal"><div class="modalbox" style="width:min(760px,100%)"><div class="modalhead"><h3>마이페이지 · 주문내역</h3><button data-close>×</button></div><div id="myOrdersContent"></div></div></div>
 <div class="modal" id="orderLookupModal"><div class="modalbox"><div class="modalhead"><h3>비회원 주문조회</h3><button data-close>×</button></div><div class="field"><label>주문번호</label><input id="lookupNo"></div><div class="field"><label>주문 연락처</label><input id="lookupPhone"></div><button class="fullbtn" id="doLookup">조회하기</button><div id="lookupResult" style="margin-top:12px"></div></div></div>
 
@@ -345,7 +356,7 @@ qa(".season-card").forEach(card=>{
 
 q("#copyShareUrl")?.addEventListener("click",async()=>{const v=q("#shareUrlInput")?.value||location.href;try{await navigator.clipboard.writeText(v);toast("공유 링크를 복사했습니다.");q("#shareModal").classList.remove("open")}catch(e){q("#shareUrlInput")?.select();document.execCommand("copy");toast("공유 링크를 복사했습니다.")}});
 q("#loginBtn").onclick=()=>open("loginModal");q("#myBtn").onclick=q("#myTopBtn").onclick=q("#ordersBtn").onclick=()=>{if(!localStorage.getItem("iroom_member_token"))open("loginModal");else alert("마이페이지/주문조회는 로그인된 계정의 주문내역을 표시합니다.")};
-q("#doLogin").onclick=async()=>{try{const r=await fetch("/api/login",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:q("#loginUser").value,password:q("#loginPass").value})});const d=await r.json();if(!r.ok)throw Error(d.error||"로그인 실패");q("#loginMsg").style.color="#246044";q("#loginMsg").textContent="로그인되었습니다.";setTimeout(()=>q("#loginModal").classList.remove("open"),600)}catch(e){q("#loginMsg").textContent=e.message}};
+q("#doLogin").onclick=async()=>{try{const r=await fetch("/api/login",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({username:q("#loginUser").value,password:q("#loginPass").value})});const d=await r.json();if(!r.ok)throw Error(d.error||"로그인 실패");q("#loginMsg").style.color="#246044";q("#loginMsg").textContent="로그인되었습니다.";await refreshAuthUI();setTimeout(()=>q("#loginModal").classList.remove("open"),500);}catch(e){q("#loginMsg").style.color="#b03d3d";q("#loginMsg").textContent=e.message;}};
 
 const reviewDetailData={
  gift:{
@@ -453,6 +464,11 @@ document.addEventListener("keydown",e=>{
 });
 
 
+
+let currentMember=null;
+async function refreshAuthUI(){try{const d=await fetch("/api/me",{cache:"no-store"}).then(r=>r.json());currentMember=d.user||null;const l=q("#loginBtn"),s=q("#signupBtn");if(currentMember){if(l){l.textContent=(currentMember.name||currentMember.username)+"님";l.title="로그아웃";}if(s)s.style.display="none";}else{if(l){l.textContent="로그인";l.title="로그인";}if(s)s.style.display="";}}catch{}}
+q("#loginBtn")?.addEventListener("click",async e=>{if(currentMember){e.stopImmediatePropagation();if(confirm("로그아웃하시겠습니까?")){await fetch("/api/logout",{method:"POST"});currentMember=null;await refreshAuthUI();}}},true);
+
 let serverProducts=[];
 async function syncServerProducts(){
  try{
@@ -470,14 +486,10 @@ async function syncServerProducts(){
   });
  }catch(e){console.warn("product sync failed",e)}
 }
-q("#signupBtn")?.addEventListener("click",()=>open("signupModal"));
-q("#doSignup")?.addEventListener("click",async()=>{
- try{
-  const r=await fetch("/api/signup",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({name:q("#signupName").value,email:q("#signupEmail").value,phone:q("#signupPhone").value,password:q("#signupPass").value})});
-  const d=await r.json();if(!r.ok)throw Error(d.error||"회원가입 실패");
-  q("#signupMsg").style.color="#246044";q("#signupMsg").textContent="회원가입되었습니다.";setTimeout(()=>q("#signupModal").classList.remove("open"),700)
- }catch(e){q("#signupMsg").textContent=e.message}
-});
+q("#signupBtn")?.addEventListener("click",()=>{open("signupModal");setTimeout(()=>q("#signupName")?.focus(),80)});
+q("#signupPostcodeBtn")?.addEventListener("click",()=>{if(window.daum?.Postcode)new daum.Postcode({oncomplete:d=>{q("#signupPostcode").value=d.zonecode||"";q("#signupAddress1").value=d.roadAddress||d.jibunAddress||"";q("#signupAddress2").focus();}}).open();else alert("주소 검색 서비스를 불러오지 못했습니다.");});
+qa(".signup-next").forEach((el,i,arr)=>el.addEventListener("keydown",e=>{if(e.key!=="Enter")return;e.preventDefault();if(el.id==="signupPostcode"){q("#signupPostcodeBtn")?.click();return;}const n=arr[i+1];if(n)n.focus();else q("#doSignup")?.click();}));
+q("#doSignup")?.addEventListener("click",async()=>{try{const r=await fetch("/api/signup",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({name:q("#signupName").value,username:q("#signupUser").value,password:q("#signupPass").value,email:q("#signupEmail").value,phone:q("#signupPhone").value,postcode:q("#signupPostcode").value,address1:q("#signupAddress1").value,address2:q("#signupAddress2").value})});const d=await r.json();if(!r.ok)throw Error(d.error||"회원가입 실패");q("#signupMsg").style.color="#246044";q("#signupMsg").textContent="회원가입되었습니다.";await refreshAuthUI();setTimeout(()=>q("#signupModal").classList.remove("open"),600);}catch(e){q("#signupMsg").style.color="#b03d3d";q("#signupMsg").textContent=e.message;}});
 async function openMyOrders(){
  try{
   const r=await fetch("/api/my/orders");const d=await r.json();if(r.status===401){open("loginModal");return}if(!r.ok)throw Error(d.error||"조회 실패");
@@ -490,7 +502,7 @@ q("#doLookup")?.addEventListener("click",async()=>{
  try{const r=await fetch("/api/order/"+encodeURIComponent(q("#lookupNo").value)+"?phone="+encodeURIComponent(q("#lookupPhone").value));const d=await r.json();if(!r.ok)throw Error(d.error||"조회 실패");const o=d.order;q("#lookupResult").innerHTML=`<b>${o.order_no}</b><br>${o.items.map(i=>`${i.product_name} × ${i.qty}`).join("<br>")}<br><b>${Number(o.total_amount).toLocaleString()}원</b><br>${o.payment_status} · ${o.status}`}
  catch(e){q("#lookupResult").textContent=e.message}
 });
-document.addEventListener("DOMContentLoaded",syncServerProducts);
+document.addEventListener("DOMContentLoaded",()=>{syncServerProducts();refreshAuthUI();});
 
 q("#customerBtn").onclick=()=>q("#footer").scrollIntoView({behavior:"smooth"});
 const names=["샤인머스켓","나주 신고배 특선","경북 홍사과","제주 한라봉","프리미엄 과일세트","복숭아 백도"];
