@@ -62,10 +62,14 @@ async function initDb(){
   await pool.query(`
     CREATE TABLE IF NOT EXISTS users(
       id BIGSERIAL PRIMARY KEY,
-      email TEXT UNIQUE NOT NULL,
+      username TEXT UNIQUE,
+      email TEXT UNIQUE,
       password_hash TEXT NOT NULL,
       name TEXT NOT NULL,
       phone TEXT DEFAULT '',
+      postcode TEXT DEFAULT '',
+      address1 TEXT DEFAULT '',
+      address2 TEXT DEFAULT '',
       created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
     );
     CREATE TABLE IF NOT EXISTS products(
@@ -112,6 +116,12 @@ async function initDb(){
     CREATE INDEX IF NOT EXISTS idx_orders_user_id ON orders(user_id);
     CREATE INDEX IF NOT EXISTS idx_orders_created_at ON orders(created_at DESC);
   `);
+  await pool.query(`ALTER TABLE users ADD COLUMN IF NOT EXISTS username TEXT`);
+  await pool.query(`ALTER TABLE users ADD COLUMN IF NOT EXISTS postcode TEXT DEFAULT ''`);
+  await pool.query(`ALTER TABLE users ADD COLUMN IF NOT EXISTS address1 TEXT DEFAULT ''`);
+  await pool.query(`ALTER TABLE users ADD COLUMN IF NOT EXISTS address2 TEXT DEFAULT ''`);
+  await pool.query(`ALTER TABLE users ALTER COLUMN email DROP NOT NULL`).catch(()=>{});
+  await pool.query(`CREATE UNIQUE INDEX IF NOT EXISTS idx_users_username_unique ON users(username) WHERE username IS NOT NULL`);
 
   const seed = [
     ["shine-muscat","샤인머스켓","향긋한 머스캣 향과 높은 당도가 특징인 프리미엄 포도입니다.","2kg (3~4송이)",28000,30,"/assets/prod-shine.jpg","과일",10],
@@ -138,20 +148,24 @@ app.get("/api/health", async(req,res)=>{
 
 // Auth
 app.post("/api/signup", async(req,res)=>{
-  const {email,password,name,phone=""}=req.body||{};
-  if(!email||!password||!name) return res.status(400).json({error:"이메일, 비밀번호, 이름을 입력해주세요."});
+  const {username,password,name,email="",phone="",postcode="",address1="",address2=""}=req.body||{};
+  const user=(username||"").trim().toLowerCase();
+  if(!user||!password||!name) return res.status(400).json({error:"아이디, 비밀번호, 이름을 입력해주세요."});
+  if(!/^[a-z0-9_]{4,20}$/.test(user)) return res.status(400).json({error:"아이디는 영문 소문자, 숫자, 밑줄로 4~20자 입력해주세요."});
   if(password.length<6) return res.status(400).json({error:"비밀번호는 6자 이상이어야 합니다."});
   try{
     const hash=await bcrypt.hash(password,12);
     const r=await pool.query(
-      "INSERT INTO users(email,password_hash,name,phone) VALUES($1,$2,$3,$4) RETURNING id,email,name,phone",
-      [email.toLowerCase().trim(),hash,name.trim(),phone.trim()]
+      `INSERT INTO users(username,email,password_hash,name,phone,postcode,address1,address2)
+       VALUES($1,$2,$3,$4,$5,$6,$7,$8)
+       RETURNING id,username,email,name,phone,postcode,address1,address2`,
+      [user,(email||"").trim().toLowerCase()||null,hash,name.trim(),phone.trim(),postcode.trim(),address1.trim(),address2.trim()]
     );
-    const u=r.rows[0]; setAuthCookie(res,token({userId:u.id,email:u.email,name:u.name}));
+    const u=r.rows[0]; setAuthCookie(res,token({userId:u.id,username:u.username,email:u.email,name:u.name}));
     res.json({ok:true,user:u});
   }catch(e){
-    if(e.code==="23505") return res.status(409).json({error:"이미 가입된 이메일입니다."});
-    res.status(500).json({error:"회원가입 처리 중 오류가 발생했습니다."});
+    if(e.code==="23505") return res.status(409).json({error:(e.detail||"").includes("username")?"이미 사용 중인 아이디입니다.":"이미 가입된 이메일입니다."});
+    console.error("signup error",e);res.status(500).json({error:"회원가입 처리 중 오류가 발생했습니다."});
   }
 });
 
@@ -170,7 +184,7 @@ app.post("/api/logout",(req,res)=>{res.clearCookie("iroom_token");res.json({ok:t
 app.get("/api/me", async(req,res)=>{
   const t=readToken(req); if(!t) return res.json({user:null});
   if(t.admin) return res.json({admin:true});
-  const r=await pool.query("SELECT id,email,name,phone,created_at FROM users WHERE id=$1",[t.userId]);
+  const r=await pool.query("SELECT id,username,email,name,phone,postcode,address1,address2,created_at FROM users WHERE id=$1",[t.userId]);
   res.json({user:r.rows[0]||null});
 });
 
@@ -323,7 +337,7 @@ app.put("/api/admin/orders/:id",requireAdmin,async(req,res)=>{
 });
 
 app.get("/api/admin/users",requireAdmin,async(req,res)=>{
-  const r=await pool.query("SELECT id,email,name,phone,created_at FROM users ORDER BY created_at DESC LIMIT 500");
+  const r=await pool.query("SELECT id,username,email,name,phone,postcode,address1,address2,created_at FROM users ORDER BY created_at DESC LIMIT 500");
   res.json({users:r.rows});
 });
 
