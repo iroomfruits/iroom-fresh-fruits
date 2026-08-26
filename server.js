@@ -4,6 +4,7 @@ const crypto = require("crypto");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser");
+const nodemailer = require("nodemailer");
 const { Pool } = require("pg");
 
 const app = express();
@@ -24,6 +25,91 @@ const pool = new Pool({
 
 app.use(express.json({ limit: "2mb" }));
 app.use(express.urlencoded({ extended: true }));
+
+function money(n){ return Number(n||0).toLocaleString("ko-KR")+"원"; }
+
+async function sendOrderEmails(order, items){
+  const orderEmail = process.env.ORDER_EMAIL || "";
+  const smtpHost = process.env.SMTP_HOST || "";
+  const smtpPort = Number(process.env.SMTP_PORT || 587);
+  const smtpUser = process.env.SMTP_USER || "";
+  const smtpPassword = process.env.SMTP_PASSWORD || "";
+  const senderEmail = process.env.BREVO_SENDER_EMAIL || smtpUser || orderEmail;
+  const senderName = process.env.BREVO_SENDER_NAME || "이룸 fresh fruits";
+
+  if(!smtpHost || !smtpUser || !smtpPassword){
+    console.warn("[ORDER EMAIL] SMTP environment variables are incomplete. Order saved without email.");
+    return {ok:false, reason:"smtp_not_configured"};
+  }
+
+  const transporter = nodemailer.createTransport({
+    host:smtpHost,
+    port:smtpPort,
+    secure:smtpPort===465,
+    auth:{user:smtpUser,pass:smtpPassword},
+    tls:{minVersion:"TLSv1.2"}
+  });
+
+  const lines = items.map(i=>`${i.product_name} × ${i.qty} = ${money(i.line_total)}`).join("\n");
+  const adminText =
+`[이룸 fresh fruits 새 주문]
+주문번호: ${order.order_no}
+주문자: ${order.customer_name}
+연락처: ${order.phone}
+이메일: ${order.email||"-"}
+배송지: ${order.postcode||""} ${order.address1||""} ${order.address2||""}
+배송메모: ${order.memo||"-"}
+
+${lines}
+
+총 결제금액: ${money(order.total_amount)}
+결제방법: ${order.payment_method}
+주문상태: ${order.status}`;
+
+  const customerText =
+`${order.customer_name} 고객님, 이룸 fresh fruits 주문이 접수되었습니다.
+
+주문번호: ${order.order_no}
+${lines}
+
+총 금액: ${money(order.total_amount)}
+입금은행: 우리은행
+입금계좌: 1005-203-135891
+예금주: 이룸 fresh fruits
+
+입금 확인 후 정성껏 선별·포장해 배송하겠습니다.`;
+
+  const jobs=[];
+  if(orderEmail){
+    jobs.push(transporter.sendMail({
+      from:`"${senderName}" <${senderEmail}>`,
+      to:orderEmail,
+      subject:`[이룸] 새 주문 ${order.order_no} / ${order.customer_name}`,
+      text:adminText
+    }));
+  }
+  if(order.email){
+    jobs.push(transporter.sendMail({
+      from:`"${senderName}" <${senderEmail}>`,
+      to:order.email,
+      subject:`[이룸 fresh fruits] 주문접수 ${order.order_no}`,
+      text:customerText
+    }));
+  }
+  if(!jobs.length){
+    console.warn("[ORDER EMAIL] No recipient configured.");
+    return {ok:false, reason:"no_recipient"};
+  }
+  const results=await Promise.allSettled(jobs);
+  const failed=results.filter(x=>x.status==="rejected");
+  if(failed.length){
+    failed.forEach(x=>console.error("[ORDER EMAIL] send failed:",x.reason?.message||x.reason));
+    return {ok:false, reason:"send_failed"};
+  }
+  console.log("[ORDER EMAIL] sent:",order.order_no);
+  return {ok:true};
+}
+
 app.use(cookieParser());
 
 function nowIso(){ return new Date().toISOString(); }
@@ -151,7 +237,7 @@ app.post("/api/signup", async(req,res)=>{
   const {username,password,name,email="",phone="",postcode="",address1="",address2=""}=req.body||{};
   const user=(username||"").trim().toLowerCase();
   if(!user||!password||!name) return res.status(400).json({error:"아이디, 비밀번호, 이름을 입력해주세요."});
-  if(!/^[a-z0-9_]{4,20}$/.test(user)) return res.status(400).json({error:"아이디는 영문 소문자, 숫자, 밑줄로 4~20자 입력해주세요."});
+  if(!/^[a-z0-9_]{4,20}$/.test(user)) return res.status(400).json({error:"아이디는 영문·숫자·밑줄로 4~20자 입력해주세요."});
   if(password.length<6) return res.status(400).json({error:"비밀번호는 6자 이상이어야 합니다."});
   try{
     const hash=await bcrypt.hash(password,12);
@@ -171,13 +257,47 @@ app.post("/api/signup", async(req,res)=>{
 
 app.post("/api/login", async(req,res)=>{
   const {username,email,password}=req.body||{};
-  const account=(email||username||"").toLowerCase().trim();
-  if(!account||!password) return res.status(400).json({error:"이메일과 비밀번호를 입력해주세요."});
-  const r=await pool.query("SELECT * FROM users WHERE email=$1",[account]);
+  const account=String(username||email||"").trim().toLowerCase();
+
+  if(!account||!password){
+    return res.status(400).json({error:"아이디와 비밀번호를 입력해주세요."});
+  }
+
+  // V79: 아이디 로그인 우선. 과거 이메일 회원도 이메일로 계속 로그인 가능.
+  const r=await pool.query(
+    `SELECT * FROM users
+     WHERE LOWER(COALESCE(username,''))=$1
+        OR LOWER(COALESCE(email,''))=$1
+     LIMIT 1`,
+    [account]
+  );
   const u=r.rows[0];
-  if(!u || !(await bcrypt.compare(password,u.password_hash))) return res.status(401).json({error:"이메일 또는 비밀번호가 올바르지 않습니다."});
-  setAuthCookie(res,token({userId:u.id,email:u.email,name:u.name}));
-  res.json({ok:true,user:{id:u.id,email:u.email,name:u.name,phone:u.phone}});
+  console.log("[AUTH LOGIN]", account, u ? "USER_FOUND" : "USER_NOT_FOUND");
+
+  if(!u || !(await bcrypt.compare(password,u.password_hash))){
+    return res.status(401).json({error:"아이디 또는 비밀번호가 올바르지 않습니다."});
+  }
+
+  setAuthCookie(res,token({
+    userId:u.id,
+    username:u.username,
+    email:u.email,
+    name:u.name
+  }));
+
+  res.json({
+    ok:true,
+    user:{
+      id:u.id,
+      username:u.username,
+      email:u.email,
+      name:u.name,
+      phone:u.phone,
+      postcode:u.postcode,
+      address1:u.address1,
+      address2:u.address2
+    }
+  });
 });
 
 app.post("/api/logout",(req,res)=>{res.clearCookie("iroom_token");res.json({ok:true});});
@@ -230,11 +350,16 @@ app.post("/api/orders", async(req,res)=>{
       await client.query("UPDATE products SET stock=stock-$1,updated_at=NOW() WHERE id=$2",[x.qty,x.p.id]);
     }
     await client.query("COMMIT");
+    const orderForMail={...order};
+    const itemsForMail=finalItems.map(x=>({
+      product_name:x.p.name,unit_price:x.p.price,qty:x.qty,line_total:x.line
+    }));
+    sendOrderEmails(orderForMail,itemsForMail).catch(e=>console.error("[ORDER EMAIL] unexpected:",e.message));
     res.json({
       ok:true,order_no:ono,total_amount:total,
       bank:{
-        name:process.env.BANK_NAME||"국민은행",
-        account:process.env.BANK_ACCOUNT||"계좌번호를 환경변수에 입력하세요",
+        name:process.env.BANK_NAME||"우리은행",
+        account:process.env.BANK_ACCOUNT||"1005-203-135891",
         holder:process.env.BANK_HOLDER||"이룸 fresh fruits"
       }
     });
