@@ -28,30 +28,86 @@ app.use(express.urlencoded({ extended: true }));
 
 function money(n){ return Number(n||0).toLocaleString("ko-KR")+"원"; }
 
-async function sendOrderEmails(order, items){
-  const orderEmail = process.env.ORDER_EMAIL || "";
-  const smtpHost = process.env.SMTP_HOST || "";
-  const smtpPort = Number(process.env.SMTP_PORT || 587);
-  const smtpUser = process.env.SMTP_USER || "";
-  const smtpPassword = process.env.SMTP_PASSWORD || "";
-  const senderEmail = process.env.BREVO_SENDER_EMAIL || smtpUser || orderEmail;
-  const senderName = process.env.BREVO_SENDER_NAME || "이룸 fresh fruits";
 
-  if(!smtpHost || !smtpUser || !smtpPassword){
-    console.warn("[ORDER EMAIL] SMTP environment variables are incomplete. Order saved without email.");
-    return {ok:false, reason:"smtp_not_configured"};
+function mailConfig(){
+  return {
+    orderEmail:(process.env.ORDER_EMAIL||"").trim(),
+    smtpHost:(process.env.SMTP_HOST||"").trim(),
+    smtpPort:Number(process.env.SMTP_PORT||587),
+    smtpUser:(process.env.SMTP_USER||"").trim(),
+    smtpPassword:(process.env.SMTP_PASSWORD||"").trim(),
+    brevoApiKey:(process.env.BREVO_API_KEY||"").trim(),
+    senderEmail:(process.env.BREVO_SENDER_EMAIL||process.env.SMTP_USER||process.env.ORDER_EMAIL||"").trim(),
+    senderName:(process.env.BREVO_SENDER_NAME||"이룸 fresh fruits").trim()
+  };
+}
+
+async function sendViaSmtp({to,subject,text,html}){
+  const c=mailConfig();
+  if(!c.smtpHost||!c.smtpUser||!c.smtpPassword||!c.senderEmail){
+    throw new Error("SMTP_NOT_CONFIGURED");
   }
-
-  const transporter = nodemailer.createTransport({
-    host:smtpHost,
-    port:smtpPort,
-    secure:smtpPort===465,
-    auth:{user:smtpUser,pass:smtpPassword},
+  const transporter=nodemailer.createTransport({
+    host:c.smtpHost,
+    port:c.smtpPort,
+    secure:c.smtpPort===465,
+    auth:{user:c.smtpUser,pass:c.smtpPassword},
     tls:{minVersion:"TLSv1.2"}
   });
+  return transporter.sendMail({
+    from:`"${c.senderName}" <${c.senderEmail}>`,
+    to,subject,text,html
+  });
+}
 
-  const lines = items.map(i=>`${i.product_name} × ${i.qty} = ${money(i.line_total)}`).join("\n");
-  const adminText =
+async function sendViaBrevo({to,subject,text,html}){
+  const c=mailConfig();
+  if(!c.brevoApiKey||!c.senderEmail) throw new Error("BREVO_API_NOT_CONFIGURED");
+  const recipients=String(to).split(",").map(x=>x.trim()).filter(Boolean).map(email=>({email}));
+  if(!recipients.length) throw new Error("NO_RECIPIENT");
+  const body={
+    sender:{name:c.senderName,email:c.senderEmail},
+    to:recipients,
+    subject,
+    textContent:text||"",
+    htmlContent:html||`<pre style="font-family:sans-serif;white-space:pre-wrap">${String(text||"").replace(/[&<>]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[m]))}</pre>`
+  };
+  const r=await fetch("https://api.brevo.com/v3/smtp/email",{
+    method:"POST",
+    headers:{"Content-Type":"application/json","api-key":c.brevoApiKey},
+    body:JSON.stringify(body)
+  });
+  if(!r.ok){
+    const t=await r.text();
+    throw new Error(`BREVO_${r.status}: ${t.slice(0,300)}`);
+  }
+  return r.json().catch(()=>({ok:true}));
+}
+
+async function sendEmailReliable(message,logPrefix="[EMAIL]"){
+  let smtpError=null;
+  try{
+    await sendViaSmtp(message);
+    console.log(logPrefix,"sent via SMTP ->",message.to);
+    return {ok:true,via:"smtp"};
+  }catch(e){
+    smtpError=e;
+    console.warn(logPrefix,"SMTP failed:",e.message);
+  }
+  try{
+    await sendViaBrevo(message);
+    console.log(logPrefix,"sent via BREVO API ->",message.to);
+    return {ok:true,via:"brevo"};
+  }catch(e){
+    console.error(logPrefix,"BREVO fallback failed:",e.message);
+    return {ok:false,smtp_error:smtpError?.message||"",brevo_error:e.message};
+  }
+}
+
+async function sendOrderEmails(order, items){
+  const c=mailConfig();
+  const lines=items.map(i=>`${i.product_name} × ${i.qty} = ${money(i.line_total)}`).join("\n");
+  const adminText=
 `[이룸 fresh fruits 새 주문]
 주문번호: ${order.order_no}
 주문자: ${order.customer_name}
@@ -64,12 +120,15 @@ ${lines}
 
 총 결제금액: ${money(order.total_amount)}
 결제방법: ${order.payment_method}
-주문상태: ${order.status}`;
+주문상태: ${order.status}
 
-  const customerText =
+입금계좌: 우리은행 1005-203-135891`;
+
+  const customerText=
 `${order.customer_name} 고객님, 이룸 fresh fruits 주문이 접수되었습니다.
 
 주문번호: ${order.order_no}
+
 ${lines}
 
 총 금액: ${money(order.total_amount)}
@@ -79,38 +138,77 @@ ${lines}
 
 입금 확인 후 정성껏 선별·포장해 배송하겠습니다.`;
 
-  const jobs=[];
-  if(orderEmail){
-    jobs.push(transporter.sendMail({
-      from:`"${senderName}" <${senderEmail}>`,
-      to:orderEmail,
+  const results=[];
+  if(c.orderEmail){
+    results.push(await sendEmailReliable({
+      to:c.orderEmail,
       subject:`[이룸] 새 주문 ${order.order_no} / ${order.customer_name}`,
       text:adminText
-    }));
+    },"[ORDER EMAIL]"));
+  }else{
+    console.warn("[ORDER EMAIL] ORDER_EMAIL is empty");
+    results.push({ok:false,reason:"ORDER_EMAIL_EMPTY"});
   }
+
   if(order.email){
-    jobs.push(transporter.sendMail({
-      from:`"${senderName}" <${senderEmail}>`,
+    results.push(await sendEmailReliable({
       to:order.email,
       subject:`[이룸 fresh fruits] 주문접수 ${order.order_no}`,
       text:customerText
-    }));
+    },"[CUSTOMER EMAIL]"));
   }
-  if(!jobs.length){
-    console.warn("[ORDER EMAIL] No recipient configured.");
-    return {ok:false, reason:"no_recipient"};
-  }
-  const results=await Promise.allSettled(jobs);
-  const failed=results.filter(x=>x.status==="rejected");
-  if(failed.length){
-    failed.forEach(x=>console.error("[ORDER EMAIL] send failed:",x.reason?.message||x.reason));
-    return {ok:false, reason:"send_failed"};
-  }
-  console.log("[ORDER EMAIL] sent:",order.order_no);
-  return {ok:true};
+  return {ok:results.some(x=>x.ok),results};
 }
 
-app.use(cookieParser());
+async function sendConsultationEmails(cst){
+  const c=mailConfig();
+  const sellerText=
+`[이룸 과일 추천 상담요청]
+상담번호: ${cst.consult_no}
+유형: ${cst.guide_type}
+고객명: ${cst.customer_name}
+연락처: ${cst.phone}
+이메일: ${cst.email||"-"}
+받는 분/상황: ${cst.recipient||"-"}
+예산: ${cst.budget||"-"}
+인원/수량: ${cst.quantity_note||"-"}
+원하는 과일: ${cst.preferred_fruits||"-"}
+피하고 싶은 과일: ${cst.avoid_fruits||"-"}
+맛 선호: ${cst.taste_preference||"-"}
+포장 요청: ${cst.packaging||"-"}
+희망 배송일: ${cst.delivery_date||"-"}
+상세 요청:
+${cst.message||"-"}`;
+
+  const customerText=
+`${cst.customer_name} 고객님, 과일 추천 요청이 접수되었습니다.
+
+상담번호: ${cst.consult_no}
+상담유형: ${cst.guide_type}
+
+보내주신 조건을 확인한 뒤 알맞은 과일과 구성을 안내드리겠습니다.
+급한 상담은 홈페이지의 상담하기 기능도 이용해주세요.
+
+이룸 fresh fruits`;
+
+  const sellerResult=c.orderEmail
+    ? await sendEmailReliable({
+        to:c.orderEmail,
+        subject:`[이룸 상담] ${cst.guide_type} / ${cst.customer_name} / ${cst.consult_no}`,
+        text:sellerText
+      },"[CONSULT EMAIL]")
+    : {ok:false,reason:"ORDER_EMAIL_EMPTY"};
+
+  let customerResult=null;
+  if(cst.email){
+    customerResult=await sendEmailReliable({
+      to:cst.email,
+      subject:`[이룸 fresh fruits] 과일 추천 요청 접수 ${cst.consult_no}`,
+      text:customerText
+    },"[CONSULT CUSTOMER EMAIL]");
+  }
+  return {seller:sellerResult,customer:customerResult};
+}
 
 function nowIso(){ return new Date().toISOString(); }
 function orderNo(){
@@ -199,6 +297,27 @@ async function initDb(){
       qty INTEGER NOT NULL CHECK(qty > 0),
       line_total INTEGER NOT NULL
     );
+    CREATE TABLE IF NOT EXISTS consultations(
+      id BIGSERIAL PRIMARY KEY,
+      consult_no TEXT UNIQUE NOT NULL,
+      user_id BIGINT REFERENCES users(id) ON DELETE SET NULL,
+      guide_type TEXT NOT NULL,
+      customer_name TEXT NOT NULL,
+      phone TEXT NOT NULL,
+      email TEXT DEFAULT '',
+      recipient TEXT DEFAULT '',
+      budget TEXT DEFAULT '',
+      quantity_note TEXT DEFAULT '',
+      preferred_fruits TEXT DEFAULT '',
+      avoid_fruits TEXT DEFAULT '',
+      taste_preference TEXT DEFAULT '',
+      packaging TEXT DEFAULT '',
+      delivery_date TEXT DEFAULT '',
+      message TEXT DEFAULT '',
+      status TEXT NOT NULL DEFAULT '상담접수',
+      created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+    );
+    CREATE INDEX IF NOT EXISTS idx_consultations_created_at ON consultations(created_at DESC);
     CREATE INDEX IF NOT EXISTS idx_orders_user_id ON orders(user_id);
     CREATE INDEX IF NOT EXISTS idx_orders_created_at ON orders(created_at DESC);
   `);
@@ -404,6 +523,43 @@ app.post("/api/admin/login",(req,res)=>{
 app.post("/api/admin/logout",(req,res)=>{res.clearCookie("iroom_token");res.json({ok:true});});
 app.get("/api/admin/me",(req,res)=>{const t=readToken(req);res.json({admin:!!t?.admin});});
 
+
+app.post("/api/consultations", async(req,res)=>{
+  const b=req.body||{};
+  const guideType=String(b.guide_type||"").trim();
+  const name=String(b.customer_name||"").trim();
+  const phone=String(b.phone||"").trim();
+  if(!guideType||!name||!phone){
+    return res.status(400).json({error:"상담 유형, 이름, 연락처를 입력해주세요."});
+  }
+  const consultNo="C"+Date.now().toString(36).toUpperCase()+crypto.randomBytes(2).toString("hex").toUpperCase();
+  const auth=parseAuth(req);
+  try{
+    const r=await pool.query(`
+      INSERT INTO consultations(
+        consult_no,user_id,guide_type,customer_name,phone,email,recipient,budget,
+        quantity_note,preferred_fruits,avoid_fruits,taste_preference,packaging,
+        delivery_date,message
+      ) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15)
+      RETURNING *
+    `,[
+      consultNo,auth?.userId||null,guideType,name,phone,String(b.email||"").trim(),
+      String(b.recipient||"").trim(),String(b.budget||"").trim(),
+      String(b.quantity_note||"").trim(),String(b.preferred_fruits||"").trim(),
+      String(b.avoid_fruits||"").trim(),String(b.taste_preference||"").trim(),
+      String(b.packaging||"").trim(),String(b.delivery_date||"").trim(),
+      String(b.message||"").trim()
+    ]);
+    const cst=r.rows[0];
+    const mail=await sendConsultationEmails(cst).catch(e=>({seller:{ok:false,error:e.message}}));
+    console.log("[CONSULTATION] saved",consultNo,"mail",JSON.stringify(mail));
+    res.json({ok:true,consult_no:consultNo,mail_sent:!!mail?.seller?.ok});
+  }catch(e){
+    console.error("[CONSULTATION] error",e);
+    res.status(500).json({error:"상담 요청 저장 중 오류가 발생했습니다."});
+  }
+});
+
 app.get("/api/admin/dashboard",requireAdmin,async(req,res)=>{
   const [p,o,u,today]=await Promise.all([
     pool.query("SELECT COUNT(*)::int count, COALESCE(SUM(stock),0)::int stock FROM products WHERE is_active=TRUE"),
@@ -412,6 +568,31 @@ app.get("/api/admin/dashboard",requireAdmin,async(req,res)=>{
     pool.query("SELECT COUNT(*)::int count, COALESCE(SUM(total_amount),0)::int sales FROM orders WHERE created_at::date=CURRENT_DATE")
   ]);
   res.json({products:p.rows[0],orders:o.rows[0].count,users:u.rows[0].count,today:today.rows[0]});
+});
+
+
+app.get("/api/admin/email-status",requireAdmin,(req,res)=>{
+  const c=mailConfig();
+  res.json({
+    smtp:{host:!!c.smtpHost,user:!!c.smtpUser,password:!!c.smtpPassword,port:c.smtpPort},
+    brevo:{api_key:!!c.brevoApiKey,sender_email:!!c.senderEmail},
+    order_email:!!c.orderEmail
+  });
+});
+app.post("/api/admin/email-test",requireAdmin,async(req,res)=>{
+  const c=mailConfig();
+  const to=String(req.body?.to||c.orderEmail||"").trim();
+  if(!to) return res.status(400).json({error:"테스트 받을 이메일이 없습니다."});
+  const result=await sendEmailReliable({
+    to,
+    subject:"[이룸] 주문메일 테스트",
+    text:"이 메일이 도착했다면 이룸 fresh fruits 메일 발송 설정이 정상입니다."
+  },"[EMAIL TEST]");
+  res.json(result);
+});
+app.get("/api/admin/consultations",requireAdmin,async(req,res)=>{
+  const r=await pool.query("SELECT * FROM consultations ORDER BY created_at DESC LIMIT 500");
+  res.json({consultations:r.rows});
 });
 
 app.get("/api/admin/products",requireAdmin,async(req,res)=>{
