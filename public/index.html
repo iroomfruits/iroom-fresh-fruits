@@ -23,7 +23,7 @@
 <meta name="twitter:description" content="자연의 신선함을 프리미엄으로 전합니다.">
 <meta name="twitter:image" content="https://iroom-fresh-fruits.onrender.com/assets/share-luxury-v68.jpg?v=68">
 
-<link rel="manifest" href="/manifest.webmanifest?v=79">
+<link rel="manifest" href="/manifest.webmanifest?v=80">
 <link rel="apple-touch-icon" href="/icons/icon-192.png?v=66">
 <link rel="icon" type="image/png" href="/icons/icon-192.png?v=66">
 <style>
@@ -123,6 +123,13 @@ footer{background:#0d2d20;color:#fff;padding:42px 0}.foot{display:grid;grid-temp
 .cartItemRow{display:grid;grid-template-columns:24px 1fr auto;gap:10px;align-items:center}
 .cartItemRow.off{opacity:.45}
 
+
+.consult-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.consult-grid .wide{grid-column:1/-1}
+.consult-choice-note{padding:11px 13px;background:#f8f4ea;border:1px solid #eadfca;border-radius:10px;margin-bottom:12px;color:#594c38;font-size:13px}
+.consult-msg{min-height:96px;resize:vertical}
+@media(max-width:650px){.consult-grid{grid-template-columns:1fr}.consult-grid .wide{grid-column:auto}}
+
 </style>
 <script src="//t1.kakaocdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
@@ -198,7 +205,7 @@ footer{background:#0d2d20;color:#fff;padding:42px 0}.foot{display:grid;grid-temp
       <button class="buyGuideChoice" data-guide="fresh"><b>🍊 산뜻한 과일</b><span>상큼하고 향긋한 과일을 원할 때</span></button>
       <button class="buyGuideChoice" data-guide="value"><b>💚 실속 구매</b><span>가격과 구성의 균형을 중요하게 볼 때</span></button>
     </div>
-    <div class="buyGuideResult" id="buyGuideResult"></div>
+    <div class="buyGuideResult" id="buyGuideResult" style="display:block"><strong>원하는 항목을 눌러주세요.</strong><p>고객님의 예산·취향·선물 목적을 적어 보내주시면 판매자가 확인할 수 있도록 접수됩니다.</p></div>
   </div>
 </section>
 
@@ -250,6 +257,28 @@ footer{background:#0d2d20;color:#fff;padding:42px 0}.foot{display:grid;grid-temp
 </div></div>
 <div class="modal" id="myOrdersModal"><div class="modalbox" style="width:min(760px,100%)"><div class="modalhead"><h3>마이페이지 · 주문내역</h3><button data-close>×</button></div><div id="myOrdersContent"></div></div></div>
 <div class="modal" id="orderLookupModal"><div class="modalbox"><div class="modalhead"><h3>비회원 주문조회</h3><button data-close>×</button></div><div class="field"><label>주문번호</label><input id="lookupNo"></div><div class="field"><label>주문 연락처</label><input id="lookupPhone"></div><button class="fullbtn" id="doLookup">조회하기</button><div id="lookupResult" style="margin-top:12px"></div></div></div>
+
+
+<div class="modal" id="consultModal"><div class="modalbox" style="width:min(720px,100%)">
+  <div class="modalhead"><h3>맞춤 과일 추천 요청</h3><button data-close>×</button></div>
+  <div class="consult-choice-note" id="consultGuideNote">선택한 상담 유형에 맞춰 조건을 알려주세요.</div>
+  <div class="consult-grid">
+    <div class="field"><label>이름 *</label><input id="consultName"></div>
+    <div class="field"><label>연락처 *</label><input id="consultPhone" inputmode="tel" placeholder="010-0000-0000"></div>
+    <div class="field wide"><label>이메일</label><input id="consultEmail" type="email" placeholder="접수 확인 메일을 받을 주소"></div>
+    <div class="field"><label>받는 분 / 이용 상황</label><input id="consultRecipient" placeholder="부모님 선물, 가족 4명 등"></div>
+    <div class="field"><label>예산</label><select id="consultBudget"><option value="">선택해주세요</option><option>3만원 이하</option><option>3~5만원</option><option>5~8만원</option><option>8~12만원</option><option>12만원 이상</option><option>상담 후 결정</option></select></div>
+    <div class="field"><label>인원 / 필요한 수량</label><input id="consultQty" placeholder="4명, 10세트 등"></div>
+    <div class="field"><label>맛 선호</label><select id="consultTaste"><option value="">선택해주세요</option><option>아주 달콤하게</option><option>달콤하고 부드럽게</option><option>달콤·새콤 균형</option><option>상큼하고 산뜻하게</option><option>잘 모르겠음 · 추천해주세요</option></select></div>
+    <div class="field"><label>원하는 과일</label><input id="consultPrefer" placeholder="샤인머스켓, 배 등"></div>
+    <div class="field"><label>피하고 싶은 과일</label><input id="consultAvoid" placeholder="복숭아 제외 등"></div>
+    <div class="field"><label>포장 요청</label><select id="consultPackaging"><option value="">선택해주세요</option><option>일반 포장</option><option>선물 포장</option><option>고급 선물 포장</option><option>기업·단체 포장</option><option>추천해주세요</option></select></div>
+    <div class="field"><label>희망 배송일</label><input id="consultDate" type="date"></div>
+    <div class="field wide"><label>판매자에게 전할 내용</label><textarea id="consultMessage" class="consult-msg" placeholder="예: 부모님 생신 선물입니다. 너무 딱딱한 과일보다는 바로 드시기 좋은 구성으로 부탁드립니다."></textarea></div>
+  </div>
+  <button class="fullbtn" id="sendConsultRequest">추천 요청 보내기</button>
+  <p id="consultResult" style="font-size:12px;margin:10px 0 0;color:#b03d3d"></p>
+</div></div>
 
 <div class="modal" id="loginModal"><div class="modalbox"><div class="modalhead"><h3>로그인</h3><button data-close>×</button></div><p style="font-size:12px;color:#777;margin:0 0 10px">회원가입 때 만든 아이디를 입력하세요. 기존 이메일 회원은 이메일로도 로그인할 수 있습니다.</p><div class="field"><label>아이디</label><input id="loginUser" autocomplete="username" placeholder="가입한 아이디"></div><div class="field"><label>비밀번호</label><input id="loginPass" type="password"></div><button class="fullbtn" id="doLogin">로그인</button><p id="loginMsg" style="font-size:12px;color:#b03d3d"></p></div></div>
 <div class="modal" id="searchModal"><div class="modalbox"><div class="modalhead"><h3>상품 검색</h3><button data-close>×</button></div><div class="field"><input id="searchInput" placeholder="배, 사과, 샤인머스켓"></div><div id="searchResults"></div></div></div>
@@ -665,14 +694,70 @@ const guideMap={
   fresh:{title:"상큼하고 향긋한 추천",desc:"향이 또렷하고 산뜻한 맛을 좋아한다면 감귤류와 사과가 좋습니다. 식후 디저트나 사무실 간식으로 특히 잘 맞습니다.",names:["제주 한라봉","경북 홍사과"]},
   value:{title:"실속 있게 고르는 법",desc:"가족 소비량을 기준으로 3~5일 안에 먹을 양부터 시작하세요. 처음 구매라면 단일 품목 1~2개로 품질을 확인한 뒤 선물세트로 넓히는 것이 좋습니다.",names:["제주 한라봉","복숭아 백도","경북 홍사과"]}
 };
-qa("[data-guide]").forEach(btn=>btn.addEventListener("click",()=>{
-  qa("[data-guide]").forEach(x=>x.classList.remove("on"));btn.classList.add("on");
-  const g=guideMap[btn.dataset.guide],box=q("#buyGuideResult");
-  const found=(serverProducts||[]).filter(p=>g.names.includes(p.name));
-  box.style.display="block";
-  box.innerHTML=`<strong>${g.title}</strong><p>${g.desc}</p>`+
-    (found.length?`<div style="display:flex;gap:8px;flex-wrap:wrap">${found.map(p=>`<button class="fullbtn" style="width:auto;padding:9px 13px" onclick="document.querySelector('.product[data-name=&quot;${p.name}&quot;]')?.scrollIntoView({behavior:'smooth',block:'center'})">${p.name} · ${Number(p.price).toLocaleString()}원~</button>`).join("")}</div>`:"");
-}));
+
+let selectedGuideType="";
+const guideLabel={gift:"🎁 선물용",family:"🏠 가족용",sweet:"🍇 달콤한 과일",fresh:"🍊 산뜻한 과일",value:"💚 실속 구매"};
+
+async function openConsultation(type){
+  selectedGuideType=type;
+  qa("[data-guide]").forEach(x=>x.classList.toggle("on",x.dataset.guide===type));
+  const g=guideMap[type];
+  q("#consultGuideNote").innerHTML=`<b>${guideLabel[type]}</b> · ${g.desc}<br><span style="font-size:12px;color:#777">아래 조건을 알려주시면 판매자가 확인 후 알맞게 안내드립니다.</span>`;
+  q("#consultResult").textContent="";
+  try{
+    const me=await fetch("/api/me",{cache:"no-store"}).then(r=>r.json());
+    if(me.user){
+      q("#consultName").value=me.user.name||"";
+      q("#consultPhone").value=me.user.phone||"";
+      q("#consultEmail").value=me.user.email||"";
+    }
+  }catch(e){}
+  open("consultModal");
+  setTimeout(()=>q("#consultName")?.focus(),80);
+}
+qa("[data-guide]").forEach(btn=>btn.addEventListener("click",()=>openConsultation(btn.dataset.guide)));
+
+q("#consultPhone")?.addEventListener("input",()=>{q("#consultPhone").value=formatPhoneValue(q("#consultPhone").value)});
+
+q("#sendConsultRequest")?.addEventListener("click",async()=>{
+  const btn=q("#sendConsultRequest");
+  const result=q("#consultResult");
+  const payload={
+    guide_type:guideLabel[selectedGuideType]||selectedGuideType,
+    customer_name:q("#consultName").value.trim(),
+    phone:q("#consultPhone").value.trim(),
+    email:q("#consultEmail").value.trim(),
+    recipient:q("#consultRecipient").value.trim(),
+    budget:q("#consultBudget").value,
+    quantity_note:q("#consultQty").value.trim(),
+    preferred_fruits:q("#consultPrefer").value.trim(),
+    avoid_fruits:q("#consultAvoid").value.trim(),
+    taste_preference:q("#consultTaste").value,
+    packaging:q("#consultPackaging").value,
+    delivery_date:q("#consultDate").value,
+    message:q("#consultMessage").value.trim()
+  };
+  if(!payload.customer_name||!payload.phone){
+    result.style.color="#b03d3d";
+    result.textContent="이름과 연락처는 꼭 입력해주세요.";
+    return;
+  }
+  btn.disabled=true;btn.textContent="접수 중...";
+  try{
+    const r=await fetch("/api/consultations",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)});
+    const d=await r.json();
+    if(!r.ok)throw Error(d.error||"접수 실패");
+    result.style.color="#1e6b45";
+    result.innerHTML=`추천 요청이 접수되었습니다. <b>상담번호 ${d.consult_no}</b><br>확인 후 알맞은 과일과 구성을 안내드리겠습니다.${d.mail_sent?" 판매자에게 이메일도 전송했습니다.":" 요청은 저장됐으며 판매자 알림 메일 설정은 확인이 필요합니다."}`;
+    setTimeout(()=>q("#consultModal").classList.remove("open"),2200);
+  }catch(e){
+    result.style.color="#b03d3d";
+    result.textContent=e.message;
+  }finally{
+    btn.disabled=false;btn.textContent="추천 요청 보내기";
+  }
+});
+
 
 document.addEventListener("DOMContentLoaded",()=>{syncServerProducts();refreshAuthUI();});
 
@@ -682,6 +767,6 @@ q("#searchBtn").onclick=()=>{open("searchModal");q("#searchInput").focus()};q("#
 window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();deferredPrompt=e;q("#installBanner").classList.add("show")});
 async function installApp(){if(deferredPrompt){deferredPrompt.prompt();await deferredPrompt.userChoice;deferredPrompt=null;q("#installBanner").classList.remove("show")}else{const ios=/iphone|ipad|ipod/i.test(navigator.userAgent);alert(ios?"Safari의 공유 버튼 → 홈 화면에 추가를 선택하세요.":"브라우저 메뉴에서 '앱 설치' 또는 '홈 화면에 추가'를 선택하세요.")}}
 q("#installNow").onclick=installApp;q("#installBannerBtn").onclick=installApp;q("#installClose").onclick=()=>q("#installBanner").classList.remove("show");
-if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("/service-worker.js?v=79",{updateViaCache:"none"}).then(reg=>reg.update()).catch(()=>{}))}
+if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("/service-worker.js?v=80",{updateViaCache:"none"}).then(reg=>reg.update()).catch(()=>{}))}
 </script>
 </body></html>
