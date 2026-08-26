@@ -1,12 +1,19 @@
 {
-  "name": "iroom-fresh-fruits-v35-online",
-  "version": "35.1.0",
+  "name": "iroom-fresh-fruits-production",
+  "version": "71.0.0",
   "private": true,
+  "type": "commonjs",
   "scripts": {
-    "start": "node start-online.js",
-    "check": "node --check server.js"
+    "start": "node server.js"
   },
   "engines": {
-    "node": ">=20"
+    "node": ">=18"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.6",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
+    "pg": "^8.13.1"
   }
 }
