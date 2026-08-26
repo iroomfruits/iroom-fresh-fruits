@@ -1,30 +1,22 @@
 services:
   - type: web
     name: iroom-fresh-fruits
-    runtime: docker
-    plan: starter
-    region: singapore
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
     healthCheckPath: /api/health
     envVars:
-      - key: NODE_ENV
-        value: production
-      - key: PERSIST_DIR
-        value: /data
-      - key: TRUST_PROXY
-        value: "1"
+      - key: DATABASE_URL
+        fromDatabase:
+          name: iroom-postgres
+          property: connectionString
+      - key: JWT_SECRET
+        generateValue: true
       - key: ADMIN_PASSWORD
         sync: false
-      - key: SMTP_HOST
-        value: smtp.naver.com
-      - key: SMTP_PORT
-        value: "465"
-      - key: SMTP_USER
-        value: iroom4562@naver.com
-      - key: SMTP_PASSWORD
-        sync: false
-      - key: ORDER_EMAIL
-        value: iroom4562@naver.com
-    disk:
-      name: iroom-data
-      mountPath: /data
-      sizeGB: 1
+      - key: PUBLIC_BASE_URL
+        value: https://iroom-fresh-fruits.onrender.com
+databases:
+  - name: iroom-postgres
+    plan: free
