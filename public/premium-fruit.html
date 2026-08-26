@@ -43,6 +43,18 @@ h3{color:var(--green2);margin:0 0 8px}
 .related a{display:inline-block;margin:7px 8px 0 0;padding:9px 13px;border:1px solid #d8c8a7;border-radius:999px;color:var(--green2);text-decoration:none;font-weight:800}
 footer{background:var(--green);color:#d8d2c8;text-align:center;padding:26px;font-size:13px}
 @media(max-width:760px){.hero h1{font-size:34px}.hero .inner,main{padding-left:22px;padding-right:22px}.grid{grid-template-columns:1fr}header .top{align-items:flex-start;flex-direction:column}}
+
+/* V94 internal-link hub */
+.seo-link-hub{margin-top:46px;padding-top:28px;border-top:1px solid #ddd3c2}
+.seo-link-hub h2{margin:0 0 16px;color:#08271e;font-size:24px}
+.seo-link-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.seo-link-card{display:flex;flex-direction:column;gap:6px;padding:17px 18px;border:1px solid #e2d5bf;border-radius:14px;background:#fff;color:#08271e;text-decoration:none;transition:.18s}
+.seo-link-card:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(8,39,30,.08);border-color:#c6a15b}
+.seo-link-card strong{font-size:16px}
+.seo-link-card span{font-size:13px;line-height:1.55;color:#6c6458}
+.seo-home-link{display:inline-block;margin-top:14px;color:#31553f;font-weight:800;text-decoration:none}
+@media(max-width:760px){.seo-link-grid{grid-template-columns:1fr}.seo-link-hub h2{font-size:21px}}
+
 </style>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebPage", "name": "고급과일 | 프리미엄 과일선물 - 이룸 fresh fruits", "url": "https://iroom-fresh-fruits.onrender.com/premium-fruit.html", "description": "선물용과 가정용 고급과일을 예산과 취향에 맞춰 고르는 이룸 fresh fruits. 신선도·식감·포장까지 꼼꼼하게 상담합니다.", "inLanguage": "ko-KR", "isPartOf": {"@type": "WebSite", "name": "이룸 fresh fruits", "url": "https://iroom-fresh-fruits.onrender.com/"}, "about": {"@type": "Thing", "name": "고급과일"}}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "고급과일은 무엇을 보고 고르면 좋나요?", "acceptedAnswer": {"@type": "Answer", "text": "외관만 보지 말고 신선도, 숙도, 당도와 산미의 균형, 식감, 포장 상태를 함께 보는 것이 좋습니다."}}, {"@type": "Question", "name": "부모님 선물에는 어떤 구성이 좋나요?", "acceptedAnswer": {"@type": "Answer", "text": "평소 좋아하는 과일이 있다면 그 품목을 우선하고, 취향을 모를 때는 여러 품목을 섞은 구성이 선택 부담을 줄여줍니다."}}]}</script>
@@ -70,11 +82,7 @@ footer{background:var(--green);color:#d8d2c8;text-align:center;padding:26px;font
   <p class="lead">예산, 맛 선호, 원하는 과일과 피하고 싶은 과일, 포장 방식, 희망 배송일을 알려주시면 선택하기 쉽게 정리해드립니다.</p>
   <a class="cta" href="/#consult">맞춤 과일 상담하기</a>
 
-  <div class="related">
-    <strong>관련 과일 안내</strong><br>
-    <a href="/delicious-fruit.html">맛있는과일</a><a href="/seasonal-fruit.html">제철과일</a><a href="/fruit-gift-set.html">과일선물세트</a>
-    <a href="/">이룸 fresh fruits 홈</a>
-  </div>
+  <section class="seo-link-hub" aria-label="관련 과일 안내"><h2>이룸 과일 가이드 더 보기</h2><div class="seo-link-grid"><a class="seo-link-card" href="/delicious-fruit.html"><strong>맛있는과일</strong><span>달콤함·산뜻함·식감으로 고르기</span></a><a class="seo-link-card" href="/seasonal-fruit.html"><strong>제철과일</strong><span>계절에 맞는 신선한 과일</span></a><a class="seo-link-card" href="/fruit-gift-set.html"><strong>과일선물세트</strong><span>부모님·감사·단체 선물</span></a></div><a class="seo-home-link" href="/">이룸 fresh fruits 메인으로</a></section>
 </main>
 <footer>이룸 fresh fruits · 신선한 과일을 정성껏 준비합니다.</footer>
 </body>
