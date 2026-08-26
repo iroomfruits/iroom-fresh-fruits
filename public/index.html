@@ -23,7 +23,7 @@
 <meta name="twitter:description" content="자연의 신선함을 프리미엄으로 전합니다.">
 <meta name="twitter:image" content="https://iroom-fresh-fruits.onrender.com/assets/share-luxury-v68.jpg?v=68">
 
-<link rel="manifest" href="/manifest.webmanifest?v=75">
+<link rel="manifest" href="/manifest.webmanifest?v=76">
 <link rel="apple-touch-icon" href="/icons/icon-192.png?v=66">
 <link rel="icon" type="image/png" href="/icons/icon-192.png?v=66">
 <style>
@@ -106,11 +106,11 @@ footer{background:#0d2d20;color:#fff;padding:42px 0}.foot{display:grid;grid-temp
 @media(max-width:1100px){.head{grid-template-columns:220px 1fr auto}.nav{gap:20px}.hero{grid-template-columns:42% 58%}.hero-copy{padding-left:30px}.hero-copy h1{font-size:42px}.products{grid-template-columns:repeat(3,1fr)}.trust .wrap{grid-template-columns:repeat(3,1fr);gap:14px}.install{grid-template-columns:1fr 1fr}.install>div:first-child{grid-column:1/-1}.steps,.guides{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:760px){.wrap{padding:0 18px}.notice nav{display:none}.head{height:auto;padding:16px 0;grid-template-columns:1fr auto}.nav{grid-column:1/-1;order:3;overflow:auto;justify-content:flex-start;white-space:nowrap;padding-top:14px}.tools .desktop{display:none}.brand .ko{font-size:33px}.hero{display:block;height:auto}.hero-copy{padding:40px 22px 30px}.hero-copy h1{font-size:38px}.hero-media{height:330px}.trust .wrap{grid-template-columns:1fr 1fr}.products{grid-template-columns:repeat(2,1fr);gap:10px}.gift-grid,.install,.story .wrap,.foot{grid-template-columns:1fr}.steps,.guides,.reviews{grid-template-columns:1fr}.install>div:first-child{grid-column:auto}.install-banner{flex-wrap:wrap}}
 </style>
-<script src="https://t1.kakaocdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="//t1.kakaocdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
 <body>
 <div class="notice"><div class="wrap"><div>🍊 <b>오늘의 입고</b> &nbsp; | &nbsp; 고급 국산 종합과일 입고되었습니다.</div><nav><button id="customerBtn">고객센터</button><button id="ordersBtn">주문조회</button><button id="myBtn">마이페이지</button></nav></div></div>
-<header><div class="wrap head"><a class="brand" href="/"><span class="ko">이룸</span><span class="en">fresh fruits</span><small>PREMIUM FRUIT BOUTIQUE</small></a><nav class="nav"><a href="#best">NEW & BEST</a><a href="#best">과일</a><a href="#gift">선물세트</a><a href="#group">공동구매</a><a href="#custom">단체·맞춤선물</a><a href="#story">스토리</a></nav><div class="tools"><button class="tool desktop" id="loginBtn">로그인</button><button class="tool desktop" id="logoutBtn">로그아웃</button><button class="tool desktop" id="signupBtn">회원가입</button><button class="tool desktop" id="myTopBtn">마이페이지</button><button class="icon desktop" id="searchBtn" title="검색">⌕</button><button class="icon" id="shareBtn" title="공유">↗</button><button class="icon" id="cartBtn">🛒<span class="badge" id="cartBadge">0</span></button></div></div></header>
+<header><div class="wrap head"><a class="brand" href="/"><span class="ko">이룸</span><span class="en">fresh fruits</span><small>PREMIUM FRUIT BOUTIQUE</small></a><nav class="nav"><a href="#best">NEW & BEST</a><a href="#best">과일</a><a href="#gift">선물세트</a><a href="#group">공동구매</a><a href="#custom">단체·맞춤선물</a><a href="#story">스토리</a></nav><div class="tools"><button class="tool desktop" id="loginBtn">로그인</button><button class="tool desktop" id="signupBtn">회원가입</button><button class="tool desktop" id="myTopBtn">마이페이지</button><button class="icon desktop" id="searchBtn" title="검색">⌕</button><button class="icon" id="shareBtn" title="공유">↗</button><button class="icon" id="cartBtn">🛒<span class="badge" id="cartBadge">0</span></button></div></div></header>
 
 <main>
 <section class="hero"><div class="hero-copy"><h1>자연의 신선함을<br>프리미엄으로 전합니다</h1><p>좋은 산지의 제철 과일을 엄선하여<br>정성껏 보내드립니다.</p><a class="cta" href="#best">SHOP NOW ›</a><div class="pager"><span id="heroCount"><b>01</b> / 06</span><button id="prev">‹</button><button id="next">›</button></div></div><div class="hero-media"><img id="heroImg" src="/assets/hero-1.jpg" alt="프리미엄 과일"><div class="dots" id="dots"></div></div></section>
@@ -203,6 +203,13 @@ footer{background:#0d2d20;color:#fff;padding:42px 0}.foot{display:grid;grid-temp
 <div style="display:grid;grid-template-columns:160px 1fr;gap:8px;align-items:end"><div class="field"><label>우편번호</label><input id="signupPostcode" class="signup-next"></div><button class="fullbtn" id="signupPostcodeBtn" type="button" style="margin-bottom:9px">주소 검색</button></div>
 <div class="field"><label>주소</label><input id="signupAddress1" class="signup-next"></div>
 <div class="field"><label>상세주소</label><input id="signupAddress2" class="signup-next"></div>
+<div id="signupPostcodeLayer" style="display:none;margin:10px 0;border:1px solid #ddd;border-radius:10px;overflow:hidden;background:#fff">
+  <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 12px;border-bottom:1px solid #eee">
+    <b style="font-size:13px">주소 검색</b>
+    <button type="button" id="signupPostcodeClose" style="border:0;background:transparent;font-size:20px;cursor:pointer">×</button>
+  </div>
+  <div id="signupPostcodeEmbed" style="width:100%;height:430px"></div>
+</div>
 <button class="fullbtn" id="doSignup">회원가입</button><p id="signupMsg" style="font-size:12px;color:#b03d3d"></p>
 </div></div>
 <div class="modal" id="myOrdersModal"><div class="modalbox" style="width:min(760px,100%)"><div class="modalhead"><h3>마이페이지 · 주문내역</h3><button data-close>×</button></div><div id="myOrdersContent"></div></div></div>
@@ -467,33 +474,27 @@ document.addEventListener("keydown",e=>{
 
 
 
-function loadDaumPostcode(){
-  return new Promise((resolve,reject)=>{
-    if(window.kakao?.Postcode) return resolve();
-    const old=document.querySelector('script[data-iroom-postcode="1"]');
-    if(old) old.remove();
-    const s=document.createElement("script");
-    s.src="https://t1.kakaocdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js";
-    s.async=true;
-    s.dataset.iroomPostcode="1";
-    s.onload=()=>window.kakao?.Postcode?resolve():reject(new Error("Kakao Postcode object unavailable"));
-    s.onerror=()=>reject(new Error("Kakao postcode script failed"));
-    document.head.appendChild(s);
-  });
-}
-async function openSignupPostcode(){
-  try{
-    await loadDaumPostcode();
-    new kakao.Postcode({
-      oncomplete:d=>{
-        q("#signupPostcode").value=d.zonecode||"";
-        q("#signupAddress1").value=d.roadAddress||d.jibunAddress||"";
-        q("#signupAddress2").focus();
-      }
-    }).open();
-  }catch(e){
-    alert("카카오 주소검색을 불러오지 못했습니다. 브라우저 또는 보안 프로그램에서 t1.kakaocdn.net 접속이 차단되지 않았는지 확인해주세요. 주소는 직접 입력해도 회원가입할 수 있습니다.");
+function openSignupPostcode(){
+  const layer=q("#signupPostcodeLayer");
+  const box=q("#signupPostcodeEmbed");
+  if(!layer||!box) return;
+  if(!window.kakao?.Postcode){
+    alert("주소검색 모듈을 불러오지 못했습니다. 주소와 우편번호를 직접 입력해 주세요.");
+    return;
   }
+  layer.style.display="block";
+  box.innerHTML="";
+  new kakao.Postcode({
+    width:"100%",
+    height:"100%",
+    oncomplete:function(data){
+      q("#signupPostcode").value=data.zonecode||"";
+      q("#signupAddress1").value=data.roadAddress||data.jibunAddress||data.address||"";
+      layer.style.display="none";
+      q("#signupAddress2").focus();
+    }
+  }).embed(box);
+  setTimeout(()=>layer.scrollIntoView({behavior:"smooth",block:"center"}),50);
 }
 
 let currentMember=null;
@@ -501,41 +502,39 @@ async function refreshAuthUI(){
   try{
     const d=await fetch("/api/me",{cache:"no-store"}).then(r=>r.json());
     currentMember=d.user||null;
-    const login=q("#loginBtn"),signup=q("#signupBtn"),logout=q("#logoutBtn");
+    const login=q("#loginBtn"),signup=q("#signupBtn");
     if(currentMember){
-      if(login){login.textContent=(currentMember.name||currentMember.username)+"님";login.title="마이페이지";}
+      if(login){login.textContent="로그아웃";login.title=(currentMember.name||currentMember.username)+"님 로그아웃";}
       if(signup) signup.style.display="none";
-      if(logout){logout.style.display="";logout.disabled=false;logout.title="로그아웃";}
     }else{
       if(login){login.textContent="로그인";login.title="로그인";}
       if(signup) signup.style.display="";
-      if(logout){logout.style.display="";logout.disabled=false;logout.title="현재 로그인 상태가 아닙니다";}
     }
-  }catch(e){
-    const logout=q("#logoutBtn");
-    if(logout) logout.style.display="";
-  }
+  }catch(e){}
 }
 
-q("#logoutBtn")?.addEventListener("click",async()=>{
+
+
+
+q("#loginBtn")?.addEventListener("click",async e=>{
+  if(!currentMember) return; // 기존 로그인 모달 핸들러가 실행됨
+  e.stopImmediatePropagation();
+  if(!confirm("로그아웃하시겠습니까?")) return;
   try{
-    const me=await fetch("/api/me",{cache:"no-store"}).then(r=>r.json());
-    if(!me.user){
-      alert("현재 로그인 상태가 아닙니다.");
-      await refreshAuthUI();
-      return;
-    }
     await fetch("/api/logout",{method:"POST"});
     currentMember=null;
     await refreshAuthUI();
     alert("로그아웃되었습니다.");
-  }catch(e){
+  }catch(err){
     alert("로그아웃 처리 중 오류가 발생했습니다.");
   }
-});
+},true);
 
 q("#signupBtn")?.addEventListener("click",()=>{open("signupModal");setTimeout(()=>q("#signupName")?.focus(),80)});
 q("#signupPostcodeBtn")?.addEventListener("click",openSignupPostcode);
+q("#signupPostcodeClose")?.addEventListener("click",()=>{
+  const layer=q("#signupPostcodeLayer"); if(layer) layer.style.display="none";
+});
 qa(".signup-next").forEach((el,i,arr)=>el.addEventListener("keydown",e=>{if(e.key!=="Enter")return;e.preventDefault();if(el.id==="signupPostcode"){openSignupPostcode();return;}const n=arr[i+1];if(n)n.focus();else q("#doSignup")?.click();}));
 q("#doSignup")?.addEventListener("click",async()=>{try{const r=await fetch("/api/signup",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({name:q("#signupName").value,username:q("#signupUser").value,password:q("#signupPass").value,email:q("#signupEmail").value,phone:q("#signupPhone").value,postcode:q("#signupPostcode").value,address1:q("#signupAddress1").value,address2:q("#signupAddress2").value})});const d=await r.json();if(!r.ok)throw Error(d.error||"회원가입 실패");q("#signupMsg").style.color="#246044";q("#signupMsg").textContent="회원가입되었습니다.";await refreshAuthUI();setTimeout(()=>q("#signupModal").classList.remove("open"),600);}catch(e){q("#signupMsg").style.color="#b03d3d";q("#signupMsg").textContent=e.message;}});
 async function openMyOrders(){
@@ -558,6 +557,6 @@ q("#searchBtn").onclick=()=>{open("searchModal");q("#searchInput").focus()};q("#
 window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();deferredPrompt=e;q("#installBanner").classList.add("show")});
 async function installApp(){if(deferredPrompt){deferredPrompt.prompt();await deferredPrompt.userChoice;deferredPrompt=null;q("#installBanner").classList.remove("show")}else{const ios=/iphone|ipad|ipod/i.test(navigator.userAgent);alert(ios?"Safari의 공유 버튼 → 홈 화면에 추가를 선택하세요.":"브라우저 메뉴에서 '앱 설치' 또는 '홈 화면에 추가'를 선택하세요.")}}
 q("#installNow").onclick=installApp;q("#installBannerBtn").onclick=installApp;q("#installClose").onclick=()=>q("#installBanner").classList.remove("show");
-if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("/service-worker.js?v=75",{updateViaCache:"none"}).then(reg=>reg.update()).catch(()=>{}))}
+if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("/service-worker.js?v=76",{updateViaCache:"none"}).then(reg=>reg.update()).catch(()=>{}))}
 </script>
 </body></html>
