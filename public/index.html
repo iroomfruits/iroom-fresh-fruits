@@ -6,6 +6,10 @@
 <title>이룸 fresh fruits | 프리미엄 국내산 과일·선물세트</title>
 <meta name="description" content="국내산 제철과일과 프리미엄 과일선물세트를 엄선해 보내드리는 이룸 fresh fruits.">
 <meta name="theme-color" content="#0b3a27">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="이룸 과일">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="이룸 fresh fruits">
@@ -23,9 +27,9 @@
 <meta name="twitter:description" content="자연의 신선함을 프리미엄으로 전합니다.">
 <meta name="twitter:image" content="https://iroom-fresh-fruits.onrender.com/assets/share-luxury-v68.jpg?v=68">
 
-<link rel="manifest" href="/manifest.webmanifest?v=83">
-<link rel="apple-touch-icon" href="/icons/icon-192.png?v=83">
-<link rel="icon" type="image/png" href="/icons/icon-192.png?v=83">
+<link rel="manifest" href="/manifest.webmanifest?v=84">
+<link rel="apple-touch-icon" href="/icons/icon-192.png?v=84">
+<link rel="icon" type="image/png" href="/icons/icon-192.png?v=84">
 <style>
 :root{--g:#0b3a27;--g2:#174c38;--ink:#181818;--muted:#777;--line:#ece8e2;--cream:#faf8f3;--gold:#b99052}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#fff;color:var(--ink);font-family:Arial,"Pretendard","Noto Sans KR",sans-serif}a{text-decoration:none;color:inherit}button,input{font:inherit}button{cursor:pointer}img{display:block;max-width:100%}.wrap{max-width:1440px;margin:auto;padding:0 34px}
@@ -219,7 +223,7 @@ footer{background:#0d2d20;color:#fff;padding:42px 0}.foot{display:grid;grid-temp
 <footer id="footer"><div class="wrap foot"><div><b>이룸 fresh fruits</b><small>국내산 제철과일과 프리미엄 과일선물세트를 정성껏 준비합니다.</small><small><a href="/band-admin.html">관리자 전용 페이지</a></small></div><div><b>고객센터</b><small>평일 09:00 ~ 18:00<br>상품 · 주문 · 배송 · 선물 상담</small></div><div><b>바로가기</b><small><a href="https://band.us/@iroomfruits" target="_blank">이룸 BAND</a><br><a href="/band-order.html">BAND 주문센터</a></small></div></div></footer>
 
 <button class="share-float" id="shareFloat">↗ 공유하기</button><div class="share-toast" id="shareToast">링크를 복사했습니다.</div>
-<div class="install-banner" id="installBanner"><img src="/icons/icon-192.png?v=83" alt="이룸 앱 아이콘" style="width:42px;height:42px;border-radius:10px;flex:0 0 auto"><div class="grow"><b>이룸 fresh fruits 앱 설치</b><div style="font-size:12px;opacity:.8">휴대폰 홈 화면에 추가해 빠르게 이용하세요.</div></div><button id="installBannerBtn">설치하기</button><button class="close" id="installClose">×</button></div>
+<div class="install-banner" id="installBanner"><img src="/icons/icon-192.png?v=84" alt="이룸 앱 아이콘" style="width:42px;height:42px;border-radius:10px;flex:0 0 auto"><div class="grow"><b>이룸 fresh fruits 앱 설치</b><div style="font-size:12px;opacity:.8">휴대폰 홈 화면에 추가해 빠르게 이용하세요.</div></div><button id="installBannerBtn">설치하기</button><button class="close" id="installClose">×</button></div>
 
 
 <div class="modal" id="shareModal"><div class="modalbox"><div class="modalhead"><h3>공유하기</h3><button data-close>×</button></div>
@@ -285,6 +289,16 @@ footer{background:#0d2d20;color:#fff;padding:42px 0}.foot{display:grid;grid-temp
 </div>
 <button class="fullbtn" id="sendConsultRequest">추천 요청 보내기</button>
 <p id="consultResult" style="font-size:12px"></p>
+</div></div>
+
+
+<div class="modal" id="mobileInstallModal"><div class="modalbox" style="width:min(560px,100%)">
+  <div class="modalhead"><h3>휴대폰에 이룸 앱 설치하기</h3><button data-close>×</button></div>
+  <div id="mobileInstallBody" style="font-size:14px;line-height:1.8;color:#444"></div>
+  <div style="display:flex;gap:8px;margin-top:16px;flex-wrap:wrap">
+    <button class="fullbtn" id="copySiteUrl" type="button" style="flex:1">사이트 주소 복사</button>
+    <button class="linebtn" id="retryInstall" type="button" style="flex:1;margin-left:0">설치 다시 시도</button>
+  </div>
 </div></div>
 
 <div class="modal" id="loginModal"><div class="modalbox"><div class="modalhead"><h3>로그인</h3><button data-close>×</button></div><p style="font-size:12px;color:#777;margin:0 0 10px">회원가입 때 만든 아이디를 입력하세요. 기존 이메일 회원은 이메일로도 로그인할 수 있습니다.</p><div class="field"><label>아이디</label><input id="loginUser" autocomplete="username" placeholder="가입한 아이디"></div><div class="field"><label>비밀번호</label><input id="loginPass" type="password"></div><button class="fullbtn" id="doLogin">로그인</button><p id="loginMsg" style="font-size:12px;color:#b03d3d"></p></div></div>
@@ -737,18 +751,139 @@ document.addEventListener("DOMContentLoaded",()=>{syncServerProducts();refreshAu
 q("#customerBtn").onclick=()=>q("#footer").scrollIntoView({behavior:"smooth"});
 const names=["샤인머스켓","나주 신고배 특선","경북 홍사과","제주 한라봉","프리미엄 과일세트","복숭아 백도"];
 q("#searchBtn").onclick=()=>{open("searchModal");q("#searchInput").focus()};q("#searchInput").oninput=e=>{const s=e.target.value.trim();q("#searchResults").innerHTML=names.filter(x=>x.includes(s)).map(x=>'<button class="searchHit" data-name="'+x+'" style="display:block;width:100%;padding:12px;border:0;border-bottom:1px solid #eee;background:#fff;text-align:left">'+x+'</button>').join("");qa(".searchHit").forEach(b=>b.onclick=()=>{q("#searchModal").classList.remove("open");document.querySelector(`.product[data-name="${b.dataset.name}"]`)?.scrollIntoView({behavior:"smooth",block:"center"})})};
-function isStandalone(){return window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone===true}
-function setInstallStatus(t){const el=q("#installStatus");if(el)el.textContent=t}
-window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();deferredPrompt=e;setInstallStatus("설치 준비가 완료되었습니다. 아래 버튼을 눌러 설치하세요.");q("#installBanner")?.classList.add("show")});
-window.addEventListener("appinstalled",()=>{deferredPrompt=null;setInstallStatus("이 기기에 앱이 설치되었습니다.");q("#installNow").textContent="설치됨";q("#installNow").disabled=true;q("#installBanner")?.classList.remove("show")});
-async function installApp(){
-  if(isStandalone()){setInstallStatus("이미 앱으로 실행 중입니다.");return}
-  if(deferredPrompt){deferredPrompt.prompt();const choice=await deferredPrompt.userChoice;if(choice.outcome==="accepted")setInstallStatus("설치를 진행했습니다.");else setInstallStatus("설치를 취소했습니다. 원할 때 다시 설치할 수 있습니다.");deferredPrompt=null;return}
-  const ios=/iphone|ipad|ipod/i.test(navigator.userAgent);
-  setInstallStatus(ios?"iPhone/iPad는 Safari의 공유 버튼 → ‘홈 화면에 추가’를 선택해주세요.":"브라우저가 아직 자동 설치 버튼을 허용하지 않았습니다. Chrome/Edge 메뉴의 ‘앱 설치’ 또는 ‘홈 화면에 추가’를 선택해주세요. 페이지를 한 번 사용한 뒤 다시 시도하면 설치 버튼이 활성화될 수 있습니다.");
+function isStandalone(){
+  return window.matchMedia("(display-mode: standalone)").matches ||
+         window.navigator.standalone===true;
 }
-q("#installNow").onclick=installApp;q("#installBannerBtn").onclick=installApp;q("#installClose").onclick=()=>q("#installBanner").classList.remove("show");
-if(isStandalone()){setInstallStatus("이 기기에 설치된 앱으로 실행 중입니다.");q("#installNow").textContent="설치됨";q("#installNow").disabled=true}
-if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("/service-worker.js?v=83",{updateViaCache:"none"}).then(reg=>{reg.update();setInstallStatus(isStandalone()?"이 기기에 설치된 앱으로 실행 중입니다.":"앱 설치 기능을 준비했습니다. Chrome/Edge에서는 설치 가능 조건이 충족되면 설치 버튼이 활성화됩니다.")}).catch(e=>setInstallStatus("앱 설치 준비 중 오류가 있습니다. 새로고침 후 다시 시도해주세요.")))}
+function setInstallStatus(t){
+  const el=q("#installStatus");
+  if(el)el.textContent=t;
+}
+function uaInfo(){
+  const ua=navigator.userAgent||"";
+  return {
+    ios:/iphone|ipad|ipod/i.test(ua),
+    android:/android/i.test(ua),
+    samsung:/samsungbrowser/i.test(ua),
+    chrome:/chrome|crios/i.test(ua) && !/edg|opr|samsungbrowser/i.test(ua),
+    edge:/edg|edga|edgios/i.test(ua),
+    inApp:/kakaotalk|naver|instagram|fbav|fban|line\//i.test(ua)
+  };
+}
+function showMobileInstallHelp(){
+  const u=uaInfo();
+  const body=q("#mobileInstallBody");
+  if(!body)return;
+  let h="";
+  if(u.inApp){
+    h=`<b>현재 앱 안의 브라우저에서는 설치가 제한될 수 있습니다.</b>
+       <p>화면의 메뉴(⋮ 또는 ⋯)에서 <b>Chrome에서 열기 / Safari에서 열기 / 외부 브라우저로 열기</b>를 선택한 뒤 다시 설치해주세요.</p>
+       <p style="color:#777">아래 ‘사이트 주소 복사’를 눌러 Chrome 또는 Safari 주소창에 붙여넣어도 됩니다.</p>`;
+  }else if(u.ios){
+    h=`<b>iPhone / iPad 설치 방법</b>
+       <ol>
+         <li><b>Safari</b>에서 이 홈페이지를 여세요.</li>
+         <li>하단 또는 상단의 <b>공유</b> 버튼을 누르세요.</li>
+         <li><b>홈 화면에 추가</b>를 선택하세요.</li>
+         <li><b>웹 앱으로 열기</b>를 켜고 <b>추가</b>를 누르세요.</li>
+       </ol>
+       <p style="color:#777">iPhone은 웹페이지의 설치 버튼으로 시스템 설치창을 직접 띄우는 방식이 지원되지 않습니다.</p>`;
+  }else if(u.samsung){
+    h=`<b>Samsung Internet 설치 방법</b>
+       <ol>
+         <li>오른쪽 아래 또는 위의 <b>메뉴</b>를 누르세요.</li>
+         <li><b>현재 페이지 추가</b> 또는 <b>홈 화면에 추가</b>를 선택하세요.</li>
+         <li>추가를 눌러 홈 화면에 설치하세요.</li>
+       </ol>`;
+  }else if(u.android){
+    h=`<b>Android 설치 방법</b>
+       <ol>
+         <li><b>Chrome</b>에서 홈페이지를 여세요.</li>
+         <li>오른쪽 위 <b>⋮ 메뉴</b>를 누르세요.</li>
+         <li><b>앱 설치</b> 또는 <b>홈 화면에 추가</b>를 선택하세요.</li>
+       </ol>
+       <p style="color:#777">Chrome이 설치 가능 상태를 감지하면 이 페이지의 ‘설치하기’ 버튼에서도 설치창이 바로 열립니다.</p>`;
+  }else{
+    h=`<b>설치 안내</b>
+       <p>Chrome 또는 Edge 메뉴에서 <b>앱 설치 / 홈 화면에 추가</b>를 선택해주세요.</p>`;
+  }
+  body.innerHTML=h;
+  open("mobileInstallModal");
+}
+window.addEventListener("beforeinstallprompt",e=>{
+  e.preventDefault();
+  deferredPrompt=e;
+  setInstallStatus("이 기기에서 앱 설치가 준비되었습니다. ‘앱 설치하기’를 눌러주세요.");
+  q("#installBanner")?.classList.add("show");
+});
+window.addEventListener("appinstalled",()=>{
+  deferredPrompt=null;
+  setInstallStatus("이 기기에 앱 설치가 완료되었습니다.");
+  q("#installNow").textContent="설치됨";
+  q("#installNow").disabled=true;
+  q("#installBanner")?.classList.remove("show");
+});
+async function installApp(){
+  if(isStandalone()){
+    setInstallStatus("이미 설치된 앱으로 실행 중입니다.");
+    return;
+  }
+  const u=uaInfo();
+  if(u.ios || u.inApp || u.samsung){
+    showMobileInstallHelp();
+    return;
+  }
+  if(deferredPrompt){
+    try{
+      deferredPrompt.prompt();
+      const choice=await deferredPrompt.userChoice;
+      if(choice.outcome==="accepted"){
+        setInstallStatus("설치를 진행했습니다. 홈 화면에서 이룸 앱을 확인해주세요.");
+      }else{
+        setInstallStatus("설치를 취소했습니다. 원할 때 다시 시도할 수 있습니다.");
+      }
+    }catch(e){
+      showMobileInstallHelp();
+    }finally{
+      deferredPrompt=null;
+    }
+    return;
+  }
+  showMobileInstallHelp();
+}
+q("#installNow").onclick=installApp;
+q("#installBannerBtn").onclick=installApp;
+q("#installClose").onclick=()=>q("#installBanner").classList.remove("show");
+q("#retryInstall")?.addEventListener("click",()=>{
+  q("#mobileInstallModal")?.classList.remove("open");
+  setTimeout(installApp,80);
+});
+q("#copySiteUrl")?.addEventListener("click",async()=>{
+  try{
+    await navigator.clipboard.writeText(location.origin);
+    alert("사이트 주소를 복사했습니다. Chrome 또는 Safari 주소창에 붙여넣어 주세요.");
+  }catch(e){
+    prompt("아래 주소를 복사해주세요.",location.origin);
+  }
+});
+if(isStandalone()){
+  setInstallStatus("이 기기에 설치된 앱으로 실행 중입니다.");
+  q("#installNow").textContent="설치됨";
+  q("#installNow").disabled=true;
+}
+if("serviceWorker" in navigator){
+  window.addEventListener("load",()=>navigator.serviceWorker.register("/service-worker.js?v=84",{updateViaCache:"none"})
+    .then(reg=>{
+      reg.update();
+      if(!isStandalone()){
+        const u=uaInfo();
+        setInstallStatus(u.ios
+          ?"iPhone/iPad는 ‘설치하기’를 누르면 Safari 홈 화면 추가 방법을 안내합니다."
+          :"설치 준비가 완료되었습니다. 설치창이 바로 열리지 않으면 기기에 맞는 방법을 안내합니다.");
+      }
+    })
+    .catch(e=>setInstallStatus("앱 설치 준비 중 오류가 있습니다. 새로고침 후 다시 시도해주세요.")));
+}
+
 </script>
 </body></html>
