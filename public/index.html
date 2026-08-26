@@ -65,6 +65,26 @@ footer{background:#0d2d20;color:#fff;padding:42px 0}.foot{display:grid;grid-temp
 .cart-actions .chat{border:1px solid #d8d0c5;background:#fff}
 @media(max-width:760px){.share-float{right:14px;bottom:14px;padding:11px 14px}.detail-actions,.cart-actions{grid-template-columns:1fr}}
 
+
+.guide.season-card{cursor:pointer;position:relative;transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease;padding-bottom:48px}
+.guide.season-card:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(11,58,39,.10);border-color:#cdbb97}
+.guide.season-card:focus-visible{outline:3px solid rgba(185,144,82,.35);outline-offset:3px}
+.season-more{position:absolute;left:24px;bottom:18px;font-size:11px;font-weight:800;color:#0b3a27;display:flex;align-items:center;gap:5px}
+.season-more:after{content:"›";font-size:16px}
+.season-kicker{font-size:11px;color:#b99052;letter-spacing:.12em;font-weight:800;margin-bottom:5px}
+.season-detail-head{padding:22px;border-radius:13px;background:linear-gradient(135deg,#0b3a27,#174c38);color:#fff;margin:12px 0 18px}
+.season-detail-head small{color:#dfc38a;letter-spacing:.16em}
+.season-detail-head h3{font-family:Georgia,"Noto Serif KR",serif;font-size:29px;margin:9px 0 4px}
+.season-fruit-list{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.season-fruit-item{border:1px solid #ece5da;border-radius:11px;padding:15px;background:#fbfaf7}
+.season-fruit-item b{display:block;color:#0b3a27;margin-bottom:6px}
+.season-fruit-item p{margin:0;font-size:12px;color:#666;line-height:1.75}
+.season-tips{margin-top:14px;background:#f6f1e7;border-radius:11px;padding:16px}
+.season-tips b{display:block;margin-bottom:6px;color:#0b3a27}
+.season-tips p{font-size:12px;color:#626262;line-height:1.8;margin:0}
+.season-note{margin-top:12px;font-size:11px;color:#888;line-height:1.7}
+@media(max-width:760px){.season-fruit-list{grid-template-columns:1fr}.season-detail-head h3{font-size:25px}}
+
 @media(max-width:1100px){.head{grid-template-columns:220px 1fr auto}.nav{gap:20px}.hero{grid-template-columns:42% 58%}.hero-copy{padding-left:30px}.hero-copy h1{font-size:42px}.products{grid-template-columns:repeat(3,1fr)}.trust .wrap{grid-template-columns:repeat(3,1fr);gap:14px}.install{grid-template-columns:1fr 1fr}.install>div:first-child{grid-column:1/-1}.steps,.guides{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:760px){.wrap{padding:0 18px}.notice nav{display:none}.head{height:auto;padding:16px 0;grid-template-columns:1fr auto}.nav{grid-column:1/-1;order:3;overflow:auto;justify-content:flex-start;white-space:nowrap;padding-top:14px}.tools .desktop{display:none}.brand .ko{font-size:33px}.hero{display:block;height:auto}.hero-copy{padding:40px 22px 30px}.hero-copy h1{font-size:38px}.hero-media{height:330px}.trust .wrap{grid-template-columns:1fr 1fr}.products{grid-template-columns:repeat(2,1fr);gap:10px}.gift-grid,.install,.story .wrap,.foot{grid-template-columns:1fr}.steps,.guides,.reviews{grid-template-columns:1fr}.install>div:first-child{grid-column:auto}.install-banner{flex-wrap:wrap}}
 </style>
@@ -95,7 +115,14 @@ footer{background:#0d2d20;color:#fff;padding:42px 0}.foot{display:grid;grid-temp
 
 <section class="section alt"><div class="wrap"><div class="sec-head"><h2>주문부터 배송까지</h2></div><div class="steps"><div class="step"><b>01 상품 선택</b><p>제철과일과 선물세트에서 원하는 상품을 고릅니다.</p></div><div class="step"><b>02 주문 확인</b><p>수량과 배송지, 선물 여부를 확인합니다.</p></div><div class="step"><b>03 선별·포장</b><p>출고 전 상태를 다시 확인하고 꼼꼼히 포장합니다.</p></div><div class="step"><b>04 안전 배송</b><p>주문조회에서 배송 상태를 확인할 수 있습니다.</p></div></div></div></section>
 
-<section class="section"><div class="wrap"><div class="sec-head"><h2>제철 과일 가이드</h2></div><div class="guides"><div class="guide"><b>봄</b><p>딸기·참외 등 향과 당도가 좋은 과일</p></div><div class="guide"><b>여름</b><p>복숭아·포도·수박처럼 시원한 과일</p></div><div class="guide"><b>가을</b><p>사과·배·샤인머스켓 등 선물용 과일</p></div><div class="guide"><b>겨울</b><p>감귤·한라봉 등 달콤한 감귤류</p></div></div></div></section>
+<section class="section" id="seasonGuide"><div class="wrap">
+<div class="sec-head"><h2>제철 과일 가이드 <span>계절을 눌러 대표 과일을 자세히 확인하세요</span></h2></div>
+<div class="guides">
+<div class="guide season-card" role="button" tabindex="0" data-season="spring" aria-label="봄 제철 과일 자세히 보기"><div class="season-kicker">SPRING</div><b>봄</b><p>딸기·참외·매실 등 산뜻한 향과 당도가 살아나는 계절</p><span class="season-more">자세히 보기</span></div>
+<div class="guide season-card" role="button" tabindex="0" data-season="summer" aria-label="여름 제철 과일 자세히 보기"><div class="season-kicker">SUMMER</div><b>여름</b><p>복숭아·포도·수박·자두처럼 과즙이 풍부한 과일</p><span class="season-more">자세히 보기</span></div>
+<div class="guide season-card" role="button" tabindex="0" data-season="autumn" aria-label="가을 제철 과일 자세히 보기"><div class="season-kicker">AUTUMN</div><b>가을</b><p>사과·배·샤인머스켓·감 등 선물용으로 좋은 풍성한 과일</p><span class="season-more">자세히 보기</span></div>
+<div class="guide season-card" role="button" tabindex="0" data-season="winter" aria-label="겨울 제철 과일 자세히 보기"><div class="season-kicker">WINTER</div><b>겨울</b><p>감귤·한라봉·천혜향·레드향 등 향긋한 감귤류</p><span class="season-more">자세히 보기</span></div>
+</div></div></section>
 
 <section class="section story" id="story"><div class="wrap"><div><small style="color:#d9c69e;letter-spacing:.18em">IROOM FRESH FRUITS</small><h2>좋은 과일을 더 쉽게,<br>선물은 더 품격 있게.</h2><p>이룸은 국내 주요 산지의 제철과일을 엄선하고, 고객이 복잡하게 고민하지 않아도 좋은 선택을 할 수 있도록 안내합니다.</p></div><div class="story-grid"><div class="story-box"><b>제철 중심</b><small>지금 좋은 과일을 우선합니다</small></div><div class="story-box"><b>정직한 안내</b><small>구성과 상태를 쉽게 안내합니다</small></div><div class="story-box"><b>선물 상담</b><small>예산과 상황에 맞춰 추천합니다</small></div><div class="story-box"><b>안전한 배송</b><small>신선식품에 맞춰 포장합니다</small></div></div></div></section>
 
@@ -122,6 +149,12 @@ footer{background:#0d2d20;color:#fff;padding:42px 0}.foot{display:grid;grid-temp
 <p style="font-size:13px;color:#666;line-height:1.7">아래 주소를 복사해 BAND, 카카오톡, 문자 등에 공유하세요.</p>
 <div class="field"><input id="shareUrlInput" readonly value=""></div>
 <button class="fullbtn" id="copyShareUrl">링크 복사</button>
+</div></div>
+
+
+<div class="modal" id="seasonModal"><div class="modalbox" style="width:min(720px,100%)">
+<div class="modalhead"><h3>제철 과일 가이드</h3><button data-close>×</button></div>
+<div id="seasonDetail"></div>
 </div></div>
 
 <div class="modal" id="loginModal"><div class="modalbox"><div class="modalhead"><h3>로그인</h3><button data-close>×</button></div><div class="field"><label>아이디</label><input id="loginUser"></div><div class="field"><label>비밀번호</label><input id="loginPass" type="password"></div><button class="fullbtn" id="doLogin">로그인</button><p id="loginMsg" style="font-size:12px;color:#b03d3d"></p></div></div>
@@ -214,6 +247,63 @@ q("#cartBtn").onclick=()=>{
   const emptyShop=q("#emptyCartShopBtn"); if(emptyShop) emptyShop.onclick=()=>q("#cartModal").classList.remove("open");
 };
 function open(id){q("#"+id).classList.add("open")}qa("[data-close]").forEach(b=>b.onclick=()=>b.closest(".modal").classList.remove("open"));qa(".modal").forEach(m=>m.onclick=e=>{if(e.target===m)m.classList.remove("open")});
+
+const seasonGuideData={
+ spring:{
+   label:"봄",eng:"SPRING",summary:"겨울을 지나 향과 산미가 살아나는 과일과 초여름으로 이어지는 달콤한 과일을 즐기기 좋은 계절입니다.",
+   fruits:[
+     ["딸기","대표 시기 12~5월 · 달콤한 향과 산뜻한 산미. 꼭지가 싱싱하고 표면이 윤기 있으며 무르지 않은 것을 고르세요."],
+     ["참외","대표 시기 3~7월 · 아삭하고 청량한 단맛. 노란색이 선명하고 골이 깊으며 묵직한 것이 좋습니다."],
+     ["매실","대표 시기 5~6월 · 생과보다는 청·장아찌 등에 많이 사용. 단단하고 흠집이 적은 열매가 좋습니다."],
+     ["토마토","봄철에도 맛이 좋아지는 품목 · 과육이 단단하고 향이 선명한 것을 추천합니다."]
+   ],
+   tips:"딸기는 씻지 않은 상태로 냉장 보관하고 가급적 빠르게 드세요. 참외는 냉장 보관하면 청량한 맛을 즐기기 좋습니다."
+ },
+ summer:{
+   label:"여름",eng:"SUMMER",summary:"수분과 과즙이 풍부한 과일이 많아 시원하게 즐기기 좋고, 복숭아·포도처럼 향이 좋은 과일도 풍성합니다.",
+   fruits:[
+     ["복숭아","대표 시기 6~9월 · 백도는 부드럽고 향긋하며 황도는 진한 단맛이 특징. 은은한 향이 나고 상처가 적은 것을 고르세요."],
+     ["포도","대표 시기 7~10월 · 캠벨·거봉·샤인머스켓 등 품종별 매력이 다양. 알이 탄탄하고 송이 축이 싱싱한 것이 좋습니다."],
+     ["수박","대표 시기 5~8월 · 풍부한 수분과 시원한 단맛. 꼭지가 지나치게 마르지 않고 묵직한 것을 고르세요."],
+     ["자두","대표 시기 6~9월 · 새콤달콤하고 과즙이 풍부. 품종에 맞는 색이 충분히 올라오고 탄력이 있는 것이 좋습니다."]
+   ],
+   tips:"복숭아는 단단하면 실온에서 짧게 후숙한 뒤 냉장 보관하고, 포도는 씻지 않은 상태로 냉장 보관하면 신선함을 오래 유지하기 좋습니다."
+ },
+ autumn:{
+   label:"가을",eng:"AUTUMN",summary:"사과와 배를 비롯해 샤인머스켓·감처럼 선물과 가정용 모두 만족도가 높은 대표 과일이 풍성한 계절입니다.",
+   fruits:[
+     ["사과","대표 시기 8~11월 · 품종에 따라 새콤달콤함과 아삭함이 다양. 표면이 단단하고 묵직하며 향이 좋은 것을 고르세요."],
+     ["배","대표 시기 8~11월 · 아삭한 식감과 풍부한 과즙. 껍질색이 고르고 상처가 적으며 묵직한 것이 좋습니다."],
+     ["샤인머스켓","대표 시기 8~10월 · 달콤하고 향긋하며 껍질째 먹기 편한 포도. 알이 고르고 탄탄한 송이를 추천합니다."],
+     ["감","대표 시기 9~11월 · 단감은 아삭하고 홍시는 부드러운 단맛. 꼭지가 들뜨지 않고 표면이 깨끗한 것이 좋습니다."]
+   ],
+   tips:"사과는 다른 과일의 후숙을 빠르게 할 수 있어 가능하면 따로 냉장 보관하세요. 배는 한 개씩 포장해 냉장 보관하면 수분 손실을 줄이는 데 도움이 됩니다."
+ },
+ winter:{
+   label:"겨울",eng:"WINTER",summary:"제주 감귤류의 향과 당도가 돋보이는 계절로, 감귤·한라봉·천혜향·레드향처럼 선물용으로도 좋은 과일이 많습니다.",
+   fruits:[
+     ["감귤","대표 시기 10~2월 · 새콤달콤하고 먹기 편한 겨울 대표 과일. 껍질이 지나치게 들뜨지 않고 묵직한 것이 좋습니다."],
+     ["한라봉","대표 시기 12~3월 · 진한 향과 풍부한 과즙, 산뜻한 단맛. 꼭지 부분이 싱싱하고 묵직한 것을 추천합니다."],
+     ["천혜향","대표 시기 1~4월 · 부드러운 향과 높은 당도, 촉촉한 과육이 특징입니다."],
+     ["레드향","대표 시기 12~3월 · 과육이 부드럽고 달콤하며 향이 풍부해 선물용으로 인기가 좋습니다."]
+   ],
+   tips:"감귤류는 습기가 차지 않게 서늘한 곳이나 냉장고에 보관하고, 상한 과일이 섞여 있지 않은지 가끔 확인해주세요."
+ }
+};
+function openSeasonGuide(key){
+ const s=seasonGuideData[key]; if(!s)return;
+ q("#seasonDetail").innerHTML=
+ '<div class="season-detail-head"><small>'+s.eng+' SEASON FRUIT GUIDE</small><h3>'+s.label+' 제철 과일</h3><div style="font-size:13px;line-height:1.8;color:rgba(255,255,255,.82)">'+s.summary+'</div></div>'+
+ '<div class="season-fruit-list">'+s.fruits.map(f=>'<div class="season-fruit-item"><b>'+f[0]+'</b><p>'+f[1]+'</p></div>').join("")+'</div>'+
+ '<div class="season-tips"><b>보관·구매 팁</b><p>'+s.tips+'</p></div>'+
+ '<div class="season-note">※ 표기된 시기는 대표적인 국내 출하시기이며 품종·산지·기후에 따라 실제 판매 시기는 달라질 수 있습니다.</div>';
+ open("seasonModal");
+}
+qa(".season-card").forEach(card=>{
+ card.addEventListener("click",()=>openSeasonGuide(card.dataset.season));
+ card.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();openSeasonGuide(card.dataset.season)}});
+});
+
 q("#copyShareUrl")?.addEventListener("click",async()=>{const v=q("#shareUrlInput")?.value||location.href;try{await navigator.clipboard.writeText(v);toast("공유 링크를 복사했습니다.");q("#shareModal").classList.remove("open")}catch(e){q("#shareUrlInput")?.select();document.execCommand("copy");toast("공유 링크를 복사했습니다.")}});
 q("#loginBtn").onclick=()=>open("loginModal");q("#myBtn").onclick=q("#myTopBtn").onclick=q("#ordersBtn").onclick=()=>{if(!localStorage.getItem("iroom_member_token"))open("loginModal");else alert("마이페이지/주문조회는 로그인된 계정의 주문내역을 표시합니다.")};
 q("#doLogin").onclick=async()=>{try{const r=await fetch("/api/login",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({username:q("#loginUser").value,password:q("#loginPass").value})});const d=await r.json();if(!r.ok)throw Error(d.error||"로그인 실패");localStorage.setItem("iroom_member_token",d.token);q("#loginMsg").style.color="#246044";q("#loginMsg").textContent="로그인되었습니다."}catch(e){q("#loginMsg").textContent=e.message}};
@@ -223,6 +313,6 @@ q("#searchBtn").onclick=()=>{open("searchModal");q("#searchInput").focus()};q("#
 window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();deferredPrompt=e;q("#installBanner").classList.add("show")});
 async function installApp(){if(deferredPrompt){deferredPrompt.prompt();await deferredPrompt.userChoice;deferredPrompt=null;q("#installBanner").classList.remove("show")}else{const ios=/iphone|ipad|ipod/i.test(navigator.userAgent);alert(ios?"Safari의 공유 버튼 → 홈 화면에 추가를 선택하세요.":"브라우저 메뉴에서 '앱 설치' 또는 '홈 화면에 추가'를 선택하세요.")}}
 q("#installNow").onclick=installApp;q("#installBannerBtn").onclick=installApp;q("#installClose").onclick=()=>q("#installBanner").classList.remove("show");
-if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("/service-worker.js?v=68",{updateViaCache:"none"}).then(reg=>reg.update()).catch(()=>{}))}
+if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("/service-worker.js?v=69",{updateViaCache:"none"}).then(reg=>reg.update()).catch(()=>{}))}
 </script>
 </body></html>
