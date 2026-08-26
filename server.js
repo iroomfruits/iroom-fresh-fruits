@@ -8,8 +8,10 @@ const { Pool } = require("pg");
 
 const app = express();
 const PORT = Number(process.env.PORT || 3000);
-const JWT_SECRET = process.env.JWT_SECRET || "CHANGE-ME-IN-PRODUCTION";
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "CHANGE-ME";
+const JWT_SECRET = process.env.JWT_SECRET || crypto.randomBytes(32).toString("hex");
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "";
+if(!process.env.JWT_SECRET) console.warn("[SECURITY] JWT_SECRET is not configured. A temporary secret is being used; set JWT_SECRET in Render Environment.");
+if(!ADMIN_PASSWORD) console.warn("[SECURITY] ADMIN_PASSWORD is not configured. Admin login is disabled until it is set.");
 const BASE_URL = process.env.PUBLIC_BASE_URL || `http://localhost:${PORT}`;
 
 if (!process.env.DATABASE_URL) {
@@ -24,6 +26,61 @@ const pool = new Pool({
 
 app.use(express.json({ limit: "2mb" }));
 app.use(express.urlencoded({ extended: true }));
+
+app.set("trust proxy",1);
+app.disable("x-powered-by");
+
+// Security headers without adding new runtime dependencies.
+app.use((req,res,next)=>{
+  res.setHeader("X-Content-Type-Options","nosniff");
+  res.setHeader("X-Frame-Options","DENY");
+  res.setHeader("Referrer-Policy","strict-origin-when-cross-origin");
+  res.setHeader("Permissions-Policy","camera=(), microphone=(), geolocation=(), payment=(self)");
+  res.setHeader("Cross-Origin-Opener-Policy","same-origin-allow-popups");
+  res.setHeader("Content-Security-Policy","frame-ancestors 'none'; object-src 'none'; base-uri 'self'; form-action 'self'");
+  if(req.secure || process.env.NODE_ENV==="production") res.setHeader("Strict-Transport-Security","max-age=31536000; includeSubDomains");
+  if(req.path.startsWith("/api/admin") || req.path==="/api/me") res.setHeader("Cache-Control","no-store");
+  next();
+});
+
+const rateBuckets=new Map();
+function simpleRateLimit({windowMs,max,keyPrefix,message}){
+  return (req,res,next)=>{
+    const now=Date.now();
+    const account=String(req.body?.username||req.body?.email||"").toLowerCase().slice(0,80);
+    const key=`${keyPrefix}:${req.ip}:${account}`;
+    let b=rateBuckets.get(key);
+    if(!b || now>b.reset){b={count:0,reset:now+windowMs};rateBuckets.set(key,b)}
+    b.count++;
+    res.setHeader("X-RateLimit-Limit",String(max));
+    res.setHeader("X-RateLimit-Remaining",String(Math.max(0,max-b.count)));
+    if(b.count>max) return res.status(429).json({error:message||"요청이 너무 많습니다. 잠시 후 다시 시도해주세요."});
+    next();
+  };
+}
+setInterval(()=>{const n=Date.now();for(const [k,v] of rateBuckets)if(n>v.reset)rateBuckets.delete(k)},10*60*1000).unref();
+
+function sameOriginGuard(req,res,next){
+  if(["GET","HEAD","OPTIONS"].includes(req.method)) return next();
+  const origin=req.get("origin");
+  if(!origin) return next();
+  try{
+    const expected=`${req.protocol}://${req.get("host")}`;
+    if(new URL(origin).origin!==new URL(expected).origin) return res.status(403).json({error:"허용되지 않은 요청입니다."});
+  }catch{return res.status(403).json({error:"허용되지 않은 요청입니다."})}
+  next();
+}
+app.use("/api",sameOriginGuard);
+
+function cleanText(v,max=200){return String(v??"").replace(/\\0/g,"").trim().slice(0,max)}
+function cleanEmail(v){const s=cleanText(v,180).toLowerCase();return s && /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(s)?s:""}
+function cleanPhone(v){return cleanText(v,30).replace(/[^0-9+ \-]/g,"")}
+function safeEqual(a,b){const x=Buffer.from(String(a)),y=Buffer.from(String(b));return x.length===y.length && crypto.timingSafeEqual(x,y)}
+function ipHash(req){return crypto.createHash("sha256").update(String(req.ip)+JWT_SECRET.slice(0,16)).digest("hex").slice(0,20)}
+async function logSecurity(type,actor,req,detail=""){
+  try{await pool.query("INSERT INTO security_events(event_type,actor,ip_hash,detail) VALUES($1,$2,$3,$4)",[cleanText(type,60),cleanText(actor,100),ipHash(req),cleanText(detail,300)])}catch(e){console.warn("[SECURITY LOG]",e.message)}
+}
+
 
 function mailSettings(){
   return {
@@ -176,7 +233,11 @@ function requireAdmin(req,res,next){
 }
 function setAuthCookie(res,tok){
   res.cookie("iroom_token", tok, {
-    httpOnly:true, sameSite:"lax", secure:BASE_URL.startsWith("https://"),
+    httpOnly:true,
+    sameSite:"strict",
+    secure:process.env.NODE_ENV==="production" || BASE_URL.startsWith("https://"),
+    path:"/",
+    priority:"high",
     maxAge:7*24*60*60*1000
   });
 }
@@ -238,11 +299,21 @@ async function initDb(){
     );
     CREATE INDEX IF NOT EXISTS idx_orders_user_id ON orders(user_id);
     CREATE INDEX IF NOT EXISTS idx_orders_created_at ON orders(created_at DESC);
+    CREATE TABLE IF NOT EXISTS security_events(
+      id BIGSERIAL PRIMARY KEY,
+      event_type TEXT NOT NULL,
+      actor TEXT DEFAULT '',
+      ip_hash TEXT DEFAULT '',
+      detail TEXT DEFAULT '',
+      created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+    );
+    CREATE INDEX IF NOT EXISTS idx_security_events_created ON security_events(created_at DESC);
   `);
   await pool.query(`ALTER TABLE users ADD COLUMN IF NOT EXISTS username TEXT`);
   await pool.query(`ALTER TABLE users ADD COLUMN IF NOT EXISTS postcode TEXT DEFAULT ''`);
   await pool.query(`ALTER TABLE users ADD COLUMN IF NOT EXISTS address1 TEXT DEFAULT ''`);
   await pool.query(`ALTER TABLE users ADD COLUMN IF NOT EXISTS address2 TEXT DEFAULT ''`);
+  await pool.query(`ALTER TABLE users ADD COLUMN IF NOT EXISTS last_login_at TIMESTAMPTZ`);
   await pool.query(`ALTER TABLE users ALTER COLUMN email DROP NOT NULL`).catch(()=>{});
   await pool.query(`CREATE UNIQUE INDEX IF NOT EXISTS idx_users_username_unique ON users(username) WHERE username IS NOT NULL`);
 
@@ -270,19 +341,20 @@ app.get("/api/health", async(req,res)=>{
 });
 
 // Auth
-app.post("/api/signup", async(req,res)=>{
+app.post("/api/signup", simpleRateLimit({windowMs:15*60*1000,max:8,keyPrefix:"signup"}), async(req,res)=>{
   const {username,password,name,email="",phone="",postcode="",address1="",address2=""}=req.body||{};
-  const user=(username||"").trim().toLowerCase();
-  if(!user||!password||!name) return res.status(400).json({error:"아이디, 비밀번호, 이름을 입력해주세요."});
+  const user=cleanText(username,20).toLowerCase();
+  const safeName=cleanText(name,60),safeEmail=cleanEmail(email),safePhone=cleanPhone(phone),safePost=cleanText(postcode,12),safeAddr1=cleanText(address1,180),safeAddr2=cleanText(address2,120);
+  if(!user||!password||!safeName) return res.status(400).json({error:"아이디, 비밀번호, 이름을 입력해주세요."});
   if(!/^[a-z0-9_]{4,20}$/.test(user)) return res.status(400).json({error:"아이디는 영문·숫자·밑줄로 4~20자 입력해주세요."});
-  if(password.length<6) return res.status(400).json({error:"비밀번호는 6자 이상이어야 합니다."});
+  if(password.length<8) return res.status(400).json({error:"비밀번호는 8자 이상이어야 합니다."});
   try{
     const hash=await bcrypt.hash(password,12);
     const r=await pool.query(
       `INSERT INTO users(username,email,password_hash,name,phone,postcode,address1,address2)
        VALUES($1,$2,$3,$4,$5,$6,$7,$8)
        RETURNING id,username,email,name,phone,postcode,address1,address2`,
-      [user,(email||"").trim().toLowerCase()||null,hash,name.trim(),phone.trim(),postcode.trim(),address1.trim(),address2.trim()]
+      [user,safeEmail||null,hash,safeName,safePhone,safePost,safeAddr1,safeAddr2]
     );
     const u=r.rows[0]; setAuthCookie(res,token({userId:u.id,username:u.username,email:u.email,name:u.name}));
     res.json({ok:true,user:u});
@@ -292,7 +364,7 @@ app.post("/api/signup", async(req,res)=>{
   }
 });
 
-app.post("/api/login", async(req,res)=>{
+app.post("/api/login", simpleRateLimit({windowMs:15*60*1000,max:12,keyPrefix:"login"}), async(req,res)=>{
   const {username,email,password}=req.body||{};
   const account=String(username||email||"").trim().toLowerCase();
 
@@ -312,8 +384,11 @@ app.post("/api/login", async(req,res)=>{
   console.log("[AUTH LOGIN]", account, u ? "USER_FOUND" : "USER_NOT_FOUND");
 
   if(!u || !(await bcrypt.compare(password,u.password_hash))){
+    logSecurity("user_login_failed",account,req);
     return res.status(401).json({error:"아이디 또는 비밀번호가 올바르지 않습니다."});
   }
+  await pool.query("UPDATE users SET last_login_at=NOW() WHERE id=$1",[u.id]).catch(()=>{});
+  logSecurity("user_login_success",u.username||u.email||String(u.id),req);
 
   setAuthCookie(res,token({
     userId:u.id,
@@ -352,10 +427,11 @@ app.get("/api/products", async(req,res)=>{
 });
 
 // Orders
-app.post("/api/orders", async(req,res)=>{
+app.post("/api/orders", simpleRateLimit({windowMs:10*60*1000,max:20,keyPrefix:"order"}), async(req,res)=>{
   const {items,customer_name,phone,email="",postcode="",address1,address2="",memo="",payment_method="무통장입금"}=req.body||{};
-  if(!Array.isArray(items)||!items.length) return res.status(400).json({error:"주문 상품이 없습니다."});
-  if(!customer_name||!phone||!address1) return res.status(400).json({error:"주문자명, 연락처, 배송지를 입력해주세요."});
+  const safeCustomer=cleanText(customer_name,60),safePhone=cleanPhone(phone),safeEmail=cleanEmail(email),safePost=cleanText(postcode,12),safeAddr1=cleanText(address1,180),safeAddr2=cleanText(address2,120),safeMemo=cleanText(memo,500);
+  if(!Array.isArray(items)||!items.length||items.length>30) return res.status(400).json({error:"주문 상품이 없습니다."});
+  if(!safeCustomer||!safePhone||!safeAddr1) return res.status(400).json({error:"주문자명, 연락처, 배송지를 입력해주세요."});
 
   const client=await pool.connect();
   try{
@@ -377,7 +453,7 @@ app.post("/api/orders", async(req,res)=>{
     const or=await client.query(`
       INSERT INTO orders(order_no,user_id,customer_name,phone,email,postcode,address1,address2,memo,payment_method,total_amount)
       VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11) RETURNING *
-    `,[ono,t?.userId||null,customer_name,phone,email,postcode,address1,address2,memo,payment_method,total]);
+    `,[ono,t?.userId||null,safeCustomer,safePhone,safeEmail,safePost,safeAddr1,safeAddr2,safeMemo,cleanText(payment_method,40),total]);
     const order=or.rows[0];
     for(const x of finalItems){
       await client.query(`
@@ -418,7 +494,7 @@ app.get("/api/my/orders", requireUser, async(req,res)=>{
   res.json({orders:r.rows});
 });
 
-app.get("/api/order/:orderNo", async(req,res)=>{
+app.get("/api/order/:orderNo", simpleRateLimit({windowMs:10*60*1000,max:20,keyPrefix:"lookup"}), async(req,res)=>{
   const phone=(req.query.phone||"").trim();
   if(!phone) return res.status(400).json({error:"연락처를 입력해주세요."});
   const r=await pool.query(`
@@ -433,16 +509,21 @@ app.get("/api/order/:orderNo", async(req,res)=>{
 });
 
 // Admin auth
-app.post("/api/admin/login",(req,res)=>{
+app.post("/api/admin/login",simpleRateLimit({windowMs:30*60*1000,max:8,keyPrefix:"admin"}),(req,res)=>{
   const {password}=req.body||{};
-  if(!password || password!==ADMIN_PASSWORD) return res.status(401).json({error:"관리자 비밀번호가 올바르지 않습니다."});
+  if(!ADMIN_PASSWORD) return res.status(503).json({error:"관리자 비밀번호가 서버에 설정되지 않았습니다."});
+  if(!password || !safeEqual(password,ADMIN_PASSWORD)){
+    logSecurity("admin_login_failed","admin",req);
+    return res.status(401).json({error:"관리자 비밀번호가 올바르지 않습니다."});
+  }
+  logSecurity("admin_login_success","admin",req);
   setAuthCookie(res,token({admin:true},"12h")); res.json({ok:true});
 });
 app.post("/api/admin/logout",(req,res)=>{res.clearCookie("iroom_token");res.json({ok:true});});
 app.get("/api/admin/me",(req,res)=>{const t=readToken(req);res.json({admin:!!t?.admin});});
 
 
-app.post("/api/consultations",async(req,res)=>{
+app.post("/api/consultations",simpleRateLimit({windowMs:10*60*1000,max:12,keyPrefix:"consult"}),async(req,res)=>{
   const b=req.body||{};
   const guideType=String(b.guide_type||"").trim();
   const name=String(b.customer_name||"").trim();
@@ -450,7 +531,7 @@ app.post("/api/consultations",async(req,res)=>{
   if(!guideType||!name||!phone) return res.status(400).json({error:"상담 유형, 이름, 연락처를 입력해주세요."});
   const consultNo="C"+Date.now().toString(36).toUpperCase()+crypto.randomBytes(2).toString("hex").toUpperCase();
   try{
-    const auth=parseAuth(req);
+    const auth=readToken(req);
     const r=await pool.query(`
       INSERT INTO consultations(
         consult_no,user_id,guide_type,customer_name,phone,email,recipient,budget,quantity_note,
@@ -551,6 +632,7 @@ app.put("/api/admin/products/:id",requireAdmin,async(req,res)=>{
   `,[p.name??null,p.description??null,p.unit??null,p.price===undefined?null:Number(p.price),p.stock===undefined?null:Number(p.stock),
      p.image??null,p.category??null,p.is_active===undefined?null:!!p.is_active,p.sort_order===undefined?null:Number(p.sort_order),req.params.id]);
   if(!r.rows[0]) return res.status(404).json({error:"상품을 찾을 수 없습니다."});
+  logSecurity("admin_product_updated","admin",req,`product:${req.params.id}`);
   res.json({ok:true,product:r.rows[0]});
 });
 
@@ -571,12 +653,24 @@ app.put("/api/admin/orders/:id",requireAdmin,async(req,res)=>{
     WHERE id=$3 RETURNING *
   `,[status||null,payment_status||null,req.params.id]);
   if(!r.rows[0]) return res.status(404).json({error:"주문을 찾을 수 없습니다."});
+  logSecurity("admin_order_updated","admin",req,`order:${req.params.id}`);
   res.json({ok:true,order:r.rows[0]});
 });
 
 app.get("/api/admin/users",requireAdmin,async(req,res)=>{
-  const r=await pool.query("SELECT id,username,email,name,phone,postcode,address1,address2,created_at FROM users ORDER BY created_at DESC LIMIT 500");
+  const r=await pool.query(`
+    SELECT u.id,u.username,u.email,u.name,u.phone,u.postcode,u.address1,u.address2,u.created_at,u.last_login_at,
+      COUNT(o.id)::int order_count,
+      COALESCE(SUM(o.total_amount),0)::int total_spent,
+      MAX(o.created_at) last_order_at
+    FROM users u LEFT JOIN orders o ON o.user_id=u.id
+    GROUP BY u.id ORDER BY u.created_at DESC LIMIT 500
+  `);
   res.json({users:r.rows});
+});
+app.get("/api/admin/security-events",requireAdmin,async(req,res)=>{
+  const r=await pool.query("SELECT id,event_type,actor,ip_hash,detail,created_at FROM security_events ORDER BY created_at DESC LIMIT 200");
+  res.json({events:r.rows});
 });
 
 // Toss readiness information endpoint
@@ -602,7 +696,7 @@ let serverStarted=false;
 function startHttp(){
   if(serverStarted)return;
   serverStarted=true;
-  app.listen(PORT,()=>console.log(`IROOM V81 STABLE listening on ${PORT}`));
+  app.listen(PORT,()=>console.log(`IROOM V83 SECURE COMMERCE listening on ${PORT}`));
 }
 initDb().then(async()=>{
   await initOptionalTables();
