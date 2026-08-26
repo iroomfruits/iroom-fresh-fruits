@@ -27,9 +27,9 @@
 <meta name="twitter:description" content="자연의 신선함을 프리미엄으로 전합니다.">
 <meta name="twitter:image" content="https://iroom-fresh-fruits.onrender.com/assets/share-luxury-v68.jpg?v=68">
 
-<link rel="manifest" href="/manifest.webmanifest?v=87">
-<link rel="apple-touch-icon" href="/icons/icon-192.png?v=87">
-<link rel="icon" type="image/png" href="/icons/icon-192.png?v=87">
+<link rel="manifest" href="/manifest.webmanifest?v=88">
+<link rel="apple-touch-icon" href="/icons/icon-192.png?v=88">
+<link rel="icon" type="image/png" href="/icons/icon-192.png?v=88">
 <style>
 :root{--g:#0b3a27;--g2:#174c38;--ink:#181818;--muted:#777;--line:#ece8e2;--cream:#faf8f3;--gold:#b99052}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#fff;color:var(--ink);font-family:Arial,"Pretendard","Noto Sans KR",sans-serif}a{text-decoration:none;color:inherit}button,input{font:inherit}button{cursor:pointer}img{display:block;max-width:100%}.wrap{max-width:1440px;margin:auto;padding:0 34px}
@@ -159,7 +159,7 @@ header{background:rgba(255,255,255,.97)!important;backdrop-filter:blur(12px);bor
 .brand{display:flex!important;align-items:center!important;gap:12px!important;position:relative}
 .brand::before{
   content:"";display:block;width:64px;height:64px;flex:0 0 64px;
-  background:url('/assets/brand-crest.png?v=86') center/contain no-repeat;
+  background:none center/contain no-repeat;
   border-radius:14px;box-shadow:0 8px 22px rgba(8,39,30,.10)
 }
 .brand .ko{font-family:Georgia,"Noto Serif KR",serif!important;color:var(--lux-green)!important;font-size:38px!important;letter-spacing:-1px}
@@ -442,12 +442,88 @@ header{background:rgba(255,255,255,.97)!important;backdrop-filter:blur(12px);bor
   }
 }
 
+
+/* V88 FINAL BRAND: fruit symbol + fresh fruits only */
+.brand-final{
+  display:flex!important;
+  align-items:center!important;
+  gap:14px!important;
+  text-decoration:none!important;
+  white-space:nowrap!important;
+  min-width:0!important;
+  overflow:visible!important;
+}
+.brand-final::before{display:none!important;content:none!important}
+.brand-symbol{
+  width:78px!important;
+  height:78px!important;
+  flex:0 0 78px!important;
+  display:block!important;
+  background:url('/assets/brand-fruit-mark.png?v=88') center/contain no-repeat!important;
+}
+.brand-final-text{
+  min-width:0!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:flex-start!important;
+  justify-content:center!important;
+  gap:3px!important;
+}
+.brand-final-en{
+  font-family:Georgia,"Times New Roman",serif!important;
+  font-size:34px!important;
+  line-height:1!important;
+  font-style:italic!important;
+  color:#31553f!important;
+  letter-spacing:-.5px!important;
+  white-space:nowrap!important;
+}
+.brand-final small{
+  font-size:9px!important;
+  letter-spacing:.28em!important;
+  line-height:1.2!important;
+  color:#866b35!important;
+  white-space:nowrap!important;
+}
+@media(max-width:760px){
+  .brand-final{gap:8px!important;max-width:100%!important;overflow:hidden!important}
+  .brand-symbol{
+    width:52px!important;
+    height:52px!important;
+    flex-basis:52px!important;
+  }
+  .brand-final-text{overflow:hidden!important}
+  .brand-final-en{
+    font-size:23px!important;
+    letter-spacing:-.3px!important;
+  }
+  .brand-final small{
+    font-size:6.5px!important;
+    letter-spacing:.16em!important;
+  }
+}
+@media(max-width:430px){
+  .brand-symbol{
+    width:46px!important;
+    height:46px!important;
+    flex-basis:46px!important;
+  }
+  .brand-final-en{font-size:20px!important}
+  .brand-final small{font-size:6px!important;letter-spacing:.12em!important}
+}
+
 </style>
 <script src="//t1.kakaocdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
 <body>
 <div class="notice"><div class="wrap"><div>🍊 <b>오늘의 입고</b> &nbsp; | &nbsp; 고급 국산 종합과일 입고되었습니다.</div><nav><button id="customerBtn">고객센터</button><button id="ordersBtn">주문조회</button><button id="myBtn">마이페이지</button></nav></div></div>
-<header><div class="wrap head"><a class="brand" href="/"><span class="brand-text"><span class="brand-main"><span class="ko">이룸</span><span class="en">fresh fruits</span></span><small>PREMIUM FRUIT BOUTIQUE</small></span></a><nav class="nav"><a href="#best">NEW & BEST <span style="font-size:9px;background:#c6a15b;color:#fff;border-radius:999px;padding:3px 6px;margin-left:3px">HOT</span></a><a href="#best">과일</a><a href="#gift">선물세트</a><a href="#group">공동구매</a><a href="#custom">단체·맞춤선물</a><a href="#story">스토리</a></nav><div class="tools"><button class="tool desktop" id="loginBtn">로그인</button><button class="tool desktop" id="signupBtn">회원가입</button><button class="tool desktop" id="myTopBtn">마이페이지</button><button class="icon desktop" id="searchBtn" title="검색">⌕</button><button class="icon" id="shareBtn" title="공유">↗</button><button class="icon" id="cartBtn">🛒<span class="badge" id="cartBadge">0</span></button></div></div></header>
+<header><div class="wrap head"><a class="brand brand-final" href="/" aria-label="이룸 fresh fruits 홈">
+  <span class="brand-symbol" aria-hidden="true"></span>
+  <span class="brand-final-text">
+    <span class="brand-final-en">fresh fruits</span>
+    <small>PREMIUM FRUIT BOUTIQUE</small>
+  </span>
+</a><nav class="nav"><a href="#best">NEW & BEST <span style="font-size:9px;background:#c6a15b;color:#fff;border-radius:999px;padding:3px 6px;margin-left:3px">HOT</span></a><a href="#best">과일</a><a href="#gift">선물세트</a><a href="#group">공동구매</a><a href="#custom">단체·맞춤선물</a><a href="#story">스토리</a></nav><div class="tools"><button class="tool desktop" id="loginBtn">로그인</button><button class="tool desktop" id="signupBtn">회원가입</button><button class="tool desktop" id="myTopBtn">마이페이지</button><button class="icon desktop" id="searchBtn" title="검색">⌕</button><button class="icon" id="shareBtn" title="공유">↗</button><button class="icon" id="cartBtn">🛒<span class="badge" id="cartBadge">0</span></button></div></div></header>
 
 <main>
 <section class="hero"><div class="hero-copy"><h1>자연의 신선함을<br>프리미엄으로 전합니다</h1><p>좋은 산지의 제철 과일을 엄선하여<br>정성껏 보내드립니다.</p><a class="cta" href="#best">SHOP NOW ›</a><div class="pager"><span id="heroCount"><b>01</b> / 06</span><button id="prev">‹</button><button id="next">›</button></div></div><div class="hero-media"><img id="heroImg" src="/assets/hero-1.jpg" alt="프리미엄 과일"><div class="dots" id="dots"></div></div></section>
@@ -523,7 +599,7 @@ header{background:rgba(255,255,255,.97)!important;backdrop-filter:blur(12px);bor
 <footer id="footer"><div class="wrap foot"><div><b>이룸 fresh fruits</b><small>국내산 제철과일과 프리미엄 과일선물세트를 정성껏 준비합니다.</small><small><a href="/band-admin.html">관리자 전용 페이지</a></small></div><div><b>고객센터</b><small>평일 09:00 ~ 18:00<br>상품 · 주문 · 배송 · 선물 상담</small></div><div><b>바로가기</b><small><a href="https://band.us/@iroomfruits" target="_blank">이룸 BAND</a><br><a href="/band-order.html">BAND 주문센터</a></small></div></div></footer>
 
 <button class="share-float" id="shareFloat">↗ 공유하기</button><div class="share-toast" id="shareToast">링크를 복사했습니다.</div>
-<div class="install-banner" id="installBanner"><img src="/icons/icon-192.png?v=87" alt="이룸 앱 아이콘" style="width:42px;height:42px;border-radius:10px;flex:0 0 auto"><div class="grow"><b>이룸 fresh fruits 앱 설치</b><div style="font-size:12px;opacity:.8">홈 화면에 추가해 더 빠르고 편리하게 이용하세요.</div></div><button id="installBannerBtn">설치하기</button><button class="close" id="installClose">×</button></div>
+<div class="install-banner" id="installBanner"><img src="/icons/icon-192.png?v=88" alt="이룸 앱 아이콘" style="width:42px;height:42px;border-radius:10px;flex:0 0 auto"><div class="grow"><b>이룸 fresh fruits 앱 설치</b><div style="font-size:12px;opacity:.8">홈 화면에 추가해 더 빠르고 편리하게 이용하세요.</div></div><button id="installBannerBtn">설치하기</button><button class="close" id="installClose">×</button></div>
 
 
 <div class="modal" id="shareModal"><div class="modalbox"><div class="modalhead"><h3>공유하기</h3><button data-close>×</button></div>
@@ -1205,7 +1281,7 @@ if(isStandalone()){
   q("#installNow").disabled=true;
 }
 if("serviceWorker" in navigator){
-  window.addEventListener("load",()=>navigator.serviceWorker.register("/service-worker.js?v=87",{updateViaCache:"none"})
+  window.addEventListener("load",()=>navigator.serviceWorker.register("/service-worker.js?v=88",{updateViaCache:"none"})
     .then(reg=>{
       reg.update();
       if(!isStandalone()){
