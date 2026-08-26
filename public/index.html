@@ -581,6 +581,44 @@ header{background:rgba(255,255,255,.97)!important;backdrop-filter:blur(12px);bor
 .seo-home-link{display:inline-block;margin-top:14px;color:#31553f;font-weight:800;text-decoration:none}
 @media(max-width:760px){.seo-link-grid{grid-template-columns:1fr}.seo-link-hub h2{font-size:21px}}
 
+
+/* V95 main-page SEO quick links */
+.seo-quick-nav{
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  flex-wrap:wrap;
+  padding:12px 18px;
+  background:#fbf8f1;
+  border-top:1px solid #eee5d4;
+  border-bottom:1px solid #eee5d4;
+}
+.seo-quick-nav a{
+  display:inline-block;
+  padding:8px 13px;
+  border-radius:999px;
+  border:1px solid #d7c59f;
+  background:#fff;
+  color:#31553f;
+  text-decoration:none;
+  font-size:13px;
+  font-weight:800;
+}
+.seo-quick-nav a:hover{
+  border-color:#c6a15b;
+  box-shadow:0 4px 12px rgba(8,39,30,.06);
+}
+@media(max-width:760px){
+  .seo-quick-nav{
+    justify-content:flex-start;
+    overflow-x:auto;
+    flex-wrap:nowrap;
+    scrollbar-width:none;
+  }
+  .seo-quick-nav::-webkit-scrollbar{display:none}
+  .seo-quick-nav a{flex:0 0 auto}
+}
+
 </style>
 <script src="//t1.kakaocdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
@@ -610,6 +648,14 @@ header{background:rgba(255,255,255,.97)!important;backdrop-filter:blur(12px);bor
     <small>PREMIUM FRUIT BOUTIQUE</small>
   </span>
 </a><nav class="nav"><a href="#best">NEW & BEST <span style="font-size:9px;background:#c6a15b;color:#fff;border-radius:999px;padding:3px 6px;margin-left:3px">HOT</span></a><a href="#best">과일</a><a href="#gift">선물세트</a><a href="#group">공동구매</a><a href="#custom">단체·맞춤선물</a><a href="#story">스토리</a></nav><div class="tools"><button class="tool desktop" id="loginBtn">로그인</button><button class="tool desktop" id="signupBtn">회원가입</button><button class="tool desktop" id="myTopBtn">마이페이지</button><button class="icon desktop" id="searchBtn" title="검색">⌕</button><button class="icon" id="shareBtn" title="공유">↗</button><button class="icon" id="cartBtn">🛒<span class="badge" id="cartBadge">0</span></button></div></div></header>
+
+<nav class="seo-quick-nav" aria-label="과일 카테고리 바로가기">
+  <a href="/premium-fruit.html" title="고급과일 안내">고급과일</a>
+  <a href="/delicious-fruit.html" title="맛있는과일 안내">맛있는과일</a>
+  <a href="/seasonal-fruit.html" title="제철과일 안내">제철과일</a>
+  <a href="/fruit-gift-set.html" title="과일선물세트 안내">과일선물세트</a>
+</nav>
+
 
 <main>
 <section class="hero"><div class="hero-copy"><h1>자연의 신선함을<br>프리미엄으로 전합니다</h1><p>좋은 산지의 제철 과일을 엄선하여<br>정성껏 보내드립니다.</p><a class="cta" href="#best">SHOP NOW ›</a><div class="pager"><span id="heroCount"><b>01</b> / 06</span><button id="prev">‹</button><button id="next">›</button></div></div><div class="hero-media"><img id="heroImg" src="/assets/hero-1.jpg" alt="프리미엄 과일"><div class="dots" id="dots"></div></div></section>
@@ -686,7 +732,7 @@ header{background:rgba(255,255,255,.97)!important;backdrop-filter:blur(12px);bor
 <a href="/delicious-fruit.html">맛있는과일</a>
 <a href="/seasonal-fruit.html">제철과일</a>
 </div></div></section>
-<section class="seo-link-hub" style="max-width:1180px;margin:36px auto;padding:28px 20px 0"><h2>목적에 맞는 과일을 빠르게 찾아보세요</h2><div class="seo-link-grid"><a class="seo-link-card" href="/premium-fruit.html"><strong>고급과일</strong><span>선물용·가정용 프리미엄 과일</span></a><a class="seo-link-card" href="/delicious-fruit.html"><strong>맛있는과일</strong><span>달콤함·산뜻함·식감으로 고르기</span></a><a class="seo-link-card" href="/seasonal-fruit.html"><strong>제철과일</strong><span>계절에 맞는 신선한 과일</span></a><a class="seo-link-card" href="/fruit-gift-set.html"><strong>과일선물세트</strong><span>부모님·감사·단체 선물</span></a></div></section>
+<section class="seo-link-hub" style="max-width:1180px;margin:36px auto;padding:28px 20px 0"><h2>목적에 맞는 과일을 빠르게 찾아보세요</h2><div class="seo-link-grid"><a class="seo-link-card" href="/premium-fruit.html"><strong>고급과일</strong><span>프리미엄 과일선물·가정용 고급과일 안내</span></a><a class="seo-link-card" href="/delicious-fruit.html"><strong>맛있는과일</strong><span>달콤함·산뜻함·식감으로 맛있는과일 고르기</span></a><a class="seo-link-card" href="/seasonal-fruit.html"><strong>제철과일</strong><span>계절별 신선한 제철과일 안내</span></a><a class="seo-link-card" href="/fruit-gift-set.html"><strong>과일선물세트</strong><span>부모님·감사·단체용 프리미엄 과일선물</span></a></div></section>
 <section class="seo-intro" aria-label="이룸 fresh fruits 소개">
   <div class="wrap">
     <h2>고급과일과 맛있는 제철과일을 찾는다면, 이룸 fresh fruits</h2>
