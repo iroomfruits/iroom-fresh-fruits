@@ -27,7 +27,7 @@
 <meta name="twitter:description" content="자연의 신선함을 프리미엄으로 전합니다.">
 <meta name="twitter:image" content="https://iroom-fresh-fruits.onrender.com/assets/share-luxury-v68.jpg?v=68">
 
-<link rel="manifest" href="/manifest.webmanifest?v=89">
+<link rel="manifest" href="/manifest.webmanifest?v=90">
 <link rel="apple-touch-icon" href="/icons/icon-192.png?v=88">
 <link rel="icon" type="image/png" href="/icons/icon-192.png?v=88">
 <style>
@@ -521,6 +521,42 @@ header{background:rgba(255,255,255,.97)!important;backdrop-filter:blur(12px);bor
   background-position:center!important;
   background-repeat:no-repeat!important;
   background-size:contain!important;
+}
+
+
+/* V90 install banner visibility */
+.install-banner.force-hide{
+  display:none!important;
+  visibility:hidden!important;
+  opacity:0!important;
+  pointer-events:none!important;
+}
+.install-mini{
+  position:fixed;
+  left:14px;
+  bottom:18px;
+  z-index:9970;
+  display:none;
+  align-items:center;
+  gap:7px;
+  padding:9px 12px;
+  border-radius:999px;
+  border:1px solid rgba(198,161,91,.55);
+  background:#08271e;
+  color:#fff;
+  box-shadow:0 8px 24px rgba(0,0,0,.18);
+  font-size:12px;
+  font-weight:800;
+  cursor:pointer;
+}
+.install-mini.show{display:flex}
+@media(max-width:760px){
+  .install-mini{
+    left:12px;
+    bottom:18px;
+    font-size:12px;
+    padding:9px 12px;
+  }
 }
 
 </style>
@@ -1198,14 +1234,56 @@ function showMobileInstallHelp(){
   body.innerHTML=h;
   open("mobileInstallModal");
 }
+
+const INSTALL_HIDE_KEY="iroom_install_banner_hide_until_v90";
+function hideInstallBanner(permanent=false){
+  const b=q("#installBanner");
+  if(b){
+    b.classList.remove("show");
+    b.classList.add("force-hide");
+  }
+  q("#installMini")?.classList.remove("show");
+  if(permanent){
+    try{localStorage.setItem(INSTALL_HIDE_KEY,String(Date.now()+1000*60*60*24*7));}catch(e){}
+  }
+}
+function showInstallBannerOnce(){
+  if(isStandalone())return hideInstallBanner(false);
+  let hiddenUntil=0;
+  try{hiddenUntil=Number(localStorage.getItem(INSTALL_HIDE_KEY)||0);}catch(e){}
+  if(hiddenUntil>Date.now()){
+    q("#installMini")?.classList.add("show");
+    return;
+  }
+  const b=q("#installBanner");
+  if(b){
+    b.classList.remove("force-hide");
+    b.classList.add("show");
+  }
+}
+function setupInstallVisibility(){
+  if(isStandalone()){
+    hideInstallBanner(false);
+    const section=q("#installSection");
+    if(section)section.style.display="none";
+    return;
+  }
+  setTimeout(showInstallBannerOnce,1200);
+}
+
 window.addEventListener("beforeinstallprompt",e=>{
   e.preventDefault();
+  if(isStandalone()){
+    hideInstallBanner(false);
+    return;
+  }
   deferredPrompt=e;
   setInstallStatus("이 기기에서 앱 설치가 준비되었습니다. ‘앱 설치하기’를 눌러주세요.");
   q("#installBanner")?.classList.add("show");
 });
 window.addEventListener("appinstalled",()=>{
   deferredPrompt=null;
+  hideInstallBanner(false);
   setInstallStatus("이 기기에 앱 설치가 완료되었습니다.");
   q("#installNow").textContent="설치됨";
   q("#installNow").disabled=true;
@@ -1255,8 +1333,9 @@ if(isStandalone()){
   showMobileInstallHelp();
 }
 q("#installNow").onclick=installApp;
+const installMini=q("#installMini"); if(installMini) installMini.onclick=installApp;
 q("#installBannerBtn").onclick=installApp;
-q("#installClose").onclick=()=>q("#installBanner").classList.remove("show");
+q("#installClose").onclick=()=>hideInstallBanner(true);
 q("#retryInstall")?.addEventListener("click",()=>{
   q("#mobileInstallModal")?.classList.remove("open");
   setTimeout(installApp,80);
@@ -1290,9 +1369,18 @@ if(isStandalone()){
   setInstallStatus("이 기기에 설치된 앱으로 실행 중입니다.");
   q("#installNow").textContent="설치됨";
   q("#installNow").disabled=true;
+  hideInstallBanner(false);
 }
+setupInstallVisibility();
+
+try{
+  window.matchMedia("(display-mode: standalone)").addEventListener("change",e=>{
+    if(e.matches)hideInstallBanner(false);
+  });
+}catch(e){}
+
 if("serviceWorker" in navigator){
-  window.addEventListener("load",()=>navigator.serviceWorker.register("/service-worker.js?v=89",{updateViaCache:"none"})
+  window.addEventListener("load",()=>navigator.serviceWorker.register("/service-worker.js?v=90",{updateViaCache:"none"})
     .then(reg=>{
       reg.update();
       if(!isStandalone()){
@@ -1306,4 +1394,5 @@ if("serviceWorker" in navigator){
 }
 
 </script>
+<button id="installMini" class="install-mini" type="button">📱 앱 설치</button>
 </body></html>
