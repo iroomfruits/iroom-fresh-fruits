@@ -23,7 +23,7 @@
 <meta name="twitter:description" content="자연의 신선함을 프리미엄으로 전합니다.">
 <meta name="twitter:image" content="https://iroom-fresh-fruits.onrender.com/assets/share-luxury-v68.jpg?v=68">
 
-<link rel="manifest" href="/manifest.webmanifest?v=78">
+<link rel="manifest" href="/manifest.webmanifest?v=79">
 <link rel="apple-touch-icon" href="/icons/icon-192.png?v=66">
 <link rel="icon" type="image/png" href="/icons/icon-192.png?v=66">
 <style>
@@ -251,7 +251,7 @@ footer{background:#0d2d20;color:#fff;padding:42px 0}.foot{display:grid;grid-temp
 <div class="modal" id="myOrdersModal"><div class="modalbox" style="width:min(760px,100%)"><div class="modalhead"><h3>마이페이지 · 주문내역</h3><button data-close>×</button></div><div id="myOrdersContent"></div></div></div>
 <div class="modal" id="orderLookupModal"><div class="modalbox"><div class="modalhead"><h3>비회원 주문조회</h3><button data-close>×</button></div><div class="field"><label>주문번호</label><input id="lookupNo"></div><div class="field"><label>주문 연락처</label><input id="lookupPhone"></div><button class="fullbtn" id="doLookup">조회하기</button><div id="lookupResult" style="margin-top:12px"></div></div></div>
 
-<div class="modal" id="loginModal"><div class="modalbox"><div class="modalhead"><h3>로그인</h3><button data-close>×</button></div><div class="field"><label>아이디</label><input id="loginUser"></div><div class="field"><label>비밀번호</label><input id="loginPass" type="password"></div><button class="fullbtn" id="doLogin">로그인</button><p id="loginMsg" style="font-size:12px;color:#b03d3d"></p></div></div>
+<div class="modal" id="loginModal"><div class="modalbox"><div class="modalhead"><h3>로그인</h3><button data-close>×</button></div><p style="font-size:12px;color:#777;margin:0 0 10px">회원가입 때 만든 아이디를 입력하세요. 기존 이메일 회원은 이메일로도 로그인할 수 있습니다.</p><div class="field"><label>아이디</label><input id="loginUser" autocomplete="username" placeholder="가입한 아이디"></div><div class="field"><label>비밀번호</label><input id="loginPass" type="password"></div><button class="fullbtn" id="doLogin">로그인</button><p id="loginMsg" style="font-size:12px;color:#b03d3d"></p></div></div>
 <div class="modal" id="searchModal"><div class="modalbox"><div class="modalhead"><h3>상품 검색</h3><button data-close>×</button></div><div class="field"><input id="searchInput" placeholder="배, 사과, 샤인머스켓"></div><div id="searchResults"></div></div></div>
 
 <div class="modal" id="productModal"><div class="modalbox"><div class="modalhead"><h3 id="detailTitle">상품 상세</h3><button data-close>×</button></div><img id="detailImg" class="detail-img" alt=""><div id="detailText" class="detail-meta"></div><div class="detail-actions"><button class="outline" id="detailShare">공유하기</button><button class="solid" id="detailCart">장바구니 담기</button><a class="solid" href="/band-order.html">주문하기</a><a class="outline" href="https://open.kakao.com/o/sd7wnrKi" target="_blank">상담하기</a></div></div></div>
@@ -682,6 +682,6 @@ q("#searchBtn").onclick=()=>{open("searchModal");q("#searchInput").focus()};q("#
 window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();deferredPrompt=e;q("#installBanner").classList.add("show")});
 async function installApp(){if(deferredPrompt){deferredPrompt.prompt();await deferredPrompt.userChoice;deferredPrompt=null;q("#installBanner").classList.remove("show")}else{const ios=/iphone|ipad|ipod/i.test(navigator.userAgent);alert(ios?"Safari의 공유 버튼 → 홈 화면에 추가를 선택하세요.":"브라우저 메뉴에서 '앱 설치' 또는 '홈 화면에 추가'를 선택하세요.")}}
 q("#installNow").onclick=installApp;q("#installBannerBtn").onclick=installApp;q("#installClose").onclick=()=>q("#installBanner").classList.remove("show");
-if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("/service-worker.js?v=78",{updateViaCache:"none"}).then(reg=>reg.update()).catch(()=>{}))}
+if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("/service-worker.js?v=79",{updateViaCache:"none"}).then(reg=>reg.update()).catch(()=>{}))}
 </script>
 </body></html>
