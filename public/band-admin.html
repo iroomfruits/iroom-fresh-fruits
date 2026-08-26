@@ -1,435 +1,47 @@
 <!doctype html>
-<html lang="ko">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>이룸 관리자 센터</title>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>이룸 운영 관리자센터</title>
 <style>
-:root{
- --green:#082d20;--green2:#124a36;--gold:#b08a43;--gold2:#f5e5bd;
- --paper:#fbf8f1;--line:#e8dfcf;--ink:#172019;--muted:#6d746f;
- --ok:#eff8f3;--bad:#fff0ef;--white:#fff
-}
-*{box-sizing:border-box} body{margin:0;color:var(--ink);background:#fff;font-family:Arial,"Pretendard","Noto Sans KR",sans-serif}
-button,input,select,textarea{font:inherit}button{cursor:pointer}
-a{text-decoration:none;color:inherit}
-.top{position:sticky;top:0;z-index:30;background:#fff;border-bottom:1px solid var(--line)}
-.topbar{height:68px;display:flex;align-items:center;gap:16px;padding:0 18px}
-.topbar h1{margin:0;font-size:24px;letter-spacing:-.7px}.spacer{flex:1}
-.ghost{border:1px solid var(--line);background:#fff;border-radius:10px;padding:10px 13px;font-weight:700}
-.primary{border:0;background:var(--green);color:#fff;border-radius:10px;padding:11px 15px;font-weight:800}
-.tabs{display:flex;gap:8px;padding:10px 18px 14px;background:var(--paper);border-top:1px solid #f1ece4;overflow:auto}
-.tab{white-space:nowrap;border:1px solid #e5dccd;background:#fff;border-radius:10px;padding:11px 14px;font-weight:800}
-.tab.active{background:var(--gold);color:#fff;border-color:var(--gold)}
-.layout{display:grid;grid-template-columns:225px minmax(0,1fr);min-height:calc(100vh - 126px)}
-.side{background:#06291d;color:#fff;padding:20px 14px;position:sticky;top:126px;height:calc(100vh - 126px);overflow:auto}
-.side h3{font-size:15px;margin:0 10px 14px;color:#f4d99f}.menu{display:flex;flex-direction:column}
-.menu button{border:0;background:transparent;color:#fff;text-align:left;padding:13px 12px;border-bottom:1px solid rgba(255,255,255,.1);font-weight:700;border-radius:10px}
-.menu button:hover,.menu button.active{background:#a9843f}
-.content{padding:18px;max-width:1440px;width:100%}
-.view{display:none}.view.active{display:block}
-.grid5{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
-.stat{background:#f8f4ec;border:1px solid #f0e8dc;padding:18px;border-radius:4px}.stat b{display:block;font-size:25px;margin-top:7px}
-.section-title{font-size:21px;margin:22px 0 14px}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-.card{border:1px solid var(--line);border-radius:15px;padding:18px;background:#fff}.card.gold{background:#fff3d9;border-color:#e4bd68}.card.ok{background:#f2faf5;border-color:#b9d8c7}
-.card h3{margin:0 0 8px;font-size:16px}.small{font-size:12px;color:var(--muted);line-height:1.7}
-.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}.toolbar input,.toolbar select{padding:10px;border:1px solid var(--line);border-radius:9px}
-.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:12px}
-table{width:100%;border-collapse:collapse;min-width:800px}th,td{padding:12px;border-bottom:1px solid #eee;text-align:left;font-size:13px}th{background:#faf8f4}
-.badge{display:inline-block;padding:4px 8px;border-radius:999px;font-size:11px;background:#eaf5ee;color:#246044}
-.formcard{border:1px solid var(--line);border-radius:14px;padding:18px;margin-bottom:14px;background:#fff}
-.formgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.formgrid.one{grid-template-columns:1fr}
-.field label{display:block;font-size:12px;font-weight:800;margin-bottom:6px}.field input,.field select,.field textarea{width:100%;border:1px solid #dcd4c8;border-radius:9px;padding:11px;background:#fff}.field textarea{min-height:100px;resize:vertical}
-.preview{height:170px;border-radius:12px;border:1px dashed #cfc5b5;background:#f7f5f0;display:flex;align-items:center;justify-content:center;overflow:hidden}.preview img{width:100%;height:100%;object-fit:cover}
-.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.row.end{justify-content:flex-end}
-.switch{display:flex;align-items:center;gap:8px}.switch input{width:18px;height:18px}
-.notice{padding:12px 14px;border-radius:10px;background:#eef8f2;color:#245d43;font-size:13px;margin:12px 0}
-.warn{padding:12px 14px;border-radius:10px;background:#fff4e8;color:#80552e;font-size:13px;margin:12px 0}
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;align-items:center;justify-content:center;z-index:100;padding:18px}.modal.open{display:flex}.modalbox{width:min(760px,100%);max-height:92vh;overflow:auto;background:#fff;border-radius:16px;padding:22px}
-.imglib{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.imgitem{border:1px solid var(--line);border-radius:10px;overflow:hidden}.imgitem img{width:100%;aspect-ratio:1.2/1;object-fit:cover}.imgitem div{padding:8px;font-size:11px}
-hr{border:0;border-top:1px solid var(--line);margin:18px 0}
-@media(max-width:1000px){.layout{grid-template-columns:1fr}.side{position:static;height:auto}.grid5{grid-template-columns:repeat(2,1fr)}.cards,.grid3{grid-template-columns:1fr}.formgrid,.grid2{grid-template-columns:1fr}.imglib{grid-template-columns:repeat(2,1fr)}}
-
-.admin-gate{position:fixed;inset:0;background:linear-gradient(135deg,#06291d,#124a36);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px}
-.admin-gate.hidden{display:none}
-.admin-login-box{width:min(430px,100%);background:#fff;border-radius:18px;padding:30px;box-shadow:0 25px 80px rgba(0,0,0,.28)}
-.admin-login-box h2{margin:0 0 8px;font-size:25px}
-.admin-login-box p{font-size:13px;color:#6d746f;line-height:1.7;margin:0 0 20px}
-.admin-login-box input{width:100%;border:1px solid #dcd4c8;border-radius:10px;padding:13px;margin-bottom:11px}
-.admin-login-box button{width:100%;border:0;border-radius:10px;background:#082d20;color:#fff;padding:13px;font-weight:800}
-.admin-login-msg{font-size:12px;color:#b03d3d;min-height:18px;margin-top:9px}
-</style>
-</head>
-<body>
-
-<div class="admin-gate" id="adminGate">
-  <div class="admin-login-box">
-    <h2>이룸 관리자 로그인</h2>
-    <p>관리자 전용 페이지입니다. 관리자 비밀번호를 입력해야 설정 화면에 들어갈 수 있습니다.</p>
-    <input id="adminPasswordInput" type="password" placeholder="관리자 비밀번호" autocomplete="current-password">
-    <button id="adminLoginBtn">관리자센터 들어가기</button>
-    <div class="admin-login-msg" id="adminLoginMsg"></div>
-  </div>
+:root{--g:#082d20;--g2:#124a36;--gold:#b99052;--cream:#faf7ef;--line:#e8dfd1}*{box-sizing:border-box}
+body{margin:0;font-family:Arial,"Pretendard","Noto Sans KR",sans-serif;color:#181818;background:#f7f6f2}
+button,input,select,textarea{font:inherit}button{cursor:pointer}.top{background:var(--g);color:#fff;padding:18px 24px;display:flex;justify-content:space-between;align-items:center}.top b{font-size:21px}.wrap{max-width:1440px;margin:auto;padding:22px}
+.login{max-width:420px;margin:10vh auto;background:#fff;border:1px solid var(--line);border-radius:15px;padding:28px}.login input{width:100%;padding:13px;border:1px solid #ddd;border-radius:8px;margin:12px 0}.btn{border:0;border-radius:8px;background:var(--g);color:#fff;padding:11px 16px;font-weight:800}.outline{background:#fff;color:#222;border:1px solid #ddd}
+#app{display:none}.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}.tab{background:#fff;border:1px solid var(--line);padding:10px 14px;border-radius:8px;font-weight:700}.tab.on{background:var(--g);color:#fff}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px}.card strong{font-size:25px;display:block;margin-top:8px}
+.panel{background:#fff;border:1px solid var(--line);border-radius:13px;padding:18px;margin-top:16px;overflow:auto}.panel h2{margin:0 0 14px}
+table{width:100%;border-collapse:collapse;min-width:900px}th,td{text-align:left;border-bottom:1px solid #eee;padding:10px;font-size:12px;vertical-align:top}th{background:#faf8f3}
+input,select,textarea{border:1px solid #ddd;border-radius:6px;padding:8px}.small{font-size:11px;color:#777}.hidden{display:none!important}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}.formrow{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.formrow input{width:100%}
+@media(max-width:800px){.cards{grid-template-columns:1fr 1fr}.grid2,.formrow{grid-template-columns:1fr}.wrap{padding:12px}}
+</style></head><body>
+<div class="top"><div><b>이룸 운영 관리자센터</b><div style="font-size:11px;opacity:.7">PRODUCT · ORDER · MEMBER · STOCK</div></div><button class="btn outline" onclick="location.href='/'">홈페이지</button></div>
+<div id="login" class="login"><h2>관리자 로그인</h2><p class="small">환경변수 ADMIN_PASSWORD에 설정된 비밀번호를 입력하세요.</p><input id="adminPw" type="password" placeholder="관리자 비밀번호"><button class="btn" id="loginBtn">로그인</button><p id="loginMsg" class="small"></p></div>
+<div id="app" class="wrap">
+ <div class="tabs"><button class="tab on" data-tab="dashboard">대시보드</button><button class="tab" data-tab="products">상품·재고</button><button class="tab" data-tab="orders">주문·배송</button><button class="tab" data-tab="users">회원</button><button class="tab" id="logoutBtn">로그아웃</button></div>
+ <section id="dashboard" class="view"><div class="cards"><div class="card">판매상품<strong id="dProducts">0</strong></div><div class="card">총재고<strong id="dStock">0</strong></div><div class="card">총주문<strong id="dOrders">0</strong></div><div class="card">오늘매출<strong id="dSales">0원</strong></div></div><div class="panel"><h2>운영 상태</h2><p>상품·재고를 수정하면 고객 홈페이지에서 API를 통해 최신 값을 불러옵니다. 주문 상태와 입금 상태도 여기에서 처리할 수 있습니다.</p></div></section>
+ <section id="products" class="view hidden"><div class="panel"><h2>상품 추가</h2><div class="formrow"><input id="npName" placeholder="상품명"><input id="npPrice" type="number" placeholder="가격"><input id="npStock" type="number" placeholder="재고"><input id="npUnit" placeholder="규격"><input id="npCategory" placeholder="카테고리"><input id="npImage" placeholder="/assets/파일.jpg"></div><textarea id="npDesc" placeholder="설명" style="width:100%;margin-top:8px"></textarea><button class="btn" id="addProduct" style="margin-top:8px">상품 등록</button></div><div class="panel"><h2>상품·재고 관리</h2><div id="productTable"></div></div></section>
+ <section id="orders" class="view hidden"><div class="panel"><h2>주문·배송 관리</h2><div id="orderTable"></div></div></section>
+ <section id="users" class="view hidden"><div class="panel"><h2>회원 관리</h2><div id="userTable"></div></div></section>
 </div>
-
-<div class="top">
-  <div class="topbar">
-    <h1>이룸 관리자 센터</h1>
-    <span class="badge" id="saveState">연결 확인 중</span>
-    <div class="spacer"></div>
-    <button class="ghost" onclick="location.href='/'">홈페이지 보기</button>
-    <button class="primary" id="saveAllBtn">전체 저장</button>
-  </div>
-  <div class="tabs">
-    <button class="tab active" data-view="home">🏠 관리자 홈</button>
-    <button class="tab" data-view="products">📦 상품관리</button>
-    <button class="tab" data-view="images">🖼 이미지 보관함</button>
-    <button class="tab" data-view="orders">🚚 주문·배송</button>
-    <button class="tab" data-view="site">⚙ 전체설정</button>
-    <button class="tab" data-view="ai">✨ AI 도우미</button>
-  </div>
-</div>
-
-<div class="layout">
-<aside class="side">
-  <h3>✨ AI 운영도우미</h3>
-  <div class="menu">
-    <button class="active" data-view="home">대시보드</button>
-    <button data-view="products">상품관리</button>
-    <button data-view="images">이미지 보관 폴더</button>
-    <button data-view="orders">주문·배송</button>
-    <button data-view="refunds">취소·환불</button>
-    <button data-view="members">회원관리</button>
-    <button data-view="events">이벤트</button>
-    <button data-view="coupons">쿠폰</button>
-    <button data-view="reviews">리뷰</button>
-    <button data-view="inquiries">문의</button>
-    <button data-view="banners">배너·팝업</button>
-    <button data-view="site">사이트·결제·알림</button>
-    <button data-view="logs">관리기록</button>
-  </div>
-</aside>
-
-<main class="content">
-
-<section class="view active" id="view-home">
-  <div class="grid5">
-    <div class="stat">상품<b id="stProducts">0</b></div>
-    <div class="stat">주문<b id="stOrders">0</b></div>
-    <div class="stat">회원<b id="stMembers">0</b></div>
-    <div class="stat">취소/환불<b id="stRefunds">0</b></div>
-    <div class="stat">저재고<b id="stLow">0</b></div>
-  </div>
-  <h2 class="section-title">홍보·유입 현황</h2>
-  <div class="grid5">
-    <div class="stat">방문<b id="stVisits">0</b></div>
-    <div class="stat">공유<b id="stShares">0</b></div>
-    <div class="stat">BAND 클릭<b id="stBand">0</b></div>
-    <div class="stat">장바구니<b id="stCart">0</b></div>
-    <div class="stat">주문<b id="stOrderTrack">0</b></div>
-  </div>
-  <div class="cards" style="margin-top:16px">
-    <button class="card gold" data-view="images"><h3>🖼 이미지·동영상 보관함</h3><div class="small">메인/상품/배너 사진을 업로드하고 적용</div></button>
-    <button class="card" data-view="products"><h3>＋ 상품 바로 등록</h3><div class="small">상품 등록 후 홈페이지에 즉시 적용</div></button>
-    <button class="card" data-view="orders"><h3>🚚 주문·배송 관리</h3><div class="small">송장번호와 배송상태 빠르게 처리</div></button>
-  </div>
-  <h2 class="section-title">관리자 설정 완료 체크</h2>
-  <div class="grid3">
-    <div class="card ok"><h3>① 상품</h3><div class="small" id="checkProduct">등록 상태 확인</div></div>
-    <div class="card ok"><h3>② 이미지 보관함</h3><div class="small" id="checkImages">보관 이미지 확인</div></div>
-    <div class="card ok"><h3>③ 연락처</h3><div class="small" id="checkPhone">미입력</div></div>
-    <div class="card ok"><h3>④ 입금계좌</h3><div class="small" id="checkBank">미입력</div></div>
-    <div class="card ok"><h3>⑤ BAND</h3><div class="small" id="checkBand">미연결</div></div>
-    <div class="card ok"><h3>⑥ 사업장정보</h3><div class="small" id="checkBiz">미입력</div></div>
-  </div>
-  <h2 class="section-title">재고 알림</h2>
-  <div id="lowStockBox" class="notice">저재고 상품이 없습니다.</div>
-</section>
-
-<section class="view" id="view-products">
-  <div class="row" style="justify-content:space-between">
-    <div><h2>상품관리</h2><div class="small">판매상품, 가격, 재고, 노출순서, NEW/BEST 표시를 관리합니다.</div></div>
-    <button class="primary" id="addProductBtn">＋ 상품 등록</button>
-  </div>
-  <div class="toolbar"><input id="productSearch" placeholder="상품명 검색"><select id="productFilter"><option value="">전체</option><option>판매중</option><option>품절</option><option>숨김</option></select></div>
-  <div class="table-wrap"><table><thead><tr><th>사진</th><th>상품명</th><th>가격</th><th>재고</th><th>상태</th><th>표시</th><th>관리</th></tr></thead><tbody id="productRows"></tbody></table></div>
-</section>
-
-<section class="view" id="view-images">
-  <div class="row" style="justify-content:space-between"><div><h2>이미지 보관 폴더</h2><div class="small">관리자가 업로드한 이미지를 보관하고 메인/상품/배너에 바로 적용할 수 있습니다.</div></div><label class="primary">＋ 이미지 업로드<input id="imageUpload" type="file" accept="image/*" multiple hidden></label></div>
-  <div class="warn">큰 사진은 자동으로 축소해 저장합니다. 메인 이미지는 가로형 1600×700 이상을 권장합니다.</div>
-  <div id="imageLibrary" class="imglib"></div>
-</section>
-
-<section class="view" id="view-orders">
-  <div><h2>주문·배송</h2><div class="small">주문 상태, 송장번호, 배송메모를 관리합니다.</div></div>
-  <div class="toolbar"><input id="orderSearch" placeholder="주문번호/이름/전화"><select id="orderStatus"><option value="">전체 상태</option><option>주문접수</option><option>입금확인</option><option>배송준비</option><option>배송중</option><option>배송완료</option><option>취소</option></select></div>
-  <div class="table-wrap"><table><thead><tr><th>주문번호</th><th>고객</th><th>금액</th><th>상태</th><th>송장번호</th><th>주문일</th><th>관리</th></tr></thead><tbody id="orderRows"></tbody></table></div>
-</section>
-
-<section class="view" id="view-refunds"><h2>취소·환불</h2><div class="table-wrap"><table><thead><tr><th>주문</th><th>고객</th><th>금액</th><th>사유</th><th>상태</th><th>처리</th></tr></thead><tbody id="refundRows"></tbody></table></div></section>
-<section class="view" id="view-members"><h2>회원관리</h2><div class="table-wrap"><table><thead><tr><th>아이디</th><th>이름</th><th>연락처</th><th>이메일</th><th>가입일</th><th>상태</th></tr></thead><tbody id="memberRows"></tbody></table></div></section>
-
-<section class="view" id="view-events"><h2>이벤트</h2><div class="formcard formgrid"><div class="field"><label>이벤트 제목</label><input id="eventTitle"></div><div class="field"><label>기간</label><input id="eventPeriod"></div><div class="field"><label>설명</label><textarea id="eventDesc"></textarea></div><div class="field"><label>노출</label><div class="switch"><input id="eventActive" type="checkbox"><span>홈페이지에 표시</span></div></div></div><button class="primary" onclick="saveSection()">저장</button></section>
-
-<section class="view" id="view-coupons"><h2>쿠폰</h2><div class="formcard formgrid"><div class="field"><label>쿠폰명</label><input id="couponName"></div><div class="field"><label>할인율(%)</label><input id="couponDiscount" type="number"></div><div class="field"><label>쿠폰코드</label><input id="couponCode"></div><div class="field"><label>사용기한</label><input id="couponExpire"></div></div><button class="primary" onclick="saveSection()">저장</button></section>
-
-<section class="view" id="view-reviews"><h2>리뷰 관리</h2><div class="notice">홈페이지에 노출할 리뷰를 직접 추가·숨김 처리할 수 있습니다.</div><div id="reviewEditor"></div><button class="primary" id="addReviewBtn">＋ 리뷰 추가</button></section>
-<section class="view" id="view-inquiries"><h2>문의 관리</h2><div class="table-wrap"><table><thead><tr><th>일시</th><th>고객</th><th>문의내용</th><th>상태</th><th>답변</th></tr></thead><tbody id="inquiryRows"></tbody></table></div></section>
-
-<section class="view" id="view-banners">
-  <h2>메인 배너 · 팝업</h2>
-  <div class="notice">홈페이지 첫 화면의 메인 이미지와 문구를 관리자에서 직접 바꿀 수 있습니다.</div>
-  <div class="grid2">
-    <div class="formcard">
-      <h3>메인 슬라이드 1</h3>
-      <div class="preview"><img id="hero1Preview"></div>
-      <div class="field"><label>이미지 URL / 보관함 이미지</label><input id="hero1Image"></div>
-      <div class="field"><label>제목</label><input id="hero1Title"></div>
-      <div class="field"><label>설명</label><textarea id="hero1Desc"></textarea></div>
-    </div>
-    <div class="formcard">
-      <h3>메인 슬라이드 2</h3>
-      <div class="preview"><img id="hero2Preview"></div>
-      <div class="field"><label>이미지 URL / 보관함 이미지</label><input id="hero2Image"></div>
-      <div class="field"><label>제목</label><input id="hero2Title"></div>
-      <div class="field"><label>설명</label><textarea id="hero2Desc"></textarea></div>
-    </div>
-  </div>
-  <div class="formcard">
-    <h3>상단 입고 안내</h3>
-    <div class="formgrid"><div class="field"><label>문구</label><input id="noticeText"></div><div class="field"><label>사용</label><div class="switch"><input id="noticeActive" type="checkbox"><span>표시</span></div></div></div>
-  </div>
-  <div class="formcard">
-    <h3>팝업</h3>
-    <div class="formgrid"><div class="field"><label>팝업 제목</label><input id="popupTitle"></div><div class="field"><label>팝업 사용</label><div class="switch"><input id="popupActive" type="checkbox"><span>표시</span></div></div><div class="field"><label>내용</label><textarea id="popupContent"></textarea></div><div class="field"><label>링크</label><input id="popupLink"></div></div>
-  </div>
-  <button class="primary" onclick="saveSection()">배너·팝업 저장</button>
-</section>
-
-<section class="view" id="view-site">
-  <h2>사이트 · 결제 · 알림</h2>
-  <div class="grid2">
-    <div class="formcard">
-      <h3>기본 정보</h3>
-      <div class="field"><label>쇼핑몰명</label><input id="siteName"></div>
-      <div class="field"><label>고객센터 전화</label><input id="sitePhone"></div>
-      <div class="field"><label>이메일</label><input id="siteEmail"></div>
-      <div class="field"><label>사업장 주소</label><input id="siteAddress"></div>
-      <div class="field"><label>사업자등록번호</label><input id="businessNo"></div>
-    </div>
-    <div class="formcard">
-      <h3>입금 · 결제</h3>
-      <div class="field"><label>은행</label><input id="bankName"></div>
-      <div class="field"><label>계좌번호</label><input id="bankAccount"></div>
-      <div class="field"><label>예금주</label><input id="bankOwner"></div>
-      <hr>
-      <div class="field"><label>토스 Client Key</label><input id="tossClientKey"></div>
-      <div class="field"><label>토스 Secret Key</label><input id="tossSecretKey" type="password"></div>
-      <div class="switch"><input id="tossEnabled" type="checkbox"><span>토스 결제 사용</span></div>
-    </div>
-    <div class="formcard">
-      <h3>BAND · 상담</h3>
-      <div class="field"><label>BAND 주소</label><input id="bandUrl"></div>
-      <div class="field"><label>카카오 상담 주소</label><input id="kakaoUrl"></div>
-      <div class="field"><label>네이버 스마트스토어/채널</label><input id="naverUrl"></div>
-    </div>
-    <div class="formcard">
-      <h3>배송 · 알림</h3>
-      <div class="field"><label>기본 배송비</label><input id="shippingFee" type="number"></div>
-      <div class="field"><label>무료배송 기준</label><input id="freeShippingFrom" type="number"></div>
-      <div class="switch"><input id="emailNotify" type="checkbox"><span>새 주문 이메일 알림</span></div>
-      <div class="switch"><input id="stockNotify" type="checkbox"><span>저재고 알림</span></div>
-    </div>
-  </div>
-
-    <div class="formcard">
-      <h3>관리자 보안</h3>
-      <div class="field"><label>새 관리자 비밀번호</label><input id="newAdminPassword" type="password" placeholder="새 비밀번호"></div>
-      <div class="field"><label>새 비밀번호 확인</label><input id="newAdminPassword2" type="password" placeholder="한 번 더 입력"></div>
-      <button class="ghost" id="changeAdminPasswordBtn" type="button">관리자 비밀번호 변경</button>
-      <div class="small" style="margin-top:8px">서버가 관리자 비밀번호 변경 API를 지원하면 서버에 반영하고, 지원하지 않으면 현재 브라우저 관리자센터 잠금용으로 저장합니다.</div>
-    </div>
-
-  <button class="primary" onclick="saveSection()">전체설정 저장</button>
-</section>
-
-<section class="view" id="view-logs"><h2>관리기록</h2><div id="logList" class="formcard small"></div></section>
-
-<section class="view" id="view-ai">
-  <h2>AI 운영도우미</h2>
-  <div class="formcard">
-    <div class="field"><label>도움받고 싶은 작업</label><textarea id="aiPrompt" placeholder="예: 추석 선물세트 홍보 문구를 고급스럽게 3개 만들어줘"></textarea></div>
-    <button class="primary" id="aiBtn">문구 만들기</button>
-    <div class="notice" id="aiResult">AI API가 연결되어 있으면 서버 기능을 사용하고, 없으면 관리자용 문구 예시를 만들어 줍니다.</div>
-  </div>
-</section>
-</main>
-</div>
-
-<div class="modal" id="productModal"><div class="modalbox">
-  <div class="row" style="justify-content:space-between"><h2 id="productModalTitle">상품 등록</h2><button class="ghost" onclick="closeModal('productModal')">닫기</button></div>
-  <input type="hidden" id="editProductIndex">
-  <div class="formgrid">
-    <div class="field"><label>상품명</label><input id="pName"></div>
-    <div class="field"><label>가격</label><input id="pPrice" type="number"></div>
-    <div class="field"><label>구성/중량</label><input id="pUnit"></div>
-    <div class="field"><label>재고</label><input id="pStock" type="number"></div>
-    <div class="field"><label>상태</label><select id="pStatus"><option>판매중</option><option>품절</option><option>숨김</option></select></div>
-    <div class="field"><label>표시</label><select id="pBadge"><option value="">일반</option><option>NEW</option><option>BEST</option></select></div>
-    <div class="field"><label>이미지</label><input id="pImage"></div>
-    <div class="field"><label>노출순서</label><input id="pOrder" type="number"></div>
-    <div class="field" style="grid-column:1/-1"><label>설명</label><textarea id="pDesc"></textarea></div>
-  </div>
-  <div class="row end"><button class="primary" id="saveProductBtn">상품 저장</button></div>
-</div></div>
-
 <script>
-"use strict";
-
-const ADMIN_SESSION_KEY="iroom_admin_session_v61";
-function adminSessionOpen(){return sessionStorage.getItem(ADMIN_SESSION_KEY)==="1"}
-function unlockAdmin(){document.getElementById("adminGate").classList.add("hidden");sessionStorage.setItem(ADMIN_SESSION_KEY,"1")}
-async function verifyAdminPassword(){
-  const input=document.getElementById("adminPasswordInput");
-  const msg=document.getElementById("adminLoginMsg");
-  const password=input.value;
-  if(!password){msg.textContent="비밀번호를 입력하세요.";return}
-  msg.textContent="확인 중...";
-  try{
-    // Use the existing server admin password when available.
-    const r=await fetch("/api/admin/login",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({password})});
-    if(r.ok){unlockAdmin();msg.textContent="";return}
-  }catch(e){}
-  // Fallback: compare with the browser-stored setup password if the current backend has no admin-login route.
-  // Default fallback is intentionally not hard-coded in the page. It must have been saved by the admin once.
-  const saved=localStorage.getItem("iroom_admin_password_v61");
-  if(saved && password===saved){unlockAdmin();msg.textContent="";return}
-  // First-time bootstrap: if no password was saved, accept the site's configured ADMIN_PASSWORD through backend only.
-  msg.textContent="비밀번호가 맞지 않거나 서버 관리자 로그인이 연결되지 않았습니다.";
+const q=s=>document.querySelector(s),qa=s=>[...document.querySelectorAll(s)];
+async function api(url,opt={}){const r=await fetch(url,{...opt,headers:{"Content-Type":"application/json",...(opt.headers||{})}});const d=await r.json().catch(()=>({}));if(!r.ok)throw Error(d.error||"요청 실패");return d}
+async function check(){const d=await api("/api/admin/me");if(d.admin){q("#login").style.display="none";q("#app").style.display="block";loadDashboard()} }
+q("#loginBtn").onclick=async()=>{try{await api("/api/admin/login",{method:"POST",body:JSON.stringify({password:q("#adminPw").value})});q("#login").style.display="none";q("#app").style.display="block";loadDashboard()}catch(e){q("#loginMsg").textContent=e.message}}
+q("#logoutBtn").onclick=async()=>{await api("/api/admin/logout",{method:"POST"});location.reload()}
+qa("[data-tab]").forEach(b=>b.onclick=()=>{qa(".tab").forEach(x=>x.classList.remove("on"));b.classList.add("on");qa(".view").forEach(v=>v.classList.add("hidden"));q("#"+b.dataset.tab).classList.remove("hidden");if(b.dataset.tab==="products")loadProducts();if(b.dataset.tab==="orders")loadOrders();if(b.dataset.tab==="users")loadUsers();if(b.dataset.tab==="dashboard")loadDashboard()})
+async function loadDashboard(){const d=await api("/api/admin/dashboard");q("#dProducts").textContent=d.products.count;q("#dStock").textContent=d.products.stock;q("#dOrders").textContent=d.orders;q("#dSales").textContent=Number(d.today.sales||0).toLocaleString()+"원"}
+async function loadProducts(){const d=await api("/api/admin/products");q("#productTable").innerHTML='<table><tr><th>ID</th><th>상품</th><th>가격</th><th>재고</th><th>규격</th><th>카테고리</th><th>판매</th><th>저장</th></tr>'+d.products.map(p=>`<tr><td>${p.id}</td><td><input id="n${p.id}" value="${esc(p.name)}"></td><td><input id="p${p.id}" type="number" value="${p.price}" style="width:100px"></td><td><input id="s${p.id}" type="number" value="${p.stock}" style="width:80px"></td><td><input id="u${p.id}" value="${esc(p.unit||"")}"></td><td><input id="c${p.id}" value="${esc(p.category||"")}"></td><td><input id="a${p.id}" type="checkbox" ${p.is_active?"checked":""}></td><td><button class="btn" onclick="saveProduct(${p.id})">저장</button></td></tr>`).join("")+"</table>"}
+async function saveProduct(id){await api("/api/admin/products/"+id,{method:"PUT",body:JSON.stringify({name:q("#n"+id).value,price:Number(q("#p"+id).value),stock:Number(q("#s"+id).value),unit:q("#u"+id).value,category:q("#c"+id).value,is_active:q("#a"+id).checked})});alert("저장했습니다.");loadProducts();loadDashboard()}
+q("#addProduct").onclick=async()=>{await api("/api/admin/products",{method:"POST",body:JSON.stringify({name:q("#npName").value,price:Number(q("#npPrice").value||0),stock:Number(q("#npStock").value||0),unit:q("#npUnit").value,category:q("#npCategory").value,image:q("#npImage").value,description:q("#npDesc").value})});["npName","npPrice","npStock","npUnit","npCategory","npImage","npDesc"].forEach(id=>q("#"+id).value="");loadProducts();loadDashboard()}
+async function loadOrders(){const d=await api("/api/admin/orders");q("#orderTable").innerHTML='<table><tr><th>주문번호</th><th>고객</th><th>상품</th><th>금액</th><th>결제</th><th>진행상태</th><th>배송지</th><th>저장</th></tr>'+d.orders.map(o=>`<tr><td>${o.order_no}<br><span class="small">${new Date(o.created_at).toLocaleString()}</span></td><td>${esc(o.customer_name)}<br>${esc(o.phone)}</td><td>${o.items.map(i=>esc(i.product_name)+" × "+i.qty).join("<br>")}</td><td>${Number(o.total_amount).toLocaleString()}원</td><td><select id="pay${o.id}">${["입금대기","결제완료","환불"].map(x=>`<option ${o.payment_status===x?"selected":""}>${x}</option>`).join("")}</select></td><td><select id="st${o.id}">${["주문접수","상품준비","배송중","배송완료","취소"].map(x=>`<option ${o.status===x?"selected":""}>${x}</option>`).join("")}</select></td><td>${esc(o.address1)} ${esc(o.address2||"")}</td><td><button class="btn" onclick="saveOrder(${o.id})">저장</button></td></tr>`).join("")+"</table>"}
+async function saveOrder(id){await api("/api/admin/orders/"+id,{method:"PUT",body:JSON.stringify({status:q("#st"+id).value,payment_status:q("#pay"+id).value})});alert("주문 상태를 저장했습니다.");loadOrders();loadDashboard()}
+async function loadUsers(){const d=await api("/api/admin/users");q("#userTable").innerHTML='<table><tr><th>ID</th><th>이름</th><th>이메일</th><th>연락처</th><th>가입일</th></tr>'+d.users.map(u=>`<tr><td>${u.id}</td><td>${esc(u.name)}</td><td>${esc(u.email)}</td><td>${esc(u.phone||"")}</td><td>${new Date(u.created_at).toLocaleString()}</td></tr>`).join("")+"</table>"}
+function esc(v){
+  return String(v??"").replace(/[&<>"']/g, function(m){
+    const map={"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"};
+    return map[m];
+  });
 }
-
-const LOCAL_KEY="iroom_admin_store_v60";
-let state={
- products:[
-  {name:"샤인머스켓",price:28000,unit:"2kg (3~4송이)",stock:20,status:"판매중",badge:"NEW",image:"/assets/prod-shine.jpg",order:1,desc:""},
-  {name:"나주 신고배 특선",price:38000,unit:"5kg (7~9과)",stock:20,status:"판매중",badge:"BEST",image:"/assets/prod-pear.jpg",order:2,desc:""},
-  {name:"경북 홍사과",price:32000,unit:"3kg (9~11과)",stock:20,status:"판매중",badge:"NEW",image:"/assets/prod-apple.jpg",order:3,desc:""},
-  {name:"제주 한라봉",price:28000,unit:"3kg (8~10과)",stock:20,status:"판매중",badge:"",image:"/assets/prod-hallabong.jpg",order:4,desc:""},
-  {name:"프리미엄 과일세트",price:85000,unit:"혼합 구성",stock:20,status:"판매중",badge:"BEST",image:"/assets/prod-gift.jpg",order:5,desc:""},
-  {name:"복숭아 (백도)",price:29000,unit:"4kg (11~13과)",stock:20,status:"판매중",badge:"",image:"/assets/prod-peach.jpg",order:6,desc:""}
- ],
- images:[],
- orders:[],members:[],refunds:[],inquiries:[],
- tracking:{visits:0,shares:0,band:0,cart:0,orders:0},
- reviews:[
-  {text:"포장이 깔끔하고 과일 상태도 좋아 부모님 선물로 만족했습니다.",author:"선물세트 구매 고객",show:true},
-  {text:"상담할 때 예산에 맞춰 구성을 설명해줘서 고르기가 편했습니다.",author:"단체 선물 상담 고객",show:true}
- ],
- banner:{
-  hero1:{image:"/assets/prod-gift.jpg",title:"자연의 신선함을 프리미엄으로 전합니다",desc:"좋은 산지의 제철 과일을 엄선하여 정성껏 보내드립니다."},
-  hero2:{image:"/assets/prod-pear.jpg",title:"프리미엄 과일 선물세트",desc:"소중한 분께 전하는 품격 있는 과일 선물."},
-  notice:{text:"고급 국산 종합과일 입고되었습니다.",active:true},
-  popup:{title:"",content:"",link:"",active:false}
- },
- site:{siteName:"이룸 fresh fruits",phone:"010-6423-4562",email:"",address:"",businessNo:"",bankName:"",bankAccount:"",bankOwner:"",tossClientKey:"",tossSecretKey:"",tossEnabled:false,bandUrl:"https://band.us/@iroomfruits",kakaoUrl:"https://open.kakao.com/o/sd7wnrKi",naverUrl:"",shippingFee:4000,freeShippingFrom:50000,emailNotify:true,stockNotify:true},
- event:{title:"",period:"",desc:"",active:false},coupon:{name:"",discount:0,code:"",expire:""},
- logs:[]
-};
-function $(s){return document.querySelector(s)} function $$(s){return Array.from(document.querySelectorAll(s))}
-function esc(s){return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]))}
-function openModal(id){$("#"+id).classList.add("open")} function closeModal(id){$("#"+id).classList.remove("open")}
-function log(msg){state.logs.unshift(new Date().toLocaleString("ko-KR")+" · "+msg);state.logs=state.logs.slice(0,100)}
-function goto(view){$$(".view").forEach(v=>v.classList.remove("active"));$("#view-"+view)?.classList.add("active");$$("[data-view]").forEach(b=>b.classList.toggle("active",b.dataset.view===view));if(view==="products")renderProducts();if(view==="images")renderImages();if(view==="orders")renderOrders();if(view==="members")renderMembers();if(view==="refunds")renderRefunds();if(view==="reviews")renderReviews();if(view==="inquiries")renderInquiries();if(view==="logs")renderLogs();if(view==="banners")fillBanner();if(view==="site")fillSite()}
-$$("[data-view]").forEach(b=>b.addEventListener("click",()=>goto(b.dataset.view)));
-
-async function load(){
-  try{
-    const r=await fetch("/api/store",{cache:"no-store"});
-    if(r.ok){const d=await r.json(); if(d&&typeof d==="object") state={...state,...d,site:{...state.site,...(d.site||d.siteSettings||{})},banner:{...state.banner,...(d.banner||{})}};$("#saveState").textContent="서버 연결됨";}
-    else throw 0;
-  }catch(e){
-    try{const x=JSON.parse(localStorage.getItem(LOCAL_KEY)||"null");if(x)state={...state,...x};$("#saveState").textContent="로컬 저장 모드"}catch(_){}
-  }
-  renderAll();
-}
-async function persist(){
-  state.updatedAt=new Date().toISOString();log("관리자 설정 저장");
-  localStorage.setItem(LOCAL_KEY,JSON.stringify(state));
-  let ok=false;
-  for(const method of ["POST","PUT"]){
-    try{const r=await fetch("/api/store",{method,headers:{"Content-Type":"application/json"},body:JSON.stringify(state)});if(r.ok){ok=true;break}}catch(e){}
-  }
-  $("#saveState").textContent=ok?"서버 저장 완료":"로컬 저장 완료";
-  $("#saveState").style.background=ok?"#eaf5ee":"#fff3df";
-  renderAll();
-}
-$("#saveAllBtn").onclick=persist;
-window.saveSection=persist;
-
-function renderAll(){
- $("#stProducts").textContent=state.products?.length||0;$("#stOrders").textContent=state.orders?.length||0;$("#stMembers").textContent=state.members?.length||0;$("#stRefunds").textContent=state.refunds?.length||0;
- const low=(state.products||[]).filter(x=>Number(x.stock)<=3);$("#stLow").textContent=low.length;
- $("#stVisits").textContent=state.tracking?.visits||0;$("#stShares").textContent=state.tracking?.shares||0;$("#stBand").textContent=state.tracking?.band||0;$("#stCart").textContent=state.tracking?.cart||0;$("#stOrderTrack").textContent=state.tracking?.orders||0;
- $("#checkProduct").textContent=(state.products?.length||0)+"개 등록";$("#checkImages").textContent=(state.images?.length||0)+"개 보관 중";$("#checkPhone").textContent=state.site?.phone||"미입력";$("#checkBank").textContent=state.site?.bankAccount||"미입력";$("#checkBand").textContent=state.site?.bandUrl?"연결됨":"미연결";$("#checkBiz").textContent=state.site?.businessNo?"입력됨":"미입력";
- $("#lowStockBox").textContent=low.length?low.map(x=>x.name+" ("+x.stock+"개)").join(", "):"저재고 상품이 없습니다.";
- renderProducts();renderImages();renderOrders();renderMembers();renderRefunds();renderReviews();renderInquiries();renderLogs();
-}
-function renderProducts(){
- const q=($("#productSearch")?.value||"").toLowerCase(),f=$("#productFilter")?.value||"";
- const arr=(state.products||[]).map((x,i)=>({...x,_i:i})).filter(x=>(!q||x.name.toLowerCase().includes(q))&&(!f||x.status===f)).sort((a,b)=>(a.order||99)-(b.order||99));
- $("#productRows").innerHTML=arr.map(x=>`<tr><td><img src="${esc(x.image)}" style="width:54px;height:44px;object-fit:cover;border-radius:7px"></td><td><b>${esc(x.name)}</b><br><span class="small">${esc(x.unit)}</span></td><td>${Number(x.price||0).toLocaleString()}원</td><td>${x.stock}</td><td><span class="badge">${esc(x.status)}</span></td><td>${esc(x.badge||"-")}</td><td><button class="ghost" onclick="editProduct(${x._i})">수정</button> <button class="ghost" onclick="deleteProduct(${x._i})">삭제</button></td></tr>`).join("");
-}
-$("#productSearch").oninput=renderProducts;$("#productFilter").onchange=renderProducts;
-$("#addProductBtn").onclick=()=>{["pName","pPrice","pUnit","pStock","pImage","pOrder","pDesc"].forEach(id=>$("#"+id).value="");$("#pStatus").value="판매중";$("#pBadge").value="";$("#editProductIndex").value="";$("#productModalTitle").textContent="상품 등록";openModal("productModal")};
-window.editProduct=i=>{const x=state.products[i];$("#editProductIndex").value=i;$("#pName").value=x.name;$("#pPrice").value=x.price;$("#pUnit").value=x.unit;$("#pStock").value=x.stock;$("#pStatus").value=x.status;$("#pBadge").value=x.badge||"";$("#pImage").value=x.image;$("#pOrder").value=x.order||"";$("#pDesc").value=x.desc||"";$("#productModalTitle").textContent="상품 수정";openModal("productModal")};
-window.deleteProduct=i=>{if(confirm("이 상품을 삭제할까요?")){state.products.splice(i,1);log("상품 삭제");persist()}};
-$("#saveProductBtn").onclick=()=>{const x={name:$("#pName").value.trim(),price:Number($("#pPrice").value),unit:$("#pUnit").value.trim(),stock:Number($("#pStock").value),status:$("#pStatus").value,badge:$("#pBadge").value,image:$("#pImage").value.trim(),order:Number($("#pOrder").value)||99,desc:$("#pDesc").value.trim()};if(!x.name)return alert("상품명을 입력하세요.");const i=$("#editProductIndex").value;if(i==="")state.products.push(x);else state.products[Number(i)]=x;log("상품 저장: "+x.name);closeModal("productModal");persist()};
-
-$("#imageUpload").onchange=async e=>{for(const file of e.target.files){if(!file.type.startsWith("image/"))continue;const data=await resizeImage(file,1200,900,.86);state.images.unshift({name:file.name,data,createdAt:new Date().toISOString()})}log("이미지 업로드");persist();e.target.value=""};
-function resizeImage(file,maxW,maxH,q){return new Promise(res=>{const fr=new FileReader();fr.onload=()=>{const im=new Image();im.onload=()=>{let w=im.width,h=im.height,r=Math.min(1,maxW/w,maxH/h);const c=document.createElement("canvas");c.width=Math.round(w*r);c.height=Math.round(h*r);c.getContext("2d").drawImage(im,0,0,c.width,c.height);res(c.toDataURL("image/jpeg",q))};im.src=fr.result};fr.readAsDataURL(file)})}
-function renderImages(){const box=$("#imageLibrary");if(!box)return;box.innerHTML=(state.images||[]).map((x,i)=>`<div class="imgitem"><img src="${x.data}"><div><b>${esc(x.name)}</b><br><button class="ghost" onclick="copyImage(${i})">주소복사</button> <button class="ghost" onclick="useHero(${i})">메인적용</button> <button class="ghost" onclick="delImage(${i})">삭제</button></div></div>`).join("")||'<div class="notice">보관된 이미지가 없습니다.</div>'}
-window.copyImage=i=>navigator.clipboard?.writeText(state.images[i].data).then(()=>alert("이미지 주소를 복사했습니다."));
-window.useHero=i=>{state.banner.hero1.image=state.images[i].data;log("메인 이미지 변경");persist();goto("banners")};
-window.delImage=i=>{if(confirm("이미지를 삭제할까요?")){state.images.splice(i,1);persist()}};
-
-function renderOrders(){$("#orderRows").innerHTML=(state.orders||[]).map((o,i)=>`<tr><td>${esc(o.id)}</td><td>${esc(o.name||o.customerName||"")}<br><span class="small">${esc(o.phone||"")}</span></td><td>${Number(o.total||0).toLocaleString()}원</td><td><select onchange="state.orders[${i}].status=this.value;persist()">${["주문접수","입금확인","배송준비","배송중","배송완료","취소"].map(s=>`<option ${s===o.status?"selected":""}>${s}</option>`).join("")}</select></td><td><input value="${esc(o.tracking||"")}" onchange="state.orders[${i}].tracking=this.value;persist()" style="width:130px"></td><td>${o.createdAt?new Date(o.createdAt).toLocaleDateString("ko-KR"):""}</td><td><button class="ghost">상세</button></td></tr>`).join("")||'<tr><td colspan="7">주문이 없습니다.</td></tr>'}
-function renderMembers(){$("#memberRows").innerHTML=(state.members||[]).map(m=>`<tr><td>${esc(m.username)}</td><td>${esc(m.name)}</td><td>${esc(m.phone)}</td><td>${esc(m.email)}</td><td>${m.createdAt?new Date(m.createdAt).toLocaleDateString("ko-KR"):""}</td><td><span class="badge">${esc(m.status||"정상")}</span></td></tr>`).join("")||'<tr><td colspan="6">회원이 없습니다.</td></tr>'}
-function renderRefunds(){$("#refundRows").innerHTML=(state.refunds||[]).map(r=>`<tr><td>${esc(r.orderId)}</td><td>${esc(r.name)}</td><td>${Number(r.amount||0).toLocaleString()}원</td><td>${esc(r.reason)}</td><td>${esc(r.status)}</td><td><button class="ghost">처리</button></td></tr>`).join("")||'<tr><td colspan="6">취소/환불 요청이 없습니다.</td></tr>'}
-function renderInquiries(){$("#inquiryRows").innerHTML=(state.inquiries||[]).map(x=>`<tr><td>${x.createdAt?new Date(x.createdAt).toLocaleString("ko-KR"):""}</td><td>${esc(x.name)}</td><td>${esc(x.message)}</td><td>${esc(x.status||"대기")}</td><td><button class="ghost">답변</button></td></tr>`).join("")||'<tr><td colspan="5">문의가 없습니다.</td></tr>'}
-function renderReviews(){const b=$("#reviewEditor");if(!b)return;b.innerHTML=(state.reviews||[]).map((r,i)=>`<div class="formcard"><div class="field"><label>리뷰</label><textarea onchange="state.reviews[${i}].text=this.value">${esc(r.text)}</textarea></div><div class="formgrid"><div class="field"><label>작성자</label><input value="${esc(r.author)}" onchange="state.reviews[${i}].author=this.value"></div><div class="switch"><input type="checkbox" ${r.show?"checked":""} onchange="state.reviews[${i}].show=this.checked"><span>홈페이지 노출</span></div></div></div>`).join("")}
-$("#addReviewBtn").onclick=()=>{state.reviews.push({text:"",author:"",show:true});renderReviews()};
-function renderLogs(){$("#logList").innerHTML=(state.logs||[]).map(x=>`<div style="padding:7px 0;border-bottom:1px solid #eee">${esc(x)}</div>`).join("")||"기록이 없습니다."}
-
-function fillBanner(){const b=state.banner||{};$("#hero1Image").value=b.hero1?.image||"";$("#hero1Title").value=b.hero1?.title||"";$("#hero1Desc").value=b.hero1?.desc||"";$("#hero2Image").value=b.hero2?.image||"";$("#hero2Title").value=b.hero2?.title||"";$("#hero2Desc").value=b.hero2?.desc||"";$("#hero1Preview").src=b.hero1?.image||"";$("#hero2Preview").src=b.hero2?.image||"";$("#noticeText").value=b.notice?.text||"";$("#noticeActive").checked=!!b.notice?.active;$("#popupTitle").value=b.popup?.title||"";$("#popupContent").value=b.popup?.content||"";$("#popupLink").value=b.popup?.link||"";$("#popupActive").checked=!!b.popup?.active}
-["hero1Image","hero2Image"].forEach((id,i)=>$("#"+id).oninput=e=>$("#hero"+(i+1)+"Preview").src=e.target.value);
-function collectBanner(){state.banner={hero1:{image:$("#hero1Image").value,title:$("#hero1Title").value,desc:$("#hero1Desc").value},hero2:{image:$("#hero2Image").value,title:$("#hero2Title").value,desc:$("#hero2Desc").value},notice:{text:$("#noticeText").value,active:$("#noticeActive").checked},popup:{title:$("#popupTitle").value,content:$("#popupContent").value,link:$("#popupLink").value,active:$("#popupActive").checked}}}
-function fillSite(){const s=state.site||{};const map={siteName:"siteName",phone:"sitePhone",email:"siteEmail",address:"siteAddress",businessNo:"businessNo",bankName:"bankName",bankAccount:"bankAccount",bankOwner:"bankOwner",tossClientKey:"tossClientKey",tossSecretKey:"tossSecretKey",bandUrl:"bandUrl",kakaoUrl:"kakaoUrl",naverUrl:"naverUrl",shippingFee:"shippingFee",freeShippingFrom:"freeShippingFrom"};for(const [k,id] of Object.entries(map))$("#"+id).value=s[k]??"";$("#tossEnabled").checked=!!s.tossEnabled;$("#emailNotify").checked=!!s.emailNotify;$("#stockNotify").checked=!!s.stockNotify}
-function collectSite(){state.site={siteName:$("#siteName").value,phone:$("#sitePhone").value,email:$("#siteEmail").value,address:$("#siteAddress").value,businessNo:$("#businessNo").value,bankName:$("#bankName").value,bankAccount:$("#bankAccount").value,bankOwner:$("#bankOwner").value,tossClientKey:$("#tossClientKey").value,tossSecretKey:$("#tossSecretKey").value,tossEnabled:$("#tossEnabled").checked,bandUrl:$("#bandUrl").value,kakaoUrl:$("#kakaoUrl").value,naverUrl:$("#naverUrl").value,shippingFee:Number($("#shippingFee").value),freeShippingFrom:Number($("#freeShippingFrom").value),emailNotify:$("#emailNotify").checked,stockNotify:$("#stockNotify").checked}}
-const oldPersist=persist;persist=async function(){if($("#view-banners").classList.contains("active"))collectBanner();if($("#view-site").classList.contains("active"))collectSite();state.event={title:$("#eventTitle").value||state.event.title,period:$("#eventPeriod").value||state.event.period,desc:$("#eventDesc").value||state.event.desc,active:$("#eventActive").checked};state.coupon={name:$("#couponName").value||state.coupon.name,discount:Number($("#couponDiscount").value||state.coupon.discount||0),code:$("#couponCode").value||state.coupon.code,expire:$("#couponExpire").value||state.coupon.expire};return oldPersist()};
-
-
-$("#changeAdminPasswordBtn")?.addEventListener("click",async()=>{
-  const a=$("#newAdminPassword").value,b=$("#newAdminPassword2").value;
-  if(a.length<6)return alert("비밀번호는 6자 이상으로 입력하세요.");
-  if(a!==b)return alert("비밀번호 확인이 일치하지 않습니다.");
-  let serverOk=false;
-  try{
-    const r=await fetch("/api/admin/password",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({password:a})});
-    serverOk=r.ok;
-  }catch(e){}
-  localStorage.setItem("iroom_admin_password_v61",a);
-  alert(serverOk?"관리자 비밀번호가 서버와 이 브라우저에 변경되었습니다.":"현재 브라우저 관리자 잠금 비밀번호로 저장했습니다.");
-  $("#newAdminPassword").value="";$("#newAdminPassword2").value="";
-});
-$("#aiBtn").onclick=async()=>{const p=$("#aiPrompt").value.trim();if(!p)return;$("#aiResult").textContent="작성 중...";try{const r=await fetch("/api/ai",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({prompt:p})});if(r.ok){const d=await r.json();$("#aiResult").textContent=d.text||d.result||JSON.stringify(d);return}}catch(e){}$("#aiResult").textContent="추천 문구: “산지의 신선함을 그대로, 소중한 분께 품격 있게 전하세요. 이룸 fresh fruits가 제철 과일을 엄선해 정성껏 준비합니다.”"};
-
-
-if(adminSessionOpen()) document.getElementById("adminGate").classList.add("hidden");
-document.getElementById("adminLoginBtn").addEventListener("click",verifyAdminPassword);
-document.getElementById("adminPasswordInput").addEventListener("keydown",e=>{if(e.key==="Enter")verifyAdminPassword()});
-load();
-
-</script>
-</body>
-</html>
+check().catch(()=>{});
+</script></body></html>
