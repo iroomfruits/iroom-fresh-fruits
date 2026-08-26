@@ -27,9 +27,9 @@
 <meta name="twitter:description" content="자연의 신선함을 프리미엄으로 전합니다.">
 <meta name="twitter:image" content="https://iroom-fresh-fruits.onrender.com/assets/share-luxury-v68.jpg?v=68">
 
-<link rel="manifest" href="/manifest.webmanifest?v=84">
-<link rel="apple-touch-icon" href="/icons/icon-192.png?v=84">
-<link rel="icon" type="image/png" href="/icons/icon-192.png?v=84">
+<link rel="manifest" href="/manifest.webmanifest?v=85">
+<link rel="apple-touch-icon" href="/icons/icon-192.png?v=85">
+<link rel="icon" type="image/png" href="/icons/icon-192.png?v=85">
 <style>
 :root{--g:#0b3a27;--g2:#174c38;--ink:#181818;--muted:#777;--line:#ece8e2;--cream:#faf8f3;--gold:#b99052}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#fff;color:var(--ink);font-family:Arial,"Pretendard","Noto Sans KR",sans-serif}a{text-decoration:none;color:inherit}button,input{font:inherit}button{cursor:pointer}img{display:block;max-width:100%}.wrap{max-width:1440px;margin:auto;padding:0 34px}
@@ -223,7 +223,7 @@ footer{background:#0d2d20;color:#fff;padding:42px 0}.foot{display:grid;grid-temp
 <footer id="footer"><div class="wrap foot"><div><b>이룸 fresh fruits</b><small>국내산 제철과일과 프리미엄 과일선물세트를 정성껏 준비합니다.</small><small><a href="/band-admin.html">관리자 전용 페이지</a></small></div><div><b>고객센터</b><small>평일 09:00 ~ 18:00<br>상품 · 주문 · 배송 · 선물 상담</small></div><div><b>바로가기</b><small><a href="https://band.us/@iroomfruits" target="_blank">이룸 BAND</a><br><a href="/band-order.html">BAND 주문센터</a></small></div></div></footer>
 
 <button class="share-float" id="shareFloat">↗ 공유하기</button><div class="share-toast" id="shareToast">링크를 복사했습니다.</div>
-<div class="install-banner" id="installBanner"><img src="/icons/icon-192.png?v=84" alt="이룸 앱 아이콘" style="width:42px;height:42px;border-radius:10px;flex:0 0 auto"><div class="grow"><b>이룸 fresh fruits 앱 설치</b><div style="font-size:12px;opacity:.8">휴대폰 홈 화면에 추가해 빠르게 이용하세요.</div></div><button id="installBannerBtn">설치하기</button><button class="close" id="installClose">×</button></div>
+<div class="install-banner" id="installBanner"><img src="/icons/icon-192.png?v=85" alt="이룸 앱 아이콘" style="width:42px;height:42px;border-radius:10px;flex:0 0 auto"><div class="grow"><b>이룸 fresh fruits 앱 설치</b><div style="font-size:12px;opacity:.8">휴대폰 홈 화면에 추가해 빠르게 이용하세요.</div></div><button id="installBannerBtn">설치하기</button><button class="close" id="installClose">×</button></div>
 
 
 <div class="modal" id="shareModal"><div class="modalbox"><div class="modalhead"><h3>공유하기</h3><button data-close>×</button></div>
@@ -296,7 +296,7 @@ footer{background:#0d2d20;color:#fff;padding:42px 0}.foot{display:grid;grid-temp
   <div class="modalhead"><h3>휴대폰에 이룸 앱 설치하기</h3><button data-close>×</button></div>
   <div id="mobileInstallBody" style="font-size:14px;line-height:1.8;color:#444"></div>
   <div style="display:flex;gap:8px;margin-top:16px;flex-wrap:wrap">
-    <button class="fullbtn" id="copySiteUrl" type="button" style="flex:1">사이트 주소 복사</button>
+    <button class="fullbtn" id="openInChromeBtn" type="button" style="flex:1">Chrome으로 열기</button><button class="linebtn" id="copySiteUrl" type="button" style="flex:1;margin-left:0">주소 복사</button>
     <button class="linebtn" id="retryInstall" type="button" style="flex:1;margin-left:0">설치 다시 시도</button>
   </div>
 </div></div>
@@ -776,9 +776,10 @@ function showMobileInstallHelp(){
   if(!body)return;
   let h="";
   if(u.inApp){
-    h=`<b>현재 앱 안의 브라우저에서는 설치가 제한될 수 있습니다.</b>
-       <p>화면의 메뉴(⋮ 또는 ⋯)에서 <b>Chrome에서 열기 / Safari에서 열기 / 외부 브라우저로 열기</b>를 선택한 뒤 다시 설치해주세요.</p>
-       <p style="color:#777">아래 ‘사이트 주소 복사’를 눌러 Chrome 또는 Safari 주소창에 붙여넣어도 됩니다.</p>`;
+    h=`<b>현재 카카오톡·네이버 같은 앱 안의 브라우저에서 열려 있습니다.</b>
+       <p>이 브라우저에서는 Android 앱 설치가 제한됩니다.</p>
+       <p><b>아래 ‘Chrome으로 열기’를 먼저 눌러주세요.</b> Chrome으로 이동한 뒤 홈페이지의 ‘앱 설치하기’를 다시 누르면 됩니다.</p>
+       <p style="color:#777">Chrome이 자동으로 열리지 않으면 ‘주소 복사’를 눌러 Chrome 주소창에 붙여넣어 주세요.</p>`;
   }else if(u.ios){
     h=`<b>iPhone / iPad 설치 방법</b>
        <ol>
@@ -824,7 +825,22 @@ window.addEventListener("appinstalled",()=>{
   q("#installBanner")?.classList.remove("show");
 });
 async function installApp(){
-  if(isStandalone()){
+  
+(function adjustInstallForInApp(){
+  const u=uaInfo();
+  if(!u.inApp)return;
+  const btn=q("#installNow");
+  if(btn){
+    btn.textContent=u.android?"Chrome으로 열기":"외부 브라우저로 열기";
+  }
+  const bannerBtn=q("#installBannerBtn");
+  if(bannerBtn){
+    bannerBtn.textContent=u.android?"Chrome으로 열기":"외부 브라우저로 열기";
+  }
+  setInstallStatus("현재 앱 안의 브라우저입니다. Chrome 또는 Safari에서 열어야 설치할 수 있습니다.");
+})();
+
+if(isStandalone()){
     setInstallStatus("이미 설치된 앱으로 실행 중입니다.");
     return;
   }
@@ -858,6 +874,23 @@ q("#retryInstall")?.addEventListener("click",()=>{
   q("#mobileInstallModal")?.classList.remove("open");
   setTimeout(installApp,80);
 });
+
+q("#openInChromeBtn")?.addEventListener("click",()=>{
+  const u=uaInfo();
+  const cleanPath=location.host + location.pathname + location.search + location.hash;
+  if(u.android){
+    // Android intent: opens Chrome directly when allowed by the in-app browser.
+    const intentUrl="intent://"+cleanPath+"#Intent;scheme=https;package=com.android.chrome;S.browser_fallback_url="+
+      encodeURIComponent(location.href)+";end";
+    location.href=intentUrl;
+  }else if(u.ios){
+    // iOS cannot reliably force Safari from every in-app browser.
+    alert("iPhone에서는 오른쪽 위 또는 아래 메뉴에서 ‘Safari에서 열기’를 선택해주세요.");
+  }else{
+    window.open(location.href,"_blank");
+  }
+});
+
 q("#copySiteUrl")?.addEventListener("click",async()=>{
   try{
     await navigator.clipboard.writeText(location.origin);
@@ -872,7 +905,7 @@ if(isStandalone()){
   q("#installNow").disabled=true;
 }
 if("serviceWorker" in navigator){
-  window.addEventListener("load",()=>navigator.serviceWorker.register("/service-worker.js?v=84",{updateViaCache:"none"})
+  window.addEventListener("load",()=>navigator.serviceWorker.register("/service-worker.js?v=85",{updateViaCache:"none"})
     .then(reg=>{
       reg.update();
       if(!isStandalone()){
