@@ -23,7 +23,7 @@
 <meta name="twitter:description" content="자연의 신선함을 프리미엄으로 전합니다.">
 <meta name="twitter:image" content="https://iroom-fresh-fruits.onrender.com/assets/share-luxury-v68.jpg?v=68">
 
-<link rel="manifest" href="/manifest.webmanifest?v=66">
+<link rel="manifest" href="/manifest.webmanifest?v=74">
 <link rel="apple-touch-icon" href="/icons/icon-192.png?v=66">
 <link rel="icon" type="image/png" href="/icons/icon-192.png?v=66">
 <style>
@@ -110,7 +110,7 @@ footer{background:#0d2d20;color:#fff;padding:42px 0}.foot{display:grid;grid-temp
 </head>
 <body>
 <div class="notice"><div class="wrap"><div>🍊 <b>오늘의 입고</b> &nbsp; | &nbsp; 고급 국산 종합과일 입고되었습니다.</div><nav><button id="customerBtn">고객센터</button><button id="ordersBtn">주문조회</button><button id="myBtn">마이페이지</button></nav></div></div>
-<header><div class="wrap head"><a class="brand" href="/"><span class="ko">이룸</span><span class="en">fresh fruits</span><small>PREMIUM FRUIT BOUTIQUE</small></a><nav class="nav"><a href="#best">NEW & BEST</a><a href="#best">과일</a><a href="#gift">선물세트</a><a href="#group">공동구매</a><a href="#custom">단체·맞춤선물</a><a href="#story">스토리</a></nav><div class="tools"><button class="tool desktop" id="loginBtn">로그인</button><button class="tool desktop" id="signupBtn">회원가입</button><button class="tool desktop" id="myTopBtn">마이페이지</button><button class="icon desktop" id="searchBtn" title="검색">⌕</button><button class="icon" id="shareBtn" title="공유">↗</button><button class="icon" id="cartBtn">🛒<span class="badge" id="cartBadge">0</span></button></div></div></header>
+<header><div class="wrap head"><a class="brand" href="/"><span class="ko">이룸</span><span class="en">fresh fruits</span><small>PREMIUM FRUIT BOUTIQUE</small></a><nav class="nav"><a href="#best">NEW & BEST</a><a href="#best">과일</a><a href="#gift">선물세트</a><a href="#group">공동구매</a><a href="#custom">단체·맞춤선물</a><a href="#story">스토리</a></nav><div class="tools"><button class="tool desktop" id="loginBtn">로그인</button><button class="tool desktop" id="logoutBtn" style="display:none">로그아웃</button><button class="tool desktop" id="signupBtn">회원가입</button><button class="tool desktop" id="myTopBtn">마이페이지</button><button class="icon desktop" id="searchBtn" title="검색">⌕</button><button class="icon" id="shareBtn" title="공유">↗</button><button class="icon" id="cartBtn">🛒<span class="badge" id="cartBadge">0</span></button></div></div></header>
 
 <main>
 <section class="hero"><div class="hero-copy"><h1>자연의 신선함을<br>프리미엄으로 전합니다</h1><p>좋은 산지의 제철 과일을 엄선하여<br>정성껏 보내드립니다.</p><a class="cta" href="#best">SHOP NOW ›</a><div class="pager"><span id="heroCount"><b>01</b> / 06</span><button id="prev">‹</button><button id="next">›</button></div></div><div class="hero-media"><img id="heroImg" src="/assets/hero-1.jpg" alt="프리미엄 과일"><div class="dots" id="dots"></div></div></section>
@@ -466,30 +466,68 @@ document.addEventListener("keydown",e=>{
 
 
 
-let currentMember=null;
-async function refreshAuthUI(){try{const d=await fetch("/api/me",{cache:"no-store"}).then(r=>r.json());currentMember=d.user||null;const l=q("#loginBtn"),s=q("#signupBtn");if(currentMember){if(l){l.textContent=(currentMember.name||currentMember.username)+"님";l.title="로그아웃";}if(s)s.style.display="none";}else{if(l){l.textContent="로그인";l.title="로그인";}if(s)s.style.display="";}}catch{}}
-q("#loginBtn")?.addEventListener("click",async e=>{if(currentMember){e.stopImmediatePropagation();if(confirm("로그아웃하시겠습니까?")){await fetch("/api/logout",{method:"POST"});currentMember=null;await refreshAuthUI();}}},true);
 
-let serverProducts=[];
-async function syncServerProducts(){
- try{
-  const r=await fetch("/api/products",{cache:"no-store"}); if(!r.ok)return;
-  const d=await r.json(); serverProducts=d.products||[];
-  qa(".product").forEach(card=>{
-    const p=serverProducts.find(x=>x.name===card.dataset.name);
-    if(!p){card.style.display="none";return}
-    card.style.display=p.is_active===false?"none":"";
-    const price=card.querySelector(".price"); if(price)price.textContent=Number(p.price).toLocaleString()+"원~";
-    const unit=card.querySelector(".info p"); if(unit)unit.textContent=p.unit||"";
-    const img=card.querySelector("img"); if(img&&p.image)img.src=p.image;
-    card.dataset.price=p.price; card.dataset.productId=p.id; card.dataset.stock=p.stock;
-    if(productCatalog[p.name]){productCatalog[p.name].price=p.price;productCatalog[p.name].unit=p.unit;productCatalog[p.name].image=p.image;productCatalog[p.name].desc=p.description}
+function loadDaumPostcode(){
+  return new Promise((resolve,reject)=>{
+    if(window.daum?.Postcode) return resolve();
+    const old=document.querySelector('script[data-iroom-postcode="1"]');
+    if(old) old.remove();
+    const s=document.createElement("script");
+    s.src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js";
+    s.async=true;
+    s.dataset.iroomPostcode="1";
+    s.onload=()=>window.daum?.Postcode?resolve():reject(new Error("postcode unavailable"));
+    s.onerror=()=>reject(new Error("postcode script failed"));
+    document.head.appendChild(s);
   });
- }catch(e){console.warn("product sync failed",e)}
 }
+async function openSignupPostcode(){
+  try{
+    await loadDaumPostcode();
+    new daum.Postcode({
+      oncomplete:d=>{
+        q("#signupPostcode").value=d.zonecode||"";
+        q("#signupAddress1").value=d.roadAddress||d.jibunAddress||"";
+        q("#signupAddress2").focus();
+      }
+    }).open();
+  }catch(e){
+    alert("주소 검색을 불러오지 못했습니다. 인터넷 연결을 확인한 뒤 새로고침 후 다시 시도해주세요.");
+  }
+}
+
+let currentMember=null;
+async function refreshAuthUI(){
+  try{
+    const d=await fetch("/api/me",{cache:"no-store"}).then(r=>r.json());
+    currentMember=d.user||null;
+    const login=q("#loginBtn"),signup=q("#signupBtn"),logout=q("#logoutBtn");
+    if(currentMember){
+      if(login){login.textContent=(currentMember.name||currentMember.username)+"님";login.title="마이페이지";}
+      if(signup) signup.style.display="none";
+      if(logout) logout.style.display="";
+    }else{
+      if(login){login.textContent="로그인";login.title="로그인";}
+      if(signup) signup.style.display="";
+      if(logout) logout.style.display="none";
+    }
+  }catch(e){}
+}
+
+q("#logoutBtn")?.addEventListener("click",async()=>{
+  try{
+    await fetch("/api/logout",{method:"POST"});
+    currentMember=null;
+    await refreshAuthUI();
+    alert("로그아웃되었습니다.");
+  }catch(e){
+    alert("로그아웃 처리 중 오류가 발생했습니다.");
+  }
+});
+
 q("#signupBtn")?.addEventListener("click",()=>{open("signupModal");setTimeout(()=>q("#signupName")?.focus(),80)});
-q("#signupPostcodeBtn")?.addEventListener("click",()=>{if(window.daum?.Postcode)new daum.Postcode({oncomplete:d=>{q("#signupPostcode").value=d.zonecode||"";q("#signupAddress1").value=d.roadAddress||d.jibunAddress||"";q("#signupAddress2").focus();}}).open();else alert("주소 검색 서비스를 불러오지 못했습니다. 잠시 후 새로고침한 뒤 다시 시도해주세요.");});
-qa(".signup-next").forEach((el,i,arr)=>el.addEventListener("keydown",e=>{if(e.key!=="Enter")return;e.preventDefault();if(el.id==="signupPostcode"){q("#signupPostcodeBtn")?.click();return;}const n=arr[i+1];if(n)n.focus();else q("#doSignup")?.click();}));
+q("#signupPostcodeBtn")?.addEventListener("click",openSignupPostcode);
+qa(".signup-next").forEach((el,i,arr)=>el.addEventListener("keydown",e=>{if(e.key!=="Enter")return;e.preventDefault();if(el.id==="signupPostcode"){openSignupPostcode();return;}const n=arr[i+1];if(n)n.focus();else q("#doSignup")?.click();}));
 q("#doSignup")?.addEventListener("click",async()=>{try{const r=await fetch("/api/signup",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({name:q("#signupName").value,username:q("#signupUser").value,password:q("#signupPass").value,email:q("#signupEmail").value,phone:q("#signupPhone").value,postcode:q("#signupPostcode").value,address1:q("#signupAddress1").value,address2:q("#signupAddress2").value})});const d=await r.json();if(!r.ok)throw Error(d.error||"회원가입 실패");q("#signupMsg").style.color="#246044";q("#signupMsg").textContent="회원가입되었습니다.";await refreshAuthUI();setTimeout(()=>q("#signupModal").classList.remove("open"),600);}catch(e){q("#signupMsg").style.color="#b03d3d";q("#signupMsg").textContent=e.message;}});
 async function openMyOrders(){
  try{
@@ -511,6 +549,6 @@ q("#searchBtn").onclick=()=>{open("searchModal");q("#searchInput").focus()};q("#
 window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();deferredPrompt=e;q("#installBanner").classList.add("show")});
 async function installApp(){if(deferredPrompt){deferredPrompt.prompt();await deferredPrompt.userChoice;deferredPrompt=null;q("#installBanner").classList.remove("show")}else{const ios=/iphone|ipad|ipod/i.test(navigator.userAgent);alert(ios?"Safari의 공유 버튼 → 홈 화면에 추가를 선택하세요.":"브라우저 메뉴에서 '앱 설치' 또는 '홈 화면에 추가'를 선택하세요.")}}
 q("#installNow").onclick=installApp;q("#installBannerBtn").onclick=installApp;q("#installClose").onclick=()=>q("#installBanner").classList.remove("show");
-if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("/service-worker.js?v=70",{updateViaCache:"none"}).then(reg=>reg.update()).catch(()=>{}))}
+if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("/service-worker.js?v=74",{updateViaCache:"none"}).then(reg=>reg.update()).catch(()=>{}))}
 </script>
 </body></html>
