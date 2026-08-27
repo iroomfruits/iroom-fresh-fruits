@@ -619,6 +619,47 @@ header{background:rgba(255,255,255,.97)!important;backdrop-filter:blur(12px);bor
   .seo-quick-nav a{flex:0 0 auto}
 }
 
+
+/* V96 맞춤 과일박스 구성 */
+.fruit-builder{grid-column:1/-1;margin-top:2px}
+.fruit-builder-head{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin-bottom:10px}
+.fruit-builder-head strong{font-size:14px;color:#08271e}
+.fruit-builder-head span{font-size:11px;color:#8a806f}
+.fruit-presets{display:flex;gap:7px;flex-wrap:wrap;margin:0 0 10px}
+.fruit-preset{border:1px solid #d7c59f;background:#fffdf8;color:#31553f;border-radius:999px;padding:7px 10px;font-size:11px;font-weight:800;cursor:pointer}
+.fruit-preset:hover{border-color:#b99043;background:#faf2df}
+.fruit-picker-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:9px}
+.fruit-pick-card{border:1px solid #e1d8ca;border-radius:13px;background:#fff;overflow:hidden;min-width:0;transition:.15s}
+.fruit-pick-card.active{border-color:#1d5c43;box-shadow:0 0 0 2px rgba(29,92,67,.08)}
+.fruit-pick-img{aspect-ratio:1.2/1;overflow:hidden;background:#f7f4ed}
+.fruit-pick-img img{width:100%;height:100%;object-fit:cover;display:block}
+.fruit-pick-body{padding:9px}
+.fruit-pick-name{font-size:12px;font-weight:900;color:#08271e;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fruit-pick-unit{font-size:10px;color:#8a806f;margin-top:2px}
+.fruit-stepper{display:grid;grid-template-columns:32px 1fr 32px;align-items:center;gap:5px;margin-top:8px}
+.fruit-stepper button{width:32px;height:32px;border:1px solid #d8d1c4;border-radius:8px;background:#fff;color:#08271e;font-size:18px;font-weight:900;cursor:pointer}
+.fruit-stepper button:hover{background:#f3efe6}
+.fruit-count{text-align:center;font-size:12px;font-weight:900;min-width:0}
+.fruit-count small{display:block;font-weight:600;color:#8a806f;font-size:9px;margin-top:1px}
+.fruit-box-summary{margin-top:10px;padding:12px 13px;border-radius:12px;background:#f8f4ea;border:1px solid #eadcc1}
+.fruit-box-summary-top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.fruit-box-summary strong{color:#08271e;font-size:13px}
+.fruit-box-summary .badge{font-size:10px;padding:4px 7px;border-radius:999px;background:#08271e;color:#fff}
+.fruit-selected-list{margin-top:7px;font-size:12px;line-height:1.65;color:#5f574c}
+.fruit-empty{color:#9a9184}
+.fruit-box-tip{margin-top:7px;font-size:10px;color:#8b7650}
+#consultExtraFruit{margin-top:8px}
+@media(max-width:760px){
+  .fruit-picker-grid{grid-template-columns:repeat(2,1fr)}
+  .fruit-builder-head{align-items:flex-start;flex-direction:column}
+}
+@media(max-width:430px){
+  .fruit-picker-grid{grid-template-columns:1fr 1fr}
+  .fruit-pick-body{padding:8px}
+  .fruit-stepper{grid-template-columns:30px 1fr 30px}
+  .fruit-stepper button{width:30px;height:30px}
+}
+
 </style>
 <script src="//t1.kakaocdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
@@ -638,6 +679,7 @@ header{background:rgba(255,255,255,.97)!important;backdrop-filter:blur(12px);bor
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "이룸 fresh fruits", "alternateName": ["이룸 과일", "이룸 신선한 과일"], "url": "https://iroom-fresh-fruits.onrender.com/", "description": "엄선한 제철과일과 고급과일, 맛있는과일, 프리미엄 과일선물세트를 정성껏 준비하는 이룸 fresh fruits입니다. 선물용·가정용·단체·맞춤 과일 상담과 주문을 도와드립니다.", "inLanguage": "ko-KR", "keywords": "과일, 고급과일, 맛있는과일, 프리미엄과일, 과일선물, 과일선물세트, 고급과일선물세트, 제철과일, 신선한과일, 선물용과일, 가정용과일, 단체과일선물, 맞춤과일, 이룸, 이룸과일, fresh fruits"}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Store", "name": "이룸 fresh fruits", "url": "https://iroom-fresh-fruits.onrender.com/", "description": "고급과일, 맛있는과일, 제철과일과 프리미엄 과일선물세트를 판매·상담하는 과일 전문점", "currenciesAccepted": "KRW", "paymentAccepted": "Bank Transfer", "hasOfferCatalog": {"@type": "OfferCatalog", "name": "프리미엄 과일", "itemListElement": [{"@type": "OfferCatalog", "name": "고급과일"}, {"@type": "OfferCatalog", "name": "맛있는과일"}, {"@type": "OfferCatalog", "name": "과일선물세트"}, {"@type": "OfferCatalog", "name": "제철과일"}, {"@type": "OfferCatalog", "name": "맞춤 과일선물"}]}}</script>
 
+<meta name="iroom-version" content="V96-fruit-box">
 </head>
 <body>
 <div class="notice"><div class="wrap"><div>🍊 <b>오늘의 입고</b> &nbsp; | &nbsp; 고급 국산 종합과일 입고되었습니다.</div><nav><button id="customerBtn">고객센터</button><button id="ordersBtn">주문조회</button><button id="myBtn">마이페이지</button></nav></div></div>
@@ -804,7 +846,64 @@ header{background:rgba(255,255,255,.97)!important;backdrop-filter:blur(12px);bor
 <div class="field"><label>예산</label><select id="consultBudget"><option value="">선택</option><option>3만원 이하</option><option>3~5만원</option><option>5~8만원</option><option>8~12만원</option><option>12만원 이상</option><option>상담 후 결정</option></select></div>
 <div class="field"><label>인원 / 수량</label><input id="consultQty" placeholder="4명, 10세트"></div>
 <div class="field"><label>맛 선호</label><select id="consultTaste"><option value="">선택</option><option>아주 달콤하게</option><option>달콤하고 부드럽게</option><option>달콤·새콤 균형</option><option>상큼하게</option><option>추천해주세요</option></select></div>
-<div class="field"><label>원하는 과일</label><input id="consultPrefer"></div>
+
+<div class="fruit-builder">
+  <div class="fruit-builder-head">
+    <strong>🍎 나만의 과일박스 구성</strong>
+    <span>사진을 보고 낱개 수량을 골라주세요 · 가격은 상담 후 확정</span>
+  </div>
+  <div class="fruit-presets">
+    <button type="button" class="fruit-preset" data-preset="gift">🎁 선물 추천</button>
+    <button type="button" class="fruit-preset" data-preset="family">🏠 가족용</button>
+    <button type="button" class="fruit-preset" data-preset="sweet">🍇 달콤하게</button>
+    <button type="button" class="fruit-preset" data-preset="reset">↺ 모두 비우기</button>
+  </div>
+  <div class="fruit-picker-grid" id="fruitPickerGrid">
+    <article class="fruit-pick-card" data-fruit="경북 홍사과" data-unit="개">
+      <div class="fruit-pick-img"><img src="/assets/prod-apple.jpg" alt="경북 홍사과"></div>
+      <div class="fruit-pick-body">
+        <div class="fruit-pick-name">경북 홍사과</div><div class="fruit-pick-unit">낱개 · 아삭·새콤달콤</div>
+        <div class="fruit-stepper"><button type="button" data-step="-1">−</button><div class="fruit-count"><span>0</span><small>개</small></div><button type="button" data-step="1">+</button></div>
+      </div>
+    </article>
+    <article class="fruit-pick-card" data-fruit="나주 신고배" data-unit="개">
+      <div class="fruit-pick-img"><img src="/assets/prod-pear.jpg" alt="나주 신고배"></div>
+      <div class="fruit-pick-body">
+        <div class="fruit-pick-name">나주 신고배</div><div class="fruit-pick-unit">낱개 · 아삭·풍부한 과즙</div>
+        <div class="fruit-stepper"><button type="button" data-step="-1">−</button><div class="fruit-count"><span>0</span><small>개</small></div><button type="button" data-step="1">+</button></div>
+      </div>
+    </article>
+    <article class="fruit-pick-card" data-fruit="샤인머스켓" data-unit="송이">
+      <div class="fruit-pick-img"><img src="/assets/prod-shine.jpg" alt="샤인머스켓"></div>
+      <div class="fruit-pick-body">
+        <div class="fruit-pick-name">샤인머스켓</div><div class="fruit-pick-unit">1송이 · 달콤·향긋</div>
+        <div class="fruit-stepper"><button type="button" data-step="-1">−</button><div class="fruit-count"><span>0</span><small>송이</small></div><button type="button" data-step="1">+</button></div>
+      </div>
+    </article>
+    <article class="fruit-pick-card" data-fruit="제주 한라봉" data-unit="개">
+      <div class="fruit-pick-img"><img src="/assets/prod-hallabong.jpg" alt="제주 한라봉"></div>
+      <div class="fruit-pick-body">
+        <div class="fruit-pick-name">제주 한라봉</div><div class="fruit-pick-unit">낱개 · 향긋·산뜻</div>
+        <div class="fruit-stepper"><button type="button" data-step="-1">−</button><div class="fruit-count"><span>0</span><small>개</small></div><button type="button" data-step="1">+</button></div>
+      </div>
+    </article>
+    <article class="fruit-pick-card" data-fruit="복숭아 백도" data-unit="개">
+      <div class="fruit-pick-img"><img src="/assets/prod-peach.jpg" alt="복숭아 백도"></div>
+      <div class="fruit-pick-body">
+        <div class="fruit-pick-name">복숭아 백도</div><div class="fruit-pick-unit">낱개 · 부드럽고 향긋</div>
+        <div class="fruit-stepper"><button type="button" data-step="-1">−</button><div class="fruit-count"><span>0</span><small>개</small></div><button type="button" data-step="1">+</button></div>
+      </div>
+    </article>
+  </div>
+  <div class="fruit-box-summary">
+    <div class="fruit-box-summary-top"><strong>내 과일박스</strong><span class="badge" id="fruitBoxCount">0종 · 0개/송이</span></div>
+    <div id="fruitSelectedList" class="fruit-selected-list"><span class="fruit-empty">아직 선택한 과일이 없습니다.</span></div>
+    <div class="fruit-box-tip">※ 실제 크기·중량·시세·계절 재고에 따라 최종 구성과 금액은 상담 후 확정됩니다.</div>
+  </div>
+  <input id="consultExtraFruit" placeholder="목록에 없는 과일이 있으면 적어주세요. 예: 애플망고, 감귤">
+  <input id="consultPrefer" type="hidden">
+</div>
+
 <div class="field"><label>피하고 싶은 과일</label><input id="consultAvoid"></div>
 <div class="field"><label>포장</label><select id="consultPackaging"><option value="">선택</option><option>일반 포장</option><option>선물 포장</option><option>고급 선물 포장</option><option>기업·단체 포장</option><option>추천해주세요</option></select></div>
 <div class="field"><label>희망 배송일</label><input id="consultDate" type="date"></div>
@@ -1258,12 +1357,78 @@ async function openConsultation(type){
   q("#consultGuideNote").textContent=(guideLabel[type]||type)+" · "+g.desc;
   try{const me=await fetch("/api/me",{cache:"no-store"}).then(r=>r.json());if(me.user){q("#consultName").value=me.user.name||"";q("#consultPhone").value=me.user.phone||"";q("#consultEmail").value=me.user.email||"";}}catch(e){}
   q("#consultResult").textContent="";
+  Object.keys(fruitBoxState).forEach(k=>delete fruitBoxState[k]);
+  const defaultPreset=selectedGuideType==="gift"?"gift":selectedGuideType==="family"?"family":selectedGuideType==="sweet"?"sweet":null;
+  if(defaultPreset)Object.assign(fruitBoxState,fruitBoxPresets[defaultPreset]||{});
+  if(q("#consultExtraFruit"))q("#consultExtraFruit").value="";
+  renderFruitBox();
   open("consultModal");
 }
 qa("[data-guide]").forEach(btn=>btn.addEventListener("click",()=>openConsultation(btn.dataset.guide)));
+
+// V96 나만의 과일박스
+const fruitBoxState={};
+const fruitBoxPresets={
+  gift:{"경북 홍사과":2,"나주 신고배":2,"샤인머스켓":1,"제주 한라봉":2},
+  family:{"경북 홍사과":4,"나주 신고배":2,"샤인머스켓":1},
+  sweet:{"샤인머스켓":2,"나주 신고배":2,"복숭아 백도":2}
+};
+function fruitBoxText(){
+  const parts=[];
+  document.querySelectorAll(".fruit-pick-card").forEach(card=>{
+    const name=card.dataset.fruit,unit=card.dataset.unit||"개",n=fruitBoxState[name]||0;
+    if(n>0)parts.push(`${name} ${n}${unit}`);
+  });
+  const extra=(q("#consultExtraFruit")?.value||"").trim();
+  if(extra)parts.push(`추가 요청: ${extra}`);
+  return parts.join(", ");
+}
+function renderFruitBox(){
+  let kinds=0,total=0;
+  const lines=[];
+  document.querySelectorAll(".fruit-pick-card").forEach(card=>{
+    const name=card.dataset.fruit,unit=card.dataset.unit||"개",n=fruitBoxState[name]||0;
+    card.classList.toggle("active",n>0);
+    const span=card.querySelector(".fruit-count span"); if(span)span.textContent=n;
+    if(n>0){kinds++;total+=n;lines.push(`<b>${name}</b> ${n}${unit}`);}
+  });
+  q("#fruitBoxCount").textContent=`${kinds}종 · ${total}개/송이`;
+  q("#fruitSelectedList").innerHTML=lines.length?lines.join(" · "):'<span class="fruit-empty">아직 선택한 과일이 없습니다.</span>';
+  q("#consultPrefer").value=fruitBoxText();
+
+  // 판매자 전달 내용에 구성 자동 반영(사용자가 작성한 내용은 보존)
+  const msg=q("#consultMessage");
+  if(msg){
+    const selected=fruitBoxText();
+    const marker="[선택 과일] ";
+    const lines0=msg.value.split("\n").filter(x=>!x.startsWith(marker));
+    if(selected)lines0.unshift(marker+selected);
+    msg.value=lines0.join("\n").trim();
+  }
+}
+document.addEventListener("click",e=>{
+  const step=e.target.closest(".fruit-stepper button");
+  if(step){
+    const card=step.closest(".fruit-pick-card");
+    const name=card.dataset.fruit;
+    const delta=Number(step.dataset.step||0);
+    fruitBoxState[name]=Math.max(0,Math.min(20,(fruitBoxState[name]||0)+delta));
+    renderFruitBox();
+    return;
+  }
+  const preset=e.target.closest(".fruit-preset");
+  if(preset){
+    Object.keys(fruitBoxState).forEach(k=>delete fruitBoxState[k]);
+    const key=preset.dataset.preset;
+    if(key!=="reset")Object.assign(fruitBoxState,fruitBoxPresets[key]||{});
+    renderFruitBox();
+  }
+});
+q("#consultExtraFruit")?.addEventListener("input",renderFruitBox);
+
 q("#consultPhone")?.addEventListener("input",()=>q("#consultPhone").value=formatPhoneValue(q("#consultPhone").value));
 q("#sendConsultRequest")?.addEventListener("click",async()=>{
-  const payload={guide_type:guideLabel[selectedGuideType]||selectedGuideType,customer_name:q("#consultName").value.trim(),phone:q("#consultPhone").value.trim(),email:q("#consultEmail").value.trim(),recipient:q("#consultRecipient").value.trim(),budget:q("#consultBudget").value,quantity_note:q("#consultQty").value.trim(),preferred_fruits:q("#consultPrefer").value.trim(),avoid_fruits:q("#consultAvoid").value.trim(),taste_preference:q("#consultTaste").value,packaging:q("#consultPackaging").value,delivery_date:q("#consultDate").value,message:q("#consultMessage").value.trim()};
+  const payload={guide_type:guideLabel[selectedGuideType]||selectedGuideType,customer_name:q("#consultName").value.trim(),phone:q("#consultPhone").value.trim(),email:q("#consultEmail").value.trim(),recipient:q("#consultRecipient").value.trim(),budget:q("#consultBudget").value,quantity_note:q("#consultQty").value.trim(),preferred_fruits:fruitBoxText(),avoid_fruits:q("#consultAvoid").value.trim(),taste_preference:q("#consultTaste").value,packaging:q("#consultPackaging").value,delivery_date:q("#consultDate").value,message:q("#consultMessage").value.trim()};
   const msg=q("#consultResult");if(!payload.customer_name||!payload.phone){msg.style.color="#b03d3d";msg.textContent="이름과 연락처는 꼭 입력해주세요.";return;}
   try{const r=await fetch("/api/consultations",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)});const d=await r.json();if(!r.ok)throw Error(d.error||"접수 실패");msg.style.color="#1e6b45";msg.innerHTML=`추천 요청이 접수되었습니다. 상담번호 <b>${d.consult_no}</b>`;}catch(e){msg.style.color="#b03d3d";msg.textContent=e.message;}
 });
