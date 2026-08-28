@@ -697,6 +697,141 @@ body{background:var(--k7-cream)!important;color:var(--k7-text)!important}
 @media(max-width:980px){.k7-top-inner{padding:6px 14px;flex-wrap:wrap}.k7-top-right{overflow-x:auto}.k7-header{grid-template-columns:1fr auto;padding:0 18px}.k7-nav{display:none}.k7-hero{grid-template-columns:1fr}.k7-hero-copy{padding:45px 26px 22px}.k7-hero-copy h1{font-size:42px}.k7-hero-visual{min-height:420px}.k7-benefits{grid-template-columns:repeat(2,1fr);margin:0 18px 26px}.k7-product-grid{grid-template-columns:repeat(2,1fr)}.k7-personal{grid-template-columns:1fr;margin:12px 18px 26px}.k7-promo-row{grid-template-columns:1fr}.k7-service-strip{grid-template-columns:repeat(2,1fr);margin:0 18px 22px}}
 @media(max-width:560px){.k7-top-left{display:none}.k7-brand img{width:155px}.k7-hero-copy h1{font-size:34px}.k7-season{padding-left:12px;padding-right:12px}.k7-section-head{align-items:flex-start;gap:12px;flex-direction:column}.k7-product-grid{gap:8px}.k7-product{border-radius:70px 70px 12px 12px;min-height:320px}.k7-product-img{height:150px}.k7-personal-cards{grid-template-columns:1fr}.k7-promo-row{padding-left:12px;padding-right:12px}.k7-service-strip{grid-template-columns:1fr}.k7-service-strip button,.k7-benefits button{border-right:0;border-bottom:1px solid #e8ddca}.k7-benefits{grid-template-columns:1fr}}
 
+
+/* ===== V113 KEEP7 NO-OVERLAP FIX ===== */
+/* V97 SEO links remain in DOM for search engines, but must not create a second visible header. */
+.seo-quick-nav{display:none!important}
+
+/* Only KEEP7 header is visible. */
+.notice, body>header{display:none!important}
+
+/* Clean logo: no giant blank canvas. */
+.k7-header{
+  position:relative;
+  z-index:20;
+  min-height:104px!important;
+  grid-template-columns:220px 1fr 150px!important;
+}
+.k7-brand{height:92px;overflow:hidden;align-items:center}
+.k7-brand img{
+  width:150px!important;
+  height:90px!important;
+  object-fit:contain!important;
+  object-position:left center!important;
+  mix-blend-mode:multiply;
+}
+
+/* Hero is two true columns. Image contains ONLY artwork now. */
+.k7-hero{
+  position:relative;
+  isolation:isolate;
+  grid-template-columns:minmax(380px,36%) minmax(0,64%)!important;
+  min-height:540px!important;
+  overflow:hidden;
+}
+.k7-hero-copy{
+  position:relative;
+  z-index:3;
+  background:linear-gradient(90deg,#fbf7ef 0%,#fbf7ef 84%,rgba(251,247,239,.86) 100%);
+}
+.k7-hero-visual{
+  position:relative;
+  z-index:1;
+  min-width:0;
+  min-height:540px!important;
+  overflow:hidden!important;
+}
+.k7-hero-visual:before{
+  background:linear-gradient(90deg,rgba(248,240,228,.78),rgba(248,240,228,.12) 12%,transparent 28%)!important;
+}
+.k7-hero-visual img{
+  width:100%!important;
+  height:100%!important;
+  object-fit:cover!important;
+  object-position:center center!important;
+  display:block!important;
+}
+
+/* Promo rows: no full-card image with burned-in text underneath HTML text. */
+.k7-promo-row{
+  grid-template-columns:1.55fr .9fr .95fr!important;
+  align-items:stretch;
+}
+.k7-promo{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) minmax(140px,.85fr)!important;
+  min-height:235px!important;
+  background:#fffdf8!important;
+}
+.k7-promo.gift{
+  background:linear-gradient(135deg,#073829,#0e4835)!important;
+}
+.k7-promo>img{
+  position:relative!important;
+  inset:auto!important;
+  grid-column:2!important;
+  grid-row:1!important;
+  width:100%!important;
+  height:100%!important;
+  object-fit:cover!important;
+  object-position:center!important;
+  z-index:1!important;
+}
+.k7-promo:after{display:none!important}
+.k7-promo>div{
+  grid-column:1!important;
+  grid-row:1!important;
+  position:relative!important;
+  z-index:2!important;
+  max-width:none!important;
+  padding:28px 18px 28px 28px!important;
+  align-self:center;
+}
+.k7-promo.gift>div{color:#fff!important}
+.k7-promo.story>div,.k7-promo.business>div{color:#17382a!important}
+.k7-promo small{
+  display:block;
+  opacity:1!important;
+  text-shadow:none!important;
+}
+.k7-promo h2,.k7-promo h3,.k7-promo button{
+  text-shadow:none!important;
+}
+
+/* Prevent source images from contributing any visual text outside their art area. */
+.k7-promo img{filter:none!important}
+
+/* Ensure service strip doesn't collide with promo row. */
+.k7-service-strip{
+  position:relative;
+  z-index:2;
+  clear:both;
+  margin-top:2px!important;
+}
+
+/* Responsive: stack artwork cleanly instead of overlapping. */
+@media(max-width:980px){
+  .k7-header{grid-template-columns:170px 1fr 120px!important;padding:0 22px!important}
+  .k7-nav{gap:22px!important}
+  .k7-hero{grid-template-columns:1fr!important}
+  .k7-hero-copy{padding:45px 28px 28px!important;background:#fbf7ef!important}
+  .k7-hero-visual{min-height:430px!important}
+  .k7-promo-row{grid-template-columns:1fr!important}
+  .k7-promo{grid-template-columns:1.1fr .9fr!important}
+}
+@media(max-width:620px){
+  .k7-header{grid-template-columns:1fr auto!important}
+  .k7-nav{display:none!important}
+  .k7-brand img{width:125px!important;height:78px!important}
+  .k7-top-inner{padding:6px 14px!important;align-items:flex-start!important}
+  .k7-top-right{flex-wrap:wrap;justify-content:flex-end!important}
+  .k7-hero-copy h1{font-size:39px!important}
+  .k7-hero-visual{min-height:330px!important}
+  .k7-promo{grid-template-columns:1fr!important}
+  .k7-promo>img{grid-column:1!important;grid-row:2!important;height:190px!important}
+  .k7-promo>div{grid-column:1!important;grid-row:1!important}
+}
+
 </style>
 <script src="//t1.kakaocdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
@@ -716,7 +851,7 @@ body{background:var(--k7-cream)!important;color:var(--k7-text)!important}
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "이룸 fresh fruits", "alternateName": ["이룸 과일", "이룸 신선한 과일"], "url": "https://iroom-fresh-fruits.onrender.com/", "description": "엄선한 제철과일과 고급과일, 맛있는과일, 프리미엄 과일선물세트를 정성껏 준비하는 이룸 fresh fruits입니다. 선물용·가정용·단체·맞춤 과일 상담과 주문을 도와드립니다.", "inLanguage": "ko-KR", "keywords": "과일, 고급과일, 맛있는과일, 프리미엄과일, 과일선물, 과일선물세트, 고급과일선물세트, 제철과일, 신선한과일, 선물용과일, 가정용과일, 단체과일선물, 맞춤과일, 이룸, 이룸과일, fresh fruits"}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Store", "name": "이룸 fresh fruits", "url": "https://iroom-fresh-fruits.onrender.com/", "description": "고급과일, 맛있는과일, 제철과일과 프리미엄 과일선물세트를 판매·상담하는 과일 전문점", "currenciesAccepted": "KRW", "paymentAccepted": "Bank Transfer", "hasOfferCatalog": {"@type": "OfferCatalog", "name": "프리미엄 과일", "itemListElement": [{"@type": "OfferCatalog", "name": "고급과일"}, {"@type": "OfferCatalog", "name": "맛있는과일"}, {"@type": "OfferCatalog", "name": "과일선물세트"}, {"@type": "OfferCatalog", "name": "제철과일"}, {"@type": "OfferCatalog", "name": "맞춤 과일선물"}]}}</script>
 
-<meta name="iroom-version" content="V112-KEEP7-V97-engine">
+<meta name="iroom-version" content="V113-KEEP7-NO-OVERLAP-V97-engine">
 </head>
 <body>
 <div class="notice"><div class="wrap"><div>🍊 <b>오늘의 입고</b> &nbsp; | &nbsp; 고급 국산 종합과일 입고되었습니다.</div><nav><button id="customerBtn">고객센터</button><button id="ordersBtn">주문조회</button><button id="myBtn">마이페이지</button></nav></div></div>
@@ -752,7 +887,7 @@ body{background:var(--k7-cream)!important;color:var(--k7-text)!important}
 </section>
 
 <header class="k7-header">
-  <a class="k7-brand" href="#home" aria-label="이룸 홈"><img src="/assets/keep7-logo.jpg" alt="이룸 IROOM PREMIUM FRUITS"></a>
+  <a class="k7-brand" href="#home" aria-label="이룸 홈"><img src="/assets/keep7-logo-clean.jpg" alt="이룸 IROOM PREMIUM FRUITS"></a>
   <nav class="k7-nav">
     <button type="button" data-k7="brand">브랜드 소개</button>
     <button type="button" data-k7="story">과일 이야기</button>
@@ -777,7 +912,7 @@ body{background:var(--k7-cream)!important;color:var(--k7-text)!important}
       <button type="button" data-k7="fruitbox">나만의 과일박스 →</button>
     </div>
   </div>
-  <div class="k7-hero-visual"><img src="/assets/keep7-hero.jpg" alt="이룸 프리미엄 과일 컬렉션"></div>
+  <div class="k7-hero-visual"><img src="/assets/keep7-hero-clean.jpg" alt="이룸 프리미엄 과일 컬렉션"></div>
 </section>
 
 <section class="k7-benefits" aria-label="이룸 서비스 장점">
@@ -816,9 +951,9 @@ body{background:var(--k7-cream)!important;color:var(--k7-text)!important}
 </section>
 
 <section class="k7-promo-row" id="gift">
-  <article class="k7-promo gift"><img src="/assets/keep7-gift.jpg" alt="프리미엄 과일 선물"><div><small>PREMIUM GIFT SET</small><h2>소중한 분께 전하는<br>특별한 과일 선물</h2><button type="button" data-k7-product="프리미엄 과일세트">선물세트 보러가기 →</button></div></article>
-  <article class="k7-promo story"><img src="/assets/keep7-story.jpg" alt="과일 이야기"><div><small>FRUIT STORY</small><h3>과일에 담긴<br>이야기와 철학</h3><button type="button" data-k7="story">자세히 보기 →</button></div></article>
-  <article class="k7-promo business"><img src="/assets/keep7-business.jpg" alt="기업 단체 행사 서비스"><div><small>BUSINESS SERVICE</small><h3>기업 · 단체 · 행사<br>맞춤 서비스</h3><button type="button" data-k7="consult">문의하기 →</button></div></article>
+  <article class="k7-promo gift"><img src="/assets/keep7-gift-clean.jpg" alt="프리미엄 과일 선물"><div><small>PREMIUM GIFT SET</small><h2>소중한 분께 전하는<br>특별한 과일 선물</h2><button type="button" data-k7-product="프리미엄 과일세트">선물세트 보러가기 →</button></div></article>
+  <article class="k7-promo story"><img src="/assets/keep7-story-clean.jpg" alt="과일 이야기"><div><small>FRUIT STORY</small><h3>과일에 담긴<br>이야기와 철학</h3><button type="button" data-k7="story">자세히 보기 →</button></div></article>
+  <article class="k7-promo business"><img src="/assets/keep7-business-clean.jpg" alt="기업 단체 행사 서비스"><div><small>BUSINESS SERVICE</small><h3>기업 · 단체 · 행사<br>맞춤 서비스</h3><button type="button" data-k7="consult">문의하기 →</button></div></article>
 </section>
 
 <section class="k7-service-strip">
