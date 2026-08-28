@@ -660,6 +660,22 @@ header{background:rgba(255,255,255,.97)!important;backdrop-filter:blur(12px);bor
   .fruit-stepper button{width:30px;height:30px}
 }
 
+
+/* V97 관리자 연동 과일박스 */
+.fruit-tools{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:8px 0 10px}
+.fruit-search{flex:1;min-width:180px;border:1px solid #e4d6c2;border-radius:10px;padding:10px 12px;background:#fff}
+.fruit-category-tabs{display:flex;gap:6px;overflow:auto;padding:2px 0 6px;scrollbar-width:thin}
+.fruit-category-tabs button{white-space:nowrap;border:1px solid #ddc9a8;background:#fff;border-radius:999px;padding:7px 11px;font-size:12px;cursor:pointer}
+.fruit-category-tabs button.active{background:#082f24;color:#fff;border-color:#082f24}
+.fruit-picker-grid.v97-collapsed .fruit-pick-card:not(.featured-card){display:none}
+.fruit-pick-card.soldout{opacity:.55;filter:grayscale(.25)}
+.fruit-pick-card.soldout .fruit-stepper button{pointer-events:none}
+.fruit-soldout{position:absolute;left:8px;top:8px;background:#9a3c34;color:#fff;padding:4px 7px;border-radius:999px;font-size:10px;font-weight:800}
+.fruit-pick-img{position:relative}
+.fruit-more-btn{width:100%;border:1px solid #d8c29c;background:#fffaf0;color:#082f24;border-radius:10px;padding:10px;font-weight:800;cursor:pointer;margin-top:8px}
+.fruit-admin-link{margin-left:auto;font-size:11px;color:#7d6d54;text-decoration:underline}
+@media(max-width:680px){.fruit-picker-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.fruit-tools{align-items:stretch}.fruit-search{width:100%}}
+
 </style>
 <script src="//t1.kakaocdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
@@ -858,43 +874,13 @@ header{background:rgba(255,255,255,.97)!important;backdrop-filter:blur(12px);bor
     <button type="button" class="fruit-preset" data-preset="sweet">🍇 달콤하게</button>
     <button type="button" class="fruit-preset" data-preset="reset">↺ 모두 비우기</button>
   </div>
-  <div class="fruit-picker-grid" id="fruitPickerGrid">
-    <article class="fruit-pick-card" data-fruit="경북 홍사과" data-unit="개">
-      <div class="fruit-pick-img"><img src="/assets/prod-apple.jpg" alt="경북 홍사과"></div>
-      <div class="fruit-pick-body">
-        <div class="fruit-pick-name">경북 홍사과</div><div class="fruit-pick-unit">낱개 · 아삭·새콤달콤</div>
-        <div class="fruit-stepper"><button type="button" data-step="-1">−</button><div class="fruit-count"><span>0</span><small>개</small></div><button type="button" data-step="1">+</button></div>
-      </div>
-    </article>
-    <article class="fruit-pick-card" data-fruit="나주 신고배" data-unit="개">
-      <div class="fruit-pick-img"><img src="/assets/prod-pear.jpg" alt="나주 신고배"></div>
-      <div class="fruit-pick-body">
-        <div class="fruit-pick-name">나주 신고배</div><div class="fruit-pick-unit">낱개 · 아삭·풍부한 과즙</div>
-        <div class="fruit-stepper"><button type="button" data-step="-1">−</button><div class="fruit-count"><span>0</span><small>개</small></div><button type="button" data-step="1">+</button></div>
-      </div>
-    </article>
-    <article class="fruit-pick-card" data-fruit="샤인머스켓" data-unit="송이">
-      <div class="fruit-pick-img"><img src="/assets/prod-shine.jpg" alt="샤인머스켓"></div>
-      <div class="fruit-pick-body">
-        <div class="fruit-pick-name">샤인머스켓</div><div class="fruit-pick-unit">1송이 · 달콤·향긋</div>
-        <div class="fruit-stepper"><button type="button" data-step="-1">−</button><div class="fruit-count"><span>0</span><small>송이</small></div><button type="button" data-step="1">+</button></div>
-      </div>
-    </article>
-    <article class="fruit-pick-card" data-fruit="제주 한라봉" data-unit="개">
-      <div class="fruit-pick-img"><img src="/assets/prod-hallabong.jpg" alt="제주 한라봉"></div>
-      <div class="fruit-pick-body">
-        <div class="fruit-pick-name">제주 한라봉</div><div class="fruit-pick-unit">낱개 · 향긋·산뜻</div>
-        <div class="fruit-stepper"><button type="button" data-step="-1">−</button><div class="fruit-count"><span>0</span><small>개</small></div><button type="button" data-step="1">+</button></div>
-      </div>
-    </article>
-    <article class="fruit-pick-card" data-fruit="복숭아 백도" data-unit="개">
-      <div class="fruit-pick-img"><img src="/assets/prod-peach.jpg" alt="복숭아 백도"></div>
-      <div class="fruit-pick-body">
-        <div class="fruit-pick-name">복숭아 백도</div><div class="fruit-pick-unit">낱개 · 부드럽고 향긋</div>
-        <div class="fruit-stepper"><button type="button" data-step="-1">−</button><div class="fruit-count"><span>0</span><small>개</small></div><button type="button" data-step="1">+</button></div>
-      </div>
-    </article>
+  <div class="fruit-tools">
+    <input id="fruitSearch" class="fruit-search" placeholder="과일 검색 · 사과, 배, 포도...">
+    <a class="fruit-admin-link" href="/admin-fruits.html" target="_blank" rel="nofollow">관리자 과일관리</a>
   </div>
+  <div class="fruit-category-tabs" id="fruitCategoryTabs"></div>
+  <div class="fruit-picker-grid v97-collapsed" id="fruitPickerGrid"></div>
+  <button type="button" class="fruit-more-btn" id="fruitMoreBtn">전체 과일 보기</button>
   <div class="fruit-box-summary">
     <div class="fruit-box-summary-top"><strong>내 과일박스</strong><span class="badge" id="fruitBoxCount">0종 · 0개/송이</span></div>
     <div id="fruitSelectedList" class="fruit-selected-list"><span class="fruit-empty">아직 선택한 과일이 없습니다.</span></div>
@@ -1366,65 +1352,39 @@ async function openConsultation(type){
 }
 qa("[data-guide]").forEach(btn=>btn.addEventListener("click",()=>openConsultation(btn.dataset.guide)));
 
-// V96 나만의 과일박스
+// V97 관리자 연동 나만의 과일박스
 const fruitBoxState={};
-const fruitBoxPresets={
-  gift:{"경북 홍사과":2,"나주 신고배":2,"샤인머스켓":1,"제주 한라봉":2},
-  family:{"경북 홍사과":4,"나주 신고배":2,"샤인머스켓":1},
-  sweet:{"샤인머스켓":2,"나주 신고배":2,"복숭아 백도":2}
-};
-function fruitBoxText(){
-  const parts=[];
-  document.querySelectorAll(".fruit-pick-card").forEach(card=>{
-    const name=card.dataset.fruit,unit=card.dataset.unit||"개",n=fruitBoxState[name]||0;
-    if(n>0)parts.push(`${name} ${n}${unit}`);
-  });
-  const extra=(q("#consultExtraFruit")?.value||"").trim();
-  if(extra)parts.push(`추가 요청: ${extra}`);
-  return parts.join(", ");
+let fruitCatalog=[];
+let fruitCategory="전체";
+let fruitExpanded=false;
+const fallbackFruitCatalog=[
+ {id:"box-apple",name:"경북 홍사과",origin:"경북",unit:"개",boxUnit:"낱개",taste:"아삭·새콤달콤",image:"/assets/prod-apple.jpg",fruitCategory:"사과·배",featured:true,active:true,boxSelectable:true,stock:99},
+ {id:"box-pear",name:"나주 신고배",origin:"나주",unit:"개",boxUnit:"낱개",taste:"아삭·풍부한 과즙",image:"/assets/prod-pear.jpg",fruitCategory:"사과·배",featured:true,active:true,boxSelectable:true,stock:99},
+ {id:"box-shine",name:"샤인머스켓",origin:"국내산",unit:"송이",boxUnit:"1송이",taste:"달콤·향긋",image:"/assets/prod-shine.jpg",fruitCategory:"포도",featured:true,active:true,boxSelectable:true,stock:99},
+ {id:"box-hallabong",name:"제주 한라봉",origin:"제주",unit:"개",boxUnit:"낱개",taste:"향긋·산뜻",image:"/assets/prod-hallabong.jpg",fruitCategory:"감귤류",featured:true,active:true,boxSelectable:true,stock:99},
+ {id:"box-peach",name:"복숭아 백도",origin:"국내산",unit:"개",boxUnit:"낱개",taste:"부드럽고 향긋",image:"/assets/prod-peach.jpg",fruitCategory:"복숭아·자두",featured:true,active:true,boxSelectable:true,stock:99}
+];
+const fruitBoxPresets={gift:{"경북 홍사과":2,"나주 신고배":2,"샤인머스켓":1,"제주 한라봉":2},family:{"경북 홍사과":4,"나주 신고배":2,"샤인머스켓":1},sweet:{"샤인머스켓":2,"나주 신고배":2,"복숭아 백도":2}};
+function normalizeFruit(p){return {id:p.id||p.name,name:p.name||"과일",origin:p.origin||"",unit:p.boxUnitName||p.unit||"개",boxUnit:p.boxUnit||p.unitLabel||"낱개",taste:p.taste||p.shortDescription||p.description||"신선한 과일",image:p.image||"/assets/prod-apple.jpg",fruitCategory:p.fruitCategory||p.category||"기타",featured:p.boxFeatured===true||p.featured===true,active:p.active!==false,boxSelectable:p.boxSelectable===true,stock:Number(p.stock??99),sortOrder:Number(p.boxSortOrder??p.sortOrder??999)};}
+async function loadFruitCatalog(){
+ try{const r=await fetch('/api/store',{cache:'no-store'});if(!r.ok)throw Error();const d=await r.json();const ps=(d.products||[]).map(normalizeFruit).filter(x=>x.boxSelectable&&x.active);fruitCatalog=ps.length?ps:fallbackFruitCatalog;}catch(e){fruitCatalog=fallbackFruitCatalog;}
+ fruitCatalog.sort((a,b)=>(b.featured-a.featured)||(a.sortOrder-b.sortOrder)||a.name.localeCompare(b.name,'ko'));renderFruitCatalog();
 }
-function renderFruitBox(){
-  let kinds=0,total=0;
-  const lines=[];
-  document.querySelectorAll(".fruit-pick-card").forEach(card=>{
-    const name=card.dataset.fruit,unit=card.dataset.unit||"개",n=fruitBoxState[name]||0;
-    card.classList.toggle("active",n>0);
-    const span=card.querySelector(".fruit-count span"); if(span)span.textContent=n;
-    if(n>0){kinds++;total+=n;lines.push(`<b>${name}</b> ${n}${unit}`);}
-  });
-  q("#fruitBoxCount").textContent=`${kinds}종 · ${total}개/송이`;
-  q("#fruitSelectedList").innerHTML=lines.length?lines.join(" · "):'<span class="fruit-empty">아직 선택한 과일이 없습니다.</span>';
-  q("#consultPrefer").value=fruitBoxText();
-
-  // 판매자 전달 내용에 구성 자동 반영(사용자가 작성한 내용은 보존)
-  const msg=q("#consultMessage");
-  if(msg){
-    const selected=fruitBoxText();
-    const marker="[선택 과일] ";
-    const lines0=msg.value.split("\n").filter(x=>!x.startsWith(marker));
-    if(selected)lines0.unshift(marker+selected);
-    msg.value=lines0.join("\n").trim();
-  }
+function fruitBoxText(){const parts=[];fruitCatalog.forEach(f=>{const n=fruitBoxState[f.name]||0;if(n>0)parts.push(`${f.name} ${n}${f.unit}`)});const extra=(q('#consultExtraFruit')?.value||'').trim();if(extra)parts.push(`추가 요청: ${extra}`);return parts.join(', ');}
+function renderFruitCatalog(){
+ const grid=q('#fruitPickerGrid');if(!grid)return;
+ const search=(q('#fruitSearch')?.value||'').trim().toLowerCase();
+ const cats=['전체',...new Set(fruitCatalog.map(x=>x.fruitCategory))];
+ q('#fruitCategoryTabs').innerHTML=cats.map(c=>`<button type="button" class="${c===fruitCategory?'active':''}" data-fruit-cat="${esc(c)}">${esc(c)}</button>`).join('');
+ const list=fruitCatalog.filter(f=>(fruitCategory==='전체'||f.fruitCategory===fruitCategory)&&(!search||`${f.name} ${f.origin} ${f.taste}`.toLowerCase().includes(search)));
+ grid.classList.toggle('v97-collapsed',!fruitExpanded&&!search&&fruitCategory==='전체');
+ grid.innerHTML=list.map((f,i)=>{const sold=f.stock<=0;const featured=f.featured&&i<6;return `<article class="fruit-pick-card ${featured?'featured-card':''} ${sold?'soldout':''}" data-fruit="${esc(f.name)}" data-unit="${esc(f.unit)}"><div class="fruit-pick-img"><img src="${esc(f.image)}" alt="${esc(f.name)}" loading="lazy">${sold?'<span class="fruit-soldout">품절</span>':''}</div><div class="fruit-pick-body"><div class="fruit-pick-name">${esc(f.name)}</div><div class="fruit-pick-unit">${esc(f.boxUnit)} · ${esc(String(f.taste).slice(0,30))}</div><div class="fruit-stepper"><button type="button" data-step="-1" ${sold?'disabled':''}>−</button><div class="fruit-count"><span>${fruitBoxState[f.name]||0}</span><small>${esc(f.unit)}</small></div><button type="button" data-step="1" ${sold?'disabled':''}>+</button></div></div></article>`}).join('')||'<div class="fruit-empty">조건에 맞는 과일이 없습니다.</div>';
+ q('#fruitMoreBtn').textContent=fruitExpanded?'추천 과일만 보기':`전체 과일 보기 (${fruitCatalog.length})`;renderFruitBox();
 }
-document.addEventListener("click",e=>{
-  const step=e.target.closest(".fruit-stepper button");
-  if(step){
-    const card=step.closest(".fruit-pick-card");
-    const name=card.dataset.fruit;
-    const delta=Number(step.dataset.step||0);
-    fruitBoxState[name]=Math.max(0,Math.min(20,(fruitBoxState[name]||0)+delta));
-    renderFruitBox();
-    return;
-  }
-  const preset=e.target.closest(".fruit-preset");
-  if(preset){
-    Object.keys(fruitBoxState).forEach(k=>delete fruitBoxState[k]);
-    const key=preset.dataset.preset;
-    if(key!=="reset")Object.assign(fruitBoxState,fruitBoxPresets[key]||{});
-    renderFruitBox();
-  }
-});
-q("#consultExtraFruit")?.addEventListener("input",renderFruitBox);
+function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function renderFruitBox(){let kinds=0,total=0;const lines=[];fruitCatalog.forEach(f=>{const n=fruitBoxState[f.name]||0;if(n>0){kinds++;total+=n;lines.push(`<b>${esc(f.name)}</b> ${n}${esc(f.unit)}`)}});if(q('#fruitBoxCount'))q('#fruitBoxCount').textContent=`${kinds}종 · ${total}개/송이`;if(q('#fruitSelectedList'))q('#fruitSelectedList').innerHTML=lines.length?lines.join(' · '):'<span class="fruit-empty">아직 선택한 과일이 없습니다.</span>';if(q('#consultPrefer'))q('#consultPrefer').value=fruitBoxText();const msg=q('#consultMessage');if(msg){const selected=fruitBoxText(),marker='[선택 과일] ';const lines0=msg.value.split('\n').filter(x=>!x.startsWith(marker));if(selected)lines0.unshift(marker+selected);msg.value=lines0.join('\n').trim();}}
+document.addEventListener('click',e=>{const step=e.target.closest('.fruit-stepper button');if(step){const card=step.closest('.fruit-pick-card'),name=card.dataset.fruit,delta=Number(step.dataset.step||0);fruitBoxState[name]=Math.max(0,Math.min(99,(fruitBoxState[name]||0)+delta));renderFruitCatalog();return;}const preset=e.target.closest('.fruit-preset');if(preset){Object.keys(fruitBoxState).forEach(k=>delete fruitBoxState[k]);const key=preset.dataset.preset;if(key!=='reset')Object.assign(fruitBoxState,fruitBoxPresets[key]||{});renderFruitCatalog();return;}const cat=e.target.closest('[data-fruit-cat]');if(cat){fruitCategory=cat.dataset.fruitCat;renderFruitCatalog();}});
+q('#fruitSearch')?.addEventListener('input',renderFruitCatalog);q('#fruitMoreBtn')?.addEventListener('click',()=>{fruitExpanded=!fruitExpanded;renderFruitCatalog();});q('#consultExtraFruit')?.addEventListener('input',renderFruitBox);loadFruitCatalog();
 
 q("#consultPhone")?.addEventListener("input",()=>q("#consultPhone").value=formatPhoneValue(q("#consultPhone").value));
 q("#sendConsultRequest")?.addEventListener("click",async()=>{
