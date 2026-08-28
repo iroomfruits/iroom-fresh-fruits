@@ -772,6 +772,98 @@ header{background:rgba(255,255,255,.97)!important;backdrop-filter:blur(12px);bor
  .season-best-card .body{padding:10px}
 }
 
+
+/* ===== IROOM V103 LUXURY SEASON ILLUSTRATION ===== */
+.season-visual{background:#f8f1e5}
+.season-visual img{display:none!important}
+.season-scene{position:absolute;inset:0;overflow:hidden;background:
+  radial-gradient(circle at 68% 18%,rgba(255,255,255,.95) 0 8%,transparent 8.3%),
+  linear-gradient(145deg,#f8f0e2 0%,#f3f4e4 48%,#f3e5d5 100%)}
+.season-scene:before{content:"";position:absolute;width:620px;height:620px;border-radius:50%;
+  border:2px solid rgba(177,132,54,.38);right:2%;top:4%}
+.season-scene:after{content:"";position:absolute;left:-5%;right:-8%;bottom:-16%;height:48%;
+  border-radius:50% 50% 0 0;background:linear-gradient(160deg,rgba(225,235,207,.9),rgba(247,235,216,.92));
+  transform:rotate(-4deg);box-shadow:0 -35px 60px rgba(255,255,255,.48) inset}
+.scene-glow{position:absolute;width:220px;height:220px;border-radius:50%;right:15%;top:10%;
+  background:radial-gradient(circle,rgba(255,249,226,.96),rgba(255,249,226,.12) 65%,transparent 70%);
+  filter:blur(1px);animation:sceneGlow 7s ease-in-out infinite}
+.scene-branch{position:absolute;width:360px;height:180px;right:7%;top:5%;border-top:4px solid #8b6730;
+  border-radius:50%;transform:rotate(-12deg);opacity:.85}
+.scene-leaf{position:absolute;width:84px;height:42px;border-radius:100% 0 100% 0;background:#557d45;
+  transform-origin:0 50%;animation:leafSway 5.4s ease-in-out infinite}
+.scene-leaf.l1{right:30%;top:16%;transform:rotate(-22deg)}
+.scene-leaf.l2{right:18%;top:23%;transform:rotate(18deg);animation-delay:-1.7s}
+.scene-leaf.l3{right:41%;top:28%;transform:rotate(-42deg);animation-delay:-3s}
+.scene-leaf.l4{right:9%;top:34%;transform:rotate(32deg);animation-delay:-2.1s}
+.scene-fruit{position:absolute;filter:drop-shadow(0 18px 18px rgba(62,43,14,.13));
+  animation:fruitFloat 6.2s ease-in-out infinite}
+.scene-fruit:before{content:"";position:absolute;width:26%;height:16%;border-radius:100% 0 100% 0;
+  background:#507a40;left:55%;top:-8%;transform:rotate(-25deg)}
+.scene-spark{position:absolute;width:6px;height:6px;border-radius:50%;background:#c79a45;
+  box-shadow:0 0 14px rgba(199,154,69,.6);animation:spark 4.2s ease-in-out infinite}
+.scene-spark.s1{right:38%;top:18%}.scene-spark.s2{right:12%;top:43%;animation-delay:-1.3s}
+.scene-spark.s3{right:54%;top:48%;animation-delay:-2.4s}.scene-spark.s4{right:26%;top:62%;animation-delay:-.6s}
+
+.scene-spring .season-scene{background:linear-gradient(145deg,#fbf3e9,#f5f1e6 48%,#edf3e3)}
+.scene-spring .scene-fruit.f1{width:150px;height:145px;border-radius:48% 52% 47% 53%;
+  right:21%;top:25%;background:radial-gradient(circle at 32% 27%,#ffe7de 0 4%,#dd6654 7%,#ae3833 75%)}
+.scene-spring .scene-fruit.f2{width:124px;height:118px;border-radius:50%;right:43%;top:43%;
+  background:radial-gradient(circle at 30% 25%,#fff1df 0 4%,#e89472 8%,#c55a4f 78%);animation-delay:-2s}
+.scene-spring .petal{position:absolute;width:24px;height:13px;border-radius:100% 0 100% 0;background:#e8b9ae;opacity:.7;
+  animation:petalFall 8s linear infinite}
+.scene-spring .p1{right:18%;top:7%}.scene-spring .p2{right:48%;top:4%;animation-delay:-2s}
+.scene-spring .p3{right:35%;top:22%;animation-delay:-5s}
+
+.scene-summer .season-scene{background:linear-gradient(145deg,#faf1df,#eef2dd 52%,#f3e2cc)}
+.scene-summer .scene-fruit.f1{width:178px;height:168px;border-radius:50%;right:19%;top:27%;
+  background:radial-gradient(circle at 33% 27%,#ffe9d0 0 5%,#ef9c79 8%,#cf655a 70%);animation-delay:-1s}
+.scene-summer .scene-fruit.f2{width:142px;height:135px;border-radius:50%;right:43%;top:47%;
+  background:radial-gradient(circle at 31% 25%,#fff0cf 0 5%,#e9b36c 8%,#c98842 74%);animation-delay:-3s}
+.scene-summer .summer-wave{position:absolute;right:2%;bottom:8%;width:64%;height:22%;
+  border-top:2px solid rgba(169,128,58,.35);border-radius:50%;transform:rotate(-5deg)}
+
+.scene-autumn .season-scene{background:linear-gradient(145deg,#f8efdf,#eef0de 50%,#f1dfcd)}
+.scene-autumn .pear{width:186px;height:200px;right:14%;top:30%;background:radial-gradient(circle at 33% 24%,#fff7db 0 4%,#dbaa4b 7%,#b87a2f 76%);
+  border-radius:47% 47% 52% 52% / 35% 35% 66% 66%}
+.scene-autumn .apple{width:158px;height:150px;right:40%;top:47%;background:radial-gradient(circle at 31% 26%,#ffe3d6 0 4%,#c9473c 8%,#973329 76%);
+  border-radius:48% 52% 48% 52%;animation-delay:-2.2s}
+.scene-autumn .grapes{position:absolute;right:38%;top:13%;width:210px;height:220px;animation:fruitFloat 6.8s ease-in-out infinite -1.4s}
+.scene-autumn .grapes i{position:absolute;width:58px;height:58px;border-radius:50%;
+  background:radial-gradient(circle at 30% 24%,#efffbf 0 7%,#a6cf5d 10%,#70a541 75%);
+  box-shadow:0 8px 14px rgba(55,73,30,.12)}
+.scene-autumn .grapes i:nth-child(1){left:70px}.scene-autumn .grapes i:nth-child(2){left:30px;top:42px}
+.scene-autumn .grapes i:nth-child(3){left:90px;top:44px}.scene-autumn .grapes i:nth-child(4){left:145px;top:52px}
+.scene-autumn .grapes i:nth-child(5){left:55px;top:92px}.scene-autumn .grapes i:nth-child(6){left:115px;top:98px}
+.scene-autumn .grapes i:nth-child(7){left:88px;top:148px}
+
+.scene-winter .season-scene{background:linear-gradient(145deg,#f7f2e9,#eef2ed 50%,#ece6da)}
+.scene-winter .citrus1{width:170px;height:160px;border-radius:50%;right:19%;top:29%;
+  background:radial-gradient(circle at 32% 25%,#fff0bf 0 4%,#ef9d28 8%,#cf6c14 76%)}
+.scene-winter .citrus2{width:125px;height:120px;border-radius:50%;right:44%;top:47%;
+  background:radial-gradient(circle at 31% 25%,#fff2c5 0 4%,#f3ab34 8%,#d87818 76%);animation-delay:-2.6s}
+.scene-winter .snow{position:absolute;width:8px;height:8px;border-radius:50%;background:#fff;opacity:.75;animation:snowFall 7s linear infinite}
+.scene-winter .n1{right:20%;top:3%}.scene-winter .n2{right:45%;top:10%;animation-delay:-2s}.scene-winter .n3{right:32%;top:32%;animation-delay:-4s}
+.scene-winter .n4{right:12%;top:40%;animation-delay:-1s}
+
+@keyframes fruitFloat{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-10px) rotate(1.2deg)}}
+@keyframes leafSway{0%,100%{margin-top:0}50%{margin-top:-5px}}
+@keyframes sceneGlow{0%,100%{opacity:.7;transform:scale(1)}50%{opacity:1;transform:scale(1.05)}}
+@keyframes spark{0%,100%{opacity:.25;transform:scale(.7)}50%{opacity:1;transform:scale(1.3)}}
+@keyframes petalFall{0%{transform:translateY(-30px) rotate(0);opacity:0}20%{opacity:.7}100%{transform:translate(-70px,520px) rotate(240deg);opacity:0}}
+@keyframes snowFall{0%{transform:translateY(-20px);opacity:0}20%{opacity:.8}100%{transform:translate(-30px,480px);opacity:0}}
+@media(prefers-reduced-motion:reduce){
+ .scene-fruit,.scene-leaf,.scene-glow,.scene-spark,.petal,.snow,.grapes{animation:none!important}
+}
+
+/* Seasonal best = illustration, not photography */
+.season-best-card img{display:none!important}
+.season-best-art{height:170px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;
+  background:linear-gradient(145deg,#fbf5e9,#f1f4e4)}
+.season-best-art:after{content:"IROOM";position:absolute;right:12px;bottom:10px;color:#b18945;font-size:9px;letter-spacing:.18em}
+.season-best-art .fruit-symbol{font-size:78px;filter:drop-shadow(0 11px 9px rgba(60,40,15,.12));transition:.25s}
+.season-best-card:hover .fruit-symbol{transform:translateY(-5px) scale(1.04)}
+@media(max-width:540px){.season-best-art{height:125px}.season-best-art .fruit-symbol{font-size:58px}}
+
 </style>
 <script src="//t1.kakaocdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
@@ -791,7 +883,7 @@ header{background:rgba(255,255,255,.97)!important;backdrop-filter:blur(12px);bor
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "이룸 fresh fruits", "alternateName": ["이룸 과일", "이룸 신선한 과일"], "url": "https://iroom-fresh-fruits.onrender.com/", "description": "엄선한 제철과일과 고급과일, 맛있는과일, 프리미엄 과일선물세트를 정성껏 준비하는 이룸 fresh fruits입니다. 선물용·가정용·단체·맞춤 과일 상담과 주문을 도와드립니다.", "inLanguage": "ko-KR", "keywords": "과일, 고급과일, 맛있는과일, 프리미엄과일, 과일선물, 과일선물세트, 고급과일선물세트, 제철과일, 신선한과일, 선물용과일, 가정용과일, 단체과일선물, 맞춤과일, 이룸, 이룸과일, fresh fruits"}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Store", "name": "이룸 fresh fruits", "url": "https://iroom-fresh-fruits.onrender.com/", "description": "고급과일, 맛있는과일, 제철과일과 프리미엄 과일선물세트를 판매·상담하는 과일 전문점", "currenciesAccepted": "KRW", "paymentAccepted": "Bank Transfer", "hasOfferCatalog": {"@type": "OfferCatalog", "name": "프리미엄 과일", "itemListElement": [{"@type": "OfferCatalog", "name": "고급과일"}, {"@type": "OfferCatalog", "name": "맛있는과일"}, {"@type": "OfferCatalog", "name": "과일선물세트"}, {"@type": "OfferCatalog", "name": "제철과일"}, {"@type": "OfferCatalog", "name": "맞춤 과일선물"}]}}</script>
 
-<meta name="iroom-version" content="V102-premium-auto-season">
+<meta name="iroom-version" content="V103-luxury-season-illustration">
 </head>
 <body>
 <div class="notice"><div class="wrap"><div>🍊 <b>오늘의 입고</b> &nbsp; | &nbsp; 고급 국산 종합과일 입고되었습니다.</div><nav><button id="customerBtn">고객센터</button><button id="ordersBtn">주문조회</button><button id="myBtn">마이페이지</button></nav></div></div>
@@ -826,8 +918,14 @@ header{background:rgba(255,255,255,.97)!important;backdrop-filter:blur(12px);bor
     </div>
     <div class="season-mini" id="seasonMini"></div>
   </div>
-  <div class="season-visual">
-    <img id="seasonHeroImg" src="/assets/season-autumn.jpg" alt="이룸 계절 프리미엄 과일">
+  <div class="season-visual scene-autumn" id="seasonVisual">
+    <div class="season-scene" id="seasonScene">
+      <div class="scene-glow"></div>
+      <div class="scene-branch"></div>
+      <div class="scene-leaf l1"></div><div class="scene-leaf l2"></div><div class="scene-leaf l3"></div><div class="scene-leaf l4"></div>
+      <div id="seasonSceneObjects"></div>
+      <div class="scene-spark s1"></div><div class="scene-spark s2"></div><div class="scene-spark s3"></div><div class="scene-spark s4"></div>
+    </div>
     <div class="season-stamp">IROOM · SEASON COLLECTION</div>
     <div class="season-auto-badge" id="seasonAutoBadge">계절 자동 운영</div>
   </div>
@@ -1127,7 +1225,6 @@ q("#detailCart").onclick=()=>{
 const seasonCatalog={
   spring:{
     label:"봄",english:"Spring Selection",icon:"🌸",
-    image:"/assets/season-spring.jpg",
     kicker:"봄의 향긋함을 담은 프리미엄 과일",
     title:"봄을 먼저 만나는<br>싱그러운 과일",
     lead:"가벼운 봄날에 잘 어울리는 산뜻한 과일을 골라<br>가족과 선물에 기분 좋은 계절감을 더합니다.",
@@ -1144,7 +1241,6 @@ const seasonCatalog={
   },
   summer:{
     label:"여름",english:"Summer Selection",icon:"☀️",
-    image:"/assets/season-summer.jpg",
     kicker:"한여름의 달콤함을 시원하게",
     title:"여름에 가장 맛있는<br>달콤한 과일",
     lead:"복숭아와 포도처럼 향과 과즙이 풍부한 과일을 중심으로<br>더운 계절에 어울리는 구성을 제안합니다.",
@@ -1161,7 +1257,6 @@ const seasonCatalog={
   },
   autumn:{
     label:"가을",english:"Autumn Selection",icon:"🍂",
-    image:"/assets/season-autumn.jpg",
     kicker:"자연의 정성을 담은 프리미엄 과일",
     title:"가족이 함께 즐기는<br>정직한 과일",
     lead:"좋은 산지의 제철 과일만 엄선하여<br>신선함과 맛을 그대로 전해드립니다.",
@@ -1178,7 +1273,6 @@ const seasonCatalog={
   },
   winter:{
     label:"겨울",english:"Winter Selection",icon:"❄️",
-    image:"/assets/season-winter.jpg",
     kicker:"겨울의 선물, 깊고 달콤하게",
     title:"추운 계절에 더 반가운<br>향긋한 과일",
     lead:"감귤류와 저장성이 좋은 과일을 중심으로<br>겨울 가족 간식과 따뜻한 선물 구성을 준비합니다.",
@@ -1206,30 +1300,43 @@ function autoSeasonKey(d=new Date()){
 }
 let activeSeason=autoSeasonKey();
 
+function fruitSymbol(name){
+  if(name.includes("샤인")||name.includes("포도")) return "🍇";
+  if(name.includes("배")) return "🍐";
+  if(name.includes("사과")) return "🍎";
+  if(name.includes("복숭아")) return "🍑";
+  if(name.includes("한라봉")||name.includes("감귤")) return "🍊";
+  if(name.includes("선물")||name.includes("혼합")) return "🎁";
+  return "🍈";
+}
 function renderSeason(key,manual=false){
   const s=seasonCatalog[key]||seasonCatalog.autumn;
   activeSeason=key;
-  const img=q("#seasonHeroImg");
-  if(img){
-    img.style.opacity=".35";
-    setTimeout(()=>{img.src=s.image;img.alt=`이룸 ${s.label} 프리미엄 과일`;img.style.opacity="1"},110);
+  const visual=q("#seasonVisual");
+  if(visual) visual.className=`season-visual scene-${key}`;
+  const objects=q("#seasonSceneObjects");
+  if(objects){
+    if(key==="spring") objects.innerHTML='<div class="scene-fruit f1"></div><div class="scene-fruit f2"></div><i class="petal p1"></i><i class="petal p2"></i><i class="petal p3"></i>';
+    if(key==="summer") objects.innerHTML='<div class="scene-fruit f1"></div><div class="scene-fruit f2"></div><div class="summer-wave"></div>';
+    if(key==="autumn") objects.innerHTML='<div class="grapes"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="scene-fruit pear"></div><div class="scene-fruit apple"></div>';
+    if(key==="winter") objects.innerHTML='<div class="scene-fruit citrus1"></div><div class="scene-fruit citrus2"></div><i class="snow n1"></i><i class="snow n2"></i><i class="snow n3"></i><i class="snow n4"></i>';
   }
   q("#seasonKicker").textContent=s.kicker;
   q("#seasonTitle").innerHTML=s.title;
   q("#seasonLead").innerHTML=s.lead;
   q("#seasonAutoBadge").textContent=manual?`${s.icon} ${s.label} 컬렉션 미리보기`:`${s.icon} ${s.label} 시즌 자동 운영`;
-  q("#seasonMini").innerHTML=s.mini.map(x=>`
+  q("#seasonMini").innerHTML=s.mini.map((x,i)=>`
     <a class="season-mini-card" href="#best">
-      <img src="${x.img}" alt="${x.name}">
+      <div style="width:70px;height:65px;border-radius:10px;background:linear-gradient(145deg,#fbf1df,#eef3df);display:flex;align-items:center;justify-content:center;font-size:34px">${fruitSymbol(x.name)}</div>
       <div><b>${x.en}</b><span>${x.name}</span></div>
     </a>`).join("");
   q("#seasonBestTitle").textContent=`${s.icon} ${s.label} 제철 BEST`;
   q("#seasonBestEnglish").textContent=s.english;
   q("#seasonBestGrid").innerHTML=s.best.map(x=>`
     <article class="season-best-card">
-      <img src="${x.img}" alt="${x.name}" loading="lazy">
+      <div class="season-best-art"><div class="fruit-symbol">${fruitSymbol(x.name)}</div></div>
       <div class="body"><span class="tag">${x.tag}</span><h3>${x.name}</h3><p>${x.desc}</p>
-      <button type="button" onclick="document.getElementById('best').scrollIntoView({behavior:'smooth'})">상품 보기 →</button></div>
+      <button type="button" onclick="document.getElementById('best').scrollIntoView({behavior:'smooth'})">상세 상품 보기 →</button></div>
     </article>`).join("");
   qa(".season-tab").forEach(b=>b.classList.toggle("active",b.dataset.season===key));
 }
