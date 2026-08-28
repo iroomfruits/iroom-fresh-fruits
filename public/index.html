@@ -676,6 +676,35 @@ header{background:rgba(255,255,255,.97)!important;backdrop-filter:blur(12px);bor
 .fruit-admin-link{margin-left:auto;font-size:11px;color:#7d6d54;text-decoration:underline}
 @media(max-width:680px){.fruit-picker-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.fruit-tools{align-items:stretch}.fruit-search{width:100%}}
 
+
+/* ===== IROOM V100 BRAND ILLUSTRATION SYSTEM ===== */
+.hero{height:520px;background:#fbf7ee}
+.hero-copy{background:linear-gradient(120deg,#fbf7ee 0%,#fffdf8 100%)}
+.hero-media{background:linear-gradient(145deg,#f8ead0,#f3f7e8);overflow:hidden}
+.iroom-hero-art{position:absolute;inset:0;overflow:hidden;background:
+ radial-gradient(circle at 78% 18%,rgba(255,255,255,.92) 0 7%,transparent 7.3%),
+ linear-gradient(145deg,#f5ead6 0%,#eef4df 48%,#f6e6d9 100%)}
+.iroom-hero-art:before{content:"";position:absolute;width:650px;height:650px;border-radius:50%;right:-90px;bottom:-310px;background:#dfe9c7;opacity:.7}
+.iroom-hero-art:after{content:"IROOM  ·  FRESH FRUITS";position:absolute;right:34px;top:28px;color:#927038;font:700 11px/1 Arial;letter-spacing:.24em}
+.art-fruit{position:absolute;border-radius:50%;filter:drop-shadow(0 16px 18px rgba(56,43,20,.12));animation:iroomFloat 5.5s ease-in-out infinite}
+.art-fruit:after{content:"";position:absolute;width:34%;height:22%;border-radius:100% 0 100% 0;background:#567e43;top:-12%;left:50%;transform:rotate(-24deg)}
+.art-apple{width:190px;height:180px;right:16%;top:18%;background:radial-gradient(circle at 32% 28%,#fff0dc 0 5%,#d94c39 7%,#9d2827 70%);border-radius:48% 52% 46% 54%}
+.art-pear{width:175px;height:210px;right:43%;bottom:8%;background:radial-gradient(circle at 35% 30%,#fff7d4 0 4%,#e4bb55 7%,#b9872d 76%);border-radius:44% 44% 52% 52% / 30% 30% 68% 68%;animation-delay:-1.2s}
+.art-orange{width:145px;height:145px;right:8%;bottom:5%;background:radial-gradient(circle at 32% 26%,#fff0b2 0 4%,#f39a28 6%,#d96c17 76%);animation-delay:-2.4s}
+.grape{position:absolute;right:34%;top:11%;width:190px;height:190px;animation:iroomFloat 6.5s ease-in-out infinite -3s}
+.grape i{position:absolute;width:58px;height:58px;border-radius:50%;background:radial-gradient(circle at 32% 28%,#eaffbc,#8ab64b 28%,#5e8d35 78%);box-shadow:0 9px 12px rgba(55,80,25,.12)}
+.grape i:nth-child(1){left:65px}.grape i:nth-child(2){left:25px;top:38px}.grape i:nth-child(3){left:85px;top:42px}.grape i:nth-child(4){left:55px;top:88px}.grape i:nth-child(5){left:115px;top:85px}.grape i:nth-child(6){left:82px;top:132px}
+.grape:before{content:"";position:absolute;width:75px;height:38px;background:#5d8b49;border-radius:100% 0 100% 0;left:88px;top:-8px;transform:rotate(18deg)}
+.hero-art-caption{position:absolute;left:42px;bottom:30px;background:rgba(255,255,255,.76);backdrop-filter:blur(7px);border:1px solid rgba(176,138,67,.22);border-radius:999px;padding:10px 16px;color:#6f5930;font-size:12px;letter-spacing:.04em}
+@keyframes iroomFloat{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-10px) rotate(1.5deg)}}
+@media(prefers-reduced-motion:reduce){.art-fruit,.grape{animation:none}}
+.fruit-art{height:190px;position:relative;overflow:hidden;background:linear-gradient(145deg,#f9f1df,#f4f7e9);display:flex;align-items:center;justify-content:center}
+.fruit-art:before{font-size:86px;filter:drop-shadow(0 10px 8px rgba(60,40,15,.14));transform:translateY(-2px);transition:.35s ease}
+.product:hover .fruit-art:before{transform:translateY(-7px) scale(1.05)}
+.fruit-art:after{content:"IROOM";position:absolute;right:10px;bottom:9px;font-size:9px;letter-spacing:.2em;color:#b08a43}
+.art-shine:before{content:"🍇"}.art-pear-card:before{content:"🍐"}.art-apple-card:before{content:"🍎"}.art-orange-card:before{content:"🍊"}.art-gift-card:before{content:"🎁"}.art-peach-card:before{content:"🍑"}
+.brand-visual-note{font-size:11px;color:#8c7a5d;margin-top:7px}
+
 </style>
 <script src="//t1.kakaocdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
@@ -716,7 +745,12 @@ header{background:rgba(255,255,255,.97)!important;backdrop-filter:blur(12px);bor
 
 
 <main>
-<section class="hero"><div class="hero-copy"><h1>자연의 신선함을<br>프리미엄으로 전합니다</h1><p>좋은 산지의 제철 과일을 엄선하여<br>정성껏 보내드립니다.</p><a class="cta" href="#best">SHOP NOW ›</a><div class="pager"><span id="heroCount"><b>01</b> / 06</span><button id="prev">‹</button><button id="next">›</button></div></div><div class="hero-media"><img id="heroImg" src="/assets/hero-1.jpg" alt="프리미엄 과일"><div class="dots" id="dots"></div></div></section>
+<section class="hero"><div class="hero-copy"><h1>자연의 신선함을<br>프리미엄으로 전합니다</h1><p>좋은 산지의 제철 과일을 엄선하여<br>정성껏 보내드립니다.</p><a class="cta" href="#best">SHOP NOW ›</a><div class="pager"><span id="heroCount"><b>01</b> / 06</span><button id="prev">‹</button><button id="next">›</button></div></div><div class="hero-media" aria-label="이룸 프리미엄 과일 브랜드 일러스트">
+<div class="iroom-hero-art" id="heroArt">
+  <div class="grape"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+  <div class="art-fruit art-apple"></div><div class="art-fruit art-pear"></div><div class="art-fruit art-orange"></div>
+  <div class="hero-art-caption">계절이 바뀌어도 변하지 않는 이룸의 신선함</div>
+</div><div class="dots" id="dots"></div></div></section>
 
 <section class="trust"><div class="wrap">
 <div class="trust-item"><div class="trust-ico">♧</div><div><b>산지 직송</b><span>신선함을 그대로</span></div></div><div class="trust-item"><div class="trust-ico">◇</div><div><b>엄선된 품질</b><span>선별·검수</span></div></div><div class="trust-item"><div class="trust-ico">▣</div><div><b>신속 배송</b><span>안전한 포장</span></div></div><div class="trust-item"><div class="trust-ico">🎁</div><div><b>정성 포장</b><span>선물에 맞게</span></div></div><div class="trust-item"><div class="trust-ico">☎</div><div><b>친절 상담</b><span>맞춤 안내</span></div></div><div class="trust-item"><div class="trust-ico">🛡</div><div><b>품질 보장</b><span>정직한 판매</span></div></div>
@@ -744,16 +778,16 @@ header{background:rgba(255,255,255,.97)!important;backdrop-filter:blur(12px);bor
   </div>
 </section>
 
-<section class="section" id="best"><div class="wrap"><div class="sec-head"><div><h2>이룸의 추천 <span>지금 가장 신선한 과일</span></h2></div><a href="#best">전체보기 ›</a></div><div class="shop-proof"><div><b>실재고 기준</b>품절·마감임박 상태를 실제 재고에서 표시합니다.</div><div><b>산지·규격 확인</b>상품명과 중량·구성을 주문 전에 확인합니다.</div><div><b>선물 맞춤상담</b>받는 분·예산·맛·포장 조건을 판매자에게 전달합니다.</div><div><b>신선식품 안내</b>기상·산지 상황에 따라 출고일이 달라질 수 있음을 투명하게 안내합니다.</div></div><div class="products">
-<article class="product" data-name="샤인머스켓" data-price="28000"><span class="label">NEW</span><img src="/assets/prod-shine.jpg" alt="샤인머스켓"><div class="info"><h3>샤인머스켓</h3><p>2kg (3~4송이)</p><span class="price">28,000원~</span><button class="cartbtn">🛒</button></div><div class="product-actions"><button class="detailBtn" data-product="샤인머스켓">상세보기</button><button class="quickCart" data-product="샤인머스켓">담기</button></div></article>
-<article class="product" data-name="나주 신고배 특선" data-price="38000"><img src="/assets/prod-pear.jpg" alt="배"><div class="info"><h3>나주 신고배 특선</h3><p>5kg (7~9과)</p><span class="price">38,000원~</span><button class="cartbtn">🛒</button></div><div class="product-actions"><button class="detailBtn" data-product="나주 신고배 특선">상세보기</button><button class="quickCart" data-product="나주 신고배 특선">담기</button></div></article>
-<article class="product" data-name="경북 홍사과" data-price="32000"><span class="label">NEW</span><img src="/assets/prod-apple.jpg" alt="사과"><div class="info"><h3>경북 홍사과</h3><p>3kg</p><span class="price">32,000원~</span><button class="cartbtn">🛒</button></div><div class="product-actions"><button class="detailBtn" data-product="경북 홍사과">상세보기</button><button class="quickCart" data-product="경북 홍사과">담기</button></div></article>
-<article class="product" data-name="제주 한라봉" data-price="28000"><img src="/assets/prod-hallabong.jpg" alt="한라봉"><div class="info"><h3>제주 한라봉</h3><p>3kg</p><span class="price">28,000원~</span><button class="cartbtn">🛒</button></div><div class="product-actions"><button class="detailBtn" data-product="제주 한라봉">상세보기</button><button class="quickCart" data-product="제주 한라봉">담기</button></div></article>
-<article class="product" data-name="프리미엄 과일세트" data-price="85000"><img src="/assets/prod-gift.jpg" alt="선물세트"><div class="info"><h3>프리미엄 과일세트</h3><p>혼합 구성</p><span class="price">85,000원~</span><button class="cartbtn">🛒</button></div><div class="product-actions"><button class="detailBtn" data-product="프리미엄 과일세트">상세보기</button><button class="quickCart" data-product="프리미엄 과일세트">담기</button></div></article>
-<article class="product" data-name="복숭아 백도" data-price="29000"><img src="/assets/prod-peach.jpg" alt="복숭아"><div class="info"><h3>복숭아 (백도)</h3><p>4kg</p><span class="price">29,000원~</span><button class="cartbtn">🛒</button></div><div class="product-actions"><button class="detailBtn" data-product="복숭아 백도">상세보기</button><button class="quickCart" data-product="복숭아 백도">담기</button></div></article>
+<section class="section" id="best"><div class="wrap"><div class="sec-head"><div><h2>이룸의 추천 <span>지금 가장 신선한 과일</span></h2><div class="brand-visual-note">브랜드 화면은 일러스트로 편안하게 · 실제 과일 사진은 상세보기에서 정확하게 확인하세요.</div></div><a href="#best">전체보기 ›</a></div><div class="shop-proof"><div><b>실재고 기준</b>품절·마감임박 상태를 실제 재고에서 표시합니다.</div><div><b>산지·규격 확인</b>상품명과 중량·구성을 주문 전에 확인합니다.</div><div><b>선물 맞춤상담</b>받는 분·예산·맛·포장 조건을 판매자에게 전달합니다.</div><div><b>신선식품 안내</b>기상·산지 상황에 따라 출고일이 달라질 수 있음을 투명하게 안내합니다.</div></div><div class="products">
+<article class="product" data-name="샤인머스켓" data-price="28000"><span class="label">NEW</span><div class="fruit-art art-shine" role="img" aria-label="샤인머스켓 일러스트"></div><div class="info"><h3>샤인머스켓</h3><p>2kg (3~4송이)</p><span class="price">28,000원~</span><button class="cartbtn">🛒</button></div><div class="product-actions"><button class="detailBtn" data-product="샤인머스켓">상세보기</button><button class="quickCart" data-product="샤인머스켓">담기</button></div></article>
+<article class="product" data-name="나주 신고배 특선" data-price="38000"><div class="fruit-art art-pear-card" role="img" aria-label="배 일러스트"></div><div class="info"><h3>나주 신고배 특선</h3><p>5kg (7~9과)</p><span class="price">38,000원~</span><button class="cartbtn">🛒</button></div><div class="product-actions"><button class="detailBtn" data-product="나주 신고배 특선">상세보기</button><button class="quickCart" data-product="나주 신고배 특선">담기</button></div></article>
+<article class="product" data-name="경북 홍사과" data-price="32000"><span class="label">NEW</span><div class="fruit-art art-apple-card" role="img" aria-label="사과 일러스트"></div><div class="info"><h3>경북 홍사과</h3><p>3kg</p><span class="price">32,000원~</span><button class="cartbtn">🛒</button></div><div class="product-actions"><button class="detailBtn" data-product="경북 홍사과">상세보기</button><button class="quickCart" data-product="경북 홍사과">담기</button></div></article>
+<article class="product" data-name="제주 한라봉" data-price="28000"><div class="fruit-art art-orange-card" role="img" aria-label="한라봉 일러스트"></div><div class="info"><h3>제주 한라봉</h3><p>3kg</p><span class="price">28,000원~</span><button class="cartbtn">🛒</button></div><div class="product-actions"><button class="detailBtn" data-product="제주 한라봉">상세보기</button><button class="quickCart" data-product="제주 한라봉">담기</button></div></article>
+<article class="product" data-name="프리미엄 과일세트" data-price="85000"><div class="fruit-art art-gift-card" role="img" aria-label="과일 선물세트 일러스트"></div><div class="info"><h3>프리미엄 과일세트</h3><p>혼합 구성</p><span class="price">85,000원~</span><button class="cartbtn">🛒</button></div><div class="product-actions"><button class="detailBtn" data-product="프리미엄 과일세트">상세보기</button><button class="quickCart" data-product="프리미엄 과일세트">담기</button></div></article>
+<article class="product" data-name="복숭아 백도" data-price="29000"><div class="fruit-art art-peach-card" role="img" aria-label="복숭아 일러스트"></div><div class="info"><h3>복숭아 (백도)</h3><p>4kg</p><span class="price">29,000원~</span><button class="cartbtn">🛒</button></div><div class="product-actions"><button class="detailBtn" data-product="복숭아 백도">상세보기</button><button class="quickCart" data-product="복숭아 백도">담기</button></div></article>
 </div></div></section>
 
-<section class="section alt" id="gift"><div class="wrap"><div class="sec-head"><h2>선물은 상황에 맞게 <span>개인 선물부터 기업·단체 주문까지</span></h2></div><div class="gift-grid"><div class="gift-photo"><img src="/assets/prod-gift.jpg"><div class="gift-copy"><small>PREMIUM GIFT</small><h3>소중한 분께 전하는<br>프리미엄 과일 선물</h3><p>예산과 받으시는 분에 맞춰 구성과 포장을 상담해드립니다.</p></div></div><div class="panel" id="custom"><h3>기업 · 단체 · 행사 선물</h3><p>수량, 예산, 배송 일정에 맞춰 상담합니다. 여러 곳으로 보내는 주문도 문의해주세요.</p><a class="greenbtn" href="https://open.kakao.com/o/sd7wnrKi" target="_blank">맞춤 상담하기 ›</a><a class="linebtn" href="https://band.us/@iroomfruits" target="_blank">BAND 보기 ›</a></div></div></div></section>
+<section class="section alt" id="gift"><div class="wrap"><div class="sec-head"><h2>선물은 상황에 맞게 <span>개인 선물부터 기업·단체 주문까지</span></h2></div><div class="gift-grid"><div class="gift-photo"><div class="fruit-art art-gift-card" style="position:absolute;inset:0;height:100%" role="img" aria-label="프리미엄 과일선물 일러스트"></div><div class="gift-copy"><small>PREMIUM GIFT</small><h3>소중한 분께 전하는<br>프리미엄 과일 선물</h3><p>예산과 받으시는 분에 맞춰 구성과 포장을 상담해드립니다.</p></div></div><div class="panel" id="custom"><h3>기업 · 단체 · 행사 선물</h3><p>수량, 예산, 배송 일정에 맞춰 상담합니다. 여러 곳으로 보내는 주문도 문의해주세요.</p><a class="greenbtn" href="https://open.kakao.com/o/sd7wnrKi" target="_blank">맞춤 상담하기 ›</a><a class="linebtn" href="https://band.us/@iroomfruits" target="_blank">BAND 보기 ›</a></div></div></div></section>
 
 <section class="section" id="install"><div class="wrap"><div class="sec-head"><h2>이룸 fresh fruits 앱 설치하기 <span>홈 화면에 추가해 더 빠르고 편리하게</span></h2></div><div class="install"><div class="install-card"><h3>📱 설치하면 더 편해집니다</h3><p>앱스토어 검색 없이 홈페이지를 휴대폰 홈 화면에 설치할 수 있습니다. 설치 후에는 독립된 앱 화면처럼 실행됩니다.</p><button class="install-btn" id="installNow">앱 설치하기</button><div id="installStatus" style="font-size:12px;color:#666;line-height:1.6;margin-top:10px">설치 가능 상태를 확인하고 있습니다.</div></div><div class="install-card android"><h3>🤖 Android</h3><ol><li>Chrome에서 홈페이지 열기</li><li>메뉴 또는 설치 버튼 선택</li><li>“이룸 fresh fruits 설치” 확인</li></ol></div><div class="install-card ios"><h3> iPhone / iPad</h3><ol><li>Safari에서 홈페이지 열기</li><li>공유 버튼 누르기</li><li>“홈 화면에 추가” 선택</li></ol></div></div></div></section>
 
@@ -983,9 +1017,16 @@ q("#detailCart").onclick=()=>{
   localStorage.setItem("iroom_cart_v62",JSON.stringify(cart));badge();toast("장바구니에 담았습니다.");
 };
 
-const slides=[1,2,3,4,5,6].map(n=>"/assets/hero-"+n+".jpg");
+const slides=[
+"계절이 바뀌어도 변하지 않는 이룸의 신선함",
+"선물의 마음까지 담는 프리미엄 과일",
+"가족이 함께 즐기는 정직한 과일",
+"달콤함과 산뜻함을 취향에 맞게",
+"산지와 상태를 살펴 고르는 과일",
+"실제 상품 사진은 상세설명에서 정확하게"
+];
 function drawDots(){q("#dots").innerHTML=slides.map((_,i)=>'<span class="dot '+(i===hero?'on':'')+'"></span>').join("")}
-function setHero(){q("#heroImg").src=slides[hero];q("#heroCount").innerHTML="<b>0"+(hero+1)+"</b> / 06";drawDots()}
+function setHero(){q("#heroCount").innerHTML="<b>0"+(hero+1)+"</b> / 06";const c=q(".hero-art-caption");if(c)c.textContent=slides[hero];drawDots()}
 q("#prev").onclick=()=>{hero=(hero+slides.length-1)%slides.length;setHero()};q("#next").onclick=()=>{hero=(hero+1)%slides.length;setHero()};setHero();
 
 let cartSelected={};
