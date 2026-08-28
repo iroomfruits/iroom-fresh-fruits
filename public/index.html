@@ -1131,35 +1131,45 @@ footer#footer{background:linear-gradient(135deg,#0a3426,#103c2d);color:#fff;bord
 }
 
 
-/* ===== IROOM V106 APPROVED DESIGN + CLICKABLE HOTSPOTS ===== */
-body{margin:0;background:#f8f2e8!important;overflow-x:hidden}
-.notice,header,#legacyMain,footer#footer,.install-mini,.share-float{display:none!important}
-#visualHome{display:block!important;width:100%;margin:0;padding:0;background:#f8f2e8}
-.visual-canvas{position:relative;width:min(100%,1536px);margin:0 auto;line-height:0;background:#f8f2e8}
-.visual-canvas>img{display:block;width:100%;height:auto;user-select:none;-webkit-user-drag:none}
-.visual-hotspot{
-  position:absolute;z-index:10;border:1px solid transparent;border-radius:14px;
-  background:rgba(255,255,255,0);cursor:pointer;color:transparent;font-size:0;
-  transition:.18s ease;line-height:1
+/* ===== IROOM V107 FULL FUNCTION RESTORE ===== */
+.v107-functionbar{
+  position:sticky;top:92px;z-index:55;
+  background:rgba(255,252,246,.96);backdrop-filter:blur(8px);
+  border-bottom:1px solid #eadfc9;box-shadow:0 5px 16px rgba(70,48,20,.04)
 }
-.visual-hotspot:hover,.visual-hotspot:focus-visible{
-  border-color:rgba(178,133,55,.66);
-  background:rgba(255,248,230,.08);
-  box-shadow:0 0 0 3px rgba(178,133,55,.10),0 8px 22px rgba(59,43,19,.09);
-  outline:none
+.v107-functionbar-inner{
+  max-width:1340px;margin:auto;padding:9px 24px;
+  display:flex;gap:8px;align-items:center;justify-content:center;flex-wrap:wrap
 }
-.visual-hotspot.round{border-radius:50%}
-.visual-anchor{position:absolute;left:0;width:1px;height:1px;pointer-events:none}
-.hotspot-tip{
-  position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(15px);
-  background:#0d3e2d;color:#fff;border:1px solid #b88d43;border-radius:999px;
-  padding:10px 16px;font-size:12px;z-index:999;opacity:0;pointer-events:none;
-  transition:.22s ease;box-shadow:0 10px 30px rgba(0,0,0,.18)
+.v107-fbtn{
+  border:1px solid #dbc8a5;background:#fffaf1;color:#173c2b;
+  border-radius:999px;padding:9px 14px;font-size:12px;font-weight:800;
+  text-decoration:none;cursor:pointer;transition:.18s ease
 }
-.hotspot-tip.show{opacity:1;transform:translateX(-50%) translateY(0)}
-@media(max-width:700px){
-  .visual-canvas{width:100%}
-  .visual-hotspot:hover{box-shadow:none}
+.v107-fbtn:hover{background:#0d432f;color:#fff;border-color:#0d432f}
+.v107-fbtn.primary{background:#0d432f;color:#fff;border-color:#0d432f}
+.v107-fbtn.admin{margin-left:auto;background:#f4e5c7;color:#72511e}
+.v107-logo-img{width:52px;height:52px;object-fit:contain;border-radius:50%;background:#fff7e9;border:1px solid #e0c89a;padding:3px}
+.v107-brand-name{display:flex;flex-direction:column;line-height:1.05}
+.v107-brand-name strong{font-family:Georgia,serif;color:#173c2b;font-size:21px}
+.v107-brand-name small{font-size:9px;letter-spacing:.18em;color:#b17d2d;margin-top:5px}
+.v107-quick-card{
+  margin-top:18px;border:1px solid #dfcfb0;border-radius:16px;
+  padding:18px;background:linear-gradient(145deg,#fffdf8,#f6efe4)
+}
+.v107-quick-card h3{margin:0 0 8px;color:#123c2b;font-family:Georgia,"Noto Serif KR",serif}
+.v107-quick-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.v107-quick-actions button,.v107-quick-actions a{
+  border:1px solid #d8c39f;border-radius:999px;background:#fffaf1;color:#173c2b;
+  padding:10px 14px;font-weight:800;font-size:12px;text-decoration:none;cursor:pointer
+}
+.v107-quick-actions .strong{background:#0d432f;color:#fff;border-color:#0d432f}
+.modal{z-index:1000!important}
+.modalbox{box-shadow:0 26px 80px rgba(0,0,0,.24)}
+@media(max-width:900px){
+ .v107-functionbar{top:74px}.v107-fbtn.admin{margin-left:0}
+ .v107-functionbar-inner{justify-content:flex-start;overflow-x:auto;flex-wrap:nowrap}
+ .v107-fbtn{white-space:nowrap}
 }
 
 </style>
@@ -1181,7 +1191,7 @@ body{margin:0;background:#f8f2e8!important;overflow-x:hidden}
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "이룸 fresh fruits", "alternateName": ["이룸 과일", "이룸 신선한 과일"], "url": "https://iroom-fresh-fruits.onrender.com/", "description": "엄선한 제철과일과 고급과일, 맛있는과일, 프리미엄 과일선물세트를 정성껏 준비하는 이룸 fresh fruits입니다. 선물용·가정용·단체·맞춤 과일 상담과 주문을 도와드립니다.", "inLanguage": "ko-KR", "keywords": "과일, 고급과일, 맛있는과일, 프리미엄과일, 과일선물, 과일선물세트, 고급과일선물세트, 제철과일, 신선한과일, 선물용과일, 가정용과일, 단체과일선물, 맞춤과일, 이룸, 이룸과일, fresh fruits"}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Store", "name": "이룸 fresh fruits", "url": "https://iroom-fresh-fruits.onrender.com/", "description": "고급과일, 맛있는과일, 제철과일과 프리미엄 과일선물세트를 판매·상담하는 과일 전문점", "currenciesAccepted": "KRW", "paymentAccepted": "Bank Transfer", "hasOfferCatalog": {"@type": "OfferCatalog", "name": "프리미엄 과일", "itemListElement": [{"@type": "OfferCatalog", "name": "고급과일"}, {"@type": "OfferCatalog", "name": "맛있는과일"}, {"@type": "OfferCatalog", "name": "과일선물세트"}, {"@type": "OfferCatalog", "name": "제철과일"}, {"@type": "OfferCatalog", "name": "맞춤 과일선물"}]}}</script>
 
-<meta name="iroom-version" content="V106-approved-pixel-exact-clickable">
+<meta name="iroom-version" content="V107-full-function-restore">
 </head>
 <body>
 <div class="notice"><div class="wrap"><div>🍊 <b>오늘의 입고</b> &nbsp; | &nbsp; 고급 국산 종합과일 입고되었습니다.</div><nav><button id="customerBtn">고객센터</button><button id="ordersBtn">주문조회</button><button id="myBtn">마이페이지</button></nav></div></div>
@@ -1192,6 +1202,18 @@ body{margin:0;background:#f8f2e8!important;overflow-x:hidden}
     <small>PREMIUM FRUIT BOUTIQUE</small>
   </span>
 </a><nav class="nav"><a href="#best">NEW & BEST <span style="font-size:9px;background:#c6a15b;color:#fff;border-radius:999px;padding:3px 6px;margin-left:3px">HOT</span></a><a href="#best">과일</a><a href="#gift">선물세트</a><a href="#group">공동구매</a><a href="#custom">단체·맞춤선물</a><a href="#story">스토리</a></nav><div class="tools"><button class="tool desktop" id="loginBtn">로그인</button><button class="tool desktop" id="signupBtn">회원가입</button><button class="tool desktop" id="myTopBtn">마이페이지</button><button class="icon desktop" id="searchBtn" title="검색">⌕</button><button class="icon" id="shareBtn" title="공유">↗</button><button class="icon" id="cartBtn">🛒<span class="badge" id="cartBadge">0</span></button></div></div></header>
+<div class="v107-functionbar" aria-label="주요 기능 바로가기">
+  <div class="v107-functionbar-inner">
+    <button type="button" class="v107-fbtn primary" id="v107CustomFruit">🍎 맞춤과일 추천</button>
+    <button type="button" class="v107-fbtn" id="v107FruitBox">🧺 나만의 과일박스</button>
+    <button type="button" class="v107-fbtn" id="v107OrderLookup">📦 주문조회</button>
+    <button type="button" class="v107-fbtn" id="v107Search">🔎 상품검색</button>
+    <button type="button" class="v107-fbtn" id="v107Login">👤 로그인/마이페이지</button>
+    <button type="button" class="v107-fbtn" id="v107Cart">🛒 장바구니</button>
+    <a class="v107-fbtn admin" href="/band-admin.html">⚙ 관리자센터</a>
+  </div>
+</div>
+
 
 <nav class="seo-quick-nav" aria-label="과일 카테고리 바로가기">
   <a href="/premium-fruit.html" title="고급과일 안내">고급과일</a>
@@ -1201,66 +1223,7 @@ body{margin:0;background:#f8f2e8!important;overflow-x:hidden}
 </nav>
 
 
-
-<main id="visualHome" aria-label="이룸 fresh fruits 프리미엄 홈페이지">
-  <div class="visual-canvas" id="visualCanvas">
-    <img src="/assets/iroom-approved-home-v106.png" alt="이룸 fresh fruits 프리미엄 과일 홈페이지">
-
-    <span class="visual-anchor" id="visualTop" style="top:0%"></span>
-    <span class="visual-anchor" id="visualBest" style="top:45.5%"></span>
-    <span class="visual-anchor" id="visualGift" style="top:70.5%"></span>
-    <span class="visual-anchor" id="visualService" style="top:88.5%"></span>
-
-    <!-- Header -->
-    <button class="visual-hotspot" aria-label="홈으로 이동" style="left:2.5%;top:1.5%;width:17%;height:5.2%" data-action="top"></button>
-    <button class="visual-hotspot" aria-label="브랜드 소개" style="left:33.0%;top:2.2%;width:10.2%;height:3.8%" data-action="brand"></button>
-    <button class="visual-hotspot" aria-label="과일 이야기" style="left:45.2%;top:2.2%;width:9.3%;height:3.8%" data-action="fruitStory"></button>
-    <button class="visual-hotspot" aria-label="상품 안내" style="left:57.4%;top:2.2%;width:9.0%;height:3.8%" data-action="products"></button>
-    <button class="visual-hotspot" aria-label="고객센터" style="left:69.0%;top:2.2%;width:9.2%;height:3.8%" data-action="customer"></button>
-    <button class="visual-hotspot round" aria-label="상품 검색" style="left:84.1%;top:1.8%;width:4.6%;height:3.6%" data-action="search"></button>
-    <button class="visual-hotspot round" aria-label="로그인 또는 마이페이지" style="left:89.2%;top:1.8%;width:4.5%;height:3.6%" data-action="login"></button>
-    <button class="visual-hotspot round" aria-label="장바구니" style="left:94.0%;top:1.6%;width:5.0%;height:4.0%" data-action="cart"></button>
-
-    <!-- Hero -->
-    <button class="visual-hotspot" aria-label="과일 보러가기" style="left:4.7%;top:26.2%;width:17.7%;height:4.1%" data-action="products"></button>
-
-    <!-- Seasons -->
-    <button class="visual-hotspot" aria-label="가을 제철 과일" style="left:4.6%;top:38.2%;width:12.2%;height:5.2%" data-season="autumn"></button>
-    <button class="visual-hotspot" aria-label="겨울 제철 과일" style="left:16.8%;top:38.2%;width:10.4%;height:5.2%" data-season="winter"></button>
-    <button class="visual-hotspot" aria-label="봄 제철 과일" style="left:27.3%;top:38.2%;width:9.6%;height:5.2%" data-season="spring"></button>
-    <button class="visual-hotspot" aria-label="여름 제철 과일" style="left:36.9%;top:38.2%;width:10.0%;height:5.2%" data-season="summer"></button>
-
-    <!-- BEST arrows -->
-    <button class="visual-hotspot round" aria-label="이전 제철 과일" style="left:74.2%;top:49.3%;width:4.2%;height:3.2%" data-action="prevSeason"></button>
-    <button class="visual-hotspot round" aria-label="다음 제철 과일" style="left:91.0%;top:49.3%;width:4.2%;height:3.2%" data-action="nextSeason"></button>
-
-    <!-- BEST cards + detail -->
-    <button class="visual-hotspot" aria-label="나주 신고배 상세 보기" style="left:5.1%;top:52.8%;width:21.4%;height:17.6%" data-product="나주 신고배 특선"></button>
-    <button class="visual-hotspot" aria-label="캠벨 포도 상세 보기" style="left:28.0%;top:52.8%;width:21.3%;height:17.6%" data-product="캠벨 포도"></button>
-    <button class="visual-hotspot" aria-label="경북 홍사과 상세 보기" style="left:50.8%;top:52.8%;width:21.3%;height:17.6%" data-product="경북 홍사과"></button>
-    <button class="visual-hotspot" aria-label="제주 감귤 상세 보기" style="left:73.6%;top:52.8%;width:21.4%;height:17.6%" data-product="제주 감귤"></button>
-
-    <!-- Gift / corporate -->
-    <button class="visual-hotspot" aria-label="프리미엄 선물세트 보기" style="left:6.6%;top:83.4%;width:17.0%;height:3.0%" data-product="프리미엄 과일세트"></button>
-    <button class="visual-hotspot" aria-label="기업 단체 행사 맞춤 상담" style="left:56.2%;top:79.4%;width:14.0%;height:3.0%" data-action="consult"></button>
-    <a class="visual-hotspot" aria-label="BAND 보기" href="https://band.us/@iroomfruits" target="_blank" rel="noopener" style="left:56.2%;top:82.8%;width:13.4%;height:2.8%"></a>
-
-    <!-- Service bar -->
-    <button class="visual-hotspot" aria-label="산지 직배송 안내" style="left:3.7%;top:89.2%;width:22.2%;height:5.2%" data-action="service"></button>
-    <button class="visual-hotspot" aria-label="당일 선별 당일 출고 안내" style="left:26.2%;top:89.2%;width:22.2%;height:5.2%" data-action="service"></button>
-    <button class="visual-hotspot" aria-label="원하는 날짜 지정 배송 안내" style="left:49.2%;top:89.2%;width:22.0%;height:5.2%" data-action="service"></button>
-    <button class="visual-hotspot" aria-label="친절한 고객 상담" style="left:72.1%;top:89.2%;width:23.0%;height:5.2%" data-action="consult"></button>
-
-    <!-- Footer social / brand -->
-    <button class="visual-hotspot" aria-label="홈 맨 위로" style="left:4.0%;top:95.0%;width:18%;height:3.5%" data-action="top"></button>
-    <a class="visual-hotspot round" aria-label="인스타그램" href="https://www.instagram.com/" target="_blank" rel="noopener" style="left:81.6%;top:95.1%;width:4.0%;height:2.9%"></a>
-    <a class="visual-hotspot round" aria-label="카카오 상담" href="https://open.kakao.com/o/sd7wnrKi" target="_blank" rel="noopener" style="left:87.6%;top:95.1%;width:4.0%;height:2.9%"></a>
-    <a class="visual-hotspot round" aria-label="블로그" href="https://blog.naver.com/" target="_blank" rel="noopener" style="left:93.1%;top:95.1%;width:4.0%;height:2.9%"></a>
-  </div>
-</main>
-<div class="hotspot-tip" id="hotspotTip"></div>
-
-<main id="legacyMain">
+<main>
 <section class="v105-hero" id="home">
   <div class="v105-copy">
     <div class="v105-kicker">자연의 정성을 담은 프리미엄 과일</div>
@@ -1310,13 +1273,13 @@ body{margin:0;background:#f8f2e8!important;overflow-x:hidden}
     <small>PREMIUM GIFT</small>
     <h3>소중한 분께 전하는<br>프리미엄 과일 선물</h3>
     <p>정성 가득한 프리미엄 과일로 감사의 마음을 전하세요.</p>
-    <a class="linebtn" href="#best" style="background:#fff7e9;color:#173c2b">선물세트 보러가기 →</a>
+    <button type="button" class="linebtn" id="v107GiftDetail" style="background:#fff7e9;color:#173c2b">선물세트 보러가기 →</button>
     <div class="v105-gift-box"></div><div class="v105-gift-bow"></div>
   </div>
   <div class="v105-corp" id="custom">
     <h3>기업 · 단체 · 행사 선물</h3>
     <p>수량, 예산, 배송 일정에 맞춰 상담합니다.<br>여러 곳으로 보내는 주문도 문의해주세요.</p>
-    <a class="greenbtn" href="https://open.kakao.com/o/sd7wnrKi" target="_blank">맞춤 상담하기 →</a>
+    <button type="button" class="greenbtn" id="v107CorpConsult">맞춤 상담하기 →</button>
     <a class="linebtn" href="https://band.us/@iroomfruits" target="_blank">BAND 보기 →</a>
     <div class="v105-corp-city"><i></i><i></i><i></i><i></i></div>
   </div>
@@ -1327,6 +1290,24 @@ body{margin:0;background:#f8f2e8!important;overflow-x:hidden}
   <div class="v105-service"><i>🛡</i><div><b>당일 선별 · 당일 출고</b><small>가장 신선한 과일</small></div></div>
   <div class="v105-service"><i>🗓</i><div><b>원하는 날짜 지정 배송</b><small>편리한 스케줄 배송</small></div></div>
   <div class="v105-service"><i>🎧</i><div><b>친절한 고객 상담</b><small>빠르고 정확한 안내</small></div></div>
+</section>
+
+<section class="section" id="v107Tools">
+  <div class="wrap">
+    <div class="sec-head"><h2>이룸 이용하기 <span>기존 기능을 모두 그대로 살렸습니다</span></h2></div>
+    <div class="v107-quick-card">
+      <h3>내 상황에 맞는 과일을 바로 찾으세요</h3>
+      <p style="margin:0;color:#746b5e;font-size:13px;line-height:1.8">선물·가족용·단체 주문부터 낱개 과일박스 구성, 주문조회, 관리자 운영까지 기존 기능을 한곳에서 이용할 수 있습니다.</p>
+      <div class="v107-quick-actions">
+        <button type="button" class="strong" id="v107CustomFruit2">맞춤 과일 추천 요청</button>
+        <button type="button" id="v107FruitBox2">나만의 과일박스 만들기</button>
+        <button type="button" id="v107OrderLookup2">주문조회</button>
+        <a href="/band-order.html">BAND 주문센터</a>
+        <a href="/admin-fruits.html">과일관리</a>
+        <a href="/band-admin.html">운영 관리자센터</a>
+      </div>
+    </div>
+  </div>
 </section>
 <section class="section" id="install"><div class="wrap"><div class="sec-head"><h2>이룸 fresh fruits 앱 설치하기 <span>홈 화면에 추가해 더 빠르고 편리하게</span></h2></div><div class="install"><div class="install-card"><h3>📱 설치하면 더 편해집니다</h3><p>앱스토어 검색 없이 홈페이지를 휴대폰 홈 화면에 설치할 수 있습니다. 설치 후에는 독립된 앱 화면처럼 실행됩니다.</p><button class="install-btn" id="installNow">앱 설치하기</button><div id="installStatus" style="font-size:12px;color:#666;line-height:1.6;margin-top:10px">설치 가능 상태를 확인하고 있습니다.</div></div><div class="install-card android"><h3>🤖 Android</h3><ol><li>Chrome에서 홈페이지 열기</li><li>메뉴 또는 설치 버튼 선택</li><li>“이룸 fresh fruits 설치” 확인</li></ol></div><div class="install-card ios"><h3> iPhone / iPad</h3><ol><li>Safari에서 홈페이지 열기</li><li>공유 버튼 누르기</li><li>“홈 화면에 추가” 선택</li></ol></div></div></div></section>
 
@@ -2378,71 +2359,87 @@ qa("[data-v105-season]").forEach(b=>b.addEventListener("click",()=>v105RenderSea
 setTimeout(()=>v105RenderSeason(v105AutoSeason()),0);
 
 
-// ===== V106 approved design interaction layer =====
+// ===== V107 FULL FUNCTION RESTORE =====
 if(typeof productCatalog!=="undefined"){
-  productCatalog["캠벨 포도"]={
-    unit:"제철 판매",
-    price:28000,
-    image:"/assets/prod-campbell-v106.png",
-    desc:"진한 포도 향과 새콤달콤한 풍미가 좋은 캠벨 포도입니다."
+  if(!productCatalog["캠벨 포도"]) productCatalog["캠벨 포도"]={
+    unit:"제철 판매",price:28000,image:"/assets/prod-shine.jpg",
+    desc:"진한 향과 새콤달콤한 풍미가 좋은 국내산 캠벨 포도입니다."
   };
-  productCatalog["제주 감귤"]={
-    unit:"3kg 기준",
-    price:26000,
-    image:"/assets/prod-jeju-citrus-v106.png",
-    desc:"산뜻한 향과 새콤달콤한 과즙이 좋은 제주 감귤입니다."
+  if(!productCatalog["제주 감귤"]) productCatalog["제주 감귤"]={
+    unit:"3kg 기준",price:26000,image:"/assets/prod-hallabong.jpg",
+    desc:"산뜻한 향과 새콤달콤한 과즙을 즐길 수 있는 제주 감귤입니다."
   };
 }
-let visualSeasonIndex=0;
-const visualSeasonOrder=["autumn","winter","spring","summer"];
-function visualTip(msg){
-  const el=document.getElementById("hotspotTip"); if(!el)return;
-  el.textContent=msg;el.classList.add("show");
-  clearTimeout(window.__visualTipTimer);
-  window.__visualTipTimer=setTimeout(()=>el.classList.remove("show"),1600);
+
+function v107OpenConsult(){
+  if(typeof openConsultation==="function"){ openConsultation("gift"); return; }
+  if(typeof open==="function" && document.getElementById("consultModal")) open("consultModal");
 }
-function visualScroll(id){
-  document.getElementById(id)?.scrollIntoView({behavior:"smooth",block:"start"});
+function v107OpenFruitBox(){
+  v107OpenConsult();
+  setTimeout(()=>document.querySelector(".fruit-builder")?.scrollIntoView({behavior:"smooth",block:"center"}),120);
 }
-function visualAction(action){
-  if(action==="top"||action==="brand"){visualScroll("visualTop");return}
-  if(action==="fruitStory"){if(typeof openSeasonGuide==="function")openSeasonGuide("autumn");else visualScroll("visualBest");return}
-  if(action==="products"){visualScroll("visualBest");return}
-  if(action==="customer"){visualScroll("visualService");return}
-  if(action==="search"){if(typeof open==="function"){open("searchModal");setTimeout(()=>document.getElementById("searchInput")?.focus(),50)}return}
-  if(action==="login"){if(typeof open==="function")open("loginModal");return}
-  if(action==="cart"){if(typeof drawCartModal==="function")drawCartModal();if(typeof open==="function")open("cartModal");return}
-  if(action==="consult"){if(typeof open==="function" && document.getElementById("consultModal"))open("consultModal");else window.open("https://open.kakao.com/o/sd7wnrKi","_blank");return}
-  if(action==="service"){visualTip("산지 직배송 · 당일 선별 · 지정 배송 · 친절 상담으로 도와드립니다.");return}
-  if(action==="prevSeason"||action==="nextSeason"){
-    visualSeasonIndex=(visualSeasonIndex+(action==="nextSeason"?1:-1)+visualSeasonOrder.length)%visualSeasonOrder.length;
-    const key=visualSeasonOrder[visualSeasonIndex];
-    if(typeof openSeasonGuide==="function")openSeasonGuide(key);
-    return;
+function v107OpenOrder(){
+  if(typeof open==="function" && document.getElementById("orderLookupModal")) open("orderLookupModal");
+}
+function v107OpenSearch(){
+  if(typeof open==="function" && document.getElementById("searchModal")){
+    open("searchModal");setTimeout(()=>document.getElementById("searchInput")?.focus(),80);
   }
 }
-document.querySelectorAll("#visualHome [data-action]").forEach(el=>{
-  el.addEventListener("click",e=>{e.preventDefault();visualAction(el.dataset.action)});
+function v107OpenLogin(){
+  if(typeof currentUser!=="undefined" && currentUser && typeof open==="function" && document.getElementById("myOrdersModal")){
+    open("myOrdersModal"); if(typeof loadMyOrders==="function") loadMyOrders(); return;
+  }
+  if(typeof open==="function" && document.getElementById("loginModal")) open("loginModal");
+}
+function v107OpenCart(){
+  if(typeof drawCartModal==="function")drawCartModal();
+  if(typeof open==="function" && document.getElementById("cartModal"))open("cartModal");
+}
+function v107Product(name){
+  if(typeof showProduct==="function") showProduct(name);
+}
+[
+ ["v107CustomFruit",v107OpenConsult],["v107CustomFruit2",v107OpenConsult],["v107CorpConsult",v107OpenConsult],
+ ["v107FruitBox",v107OpenFruitBox],["v107FruitBox2",v107OpenFruitBox],
+ ["v107OrderLookup",v107OpenOrder],["v107OrderLookup2",v107OpenOrder],
+ ["v107Search",v107OpenSearch],["v107Login",v107OpenLogin],["v107Cart",v107OpenCart],
+ ["v107GiftDetail",()=>v107Product("프리미엄 과일세트")]
+].forEach(([id,fn])=>document.getElementById(id)?.addEventListener("click",fn));
+
+// Robust delegated product detail: works for initial AND dynamically regenerated season cards.
+document.addEventListener("click",e=>{
+  const btn=e.target.closest(".detailBtn[data-product]");
+  if(btn){e.preventDefault();v107Product(btn.dataset.product);}
 });
-document.querySelectorAll("#visualHome [data-season]").forEach(el=>{
-  el.addEventListener("click",e=>{
-    e.preventDefault();
-    const key=el.dataset.season;
-    visualSeasonIndex=Math.max(0,visualSeasonOrder.indexOf(key));
-    if(typeof openSeasonGuide==="function")openSeasonGuide(key);
-  });
-});
-document.querySelectorAll("#visualHome [data-product]").forEach(el=>{
-  el.addEventListener("click",e=>{
-    e.preventDefault();
-    const name=el.dataset.product;
-    if(typeof showProduct==="function")showProduct(name);
-  });
-});
-// Keyboard accessibility for all visual hotspots
-document.querySelectorAll("#visualHome button.visual-hotspot").forEach(el=>{
-  el.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();el.click()}});
-});
+
+// V105 season arrows: make them work, too.
+const seasonKeysV107=["autumn","winter","spring","summer"];
+let seasonIdxV107=Math.max(0,seasonKeysV107.indexOf((typeof v105AutoSeason==="function"?v105AutoSeason():"autumn")));
+const arrows=document.querySelectorAll(".v105-best-controls .v105-round");
+if(arrows[0])arrows[0].addEventListener("click",()=>{seasonIdxV107=(seasonIdxV107+3)%4;if(typeof v105RenderSeason==="function")v105RenderSeason(seasonKeysV107[seasonIdxV107]);});
+if(arrows[1])arrows[1].addEventListener("click",()=>{seasonIdxV107=(seasonIdxV107+1)%4;if(typeof v105RenderSeason==="function")v105RenderSeason(seasonKeysV107[seasonIdxV107]);});
+
+// Make generated "campbell" and "citrus" detail buttons functional after seasonal render.
+const _v105RenderSeason = typeof v105RenderSeason==="function" ? v105RenderSeason : null;
+if(_v105RenderSeason){
+  v105RenderSeason=function(key){
+    _v105RenderSeason(key);
+    // Re-map buttons by visible card title where no data-product exists
+    document.querySelectorAll("#v105BestGrid .v105-best-card").forEach(card=>{
+      const title=card.querySelector("h3")?.textContent?.trim();
+      const btn=card.querySelector("button");
+      if(!btn)return;
+      if(title==="캠벨 포도"){btn.classList.add("detailBtn");btn.dataset.product="캠벨 포도";}
+      if(title==="제주 감귤"){btn.classList.add("detailBtn");btn.dataset.product="제주 감귤";}
+      if(title==="샤인머스켓"){btn.classList.add("detailBtn");btn.dataset.product="샤인머스켓";}
+      if(title==="복숭아 백도"){btn.classList.add("detailBtn");btn.dataset.product="복숭아 백도";}
+      if(title?.includes("선물")){btn.classList.add("detailBtn");btn.dataset.product="프리미엄 과일세트";}
+    });
+  }
+  setTimeout(()=>v105RenderSeason(typeof v105AutoSeason==="function"?v105AutoSeason():"autumn"),0);
+}
 
 </script>
 <button id="installMini" class="install-mini" type="button">📱 앱 설치</button>
