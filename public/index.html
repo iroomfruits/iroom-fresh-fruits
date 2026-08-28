@@ -677,239 +677,117 @@ header{background:rgba(255,255,255,.97)!important;backdrop-filter:blur(12px);bor
 @media(max-width:680px){.fruit-picker-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.fruit-tools{align-items:stretch}.fruit-search{width:100%}}
 
 
-/* ===== V97 PREMIUM IMAGE STYLE — 기능 구조 보존 ===== */
-:root{
-  --iroom-green:#0a3d2d;
-  --iroom-green-2:#123f2e;
-  --iroom-gold:#b8842d;
-  --iroom-gold-soft:#d9bd84;
-  --iroom-cream:#fbf7ef;
-  --iroom-cream-2:#f5eddf;
-  --iroom-line:#e3d4b9;
-  --iroom-text:#17382a;
-}
-html{scroll-behavior:smooth}
-body{background:var(--iroom-cream)!important;color:var(--iroom-text)!important}
+/* ===== V97 EXACT APPROVED IMAGE + FULL SYSTEM ===== */
+body{background:#fbf7ef!important;color:#17382a!important}
+.notice,header{display:none!important}
 
-/* V97 기존 상단 구조는 유지하고 이미지 분위기로 스타일만 변경 */
-.notice{
-  background:var(--iroom-green)!important;
-  color:#fff!important;
-  border:0!important
+/* exact image landing */
+.v97-exact-home{
+  background:#fbf7ef;
+  border-bottom:1px solid #e4d5bb;
 }
-header{
-  background:rgba(255,252,246,.97)!important;
-  border-bottom:1px solid var(--iroom-line)!important;
-  box-shadow:0 5px 18px rgba(80,55,20,.04)!important;
-  backdrop-filter:blur(8px)
+.v97-exact-canvas{
+  position:relative;
+  width:min(100%,1536px);
+  margin:0 auto;
+  line-height:0;
+  background:#fbf7ef;
 }
-.head{min-height:86px!important}
-.brand{gap:12px!important;text-decoration:none!important}
-.brand img{width:58px!important;height:58px!important;border-radius:50%!important;object-fit:contain!important;background:#fff8e8!important;border:1px solid #e1c998!important;padding:3px!important}
-.brand .brandname,.brand strong{color:var(--iroom-green)!important}
-.nav a,.toplinks a{color:var(--iroom-text)!important;font-weight:800!important}
-.nav a:hover,.toplinks a:hover{color:var(--iroom-gold)!important}
+.v97-exact-canvas>img{
+  display:block;
+  width:100%;
+  height:auto;
+  user-select:none;
+  -webkit-user-drag:none;
+}
+.v97-hotspot{
+  position:absolute;
+  z-index:20;
+  border:1px solid transparent;
+  background:transparent;
+  border-radius:14px;
+  cursor:pointer;
+  color:transparent;
+  font-size:0;
+  line-height:1;
+}
+.v97-hotspot:hover,.v97-hotspot:focus-visible{
+  border-color:rgba(181,133,49,.7);
+  background:rgba(255,249,235,.08);
+  box-shadow:0 0 0 3px rgba(181,133,49,.10),0 8px 24px rgba(58,41,18,.09);
+  outline:none;
+}
+.v97-hotspot.round{border-radius:50%}
+.v97-exact-admin{
+  position:absolute;right:2.8%;bottom:1.2%;
+  z-index:30;font-size:10px;line-height:1;
+  color:rgba(255,255,255,.58)!important;text-decoration:none;
+  padding:5px 7px;border-radius:7px;background:rgba(0,0,0,.08)
+}
+.v97-exact-admin:hover{color:#f0cd83!important;background:rgba(0,0,0,.16)}
 
-/* 상단 V97 기능 버튼을 시안의 진녹색 유틸리티 바처럼 정리 */
-.v97-premium-tools{
-  background:linear-gradient(90deg,#083829,#0d4a36);
-  color:#fff;border-bottom:1px solid rgba(216,184,123,.35)
-}
-.v97-premium-tools .wrap{
-  min-height:38px;display:flex;align-items:center;gap:9px;flex-wrap:wrap
-}
-.v97-premium-tools button,.v97-premium-tools a{
-  border:0;background:transparent;color:#fff;text-decoration:none;
-  font-size:12px;font-weight:800;padding:7px 10px;border-radius:999px;cursor:pointer
-}
-.v97-premium-tools button:hover,.v97-premium-tools a:hover{background:rgba(255,255,255,.1)}
-.v97-premium-tools .grow{margin-left:auto;display:flex;gap:8px;align-items:center}
-
-/* 메인 비주얼 — 확정 이미지와 같은 구도, 실제 HTML/CSS */
-.v97-image-hero{
-  max-width:1440px;margin:0 auto;
-  background:
-    radial-gradient(circle at 77% 12%,rgba(255,255,255,.96),transparent 18%),
-    linear-gradient(145deg,#fbf5e9 0%,#f8f0e4 58%,#f1e5d4 100%);
-  overflow:hidden;border-bottom:1px solid var(--iroom-line)
-}
-.v97-image-hero-grid{
-  display:grid;grid-template-columns:40% 60%;min-height:520px
-}
-.v97-image-copy{
-  padding:72px 28px 42px max(42px,calc((100vw - 1340px)/2));
-  display:flex;flex-direction:column;justify-content:center
-}
-.v97-image-copy .kicker{
-  color:#a9752a;font-weight:800;font-size:14px;letter-spacing:.02em;margin-bottom:18px
-}
-.v97-image-copy h1{
-  font-family:Georgia,"Noto Serif KR",serif;
-  font-weight:500;color:#123b2a;font-size:52px;line-height:1.28;
-  letter-spacing:-2px;margin:0
-}
-.v97-image-copy p{
-  margin:22px 0 0;color:#5f625b;line-height:1.9;font-size:14px
-}
-.v97-image-copy .hero-btn{
-  align-self:flex-start;margin-top:24px;border:0;border-radius:999px;
-  padding:14px 24px;background:var(--iroom-green);color:#fff;font-weight:900;
-  box-shadow:0 9px 24px rgba(20,58,42,.15);cursor:pointer
-}
-.v97-image-scene{position:relative;min-height:500px;overflow:hidden}
-.v97-arch{
-  position:absolute;width:55%;height:70%;right:14%;top:3%;
-  border:2px solid #d3a751;border-radius:50% 50% 8% 8%;overflow:hidden;
-  background:linear-gradient(#f9f1e2,#efe2c3)
-}
-.v97-arch:before{
-  content:"";position:absolute;inset:27% -8% 0;
-  background:
-   radial-gradient(ellipse at 40% 20%,#eadfbe 0 17%,transparent 18%),
-   radial-gradient(ellipse at 70% 26%,#e5d7b1 0 15%,transparent 16%),
-   linear-gradient(165deg,#f5ead1 0 33%,#e7d8ad 33% 44%,#f2e6c9 44% 59%,#e3d5ad 59% 68%,#f7efdb 68%);
-}
-.v97-arch:after{
-  content:"";position:absolute;left:0;right:0;bottom:10%;height:34%;
-  background:repeating-linear-gradient(169deg,rgba(205,174,111,.28) 0 5px,rgba(255,255,255,.1) 5px 12px)
-}
-.v97-stage{
-  position:absolute;left:22%;right:4%;bottom:5%;height:29%;
-  border-radius:50%;background:linear-gradient(#fffdf8,#eadfc9);
-  border:1px solid #dec79c;box-shadow:0 20px 35px rgba(77,51,17,.13)
-}
-.v97-pear{
-  position:absolute;left:31%;bottom:20%;width:158px;height:150px;border-radius:50%;
-  background:radial-gradient(circle at 31% 24%,#fff8dc 0 4%,#deb150 8%,#b8792e 78%);
-  box-shadow:0 17px 22px rgba(73,49,16,.14);z-index:4
-}
-.v97-pear:before{
-  content:"";position:absolute;left:49%;top:-12px;width:8px;height:27px;
-  background:#744d22;border-radius:4px
-}
-.v97-pear:after{
-  content:"";position:absolute;left:55%;top:-2px;width:67px;height:33px;
-  border-radius:100% 0 100% 0;background:#547a43;transform:rotate(16deg)
-}
-.v97-campbell{
-  position:absolute;right:20%;bottom:16%;width:225px;height:215px;z-index:4
-}
-.v97-campbell i{
-  position:absolute;width:59px;height:59px;border-radius:50%;
-  background:radial-gradient(circle at 28% 23%,#aaa9e8 0 5%,#514690 12%,#29255f 78%);
-  box-shadow:0 9px 14px rgba(35,28,76,.18)
-}
-.v97-campbell i:nth-child(1){left:72px}.v97-campbell i:nth-child(2){left:34px;top:42px}
-.v97-campbell i:nth-child(3){left:92px;top:42px}.v97-campbell i:nth-child(4){left:146px;top:47px}
-.v97-campbell i:nth-child(5){left:52px;top:92px}.v97-campbell i:nth-child(6){left:112px;top:96px}
-.v97-campbell i:nth-child(7){left:165px;top:100px}.v97-campbell i:nth-child(8){left:82px;top:145px}
-.v97-campbell i:nth-child(9){left:140px;top:151px}
-.v97-grapeleaf{
-  position:absolute;right:18%;bottom:51%;width:150px;height:74px;
-  border-radius:100% 0 100% 0;background:#527841;transform:rotate(10deg);z-index:5
-}
-.v97-vase{
-  position:absolute;right:4%;bottom:19%;width:66px;height:126px;
-  background:linear-gradient(90deg,#e8dcc2,#fff8e9,#dfd0b3);
-  border-radius:14px 14px 29px 29px;z-index:3
-}
-.v97-goldleaf{
-  position:absolute;width:70px;height:33px;border-radius:100% 0 100% 0;
-  background:linear-gradient(145deg,#d8b660,#a47a2c);opacity:.78
-}
-.v97-goldleaf.g1{right:7%;top:11%;transform:rotate(58deg)}
-.v97-goldleaf.g2{right:2%;top:26%;transform:rotate(77deg)}
-.v97-goldleaf.g3{left:7%;bottom:14%;transform:rotate(-35deg)}
-.v97-goldleaf.g4{left:17%;bottom:5%;transform:rotate(-12deg)}
-
-/* 계절/품질 바 */
-.v97-season-quality{
-  max-width:1340px;margin:-2px auto 24px;padding:0 24px;
-  display:grid;grid-template-columns:1fr 1.15fr;gap:12px
-}
-.v97-season-tabs,.v97-quality-tabs{
-  display:grid;grid-template-columns:repeat(4,1fr);
-  background:#fffdf8;border:1px solid var(--iroom-line);border-radius:22px;padding:8px;
-  box-shadow:0 10px 25px rgba(76,52,20,.04)
-}
-.v97-season-tabs button,.v97-quality-tabs button{
-  border:0;background:transparent;border-radius:16px;padding:12px 8px;
-  color:var(--iroom-text);cursor:pointer
-}
-.v97-season-tabs button.active{background:var(--iroom-green);color:#fff}
-.v97-season-tabs b,.v97-season-tabs small,.v97-quality-tabs b,.v97-quality-tabs small{display:block}
-.v97-season-tabs small,.v97-quality-tabs small{font-size:10px;margin-top:3px}
-.v97-quality-tabs button{border-right:1px solid #e5dac6}
-.v97-quality-tabs button:last-child{border-right:0}
-.v97-quality-tabs em{display:block;font-style:normal;font-size:24px;color:var(--iroom-gold);margin-bottom:5px}
-
-/* V97의 기존 섹션들 전체를 같은 이미지 톤으로 */
-.section{background:var(--iroom-cream)!important;padding-top:50px!important;padding-bottom:50px!important}
-.section.alt{background:var(--iroom-cream-2)!important}
+/* functional V97 content remains below exact landing */
+main{background:#fbf7ef}
+.section{background:#fbf7ef!important}
+.section.alt{background:#f4ecdf!important}
 .sec-head h2{
-  color:var(--iroom-green)!important;font-family:Georgia,"Noto Serif KR",serif!important;
-  letter-spacing:-.7px
+  font-family:Georgia,"Noto Serif KR",serif!important;
+  color:#113b2a!important;
 }
-.sec-head span{color:#9d7b46!important}
-.panel,.product,.guide,.step,.install-card,.review,.faq details{
+.sec-head span{color:#9b7942!important}
+.product,.panel,.guide,.step,.install-card,.review,.faq details{
   background:linear-gradient(180deg,#fff 0%,#fffdf8 100%)!important;
-  border-color:var(--iroom-line)!important;border-radius:16px!important;
-  box-shadow:0 9px 26px rgba(74,52,22,.045)!important
+  border-color:#e3d3b7!important;
+  border-radius:16px!important;
+  box-shadow:0 9px 26px rgba(72,51,20,.045)!important;
 }
-.product:hover,.guide:hover,.install-card:hover{
-  transform:translateY(-3px);box-shadow:0 14px 30px rgba(74,52,22,.08)!important
-}
-.product h3,.guide b,.step b{color:var(--iroom-green)!important}
+.product h3,.guide b,.step b{color:#123d2b!important}
 .greenbtn,.fullbtn,.install-btn{
-  background:var(--iroom-green)!important;border-color:var(--iroom-green)!important;color:#fff!important
+  background:#0b3f2e!important;
+  color:#fff!important;
+  border-color:#0b3f2e!important;
 }
 .linebtn,.product-actions button{
-  background:#fffaf1!important;border-color:#d9c49e!important;color:var(--iroom-green)!important
+  background:#fffaf1!important;
+  color:#153c2b!important;
+  border-color:#d9c39d!important;
 }
-.story{
-  background:linear-gradient(135deg,#083829,#123f2e)!important
-}
+.story{background:linear-gradient(135deg,#073326,#0d3f2f)!important}
 .story-box{background:rgba(255,255,255,.07)!important;border-color:rgba(216,184,123,.22)!important}
-footer#footer{
-  background:linear-gradient(135deg,#073326,#0d3e2e)!important;
-  border-top:1px solid rgba(216,184,123,.25)!important
-}
-footer#footer b,footer#footer a{color:#d7b365!important}
+footer#footer{background:linear-gradient(135deg,#073326,#0d3e2e)!important}
+footer#footer b,footer#footer a{color:#d6b160!important}
 footer#footer small{color:#dce7df!important}
 
-/* 모달도 동일한 프리미엄 톤 */
-.modalbox{
-  background:#fffdf8!important;border:1px solid var(--iroom-line)!important;
-  box-shadow:0 28px 85px rgba(0,0,0,.25)!important
+/* compact sticky V97 function dock, not admin */
+.v97-function-dock{
+  position:sticky;top:0;z-index:80;
+  display:flex;justify-content:center;gap:8px;flex-wrap:wrap;
+  padding:8px 12px;background:rgba(9,56,41,.96);
+  border-bottom:1px solid rgba(215,181,112,.35);
+  backdrop-filter:blur(8px)
 }
-.modalhead{border-bottom:1px solid #eadfcd!important}
-.modalhead h3{color:var(--iroom-green)!important}
+.v97-function-dock button{
+  border:1px solid rgba(223,195,139,.4);background:transparent;color:#fff;
+  border-radius:999px;padding:8px 12px;font-size:11px;font-weight:800;cursor:pointer
+}
+.v97-function-dock button:hover{background:rgba(255,255,255,.1)}
+.modal{z-index:1000!important}
+.modalbox{
+  background:#fffdf8!important;
+  border:1px solid #e3d3b7!important;
+  box-shadow:0 28px 80px rgba(0,0,0,.26)!important
+}
 .fruit-builder,.fruit-box-summary{
-  background:#faf4e9!important;border-color:#e3d1b1!important
+  background:#faf4e9!important;
+  border-color:#e4d1ae!important
 }
 .fruit-preset,.fruit-more-btn,.fruit-category-tabs button{
-  background:#fffaf1!important;border-color:#dac59f!important;color:var(--iroom-green)!important
+  background:#fffaf1!important;color:#153c2b!important;border-color:#d9c39d!important
 }
-.fruit-category-tabs button.active{background:var(--iroom-green)!important;color:#fff!important}
-.fruit-admin-link{color:#8c6d37!important}
-
-/* 관리자는 V97 그대로 footer 안에서만. */
-footer#footer .admin-visible-top{display:none!important}
-
-@media(max-width:900px){
-  .v97-image-hero-grid{grid-template-columns:1fr}
-  .v97-image-copy{padding:42px 26px 20px}
-  .v97-image-copy h1{font-size:40px}
-  .v97-image-scene{min-height:420px}
-  .v97-season-quality{grid-template-columns:1fr}
-}
-@media(max-width:560px){
-  .v97-image-copy h1{font-size:34px}
-  .v97-image-scene{min-height:340px}
-  .v97-arch{width:78%;right:3%}
-  .v97-pear{width:116px;height:110px;left:20%}
-  .v97-campbell{transform:scale(.72);transform-origin:bottom right;right:1%}
-  .v97-season-tabs,.v97-quality-tabs{grid-template-columns:repeat(2,1fr)}
+.fruit-category-tabs button.active{background:#0b3f2e!important;color:#fff!important}
+@media(max-width:700px){
+  .v97-function-dock{justify-content:flex-start;overflow-x:auto;flex-wrap:nowrap}
+  .v97-function-dock button{white-space:nowrap}
 }
 
 </style>
@@ -931,7 +809,7 @@ footer#footer .admin-visible-top{display:none!important}
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "이룸 fresh fruits", "alternateName": ["이룸 과일", "이룸 신선한 과일"], "url": "https://iroom-fresh-fruits.onrender.com/", "description": "엄선한 제철과일과 고급과일, 맛있는과일, 프리미엄 과일선물세트를 정성껏 준비하는 이룸 fresh fruits입니다. 선물용·가정용·단체·맞춤 과일 상담과 주문을 도와드립니다.", "inLanguage": "ko-KR", "keywords": "과일, 고급과일, 맛있는과일, 프리미엄과일, 과일선물, 과일선물세트, 고급과일선물세트, 제철과일, 신선한과일, 선물용과일, 가정용과일, 단체과일선물, 맞춤과일, 이룸, 이룸과일, fresh fruits"}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Store", "name": "이룸 fresh fruits", "url": "https://iroom-fresh-fruits.onrender.com/", "description": "고급과일, 맛있는과일, 제철과일과 프리미엄 과일선물세트를 판매·상담하는 과일 전문점", "currenciesAccepted": "KRW", "paymentAccepted": "Bank Transfer", "hasOfferCatalog": {"@type": "OfferCatalog", "name": "프리미엄 과일", "itemListElement": [{"@type": "OfferCatalog", "name": "고급과일"}, {"@type": "OfferCatalog", "name": "맛있는과일"}, {"@type": "OfferCatalog", "name": "과일선물세트"}, {"@type": "OfferCatalog", "name": "제철과일"}, {"@type": "OfferCatalog", "name": "맞춤 과일선물"}]}}</script>
 
-<meta name="iroom-version" content="V97-premium-image-style">
+<meta name="iroom-version" content="V97-exact-image-full-system">
 </head>
 <body>
 <div class="notice"><div class="wrap"><div>🍊 <b>오늘의 입고</b> &nbsp; | &nbsp; 고급 국산 종합과일 입고되었습니다.</div><nav><button id="customerBtn">고객센터</button><button id="ordersBtn">주문조회</button><button id="myBtn">마이페이지</button></nav></div></div>
@@ -942,19 +820,6 @@ footer#footer .admin-visible-top{display:none!important}
     <small>PREMIUM FRUIT BOUTIQUE</small>
   </span>
 </a><nav class="nav"><a href="#best">NEW & BEST <span style="font-size:9px;background:#c6a15b;color:#fff;border-radius:999px;padding:3px 6px;margin-left:3px">HOT</span></a><a href="#best">과일</a><a href="#gift">선물세트</a><a href="#group">공동구매</a><a href="#custom">단체·맞춤선물</a><a href="#story">스토리</a></nav><div class="tools"><button class="tool desktop" id="loginBtn">로그인</button><button class="tool desktop" id="signupBtn">회원가입</button><button class="tool desktop" id="myTopBtn">마이페이지</button><button class="icon desktop" id="searchBtn" title="검색">⌕</button><button class="icon" id="shareBtn" title="공유">↗</button><button class="icon" id="cartBtn">🛒<span class="badge" id="cartBadge">0</span></button></div></div></header>
-<div class="v97-premium-tools">
-  <div class="wrap">
-    <button type="button" id="v97QuickConsult">✣ 맞춤과일 추천</button>
-    <button type="button" id="v97QuickBox">▢ 나만의 과일박스</button>
-    <button type="button" id="v97QuickOrder">▣ 주문조회</button>
-    <div class="grow">
-      <button type="button" id="v97QuickSearch">상품 검색</button>
-      <button type="button" id="v97QuickLogin">로그인 / 마이페이지</button>
-      <button type="button" id="v97QuickCart">장바구니</button>
-    </div>
-  </div>
-</div>
-
 
 <nav class="seo-quick-nav" aria-label="과일 카테고리 바로가기">
   <a href="/premium-fruit.html" title="고급과일 안내">고급과일</a>
@@ -964,42 +829,68 @@ footer#footer .admin-visible-top{display:none!important}
 </nav>
 
 
+
+<section class="v97-exact-home" id="v97ExactHome">
+  <div class="v97-exact-canvas">
+    <img src="/assets/iroom-approved-v97-home.png" alt="이룸 fresh fruits 프리미엄 홈페이지">
+
+    <!-- header/menu -->
+    <button class="v97-hotspot" style="left:2.3%;top:1.7%;width:17%;height:4.8%" data-v97-action="home" aria-label="홈"></button>
+    <button class="v97-hotspot" style="left:33.1%;top:2.2%;width:10.5%;height:3.5%" data-v97-action="brand" aria-label="브랜드 소개"></button>
+    <button class="v97-hotspot" style="left:45.0%;top:2.2%;width:10.0%;height:3.5%" data-v97-action="story" aria-label="과일 이야기"></button>
+    <button class="v97-hotspot" style="left:57.2%;top:2.2%;width:9.5%;height:3.5%" data-v97-action="products" aria-label="상품 안내"></button>
+    <button class="v97-hotspot" style="left:69.1%;top:2.2%;width:9.5%;height:3.5%" data-v97-action="customer" aria-label="고객센터"></button>
+    <button class="v97-hotspot round" style="left:84.0%;top:1.8%;width:4.3%;height:3.5%" data-v97-action="search" aria-label="검색"></button>
+    <button class="v97-hotspot round" style="left:89.0%;top:1.8%;width:4.4%;height:3.5%" data-v97-action="login" aria-label="로그인 및 마이페이지"></button>
+    <button class="v97-hotspot round" style="left:93.8%;top:1.6%;width:5.0%;height:3.9%" data-v97-action="cart" aria-label="장바구니"></button>
+
+    <!-- hero -->
+    <button class="v97-hotspot" style="left:4.5%;top:26.3%;width:18.0%;height:4.2%" data-v97-action="products" aria-label="과일 보러가기"></button>
+
+    <!-- seasons -->
+    <button class="v97-hotspot" style="left:4.6%;top:38.2%;width:12.2%;height:5.2%" data-v97-season="autumn" aria-label="가을 제철 과일"></button>
+    <button class="v97-hotspot" style="left:16.8%;top:38.2%;width:10.3%;height:5.2%" data-v97-season="winter" aria-label="겨울 제철 과일"></button>
+    <button class="v97-hotspot" style="left:27.2%;top:38.2%;width:9.5%;height:5.2%" data-v97-season="spring" aria-label="봄 제철 과일"></button>
+    <button class="v97-hotspot" style="left:36.8%;top:38.2%;width:10.1%;height:5.2%" data-v97-season="summer" aria-label="여름 제철 과일"></button>
+
+    <!-- quality -->
+    <button class="v97-hotspot" style="left:52.5%;top:38.3%;width:10.5%;height:5.2%" data-info="quality" aria-label="엄선된 산지"></button>
+    <button class="v97-hotspot" style="left:63.0%;top:38.3%;width:10.5%;height:5.2%" data-info="quality" aria-label="프리미엄 품질"></button>
+    <button class="v97-hotspot" style="left:73.6%;top:38.3%;width:10.3%;height:5.2%" data-info="shipping" aria-label="신선한 보관"></button>
+    <button class="v97-hotspot" style="left:84.0%;top:38.3%;width:10.5%;height:5.2%" data-info="gift" aria-label="정성 포장"></button>
+
+    <!-- best cards -->
+    <button class="v97-hotspot" style="left:5.0%;top:52.8%;width:21.5%;height:17.8%" data-v97-product="나주 신고배 특선" aria-label="나주 신고배 상세 보기"></button>
+    <button class="v97-hotspot" style="left:28.0%;top:52.8%;width:21.4%;height:17.8%" data-v97-product="샤인머스켓" aria-label="캠벨 포도 상세 보기"></button>
+    <button class="v97-hotspot" style="left:50.7%;top:52.8%;width:21.4%;height:17.8%" data-v97-product="경북 홍사과" aria-label="경북 홍사과 상세 보기"></button>
+    <button class="v97-hotspot" style="left:73.6%;top:52.8%;width:21.4%;height:17.8%" data-v97-product="제주 한라봉" aria-label="제주 감귤 상세 보기"></button>
+
+    <!-- gift/corporate -->
+    <button class="v97-hotspot" style="left:6.5%;top:83.2%;width:17.5%;height:3.0%" data-v97-product="프리미엄 과일세트" aria-label="선물세트 보기"></button>
+    <button class="v97-hotspot" style="left:56.0%;top:79.3%;width:14.4%;height:3.1%" data-v97-action="consult" aria-label="맞춤 상담"></button>
+    <a class="v97-hotspot" style="left:56.0%;top:82.7%;width:13.7%;height:2.9%" href="https://band.us/@iroomfruits" target="_blank" rel="noopener" aria-label="BAND 보기"></a>
+
+    <!-- service -->
+    <button class="v97-hotspot" style="left:3.7%;top:89.2%;width:22.0%;height:5.0%" data-info="shipping" aria-label="산지 직배송"></button>
+    <button class="v97-hotspot" style="left:26.1%;top:89.2%;width:22.2%;height:5.0%" data-info="quality" aria-label="당일 선별 당일 출고"></button>
+    <button class="v97-hotspot" style="left:49.0%;top:89.2%;width:22.1%;height:5.0%" data-info="shipping" aria-label="날짜 지정 배송"></button>
+    <button class="v97-hotspot" style="left:72.0%;top:89.2%;width:23.0%;height:5.0%" data-v97-action="consult" aria-label="고객 상담"></button>
+
+    <!-- administrator remains at the bottom only -->
+    <a class="v97-exact-admin" href="/band-admin.html">관리자</a>
+  </div>
+</section>
+
+<div class="v97-function-dock" aria-label="V97 주요 기능">
+  <button type="button" data-v97-action="consult">맞춤과일 추천</button>
+  <button type="button" data-v97-action="fruitbox">나만의 과일박스</button>
+  <button type="button" data-v97-action="order">주문조회</button>
+  <button type="button" data-v97-action="search">상품검색</button>
+  <button type="button" data-v97-action="login">로그인/마이페이지</button>
+  <button type="button" data-v97-action="cart">장바구니</button>
+</div>
+
 <main>
-<section class="v97-image-hero" id="v97PremiumHome">
-  <div class="v97-image-hero-grid">
-    <div class="v97-image-copy">
-      <div class="kicker">자연의 정성을 담은 프리미엄 과일</div>
-      <h1>가족이 함께 즐기는<br>정직한 과일</h1>
-      <p>좋은 산지의 제철 과일만 엄선하여<br>신선함과 맛을 그대로 전해드립니다.</p>
-      <button class="hero-btn" type="button" id="v97HeroShop">과일 보러가기 →</button>
-    </div>
-    <div class="v97-image-scene">
-      <div class="v97-arch"></div>
-      <div class="v97-stage"></div>
-      <div class="v97-pear"></div>
-      <div class="v97-campbell"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-      <div class="v97-grapeleaf"></div>
-      <div class="v97-vase"></div>
-      <div class="v97-goldleaf g1"></div><div class="v97-goldleaf g2"></div><div class="v97-goldleaf g3"></div><div class="v97-goldleaf g4"></div>
-    </div>
-  </div>
-</section>
-
-<section class="v97-season-quality">
-  <div class="v97-season-tabs">
-    <button type="button" class="active" data-v97-season="autumn"><b>🍂 가을</b><small>8.25 ~ 11월</small></button>
-    <button type="button" data-v97-season="winter"><b>❄ 겨울</b><small>12월 ~ 2월</small></button>
-    <button type="button" data-v97-season="spring"><b>🌸 봄</b><small>3월 ~ 5월</small></button>
-    <button type="button" data-v97-season="summer"><b>☀ 여름</b><small>6월 ~ 8월</small></button>
-  </div>
-  <div class="v97-quality-tabs">
-    <button type="button" data-info="quality"><em>△</em><b>엄선된 산지</b><small>좋은 산지의 제철 과일</small></button>
-    <button type="button" data-info="quality"><em>◇</em><b>프리미엄 품질</b><small>엄격한 선별과 품질 관리</small></button>
-    <button type="button" data-info="shipping"><em>♨</em><b>신선한 보관</b><small>최적의 온도 유지</small></button>
-    <button type="button" data-info="gift"><em>🎁</em><b>정성 포장</b><small>안전하고 고급스럽게</small></button>
-  </div>
-</section>
-
 <section class="hero"><div class="hero-copy"><h1>자연의 신선함을<br>프리미엄으로 전합니다</h1><p>좋은 산지의 제철 과일을 엄선하여<br>정성껏 보내드립니다.</p><a class="cta" href="#best">SHOP NOW ›</a><div class="pager"><span id="heroCount"><b>01</b> / 06</span><button id="prev">‹</button><button id="next">›</button></div></div><div class="hero-media"><img id="heroImg" src="/assets/hero-1.jpg" alt="프리미엄 과일"><div class="dots" id="dots"></div></div></section>
 
 <section class="trust"><div class="wrap">
@@ -1903,33 +1794,35 @@ if("serviceWorker" in navigator){
 }
 
 
-// ===== V97 PREMIUM IMAGE STYLE BINDINGS =====
-function v97OpenConsult(){
-  if(typeof openConsultation==="function"){openConsultation("gift");return;}
+// ===== V97 EXACT IMAGE CONTROLS =====
+function v97ExactConsult(){
+  if(typeof openConsultation==="function"){openConsultation("gift");return}
   if(typeof open==="function" && document.getElementById("consultModal"))open("consultModal");
 }
-function v97OpenFruitBox(){
-  v97OpenConsult();
+function v97ExactFruitbox(){
+  v97ExactConsult();
   setTimeout(()=>document.querySelector(".fruit-builder")?.scrollIntoView({behavior:"smooth",block:"center"}),120);
 }
-document.getElementById("v97QuickConsult")?.addEventListener("click",v97OpenConsult);
-document.getElementById("v97QuickBox")?.addEventListener("click",v97OpenFruitBox);
-document.getElementById("v97QuickOrder")?.addEventListener("click",()=>{if(typeof open==="function")open("orderLookupModal")});
-document.getElementById("v97QuickSearch")?.addEventListener("click",()=>{if(typeof open==="function")open("searchModal");setTimeout(()=>document.getElementById("searchInput")?.focus(),60)});
-document.getElementById("v97QuickLogin")?.addEventListener("click",()=>{
-  if(typeof currentUser!=="undefined" && currentUser && document.getElementById("myOrdersModal") && typeof open==="function"){
-    open("myOrdersModal");if(typeof loadMyOrders==="function")loadMyOrders();
-  }else if(typeof open==="function")open("loginModal");
-});
-document.getElementById("v97QuickCart")?.addEventListener("click",()=>{if(typeof drawCartModal==="function")drawCartModal();if(typeof open==="function")open("cartModal")});
-document.getElementById("v97HeroShop")?.addEventListener("click",()=>{
-  const target=document.getElementById("best")||document.querySelector(".products")||document.querySelector(".section");
-  target?.scrollIntoView({behavior:"smooth",block:"start"});
-});
-document.querySelectorAll("[data-v97-season]").forEach(btn=>btn.addEventListener("click",()=>{
-  document.querySelectorAll("[data-v97-season]").forEach(x=>x.classList.toggle("active",x===btn));
-  if(typeof openSeasonGuide==="function")openSeasonGuide(btn.dataset.v97Season);
-}));
+function v97ExactAction(action){
+  if(action==="home"||action==="brand"){document.getElementById("v97ExactHome")?.scrollIntoView({behavior:"smooth"});return}
+  if(action==="story"){document.getElementById("seasonGuide")?.scrollIntoView({behavior:"smooth"});return}
+  if(action==="products"){(document.getElementById("best")||document.querySelector(".products")||document.querySelector("main .section"))?.scrollIntoView({behavior:"smooth"});return}
+  if(action==="customer"){document.getElementById("footer")?.scrollIntoView({behavior:"smooth"});return}
+  if(action==="search"){if(typeof open==="function")open("searchModal");setTimeout(()=>document.getElementById("searchInput")?.focus(),60);return}
+  if(action==="login"){
+    if(typeof currentUser!=="undefined" && currentUser && typeof open==="function" && document.getElementById("myOrdersModal")){
+      open("myOrdersModal");if(typeof loadMyOrders==="function")loadMyOrders();
+    }else if(typeof open==="function")open("loginModal");
+    return;
+  }
+  if(action==="cart"){if(typeof drawCartModal==="function")drawCartModal();if(typeof open==="function")open("cartModal");return}
+  if(action==="consult"){v97ExactConsult();return}
+  if(action==="fruitbox"){v97ExactFruitbox();return}
+  if(action==="order"){if(typeof open==="function")open("orderLookupModal");return}
+}
+document.querySelectorAll("[data-v97-action]").forEach(el=>el.addEventListener("click",e=>{e.preventDefault();v97ExactAction(el.dataset.v97Action)}));
+document.querySelectorAll("[data-v97-season]").forEach(el=>el.addEventListener("click",e=>{e.preventDefault();if(typeof openSeasonGuide==="function")openSeasonGuide(el.dataset.v97Season)}));
+document.querySelectorAll("[data-v97-product]").forEach(el=>el.addEventListener("click",e=>{e.preventDefault();if(typeof showProduct==="function")showProduct(el.dataset.v97Product)}));
 
 </script>
 <button id="installMini" class="install-mini" type="button">📱 앱 설치</button>
