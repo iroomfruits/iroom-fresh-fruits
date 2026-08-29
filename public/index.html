@@ -832,6 +832,219 @@ body{background:var(--k7-cream)!important;color:var(--k7-text)!important}
   .k7-promo>div{grid-column:1!important;grid-row:1!important}
 }
 
+
+/* ===== V114 KEEP7 ARCH CLEAN ===== */
+:root{
+  --k7-green:#073b2c;
+  --k7-green2:#0e4936;
+  --k7-gold:#b78635;
+  --k7-cream:#fbf8f1;
+  --k7-cream-soft:#f8f2e8;
+  --k7-line:#dec9a7;
+  --k7-text:#17382a;
+}
+body,#keep7Main{background:#fbf8f1!important}
+
+/* Header and hero become one soft visual field. */
+.k7-header{
+  max-width:1440px!important;
+  min-height:112px!important;
+  padding:0 44px!important;
+  background:linear-gradient(180deg,#fffdf8 0%,#fbf8f1 100%)!important;
+  border-bottom:0!important;
+  box-shadow:none!important;
+}
+.k7-brand{
+  height:104px!important;
+  overflow:hidden!important;
+  display:flex!important;
+  align-items:center!important;
+}
+.k7-brand img{
+  width:142px!important;
+  height:104px!important;
+  object-fit:contain!important;
+  object-position:left center!important;
+  mix-blend-mode:multiply!important;
+}
+.k7-nav{gap:48px!important}
+.k7-nav button{font-size:14px!important;letter-spacing:-.1px}
+.k7-icons button{color:#0c3c2d!important}
+
+.k7-hero{
+  max-width:1440px!important;
+  grid-template-columns:38% 62%!important;
+  min-height:500px!important;
+  background:
+    radial-gradient(circle at 83% 24%,rgba(255,255,255,.96) 0,rgba(255,255,255,.2) 35%,transparent 58%),
+    linear-gradient(145deg,#fbf8f1 0%,#f8f1e5 63%,#f1e4cf 100%)!important;
+  border-radius:0 0 46% 0 / 0 0 18% 0;
+}
+.k7-hero-copy{
+  padding:58px 28px 60px 66px!important;
+  background:transparent!important;
+}
+.k7-hero-copy small{font-size:13px!important;color:#a7752f!important}
+.k7-hero-copy h1{font-size:50px!important;line-height:1.3!important}
+.k7-hero-copy p{font-size:14px!important}
+.k7-hero-visual{
+  min-height:500px!important;
+  background:transparent!important;
+}
+.k7-hero-visual:before{
+  content:""!important;
+  position:absolute!important;
+  inset:0!important;
+  z-index:2!important;
+  background:linear-gradient(90deg,#f8f1e5 0,rgba(248,241,229,.55) 7%,transparent 25%)!important;
+  pointer-events:none!important;
+}
+.k7-hero-visual img{
+  width:100%!important;
+  height:100%!important;
+  object-fit:cover!important;
+  object-position:center center!important;
+  border:0!important;
+}
+
+/* Four benefit cells exactly like the approved mockup. */
+.k7-benefits{
+  max-width:1320px!important;
+  grid-template-columns:repeat(4,1fr)!important;
+  margin:-2px auto 18px!important;
+  border:1px solid #ddcaa8!important;
+  border-radius:17px!important;
+  overflow:hidden!important;
+  background:rgba(255,253,249,.96)!important;
+  box-shadow:0 9px 25px rgba(83,57,20,.045)!important;
+}
+.k7-benefits button{padding:18px 26px!important}
+.k7-benefits i{font-size:29px!important}
+
+/* Season section spacing and filters. */
+.k7-season{
+  max-width:1360px!important;
+  padding:12px 24px 30px!important;
+}
+.k7-section-head{margin-bottom:14px!important}
+.k7-section-head small{
+  font-family:Georgia,serif!important;
+  font-size:27px!important;
+  color:#123b2b!important;
+}
+.k7-section-head h2{font-size:12px!important;margin-top:3px!important}
+.k7-season-pills{align-items:center!important}
+.k7-season-pills button{
+  min-width:44px!important;
+  padding:7px 14px!important;
+  background:#fffaf2!important;
+}
+.k7-season-pills button.active{
+  background:var(--k7-green)!important;
+  color:#fff!important;
+}
+
+/* TRUE ARCH CARDS. Artwork never contains text. */
+.k7-product-grid{
+  grid-template-columns:repeat(5,minmax(0,1fr))!important;
+  gap:18px!important;
+}
+.k7-product{
+  min-height:405px!important;
+  overflow:hidden!important;
+  border:1px solid #d9bc8a!important;
+  border-radius:118px 118px 14px 14px!important;
+  background:linear-gradient(180deg,#fffdf9 0%,#fffaf3 100%)!important;
+  box-shadow:0 10px 24px rgba(69,48,20,.035)!important;
+  display:flex!important;
+  flex-direction:column!important;
+}
+.k7-product-img{
+  height:225px!important;
+  padding:10px 10px 0!important;
+  overflow:hidden!important;
+  flex:0 0 auto!important;
+}
+.k7-product-img img{
+  width:100%!important;
+  height:100%!important;
+  object-fit:cover!important;
+  object-position:center!important;
+  display:block!important;
+  border-radius:105px 105px 7px 7px!important;
+}
+.k7-product-body{
+  position:relative!important;
+  z-index:3!important;
+  margin-top:0!important;
+  padding:14px 12px 17px!important;
+  background:#fffaf3!important;
+  text-align:center!important;
+  flex:1 1 auto!important;
+}
+.k7-product h3{
+  font-size:15px!important;
+  line-height:1.4!important;
+  margin:0 0 6px!important;
+  color:#103c2b!important;
+}
+.k7-product p{
+  min-height:30px!important;
+  font-size:10px!important;
+  line-height:1.45!important;
+  margin:0 0 7px!important;
+  color:#766a5c!important;
+}
+.k7-product strong{
+  font-size:16px!important;
+  color:#073b2c!important;
+  margin:9px 0 11px!important;
+}
+.k7-product-actions{gap:8px!important}
+.k7-product-actions button{
+  padding:8px 13px!important;
+  min-width:70px!important;
+}
+.k7-product-actions button.cart{
+  background:#073b2c!important;
+  border-color:#073b2c!important;
+}
+
+/* Keep lower sections calm and aligned with the same palette. */
+.k7-personal,.k7-promo-row,.k7-service-strip{max-width:1320px!important}
+.k7-personal{margin-top:4px!important}
+.k7-promo-row{padding-left:0!important;padding-right:0!important}
+.k7-service-strip{margin-bottom:22px!important}
+
+/* Never reveal burned-in source text. */
+.k7-product-img{background:#fffdf9!important}
+.k7-product-img:after{display:none!important}
+
+@media(max-width:980px){
+  .k7-header{grid-template-columns:165px 1fr 120px!important;padding:0 20px!important}
+  .k7-brand img{width:125px!important}
+  .k7-hero{grid-template-columns:1fr!important;border-radius:0!important}
+  .k7-hero-copy{padding:42px 28px 22px!important}
+  .k7-hero-visual{min-height:420px!important}
+  .k7-benefits{grid-template-columns:repeat(2,1fr)!important;margin:0 18px 18px!important}
+  .k7-product-grid{grid-template-columns:repeat(2,1fr)!important}
+  .k7-product{border-radius:110px 110px 14px 14px!important}
+}
+@media(max-width:560px){
+  .k7-header{grid-template-columns:1fr auto!important}
+  .k7-brand{height:86px!important}
+  .k7-brand img{width:110px!important;height:82px!important}
+  .k7-hero-copy h1{font-size:35px!important}
+  .k7-hero-visual{min-height:310px!important}
+  .k7-benefits{grid-template-columns:1fr!important}
+  .k7-product-grid{grid-template-columns:1fr 1fr!important;gap:9px!important}
+  .k7-product{min-height:345px!important;border-radius:74px 74px 12px 12px!important}
+  .k7-product-img{height:165px!important}
+  .k7-product-img img{border-radius:66px 66px 6px 6px!important}
+  .k7-product-body{padding:12px 7px 14px!important}
+  .k7-product-actions{flex-direction:column!important;align-items:center!important}
+}
+
 </style>
 <script src="//t1.kakaocdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
@@ -851,7 +1064,7 @@ body{background:var(--k7-cream)!important;color:var(--k7-text)!important}
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "이룸 fresh fruits", "alternateName": ["이룸 과일", "이룸 신선한 과일"], "url": "https://iroom-fresh-fruits.onrender.com/", "description": "엄선한 제철과일과 고급과일, 맛있는과일, 프리미엄 과일선물세트를 정성껏 준비하는 이룸 fresh fruits입니다. 선물용·가정용·단체·맞춤 과일 상담과 주문을 도와드립니다.", "inLanguage": "ko-KR", "keywords": "과일, 고급과일, 맛있는과일, 프리미엄과일, 과일선물, 과일선물세트, 고급과일선물세트, 제철과일, 신선한과일, 선물용과일, 가정용과일, 단체과일선물, 맞춤과일, 이룸, 이룸과일, fresh fruits"}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Store", "name": "이룸 fresh fruits", "url": "https://iroom-fresh-fruits.onrender.com/", "description": "고급과일, 맛있는과일, 제철과일과 프리미엄 과일선물세트를 판매·상담하는 과일 전문점", "currenciesAccepted": "KRW", "paymentAccepted": "Bank Transfer", "hasOfferCatalog": {"@type": "OfferCatalog", "name": "프리미엄 과일", "itemListElement": [{"@type": "OfferCatalog", "name": "고급과일"}, {"@type": "OfferCatalog", "name": "맛있는과일"}, {"@type": "OfferCatalog", "name": "과일선물세트"}, {"@type": "OfferCatalog", "name": "제철과일"}, {"@type": "OfferCatalog", "name": "맞춤 과일선물"}]}}</script>
 
-<meta name="iroom-version" content="V113-KEEP7-NO-OVERLAP-V97-engine">
+<meta name="iroom-version" content="V114-KEEP7-ARCH-CLEAN-V97-engine">
 </head>
 <body>
 <div class="notice"><div class="wrap"><div>🍊 <b>오늘의 입고</b> &nbsp; | &nbsp; 고급 국산 종합과일 입고되었습니다.</div><nav><button id="customerBtn">고객센터</button><button id="ordersBtn">주문조회</button><button id="myBtn">마이페이지</button></nav></div></div>
@@ -887,7 +1100,7 @@ body{background:var(--k7-cream)!important;color:var(--k7-text)!important}
 </section>
 
 <header class="k7-header">
-  <a class="k7-brand" href="#home" aria-label="이룸 홈"><img src="/assets/keep7-logo-clean.jpg" alt="이룸 IROOM PREMIUM FRUITS"></a>
+  <a class="k7-brand" href="#home" aria-label="이룸 홈"><img src="/assets/v114-logo.jpg" alt="이룸 IROOM PREMIUM FRUITS"></a>
   <nav class="k7-nav">
     <button type="button" data-k7="brand">브랜드 소개</button>
     <button type="button" data-k7="story">과일 이야기</button>
@@ -912,13 +1125,13 @@ body{background:var(--k7-cream)!important;color:var(--k7-text)!important}
       <button type="button" data-k7="fruitbox">나만의 과일박스 →</button>
     </div>
   </div>
-  <div class="k7-hero-visual"><img src="/assets/keep7-hero-clean.jpg" alt="이룸 프리미엄 과일 컬렉션"></div>
+  <div class="k7-hero-visual"><img src="/assets/v114-hero-clean.jpg" alt="이룸 프리미엄 과일 컬렉션"></div>
 </section>
 
 <section class="k7-benefits" aria-label="이룸 서비스 장점">
   <button type="button" data-info="quality"><i>❧</i><span><b>자연 그대로</b><small>제철의 맛을 그대로 담았습니다</small></span></button>
   <button type="button" data-info="quality"><i>◇</i><span><b>프리미엄 품질</b><small>엄격한 기준으로 선별한 최상급 과일</small></span></button>
-  <button type="button" data-info="shipping"><i>♨</i><span><b>신선한 온도</b><small>최적의 온도로 신선함을 유지</small></span></button>
+  
   <button type="button" data-info="gift"><i>🎁</i><span><b>정성 포장</b><small>품격 있는 포장으로 마음을 전합니다</small></span></button>
   <button type="button" data-info="shipping"><i>🚚</i><span><b>안전한 배송</b><small>신선함을 그대로 안전하게 배송</small></span></button>
 </section>
@@ -945,8 +1158,8 @@ body{background:var(--k7-cream)!important;color:var(--k7-text)!important}
   </div>
   <div class="k7-personal-cards">
     <button type="button" data-k7-product="프리미엄 과일세트"><img src="/assets/prod-gift.jpg?v=66"><b>감사·명절 선물</b><span>프리미엄 과일세트</span></button>
-    <button type="button" data-k7-product="나주 신고배 특선"><img src="/assets/keep7-pear.jpg"><b>가족과 함께</b><span>나주 신고배 특선</span></button>
-    <button type="button" data-k7-product="샤인머스켓"><img src="/assets/keep7-grape.jpg"><b>달콤한 취향</b><span>샤인머스켓</span></button>
+    <button type="button" data-k7-product="나주 신고배 특선"><img src="/assets/v114-pear.jpg"><b>가족과 함께</b><span>나주 신고배 특선</span></button>
+    <button type="button" data-k7-product="샤인머스켓"><img src="/assets/v114-grape.jpg"><b>달콤한 취향</b><span>샤인머스켓</span></button>
   </div>
 </section>
 
@@ -1836,29 +2049,29 @@ if("serviceWorker" in navigator){
  const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>Array.from(r.querySelectorAll(s));
  const seasonal={
   spring:[
-   ['복숭아 백도','/assets/keep7-peach.jpg','부드럽고 향긋한 봄·초여름 과일'],
-   ['경북 홍사과','/assets/keep7-apple.jpg','산뜻하고 아삭한 사과'],
-   ['나주 신고배 특선','/assets/keep7-pear.jpg','시원한 과즙과 깔끔한 단맛'],
+   ['복숭아 백도','/assets/v114-peach.jpg','부드럽고 향긋한 봄·초여름 과일'],
+   ['경북 홍사과','/assets/v114-apple.jpg','산뜻하고 아삭한 사과'],
+   ['나주 신고배 특선','/assets/v114-pear.jpg','시원한 과즙과 깔끔한 단맛'],
    ['프리미엄 과일세트','/assets/prod-gift.jpg?v=66','감사의 마음을 담은 맞춤 선물'],
-   ['샤인머스켓','/assets/keep7-grape.jpg','향긋하고 달콤한 프리미엄 포도']],
+   ['샤인머스켓','/assets/v114-grape.jpg','향긋하고 달콤한 프리미엄 포도']],
   summer:[
-   ['복숭아 백도','/assets/keep7-peach.jpg','부드럽고 향긋한 여름 대표 과일'],
-   ['샤인머스켓','/assets/keep7-grape.jpg','청포도의 향긋한 단맛'],
-   ['경북 홍사과','/assets/keep7-apple.jpg','차갑게 즐기는 아삭함'],
-   ['제주 한라봉','/assets/keep7-citrus.jpg','상큼한 감귤류의 풍부한 과즙'],
+   ['복숭아 백도','/assets/v114-peach.jpg','부드럽고 향긋한 여름 대표 과일'],
+   ['샤인머스켓','/assets/v114-grape.jpg','청포도의 향긋한 단맛'],
+   ['경북 홍사과','/assets/v114-apple.jpg','차갑게 즐기는 아삭함'],
+   ['제주 한라봉','/assets/v114-citrus.jpg','상큼한 감귤류의 풍부한 과즙'],
    ['프리미엄 과일세트','/assets/prod-gift.jpg?v=66','여름 인기 과일 맞춤 구성']],
   autumn:[
-   ['나주 신고배 특선','/assets/keep7-pear.jpg','아삭하고 시원한 가을 대표 과일'],
-   ['샤인머스켓','/assets/keep7-grape.jpg','향긋하고 달콤한 프리미엄 포도'],
-   ['경북 홍사과','/assets/keep7-apple.jpg','아삭하고 달콤한 가을 사과'],
-   ['복숭아 백도','/assets/keep7-peach.jpg','부드럽고 향긋한 과육'],
-   ['제주 한라봉','/assets/keep7-citrus.jpg','새콤달콤 풍부한 과즙']],
+   ['나주 신고배 특선','/assets/v114-pear.jpg','아삭하고 시원한 가을 대표 과일'],
+   ['샤인머스켓','/assets/v114-grape.jpg','향긋하고 달콤한 프리미엄 포도'],
+   ['경북 홍사과','/assets/v114-apple.jpg','아삭하고 달콤한 가을 사과'],
+   ['복숭아 백도','/assets/v114-peach.jpg','부드럽고 향긋한 과육'],
+   ['제주 한라봉','/assets/v114-citrus.jpg','새콤달콤 풍부한 과즙']],
   winter:[
-   ['제주 한라봉','/assets/keep7-citrus.jpg','향이 진하고 과즙이 풍부한 겨울 과일'],
-   ['나주 신고배 특선','/assets/keep7-pear.jpg','시원하게 즐기는 저장 과일'],
-   ['경북 홍사과','/assets/keep7-apple.jpg','겨울에도 아삭한 사과'],
+   ['제주 한라봉','/assets/v114-citrus.jpg','향이 진하고 과즙이 풍부한 겨울 과일'],
+   ['나주 신고배 특선','/assets/v114-pear.jpg','시원하게 즐기는 저장 과일'],
+   ['경북 홍사과','/assets/v114-apple.jpg','겨울에도 아삭한 사과'],
    ['프리미엄 과일세트','/assets/prod-gift.jpg?v=66','연말·명절 프리미엄 선물'],
-   ['샤인머스켓','/assets/keep7-grape.jpg','선물하기 좋은 달콤한 포도']]
+   ['샤인머스켓','/assets/v114-grape.jpg','선물하기 좋은 달콤한 포도']]
  };
  function autoSeason(){const d=new Date(),m=d.getMonth()+1,day=d.getDate();if((m===8&&day>=25)||(m>=9&&m<=11))return'autumn';if(m===12||m<=2)return'winter';if(m>=3&&m<=5)return'spring';return'summer'}
  function renderSeason(key){
