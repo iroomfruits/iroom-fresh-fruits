@@ -29,8 +29,8 @@
 <meta name="twitter:image" content="https://iroom-fresh-fruits.onrender.com/assets/share-luxury-v68.jpg?v=68">
 
 <link rel="manifest" href="/manifest.webmanifest?v=92">
-<link rel="apple-touch-icon" href="/icons/icon-192.png?v=88">
-<link rel="icon" type="image/png" href="/icons/icon-192.png?v=88">
+<link rel="apple-touch-icon" href="/assets/v114-logo.jpg">
+<link rel="icon" type="image/jpeg" href="/assets/v114-logo.jpg">
 <style>
 :root{--g:#0b3a27;--g2:#174c38;--ink:#181818;--muted:#777;--line:#ece8e2;--cream:#faf8f3;--gold:#b99052}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#fff;color:var(--ink);font-family:Arial,"Pretendard","Noto Sans KR",sans-serif}a{text-decoration:none;color:inherit}button,input{font:inherit}button{cursor:pointer}img{display:block;max-width:100%}.wrap{max-width:1440px;margin:auto;padding:0 34px}
@@ -1227,7 +1227,7 @@ body,#keep7Main{background:#fbf8f1!important}
 <footer id="footer"><div class="wrap foot"><div><b>이룸 fresh fruits</b><small>국내산 제철과일과 프리미엄 과일선물세트를 정성껏 준비합니다.</small><small><a href="/band-admin.html">관리자 전용 페이지</a></small></div><div><b>고객센터</b><small>평일 09:00 ~ 18:00<br>상품 · 주문 · 배송 · 선물 상담</small></div><div><b>바로가기</b><small><a href="https://band.us/@iroomfruits" target="_blank">이룸 BAND</a><br><a href="/band-order.html">BAND 주문센터</a></small></div></div></footer>
 
 <button class="share-float" id="shareFloat">↗ 공유하기</button><div class="share-toast" id="shareToast">링크를 복사했습니다.</div>
-<div class="install-banner" id="installBanner"><img src="/icons/icon-192.png?v=88" alt="이룸 앱 아이콘" style="width:42px;height:42px;border-radius:10px;flex:0 0 auto"><div class="grow"><b>이룸 fresh fruits 앱 설치</b><div style="font-size:12px;opacity:.8">홈 화면에 추가해 더 빠르고 편리하게 이용하세요.</div></div><button id="installBannerBtn">설치하기</button><button class="close" id="installClose">×</button></div>
+<div class="install-banner" id="installBanner"><img src="/assets/v114-logo.jpg" alt="이룸 앱 아이콘" style="width:42px;height:42px;border-radius:10px;object-fit:cover;flex:0 0 auto"><div class="grow"><b>이룸 fresh fruits 앱 설치</b><div style="font-size:12px;opacity:.8">홈 화면에 추가해 더 빠르고 편리하게 이용하세요.</div></div><button id="installBannerBtn">설치하기</button><button class="close" id="installClose">×</button></div>
 
 
 <div class="modal" id="shareModal"><div class="modalbox"><div class="modalhead"><h3>공유하기</h3><button data-close>×</button></div>
@@ -1339,6 +1339,19 @@ body,#keep7Main{background:#fbf8f1!important}
 
 <div class="modal" id="cartModal"><div class="modalbox"><div class="modalhead"><h3>장바구니</h3><button data-close>×</button></div><div id="cartContent"></div></div></div>
 
+<style>
+/* ===== V115 / KEEP8 integration and navigation ===== */
+:root{--k8-cream:#fbf7ee;--k8-cream-deep:#f5ecdd;--k8-green:#073b2c;--k8-gold:#b88a3f}
+body,#keep7Main,.k7-hero{background-color:var(--k8-cream)!important}
+.k7-header{background:#faf5ef!important;box-shadow:none!important;border-bottom-color:#eadfce!important}
+.k7-brand img{mix-blend-mode:normal!important;filter:saturate(.94) contrast(.99)}
+.modalbox{position:relative;max-height:min(88vh,900px);overflow:auto}
+.modalhead{position:sticky;top:0;z-index:5;background:rgba(255,253,248,.97);backdrop-filter:blur(8px)}
+.modal-back{border:0;background:transparent;color:var(--k8-green);font-weight:900;font-size:13px;padding:8px 8px 8px 0;cursor:pointer;white-space:nowrap}
+.modal-back:hover{color:var(--k8-gold)}
+.modalhead h3{flex:1}.modalhead [data-close]{width:38px;height:38px;border-radius:50%;background:#f3ecdf!important}
+@media(max-width:560px){.modal{align-items:flex-end!important;padding:0!important}.modalbox{width:100%!important;max-height:94vh;border-radius:20px 20px 0 0!important}.modalhead h3{font-size:16px}.modal-back{font-size:12px}}
+</style>
 <script>
 "use strict";
 localStorage.removeItem("iroom_order_cart_v78");
@@ -1351,7 +1364,8 @@ const productCatalog={
  "경북 홍사과":{unit:"3kg",price:32000,image:"/assets/prod-apple.jpg",desc:"산뜻한 향과 달콤한 맛이 균형 잡힌 경북 홍사과입니다."},
  "제주 한라봉":{unit:"3kg",price:28000,image:"/assets/prod-hallabong.jpg",desc:"향이 진하고 과즙이 풍부한 제주 한라봉입니다."},
  "프리미엄 과일세트":{unit:"혼합 구성",price:85000,image:"/assets/prod-gift.jpg?v=66",desc:"받는 분과 예산에 맞춰 엄선한 과일을 품격 있게 구성한 선물세트입니다."},
- "복숭아 백도":{unit:"4kg",price:29000,image:"/assets/prod-peach.jpg",desc:"부드러운 과육과 향긋한 단맛이 좋은 백도 복숭아입니다."}
+ "복숭아 백도":{unit:"4kg",price:29000,image:"/assets/prod-peach.jpg",desc:"부드러운 과육과 향긋한 단맛이 좋은 백도 복숭아입니다."},
+ "제주 애플망고":{unit:"2.5kg (6~9과)",price:69000,image:"/assets/keep8-apple-mango.jpg",desc:"붉게 익은 껍질과 진한 향, 부드러운 과육이 매력적인 여름 제철 애플망고입니다."}
 };
 let currentDetailProduct=null;
 function toast(msg){const t=q("#shareToast");t.textContent=msg;t.classList.add("show");clearTimeout(window.__shareTimer);window.__shareTimer=setTimeout(()=>t.classList.remove("show"),1700)}
@@ -1482,7 +1496,10 @@ q("#cartBtn").onclick=()=>{
   drawCartModal();
   open("cartModal");
 };
-function open(id){q("#"+id).classList.add("open")}qa("[data-close]").forEach(b=>b.onclick=()=>b.closest(".modal").classList.remove("open"));qa(".modal").forEach(m=>m.onclick=e=>{if(e.target===m)m.classList.remove("open")});
+const modalHistory=[];
+function open(id){const target=q("#"+id);if(!target)return;const current=qa(".modal.open").filter(m=>m!==target).at(-1);if(current){current.classList.remove("open");modalHistory.push(current.id)}target.classList.add("open");target.setAttribute("aria-hidden","false")}
+function closeCurrentModal(modal,goBack=false){if(!modal)return;modal.classList.remove("open");modal.setAttribute("aria-hidden","true");if(goBack&&modalHistory.length){const previous=q("#"+modalHistory.pop());if(previous){previous.classList.add("open");previous.setAttribute("aria-hidden","false")}}}
+qa(".modal").forEach(m=>{const head=m.querySelector(".modalhead");if(head&&!head.querySelector(".modal-back")){const back=document.createElement("button");back.type="button";back.className="modal-back";back.textContent="← 뒤로가기";back.setAttribute("aria-label","이전 화면으로 돌아가기");head.prepend(back);back.onclick=()=>closeCurrentModal(m,true)}m.querySelectorAll("[data-close]").forEach(b=>b.onclick=()=>closeCurrentModal(m,false));m.addEventListener("click",e=>{if(e.target===m)closeCurrentModal(m,false)})});
 
 const seasonGuideData={
  spring:{
@@ -1817,7 +1834,7 @@ q("#sendConsultRequest")?.addEventListener("click",async()=>{
 });
 
 
-document.addEventListener("DOMContentLoaded",()=>{syncServerProducts();refreshAuthUI();});
+document.addEventListener("DOMContentLoaded",()=>{if(typeof syncServerProducts==="function")syncServerProducts();refreshAuthUI();});
 
 q("#customerBtn").onclick=()=>q("#footer").scrollIntoView({behavior:"smooth"});
 const names=["샤인머스켓","나주 신고배 특선","경북 홍사과","제주 한라봉","프리미엄 과일세트","복숭아 백도"];
@@ -2055,11 +2072,11 @@ if("serviceWorker" in navigator){
    ['프리미엄 과일세트','/assets/prod-gift.jpg?v=66','감사의 마음을 담은 맞춤 선물'],
    ['샤인머스켓','/assets/v114-grape.jpg','향긋하고 달콤한 프리미엄 포도']],
   summer:[
+   ['제주 애플망고','/assets/keep8-apple-mango.jpg','진한 향과 부드러운 과육의 여름 한정 과일'],
    ['복숭아 백도','/assets/v114-peach.jpg','부드럽고 향긋한 여름 대표 과일'],
    ['샤인머스켓','/assets/v114-grape.jpg','청포도의 향긋한 단맛'],
    ['경북 홍사과','/assets/v114-apple.jpg','차갑게 즐기는 아삭함'],
-   ['제주 한라봉','/assets/v114-citrus.jpg','상큼한 감귤류의 풍부한 과즙'],
-   ['프리미엄 과일세트','/assets/prod-gift.jpg?v=66','여름 인기 과일 맞춤 구성']],
+   ['제주 한라봉','/assets/v114-citrus.jpg','상큼한 감귤류의 풍부한 과즙']],
   autumn:[
    ['나주 신고배 특선','/assets/v114-pear.jpg','아삭하고 시원한 가을 대표 과일'],
    ['샤인머스켓','/assets/v114-grape.jpg','향긋하고 달콤한 프리미엄 포도'],

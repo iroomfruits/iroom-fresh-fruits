@@ -1,4 +1,3 @@
 User-agent: *
 Allow: /
-
-Sitemap: https://iroom-fresh-fruits.onrender.com/sitemap.xml
+Sitemap: /sitemap.xml
