@@ -1100,7 +1100,7 @@ body,#keep7Main{background:#fbf8f1!important}
 </section>
 
 <header class="k7-header">
-  <a class="k7-brand" href="#home" aria-label="이룸 홈"><img src="/assets/v114-logo.jpg" alt="이룸 IROOM PREMIUM FRUITS"></a>
+  <a class="k7-brand keep8-brand" href="#home" aria-label="이룸 홈"><span class="keep8-mark"><span>이룸</span></span><span class="keep8-word"><b>IROOM</b><small>PREMIUM FRUITS</small></span></a>
   <nav class="k7-nav">
     <button type="button" data-k7="brand">브랜드 소개</button>
     <button type="button" data-k7="story">과일 이야기</button>
@@ -1125,7 +1125,7 @@ body,#keep7Main{background:#fbf8f1!important}
       <button type="button" data-k7="fruitbox">나만의 과일박스 →</button>
     </div>
   </div>
-  <div class="k7-hero-visual"><img src="/assets/v114-hero-clean.jpg" alt="이룸 프리미엄 과일 컬렉션"></div>
+  <div class="k7-hero-visual"><img src="/assets/keep8-hero-artwork.png" alt="이룸 프리미엄 과일 컬렉션"></div>
 </section>
 
 <section class="k7-benefits" aria-label="이룸 서비스 장점">
@@ -1158,7 +1158,7 @@ body,#keep7Main{background:#fbf8f1!important}
   </div>
   <div class="k7-personal-cards">
     <button type="button" data-k7-product="프리미엄 과일세트"><img src="/assets/prod-gift.jpg?v=66"><b>감사·명절 선물</b><span>프리미엄 과일세트</span></button>
-    <button type="button" data-k7-product="나주 신고배 특선"><img src="/assets/v114-pear.jpg"><b>가족과 함께</b><span>나주 신고배 특선</span></button>
+    <button type="button" data-k7-product="나주 신고배 특선"><img src="/assets/keep8-singo-pear.png" alt="나주 신고배"><b>가족과 함께</b><span>나주 신고배 특선</span></button>
     <button type="button" data-k7-product="샤인머스켓"><img src="/assets/v114-grape.jpg"><b>달콤한 취향</b><span>샤인머스켓</span></button>
   </div>
 </section>
@@ -1345,6 +1345,14 @@ body,#keep7Main{background:#fbf8f1!important}
 body,#keep7Main,.k7-hero{background-color:var(--k8-cream)!important}
 .k7-header{background:#faf5ef!important;box-shadow:none!important;border-bottom-color:#eadfce!important}
 .k7-brand img{mix-blend-mode:normal!important;filter:saturate(.94) contrast(.99)}
+.keep8-brand{height:92px!important;overflow:visible!important;display:flex!important;align-items:center!important;gap:11px;color:#073b2c}
+.keep8-mark{width:67px;height:67px;border:3px solid #0b4a37;border-right-color:#b88a3f;border-radius:50%;display:grid;place-items:center;position:relative;background:transparent;box-shadow:inset 0 0 0 4px #faf5ef}
+.keep8-mark:before{content:'◆';position:absolute;top:-13px;right:5px;color:#0b4a37;font-size:18px;transform:rotate(24deg)}
+.keep8-mark span{font-family:Georgia,'Noto Serif KR',serif;font-size:21px;font-weight:800;letter-spacing:-2px}
+.keep8-word{display:flex;flex-direction:column;line-height:1}.keep8-word b{font-family:Georgia,serif;letter-spacing:.18em;font-size:18px}.keep8-word small{font-size:7px;letter-spacing:.2em;color:#a87b35;margin-top:7px;font-weight:900}
+.k7-benefits{grid-template-columns:repeat(4,1fr)!important;margin-top:0!important}
+.k7-hero-visual img{object-position:center center!important}
+@media(max-width:560px){.keep8-brand{gap:7px}.keep8-mark{width:54px;height:54px}.keep8-mark span{font-size:17px}.keep8-word b{font-size:14px}.keep8-word small{font-size:6px}}
 .modalbox{position:relative;max-height:min(88vh,900px);overflow:auto}
 .modalhead{position:sticky;top:0;z-index:5;background:rgba(255,253,248,.97);backdrop-filter:blur(8px)}
 .modal-back{border:0;background:transparent;color:var(--k8-green);font-weight:900;font-size:13px;padding:8px 8px 8px 0;cursor:pointer;white-space:nowrap}
@@ -1360,7 +1368,7 @@ let hero=0, deferredPrompt=null;
 
 const productCatalog={
  "샤인머스켓":{unit:"2kg (3~4송이)",price:28000,image:"/assets/prod-shine.jpg",desc:"향긋한 머스캣 향과 높은 당도가 특징인 프리미엄 포도입니다."},
- "나주 신고배 특선":{unit:"5kg (7~9과)",price:38000,image:"/assets/prod-pear.jpg",desc:"아삭한 식감과 풍부한 과즙이 좋은 나주 신고배 특선입니다."},
+ "나주 신고배 특선":{unit:"5kg (7~9과)",price:38000,image:"/assets/keep8-singo-pear.png",desc:"아삭한 식감과 풍부한 과즙이 좋은 나주 신고배 특선입니다."},
  "경북 홍사과":{unit:"3kg",price:32000,image:"/assets/prod-apple.jpg",desc:"산뜻한 향과 달콤한 맛이 균형 잡힌 경북 홍사과입니다."},
  "제주 한라봉":{unit:"3kg",price:28000,image:"/assets/prod-hallabong.jpg",desc:"향이 진하고 과즙이 풍부한 제주 한라봉입니다."},
  "프리미엄 과일세트":{unit:"혼합 구성",price:85000,image:"/assets/prod-gift.jpg?v=66",desc:"받는 분과 예산에 맞춰 엄선한 과일을 품격 있게 구성한 선물세트입니다."},
@@ -2068,7 +2076,7 @@ if("serviceWorker" in navigator){
   spring:[
    ['복숭아 백도','/assets/v114-peach.jpg','부드럽고 향긋한 봄·초여름 과일'],
    ['경북 홍사과','/assets/v114-apple.jpg','산뜻하고 아삭한 사과'],
-   ['나주 신고배 특선','/assets/v114-pear.jpg','시원한 과즙과 깔끔한 단맛'],
+    ['나주 신고배 특선','/assets/keep8-singo-pear.png','시원한 과즙과 깔끔한 단맛'],
    ['프리미엄 과일세트','/assets/prod-gift.jpg?v=66','감사의 마음을 담은 맞춤 선물'],
    ['샤인머스켓','/assets/v114-grape.jpg','향긋하고 달콤한 프리미엄 포도']],
   summer:[
@@ -2078,14 +2086,14 @@ if("serviceWorker" in navigator){
    ['경북 홍사과','/assets/v114-apple.jpg','차갑게 즐기는 아삭함'],
    ['제주 한라봉','/assets/v114-citrus.jpg','상큼한 감귤류의 풍부한 과즙']],
   autumn:[
-   ['나주 신고배 특선','/assets/v114-pear.jpg','아삭하고 시원한 가을 대표 과일'],
+   ['나주 신고배 특선','/assets/keep8-singo-pear.png','아삭하고 시원한 가을 대표 과일'],
    ['샤인머스켓','/assets/v114-grape.jpg','향긋하고 달콤한 프리미엄 포도'],
    ['경북 홍사과','/assets/v114-apple.jpg','아삭하고 달콤한 가을 사과'],
    ['복숭아 백도','/assets/v114-peach.jpg','부드럽고 향긋한 과육'],
    ['제주 한라봉','/assets/v114-citrus.jpg','새콤달콤 풍부한 과즙']],
   winter:[
    ['제주 한라봉','/assets/v114-citrus.jpg','향이 진하고 과즙이 풍부한 겨울 과일'],
-   ['나주 신고배 특선','/assets/v114-pear.jpg','시원하게 즐기는 저장 과일'],
+   ['나주 신고배 특선','/assets/keep8-singo-pear.png','시원하게 즐기는 저장 과일'],
    ['경북 홍사과','/assets/v114-apple.jpg','겨울에도 아삭한 사과'],
    ['프리미엄 과일세트','/assets/prod-gift.jpg?v=66','연말·명절 프리미엄 선물'],
    ['샤인머스켓','/assets/v114-grape.jpg','선물하기 좋은 달콤한 포도']]
