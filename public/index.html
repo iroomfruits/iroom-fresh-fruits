@@ -6,7 +6,7 @@
 <title>이룸 fresh fruits | 고급과일·맛있는과일·프리미엄 과일선물세트</title>
 <meta name="keywords" content="과일, 고급과일, 맛있는과일, 프리미엄과일, 과일선물, 과일선물세트, 고급과일선물세트, 제철과일, 신선한과일, 선물용과일, 가정용과일, 단체과일선물, 맞춤과일, 이룸, 이룸과일, fresh fruits">
 <meta name="description" content="고급과일·제철과일·맛있는과일·프리미엄 과일선물세트 전문 이룸 fresh fruits">
-<meta name="theme-color" content="#0b3a27">
+<meta name="theme-color" content="#fbf7ee">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -1352,7 +1352,7 @@ body,#keep7Main,.k7-hero{background-color:var(--k8-cream)!important}
 @media(max-width:560px){.keep8-official-logo{width:145px!important;height:82px!important}}
 .modalbox{position:relative;max-height:min(88vh,900px);overflow:auto}
 .modalhead{position:sticky;top:0;z-index:5;background:rgba(255,253,248,.97);backdrop-filter:blur(8px)}
-.modal-back{border:0;background:transparent;color:var(--k8-green);font-weight:900;font-size:13px;padding:8px 8px 8px 0;cursor:pointer;white-space:nowrap}
+.modal-back{width:38px;height:38px;border:1px solid #dfd2bd;background:#fffaf2;color:var(--k8-green);font-weight:900;font-size:22px;line-height:1;border-radius:50%;padding:0;display:grid;place-items:center;cursor:pointer;white-space:nowrap}
 .modal-back:hover{color:var(--k8-gold)}
 .modalhead h3{flex:1}.modalhead [data-close]{width:38px;height:38px;border-radius:50%;background:#f3ecdf!important}
 @media(max-width:560px){.modal{align-items:flex-end!important;padding:0!important}.modalbox{width:100%!important;max-height:94vh;border-radius:20px 20px 0 0!important}.modalhead h3{font-size:16px}.modal-back{font-size:12px}}
@@ -1504,7 +1504,7 @@ q("#cartBtn").onclick=()=>{
 const modalHistory=[];
 function open(id){const target=q("#"+id);if(!target)return;const current=qa(".modal.open").filter(m=>m!==target).at(-1);if(current){current.classList.remove("open");modalHistory.push(current.id)}target.classList.add("open");target.setAttribute("aria-hidden","false")}
 function closeCurrentModal(modal,goBack=false){if(!modal)return;modal.classList.remove("open");modal.setAttribute("aria-hidden","true");if(goBack&&modalHistory.length){const previous=q("#"+modalHistory.pop());if(previous){previous.classList.add("open");previous.setAttribute("aria-hidden","false")}}}
-qa(".modal").forEach(m=>{const head=m.querySelector(".modalhead");if(head&&!head.querySelector(".modal-back")){const back=document.createElement("button");back.type="button";back.className="modal-back";back.textContent="← 뒤로가기";back.setAttribute("aria-label","이전 화면으로 돌아가기");head.prepend(back);back.onclick=()=>closeCurrentModal(m,true)}m.querySelectorAll("[data-close]").forEach(b=>b.onclick=()=>closeCurrentModal(m,false));m.addEventListener("click",e=>{if(e.target===m)closeCurrentModal(m,false)})});
+qa(".modal").forEach(m=>{const head=m.querySelector(".modalhead");if(head&&!head.querySelector(".modal-back")){const back=document.createElement("button");back.type="button";back.className="modal-back";back.textContent="←";back.setAttribute("aria-label","이전 화면으로 돌아가기");back.title="이전 화면";head.prepend(back);back.onclick=()=>closeCurrentModal(m,true)}m.querySelectorAll("[data-close]").forEach(b=>b.onclick=()=>closeCurrentModal(m,false));m.addEventListener("click",e=>{if(e.target===m)closeCurrentModal(m,false)})});
 
 const seasonGuideData={
  spring:{
