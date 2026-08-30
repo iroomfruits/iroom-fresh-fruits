@@ -1,0 +1,8 @@
+# example.com 을 실제 도메인으로 변경하세요.
+example.com, www.example.com {
+    encode zstd gzip
+    reverse_proxy 127.0.0.1:3000
+    header {
+        Strict-Transport-Security "max-age=31536000; includeSubDomains"
+    }
+}

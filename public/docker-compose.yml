@@ -1,0 +1,13 @@
+services:
+  iroom:
+    build: .
+    container_name: iroom-fresh-fruits
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      - PERSIST_DIR=/data
+    ports:
+      - "127.0.0.1:3000:3000"
+    volumes:
+      - ./persist:/data

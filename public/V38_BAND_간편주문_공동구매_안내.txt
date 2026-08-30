@@ -1,0 +1,35 @@
+이룸 fresh fruits V38 - BAND 간편주문 + 공동구매 통합판
+
+[핵심 기능]
+1. BAND 전용 주문센터: /band-order.html
+2. 홈페이지의 실제 상품/가격/재고를 자동 표시
+3. 고객이 상품 선택 → 수량 → 배송 → 결제방법 → 주문 접수
+4. 주문은 기존 관리자 주문목록에 그대로 저장
+5. SMTP 설정 시 iroom4562@naver.com으로 주문 상세 메일 즉시 발송
+6. 공동구매 코너 + 참여신청 + 목표수량 진행률
+7. 공구 참여도 메일 알림
+8. 공구 관리자센터: /band-admin.html
+9. 카카오 1:1 상담, 카카오페이 QR, 우리은행/토스 계좌이체 안내
+10. BAND 홈 / 배송안내 / 전화 / 이메일 바로가기
+
+[BAND에 적용]
+서버에 배포한 홈페이지 주소가 https://example.com 이라면
+- 주문하기: https://example.com/band-order.html#order
+- 공동구매: https://example.com/band-order.html#groupbuy
+- 전체 주문센터: https://example.com/band-order.html
+
+위 주소를 BAND 공지글에 링크로 붙여두면 됩니다.
+
+[이메일 자동 알림]
+기존 관리자 설정 또는 .env에 아래 값을 설정합니다.
+ORDER_EMAIL=iroom4562@naver.com
+SMTP_HOST=smtp.naver.com
+SMTP_PORT=465
+SMTP_USER=iroom4562@naver.com
+SMTP_PASSWORD=본인의 SMTP 인증 비밀번호
+
+비밀번호는 다른 사람에게 보내지 말고 서버에 직접 입력하세요.
+
+[공동구매 운영]
+https://홈페이지주소/band-admin.html
+기존 관리자 비밀번호로 로그인 → 공구 등록 → BAND에 /band-order.html#groupbuy 링크 공유
