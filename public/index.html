@@ -3916,4 +3916,56 @@ document.addEventListener("keydown", function(e){
 })();
 </script>
 
+
+<script id="IROOM_FULL_HOMEPAGE_CONFIG">
+(function(){
+ const esc=s=>String(s??"");
+ const txt=(sel,v)=>{const e=document.querySelector(sel);if(e&&v!==undefined&&v!==null&&v!=="")e.textContent=v};
+ const html=(sel,v)=>{const e=document.querySelector(sel);if(e&&v)e.innerHTML=v};
+ const img=(sel,v)=>{const e=document.querySelector(sel);if(e&&v)e.src=v};
+ const setProduct=(card,p)=>{
+   if(!card||!p)return;
+   const im=card.querySelector("img"); if(im&&p.image)im.src=p.image;
+   const b=card.querySelector("b"); if(b&&p.name)b.textContent=p.name;
+   const spans=[...card.querySelectorAll(".k9x-card-main>span:not(.season)")]; if(spans[0]&&p.desc)spans[0].textContent=p.desc;
+   const strong=card.querySelector("strong"); if(strong&&p.price)strong.textContent=p.price;
+   if(p.name){card.dataset.k7Product=p.name; card.querySelectorAll("[data-k7-product]").forEach(x=>x.dataset.k7Product=p.name)}
+   if(p.hidden)card.style.display="none"; else card.style.display="";
+ };
+ async function apply(){
+  try{
+   const r=await fetch("/api/site/homepage-config",{cache:"no-store"});if(!r.ok)return;
+   const c=(await r.json()).config||{};
+   if(c.hero){
+    txt(".k9x-hero-copy .eyebrow",c.hero.eyebrow); txt(".k9x-hero-copy h1",c.hero.title);
+    txt(".k9x-hero-copy p",c.hero.description); img(".k9x-hero-visual img",c.hero.image);
+   }
+   if(c.today){
+    txt("#todayPickTitle",c.today.title);txt("#todayPickSummary",c.today.summary);txt("#todayPickReason",c.today.reason);
+   }
+   const best=[...document.querySelectorAll("#best-products .k9x-action-card")];
+   (c.bestProducts||[]).forEach((p,i)=>setProduct(best[i],p));
+   const rows=[...document.querySelectorAll("#KEEP9_EXACT .k9x-row")];
+   const seasonRow=rows.find(x=>x.querySelector(".k9x-side small")?.textContent?.includes("SEASON"));
+   const season=seasonRow?[...seasonRow.querySelectorAll(".k9x-action-card")]:[];
+   (c.seasonProducts||[]).forEach((p,i)=>setProduct(season[i],p));
+   const custom=[...document.querySelectorAll(".k9x-custom-grid>button")];
+   (c.customSets||[]).forEach((p,i)=>{
+    const card=custom[i];if(!card)return;const im=card.querySelector("img");if(im&&p.image)im.src=p.image;
+    const b=card.querySelector("b");if(b&&p.name)b.textContent=p.name;
+    const sp=card.querySelector("span");if(sp&&p.desc)sp.textContent=p.desc;
+    if(p.name)card.dataset.k7Product=p.name;if(p.hidden)card.style.display="none";else card.style.display="";
+   });
+   if(c.gift){txt(".k9x-promos .gift h3",c.gift.title);txt(".k9x-promos .gift p",c.gift.description);img(".k9x-promos .gift img",c.gift.image)}
+   if(c.business){txt(".k9x-promos .business h3",c.business.title);txt(".k9x-promos .business p",c.business.description);img(".k9x-promos .business img",c.business.image)}
+   if(c.contact){
+    document.querySelectorAll(".k9x-footer").forEach(f=>{
+      if(c.contact.phone) f.innerHTML=f.innerHTML.replace(/02-\\d{3,4}-\\d{4}|010-\\d{3,4}-\\d{4}/g,c.contact.phone);
+    });
+   }
+  }catch(e){console.warn("homepage config",e)}
+ }
+ apply();
+})();
+</script>
 </body></html>
