@@ -1045,6 +1045,11 @@ body,#keep7Main{background:#fbf8f1!important}
   .k7-product-actions{flex-direction:column!important;align-items:center!important}
 }
 
+
+/* V8: 홈페이지에서 관리자센터 진입 버튼을 항상 표시 */
+.admin-home-entry{display:inline-flex;align-items:center;justify-content:center;gap:4px;padding:8px 11px;border:1px solid #d9c9aa;border-radius:999px;background:#fffaf1;color:#123f31!important;text-decoration:none;font-size:11px;font-weight:800;white-space:nowrap;line-height:1}
+.admin-home-entry:hover{background:#123f31;color:#fff!important;border-color:#123f31}
+@media(max-width:760px){.admin-home-entry{padding:8px 9px;font-size:0}.admin-home-entry::after{content:"관리자";font-size:10px}}
 </style>
 <script src="//t1.kakaocdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
@@ -2582,7 +2587,7 @@ body>.notice,body>header:not(.k9x-header),body>section.section,body>footer#foote
     <span class="brand-final-en">fresh fruits</span>
     <small>PREMIUM FRUIT BOUTIQUE</small>
   </span>
-</a><nav class="nav"><a href="#best">NEW & BEST <span style="font-size:9px;background:#c6a15b;color:#fff;border-radius:999px;padding:3px 6px;margin-left:3px">HOT</span></a><a href="#best">과일</a><a href="#gift">선물세트</a><a href="#group">공동구매</a><a href="#custom">단체·맞춤선물</a><a href="#story">스토리</a></nav><div class="tools"><button class="tool desktop" id="loginBtn">로그인</button><button class="tool desktop" id="signupBtn">회원가입</button><button class="tool desktop" id="myTopBtn">마이페이지</button><button class="icon desktop" id="searchBtn" title="검색">⌕</button><button class="icon" id="shareBtn" title="공유">↗</button><button class="icon" id="cartBtn">🛒<span class="badge" id="cartBadge">0</span></button></div></div></header>
+</a><nav class="nav"><a href="#best">NEW & BEST <span style="font-size:9px;background:#c6a15b;color:#fff;border-radius:999px;padding:3px 6px;margin-left:3px">HOT</span></a><a href="#best">과일</a><a href="#gift">선물세트</a><a href="#group">공동구매</a><a href="#custom">단체·맞춤선물</a><a href="#story">스토리</a></nav><div class="tools"><a class="admin-home-entry" href="/band-admin.html?reauth=1" title="이룸 관리자 센터">🔐 관리자</a><button class="tool desktop" id="loginBtn">로그인</button><button class="tool desktop" id="signupBtn">회원가입</button><button class="tool desktop" id="myTopBtn">마이페이지</button><button class="icon desktop" id="searchBtn" title="검색">⌕</button><button class="icon" id="shareBtn" title="공유">↗</button><button class="icon" id="cartBtn">🛒<span class="badge" id="cartBadge">0</span></button></div></div></header>
 
 <nav class="seo-quick-nav" aria-label="과일 카테고리 바로가기">
   <a href="/premium-fruit.html" title="고급과일 안내">고급과일</a>
