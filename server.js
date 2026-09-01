@@ -13,6 +13,8 @@ const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "";
 if(!process.env.JWT_SECRET) console.warn("[SECURITY] JWT_SECRET is not configured. A temporary secret is being used; set JWT_SECRET in Render Environment.");
 if(!ADMIN_PASSWORD) console.warn("[SECURITY] ADMIN_PASSWORD is not configured. Admin login is disabled until it is set.");
 const BASE_URL = process.env.PUBLIC_BASE_URL || `http://localhost:${PORT}`;
+const OPENAI_API_KEY = String(process.env.OPENAI_API_KEY || "").trim();
+const OPENAI_MODEL = String(process.env.OPENAI_MODEL || "gpt-5.6-luna").trim();
 
 if (!process.env.DATABASE_URL) {
   console.error("DATABASE_URL is required. Create a PostgreSQL database and set DATABASE_URL.");
@@ -24,7 +26,7 @@ const pool = new Pool({
   ssl: process.env.DATABASE_URL.includes("localhost") ? false : { rejectUnauthorized: false }
 });
 
-app.use(express.json({ limit: "2mb" }));
+app.use(express.json({ limit: "6mb" }));
 app.use(express.urlencoded({ extended: true }));
 
 app.set("trust proxy",1);
@@ -113,6 +115,104 @@ async function sendBrevoMail({to,subject,text}){
   return r.json().catch(()=>({ok:true}));
 }
 function money(n){return Number(n||0).toLocaleString("ko-KR")+"원"}
+
+function cleanLongText(v,max=5000){return String(v??"").replace(/\0/g,"").trim().slice(0,max)}
+function safeMediaValue(v){
+  const s=String(v||"").trim();
+  if(!s) return "";
+  if(s.startsWith("/assets/") || s.startsWith("assets/")) return s.startsWith("/")?s:"/"+s;
+  if(/^https:\/\/[^\s]+$/i.test(s)) return s.slice(0,2000);
+  if(/^data:image\/(?:jpeg|jpg|png|webp);base64,/i.test(s) && s.length<=900000) return s;
+  return "";
+}
+function normalizeTodayPick(body={}){
+  const images=Array.isArray(body.images)?body.images.map(safeMediaValue).filter(Boolean).slice(0,4):[];
+  return {
+    eyebrow:cleanText(body.eyebrow||"TODAY'S PICK",40),
+    dateNote:cleanText(body.dateNote||"오늘의 이룸 PICK · 입고 당일 업데이트",100),
+    title:cleanText(body.title||"오늘 가장 좋은 과일",80),
+    summary:cleanLongText(body.summary||"",700),
+    reason:cleanLongText(body.reason||"",900),
+    productName:cleanText(body.productName||"",80),
+    origin:cleanText(body.origin||"",100),
+    taste:cleanText(body.taste||"",120),
+    price:Math.max(0,Number(body.price||0)||0),
+    stockText:cleanText(body.stockText||"한정 수량",60),
+    status:["판매중","품절","준비중"].includes(body.status)?body.status:"판매중",
+    images,
+    updatedAt:new Date().toISOString()
+  };
+}
+async function getSetting(key,fallback={}){
+  const r=await pool.query("SELECT setting_value FROM site_settings WHERE setting_key=$1",[key]);
+  return r.rows[0]?.setting_value || fallback;
+}
+async function putSetting(key,value){
+  const r=await pool.query(`
+    INSERT INTO site_settings(setting_key,setting_value,updated_at)
+    VALUES($1,$2::jsonb,NOW())
+    ON CONFLICT(setting_key) DO UPDATE SET setting_value=EXCLUDED.setting_value,updated_at=NOW()
+    RETURNING setting_value,updated_at
+  `,[key,JSON.stringify(value)]);
+  return r.rows[0];
+}
+function extractOpenAIResult(data){
+  const texts=[], sources=[];
+  for(const item of (data?.output||[])){
+    if(item?.type==="message"){
+      for(const c of (item.content||[])){
+        if(c?.type==="output_text" && c.text) texts.push(c.text);
+        for(const a of (c?.annotations||[])){
+          if(a?.type==="url_citation" && a.url) sources.push({title:a.title||a.url,url:a.url});
+        }
+      }
+    }
+    if(item?.type==="web_search_call"){
+      for(const s of (item.action?.sources||[])){
+        if(s?.url) sources.push({title:s.title||s.url,url:s.url});
+      }
+    }
+  }
+  const uniq=[]; const seen=new Set();
+  for(const s of sources){ if(!seen.has(s.url)){seen.add(s.url);uniq.push(s)} }
+  return {text:(data?.output_text||texts.join("\n")).trim(),sources:uniq.slice(0,8)};
+}
+async function openAiAssist({mode,subject,audience,tone,details,useWeb}){
+  if(!OPENAI_API_KEY) throw new Error("OPENAI_API_KEY_MISSING");
+  const modeGuide={
+    today:"오늘의 이룸 PICK 고객용 문구를 작성한다. 결과는 [제목] [요약] [오늘의 선택 이유] [상세설명] 순서로 작성한다.",
+    product:"상품 상세페이지 설명을 작성한다. 결과는 [한줄소개] [상세설명] [구매 전 확인] 순서로 작성한다.",
+    promotion:"네이버 블로그/인스타그램용 홍보 문구를 과장 없이 작성한다.",
+    seo:"검색용 제목, 메타 설명, 핵심 키워드를 작성한다.",
+    audit:"입력한 운영 정보를 고객 신뢰·구매 편의·운영 현실성 관점에서 점검한다."
+  }[mode]||"과일 쇼핑몰 운영 문구를 작성한다.";
+  const instructions=`당신은 한국의 프리미엄 과일 쇼핑몰 '이룸 fresh fruits' 관리자 보조 AI다.
+브랜드 원칙은 '오늘 가장 좋은 맛을 고릅니다.'이며 가락시장 당일 선별, 맛 우선, 기준 미달 시 억지 판매하지 않는 운영 철학을 따른다.
+중요: 사용자가 입력하지 않은 산지, 등급, 당도(Brix), 중량, 가격, 재고, 인증, 효능을 사실처럼 지어내지 마라.
+인터넷 검색을 사용한 경우에도 실제 판매 상품의 산지·등급·당도는 관리자 입력값을 우선하고, 일반적인 참고 정보와 실제 상품 사실을 명확히 구분하라.
+건강·치료 효과를 보장하는 표현, 근거 없는 최상급 표현, 허위 희소성 표현을 피하라.
+문장은 한국어로 고급스럽지만 쉽게 읽히게 작성한다.
+${modeGuide}`;
+  const input=`주제/상품명: ${cleanText(subject,120)}
+대상/상황: ${cleanText(audience,180)}
+말투: ${cleanText(tone,100)}
+관리자가 확인한 실제 정보:
+${cleanLongText(details,3500)}
+
+필요하면 부족한 실제 정보는 '확인 필요'라고 표시하고 임의로 채우지 마라.`;
+  const payload={model:OPENAI_MODEL,instructions,input,store:false};
+  if(useWeb){
+    payload.tools=[{type:"web_search",search_context_size:"medium",user_location:{type:"approximate",country:"KR",timezone:"Asia/Seoul"}}];
+  }
+  const r=await fetch("https://api.openai.com/v1/responses",{
+    method:"POST",
+    headers:{"Authorization":`Bearer ${OPENAI_API_KEY}`,"Content-Type":"application/json"},
+    body:JSON.stringify(payload)
+  });
+  const data=await r.json().catch(()=>({}));
+  if(!r.ok) throw new Error(data?.error?.message||`OPENAI_${r.status}`);
+  return extractOpenAIResult(data);
+}
 async function notifyOrder(order,items){
   const c=mailSettings();
   const lines=items.map(i=>`${i.product_name} × ${i.qty} = ${money(i.line_total)}`).join("\n");
@@ -308,6 +408,11 @@ async function initDb(){
       created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
     );
     CREATE INDEX IF NOT EXISTS idx_security_events_created ON security_events(created_at DESC);
+    CREATE TABLE IF NOT EXISTS site_settings(
+      setting_key TEXT PRIMARY KEY,
+      setting_value JSONB NOT NULL DEFAULT '{}'::jsonb,
+      updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+    );
   `);
   await pool.query(`ALTER TABLE users ADD COLUMN IF NOT EXISTS username TEXT`);
   await pool.query(`ALTER TABLE users ADD COLUMN IF NOT EXISTS postcode TEXT DEFAULT ''`);
@@ -521,6 +626,7 @@ app.post("/api/admin/login",simpleRateLimit({windowMs:30*60*1000,max:8,keyPrefix
 });
 app.post("/api/admin/logout",(req,res)=>{res.clearCookie("iroom_token");res.json({ok:true});});
 app.get("/api/admin/me",(req,res)=>{const t=readToken(req);res.json({admin:!!t?.admin});});
+app.get("/api/admin/session",(req,res)=>{const t=readToken(req);if(!t?.admin)return res.status(401).json({authenticated:false});res.json({authenticated:true});});
 
 
 app.post("/api/consultations",simpleRateLimit({windowMs:10*60*1000,max:12,keyPrefix:"consult"}),async(req,res)=>{
@@ -597,6 +703,68 @@ app.post("/api/admin/email-test",requireAdmin,async(req,res)=>{
     res.status(500).json({ok:false,error:e.message});
   }
 });
+
+
+app.get("/api/site/today-pick",async(req,res)=>{
+  try{
+    const data=await getSetting("today_pick",normalizeTodayPick({}));
+    res.json({ok:true,todayPick:data});
+  }catch(e){res.status(500).json({ok:false,error:"오늘의 PICK을 불러오지 못했습니다."})}
+});
+
+app.get("/api/admin/site/today-pick",requireAdmin,async(req,res)=>{
+  const data=await getSetting("today_pick",normalizeTodayPick({}));
+  res.json({ok:true,todayPick:data});
+});
+app.put("/api/admin/site/today-pick",requireAdmin,async(req,res)=>{
+  try{
+    const value=normalizeTodayPick(req.body||{});
+    const saved=await putSetting("today_pick",value);
+    logSecurity("admin_today_pick_updated","admin",req,value.productName||value.title);
+    res.json({ok:true,todayPick:saved.setting_value,updatedAt:saved.updated_at});
+  }catch(e){
+    console.error("[TODAY PICK SAVE]",e.message);
+    res.status(500).json({ok:false,error:"오늘의 PICK 저장 중 오류가 발생했습니다."});
+  }
+});
+
+app.get("/api/admin/system-status",requireAdmin,async(req,res)=>{
+  let db=false;
+  try{await pool.query("SELECT 1");db=true}catch{}
+  const mail=mailSettings();
+  res.json({
+    ok:true,db,
+    openai_configured:!!OPENAI_API_KEY,
+    openai_model:OPENAI_MODEL,
+    email_configured:!!(mail.apiKey&&mail.senderEmail&&mail.orderEmail),
+    public_base_url:BASE_URL,
+    node_env:process.env.NODE_ENV||"development"
+  });
+});
+
+app.post("/api/admin/ai/assist",
+  requireAdmin,
+  simpleRateLimit({windowMs:60*60*1000,max:40,keyPrefix:"admin_ai",message:"AI 요청이 많습니다. 잠시 후 다시 시도해주세요."}),
+  async(req,res)=>{
+    try{
+      const b=req.body||{};
+      const result=await openAiAssist({
+        mode:cleanText(b.mode||"today",30),
+        subject:cleanText(b.subject||"",120),
+        audience:cleanText(b.audience||"",180),
+        tone:cleanText(b.tone||"고급스럽고 신뢰감 있게",100),
+        details:cleanLongText(b.details||"",3500),
+        useWeb:!!b.useWeb
+      });
+      logSecurity("admin_ai_assist","admin",req,`${b.mode||"today"}:${b.subject||""}`);
+      res.json({ok:true,model:OPENAI_MODEL,...result});
+    }catch(e){
+      console.error("[ADMIN AI]",e.message);
+      const code=e.message==="OPENAI_API_KEY_MISSING"?503:502;
+      res.status(code).json({ok:false,error:e.message==="OPENAI_API_KEY_MISSING"?"Render 환경변수 OPENAI_API_KEY를 먼저 설정해주세요.":"AI 요청 처리 중 오류가 발생했습니다.",detail:e.message.slice(0,240)});
+    }
+  }
+);
 
 app.get("/api/admin/dashboard",requireAdmin,async(req,res)=>{
   const [p,o,u,today]=await Promise.all([
