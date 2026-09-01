@@ -3968,4 +3968,15 @@ document.addEventListener("keydown", function(e){
  apply();
 })();
 </script>
+<script id="IROOM_ADMIN_ENTRY">
+(function(){
+ const q=new URLSearchParams(location.search);
+ if(q.get('admin')==='1'){
+   const a=document.createElement('a');
+   a.href='/band-admin.html'; a.textContent='⚙ 관리자';
+   a.style.cssText='position:fixed;right:14px;bottom:78px;z-index:99999;background:#123f31;color:white;padding:11px 15px;border-radius:999px;text-decoration:none;font-weight:900;box-shadow:0 8px 24px #0003';
+   document.body.appendChild(a);
+ }
+})();
+</script>
 </body></html>
