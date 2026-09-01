@@ -3968,6 +3968,33 @@ document.addEventListener("keydown", function(e){
  apply();
 })();
 </script>
+<script id="IROOM_ADMIN_PRODUCT_SYNC_V7">
+(async function(){
+  const money=n=>Number(n||0).toLocaleString("ko-KR")+"원";
+  const safeImage=p=>p.image||"assets/keep9-gift.jpg";
+  function mergeCatalog(p){
+    const old=productCatalog[p.name]||{};
+    productCatalog[p.name]={...old,unit:p.unit||old.unit||"구성 확인",price:Number(p.price||0),image:safeImage(p),desc:p.description||old.desc||"오늘 상태를 확인해 선별한 이룸 과일입니다.",stock:Number(p.stock||0),id:p.id};
+  }
+  function cardHTML(p){
+    const name=String(p.name||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/"/g,"&quot;");
+    const desc=String(p.description||p.unit||"오늘 상태를 확인해 선별한 과일입니다.").replace(/&/g,"&amp;").replace(/</g,"&lt;");
+    const image=String(safeImage(p)).replace(/"/g,"&quot;");
+    return `<article class="k9x-card k9x-action-card"><button class="k9x-card-main" type="button" data-k7-product="${name}"><img src="${image}" alt="${name}"><b>${name}</b><span>${desc}</span><strong>${money(p.price)}</strong></button><div class="k9x-card-actions"><button type="button" data-k7-product="${name}">상세보기</button><button class="cart" type="button" data-k7-cart="${name}">🛒 담기</button></div></article>`;
+  }
+  try{
+    const r=await fetch("/api/site/products",{cache:"no-store"});
+    if(!r.ok) throw new Error("product feed");
+    const data=await r.json();
+    const products=(data.products||[]).filter(p=>p&&p.name&&p.is_active!==false);
+    if(!products.length)return;
+    products.forEach(mergeCatalog);
+    const grid=document.querySelector("#best-products .k9x-grid");
+    if(grid) grid.innerHTML=products.slice(0,4).map(cardHTML).join("");
+    window.iroomLiveProducts=products;
+  }catch(e){console.warn("IROOM product sync fallback",e);}
+})();
+</script>
 <script id="IROOM_ADMIN_ENTRY">
 (function(){
  const q=new URLSearchParams(location.search);
