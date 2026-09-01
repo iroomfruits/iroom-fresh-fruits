@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>이룸 운영·AI 설정</title>
+<style>
+:root{--g:#0b4433;--g2:#123f31;--gold:#c18a38;--cream:#f7f1e6;--line:#e6d8c4;--muted:#6f7b74;--red:#a84635}
+*{box-sizing:border-box}body{margin:0;background:#f7f3eb;color:#153d30;font-family:Pretendard,"Noto Sans KR",Arial,sans-serif}
+button,input,textarea,select{font:inherit}.hidden{display:none!important}
+.top{position:sticky;top:0;z-index:10;height:70px;display:flex;align-items:center;gap:12px;padding:0 24px;background:#fffdf8;border-bottom:1px solid var(--line)}
+.top a{color:var(--g);text-decoration:none;font-weight:900}.top h1{font-size:19px;margin:0;flex:1}.wrap{max-width:1220px;margin:auto;padding:24px}
+.status-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:18px}.status{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px}.status b{display:block;font-size:12px}.status span{font-size:11px;color:var(--muted)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px}.card h2{margin:0 0 6px;font-size:21px}.card p{margin:0 0 16px;color:var(--muted);font-size:12px;line-height:1.65}
+label{display:block;font-size:11px;font-weight:900;margin:11px 0 5px}input,textarea,select{width:100%;border:1px solid #d9cdbd;border-radius:10px;padding:11px;background:#fff}textarea{min-height:95px;resize:vertical}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:9px}.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}.btn{border:1px solid #d7c7ae;background:#fffaf2;color:var(--g);border-radius:999px;padding:10px 15px;font-weight:900;cursor:pointer}.btn.primary{background:var(--g);border-color:var(--g);color:#fff}.btn.gold{background:#fff8e9;border-color:#c9984e;color:#6b481c}
+.photos{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-top:8px}.photo{aspect-ratio:1.2;border:1px dashed #cfbea2;border-radius:10px;background:#faf6ee;display:grid;place-items:center;overflow:hidden;font-size:9px;color:#887d6f}.photo img{width:100%;height:100%;object-fit:cover}.help{font-size:10px;color:#8a8d89;line-height:1.55;margin-top:6px}
+.aiout{min-height:250px;white-space:pre-wrap;background:#fbf8f2}.sources{margin-top:12px;font-size:10px}.sources a{display:block;color:#386957;margin:5px 0;word-break:break-all}
+.badge{display:inline-block;border-radius:999px;padding:5px 9px;background:#eef5f0;color:#26704e;font-size:10px;font-weight:900}.warn{background:#fff5e8;color:#875821}.msg{font-size:11px;color:var(--muted);margin-top:8px;min-height:18px}
+@media(max-width:900px){.grid{grid-template-columns:1fr}.status-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.wrap{padding:14px 10px}.top{padding:0 12px}.row{grid-template-columns:1fr}.photos{grid-template-columns:1fr 1fr}.status-grid{grid-template-columns:1fr}}
+</style></head>
+<body>
+<header class="top"><a href="/band-admin.html">← 관리자센터</a><h1>운영 · AI 설정</h1><a href="/" target="_blank">홈페이지 ↗</a></header>
+<main class="wrap">
+<div id="authMsg" class="card">관리자 인증을 확인하고 있습니다…</div>
+<div id="app" class="hidden">
+<section class="status-grid">
+<div class="status"><b>데이터베이스</b><span id="stDb">확인 중</span></div>
+<div class="status"><b>AI 연결</b><span id="stAi">확인 중</span></div>
+<div class="status"><b>주문 메일</b><span id="stMail">확인 중</span></div>
+<div class="status"><b>AI 모델</b><span id="stModel">확인 중</span></div>
+</section>
+<section class="grid">
+<div class="card">
+<span class="badge">TODAY'S IROOM PICK</span>
+<h2>오늘의 과일 관리</h2>
+<p>휴대폰 사진과 실제 확인한 사실만 입력하면 홈페이지의 ‘오늘의 이룸 PICK’이 바로 바뀝니다.</p>
+<div class="row"><div><label>상품명</label><input id="productName" placeholder="예: 제주 하우스 감귤"></div><div><label>판매 상태</label><select id="status"><option>판매중</option><option>품절</option><option>준비중</option></select></div></div>
+<div class="row"><div><label>산지</label><input id="origin" placeholder="실제 확인한 산지"></div><div><label>판매가</label><input id="price" inputmode="numeric" placeholder="예: 29900"></div></div>
+<label>메인 제목</label><input id="title" value="오늘 가장 좋은 과일">
+<label>오늘 설명</label><textarea id="summary" placeholder="오늘 경매 물건 가운데 어떤 점이 좋았는지"></textarea>
+<label>오늘의 선택 이유</label><textarea id="reason" placeholder="예: 향이 좋고 과육이 단단해 오늘 출고용으로 선택했습니다."></textarea>
+<div class="row"><div><label>맛 특징</label><input id="taste" placeholder="예: 높은 향, 아삭한 식감"></div><div><label>재고 표시</label><input id="stockText" value="한정 수량"></div></div>
+<label>입고 사진 (최대 4장)</label><input id="photos" type="file" accept="image/*" multiple>
+<div id="photoPreview" class="photos"></div>
+<div class="help">사진은 브라우저에서 자동으로 축소·압축한 뒤 DB에 저장합니다. Render 서버 파일시스템에 직접 저장하지 않아 재배포 후에도 유지됩니다.</div>
+<div class="actions"><button class="btn primary" id="saveToday">홈페이지에 저장</button><button class="btn" id="reloadToday">저장값 다시 불러오기</button></div>
+<div id="saveMsg" class="msg"></div>
+</div>
+
+<div class="card">
+<span class="badge">IROOM AI ASSISTANT</span>
+<h2>AI 운영 도우미</h2>
+<p>실제 과일 정보는 관리자가 입력하고, AI는 고객이 이해하기 좋은 문구 작성과 인터넷 참고조사를 돕습니다. AI가 만든 내용은 저장 전에 반드시 확인하세요.</p>
+<div class="row"><div><label>작업</label><select id="aiMode"><option value="today">오늘의 PICK 문구</option><option value="product">상품 상세설명</option><option value="promotion">홍보·SNS 문구</option><option value="seo">SEO 문구</option><option value="audit">운영 점검</option></select></div><div><label>말투</label><select id="aiTone"><option>고급스럽고 신뢰감 있게</option><option>따뜻하고 친근하게</option><option>간결하고 구매하기 쉽게</option><option>기업·단체 상담용</option></select></div></div>
+<label>상품명/주제</label><input id="aiSubject" placeholder="예: 제주 감귤">
+<label>대상/상황</label><input id="aiAudience" placeholder="예: 가족 간식 / 부모님 선물">
+<label>관리자가 확인한 실제 정보</label><textarea id="aiDetails" placeholder="산지, 실제 맛, 상태, 중량, 가격, 포장, 출고 가능일 등 확인한 사실만 적어주세요."></textarea>
+<div class="actions"><button class="btn primary" id="aiWrite">AI 문구 만들기</button><button class="btn gold" id="aiWeb">인터넷 확인 + AI 제안</button><button class="btn" id="applyAi">오늘의 PICK에 적용</button></div>
+<label>AI 결과</label><textarea id="aiOutput" class="aiout" placeholder="AI 결과가 여기에 표시됩니다."></textarea>
+<div id="aiSources" class="sources"></div><div id="aiMsg" class="msg"></div>
+</div>
+</section>
+</div>
+</main>
+<script>
+const $=s=>document.querySelector(s); let savedImages=[];
+function moneyNum(v){return Number(String(v||"").replace(/[^0-9]/g,""))||0}
+async function requireAdmin(){
+  try{
+    const r=await fetch("/api/admin/session",{credentials:"same-origin"});
+    if(!r.ok)throw 0;
+    $("#authMsg").classList.add("hidden");$("#app").classList.remove("hidden");
+    await Promise.all([loadStatus(),loadToday()]);
+  }catch{location.href="/band-admin.html?next="+encodeURIComponent(location.pathname)}
+}
+async function loadStatus(){
+  const r=await fetch("/api/admin/system-status",{credentials:"same-origin"});if(!r.ok)return;
+  const d=await r.json();
+  $("#stDb").textContent=d.db?"정상 연결":"오류";
+  $("#stAi").textContent=d.openai_configured?"OpenAI 연결 준비됨":"OPENAI_API_KEY 설정 필요";
+  $("#stMail").textContent=d.email_configured?"정상 설정":"일부 설정 필요";
+  $("#stModel").textContent=d.openai_model||"-";
+}
+function renderPhotos(){
+  $("#photoPreview").innerHTML=(savedImages.length?savedImages:["","","",""]).slice(0,4).map((src,i)=>`<div class="photo">${src?`<img src="${src}" alt="사진 ${i+1}">`:`사진 ${i+1}`}</div>`).join("");
+}
+async function loadToday(){
+  const r=await fetch("/api/admin/site/today-pick",{credentials:"same-origin"});if(!r.ok)return;
+  const p=(await r.json()).todayPick||{};
+  ["productName","origin","title","summary","reason","taste","stockText","status"].forEach(k=>{if(p[k]!==undefined)$("#"+k).value=p[k]||""});
+  $("#price").value=p.price||"";
+  savedImages=Array.isArray(p.images)?p.images:[];
+  renderPhotos();
+}
+async function compress(file){
+  const img=await new Promise((ok,fail)=>{const i=new Image;i.onload=()=>ok(i);i.onerror=fail;i.src=URL.createObjectURL(file)});
+  const max=1200,scale=Math.min(1,max/Math.max(img.width,img.height)),w=Math.round(img.width*scale),h=Math.round(img.height*scale);
+  const c=document.createElement("canvas");c.width=w;c.height=h;c.getContext("2d").drawImage(img,0,0,w,h);
+  return c.toDataURL("image/jpeg",.76);
+}
+$("#photos").onchange=async e=>{
+  $("#saveMsg").textContent="사진을 최적화하는 중…";
+  const files=[...e.target.files].slice(0,4), arr=[];
+  for(const f of files)arr.push(await compress(f));
+  savedImages=arr;renderPhotos();$("#saveMsg").textContent=`사진 ${arr.length}장 준비 완료`;
+};
+$("#saveToday").onclick=async()=>{
+  $("#saveMsg").textContent="저장 중…";
+  const body={productName:$("#productName").value,origin:$("#origin").value,price:moneyNum($("#price").value),title:$("#title").value,summary:$("#summary").value,reason:$("#reason").value,taste:$("#taste").value,stockText:$("#stockText").value,status:$("#status").value,images:savedImages,dateNote:"오늘의 이룸 PICK · 입고 당일 업데이트"};
+  const r=await fetch("/api/admin/site/today-pick",{method:"PUT",headers:{"Content-Type":"application/json"},credentials:"same-origin",body:JSON.stringify(body)});
+  const d=await r.json().catch(()=>({}));$("#saveMsg").textContent=r.ok?"저장했습니다. 홈페이지 새로고침 후 바로 확인할 수 있습니다.":(d.error||"저장 실패");
+};
+$("#reloadToday").onclick=loadToday;
+function fillAiActual(){
+  const bits=[`산지: ${$("#origin").value||"확인 필요"}`,`가격: ${$("#price").value||"확인 필요"}`,`맛 특징: ${$("#taste").value||"확인 필요"}`,`판매 상태: ${$("#status").value}`];
+  if(!$("#aiSubject").value)$("#aiSubject").value=$("#productName").value;
+  if(!$("#aiDetails").value)$("#aiDetails").value=bits.join("\\n");
+}
+async function ai(useWeb){
+  fillAiActual();$("#aiMsg").textContent=useWeb?"인터넷 참고자료를 확인하며 작성 중…":"AI가 작성 중…";$("#aiSources").innerHTML="";
+  const r=await fetch("/api/admin/ai/assist",{method:"POST",headers:{"Content-Type":"application/json"},credentials:"same-origin",body:JSON.stringify({mode:$("#aiMode").value,subject:$("#aiSubject").value,audience:$("#aiAudience").value,tone:$("#aiTone").value,details:$("#aiDetails").value,useWeb})});
+  const d=await r.json().catch(()=>({}));if(!r.ok){$("#aiMsg").textContent=d.error||"AI 요청 실패";return}
+  $("#aiOutput").value=d.text||"";$("#aiMsg").textContent=`${d.model||"AI"}로 작성했습니다. 실제 상품 사실과 맞는지 확인 후 사용하세요.`;
+  $("#aiSources").innerHTML=(d.sources||[]).map(s=>`<a href="${s.url}" target="_blank" rel="noopener">참고: ${s.title||s.url}</a>`).join("");
+}
+$("#aiWrite").onclick=()=>ai(false);$("#aiWeb").onclick=()=>ai(true);
+function section(text,name){
+ const re=new RegExp("\\\\["+name+"\\\\]\\\\s*([\\\\s\\\\S]*?)(?=\\\\n\\\\[[^\\\\]]+\\\\]|$)");const m=text.match(re);return m?m[1].trim():"";
+}
+$("#applyAi").onclick=()=>{
+ const t=$("#aiOutput").value;if(!t)return;
+ const title=section(t,"제목"),summary=section(t,"요약"),reason=section(t,"오늘의 선택 이유");
+ if(title)$("#title").value=title;if(summary)$("#summary").value=summary;if(reason)$("#reason").value=reason;
+ $("#aiMsg").textContent="AI 제안을 입력칸에 적용했습니다. 확인한 뒤 ‘홈페이지에 저장’을 눌러주세요.";
+};
+renderPhotos();requireAdmin();
+</script></body></html>
