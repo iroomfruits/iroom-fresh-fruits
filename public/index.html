@@ -2578,18 +2578,10 @@ body>.notice,body>header:not(.k9x-header),body>section.section,body>footer#foote
 #todayPickMedia.iroom-today-media-grid img:nth-of-type(3):last-of-type{grid-column:1/-1}
 </style>
 
+
 <style>
-/* V9: 실제로 화면에 표시되는 KEEP9 헤더의 관리자 진입 버튼 */
-#KEEP9_EXACT .k9x-header{grid-template-columns:280px 1fr 270px!important}
-#KEEP9_EXACT .k9x-admin-visible{
-  display:inline-flex!important;align-items:center!important;justify-content:center!important;
-  height:34px!important;padding:0 13px!important;border:1px solid #c99a43!important;
-  border-radius:999px!important;background:#fffaf2!important;color:#0d3f30!important;
-  text-decoration:none!important;font-size:12px!important;font-weight:900!important;white-space:nowrap!important;
-}
-#KEEP9_EXACT .k9x-admin-visible:hover{background:#0d3f30!important;color:#fff!important;border-color:#0d3f30!important}
-@media(max-width:1000px){#KEEP9_EXACT .k9x-header{grid-template-columns:200px 1fr!important}}
-@media(max-width:560px){#KEEP9_EXACT .k9x-header{grid-template-columns:155px 1fr!important}#KEEP9_EXACT .k9x-admin-visible{height:30px!important;padding:0 9px!important;font-size:10px!important}}
+.footer-admin-link{display:inline-block;color:#7f765f!important;font-size:11px!important;text-decoration:none!important;border-bottom:1px solid rgba(127,118,95,.35);padding-bottom:2px}
+.footer-admin-link:hover{color:#0d4a3a!important;border-bottom-color:#0d4a3a}
 </style>
 </head>
 <body>
@@ -2600,7 +2592,7 @@ body>.notice,body>header:not(.k9x-header),body>section.section,body>footer#foote
     <span class="brand-final-en">fresh fruits</span>
     <small>PREMIUM FRUIT BOUTIQUE</small>
   </span>
-</a><nav class="nav"><a href="#best">NEW & BEST <span style="font-size:9px;background:#c6a15b;color:#fff;border-radius:999px;padding:3px 6px;margin-left:3px">HOT</span></a><a href="#best">과일</a><a href="#gift">선물세트</a><a href="#group">공동구매</a><a href="#custom">단체·맞춤선물</a><a href="#story">스토리</a></nav><div class="tools"><a class="admin-home-entry" href="/band-admin.html?reauth=1" title="이룸 관리자 센터">🔐 관리자</a><button class="tool desktop" id="loginBtn">로그인</button><button class="tool desktop" id="signupBtn">회원가입</button><button class="tool desktop" id="myTopBtn">마이페이지</button><button class="icon desktop" id="searchBtn" title="검색">⌕</button><button class="icon" id="shareBtn" title="공유">↗</button><button class="icon" id="cartBtn">🛒<span class="badge" id="cartBadge">0</span></button></div></div></header>
+</a><nav class="nav"><a href="#best">NEW & BEST <span style="font-size:9px;background:#c6a15b;color:#fff;border-radius:999px;padding:3px 6px;margin-left:3px">HOT</span></a><a href="#best">과일</a><a href="#gift">선물세트</a><a href="#group">공동구매</a><a href="#custom">단체·맞춤선물</a><a href="#story">스토리</a></nav><div class="tools"><button class="tool desktop" id="loginBtn">로그인</button><button class="tool desktop" id="signupBtn">회원가입</button><button class="tool desktop" id="myTopBtn">마이페이지</button><button class="icon desktop" id="searchBtn" title="검색">⌕</button><button class="icon" id="shareBtn" title="공유">↗</button><button class="icon" id="cartBtn">🛒<span class="badge" id="cartBadge">0</span></button></div></div></header>
 
 <nav class="seo-quick-nav" aria-label="과일 카테고리 바로가기">
   <a href="/premium-fruit.html" title="고급과일 안내">고급과일</a>
@@ -2633,7 +2625,6 @@ body>.notice,body>header:not(.k9x-header),body>section.section,body>footer#foote
       <button type="button" data-k7="gift">선물 서비스</button>
     </nav>
     <div class="k9x-icons" aria-label="빠른 메뉴">
-      <a class="k9x-admin-visible" href="/band-admin.html?reauth=1" aria-label="관리자센터" title="관리자센터">🔐 관리자</a>
       <button type="button" data-k7="search" aria-label="검색"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 4 4"></path></svg></button>
       <button type="button" data-k7="login" aria-label="로그인"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.5"></circle><path d="M5.5 20c.8-4 3-6 6.5-6s5.7 2 6.5 6"></path></svg></button>
       <button type="button" data-k7="cart" aria-label="장바구니"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h2l1.7 9.2h9.8l2-6.4H6.1"></path><circle cx="9" cy="19" r="1.2"></circle><circle cx="17" cy="19" r="1.2"></circle></svg></button>
@@ -2859,7 +2850,7 @@ body>.notice,body>header:not(.k9x-header),body>section.section,body>footer#foote
 </main>
 
 
-<footer id="footer"><div class="wrap foot"><div><b>이룸 fresh fruits</b><small>국내산 제철과일과 프리미엄 과일선물세트를 정성껏 준비합니다.</small><small><a href="/band-admin.html?reauth=1">관리자 전용 페이지</a></small></div><div><b>고객센터</b><small>평일 09:00 ~ 18:00<br>상품 · 주문 · 배송 · 선물 상담</small></div><div><b>바로가기</b><small><a href="https://band.us/@iroomfruits" target="_blank">이룸 BAND</a><br><a href="/band-order.html">BAND 주문센터</a></small></div></div></footer>
+<footer id="footer"><div class="wrap foot"><div><b>이룸 fresh fruits</b><small>국내산 제철과일과 프리미엄 과일선물세트를 정성껏 준비합니다.</small><small style="margin-top:12px"><a href="/band-admin.html?reauth=1" class="footer-admin-link">🔐 관리자 전용</a></small></div><div><b>고객센터</b><small>평일 09:00 ~ 18:00<br>상품 · 주문 · 배송 · 선물 상담</small></div><div><b>바로가기</b><small><a href="https://band.us/@iroomfruits" target="_blank">이룸 BAND</a><br><a href="/band-order.html">BAND 주문센터</a></small></div></div></footer>
 
 <button class="share-float" id="shareFloat">↗ 공유하기</button><div class="share-toast" id="shareToast">링크를 복사했습니다.</div>
 <div class="install-banner" id="installBanner"><img src="/assets/v114-logo.jpg" alt="이룸 앱 아이콘" style="width:42px;height:42px;border-radius:10px;object-fit:cover;flex:0 0 auto"><div class="grow"><b>이룸 fresh fruits 앱 설치</b><div style="font-size:12px;opacity:.8">홈 화면에 추가해 더 빠르고 편리하게 이용하세요.</div></div><button id="installBannerBtn">설치하기</button><button class="close" id="installClose">×</button></div>

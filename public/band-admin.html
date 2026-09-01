@@ -77,7 +77,7 @@ hr{border:0;border-top:1px solid var(--line);margin:18px 0}
     <h1>이룸 관리자 센터</h1>
     <span class="badge" id="saveState">연결 확인 중</span>
     <div class="spacer"></div>
-    <button class="ghost" onclick="location.href='/'">홈페이지 보기</button>
+    <button class="ghost" type="button" onclick="goBackToSite()">← 뒤로가기</button>
     <button class="primary" id="saveAllBtn">전체 저장</button>
   </div>
   <div class="tabs">
@@ -287,26 +287,72 @@ hr{border:0;border-top:1px solid var(--line);margin:18px 0}
 <script>
 "use strict";
 
+function goBackToSite(){
+  // 홈페이지에서 같은 창으로 들어온 경우에는 원래 보던 페이지로 돌아갑니다.
+  // 직접 관리자 주소를 연 경우에는 홈페이지로 이동합니다.
+  try{
+    if(document.referrer && new URL(document.referrer).origin===location.origin){
+      history.back();
+      return;
+    }
+  }catch(e){}
+  location.href="/";
+}
+
 const ADMIN_SESSION_KEY="iroom_admin_session_v61";
 function adminSessionOpen(){return sessionStorage.getItem(ADMIN_SESSION_KEY)==="1"}
 function unlockAdmin(){document.getElementById("adminGate").classList.add("hidden");sessionStorage.setItem(ADMIN_SESSION_KEY,"1")}
+function lockAdmin(message=""){
+  sessionStorage.removeItem(ADMIN_SESSION_KEY);
+  document.getElementById("adminGate").classList.remove("hidden");
+  document.getElementById("saveState").textContent="로그인 필요";
+  const msg=document.getElementById("adminLoginMsg");
+  if(msg) msg.textContent=message;
+}
 async function verifyAdminPassword(){
   const input=document.getElementById("adminPasswordInput");
   const msg=document.getElementById("adminLoginMsg");
+  const button=document.getElementById("adminLoginBtn");
   const password=input.value;
-  if(!password){msg.textContent="비밀번호를 입력하세요.";return}
+  if(!password){msg.textContent="비밀번호를 입력하세요.";input.focus();return}
   msg.textContent="확인 중...";
+  button.disabled=true;
   try{
-    // Use the existing server admin password when available.
-    const r=await fetch("/api/admin/login",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({password})});
-    if(r.ok){unlockAdmin();msg.textContent="";await load();return}
+    const r=await fetch("/api/admin/login",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      credentials:"same-origin",
+      body:JSON.stringify({password})
+    });
+    const d=await r.json().catch(()=>({}));
+    if(!r.ok){
+      msg.textContent=d.error||"관리자 로그인에 실패했습니다.";
+      return;
+    }
+    unlockAdmin();
+    input.value="";
+    msg.textContent="";
+    await load();
+  }catch(e){
+    msg.textContent="서버에 연결할 수 없습니다. 잠시 후 다시 시도해 주세요.";
+  }finally{
+    button.disabled=false;
+  }
+}
+async function initializeAdmin(){
+  document.getElementById("saveState").textContent="연결 확인 중";
+  try{
+    const r=await fetch("/api/admin/me",{cache:"no-store",credentials:"same-origin"});
+    const d=await r.json().catch(()=>({admin:false}));
+    if(r.ok && d.admin===true){
+      unlockAdmin();
+      await load();
+      return;
+    }
   }catch(e){}
-  // Fallback: compare with the browser-stored setup password if the current backend has no admin-login route.
-  // Default fallback is intentionally not hard-coded in the page. It must have been saved by the admin once.
-  const saved=localStorage.getItem("iroom_admin_password_v61");
-  if(saved && password===saved){unlockAdmin();msg.textContent="";return}
-  // First-time bootstrap: if no password was saved, accept the site's configured ADMIN_PASSWORD through backend only.
-  msg.textContent="비밀번호가 맞지 않거나 서버 관리자 로그인이 연결되지 않았습니다.";
+  lockAdmin("");
+  renderAll();
+  setTimeout(()=>document.getElementById("adminPasswordInput")?.focus(),0);
 }
 
 const LOCAL_KEY="iroom_admin_store_v60";
@@ -352,7 +398,8 @@ async function load(){
       fetch("/api/admin/users",{cache:"no-store"})
     ]);
     if([storeR,productsR,ordersR,usersR].some(r=>r.status===401)){
-      $("#saveState").textContent="로그인 필요";renderAll();return;
+      lockAdmin("로그인 시간이 만료되었습니다. 다시 로그인해 주세요.");
+      renderAll();return;
     }
     if(!storeR.ok) throw new Error("store");
     const d=await storeR.json();
@@ -451,10 +498,9 @@ $("#changeAdminPasswordBtn")?.addEventListener("click",async()=>{
 $("#aiBtn").onclick=async()=>{const p=$("#aiPrompt").value.trim();if(!p)return;$("#aiResult").textContent="작성 중...";try{const r=await fetch("/api/ai",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({prompt:p})});if(r.ok){const d=await r.json();$("#aiResult").textContent=d.text||d.result||JSON.stringify(d);return}}catch(e){}$("#aiResult").textContent="추천 문구: “산지의 신선함을 그대로, 소중한 분께 품격 있게 전하세요. 이룸 fresh fruits가 제철 과일을 엄선해 정성껏 준비합니다.”"};
 
 
-if(adminSessionOpen()) document.getElementById("adminGate").classList.add("hidden");
 document.getElementById("adminLoginBtn").addEventListener("click",verifyAdminPassword);
 document.getElementById("adminPasswordInput").addEventListener("keydown",e=>{if(e.key==="Enter")verifyAdminPassword()});
-if(adminSessionOpen()) load(); else renderAll();
+initializeAdmin();
 
 </script>
 </body>
