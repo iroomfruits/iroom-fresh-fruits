@@ -786,6 +786,20 @@ app.put("/api/admin/site/homepage-config",requireAdmin,async(req,res)=>{
 });
 
 // IROOM1 full admin store backed by PostgreSQL site_settings.
+// Public storefront product feed. Only sale-safe product fields are exposed.
+app.get("/api/site/products",async(req,res)=>{
+  try{
+    const r=await pool.query(`
+      SELECT id,slug,name,description,unit,price,stock,image,category,is_active,sort_order
+      FROM products WHERE is_active=TRUE ORDER BY sort_order,id
+    `);
+    res.json({ok:true,products:r.rows});
+  }catch(e){
+    console.error("[SITE PRODUCTS]",e.message);
+    res.status(500).json({ok:false,error:"상품 정보를 불러오지 못했습니다."});
+  }
+});
+
 app.get("/api/store",requireAdmin,async(req,res)=>{
   try{
     const saved=await getSetting("iroom1_store",{});
