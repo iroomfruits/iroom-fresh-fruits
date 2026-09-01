@@ -299,7 +299,7 @@ async function verifyAdminPassword(){
   try{
     // Use the existing server admin password when available.
     const r=await fetch("/api/admin/login",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({password})});
-    if(r.ok){unlockAdmin();msg.textContent="";return}
+    if(r.ok){unlockAdmin();msg.textContent="";await load();return}
   }catch(e){}
   // Fallback: compare with the browser-stored setup password if the current backend has no admin-login route.
   // Default fallback is intentionally not hard-coded in the page. It must have been saved by the admin once.
@@ -345,23 +345,47 @@ $$("[data-view]").forEach(b=>b.addEventListener("click",()=>goto(b.dataset.view)
 
 async function load(){
   try{
-    const r=await fetch("/api/store",{cache:"no-store"});
-    if(r.ok){const d=await r.json(); if(d&&typeof d==="object") state={...state,...d,site:{...state.site,...(d.site||d.siteSettings||{})},banner:{...state.banner,...(d.banner||{})}};$("#saveState").textContent="서버 연결됨";}
-    else throw 0;
+    const [storeR,productsR,ordersR,usersR]=await Promise.all([
+      fetch("/api/store",{cache:"no-store"}),
+      fetch("/api/admin/products",{cache:"no-store"}),
+      fetch("/api/admin/orders",{cache:"no-store"}),
+      fetch("/api/admin/users",{cache:"no-store"})
+    ]);
+    if([storeR,productsR,ordersR,usersR].some(r=>r.status===401)){
+      $("#saveState").textContent="로그인 필요";renderAll();return;
+    }
+    if(!storeR.ok) throw new Error("store");
+    const d=await storeR.json();
+    const pd=productsR.ok?await productsR.json():{products:d.products||[]};
+    const od=ordersR.ok?await ordersR.json():{orders:d.orders||[]};
+    const ud=usersR.ok?await usersR.json():{users:d.members||[]};
+    state={...state,...d,
+      products:(pd.products||[]).map(p=>({
+        id:p.id,name:p.name,price:Number(p.price||0),unit:p.unit||"",stock:Number(p.stock||0),
+        status:p.is_active===false?"숨김":(Number(p.stock||0)<=0?"품절":"판매중"),badge:p.badge||"",
+        image:p.image||"",order:Number(p.sort_order||0),desc:p.description||"",category:p.category||"과일"
+      })),
+      orders:(od.orders||[]).map(o=>({...o,id:o.id,orderNo:o.order_no,name:o.customer_name,phone:o.phone,total:o.total_amount,createdAt:o.created_at})),
+      members:(ud.users||[]).map(u=>({...u,createdAt:u.created_at}))
+    };
+    $("#saveState").textContent="서버 연결됨";
+    $("#saveState").style.background="#eaf5ee";
   }catch(e){
-    try{const x=JSON.parse(localStorage.getItem(LOCAL_KEY)||"null");if(x)state={...state,...x};$("#saveState").textContent="로컬 저장 모드"}catch(_){}
+    try{const x=JSON.parse(localStorage.getItem(LOCAL_KEY)||"null");if(x)state={...state,...x}}catch(_){}
+    $("#saveState").textContent="서버 연결 확인 필요";
+    $("#saveState").style.background="#fff3df";
   }
   renderAll();
 }
 async function persist(){
   state.updatedAt=new Date().toISOString();log("관리자 설정 저장");
   localStorage.setItem(LOCAL_KEY,JSON.stringify(state));
-  let ok=false;
-  for(const method of ["POST","PUT"]){
-    try{const r=await fetch("/api/store",{method,headers:{"Content-Type":"application/json"},body:JSON.stringify(state)});if(r.ok){ok=true;break}}catch(e){}
-  }
-  $("#saveState").textContent=ok?"서버 저장 완료":"로컬 저장 완료";
-  $("#saveState").style.background=ok?"#eaf5ee":"#fff3df";
+  const payload={...state}; delete payload.products; delete payload.orders; delete payload.members;
+  try{
+    const r=await fetch("/api/store",{method:"PUT",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)});
+    if(!r.ok) throw new Error("save");
+    $("#saveState").textContent="서버 저장 완료";$("#saveState").style.background="#eaf5ee";
+  }catch(e){$("#saveState").textContent="서버 저장 실패";$("#saveState").style.background="#fff0ef";}
   renderAll();
 }
 $("#saveAllBtn").onclick=persist;
@@ -383,8 +407,8 @@ function renderProducts(){
 $("#productSearch").oninput=renderProducts;$("#productFilter").onchange=renderProducts;
 $("#addProductBtn").onclick=()=>{["pName","pPrice","pUnit","pStock","pImage","pOrder","pDesc"].forEach(id=>$("#"+id).value="");$("#pStatus").value="판매중";$("#pBadge").value="";$("#editProductIndex").value="";$("#productModalTitle").textContent="상품 등록";openModal("productModal")};
 window.editProduct=i=>{const x=state.products[i];$("#editProductIndex").value=i;$("#pName").value=x.name;$("#pPrice").value=x.price;$("#pUnit").value=x.unit;$("#pStock").value=x.stock;$("#pStatus").value=x.status;$("#pBadge").value=x.badge||"";$("#pImage").value=x.image;$("#pOrder").value=x.order||"";$("#pDesc").value=x.desc||"";$("#productModalTitle").textContent="상품 수정";openModal("productModal")};
-window.deleteProduct=i=>{if(confirm("이 상품을 삭제할까요?")){state.products.splice(i,1);log("상품 삭제");persist()}};
-$("#saveProductBtn").onclick=()=>{const x={name:$("#pName").value.trim(),price:Number($("#pPrice").value),unit:$("#pUnit").value.trim(),stock:Number($("#pStock").value),status:$("#pStatus").value,badge:$("#pBadge").value,image:$("#pImage").value.trim(),order:Number($("#pOrder").value)||99,desc:$("#pDesc").value.trim()};if(!x.name)return alert("상품명을 입력하세요.");const i=$("#editProductIndex").value;if(i==="")state.products.push(x);else state.products[Number(i)]=x;log("상품 저장: "+x.name);closeModal("productModal");persist()};
+window.deleteProduct=async i=>{if(!confirm("이 상품을 삭제할까요?"))return;const x=state.products[i];if(x?.id){const r=await fetch("/api/admin/products/"+x.id,{method:"DELETE"});if(!r.ok)return alert("상품 삭제에 실패했습니다.");}else state.products.splice(i,1);log("상품 삭제");await load()};
+$("#saveProductBtn").onclick=async()=>{const x={name:$("#pName").value.trim(),price:Number($("#pPrice").value),unit:$("#pUnit").value.trim(),stock:Number($("#pStock").value),status:$("#pStatus").value,badge:$("#pBadge").value,image:$("#pImage").value.trim(),order:Number($("#pOrder").value)||99,desc:$("#pDesc").value.trim()};if(!x.name)return alert("상품명을 입력하세요.");const i=$("#editProductIndex").value;const current=i===""?null:state.products[Number(i)];const body={name:x.name,price:x.price,unit:x.unit,stock:x.stock,image:x.image,description:x.desc,sort_order:x.order,is_active:x.status!=="숨김",category:current?.category||"과일"};const url=current?.id?"/api/admin/products/"+current.id:"/api/admin/products";const r=await fetch(url,{method:current?.id?"PUT":"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)});if(!r.ok){const e=await r.json().catch(()=>({}));return alert(e.error||"상품 저장에 실패했습니다.");}closeModal("productModal");log("상품 저장: "+x.name);await load()};
 
 $("#imageUpload").onchange=async e=>{for(const file of e.target.files){if(!file.type.startsWith("image/"))continue;const data=await resizeImage(file,1200,900,.86);state.images.unshift({name:file.name,data,createdAt:new Date().toISOString()})}log("이미지 업로드");persist();e.target.value=""};
 function resizeImage(file,maxW,maxH,q){return new Promise(res=>{const fr=new FileReader();fr.onload=()=>{const im=new Image();im.onload=()=>{let w=im.width,h=im.height,r=Math.min(1,maxW/w,maxH/h);const c=document.createElement("canvas");c.width=Math.round(w*r);c.height=Math.round(h*r);c.getContext("2d").drawImage(im,0,0,c.width,c.height);res(c.toDataURL("image/jpeg",q))};im.src=fr.result};fr.readAsDataURL(file)})}
@@ -393,7 +417,9 @@ window.copyImage=i=>navigator.clipboard?.writeText(state.images[i].data).then(()
 window.useHero=i=>{state.banner.hero1.image=state.images[i].data;log("메인 이미지 변경");persist();goto("banners")};
 window.delImage=i=>{if(confirm("이미지를 삭제할까요?")){state.images.splice(i,1);persist()}};
 
-function renderOrders(){$("#orderRows").innerHTML=(state.orders||[]).map((o,i)=>`<tr><td>${esc(o.id)}</td><td>${esc(o.name||o.customerName||"")}<br><span class="small">${esc(o.phone||"")}</span></td><td>${Number(o.total||0).toLocaleString()}원</td><td><select onchange="state.orders[${i}].status=this.value;persist()">${["주문접수","입금확인","배송준비","배송중","배송완료","취소"].map(s=>`<option ${s===o.status?"selected":""}>${s}</option>`).join("")}</select></td><td><input value="${esc(o.tracking||"")}" onchange="state.orders[${i}].tracking=this.value;persist()" style="width:130px"></td><td>${o.createdAt?new Date(o.createdAt).toLocaleDateString("ko-KR"):""}</td><td><button class="ghost">상세</button></td></tr>`).join("")||'<tr><td colspan="7">주문이 없습니다.</td></tr>'}
+function renderOrders(){$("#orderRows").innerHTML=(state.orders||[]).map((o,i)=>`<tr><td>${esc(o.id)}</td><td>${esc(o.name||o.customerName||"")}<br><span class="small">${esc(o.phone||"")}</span></td><td>${Number(o.total||0).toLocaleString()}원</td><td><select onchange="updateOrderStatus(${i},this.value)">${["주문접수","입금확인","배송준비","배송중","배송완료","취소"].map(s=>`<option ${s===o.status?"selected":""}>${s}</option>`).join("")}</select></td><td><input value="${esc(o.tracking||"")}" onchange="state.orders[${i}].tracking=this.value;persist()" style="width:130px"></td><td>${o.createdAt?new Date(o.createdAt).toLocaleDateString("ko-KR"):""}</td><td><button class="ghost">상세</button></td></tr>`).join("")||'<tr><td colspan="7">주문이 없습니다.</td></tr>'}
+
+window.updateOrderStatus=async(i,status)=>{const o=state.orders[i];if(!o?.id)return;const r=await fetch("/api/admin/orders/"+o.id,{method:"PUT",headers:{"Content-Type":"application/json"},body:JSON.stringify({status})});if(!r.ok)return alert("주문 상태 저장에 실패했습니다.");await load()};
 function renderMembers(){$("#memberRows").innerHTML=(state.members||[]).map(m=>`<tr><td>${esc(m.username)}</td><td>${esc(m.name)}</td><td>${esc(m.phone)}</td><td>${esc(m.email)}</td><td>${m.createdAt?new Date(m.createdAt).toLocaleDateString("ko-KR"):""}</td><td><span class="badge">${esc(m.status||"정상")}</span></td></tr>`).join("")||'<tr><td colspan="6">회원이 없습니다.</td></tr>'}
 function renderRefunds(){$("#refundRows").innerHTML=(state.refunds||[]).map(r=>`<tr><td>${esc(r.orderId)}</td><td>${esc(r.name)}</td><td>${Number(r.amount||0).toLocaleString()}원</td><td>${esc(r.reason)}</td><td>${esc(r.status)}</td><td><button class="ghost">처리</button></td></tr>`).join("")||'<tr><td colspan="6">취소/환불 요청이 없습니다.</td></tr>'}
 function renderInquiries(){$("#inquiryRows").innerHTML=(state.inquiries||[]).map(x=>`<tr><td>${x.createdAt?new Date(x.createdAt).toLocaleString("ko-KR"):""}</td><td>${esc(x.name)}</td><td>${esc(x.message)}</td><td>${esc(x.status||"대기")}</td><td><button class="ghost">답변</button></td></tr>`).join("")||'<tr><td colspan="5">문의가 없습니다.</td></tr>'}
@@ -428,7 +454,7 @@ $("#aiBtn").onclick=async()=>{const p=$("#aiPrompt").value.trim();if(!p)return;$
 if(adminSessionOpen()) document.getElementById("adminGate").classList.add("hidden");
 document.getElementById("adminLoginBtn").addEventListener("click",verifyAdminPassword);
 document.getElementById("adminPasswordInput").addEventListener("keydown",e=>{if(e.key==="Enter")verifyAdminPassword()});
-load();
+if(adminSessionOpen()) load(); else renderAll();
 
 </script>
 </body>
