@@ -766,6 +766,24 @@ app.post("/api/admin/ai/assist",
   }
 );
 
+
+app.get("/api/site/homepage-config",async(req,res)=>{
+  try{res.json({ok:true,config:await getSetting("homepage_config",{})})}
+  catch(e){res.status(500).json({ok:false,error:"홈페이지 설정을 불러오지 못했습니다."})}
+});
+app.get("/api/admin/site/homepage-config",requireAdmin,async(req,res)=>{
+  res.json({ok:true,config:await getSetting("homepage_config",{})});
+});
+app.put("/api/admin/site/homepage-config",requireAdmin,async(req,res)=>{
+  try{
+    const raw=req.body&&typeof req.body.config==="object"?req.body.config:{};
+    const json=JSON.stringify(raw);
+    if(json.length>3500000)return res.status(413).json({ok:false,error:"설정/이미지 용량이 너무 큽니다. 사진 수나 크기를 줄여주세요."});
+    const saved=await putSetting("homepage_config",raw);
+    logSecurity("admin_homepage_config_updated","admin",req,"homepage_config");
+    res.json({ok:true,config:saved.setting_value,updatedAt:saved.updated_at});
+  }catch(e){console.error("[HOME CONFIG]",e.message);res.status(500).json({ok:false,error:"홈페이지 설정 저장 중 오류가 발생했습니다."})}
+});
 app.get("/api/admin/dashboard",requireAdmin,async(req,res)=>{
   const [p,o,u,today]=await Promise.all([
     pool.query("SELECT COUNT(*)::int count, COALESCE(SUM(stock),0)::int stock FROM products WHERE is_active=TRUE"),
