@@ -2578,6 +2578,19 @@ body>.notice,body>header:not(.k9x-header),body>section.section,body>footer#foote
 #todayPickMedia.iroom-today-media-grid img:nth-of-type(3):last-of-type{grid-column:1/-1}
 </style>
 
+<style>
+/* V9: 실제로 화면에 표시되는 KEEP9 헤더의 관리자 진입 버튼 */
+#KEEP9_EXACT .k9x-header{grid-template-columns:280px 1fr 270px!important}
+#KEEP9_EXACT .k9x-admin-visible{
+  display:inline-flex!important;align-items:center!important;justify-content:center!important;
+  height:34px!important;padding:0 13px!important;border:1px solid #c99a43!important;
+  border-radius:999px!important;background:#fffaf2!important;color:#0d3f30!important;
+  text-decoration:none!important;font-size:12px!important;font-weight:900!important;white-space:nowrap!important;
+}
+#KEEP9_EXACT .k9x-admin-visible:hover{background:#0d3f30!important;color:#fff!important;border-color:#0d3f30!important}
+@media(max-width:1000px){#KEEP9_EXACT .k9x-header{grid-template-columns:200px 1fr!important}}
+@media(max-width:560px){#KEEP9_EXACT .k9x-header{grid-template-columns:155px 1fr!important}#KEEP9_EXACT .k9x-admin-visible{height:30px!important;padding:0 9px!important;font-size:10px!important}}
+</style>
 </head>
 <body>
 <div class="notice"><div class="wrap"><div>🍊 <b>오늘의 입고</b> &nbsp; | &nbsp; 고급 국산 종합과일 입고되었습니다.</div><nav><button id="customerBtn">고객센터</button><button id="ordersBtn">주문조회</button><button id="myBtn">마이페이지</button></nav></div></div>
@@ -2620,6 +2633,7 @@ body>.notice,body>header:not(.k9x-header),body>section.section,body>footer#foote
       <button type="button" data-k7="gift">선물 서비스</button>
     </nav>
     <div class="k9x-icons" aria-label="빠른 메뉴">
+      <a class="k9x-admin-visible" href="/band-admin.html?reauth=1" aria-label="관리자센터" title="관리자센터">🔐 관리자</a>
       <button type="button" data-k7="search" aria-label="검색"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 4 4"></path></svg></button>
       <button type="button" data-k7="login" aria-label="로그인"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.5"></circle><path d="M5.5 20c.8-4 3-6 6.5-6s5.7 2 6.5 6"></path></svg></button>
       <button type="button" data-k7="cart" aria-label="장바구니"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h2l1.7 9.2h9.8l2-6.4H6.1"></path><circle cx="9" cy="19" r="1.2"></circle><circle cx="17" cy="19" r="1.2"></circle></svg></button>
