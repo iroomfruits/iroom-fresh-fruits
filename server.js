@@ -783,7 +783,46 @@ app.put("/api/admin/site/homepage-config",requireAdmin,async(req,res)=>{
     logSecurity("admin_homepage_config_updated","admin",req,"homepage_config");
     res.json({ok:true,config:saved.setting_value,updatedAt:saved.updated_at});
   }catch(e){console.error("[HOME CONFIG]",e.message);res.status(500).json({ok:false,error:"홈페이지 설정 저장 중 오류가 발생했습니다."})}
+});// IROOM1 관리자 전체 저장소 - PostgreSQL site_settings 연결
+app.get("/api/store", requireAdmin, async (req, res) => {
+  try {
+    const result = await pool.query(
+      "SELECT setting_value FROM site_settings WHERE setting_key=$1 LIMIT 1",
+      ["iroom1_store"]
+    );
+
+    res.json(result.rows[0]?.setting_value || {});
+  } catch (e) {
+    console.error("[IROOM1 STORE GET]", e.message);
+    res.status(500).json({ error: "관리자 데이터를 불러오지 못했습니다." });
+  }
 });
+
+async function saveIroom1Store(req, res) {
+  try {
+    const data = req.body || {};
+
+    // 결제 Secret Key 같은 민감정보는 관리자 저장 데이터에 넣지 않음
+    if (data.site && data.site.tossSecretKey) {
+      data.site.tossSecretKey = "";
+    }
+
+    data.updatedAt = new Date().toISOString();
+
+    await putSetting("iroom1_store", data);
+
+    res.json({
+      ok: true,
+      message: "이룸1 관리자 데이터가 서버에 저장되었습니다."
+    });
+  } catch (e) {
+    console.error("[IROOM1 STORE SAVE]", e.message);
+    res.status(500).json({ error: "관리자 데이터 저장에 실패했습니다." });
+  }
+}
+
+app.post("/api/store", requireAdmin, saveIroom1Store);
+app.put("/api/store", requireAdmin, saveIroom1Store);
 
 // IROOM1 V61 compatibility layer: keeps the proven admin UI while using the current IROOM3 server/session.
 app.get("/api/admin/all",requireAdmin,async(req,res)=>{
