@@ -784,6 +784,27 @@ app.put("/api/admin/site/homepage-config",requireAdmin,async(req,res)=>{
     res.json({ok:true,config:saved.setting_value,updatedAt:saved.updated_at});
   }catch(e){console.error("[HOME CONFIG]",e.message);res.status(500).json({ok:false,error:"홈페이지 설정 저장 중 오류가 발생했습니다."})}
 });
+
+// IROOM1 V61 compatibility layer: keeps the proven admin UI while using the current IROOM3 server/session.
+app.get("/api/admin/all",requireAdmin,async(req,res)=>{
+  try{
+    const [pr,or,ur,cr,rv,iq,bn,st]=await Promise.all([
+      pool.query("SELECT * FROM products ORDER BY id DESC").catch(()=>({rows:[]})),
+      pool.query("SELECT * FROM orders ORDER BY id DESC LIMIT 500").catch(()=>({rows:[]})),
+      pool.query("SELECT id,name,email,phone,created_at FROM users ORDER BY id DESC LIMIT 500").catch(()=>({rows:[]})),
+      pool.query("SELECT * FROM coupons ORDER BY id DESC").catch(()=>({rows:[]})),
+      pool.query("SELECT * FROM reviews ORDER BY id DESC").catch(()=>({rows:[]})),
+      pool.query("SELECT * FROM inquiries ORDER BY id DESC").catch(()=>({rows:[]})),
+      pool.query("SELECT * FROM banners ORDER BY id DESC").catch(()=>({rows:[]})),
+      pool.query("SELECT setting_value FROM site_settings WHERE setting_key='iroom1_settings'").catch(()=>({rows:[]}))
+    ]);
+    res.json({products:pr.rows,orders:or.rows,members:ur.rows,coupons:cr.rows,events:[],reviews:rv.rows,inquiries:iq.rows,banners:bn.rows,popups:[],mediaLibrary:[],settings:st.rows[0]?.setting_value||{},adminLogs:[],marketingStats:{}});
+  }catch(e){console.error("[ADMIN ALL]",e.message);res.status(500).json({error:"관리자 데이터를 불러오지 못했습니다."})}
+});
+app.post("/api/admin/settings",requireAdmin,async(req,res)=>{
+  try{const saved=await putSetting("iroom1_settings",req.body||{});res.json({ok:true,settings:saved.setting_value})}
+  catch(e){res.status(500).json({error:"설정 저장 실패"})}
+});
 app.get("/api/admin/dashboard",requireAdmin,async(req,res)=>{
   const [p,o,u,today]=await Promise.all([
     pool.query("SELECT COUNT(*)::int count, COALESCE(SUM(stock),0)::int stock FROM products WHERE is_active=TRUE"),
