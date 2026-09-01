@@ -1046,10 +1046,10 @@ body,#keep7Main{background:#fbf8f1!important}
 }
 
 
-/* V8: 홈페이지에서 관리자센터 진입 버튼을 항상 표시 */
-.admin-home-entry{display:inline-flex;align-items:center;justify-content:center;gap:4px;padding:8px 11px;border:1px solid #d9c9aa;border-radius:999px;background:#fffaf1;color:#123f31!important;text-decoration:none;font-size:11px;font-weight:800;white-space:nowrap;line-height:1}
-.admin-home-entry:hover{background:#123f31;color:#fff!important;border-color:#123f31}
-@media(max-width:760px){.admin-home-entry{padding:8px 9px;font-size:0}.admin-home-entry::after{content:"관리자";font-size:10px}}
+/* V9: 관리자 진입은 고객 화면 상단이 아닌 푸터 하단에만 표시 */
+.admin-footer-entry{display:inline-flex;align-items:center;justify-content:center;padding:6px 10px;border:1px solid #d9c9aa;border-radius:999px;background:#fffdf9;color:#6f6557!important;text-decoration:none;font-size:9px;font-weight:700;white-space:nowrap;line-height:1;margin-left:10px;vertical-align:middle}
+.admin-footer-entry:hover{background:#123f31;color:#fff!important;border-color:#123f31}
+@media(max-width:560px){.admin-footer-entry{margin:8px 0 0 0}}
 </style>
 <script src="//t1.kakaocdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
@@ -2578,11 +2578,6 @@ body>.notice,body>header:not(.k9x-header),body>section.section,body>footer#foote
 #todayPickMedia.iroom-today-media-grid img:nth-of-type(3):last-of-type{grid-column:1/-1}
 </style>
 
-
-<style>
-.footer-admin-link{display:inline-block;color:#7f765f!important;font-size:11px!important;text-decoration:none!important;border-bottom:1px solid rgba(127,118,95,.35);padding-bottom:2px}
-.footer-admin-link:hover{color:#0d4a3a!important;border-bottom-color:#0d4a3a}
-</style>
 </head>
 <body>
 <div class="notice"><div class="wrap"><div>🍊 <b>오늘의 입고</b> &nbsp; | &nbsp; 고급 국산 종합과일 입고되었습니다.</div><nav><button id="customerBtn">고객센터</button><button id="ordersBtn">주문조회</button><button id="myBtn">마이페이지</button></nav></div></div>
@@ -2799,7 +2794,7 @@ body>.notice,body>header:not(.k9x-header),body>section.section,body>footer#foote
     <div><b>이용안내</b><span>배송안내</span><span>교환/반품 안내</span><span>자주 묻는 질문</span><span>이용약관</span><span>개인정보처리방침</span></div>
     <div><b>고객센터 <strong>1234-5678</strong></b><span>평일 09:00 - 18:00</span><span>점심 12:00 - 13:00</span><span>토 / 일 / 공휴일 휴무</span><div class="social">◎　▣　●　◉</div></div>
   </footer>
-  <div class="k9x-copyline k9x-shell"><span>(주)이룸프루츠　|　사업자등록번호 123-45-67890　|　통신판매업신고 제 2024-서울강남-01234호</span><span>© IROOM PREMIUM FRUITS. All rights reserved.</span></div>
+  <div class="k9x-copyline k9x-shell"><span>(주)이룸프루츠　|　사업자등록번호 123-45-67890　|　통신판매업신고 제 2024-서울강남-01234호 <a class="admin-footer-entry" href="/band-admin.html?reauth=1" title="이룸 관리자 센터">🔐 관리자</a></span><span>© IROOM PREMIUM FRUITS. All rights reserved.</span></div>
 </main>
 
 <!-- V97 compatibility anchors: hidden, so the original V97 engine does not break. -->
@@ -2850,7 +2845,7 @@ body>.notice,body>header:not(.k9x-header),body>section.section,body>footer#foote
 </main>
 
 
-<footer id="footer"><div class="wrap foot"><div><b>이룸 fresh fruits</b><small>국내산 제철과일과 프리미엄 과일선물세트를 정성껏 준비합니다.</small><small style="margin-top:12px"><a href="/band-admin.html?reauth=1" class="footer-admin-link">🔐 관리자 전용</a></small></div><div><b>고객센터</b><small>평일 09:00 ~ 18:00<br>상품 · 주문 · 배송 · 선물 상담</small></div><div><b>바로가기</b><small><a href="https://band.us/@iroomfruits" target="_blank">이룸 BAND</a><br><a href="/band-order.html">BAND 주문센터</a></small></div></div></footer>
+<footer id="footer"><div class="wrap foot"><div><b>이룸 fresh fruits</b><small>국내산 제철과일과 프리미엄 과일선물세트를 정성껏 준비합니다.</small><small><a href="/band-admin.html?reauth=1">관리자 전용 페이지</a></small></div><div><b>고객센터</b><small>평일 09:00 ~ 18:00<br>상품 · 주문 · 배송 · 선물 상담</small></div><div><b>바로가기</b><small><a href="https://band.us/@iroomfruits" target="_blank">이룸 BAND</a><br><a href="/band-order.html">BAND 주문센터</a></small></div></div></footer>
 
 <button class="share-float" id="shareFloat">↗ 공유하기</button><div class="share-toast" id="shareToast">링크를 복사했습니다.</div>
 <div class="install-banner" id="installBanner"><img src="/assets/v114-logo.jpg" alt="이룸 앱 아이콘" style="width:42px;height:42px;border-radius:10px;object-fit:cover;flex:0 0 auto"><div class="grow"><b>이룸 fresh fruits 앱 설치</b><div style="font-size:12px;opacity:.8">홈 화면에 추가해 더 빠르고 편리하게 이용하세요.</div></div><button id="installBannerBtn">설치하기</button><button class="close" id="installClose">×</button></div>
