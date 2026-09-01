@@ -1,0 +1,11 @@
+홈페이지 전반 클릭 불능 수정본.
+
+실제 원인:
+- openConsultation 함수가 'async async function'으로 저장되어 JavaScript 문법 오류가 발생함.
+- 해당 오류 때문에 같은 script 블록에서 정의된 상품상세, 모달, 장바구니, 검색, 로그인, 맞춤추천 등 여러 클릭 기능이 함께 멈출 수 있었음.
+
+수정:
+- 'async async function'을 정상 'async function'으로 수정
+- JSON-LD를 제외한 전체 inline JavaScript를 Node.js 문법 검사
+- 검사 대상 모든 스크립트 문법 통과 확인
+- 기존 이룸3 디자인과 최근 추가 기능 유지

@@ -1,0 +1,13 @@
+핵심 3카드 클릭 오류 수정본.
+
+원인:
+- openConsultation 함수에서 await 사용 중 async 누락으로 관련 스크립트 파싱 오류 가능
+- products/gift 액션이 존재하지 않는 #best, #gift를 대상으로 스크롤하고 있었음
+
+수정:
+- openConsultation -> async function으로 수정
+- 오늘의 과일 -> #today-iroom-pick으로 이동
+- 이룸 맡김박스 -> 맞춤추천 모달 오픈
+- 프리미엄 선물박스 -> 실제 선물 프로모션 영역으로 이동
+- 핵심 3카드에 독립 클릭 핸들러 추가
+- 카드 안 버튼/카드 빈 공간 어디를 눌러도 작동

@@ -1,0 +1,11 @@
+오늘의 이룸 PICK 클릭 수정본.
+
+문제 원인:
+- '오늘 판매 과일 보기'의 products 액션이 현재 TODAY PICK 섹션 자체로 다시 스크롤하도록 연결되어 있어
+  눌러도 아무 반응이 없는 것처럼 보였음.
+
+수정:
+- products 액션을 실제 NEW & BEST 상품 영역(#best-products)으로 연결
+- TODAY PICK 왼쪽 사진 영역 전체도 클릭 가능하게 변경
+- TODAY PICK 상품보기 버튼에 독립 클릭 핸들러 추가
+- JavaScript 전체 문법 검사 통과
