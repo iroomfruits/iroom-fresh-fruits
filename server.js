@@ -783,46 +783,35 @@ app.put("/api/admin/site/homepage-config",requireAdmin,async(req,res)=>{
     logSecurity("admin_homepage_config_updated","admin",req,"homepage_config");
     res.json({ok:true,config:saved.setting_value,updatedAt:saved.updated_at});
   }catch(e){console.error("[HOME CONFIG]",e.message);res.status(500).json({ok:false,error:"홈페이지 설정 저장 중 오류가 발생했습니다."})}
-});// IROOM1 관리자 전체 저장소 - PostgreSQL site_settings 연결
-app.get("/api/store", requireAdmin, async (req, res) => {
-  try {
-    const result = await pool.query(
-      "SELECT setting_value FROM site_settings WHERE setting_key=$1 LIMIT 1",
-      ["iroom1_store"]
-    );
-
-    res.json(result.rows[0]?.setting_value || {});
-  } catch (e) {
-    console.error("[IROOM1 STORE GET]", e.message);
-    res.status(500).json({ error: "관리자 데이터를 불러오지 못했습니다." });
-  }
 });
 
-async function saveIroom1Store(req, res) {
-  try {
-    const data = req.body || {};
-
-    // 결제 Secret Key 같은 민감정보는 관리자 저장 데이터에 넣지 않음
-    if (data.site && data.site.tossSecretKey) {
-      data.site.tossSecretKey = "";
-    }
-
-    data.updatedAt = new Date().toISOString();
-
-    await putSetting("iroom1_store", data);
-
-    res.json({
-      ok: true,
-      message: "이룸1 관리자 데이터가 서버에 저장되었습니다."
-    });
-  } catch (e) {
-    console.error("[IROOM1 STORE SAVE]", e.message);
-    res.status(500).json({ error: "관리자 데이터 저장에 실패했습니다." });
-  }
+// IROOM1 full admin store backed by PostgreSQL site_settings.
+app.get("/api/store",requireAdmin,async(req,res)=>{
+  try{
+    const saved=await getSetting("iroom1_store",{});
+    // Keep real operational DB data authoritative for products/orders/members.
+    const [pr,or,ur]=await Promise.all([
+      pool.query("SELECT * FROM products ORDER BY sort_order,id").catch(()=>({rows:[]})),
+      pool.query("SELECT * FROM orders ORDER BY created_at DESC LIMIT 500").catch(()=>({rows:[]})),
+      pool.query("SELECT id,username,email,name,phone,created_at,last_login_at FROM users ORDER BY created_at DESC LIMIT 500").catch(()=>({rows:[]}))
+    ]);
+    const value=saved?.setting_value||saved||{};
+    res.json({...value,products:pr.rows,orders:or.rows,members:ur.rows});
+  }catch(e){console.error("[IROOM1 STORE GET]",e.message);res.status(500).json({error:"관리자 데이터를 불러오지 못했습니다."})}
+});
+async function saveIroom1Store(req,res){
+  try{
+    const data={...(req.body||{})};
+    // Products/orders/members are stored in their real tables, not duplicated into settings.
+    delete data.products; delete data.orders; delete data.members;
+    if(data.site&&data.site.tossSecretKey) data.site={...data.site,tossSecretKey:""};
+    data.updatedAt=new Date().toISOString();
+    await putSetting("iroom1_store",data);
+    res.json({ok:true,message:"관리자 설정을 서버에 저장했습니다."});
+  }catch(e){console.error("[IROOM1 STORE SAVE]",e.message);res.status(500).json({error:"관리자 데이터 저장에 실패했습니다."})}
 }
-
-app.post("/api/store", requireAdmin, saveIroom1Store);
-app.put("/api/store", requireAdmin, saveIroom1Store);
+app.post("/api/store",requireAdmin,saveIroom1Store);
+app.put("/api/store",requireAdmin,saveIroom1Store);
 
 // IROOM1 V61 compatibility layer: keeps the proven admin UI while using the current IROOM3 server/session.
 app.get("/api/admin/all",requireAdmin,async(req,res)=>{
@@ -879,6 +868,13 @@ app.put("/api/admin/products/:id",requireAdmin,async(req,res)=>{
      p.image??null,p.category??null,p.is_active===undefined?null:!!p.is_active,p.sort_order===undefined?null:Number(p.sort_order),req.params.id]);
   if(!r.rows[0]) return res.status(404).json({error:"상품을 찾을 수 없습니다."});
   logSecurity("admin_product_updated","admin",req,`product:${req.params.id}`);
+  res.json({ok:true,product:r.rows[0]});
+});
+
+app.delete("/api/admin/products/:id",requireAdmin,async(req,res)=>{
+  const r=await pool.query("DELETE FROM products WHERE id=$1 RETURNING id,name",[req.params.id]);
+  if(!r.rows[0])return res.status(404).json({error:"상품을 찾을 수 없습니다."});
+  logSecurity("admin_product_deleted","admin",req,`product:${req.params.id}`);
   res.json({ok:true,product:r.rows[0]});
 });
 
