@@ -2579,6 +2579,7 @@ body>.notice,body>header:not(.k9x-header),body>section.section,body>footer#foote
 </style>
 
 <style id="iroom-seasonal-skin-style">
+
 :root{--iroom-season-bg:#fff5f7;--iroom-season-accent:#7f45b2;--iroom-season-soft:#f8dfe9;--iroom-season-text:#6f3398}
 html,body{background:var(--iroom-season-bg)!important}
 #iroomSeasonalSkin{display:block;position:relative;background:var(--iroom-season-bg);min-height:100vh}
@@ -2606,39 +2607,211 @@ html,body{background:var(--iroom-season-bg)!important}
 #iroomRecipeModal .recipe-meta b{display:block;color:var(--iroom-season-text);font-size:12px;margin-bottom:4px}
 #iroomRecipeModal ol{margin:10px 0 0;padding-left:21px;line-height:1.75}
 #iroomRecipeModal .tip{margin-top:16px;padding:12px 14px;background:var(--iroom-season-soft);border-radius:15px;font-size:13px;line-height:1.6}
-.seasonal-original-hidden{display:none!important}
+
 @media(max-width:700px){#iroomSeasonalSkin .season-control{right:10px;bottom:10px;padding:6px 8px}#iroomSeasonalSkin .season-control b{display:none}#iroomSeasonalSkin .season-control select{font-size:12px}#iroomRecipeModal .recipe-meta{grid-template-columns:1fr}}
-</style>
 
-<style id="iroom-seasonal-real-path-hide">
-body.iroom-seasonal-mode > *:not(#iroomSeasonalSkin):not(#iroomRecipeModal):not(script):not(style):not(.modal){
-  display:none !important;
-}
-body.iroom-seasonal-mode > #iroomSeasonalSkin{
-  display:block !important;
-}
-</style>
 
+/* ===== IROOM3 SYSTEM + SEASONAL SKIN V2 ===== */
+body.iroom-seasonal-mode > .notice,
+body.iroom-seasonal-mode > header,
+body.iroom-seasonal-mode > .seo-quick-nav,
+body.iroom-seasonal-mode > main#KEEP9_EXACT,
+body.iroom-seasonal-mode > .k7-compat,
+body.iroom-seasonal-mode > section,
+body.iroom-seasonal-mode > footer,
+body.iroom-seasonal-mode > .share-float,
+body.iroom-seasonal-mode > .share-toast,
+body.iroom-seasonal-mode > .install-banner,
+body.iroom-seasonal-mode > #installMini,
+body.iroom-seasonal-mode > .iroom-mobile-buybar {
+  display:none!important;
+}
+body.iroom-seasonal-mode > .modal { z-index:16000!important; }
+body.iroom-seasonal-mode > .modal.open { display:flex!important; }
+
+/* 항상 보이는 이룸3 시스템 바 */
+#iroomSeasonalSkin .iroom-system-bar{
+  position:sticky; top:0; z-index:15000;
+  min-height:46px;
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  padding:7px max(14px,calc((100vw - 1402px)/2 + 16px));
+  background:rgba(69,19,104,.97);
+  color:#fff;
+  box-shadow:0 6px 20px rgba(48,16,66,.16);
+  backdrop-filter:blur(10px);
+}
+#iroomSeasonalSkin .iroom-system-brand{
+  display:flex;align-items:center;gap:9px;min-width:0
+}
+#iroomSeasonalSkin .iroom-system-brand img{
+  width:30px;height:30px;object-fit:contain;border-radius:9px;background:#fff
+}
+#iroomSeasonalSkin .iroom-system-brand b{font-size:13px;white-space:nowrap}
+#iroomSeasonalSkin .iroom-system-actions{
+  display:flex;align-items:center;justify-content:flex-end;gap:5px;flex-wrap:wrap
+}
+#iroomSeasonalSkin .iroom-system-actions button,
+#iroomSeasonalSkin .iroom-system-actions a{
+  min-height:31px;padding:6px 9px;border:1px solid rgba(255,255,255,.27);
+  border-radius:999px;background:rgba(255,255,255,.08);color:#fff;
+  text-decoration:none;font-size:11px;font-weight:900;cursor:pointer;line-height:1
+}
+#iroomSeasonalSkin .iroom-system-actions button:hover,
+#iroomSeasonalSkin .iroom-system-actions a:hover{background:#fff;color:#572181}
+#iroomSeasonalSkin .iroom-system-actions .cart-system{background:#fff;color:#572181}
+#iroomSeasonalSkin .iroom-system-actions .admin-system{background:#ef4f84;border-color:#ef4f84}
+#iroomSeasonalSkin .iroom-system-actions .season-mini{
+  appearance:none;border:1px solid rgba(255,255,255,.27);color:#fff;background:#572181;
+  border-radius:999px;padding:6px 24px 6px 9px;font-size:11px;font-weight:900;min-height:31px
+}
+
+/* 이미지 위 투명 클릭 영역 */
+#iroomSeasonalSkin .hotspot{
+  position:absolute!important;border:0!important;background:rgba(255,255,255,0)!important;
+  cursor:pointer!important;z-index:30!important;pointer-events:auto!important;
+}
+#iroomSeasonalSkin .hotspot:hover{
+  box-shadow:inset 0 0 0 2px rgba(111,51,152,.16)
+}
+
+/* 보조 서비스 패널 */
+#iroomSeasonalSkin .system-drawer{
+  position:fixed;right:14px;top:58px;z-index:15500;width:min(390px,calc(100vw - 28px));
+  background:#fff;border:1px solid #eadff0;border-radius:22px;box-shadow:0 22px 70px rgba(45,18,62,.28);
+  padding:15px;display:none
+}
+#iroomSeasonalSkin .system-drawer.open{display:block}
+#iroomSeasonalSkin .drawer-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}
+#iroomSeasonalSkin .drawer-head img{width:190px;max-width:72%;height:auto}
+#iroomSeasonalSkin .drawer-close{width:36px;height:36px;border:0;border-radius:50%;background:#f5edf8;color:#572181;font-size:22px;cursor:pointer}
+#iroomSeasonalSkin .drawer-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+#iroomSeasonalSkin .drawer-grid button,#iroomSeasonalSkin .drawer-grid a{
+  min-height:44px;border:1px solid #eadff0;background:#fff;color:#4e315e;border-radius:13px;
+  display:flex;align-items:center;justify-content:center;text-decoration:none;font-weight:900;font-size:13px;cursor:pointer
+}
+#iroomSeasonalSkin .drawer-grid .primary{background:#572181;color:#fff}
+#iroomSeasonalSkin .drawer-grid .admin{background:#ef4f84;color:#fff;border-color:#ef4f84}
+#iroomSeasonalSkin .drawer-note{margin:10px 2px 0;color:#7c6d83;font-size:11px;line-height:1.5}
+
+/* 클릭이 실제로 작동하는지 사용자가 바로 알 수 있도록 작은 힌트 */
+#iroomSeasonalSkin .click-help{
+  position:fixed;left:14px;bottom:14px;z-index:14990;
+  padding:7px 10px;border-radius:999px;background:rgba(255,255,255,.94);
+  border:1px solid #eadff0;color:#572181;font-size:11px;font-weight:900;
+  box-shadow:0 8px 25px rgba(48,16,66,.12)
+}
+
+/* 기존 하단 계절 셀렉터는 상단바와 중복되므로 숨김 */
+#iroomSeasonalSkin .season-control{display:none!important}
+
+@media(max-width:820px){
+ #iroomSeasonalSkin .iroom-system-bar{align-items:flex-start}
+ #iroomSeasonalSkin .iroom-system-brand b{display:none}
+ #iroomSeasonalSkin .iroom-system-actions{gap:4px}
+ #iroomSeasonalSkin .iroom-system-actions button,
+ #iroomSeasonalSkin .iroom-system-actions a,
+ #iroomSeasonalSkin .iroom-system-actions .season-mini{font-size:10px;padding:6px 7px}
+ #iroomSeasonalSkin .system-drawer{top:64px}
+}
+@media(max-width:560px){
+ #iroomSeasonalSkin .iroom-system-bar{position:sticky;padding:6px 8px}
+ #iroomSeasonalSkin .iroom-system-actions .desktop-optional{display:none}
+ #iroomSeasonalSkin .click-help{display:none}
+}
+
+</style>
 </head>
 <body class="iroom-seasonal-mode">
-<div id="iroomSeasonalSkin" aria-label="이룸시안1 계절 자동 테마">
+
+<div id="iroomSeasonalSkin" aria-label="이룸 Fresh Fruits 계절 자동 홈페이지">
+  <div class="iroom-system-bar" aria-label="이룸3 시스템 메뉴">
+    <div class="iroom-system-brand">
+      <img src="/iroom_assets/iroom-logo-icon.png" alt="이룸">
+      <b>이룸 Fresh Fruits</b>
+    </div>
+    <div class="iroom-system-actions">
+      <button id="sysLogin" type="button">로그인</button>
+      <button id="sysSignup" type="button">회원가입</button>
+      <button id="sysMy" type="button">마이페이지</button>
+      <button id="sysOrders" class="desktop-optional" type="button">주문조회</button>
+      <button id="sysSearch" class="desktop-optional" type="button">상품검색</button>
+      <button id="sysCart" class="cart-system" type="button">🛒 장바구니 <span id="sysCartBadge">0</span></button>
+      <button id="sysMenu" type="button">☰ 더보기</button>
+      <a class="admin-system" href="/band-admin.html?reauth=1">🔐 관리자</a>
+      <select id="iroomSeasonSelectTop" class="season-mini" aria-label="계절 화면">
+        <option value="auto">계절 자동</option>
+        <option value="spring">봄</option><option value="summer">여름</option>
+        <option value="autumn">가을</option><option value="winter">겨울</option>
+      </select>
+    </div>
+  </div>
+
   <div class="skin-frame">
     <img id="iroomSeasonImage" class="skin-img" src="/iroom_assets/iroom-spring.png" alt="이룸 fresh fruits 계절 홈페이지">
-    <a class="iroom-brand-logo" href="/" aria-label="이룸 fresh fruits 홈"><img src="/iroom_assets/iroom-logo-horizontal.png" alt="이룸 fresh fruits"></a>
-    <button class="hotspot" style="left:1.7%;top:2.1%;width:16%;height:6.5%" aria-label="홈" onclick="window.scrollTo({top:0,behavior:'smooth'})"></button>
-    <button class="hotspot" style="left:23.5%;top:2.5%;width:10%;height:5.5%" aria-label="상품" onclick="location.href='/seasonal-fruit.html'"></button>
-    <button class="hotspot" style="left:34%;top:2.5%;width:10%;height:5.5%" aria-label="선물세트" onclick="location.href='/fruit-gift-set.html'"></button>
-    <button class="hotspot" style="left:46%;top:2.5%;width:8.5%;height:5.5%" aria-label="이룸 이야기" onclick="window.scrollTo({top:document.documentElement.scrollHeight*.58,behavior:'smooth'})"></button>
-    <button class="hotspot" style="left:84%;top:2.2%;width:7%;height:5.5%" aria-label="마이페이지" onclick="document.getElementById('myTopBtn')?.click()"></button>
-    <button class="hotspot" style="left:91%;top:2.2%;width:7.5%;height:5.5%" aria-label="장바구니" onclick="document.getElementById('cartBtn')?.click()"></button>
-    <button class="hotspot" style="left:5%;top:20%;width:10%;height:5.5%" aria-label="상품 보기" onclick="location.href='/seasonal-fruit.html'"></button>
-    <button id="smoothieOneHotspot" class="hotspot" style="left:75%;top:9.5%;width:24%;height:14%" aria-label="첫 번째 계절 스무디 레시피 보기"></button>
-    <button id="smoothieTwoHotspot" class="hotspot" style="left:75%;top:24%;width:24%;height:14%" aria-label="두 번째 계절 스무디 레시피 보기"></button>
-    <button class="hotspot" style="left:75%;top:73%;width:24%;height:10%" aria-label="고객 문의" onclick="location.href='https://open.kakao.com/o/sd7wnrKi'"></button>
+
+    <!-- 시안 속 메뉴 / 마이페이지 / 장바구니 -->
+    <button id="seasonMenuHotspot" class="hotspot" style="left:1.8%;top:1.2%;width:8.5%;height:4.5%" aria-label="메뉴"></button>
+    <button id="seasonMyHotspot" class="hotspot" style="left:54.4%;top:1.0%;width:6.8%;height:4.8%" aria-label="마이페이지"></button>
+    <button id="seasonCartHotspot" class="hotspot" style="left:60.6%;top:1.0%;width:6.0%;height:4.8%" aria-label="장바구니"></button>
+
+    <!-- 메인 버튼 -->
+    <button id="seasonHeroProducts" class="hotspot" style="left:3.1%;top:29.0%;width:10.8%;height:4.9%" aria-label="상품 보러가기"></button>
+    <button id="seasonHeroStory" class="hotspot" style="left:14.0%;top:29.0%;width:10.7%;height:4.9%" aria-label="이룸 이야기"></button>
+    <button id="seasonTodayPick" class="hotspot" style="left:47.0%;top:25.4%;width:16.8%;height:13.7%" aria-label="오늘의 추천 상세보기"></button>
+
+    <!-- 스무디 -->
+    <button id="smoothieOneHotspot" class="hotspot" style="left:67.2%;top:5.6%;width:31.6%;height:17.0%" aria-label="첫 번째 스무디 레시피"></button>
+    <button id="smoothieTwoHotspot" class="hotspot" style="left:67.2%;top:23.7%;width:31.6%;height:19.2%" aria-label="두 번째 스무디 레시피"></button>
+
+    <!-- 프리미엄 추천 카드 -->
+    <button class="hotspot seasonal-product" data-slot="0" style="left:3.0%;top:82.0%;width:11.2%;height:17.0%" aria-label="추천상품 1 상세보기"></button>
+    <button class="hotspot seasonal-product" data-slot="1" style="left:15.2%;top:82.0%;width:11.2%;height:17.0%" aria-label="추천상품 2 상세보기"></button>
+    <button class="hotspot seasonal-product" data-slot="2" style="left:27.3%;top:82.0%;width:11.2%;height:17.0%" aria-label="추천상품 3 상세보기"></button>
+    <button class="hotspot seasonal-product" data-slot="3" style="left:39.5%;top:82.0%;width:11.2%;height:17.0%" aria-label="추천상품 4 상세보기"></button>
+    <button class="hotspot seasonal-product" data-slot="4" style="left:51.5%;top:82.0%;width:11.4%;height:17.0%" aria-label="추천상품 5 상세보기"></button>
+    <button id="seasonAllProducts" class="hotspot" style="left:56.3%;top:78.9%;width:7.0%;height:3.8%" aria-label="전체보기"></button>
+
+    <!-- 우측 도움 -->
+    <button id="seasonCustomerHotspot" class="hotspot" style="left:67.0%;top:82.0%;width:31.8%;height:9.0%" aria-label="문의하기"></button>
   </div>
-  <div class="season-control"><b>계절 화면</b><select id="iroomSeasonSelect"><option value="auto">자동</option><option value="spring">봄</option><option value="summer">여름</option><option value="autumn">가을</option><option value="winter">겨울</option></select></div>
+
+  <div id="iroomSystemDrawer" class="system-drawer" aria-label="이룸 서비스 더보기">
+    <div class="drawer-head">
+      <img src="/iroom_assets/iroom-logo-horizontal.png" alt="이룸 fresh fruits">
+      <button id="drawerClose" class="drawer-close" type="button">×</button>
+    </div>
+    <div class="drawer-grid">
+      <button id="drawerLogin" class="primary" type="button">로그인</button>
+      <button id="drawerSignup" type="button">회원가입</button>
+      <button id="drawerMy" type="button">마이페이지</button>
+      <button id="drawerOrders" type="button">주문조회</button>
+      <button id="drawerSearch" type="button">상품 검색</button>
+      <button id="drawerCart" type="button">장바구니</button>
+      <button id="drawerConsult" type="button">선물·구매 상담</button>
+      <button id="drawerShare" type="button">홈페이지 공유</button>
+      <a href="/band-order.html">BAND 주문센터</a>
+      <a href="/admin-fruits.html">과일 관리</a>
+      <a class="admin" href="/band-admin.html?reauth=1">🔐 관리자 센터</a>
+      <button id="drawerRecipe" type="button">스무디 안내</button>
+    </div>
+    <p class="drawer-note">이 메뉴는 기존 이룸3의 로그인·주문·장바구니·상품·관리자 시스템을 호출합니다.</p>
+  </div>
+
+  <div class="click-help">상품 · 스무디 · 메뉴 영역은 클릭할 수 있습니다</div>
 </div>
-<div id="iroomRecipeModal" role="dialog" aria-modal="true" aria-labelledby="iroomRecipeTitle"><div class="recipe-card"><div class="recipe-head"><div><small id="iroomRecipeSeason">SEASONAL SMOOTHIE</small><h3 id="iroomRecipeTitle">스무디 만들기</h3></div><button class="close" type="button" aria-label="닫기">×</button></div><div class="recipe-body"><div class="recipe-meta"><div><b>준비 재료</b><span id="iroomRecipeIngredients"></span></div><div><b>추천 비율</b><span id="iroomRecipeRatio"></span></div></div><b>만드는 순서</b><ol id="iroomRecipeSteps"></ol><div id="iroomRecipeTip" class="tip"></div></div></div></div>
+
+<div id="iroomRecipeModal" role="dialog" aria-modal="true" aria-labelledby="iroomRecipeTitle">
+  <div class="recipe-card">
+    <div class="recipe-head"><div><small id="iroomRecipeSeason">SEASONAL SMOOTHIE</small><h3 id="iroomRecipeTitle">스무디 만들기</h3></div>
+    <button class="close" type="button" aria-label="닫기">×</button></div>
+    <div class="recipe-body">
+      <div class="recipe-meta"><div><b>준비 재료</b><span id="iroomRecipeIngredients"></span></div><div><b>추천 비율</b><span id="iroomRecipeRatio"></span></div></div>
+      <b>만드는 순서</b><ol id="iroomRecipeSteps"></ol>
+      <div id="iroomRecipeTip" class="tip"></div>
+    </div>
+  </div>
+</div>
+
 
 <div class="notice"><div class="wrap"><div>🍊 <b>오늘의 입고</b> &nbsp; | &nbsp; 고급 국산 종합과일 입고되었습니다.</div><nav><button id="customerBtn">고객센터</button><button id="ordersBtn">주문조회</button><button id="myBtn">마이페이지</button></nav></div></div>
 <header><div class="wrap head"><a class="brand brand-final" href="/" aria-label="이룸 fresh fruits 홈">
@@ -4071,10 +4244,14 @@ document.addEventListener("keydown", function(e){
  }
 })();
 </script>
-<script id="iroom-seasonal-skin-script">
+
+<script id="iroom-seasonal-system-v2-script">
 (function(){
- const skin=document.getElementById('iroomSeasonalSkin'); if(!skin)return;
-const cfg={
+  'use strict';
+  const skin=document.getElementById('iroomSeasonalSkin');
+  if(!skin)return;
+
+  const cfg={
  spring:{image:'/iroom_assets/iroom-spring.png',bg:'#fff5f7',accent:'#7f45b2',soft:'#f8dfe9',text:'#6f3398',label:'SPRING',smoothies:[
  {title:'딸기 스무디',ingredients:'딸기 8~10알 · 우유 150ml · 플레인요거트 80g · 얼음 한 줌',ratio:'과일 2 : 우유 1 : 요거트 1',steps:['딸기를 씻고 꼭지를 제거합니다.','딸기, 우유, 요거트, 얼음을 넣습니다.','20~30초 곱게 갈아 컵에 담습니다.','필요할 때만 꿀을 소량 더합니다.'],tip:'봄 딸기는 향이 좋아 당류를 적게 넣는 편이 좋습니다.'},
  {title:'블랙베리 스무디',ingredients:'블랙베리 100g · 바나나 1/2개 · 우유 140ml · 요거트 70g',ratio:'베리 2 : 우유 1.5 : 요거트 1',steps:['블랙베리를 가볍게 씻습니다.','바나나와 함께 블렌더에 넣습니다.','우유와 요거트를 넣고 부드럽게 갈아줍니다.','씨 식감이 부담되면 체에 한 번 거릅니다.'],tip:'완숙 바나나를 함께 쓰면 산미가 부드러워집니다.'}]},
@@ -4086,17 +4263,193 @@ const cfg={
  {title:'포도 스무디',ingredients:'씨 없는 포도 150g · 우유 100ml · 요거트 80g · 얼음',ratio:'포도 2 : 우유 1 : 요거트 1',steps:['포도를 씻어 물기를 제거합니다.','차갑게 한 포도를 넣습니다.','우유와 요거트를 넣고 20초 정도 갈아줍니다.','껍질 식감이 강하면 조금 더 갈아줍니다.'],tip:'가을 포도는 당도가 높아 우유를 조금 늘려도 맛이 좋습니다.'}]},
  winter:{image:'/iroom_assets/iroom-winter.png',bg:'#f7f4ff',accent:'#6940a5',soft:'#ebe2fb',text:'#5c3292',label:'WINTER',smoothies:[
  {title:'한라봉 스무디',ingredients:'한라봉 1개 · 요거트 120g · 얼음 · 꿀(선택)',ratio:'한라봉 2 : 요거트 1',steps:['한라봉 껍질을 벗기고 씨를 제거합니다.','과육과 요거트, 얼음을 넣습니다.','부드러워질 정도로만 갈아줍니다.','산미가 강할 때만 꿀을 조금 넣습니다.'],tip:'짧게 갈아야 한라봉 향이 더 살아납니다.'},
- {title:'블루베리 스무디',ingredients:'블루베리 120g · 우유 130ml · 플레인요거트 90g · 얼음 한 줌',ratio:'블루베리 2 : 우유 1 : 요거트 1',steps:['블루베리를 가볍게 씻어 물기를 제거합니다.','블루베리와 우유, 요거트를 블렌더에 넣습니다.','얼음을 넣고 20~30초 곱게 갈아줍니다.','농도를 보고 우유를 조금 더해 마무리합니다.'],tip:'냉동 블루베리를 절반 정도 섞으면 얼음을 줄여도 진하고 차갑게 즐길 수 있습니다.'}]}
- };
- const autoSeason=()=>{const m=new Date().getMonth()+1;if(m>=3&&m<=5)return'spring';if(m>=6&&m<=8)return'summer';if(m>=9&&m<=11)return'autumn';return'winter'};
- const select=document.getElementById('iroomSeasonSelect'),img=document.getElementById('iroomSeasonImage');
- const saved=localStorage.getItem('iroomSeasonMode')||'auto';select.value=['auto','spring','summer','autumn','winter'].includes(saved)?saved:'auto';
- function apply(mode){const key=mode==='auto'?autoSeason():mode,s=cfg[key];img.src=s.image;document.documentElement.style.setProperty('--iroom-season-bg',s.bg);document.documentElement.style.setProperty('--iroom-season-accent',s.accent);document.documentElement.style.setProperty('--iroom-season-soft',s.soft);document.documentElement.style.setProperty('--iroom-season-text',s.text);skin.dataset.season=key}
- select.addEventListener('change',()=>{localStorage.setItem('iroomSeasonMode',select.value);apply(select.value)});apply(select.value);
- const modal=document.getElementById('iroomRecipeModal'),title=document.getElementById('iroomRecipeTitle'),season=document.getElementById('iroomRecipeSeason'),ing=document.getElementById('iroomRecipeIngredients'),ratio=document.getElementById('iroomRecipeRatio'),steps=document.getElementById('iroomRecipeSteps'),tip=document.getElementById('iroomRecipeTip');
- function openRecipe(i){const key=skin.dataset.season||autoSeason(),r=cfg[key].smoothies[i];season.textContent=cfg[key].label+' · SEASONAL SMOOTHIE';title.textContent=r.title;ing.textContent=r.ingredients;ratio.textContent=r.ratio;steps.innerHTML=r.steps.map(v=>'<li>'+v+'</li>').join('');tip.textContent='TIP · '+r.tip;modal.classList.add('open');document.body.style.overflow='hidden'}
- function closeRecipe(){modal.classList.remove('open');document.body.style.overflow=''}
- document.getElementById('smoothieOneHotspot').onclick=()=>openRecipe(0);document.getElementById('smoothieTwoHotspot').onclick=()=>openRecipe(1);modal.querySelector('.close').onclick=closeRecipe;modal.onclick=e=>{if(e.target===modal)closeRecipe()};document.addEventListener('keydown',e=>{if(e.key==='Escape')closeRecipe()});
+ {title:'블루베리 스무디',ingredients:'블루베리 120g · 우유 130ml · 플레인요거트 90g · 얼음 한 줌',ratio:'블루베리 2 : 우유 1 : 요거트 1',steps:['블루베리를 가볍게 씻어 물기를 제거합니다.','블루베리와 우유, 요거트를 블렌더에 넣습니다.','얼음을 넣고 20~30초 곱게 갈아줍니다.','농도를 보고 우유를 조금 더해 마무리합니다.'],tip:'냉동 블루베리를 절반 정도 섞으면 얼음을 줄여도 진하고 차갑게 즐길 수 있습니다.'}]}};
+
+  const productMap={
+    spring:['딸기','참외','체리','복숭아','샤인머스켓'],
+    summer:['수박','샤인머스켓','복숭아','블루베리','제주 애플망고'],
+    autumn:['거봉','나주 신고배 특선','단감','경북 홍사과','프리미엄 혼합과일'],
+    winter:['딸기','제주 한라봉','경북 홍사과','나주 신고배 특선','샤인머스켓']
+  };
+  const todayMap={spring:'딸기',summer:'제주 애플망고',autumn:'거봉',winter:'제주 한라봉'};
+
+  const $=id=>document.getElementById(id);
+  const autoSeason=()=>{
+    const m=new Date().getMonth()+1;
+    return m>=3&&m<=5?'spring':m>=6&&m<=8?'summer':m>=9&&m<=11?'autumn':'winter';
+  };
+
+  const seasonSel=$('iroomSeasonSelectTop');
+  const img=$('iroomSeasonImage');
+  const saved=localStorage.getItem('iroomSeasonMode')||'auto';
+  seasonSel.value=['auto','spring','summer','autumn','winter'].includes(saved)?saved:'auto';
+
+  function applySeason(mode){
+    const key=mode==='auto'?autoSeason():mode, s=cfg[key];
+    skin.dataset.season=key;
+    img.src=s.image;
+    document.documentElement.style.setProperty('--iroom-season-bg',s.bg);
+    document.documentElement.style.setProperty('--iroom-season-accent',s.accent);
+    document.documentElement.style.setProperty('--iroom-season-soft',s.soft);
+    document.documentElement.style.setProperty('--iroom-season-text',s.text);
+  }
+  seasonSel.addEventListener('change',()=>{
+    localStorage.setItem('iroomSeasonMode',seasonSel.value);
+    applySeason(seasonSel.value);
+  });
+  applySeason(seasonSel.value);
+
+  // 기존 이룸3 버튼을 "그대로 클릭"시키는 방식 — 가장 안전
+  function clickOriginal(id){
+    const el=$(id);
+    if(!el)return false;
+    el.dispatchEvent(new MouseEvent('click',{bubbles:true,cancelable:true,view:window}));
+    return true;
+  }
+
+  // 기존 모달 직접 열기(예비 수단)
+  function openModal(id){
+    const m=$(id);
+    if(!m)return false;
+    document.querySelectorAll('.modal.open').forEach(x=>x.classList.remove('open'));
+    m.classList.add('open');
+    m.setAttribute('aria-hidden','false');
+    return true;
+  }
+
+  function login(){ if(!clickOriginal('loginBtn')) openModal('loginModal'); }
+  function signup(){ if(!clickOriginal('signupBtn')) openModal('signupModal'); }
+  function mypage(){ if(!clickOriginal('myTopBtn')) openModal('loginModal'); }
+  function orders(){ if(!clickOriginal('ordersBtn')) openModal('orderLookupModal'); }
+  function search(){ if(!clickOriginal('searchBtn')) openModal('searchModal'); }
+  function cart(){ if(!clickOriginal('cartBtn')) openModal('cartModal'); }
+  function share(){ if(!clickOriginal('shareBtn')) openModal('shareModal'); }
+  function consult(){
+    const fake=document.createElement('button');
+    fake.dataset.k7='consult';
+    fake.style.display='none';
+    document.body.appendChild(fake);
+    fake.click();
+    fake.remove();
+    setTimeout(()=>{ if(!$('consultModal')?.classList.contains('open')) openModal('consultModal'); },20);
+  }
+
+  // 상품 상세는 기존 이룸3의 위임 클릭 시스템(data-k7-product)을 사용
+  function product(name){
+    const fake=document.createElement('button');
+    fake.dataset.k7Product=name;
+    fake.style.display='none';
+    document.body.appendChild(fake);
+    fake.click();
+    fake.remove();
+
+    // 현재 카탈로그에 정확히 없는 계절 상품은 검색창으로 안내
+    setTimeout(()=>{
+      if(!$('productModal')?.classList.contains('open')){
+        search();
+        const input=$('searchInput');
+        if(input){
+          input.value=name;
+          input.dispatchEvent(new Event('input',{bubbles:true}));
+        }
+      }
+    },50);
+  }
+
+  // 장바구니에 직접 담기용(향후 필요 시)
+  function addProduct(name){
+    const fake=document.createElement('button');
+    fake.dataset.k7Cart=name;
+    fake.style.display='none';
+    document.body.appendChild(fake);
+    fake.click();
+    fake.remove();
+  }
+
+  // 레시피
+  const recipeModal=$('iroomRecipeModal');
+  function openRecipe(i){
+    const key=skin.dataset.season||autoSeason(),r=cfg[key].smoothies[i];
+    $('iroomRecipeSeason').textContent=cfg[key].label+' · SEASONAL SMOOTHIE';
+    $('iroomRecipeTitle').textContent=r.title;
+    $('iroomRecipeIngredients').textContent=r.ingredients;
+    $('iroomRecipeRatio').textContent=r.ratio;
+    $('iroomRecipeSteps').innerHTML=r.steps.map(v=>'<li>'+v+'</li>').join('');
+    $('iroomRecipeTip').textContent='TIP · '+r.tip;
+    recipeModal.classList.add('open');
+  }
+  function closeRecipe(){recipeModal.classList.remove('open')}
+  $('smoothieOneHotspot').addEventListener('click',()=>openRecipe(0));
+  $('smoothieTwoHotspot').addEventListener('click',()=>openRecipe(1));
+  recipeModal.querySelector('.close').addEventListener('click',closeRecipe);
+  recipeModal.addEventListener('click',e=>{if(e.target===recipeModal)closeRecipe()});
+
+  // 상단 시스템 바
+  $('sysLogin').addEventListener('click',login);
+  $('sysSignup').addEventListener('click',signup);
+  $('sysMy').addEventListener('click',mypage);
+  $('sysOrders').addEventListener('click',orders);
+  $('sysSearch').addEventListener('click',search);
+  $('sysCart').addEventListener('click',cart);
+
+  // 더보기 패널
+  const drawer=$('iroomSystemDrawer');
+  const openDrawer=()=>drawer.classList.add('open');
+  const closeDrawer=()=>drawer.classList.remove('open');
+  $('sysMenu').addEventListener('click',openDrawer);
+  $('seasonMenuHotspot').addEventListener('click',openDrawer);
+  $('drawerClose').addEventListener('click',closeDrawer);
+  $('drawerLogin').addEventListener('click',login);
+  $('drawerSignup').addEventListener('click',signup);
+  $('drawerMy').addEventListener('click',mypage);
+  $('drawerOrders').addEventListener('click',orders);
+  $('drawerSearch').addEventListener('click',search);
+  $('drawerCart').addEventListener('click',cart);
+  $('drawerConsult').addEventListener('click',consult);
+  $('drawerShare').addEventListener('click',share);
+  $('drawerRecipe').addEventListener('click',()=>openRecipe(0));
+
+  // 시안 속 클릭
+  $('seasonMyHotspot').addEventListener('click',mypage);
+  $('seasonCartHotspot').addEventListener('click',cart);
+  $('seasonHeroProducts').addEventListener('click',search);
+  $('seasonHeroStory').addEventListener('click',consult);
+  $('seasonTodayPick').addEventListener('click',()=>product(todayMap[skin.dataset.season||autoSeason()]));
+  $('seasonAllProducts').addEventListener('click',search);
+  $('seasonCustomerHotspot').addEventListener('click',consult);
+
+  document.querySelectorAll('.seasonal-product').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      const key=skin.dataset.season||autoSeason();
+      const name=(productMap[key]||[])[Number(btn.dataset.slot)];
+      if(name) product(name); else search();
+    });
+  });
+
+  // 기존 로그인 상태와 장바구니 수량 표시를 새 바에 동기화
+  function sync(){
+    const oldLogin=$('loginBtn');
+    if(oldLogin && oldLogin.textContent) $('sysLogin').textContent=oldLogin.textContent.trim();
+
+    const oldSignup=$('signupBtn');
+    if(oldSignup){
+      const loggedIn=getComputedStyle(oldSignup).display==='none';
+      $('sysSignup').style.display=loggedIn?'none':'inline-flex';
+    }
+
+    const n=$('cartBadge')?.textContent?.trim()||'0';
+    $('sysCartBadge').textContent=n;
+  }
+  setTimeout(sync,150);
+  setInterval(sync,800);
+
+  document.addEventListener('keydown',e=>{
+    if(e.key==='Escape'){closeDrawer();closeRecipe()}
+  });
+
+  // 디버깅 표식: 정상 연결되면 html data 속성에 기록
+  document.documentElement.dataset.iroomSeasonalSystem='v2-ready';
 })();
 </script>
+
 </body></html>
