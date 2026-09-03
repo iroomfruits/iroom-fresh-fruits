@@ -1050,6 +1050,11 @@ body,#keep7Main{background:#fbf8f1!important}
 .admin-footer-entry{display:inline-flex;align-items:center;justify-content:center;padding:6px 10px;border:1px solid #d9c9aa;border-radius:999px;background:#fffdf9;color:#6f6557!important;text-decoration:none;font-size:9px;font-weight:700;white-space:nowrap;line-height:1;margin-left:10px;vertical-align:middle}
 .admin-footer-entry:hover{background:#123f31;color:#fff!important;border-color:#123f31}
 @media(max-width:560px){.admin-footer-entry{margin:8px 0 0 0}}
+
+@media(max-width:720px){
+ #iroomSeasonalSkin .iroom-header-actions{right:2%;top:.8%;gap:2px;padding:4px 5px}
+ #iroomSeasonalSkin .iroom-header-actions button{font-size:9px;padding:4px 6px;min-height:27px}
+}
 </style>
 <script src="//t1.kakaocdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
@@ -2629,50 +2634,59 @@ body.iroom-seasonal-mode > .iroom-mobile-buybar {
 body.iroom-seasonal-mode > .modal { z-index:16000!important; }
 body.iroom-seasonal-mode > .modal.open { display:flex!important; }
 
-/* 항상 보이는 이룸3 시스템 바 */
-#iroomSeasonalSkin .iroom-system-bar{
-  position:sticky; top:0; z-index:15000;
-  min-height:46px;
-  display:flex; align-items:center; justify-content:space-between; gap:12px;
-  padding:7px max(14px,calc((100vw - 1402px)/2 + 16px));
-  background:rgba(69,19,104,.97);
-  color:#fff;
-  box-shadow:0 6px 20px rgba(48,16,66,.16);
+/* 시안 위에 자연스럽게 얹는 계정/메뉴 헤더 */
+#iroomSeasonalSkin .iroom-header-actions{
+  position:absolute;right:3.1%;top:1.05%;z-index:120;
+  display:flex;align-items:center;gap:6px;
+  padding:5px 7px;
+  border:1px solid rgba(91,42,121,.10);
+  border-radius:999px;
+  background:rgba(255,250,247,.88);
+  box-shadow:0 8px 24px rgba(62,29,78,.08);
   backdrop-filter:blur(10px);
 }
-#iroomSeasonalSkin .iroom-system-brand{
-  display:flex;align-items:center;gap:9px;min-width:0
+#iroomSeasonalSkin .iroom-header-actions button{
+  border:0;background:transparent;color:#4e286d;
+  min-height:30px;padding:5px 9px;border-radius:999px;
+  font-size:11px;font-weight:900;letter-spacing:.02em;cursor:pointer;
+  transition:transform .14s ease,background .14s ease,color .14s ease,box-shadow .14s ease;
 }
-#iroomSeasonalSkin .iroom-system-brand img{
-  width:30px;height:30px;object-fit:contain;border-radius:9px;background:#fff
-}
-#iroomSeasonalSkin .iroom-system-brand b{font-size:13px;white-space:nowrap}
-#iroomSeasonalSkin .iroom-system-actions{
-  display:flex;align-items:center;justify-content:flex-end;gap:5px;flex-wrap:wrap
-}
-#iroomSeasonalSkin .iroom-system-actions button,
-#iroomSeasonalSkin .iroom-system-actions a{
-  min-height:31px;padding:6px 9px;border:1px solid rgba(255,255,255,.27);
-  border-radius:999px;background:rgba(255,255,255,.08);color:#fff;
-  text-decoration:none;font-size:11px;font-weight:900;cursor:pointer;line-height:1
-}
-#iroomSeasonalSkin .iroom-system-actions button:hover,
-#iroomSeasonalSkin .iroom-system-actions a:hover{background:#fff;color:#572181}
-#iroomSeasonalSkin .iroom-system-actions .cart-system{background:#fff;color:#572181}
-#iroomSeasonalSkin .iroom-system-actions .admin-system{background:#ef4f84;border-color:#ef4f84}
-#iroomSeasonalSkin .iroom-system-actions .season-mini{
-  appearance:none;border:1px solid rgba(255,255,255,.27);color:#fff;background:#572181;
-  border-radius:999px;padding:6px 24px 6px 9px;font-size:11px;font-weight:900;min-height:31px
-}
+#iroomSeasonalSkin .iroom-header-actions button:hover{background:rgba(102,51,143,.07)}
+#iroomSeasonalSkin .iroom-header-actions button:active{transform:scale(.97)}
+#iroomSeasonalSkin .iroom-header-actions button:focus-visible{outline:2px solid rgba(102,51,143,.26);outline-offset:2px}
+#iroomSeasonalSkin .iroom-header-actions .cart-system{background:#fff;color:#572181;box-shadow:0 3px 10px rgba(70,27,92,.08)}
+#iroomSeasonalSkin .iroom-header-actions .menu-system{padding-right:12px}
 
-/* 이미지 위 투명 클릭 영역 */
+/* 투명 클릭 영역은 개발용 큰 테두리를 표시하지 않고 자연스럽게 반응 */
 #iroomSeasonalSkin .hotspot{
-  position:absolute!important;border:0!important;background:rgba(255,255,255,0)!important;
-  cursor:pointer!important;z-index:30!important;pointer-events:auto!important;
+  position:absolute!important;border:0!important;outline:0!important;
+  background:transparent!important;cursor:pointer!important;z-index:30!important;
+  pointer-events:auto!important;border-radius:16px;
+  transition:transform .14s ease,box-shadow .14s ease,background .14s ease;
 }
-#iroomSeasonalSkin .hotspot:hover{
-  box-shadow:inset 0 0 0 2px rgba(111,51,152,.16)
+#iroomSeasonalSkin .hotspot:hover{box-shadow:none!important;background:rgba(255,255,255,.025)!important}
+#iroomSeasonalSkin .hotspot:active{transform:scale(.985)}
+#iroomSeasonalSkin .hotspot:focus-visible{outline:1px solid rgba(102,51,143,.18)!important;outline-offset:-2px}
+
+/* LOGIN / JOIN 전용 간단 인증창 */
+#iroomQuickAuth{
+  position:fixed;inset:0;z-index:17000;display:none;align-items:center;justify-content:center;
+  padding:20px;background:rgba(35,20,41,.28);backdrop-filter:blur(5px)
 }
+#iroomQuickAuth.open{display:flex}
+#iroomQuickAuth .qa-card{width:min(430px,100%);background:#fffaf7;border:1px solid #eee1eb;border-radius:26px;padding:24px;box-shadow:0 30px 90px rgba(45,18,62,.28)}
+#iroomQuickAuth .qa-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
+#iroomQuickAuth .qa-head img{width:185px;max-width:68%;height:auto}
+#iroomQuickAuth .qa-close{width:38px;height:38px;border:0;border-radius:50%;background:#f4edf7;color:#5a267a;font-size:22px;cursor:pointer}
+#iroomQuickAuth h3{margin:6px 0 5px;color:#4c2863;font-size:22px}
+#iroomQuickAuth .qa-desc{margin:0 0 16px;color:#806d84;font-size:13px;line-height:1.5}
+#iroomQuickAuth .qa-kakao{width:100%;min-height:50px;border:0;border-radius:14px;background:#FEE500;color:#191919;font-size:15px;font-weight:900;cursor:pointer;box-shadow:0 6px 16px rgba(81,67,0,.08)}
+#iroomQuickAuth .qa-kakao:active{transform:scale(.985)}
+#iroomQuickAuth .qa-divider{display:flex;align-items:center;gap:10px;margin:15px 0;color:#aa99ae;font-size:11px}
+#iroomQuickAuth .qa-divider:before,#iroomQuickAuth .qa-divider:after{content:'';height:1px;background:#eee4ef;flex:1}
+#iroomQuickAuth .qa-normal{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+#iroomQuickAuth .qa-normal button{min-height:44px;border:1px solid #e8dbe9;background:#fff;color:#542870;border-radius:13px;font-weight:900;cursor:pointer}
+#iroomQuickAuth .qa-note{margin:13px 0 0;color:#9a899d;font-size:11px;line-height:1.5}
 
 /* 보조 서비스 패널 */
 #iroomSeasonalSkin .system-drawer{
@@ -2704,18 +2718,7 @@ body.iroom-seasonal-mode > .modal.open { display:flex!important; }
 /* 기존 하단 계절 셀렉터는 상단바와 중복되므로 숨김 */
 #iroomSeasonalSkin .season-control{display:none!important}
 
-@media(max-width:820px){
- #iroomSeasonalSkin .iroom-system-bar{align-items:flex-start}
- #iroomSeasonalSkin .iroom-system-brand b{display:none}
- #iroomSeasonalSkin .iroom-system-actions{gap:4px}
- #iroomSeasonalSkin .iroom-system-actions button,
- #iroomSeasonalSkin .iroom-system-actions a,
- #iroomSeasonalSkin .iroom-system-actions .season-mini{font-size:10px;padding:6px 7px}
- #iroomSeasonalSkin .system-drawer{top:64px}
-}
-@media(max-width:560px){
- #iroomSeasonalSkin .iroom-system-bar{position:sticky;padding:6px 8px}
- #iroomSeasonalSkin .iroom-system-actions .desktop-optional{display:none}
+#iroomSeasonalSkin .iroom-system-actions .desktop-optional{display:none}
  #iroomSeasonalSkin .click-help{display:none}
 }
 
@@ -2724,26 +2727,13 @@ body.iroom-seasonal-mode > .modal.open { display:flex!important; }
 <body class="iroom-seasonal-mode">
 
 <div id="iroomSeasonalSkin" aria-label="이룸 Fresh Fruits 계절 자동 홈페이지">
-  <div class="iroom-system-bar" aria-label="이룸3 시스템 메뉴">
-    <div class="iroom-system-brand">
-      <img src="/iroom_assets/iroom-logo-icon.png" alt="이룸">
-      <b>이룸 Fresh Fruits</b>
-    </div>
-    <div class="iroom-system-actions">
-      <button id="sysLogin" type="button">로그인</button>
-      <button id="sysSignup" type="button">회원가입</button>
-      <button id="sysMy" type="button">마이페이지</button>
-      <button id="sysOrders" class="desktop-optional" type="button">주문조회</button>
-      <button id="sysSearch" class="desktop-optional" type="button">상품검색</button>
-      <button id="sysCart" class="cart-system" type="button">🛒 장바구니 <span id="sysCartBadge">0</span></button>
-      <button id="sysMenu" type="button">☰ 더보기</button>
-      <a class="admin-system" href="/band-admin.html?reauth=1">🔐 관리자</a>
-      <select id="iroomSeasonSelectTop" class="season-mini" aria-label="계절 화면">
-        <option value="auto">계절 자동</option>
-        <option value="spring">봄</option><option value="summer">여름</option>
-        <option value="autumn">가을</option><option value="winter">겨울</option>
-      </select>
-    </div>
+  <div class="iroom-header-actions" aria-label="이룸 계정 및 메뉴">
+    <button id="sysLogin" type="button">LOGIN</button>
+    <button id="sysSignup" type="button">JOIN</button>
+    <button id="sysMy" type="button" hidden>MY PAGE</button>
+    <button id="sysLogout" type="button" hidden>LOGOUT</button>
+    <button id="sysCart" class="cart-system" type="button">CART <span id="sysCartBadge">0</span></button>
+    <button id="sysMenu" class="menu-system" type="button" aria-label="메뉴 열기">MENU</button>
   </div>
 
   <div class="skin-frame">
@@ -2798,6 +2788,25 @@ body.iroom-seasonal-mode > .modal.open { display:flex!important; }
   </div>
 
   <div class="click-help">상품 · 스무디 · 메뉴 영역은 클릭할 수 있습니다</div>
+</div>
+
+
+<div id="iroomQuickAuth" role="dialog" aria-modal="true" aria-labelledby="qaTitle">
+  <div class="qa-card">
+    <div class="qa-head">
+      <img src="/iroom_assets/iroom-logo-horizontal.png" alt="이룸 fresh fruits">
+      <button class="qa-close" type="button" aria-label="닫기">×</button>
+    </div>
+    <h3 id="qaTitle">로그인</h3>
+    <p id="qaDesc" class="qa-desc">카카오로 빠르게 로그인하거나 기존 이룸 계정을 이용하세요.</p>
+    <button id="qaKakao" class="qa-kakao" type="button">카카오로 1초 로그인</button>
+    <div class="qa-divider">또는</div>
+    <div class="qa-normal">
+      <button id="qaNormalLogin" type="button">일반 로그인</button>
+      <button id="qaNormalJoin" type="button">일반 회원가입</button>
+    </div>
+    <p class="qa-note">카카오 최초 이용 시 이룸 회원으로 자동 연결되고, 다음부터는 같은 카카오 계정으로 바로 로그인됩니다.</p>
+  </div>
 </div>
 
 <div id="iroomRecipeModal" role="dialog" aria-modal="true" aria-labelledby="iroomRecipeTitle">
@@ -4384,9 +4393,29 @@ document.addEventListener("keydown", function(e){
   recipeModal.querySelector('.close').addEventListener('click',closeRecipe);
   recipeModal.addEventListener('click',e=>{if(e.target===recipeModal)closeRecipe()});
 
+  // 자연스러운 LOGIN / JOIN + 카카오 1초 가입/로그인
+  const quickAuth=$('iroomQuickAuth');
+  let quickMode='login';
+  function openQuickAuth(mode){
+    quickMode=mode==='join'?'join':'login';
+    $('qaTitle').textContent=quickMode==='join'?'회원가입':'로그인';
+    $('qaDesc').textContent=quickMode==='join'?'카카오로 1초 가입하거나 일반 회원가입을 이용하세요.':'카카오로 빠르게 로그인하거나 기존 이룸 계정을 이용하세요.';
+    $('qaKakao').textContent=quickMode==='join'?'카카오로 1초 가입':'카카오로 1초 로그인';
+    quickAuth.classList.add('open');
+  }
+  function closeQuickAuth(){quickAuth.classList.remove('open')}
+  quickAuth.querySelector('.qa-close').addEventListener('click',closeQuickAuth);
+  quickAuth.addEventListener('click',e=>{if(e.target===quickAuth)closeQuickAuth()});
+  $('qaNormalLogin').addEventListener('click',()=>{closeQuickAuth();login()});
+  $('qaNormalJoin').addEventListener('click',()=>{closeQuickAuth();signup()});
+  $('qaKakao').addEventListener('click',()=>{
+    const next=encodeURIComponent(location.pathname+location.search);
+    location.href='/api/auth/kakao/start?mode='+quickMode+'&next='+next;
+  });
+
   // 상단 시스템 바
-  $('sysLogin').addEventListener('click',login);
-  $('sysSignup').addEventListener('click',signup);
+  $('sysLogin').addEventListener('click',()=>openQuickAuth('login'));
+  $('sysSignup').addEventListener('click',()=>openQuickAuth('join'));
   $('sysMy').addEventListener('click',mypage);
   $('sysOrders').addEventListener('click',orders);
   $('sysSearch').addEventListener('click',search);
@@ -4426,25 +4455,33 @@ document.addEventListener("keydown", function(e){
     });
   });
 
-  // 기존 로그인 상태와 장바구니 수량 표시를 새 바에 동기화
-  function sync(){
-    const oldLogin=$('loginBtn');
-    if(oldLogin && oldLogin.textContent) $('sysLogin').textContent=oldLogin.textContent.trim();
-
-    const oldSignup=$('signupBtn');
-    if(oldSignup){
-      const loggedIn=getComputedStyle(oldSignup).display==='none';
-      $('sysSignup').style.display=loggedIn?'none':'inline-flex';
+  // 기존 로그인 상태와 장바구니 수량 표시를 새 헤더에 동기화
+  async function sync(){
+    let logged=false;
+    try{
+      const r=await fetch('/api/me',{credentials:'same-origin',cache:'no-store'});
+      const d=await r.json();
+      logged=!!(d&&d.user);
+    }catch(e){
+      const oldSignup=$('signupBtn');
+      logged=!!(oldSignup && getComputedStyle(oldSignup).display==='none');
     }
-
+    $('sysLogin').hidden=logged;
+    $('sysSignup').hidden=logged;
+    $('sysMy').hidden=!logged;
+    $('sysLogout').hidden=!logged;
     const n=$('cartBadge')?.textContent?.trim()||'0';
     $('sysCartBadge').textContent=n;
   }
-  setTimeout(sync,150);
-  setInterval(sync,800);
+  $('sysLogout').addEventListener('click',async()=>{
+    try{await fetch('/api/logout',{method:'POST',credentials:'same-origin'})}catch(e){}
+    location.reload();
+  });
+  setTimeout(sync,180);
+  setInterval(sync,3000);
 
   document.addEventListener('keydown',e=>{
-    if(e.key==='Escape'){closeDrawer();closeRecipe()}
+    if(e.key==='Escape'){closeDrawer();closeRecipe();closeQuickAuth()}
   });
 
   // 디버깅 표식: 정상 연결되면 html data 속성에 기록
