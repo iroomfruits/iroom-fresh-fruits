@@ -1,0 +1,10 @@
+KEEP9 적용 변경 목록
+
+- public/index.html — KEEP9 홈 레이아웃, 반응형 스타일, 깨끗한 혼합 과일 히어로, 카드/배너/서비스 섹션, 기존 모달·기능 연결 유지
+- public/KEEP9_기준기록.md — KEEP9 고정 기준 및 기능/이미지 기준 기록
+- KEEP9_적용안내.txt — 배포 및 관리자 사용 안내
+- KEEP9_변경파일목록.txt — 변경 파일 요약
+
+보존 파일
+- public/KEEP8_기준기록.md
+- server.js, public/server.js, public/band-admin.html, public/admin-fruits.html 및 기존 자산/API

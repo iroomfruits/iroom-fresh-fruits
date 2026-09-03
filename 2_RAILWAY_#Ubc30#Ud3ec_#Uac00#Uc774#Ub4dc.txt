@@ -1,0 +1,31 @@
+[이룸 fresh fruits - Railway 배포]
+
+Railway는 현재 새 서비스에서 Dockerfile을 자동 감지합니다.
+
+방법 A: GitHub 연결
+1. 이 폴더 전체를 GitHub 저장소에 업로드
+2. Railway → New Project → Deploy from GitHub repo
+3. 저장소 선택 후 Deploy
+4. Service → Variables에 아래 값 추가
+   NODE_ENV=production
+   TRUST_PROXY=1
+   PERSIST_DIR=/data
+   ADMIN_PASSWORD=관리자용_강한_비밀번호
+   SMTP_HOST=smtp.naver.com
+   SMTP_PORT=465
+   SMTP_USER=iroom4562@naver.com
+   SMTP_PASSWORD=네이버_SMTP_인증값
+   ORDER_EMAIL=iroom4562@naver.com
+5. Service에 Volume 추가 → Mount Path를 /data 로 설정
+6. Settings → Networking → Generate Domain
+7. Settings → Healthcheck Path를 /api/health 로 설정
+8. 생성 주소 + /band-order.html 을 BAND에 등록
+
+방법 B: Railway CLI
+1. 이 폴더에서 railway init
+2. railway up
+3. Dashboard에서 위 환경변수, Volume(/data), Public Domain 설정
+
+주의:
+- Volume을 붙이지 않으면 배포/재시작 때 로컬 저장 데이터가 유지된다고 보장할 수 없습니다.
+- 관리자/메일 비밀번호를 GitHub 파일에 넣지 마세요.

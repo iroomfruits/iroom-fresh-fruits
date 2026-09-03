@@ -1,0 +1,24 @@
+[이룸 fresh fruits - Render 배포]
+
+준비된 render.yaml이 있어서 GitHub에 이 폴더를 올린 후 Render Blueprint로 연결하면 됩니다.
+
+1. GitHub에 이 폴더 전체를 새 저장소로 업로드
+2. Render 로그인 → New → Blueprint
+3. 방금 만든 GitHub 저장소 선택
+4. render.yaml이 자동 인식됨
+5. 아래 비밀값을 입력
+   - ADMIN_PASSWORD : 관리자용 강한 비밀번호
+   - SMTP_PASSWORD : 네이버 메일 SMTP 인증 비밀번호/앱 비밀번호
+6. Apply / Deploy
+7. 배포 완료 후 생성된 https://xxxx.onrender.com 주소 확인
+8. 아래 주소 테스트
+   - 홈페이지: https://xxxx.onrender.com/
+   - BAND 주문: https://xxxx.onrender.com/band-order.html
+   - 공동구매: https://xxxx.onrender.com/band-order.html#groupbuy
+   - 공구관리: https://xxxx.onrender.com/band-admin.html
+   - 상태확인: https://xxxx.onrender.com/api/health
+
+중요:
+- render.yaml은 /data에 1GB 영구 디스크를 연결하도록 구성되어 있습니다.
+- 주문/상품/공구 데이터와 업로드 사진은 /data 아래에 보존됩니다.
+- 관리자 비밀번호와 SMTP 비밀번호는 파일에 적지 말고 Render 비밀 환경변수로 입력하세요.
