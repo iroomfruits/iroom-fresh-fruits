@@ -39,3 +39,34 @@
 .iv6-footer{background:linear-gradient(135deg,#4d1d65,#642a78);padding-top:42px}
 @media(max-width:1050px){.iv6-head{grid-template-columns:150px 1fr auto}.iv6-main-nav{gap:22px}.iv6-hero-grid{grid-template-columns:48% 52%}.iv6-smoothies{grid-column:1/-1;grid-template-columns:1fr 1fr}.iv6-promise-grid{grid-template-columns:1fr}.iv6-journey-steps{overflow-x:auto;justify-content:flex-start;grid-template-columns:repeat(9,max-content);padding-bottom:4px}}
 @media(max-width:760px){.iv6-head{height:68px;grid-template-columns:1fr auto}.iv6-main-nav{display:none}.iv6-logo img{width:118px}.iv6-head-actions #iv6Login,.iv6-head-actions #iv6Join,.iv6-head-actions #iv6My{font-size:9px}.iv6-head-actions #iv6Join{display:none}.iv6-hero-grid{grid-template-columns:1fr}.iv6-hero-copy{padding:36px 12px 18px}.iv6-hero-fruit{min-height:310px;height:auto}.iv6-hero-fruit img{max-height:330px}.iv6-smoothies{padding:0;grid-template-columns:1fr 1fr}.iv6-smoothie{min-height:145px}.iv6-promise-grid{grid-template-columns:1fr}.iv6-journey-title{display:block}.iv6-journey-title span{display:block;margin-top:4px}.iv6-journey-steps{grid-template-columns:repeat(9,max-content);overflow-x:auto}.iv6-season-strip{width:min(100% - 22px,1240px)}.iv6-season-strip .iv6-wrap{padding:0 14px}.iv6-product-media{aspect-ratio:1.05/1}}
+
+
+/* IROOM V8 — production isolation + interaction fidelity fix */
+html body #KEEP9_EXACT[data-iroom3-legacy-visual="1"],
+html body > [data-iroom3-legacy-visual="1"],
+html body .iroom-mobile-buybar[data-iroom3-legacy-visual="1"]{
+  display:none!important;
+  visibility:hidden!important;
+  pointer-events:none!important;
+  height:0!important;
+  min-height:0!important;
+  max-height:0!important;
+  margin:0!important;
+  padding:0!important;
+  overflow:hidden!important;
+}
+#iroomV6, #iroomV6 *{box-sizing:border-box}
+#iroomV6 button,#iroomV6 a,.iv6-drawer button,.iv6-drawer a,.iv6-auth button{pointer-events:auto;touch-action:manipulation}
+.iv6-hero-copy h1 span{display:block;white-space:nowrap}
+.iv6-hero-copy h1{font-size:clamp(44px,3.8vw,63px);line-height:1.08;letter-spacing:-.07em}
+.iv6-hero-fruit{background:radial-gradient(circle at 55% 45%,#fff 0 28%,#fff5ef 72%,transparent 100%);border-radius:34px}
+.iv6-hero-fruit img{width:105%;max-height:455px;border-radius:28px}
+.iv6-smoothie{overflow:hidden;position:relative;background:linear-gradient(145deg,#fff,#fff4f1)}
+.iv6-smoothie.purple{background:linear-gradient(145deg,#fff,#f7f1fb)}
+.iv6-cup{width:88px;height:88px;border-radius:22px;overflow:hidden;background:#fff;box-shadow:0 12px 28px rgba(91,44,108,.10);flex:0 0 auto}
+.iv6-cup img{display:block;width:100%;height:100%;object-fit:cover}
+.iv6-smoothie>div:first-child{position:relative;z-index:2}
+.iv6-smoothie strong{line-height:1.25}
+.iv6-product-media,.iv6-product-bottom button,.iv6-gift-grid button,.iv6-budget-grid button,.iv6-fun-grid button,.iv6-cta-grid button{cursor:pointer}
+.iv6-product-media:focus-visible,.iv6-product-bottom button:focus-visible,.iv6-main-nav button:focus-visible,.iv6-head-actions button:focus-visible{outline:3px solid rgba(112,47,137,.25);outline-offset:3px}
+@media(max-width:760px){.iv6-hero-copy h1 span{white-space:normal}.iv6-cup{width:66px;height:66px;border-radius:17px}}
