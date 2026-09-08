@@ -29,7 +29,7 @@
  function currentSeason(){const q=new URLSearchParams(location.search).get('season');return seasons[q]?q:autoSeason()}
  const key=currentSeason(), c=seasons[key];
  document.documentElement.style.setProperty('--v4-accent',c.accent);
- $('.v4-artboard').src=base+c.img;
+ const legacyArt=$('.v4-artboard'); if(legacyArt) legacyArt.src=base+c.img;
  $$('.v4-hot-recos button').forEach((b,i)=>b.dataset.fruit=c.fruits[i]);
 
  function legacyModal(id){const m=document.getElementById(id);if(!m)return false;document.querySelectorAll('.modal.open').forEach(x=>{if(x!==m){x.classList.remove('open');x.setAttribute('aria-hidden','true')}});m.classList.add('open');m.setAttribute('aria-hidden','false');return true}
