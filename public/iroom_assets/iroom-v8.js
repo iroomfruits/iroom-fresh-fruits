@@ -16,10 +16,10 @@
   };
   let publicSite={...PUBLIC_DEFAULT};
   const seasons={
-    spring:{label:'봄',art:'hero_clean/spring.jpg',curation:'card_art/spring_curation.jpg',gift:'card_art/spring_gift.jpg',premium:'card_art/spring_premium.jpg',premiumFruits:['샤인머스캣','체리','망고','키위'],seasonalFruits:['딸기','참외','토마토','청포도'],library:['블루베리','파인애플','망고','자몽','체리','멜론']},
-    summer:{label:'여름',art:'hero_clean/summer.jpg',curation:'card_art/summer_curation.jpg',gift:'card_art/summer_gift.jpg',premium:'card_art/summer_premium.jpg',premiumFruits:['망고','샤인머스캣','체리','멜론'],seasonalFruits:['수박','천도복숭아','자두','포도'],library:['파인애플','키위','블루베리','청포도','자몽','체리']},
-    autumn:{label:'가을',art:'hero_clean/autumn.jpg',curation:'card_art/autumn_curation.jpg',gift:'card_art/autumn_gift.jpg',premium:'card_art/autumn_premium.jpg',premiumFruits:['샤인머스캣','석류','망고','키위'],seasonalFruits:['사과','배','감','대봉'],library:['석류','포도','블랙베리','자몽','샤인머스캣','사과']},
-    winter:{label:'겨울',art:'hero_clean/winter.jpg',curation:'card_art/winter_curation.jpg',gift:'card_art/winter_gift.jpg',premium:'card_art/winter_premium.jpg',premiumFruits:['한라봉','샤인머스캣','망고','딸기'],seasonalFruits:['제주감귤','한라봉','딸기','사과'],library:['키위','금귤','배','블루베리','자몽','오렌지']}
+    spring:{label:'봄',art:'hero_clean/spring.jpg',curation:'card_art/spring_curation.jpg',gift:'card_art/spring_gift.jpg',premium:'card_art/spring_premium.jpg',premiumFruits:['금실딸기','성주참외','대저토마토','샤인머스캣'],seasonalFruits:['딸기','참외','토마토','청포도'],library:['블루베리','파인애플','망고','자몽','체리','멜론']},
+    summer:{label:'여름',art:'hero_clean/summer.jpg',curation:'card_art/summer_curation.jpg',gift:'card_art/summer_gift.jpg',premium:'card_art/summer_premium.jpg',premiumFruits:['백도복숭아','고당도수박','샤인머스캣','머스크멜론'],seasonalFruits:['수박','복숭아','자두','포도'],library:['파인애플','키위','블루베리','청포도','자몽','체리']},
+    autumn:{label:'가을',art:'hero_clean/autumn.jpg',curation:'card_art/autumn_curation.jpg',gift:'card_art/autumn_gift.jpg',premium:'card_art/autumn_premium.jpg',premiumFruits:['홍로사과','나주배','샤인머스캣','대봉'],seasonalFruits:['사과','배','감','대봉'],library:['석류','포도','블랙베리','자몽','샤인머스캣','사과']},
+    winter:{label:'겨울',art:'hero_clean/winter.jpg',curation:'card_art/winter_curation.jpg',gift:'card_art/winter_gift.jpg',premium:'card_art/winter_premium.jpg',premiumFruits:['제주감귤','한라봉','금실딸기','부사사과'],seasonalFruits:['제주감귤','한라봉','딸기','사과'],library:['키위','금귤','배','블루베리','자몽','오렌지']}
   };
   const fruitMeta={
     '딸기':['fruits/01_딸기_strawberry.png','향긋하고 산뜻한 단맛'],
@@ -27,7 +27,8 @@
     '청포도':['fruits/03_청포도_green_grape.png','청량하고 향긋한 단맛'],
     '체리':['fruits/04_체리_cherry.png','상큼하고 진한 과즙'],
     '수박':['fruits/05_수박_watermelon.png','시원하고 풍부한 과즙'],
-    '천도복숭아':['fruits/06_복숭아_peach.png','부드럽고 향긋한 여름 맛'],
+    '천도복숭아':['fruits/06_복숭아_peach.png','산뜻하고 향긋한 여름 맛'],
+    '복숭아':['fruits/06_복숭아_peach.png','부드럽고 향긋한 여름의 단맛'],
     '사과':['fruits/09_사과_apple.png','아삭하고 선명한 달콤함'],
     '배':['fruits/10_배_pear.png','시원하고 풍부한 과즙'],
     '감':['fruits/11_감_persimmon.png','깊고 진한 계절의 단맛'],
@@ -52,6 +53,25 @@
     '레몬':['fruits/14_레몬_lemon.png','상큼하고 선명한 향'],
     '금귤':['fruits/35_금귤_kumquat.png','작고 향긋한 겨울의 맛']
   };
+  const fruitAliasBase={
+    '금실딸기':'딸기','성주참외':'참외','대저토마토':'토마토',
+    '백도복숭아':'복숭아','고당도수박':'수박','머스크멜론':'멜론',
+    '홍로사과':'사과','나주배':'배','부사사과':'사과'
+  };
+  const premiumTaglines={
+    '금실딸기':'국산 프리미엄 딸기의 향긋한 단맛',
+    '성주참외':'아삭하고 맑은 국산 참외의 달콤함',
+    '대저토마토':'산뜻한 감칠맛과 균형 잡힌 풍미',
+    '백도복숭아':'부드러운 과육과 풍부한 향',
+    '고당도수박':'시원한 과즙과 선명한 여름 단맛',
+    '머스크멜론':'은은한 향과 부드러운 고급 단맛',
+    '홍로사과':'아삭한 식감과 산뜻한 국산 사과의 맛',
+    '나주배':'시원한 과즙과 깔끔한 단맛',
+    '부사사과':'단단한 식감과 깊은 겨울 단맛'
+  };
+  Object.entries(fruitAliasBase).forEach(([name,base])=>{
+    if(!fruitMeta[name]&&fruitMeta[base])fruitMeta[name]=[fruitMeta[base][0],premiumTaglines[name]||fruitMeta[base][1]];
+  });
   const fruitDetails={
     '딸기':{season:'겨울 · 봄',summary:'향긋한 향과 산뜻한 단맛, 부드러운 과육이 매력적인 과일입니다.',choose:'꼭지가 싱싱하고 표면의 붉은 빛이 고르며 과육이 무르지 않은 것을 살펴봅니다.',keep:'씻지 않은 상태로 냉장 보관하고, 드시기 직전에 가볍게 세척하는 것이 좋습니다.',enjoy:'차갑게 그대로 즐기거나 요거트·디저트와 함께하면 향이 잘 살아납니다.'},
     '참외':{season:'봄 · 초여름',summary:'아삭한 식감과 맑고 시원한 달콤함이 특징입니다.',choose:'껍질의 노란색과 흰 줄이 선명하고 묵직하며 향이 은은한 것을 살펴봅니다.',keep:'서늘한 곳에 두었다가 충분히 익으면 냉장 보관해 시원하게 즐기세요.',enjoy:'차갑게 잘라 먹거나 샐러드에 곁들이면 산뜻한 단맛을 즐길 수 있습니다.'},
@@ -59,6 +79,7 @@
     '체리':{season:'봄 · 여름',summary:'작은 한 알에 상큼함과 깊은 단맛이 함께 들어 있는 과일입니다.',choose:'표면이 매끈하고 윤기가 있으며 꼭지가 푸르고 과육이 단단한 것을 살펴봅니다.',keep:'습기를 줄여 냉장 보관하고 먹기 직전에 세척하는 편이 좋습니다.',enjoy:'그대로 먹거나 치즈·요거트와 곁들이면 풍부한 향을 즐길 수 있습니다.'},
     '수박':{season:'여름',summary:'풍부한 수분과 시원한 과즙으로 여름에 가장 잘 어울리는 과일입니다.',choose:'크기에 비해 묵직하고 껍질의 무늬가 선명하며 모양이 고른 것을 살펴봅니다.',keep:'통째로는 서늘한 곳에, 자른 뒤에는 밀폐해 냉장 보관하세요.',enjoy:'충분히 차갑게 먹으면 수분감과 청량감이 가장 좋습니다.'},
     '천도복숭아':{season:'여름',summary:'산뜻한 산미와 향긋한 단맛, 매끄러운 껍질이 특징인 여름 과일입니다.',choose:'은은한 향이 나고 과육이 너무 딱딱하지 않으며 멍이 적은 것을 살펴봅니다.',keep:'단단할 때는 실온에서 후숙한 뒤 냉장 보관하고 너무 오래 차갑게 두지 않는 것이 좋습니다.',enjoy:'먹기 전 잠시 차갑게 두면 향과 과즙의 균형이 좋습니다.'},
+    '복숭아':{season:'여름',summary:'부드러운 과육과 풍부한 향, 촉촉한 과즙이 어우러지는 대표 여름 과일입니다.',choose:'향이 은은하게 올라오고 표면에 큰 멍이 없으며 손으로 살짝 눌렀을 때 적당한 탄력이 있는 것을 살펴봅니다.',keep:'단단할 때는 실온에서 후숙한 뒤 먹기 좋은 상태가 되면 냉장 보관하세요.',enjoy:'먹기 전 잠시 차갑게 두면 향과 과즙, 부드러운 식감을 균형 있게 즐길 수 있습니다.'},
     '사과':{season:'가을 · 겨울',summary:'아삭한 식감과 선명한 단맛, 산뜻한 향의 균형이 좋은 기본 과일입니다.',choose:'표면이 단단하고 묵직하며 멍이나 눌림이 적은 것을 살펴봅니다.',keep:'다른 과일과 분리해 냉장 보관하면 아삭함을 오래 유지하는 데 도움이 됩니다.',enjoy:'그대로 먹거나 치즈·견과류와 곁들이면 단맛과 향이 잘 어울립니다.'},
     '배':{season:'가을 · 겨울',summary:'시원하고 풍부한 과즙과 부드러운 단맛이 돋보입니다.',choose:'모양이 고르고 묵직하며 껍질에 상처가 적고 단단한 것을 살펴봅니다.',keep:'냉장 보관하면 시원한 과즙과 아삭한 식감을 유지하기 좋습니다.',enjoy:'차갑게 잘라 그대로 먹으면 배 특유의 시원한 단맛이 가장 잘 살아납니다.'},
     '감':{season:'가을',summary:'계절이 깊어질수록 진해지는 부드럽고 풍성한 단맛이 매력입니다.',choose:'색이 고르고 꼭지 주변이 깨끗하며 단단함이 용도에 맞는 것을 고릅니다.',keep:'단단한 감은 서늘한 곳에, 충분히 익은 감은 냉장 보관하세요.',enjoy:'단단할 때의 아삭함과 후숙했을 때의 부드러움을 취향에 따라 즐길 수 있습니다.'},
@@ -244,7 +265,7 @@
   }
   function showFruit(n){
     const m=fruitMeta[n]||['','오늘 상태가 좋은 과일'];
-    const d=fruitDetails[n]||{season:'계절 추천',summary:m[1]||'오늘 상태가 좋은 과일입니다.',choose:'표면 상태와 향, 탄력과 무게를 함께 살펴 신선한 과일을 고릅니다.',keep:'과일의 숙도에 맞춰 실온 또는 냉장 보관해 주세요.',enjoy:'가장 맛있는 상태에서 신선하게 즐겨보세요.'};
+    const d=fruitDetails[n]||fruitDetails[fruitAliasBase[n]]||{season:'계절 추천',summary:m[1]||'오늘 상태가 좋은 과일입니다.',choose:'표면 상태와 향, 탄력과 무게를 함께 살펴 신선한 과일을 고릅니다.',keep:'과일의 숙도에 맞춰 실온 또는 냉장 보관해 주세요.',enjoy:'가장 맛있는 상태에서 신선하게 즐겨보세요.'};
     setModal('FRUIT DETAIL',n,`${m[1]} · ${d.season}`,`
       <div class="fruit-detail-layout">
         <div class="fruit-detail-visual"><img src="${assets+m[0]}" alt="${n}"></div>

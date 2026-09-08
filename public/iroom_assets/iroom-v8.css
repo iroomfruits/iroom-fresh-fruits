@@ -229,3 +229,16 @@
   .footer-actions{grid-template-columns:repeat(2,1fr)}
 }
 @media(max-width:430px){.public-season-preview__buttons button{padding:6px 10px}.footer-actions{grid-template-columns:1fr}}
+
+
+/* IROOM4 V8 — Korean premium focus + soft full-width edges */
+body{background:var(--season-wash-2,#fffaf4)}
+.site-shell{width:100%;max-width:none;margin:0;background:var(--season-wash-2,#fffaf4);box-shadow:none;border-left:0!important;border-right:0!important;overflow:hidden}
+.topbar{border-left:0!important;border-right:0!important}
+.season-stage{border-left:0!important;border-right:0!important;background:linear-gradient(180deg,var(--season-wash-2),var(--season-wash))}
+.season-visual{width:100%;max-width:none;margin:0;border-left:0!important;border-right:0!important}
+.selection-section,.fruit-library,.review-section,.public-season-preview,.site-footer{border-left:0!important;border-right:0!important}
+.selection-section,.fruit-library,.review-section{box-shadow:none}
+.premium-fruits-block:first-of-type{background:linear-gradient(145deg,rgba(255,255,255,.94),color-mix(in srgb,var(--season-card) 82%,#f7efe3 18%))}
+.premium-fruits-block:first-of-type .premium-fruit-card:before{content:"국산 엄선";position:absolute;left:10px;top:10px;padding:4px 7px;border-radius:999px;background:color-mix(in srgb,var(--season-accent) 12%,white 88%);color:var(--season-accent);font-size:9px;font-weight:700;letter-spacing:.05em;z-index:2}
+@media(min-width:1800px){.topbar-inner,.selection-section,.fruit-library,.review-section,.public-season-preview,.footer-main,.footer-legal{padding-left:max(6vw,110px);padding-right:max(6vw,110px)}}
