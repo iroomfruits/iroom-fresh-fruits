@@ -325,3 +325,112 @@ body{background:var(--season-wash-2,#fffaf4)}
   .season-copy-fix p{font-size:11px;line-height:1.5}
   .season-copy-fix small{display:none}
 }
+
+/* IROOM4 V11 — compact hero, no baked-copy overlap, visible member actions */
+.topbar-inner{grid-template-columns:280px 1fr 320px}
+.header-tools{align-items:center;gap:12px}
+.header-auth{display:flex;align-items:center;gap:7px;white-space:nowrap;color:#2c4b44;font-size:13px}
+.auth-link{border:0;background:transparent;color:inherit;padding:6px 1px;font-weight:600;letter-spacing:-.02em}
+.auth-link:hover{text-decoration:underline;text-underline-offset:4px}
+.auth-user{color:#0d5a47}
+
+/* The approved seasonal artwork stays the same; only its footprint is reduced. */
+.season-stage{background:var(--season-wash-2,#fffaf4);padding:0}
+.season-visual{
+  position:relative;
+  height:clamp(420px,31vw,500px);
+  min-height:420px;
+  overflow:hidden;
+  background:linear-gradient(90deg,var(--season-wash-2,#fffaf4) 0 34%,color-mix(in srgb,var(--season-wash,#fbf1e6) 82%,white 18%) 100%);
+}
+.season-visual>img{
+  position:absolute;
+  right:-1.2%;
+  top:50%;
+  width:72%;
+  max-width:none;
+  height:auto;
+  max-height:none;
+  transform:translateY(-50%);
+  clip-path:inset(0 0 0 28%);
+  object-fit:contain;
+  object-position:right center;
+  filter:saturate(.93) contrast(.96) brightness(1.02);
+  transition:opacity .22s ease,transform .22s ease;
+}
+/* Soft cover hides the old baked-in title without changing the fruit artwork. */
+.season-visual:before{
+  content:"";
+  position:absolute;
+  z-index:2;
+  inset:0 auto 0 0;
+  width:39%;
+  pointer-events:none;
+  background:linear-gradient(90deg,
+    color-mix(in srgb,var(--season-wash-2,#fffaf4) 99%,white 1%) 0%,
+    color-mix(in srgb,var(--season-wash-2,#fffaf4) 98%,white 2%) 70%,
+    color-mix(in srgb,var(--season-wash-2,#fffaf4) 78%,transparent 22%) 88%,
+    transparent 100%);
+}
+html[data-season="autumn"] .season-visual:before,
+html[data-season="winter"] .season-visual:before{width:42%}
+html[data-season="autumn"] .season-visual>img,
+html[data-season="winter"] .season-visual>img{clip-path:inset(0 0 0 30%)}
+.season-copy-fix{
+  width:34%;
+  height:100%;
+  padding:4.5% 1.4% 5% max(3.2%,38px);
+  background:transparent;
+  justify-content:center;
+}
+.season-copy-brand{font-size:clamp(22px,1.9vw,34px);margin-bottom:10px}
+.season-copy-fix strong{font-size:clamp(25px,2.1vw,40px);max-width:390px;line-height:1.18}
+.season-copy-fix>i{margin:17px 0 16px}
+.season-copy-fix p{font-size:clamp(13px,1vw,17px);line-height:1.58}
+.season-copy-fix small{margin-top:25px;font-size:9px;max-width:230px}
+
+.auth-form{max-width:520px;display:grid;gap:13px}
+.auth-form label{display:grid;gap:7px;color:#45605a;font-size:12px;font-weight:700}
+.auth-form input{width:100%;border:1px solid #dfd0c3;background:#fffdf9;border-radius:12px;padding:13px 14px;color:#163b33;outline:none}
+.auth-form input:focus{border-color:#9f725d;box-shadow:0 0 0 3px rgba(159,114,93,.09)}
+.auth-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.auth-grid-wide{grid-column:1/-1}
+.auth-help{margin:2px 0 0;color:#80756c;font-size:12px;text-align:center}
+.auth-help button,.login-status-actions button{border:0;background:transparent;color:#0f5b49;text-decoration:underline;text-underline-offset:3px;padding:3px 5px}
+.login-status-actions{display:flex;gap:8px;margin-top:12px}
+
+@media(max-width:1180px){
+  .topbar-inner{grid-template-columns:220px 1fr 285px}
+  .brand{width:205px}
+  .header-auth{font-size:12px}
+  .season-visual{height:430px;min-height:430px}
+  .season-visual>img{width:78%}
+  .season-copy-fix{width:38%;padding-left:28px}
+  .season-visual:before{width:43%}
+  html[data-season="autumn"] .season-visual:before,html[data-season="winter"] .season-visual:before{width:45%}
+}
+@media(max-width:900px){
+  .topbar-inner{grid-template-columns:190px 1fr 230px}
+  .brand{width:178px}
+  .main-nav{gap:14px}.main-nav button{font-size:12px}
+  .header-tools{gap:7px}.header-auth{gap:4px;font-size:11px}
+  .icon-btn{width:30px;height:30px}
+  .season-visual{height:390px;min-height:390px}
+  .season-visual>img{width:88%;right:-8%;clip-path:inset(0 0 0 31%)}
+  .season-visual:before{width:48%}
+  html[data-season="autumn"] .season-visual:before,html[data-season="winter"] .season-visual:before{width:50%}
+  .season-copy-fix{width:43%;padding-left:22px}
+  .season-copy-fix small{margin-top:17px}
+}
+@media(max-width:760px){
+  .topbar-inner{grid-template-columns:1fr auto;padding:6px 14px 7px}
+  .header-tools{grid-column:2;grid-row:1}
+  .header-auth{display:none}
+  .season-visual{height:350px;min-height:350px;aspect-ratio:auto}
+  .season-visual>img{width:108%;height:auto;left:auto;right:-30%;top:50%;transform:translateY(-50%);clip-path:inset(0 0 0 34%)}
+  .season-visual:before{width:55%}
+  html[data-season="autumn"] .season-visual:before,html[data-season="winter"] .season-visual:before{width:57%}
+  .season-copy-fix{width:50%;padding:24px 8px 24px 16px}
+  .season-copy-brand{font-size:18px}.season-copy-fix strong{font-size:22px}.season-copy-fix p{font-size:11px}.season-copy-fix small{display:none}
+  .auth-grid{grid-template-columns:1fr}.auth-grid-wide{grid-column:auto}
+}

@@ -167,6 +167,8 @@
     else if(type==='gift')renderGift();
     else if(type==='brand')renderBrand();
     else if(type==='search')renderSearch();
+    else if(type==='login')renderLogin();
+    else if(type==='signup')renderSignup();
     else if(type==='mypage')renderMyPage();
     else if(type==='cart')renderCart();
     else if(type==='terms')renderTerms();
@@ -214,7 +216,37 @@
     setTimeout(()=>fillSearch(''),0);
   }
   function fillSearch(q){const box=$('#searchResults');if(!box)return;q=(q||'').trim();const list=allFruitNames.filter(n=>!q||n.includes(q));box.innerHTML=list.map(n=>`<button type="button" data-fruit="${n}">${n}</button>`).join('')||'<span style="color:#81786e">검색 결과가 없습니다.</span>'}
-  function renderMyPage(){setModal('MY PAGE','마이페이지','주문조회 · 회원정보 · 상담내역을 연결할 자리입니다.',`<div class="mini-panel"><p>최종 디자인 베이스에서는 위치와 동작만 확정했습니다. 다음 기능 작업에서 기존 이룸3 로그인/주문조회 시스템을 이 창에 연결합니다.</p></div>`)}
+  function renderLogin(){
+    setModal('MEMBER LOGIN','로그인','이룸 회원으로 로그인하면 주문조회와 상담내역을 한곳에서 확인할 수 있습니다.',`
+      <form class="auth-form" id="loginForm">
+        <label><span>아이디 또는 이메일</span><input name="account" autocomplete="username" required placeholder="아이디 또는 이메일"></label>
+        <label><span>비밀번호</span><input name="password" type="password" autocomplete="current-password" required placeholder="비밀번호"></label>
+        <button class="primary-btn" type="submit">로그인</button>
+        <button class="kakao-login-btn" type="button" data-kakao-login>카카오 1초 로그인</button>
+        <p class="auth-help">아직 회원이 아니신가요? <button type="button" data-open-related="signup">회원가입</button></p>
+      </form>`);
+  }
+  function renderSignup(){
+    setModal('MEMBER JOIN','회원가입','기본 정보만 입력하면 이룸 회원으로 가입할 수 있습니다.',`
+      <form class="auth-form auth-form-signup" id="signupForm">
+        <div class="auth-grid">
+          <label><span>아이디</span><input name="username" minlength="4" maxlength="20" autocomplete="username" required placeholder="영문·숫자 4~20자"></label>
+          <label><span>이름</span><input name="name" autocomplete="name" required placeholder="이름"></label>
+          <label><span>비밀번호</span><input name="password" type="password" minlength="6" autocomplete="new-password" required placeholder="6자 이상"></label>
+          <label><span>이메일</span><input name="email" type="email" autocomplete="email" placeholder="선택 입력"></label>
+          <label class="auth-grid-wide"><span>휴대폰</span><input name="phone" autocomplete="tel" placeholder="선택 입력"></label>
+        </div>
+        <button class="primary-btn" type="submit">회원가입</button>
+        <button class="kakao-login-btn" type="button" data-kakao-login>카카오로 빠르게 가입·로그인</button>
+        <p class="auth-help">이미 회원이신가요? <button type="button" data-open-related="login">로그인</button></p>
+      </form>`);
+  }
+  function renderMyPage(){
+    setModal('MY PAGE','마이페이지','로그인 상태와 회원 정보를 확인할 수 있습니다.',`
+      <div class="login-status" id="myPageStatus"><b>로그인 상태를 확인하고 있습니다.</b><span>잠시만 기다려 주세요.</span></div>
+      <div class="modal-actions"><button class="secondary-btn" type="button" data-logout>로그아웃</button></div>`);
+    setTimeout(loadMyPageStatus,0);
+  }
   function renderCart(){setModal('CART','장바구니','고른 상품과 선물 구성을 확인하는 창입니다.',`<div class="mini-panel"><p>현재는 디자인 베이스 단계입니다. 다음 작업에서 기존 이룸3 장바구니 데이터를 그대로 연결합니다.</p></div>`)}
   function renderTerms(){
     setModal('TERMS','이용약관','이룸 fresh fruits의 상품 주문과 서비스 이용에 관한 기본 안내입니다.',`
@@ -289,8 +321,54 @@
   }
   async function loadMyPageStatus(){
     const box=$('#myPageStatus');if(!box)return;
-    try{const r=await fetch('/api/me',{cache:'no-store'});const d=await r.json();if(d.user){box.innerHTML=`<b>${d.user.name||d.user.username||'이룸 고객'}님, 반갑습니다.</b><span>${d.user.email||''}</span>`;const btn=$('[data-kakao-login]',overlay);if(btn)btn.style.display='none';return}}catch(e){}
-    box.innerHTML='<b>로그인이 필요합니다.</b><span>카카오 로그인 또는 기존 이룸 회원 로그인을 연결할 수 있습니다.</span>';
+    try{
+      const r=await fetch('/api/me',{cache:'no-store',credentials:'same-origin'});
+      const d=await r.json();
+      if(d.user){
+        box.innerHTML=`<b>${d.user.name||d.user.username||'이룸 고객'}님, 반갑습니다.</b><span>${d.user.email||d.user.username||''}</span>`;
+        return;
+      }
+    }catch(e){}
+    box.innerHTML='<b>로그인이 필요합니다.</b><span>상단의 로그인·회원가입 또는 카카오 로그인을 이용해 주세요.</span><div class="login-status-actions"><button type="button" data-open-related="login">로그인</button><button type="button" data-open-related="signup">회원가입</button></div>';
+  }
+  async function updateHeaderAuth(){
+    const wrap=$('.header-auth');if(!wrap)return;
+    try{
+      const r=await fetch('/api/me',{cache:'no-store',credentials:'same-origin'});
+      const d=await r.json();
+      if(d.user){
+        const nm=(d.user.name||d.user.username||'회원').replace(/[<>]/g,'');
+        wrap.innerHTML=`<button class="auth-link auth-user" type="button" data-modal="mypage">${nm}님</button><span aria-hidden="true">·</span><button class="auth-link" type="button" data-logout>로그아웃</button>`;
+        return;
+      }
+    }catch(e){}
+    wrap.innerHTML='<button class="auth-link" type="button" data-modal="login">로그인</button><span aria-hidden="true">·</span><button class="auth-link" type="button" data-modal="signup">회원가입</button>';
+  }
+  async function submitLogin(form){
+    const fd=new FormData(form);
+    const account=String(fd.get('account')||'').trim();
+    const password=String(fd.get('password')||'');
+    try{
+      const r=await fetch('/api/login',{method:'POST',headers:{'Content-Type':'application/json'},credentials:'same-origin',body:JSON.stringify({username:account,password})});
+      const d=await r.json();
+      if(!r.ok)throw new Error(d.error||'로그인에 실패했습니다.');
+      await updateHeaderAuth();closeModal();setTimeout(()=>openModal('mypage'),80);
+    }catch(e){alert(e.message||'로그인 서버 연결을 확인해 주세요.')}
+  }
+  async function submitSignup(form){
+    const fd=new FormData(form);
+    const payload=Object.fromEntries(fd.entries());
+    try{
+      const r=await fetch('/api/signup',{method:'POST',headers:{'Content-Type':'application/json'},credentials:'same-origin',body:JSON.stringify(payload)});
+      const d=await r.json();
+      if(!r.ok)throw new Error(d.error||'회원가입에 실패했습니다.');
+      await updateHeaderAuth();closeModal();setTimeout(()=>openModal('mypage'),80);
+    }catch(e){alert(e.message||'회원가입 서버 연결을 확인해 주세요.')}
+  }
+  async function logoutUser(){
+    try{await fetch('/api/logout',{method:'POST',credentials:'same-origin'})}catch(e){}
+    await updateHeaderAuth();
+    if(overlay.classList.contains('open')){closeModal();}
   }
   function openFruit(n){
     lastFocus=document.activeElement;
@@ -343,6 +421,7 @@
     try{await navigator.clipboard.writeText(location.href);alert('홈페이지 주소를 복사했습니다.')}catch(e){prompt('아래 주소를 복사해 주세요.',location.href)}
   }
   loadPublicConfig();
+  updateHeaderAuth();
   if('serviceWorker' in navigator && (location.protocol==='https:' || location.hostname==='localhost' || location.hostname==='127.0.0.1')){
     window.addEventListener('load',async()=>{
       try{
@@ -355,12 +434,13 @@
   }else if(location.protocol==='file:'){
     setInstallStatus('미리보기 파일 · 설치 확인은 localhost에서 가능');
   }
-  if(new URLSearchParams(location.search).get('kakao')==='success')setTimeout(()=>{history.replaceState({},'',location.pathname);openModal('mypage')},180);
+  if(new URLSearchParams(location.search).get('kakao')==='success')setTimeout(async()=>{history.replaceState({},'',location.pathname);await updateHeaderAuth();openModal('mypage')},180);
 
   root.addEventListener('click',e=>{
     const seasonBtn=e.target.closest('[data-public-season]'); if(seasonBtn){e.preventDefault();setSeasonMode(seasonBtn.dataset.publicSeason);return}
     const m=e.target.closest('[data-modal]'); if(m){e.preventDefault();openModal(m.dataset.modal);return}
     if(e.target.closest('[data-kakao-login]')){e.preventDefault();startKakaoLogin();return}
+    if(e.target.closest('[data-logout]')){e.preventDefault();logoutUser();return}
     if(e.target.closest('[data-install-app]')){e.preventDefault();installApp();return}
     const fruit=e.target.closest('[data-fruit]');
     if(fruit){e.preventDefault();openFruit(fruit.dataset.fruit);return}
@@ -377,10 +457,15 @@
     const f=e.target.closest('[data-fruit]'); if(f){showFruit(f.dataset.fruit);return}
     if(e.target.closest('[data-search]')){fillSearch($('#searchInput')?.value||'');return}
     if(e.target.closest('[data-kakao-login]')){startKakaoLogin();return}
+    if(e.target.closest('[data-logout]')){logoutUser();return}
     if(e.target.closest('[data-install-now]')){if(deferredInstallPrompt){installApp();}return}
     if(e.target.closest('[data-copy-home]')){navigator.clipboard?.writeText(location.origin).then(()=>alert('홈페이지 주소를 복사했습니다.')).catch(()=>prompt('주소를 복사해 주세요.',location.origin));return}
     const related=e.target.closest('[data-open-related]'); if(related){openModal(related.dataset.openRelated);return}
     const demo=e.target.closest('[data-demo]'); if(demo){const box=demo.closest('.modal-panel'); if(box){demo.textContent='다음 기능 작업에서 이룸3 시스템과 연결';demo.disabled=true;setTimeout(()=>{demo.disabled=false;demo.textContent=demo.dataset.demo==='curation'?'선택 내용 확인하기 →':'상담 연결 예정'},1700)} }
+  });
+  overlay.addEventListener('submit',e=>{
+    if(e.target.id==='loginForm'){e.preventDefault();submitLogin(e.target);return}
+    if(e.target.id==='signupForm'){e.preventDefault();submitSignup(e.target);return}
   });
   overlay.addEventListener('input',e=>{if(e.target.id==='searchInput')fillSearch(e.target.value)});
   document.addEventListener('keydown',e=>{if(e.key==='Escape'&&overlay.classList.contains('open'))closeModal()});
