@@ -133,6 +133,19 @@ hr{border:0;border-top:1px solid var(--line);margin:18px 0}
     <button class="card" data-view="products"><h3>＋ 상품 바로 등록</h3><div class="small">상품 등록 후 홈페이지에 즉시 적용</div></button>
     <button class="card" data-view="orders"><h3>🚚 주문·배송 관리</h3><div class="small">송장번호와 배송상태 빠르게 처리</div></button>
   </div>
+  <h2 class="section-title">계절 미리보기 바로가기</h2>
+  <div class="formcard" style="margin-bottom:18px">
+    <div class="row" style="justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap">
+      <div><b>메인 계절 확인</b><div class="small" style="margin-top:4px">자동 운영은 그대로 유지하면서 봄·여름·가을·겨울 화면을 새 창에서 즉시 확인합니다.</div></div>
+      <div class="row">
+        <button class="ghost" type="button" data-admin-season="auto">자동</button>
+        <button class="ghost" type="button" data-admin-season="spring">봄</button>
+        <button class="ghost" type="button" data-admin-season="summer">여름</button>
+        <button class="ghost" type="button" data-admin-season="autumn">가을</button>
+        <button class="ghost" type="button" data-admin-season="winter">겨울</button>
+      </div>
+    </div>
+  </div>
   <h2 class="section-title">관리자 설정 완료 체크</h2>
   <div class="grid3">
     <div class="card ok"><h3>① 상품</h3><div class="small" id="checkProduct">등록 상태 확인</div></div>
@@ -249,7 +262,7 @@ hr{border:0;border-top:1px solid var(--line);margin:18px 0}
 
     <div class="formcard">
       <h3>계절 미리보기</h3>
-      <div class="small">고객 화면에는 계절 선택 버튼을 노출하지 않고, 여기에서만 봄·여름·가을·겨울을 확인합니다. 실제 운영은 월별 자동 전환입니다.</div>
+      <div class="small">실제 운영은 월별 자동 전환입니다. 관리자 화면과 홈페이지 하단의 작은 SEASON VIEW에서 봄·여름·가을·겨울을 빠르게 확인할 수 있습니다.</div>
       <div class="row" style="margin-top:12px">
         <button class="ghost" type="button" data-admin-season="auto">자동</button>
         <button class="ghost" type="button" data-admin-season="spring">봄</button>

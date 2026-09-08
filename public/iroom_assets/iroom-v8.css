@@ -146,3 +146,86 @@
 .guide-chips{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:18px}
 .guide-chips b{display:flex;align-items:center;justify-content:center;min-height:40px;padding:8px;border:1px solid #e4d4c4;border-radius:14px;background:rgba(255,255,255,.72);font-size:11px;font-weight:500;color:#6e665e}
 @media(max-width:760px){.guide-chips{grid-template-columns:repeat(2,1fr)}}
+
+
+/* IROOM4 V7 — subtle seasonal color system + compact public season preview */
+.site-shell{
+  --season-wash:#fbf2e8;
+  --season-wash-2:#fffaf4;
+  --season-accent:#a56543;
+  --season-line:#ead7c6;
+  --season-card:#fffaf4;
+  --season-glow:rgba(206,132,82,.10);
+  --season-theme:#fbf2e8;
+}
+.site-shell[data-season="spring"]{
+  --season-wash:#fff5f3;--season-wash-2:#fffaf7;--season-accent:#a76e79;--season-line:#ecd7d4;--season-card:#fff9f7;--season-glow:rgba(229,151,166,.12);--season-theme:#fff5f3;
+}
+.site-shell[data-season="summer"]{
+  --season-wash:#f3f8f0;--season-wash-2:#fbfcf5;--season-accent:#5f8061;--season-line:#d9e4d4;--season-card:#fbfcf7;--season-glow:rgba(119,161,111,.11);--season-theme:#f3f8f0;
+}
+.site-shell[data-season="autumn"]{
+  --season-wash:#fbf1e6;--season-wash-2:#fff9f2;--season-accent:#a5603e;--season-line:#ead5c2;--season-card:#fff9f2;--season-glow:rgba(202,116,67,.13);--season-theme:#fbf1e6;
+}
+.site-shell[data-season="winter"]{
+  --season-wash:#f4f6f1;--season-wash-2:#fbfbf7;--season-accent:#657a6d;--season-line:#dbe2da;--season-card:#fbfcf8;--season-glow:rgba(109,137,118,.11);--season-theme:#f4f6f1;
+}
+.topbar{background:color-mix(in srgb,var(--season-wash-2) 84%,white 16%);border-bottom-color:var(--season-line)}
+.selection-section{
+  background:
+    radial-gradient(circle at 8% 9%,var(--season-glow),transparent 24%),
+    radial-gradient(circle at 91% 30%,var(--season-glow),transparent 23%),
+    linear-gradient(180deg,var(--season-wash-2) 0%,var(--season-wash) 100%);
+  border-top-color:var(--season-line);
+}
+.selection-card,.premium-fruit-card,.library-card,.review-card{border-color:var(--season-line)}
+.premium-fruits-block,.seasonal-fruits-block,.selection-curation,.selection-gift,.selection-guide{background:linear-gradient(145deg,rgba(255,255,255,.86),var(--season-card))}
+.premium-fruit-card,.seasonal-fruit-card,.library-card{background:linear-gradient(180deg,#fff,var(--season-card))}
+.selection-copy small,.eyebrow,.premium-fruits-block .premium-fruits-copy small,.modal-kicker{color:var(--season-accent)}
+.selection-copy em b{color:var(--season-accent)}
+.premium-banner{
+  border-color:var(--season-line);
+  background:
+    radial-gradient(circle at 78% 20%,var(--season-glow),transparent 28%),
+    linear-gradient(110deg,var(--season-wash),var(--season-wash-2));
+}
+.premium-art:before{background:linear-gradient(90deg,var(--season-wash),rgba(255,255,255,0))}
+.fruit-library{
+  background:
+    radial-gradient(circle at 96% 8%,var(--season-glow),transparent 20%),
+    linear-gradient(180deg,#fff,var(--season-wash-2));
+  border-top-color:var(--season-line);
+}
+.review-section{
+  background:
+    radial-gradient(circle at 2% 12%,var(--season-glow),transparent 22%),
+    linear-gradient(180deg,var(--season-wash-2),var(--season-wash));
+  border-top-color:var(--season-line);
+}
+.modal-panel{border-color:var(--season-line);background:linear-gradient(180deg,#fff,var(--season-wash-2))}
+.fruit-detail-badge{background:var(--season-wash);color:var(--season-accent)}
+
+.public-season-preview{
+  display:flex;align-items:center;justify-content:space-between;gap:24px;
+  padding:16px clamp(24px,7.2vw,116px);
+  background:linear-gradient(90deg,var(--season-wash),var(--season-wash-2));
+  border-top:1px solid var(--season-line);border-bottom:1px solid var(--season-line);
+}
+.public-season-preview__copy{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;min-width:0}
+.public-season-preview__copy>span{font:10px Georgia,serif;letter-spacing:.2em;color:var(--season-accent)}
+.public-season-preview__copy strong{font-family:"Noto Serif KR","Batang",serif;font-size:14px;font-weight:500;color:var(--ink);white-space:nowrap}
+.public-season-preview__copy strong b{font-weight:600;color:var(--season-accent)}
+.public-season-preview__copy small{font-size:10.5px;color:#8a7f75}
+.public-season-preview__buttons{display:flex;align-items:center;justify-content:flex-end;gap:7px;flex-wrap:wrap}
+.public-season-preview__buttons button{border:1px solid var(--season-line);background:rgba(255,255,255,.72);color:#315047;border-radius:999px;padding:7px 11px;font-size:11px;transition:.18s ease}
+.public-season-preview__buttons button:hover{transform:translateY(-1px);border-color:var(--season-accent)}
+.public-season-preview__buttons button.is-active{background:var(--season-accent);border-color:var(--season-accent);color:#fff}
+.footer-actions{grid-template-columns:repeat(4,1fr)}
+
+@media(max-width:760px){
+  .public-season-preview{align-items:flex-start;flex-direction:column;padding:14px 20px;gap:10px}
+  .public-season-preview__copy{gap:7px 10px}.public-season-preview__copy small{flex-basis:100%}
+  .public-season-preview__buttons{width:100%;justify-content:flex-start}
+  .footer-actions{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:430px){.public-season-preview__buttons button{padding:6px 10px}.footer-actions{grid-template-columns:1fr}}

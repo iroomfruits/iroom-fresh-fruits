@@ -88,11 +88,29 @@
   const params=new URLSearchParams(location.search);
   const forced=params.get('season');
   const valid=['spring','summer','autumn','winter'];
-  let current=valid.includes(forced)?forced:autoSeason();
+  let seasonMode=valid.includes(forced)?forced:'auto';
+  let current=seasonMode==='auto'?autoSeason():seasonMode;
   const artwork=$('#seasonArtwork'), visual=$('#seasonVisual');
+  const seasonThemeColors={spring:'#fff5f3',summer:'#f3f8f0',autumn:'#fbf1e6',winter:'#f4f6f1'};
+  function updateSeasonControls(){
+    const data=seasons[current];
+    root.dataset.season=current;
+    document.documentElement.dataset.season=current;
+    const metaTheme=document.querySelector('meta[name="theme-color"]'); if(metaTheme)metaTheme.setAttribute('content',seasonThemeColors[current]||'#fbf7f0');
+    $$('[data-season-status]').forEach(el=>el.textContent=`${data.label}${seasonMode==='auto'?' · 자동':''}`);
+    $$('[data-public-season]').forEach(btn=>btn.classList.toggle('is-active',btn.dataset.publicSeason===seasonMode));
+  }
+  function setSeasonMode(mode){
+    seasonMode=valid.includes(mode)?mode:'auto';
+    const u=new URL(location.href);
+    if(seasonMode==='auto')u.searchParams.delete('season'); else u.searchParams.set('season',seasonMode);
+    history.replaceState({},'',u.pathname+(u.searchParams.toString()?`?${u.searchParams.toString()}`:'')+u.hash);
+    applySeason(seasonMode==='auto'?autoSeason():seasonMode);
+  }
   function applySeason(key){
     current=key; visual.classList.add('is-changing');
     const data=seasons[key]; artwork.alt=`이룸 ${data.label} 계절 메인 시안`;
+    updateSeasonControls();
     const preload=new Image();
     preload.onload=()=>{artwork.src=preload.src; requestAnimationFrame(()=>visual.classList.remove('is-changing'))};
     preload.src=assets+data.art;
@@ -273,6 +291,7 @@
   if(new URLSearchParams(location.search).get('kakao')==='success')setTimeout(()=>{history.replaceState({},'',location.pathname);openModal('mypage')},180);
 
   root.addEventListener('click',e=>{
+    const seasonBtn=e.target.closest('[data-public-season]'); if(seasonBtn){e.preventDefault();setSeasonMode(seasonBtn.dataset.publicSeason);return}
     const m=e.target.closest('[data-modal]'); if(m){e.preventDefault();openModal(m.dataset.modal);return}
     if(e.target.closest('[data-kakao-login]')){e.preventDefault();startKakaoLogin();return}
     if(e.target.closest('[data-install-app]')){e.preventDefault();installApp();return}
