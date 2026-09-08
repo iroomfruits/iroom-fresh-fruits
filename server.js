@@ -767,6 +767,34 @@ app.post("/api/admin/ai/assist",
 );
 
 
+
+// Public-safe footer/review configuration for IROOM4 storefront.
+app.get("/api/site/footer-config",async(req,res)=>{
+  try{
+    const saved=await getSetting("iroom1_store",{});
+    const value=saved?.setting_value||saved||{};
+    const site=value.site||{};
+    const reviews=Array.isArray(value.reviews)?value.reviews.filter(x=>x&&x.show!==false).slice(0,3):[];
+    res.json({
+      ok:true,
+      site:{
+        siteName:String(site.siteName||"이룸 fresh fruits"),
+        address:String(site.address||"서울특별시 송파구 송이로15길 33, 상가동 B-103호"),
+        businessNo:String(site.businessNo||"775-97-00292"),
+        mailOrderNo:String(site.mailOrderNo||"제 2025-서울 송파 -1052호"),
+        bandUrl:String(site.bandUrl||"https://band.us/@iroomfruits"),
+        kakaoUrl:String(site.kakaoUrl||""),
+        kakaoJoinUrl:String(site.kakaoJoinUrl||""),
+        naverUrl:String(site.naverUrl||"")
+      },
+      reviews
+    });
+  }catch(e){
+    console.error("[FOOTER CONFIG]",e.message);
+    res.status(500).json({ok:false,error:"홈페이지 하단 정보를 불러오지 못했습니다."});
+  }
+});
+
 app.get("/api/site/homepage-config",async(req,res)=>{
   try{res.json({ok:true,config:await getSetting("homepage_config",{})})}
   catch(e){res.status(500).json({ok:false,error:"홈페이지 설정을 불러오지 못했습니다."})}
