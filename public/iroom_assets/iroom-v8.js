@@ -9,14 +9,17 @@
     mailOrderNo:'제 2025-서울 송파 -1052호',
     bandUrl:'https://band.us/@iroomfruits',
     kakaoUrl:'https://open.kakao.com/o/sd7wnrKi',
-    kakaoJoinUrl:''
+    kakaoJoinUrl:'',
+    kakaoEnabled:false,
+    kakaoJsKey:'',
+    kakaoRedirectUri:''
   };
   let publicSite={...PUBLIC_DEFAULT};
   const seasons={
-    spring:{label:'봄',art:'seasonal_clean/spring.jpg',fruits:['딸기','참외','체리','토마토']},
-    summer:{label:'여름',art:'seasonal_clean/summer.jpg',fruits:['수박','청포도','자두','천도복숭아']},
-    autumn:{label:'가을',art:'seasonal_clean/autumn.jpg',fruits:['사과','배','샤인머스캣','감']},
-    winter:{label:'겨울',art:'seasonal_clean/winter.jpg',fruits:['한라봉','딸기','키위','사과']}
+    spring:{label:'봄',art:'seasonal_clean/spring.jpg',curation:'feature_art/spring_curation.jpg',gift:'feature_art/spring_gift.jpg',premium:'feature_art/spring_premium.jpg',fruits:['딸기','참외','체리','토마토']},
+    summer:{label:'여름',art:'seasonal_clean/summer.jpg',curation:'feature_art/summer_curation.jpg',gift:'feature_art/summer_gift.jpg',premium:'feature_art/summer_premium.jpg',fruits:['수박','청포도','자두','천도복숭아']},
+    autumn:{label:'가을',art:'seasonal_clean/autumn.jpg',curation:'feature_art/autumn_curation.jpg',gift:'feature_art/autumn_gift.jpg',premium:'feature_art/autumn_premium.jpg',fruits:['사과','배','샤인머스캣','감']},
+    winter:{label:'겨울',art:'seasonal_clean/winter.jpg',curation:'feature_art/winter_curation.jpg',gift:'feature_art/winter_gift.jpg',premium:'feature_art/winter_premium.jpg',fruits:['한라봉','딸기','키위','사과']}
   };
   const fruitMeta={
     '딸기':['fruits/01_딸기_strawberry.png','향긋하고 산뜻한 단맛'],
@@ -47,16 +50,13 @@
     const preload=new Image();
     preload.onload=()=>{artwork.src=preload.src; requestAnimationFrame(()=>visual.classList.remove('is-changing'))};
     preload.src=assets+data.art;
-    $$('.season-buttons button').forEach(b=>b.classList.toggle('is-active',b.dataset.season===key || (b.dataset.season==='auto'&&!valid.includes(forced)&&key===autoSeason())));
+    const ca=$('#curationArt'),ga=$('#giftArt'),pa=$('#premiumArt');
+    if(ca)ca.src=assets+data.curation;if(ga)ga.src=assets+data.gift;if(pa)pa.src=assets+data.premium;
+    $$('[data-season-fruit]').forEach((img,i)=>{const n=data.fruits[i]||data.fruits[0],m=fruitMeta[n];if(m){img.src=assets+m[0];img.alt=n;}});
   }
   applySeason(current);
 
   $('[data-home]')?.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
-  $$('.season-buttons button').forEach(btn=>btn.addEventListener('click',()=>{
-    const key=btn.dataset.season; const url=new URL(location.href);
-    if(key==='auto') url.searchParams.delete('season'); else url.searchParams.set('season',key);
-    location.href=url.pathname+(url.search||'');
-  }));
 
   const overlay=$('#modalBackdrop'), kicker=$('#modalKicker'), title=$('#modalTitle'), intro=$('#modalIntro'), body=$('#modalBody');
   let lastFocus=null;
@@ -73,6 +73,7 @@
     else if(type==='terms')renderTerms();
     else if(type==='privacy')renderPrivacy();
     else if(type==='guide')renderGuide();
+    else if(type==='install')renderInstall();
     overlay.classList.add('open');overlay.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';
     setTimeout(()=>$('button,select,input',overlay)?.focus(),20);
   }
@@ -137,6 +138,37 @@
         <article class="story-card"><b>04 · CONTACT</b><h3>BAND · 카카오</h3><p>하단 빠른 연결 버튼을 이용해 소식과 상담 채널로 이동할 수 있습니다.</p></article>
       </div>`);
   }
+  let deferredInstallPrompt=null;
+  window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredInstallPrompt=e;});
+  const isIOS=()=>/iphone|ipad|ipod/i.test(navigator.userAgent);
+  function renderInstall(){
+    const ios=isIOS();
+    setModal('INSTALL','이룸을 더 빠르게 여는 방법','앱스토어에서 별도 앱을 찾지 않아도, 이 홈페이지를 앱처럼 설치해 사용할 수 있습니다.',`
+      <div class="install-note">
+        <div class="install-step"><b>Android · Chrome</b>아래 설치 버튼이 지원되면 바로 설치됩니다. 지원되지 않으면 브라우저 메뉴의 ‘앱 설치’ 또는 ‘홈 화면에 추가’를 이용하세요.</div>
+        <div class="install-step"><b>iPhone · Safari</b>Safari의 공유 버튼을 누른 뒤 ‘홈 화면에 추가’를 선택하세요. iPhone은 웹페이지가 임의로 설치창을 강제로 띄울 수 없습니다.</div>
+        <div class="install-step"><b>Windows · Mac</b>Chrome/Edge 주소창의 설치 아이콘 또는 브라우저 메뉴의 ‘앱 설치’를 이용하면 바탕화면/시작 메뉴에서 바로 열 수 있습니다.</div>
+      </div>
+      <div class="modal-actions"><button class="primary-btn" type="button" data-install-now>${ios?'설치 방법 확인':'지원되면 지금 설치'}</button><button class="secondary-btn" type="button" data-copy-home>홈페이지 주소 복사</button></div>`);
+  }
+  async function installApp(){
+    if(deferredInstallPrompt){deferredInstallPrompt.prompt();const r=await deferredInstallPrompt.userChoice.catch(()=>null);deferredInstallPrompt=null;return r}
+    openModal('install');
+  }
+  async function ensureKakaoSdk(){
+    if(window.Kakao)return true;
+    return new Promise(resolve=>{const s=document.createElement('script');s.src='https://t1.kakaocdn.net/kakao_js_sdk/2.8.3/kakao.min.js';s.onload=()=>resolve(true);s.onerror=()=>resolve(false);document.head.appendChild(s)});
+  }
+  async function startKakaoLogin(){
+    if(!publicSite.kakaoEnabled||!publicSite.kakaoJsKey){alert('카카오 로그인은 관리자 설정에서 JavaScript 키를 등록하고 사용을 켜야 합니다.');return}
+    const ok=await ensureKakaoSdk();if(!ok||!window.Kakao){alert('카카오 로그인 모듈을 불러오지 못했습니다.');return}
+    try{if(!Kakao.isInitialized())Kakao.init(publicSite.kakaoJsKey);Kakao.Auth.authorize({redirectUri:publicSite.kakaoRedirectUri||`${location.origin}/api/auth/kakao/callback`})}catch(e){alert('카카오 로그인 설정을 확인해 주세요.')}
+  }
+  async function loadMyPageStatus(){
+    const box=$('#myPageStatus');if(!box)return;
+    try{const r=await fetch('/api/me',{cache:'no-store'});const d=await r.json();if(d.user){box.innerHTML=`<b>${d.user.name||d.user.username||'이룸 고객'}님, 반갑습니다.</b><span>${d.user.email||''}</span>`;const btn=$('[data-kakao-login]',overlay);if(btn)btn.style.display='none';return}}catch(e){}
+    box.innerHTML='<b>로그인이 필요합니다.</b><span>카카오 로그인 또는 기존 이룸 회원 로그인을 연결할 수 있습니다.</span>';
+  }
   function showFruit(n){const m=fruitMeta[n]||['','오늘 상태가 좋은 과일'];setModal('FRUIT',n,m[1],`<div class="fruit-card" style="max-width:420px"><img src="${assets+m[0]}" alt="${n}"><span><b>${n}</b><small>상품 상세 연결은 다음 기능 작업에서 이룸3 상품 데이터와 연결합니다.</small></span></div>`)}
 
   function applyPublicConfig(data={}){
@@ -163,22 +195,28 @@
     try{await navigator.clipboard.writeText(location.href);alert('홈페이지 주소를 복사했습니다.')}catch(e){prompt('아래 주소를 복사해 주세요.',location.href)}
   }
   loadPublicConfig();
+  if('serviceWorker' in navigator && location.protocol.startsWith('http'))window.addEventListener('load',()=>navigator.serviceWorker.register('/sw.js').catch(()=>{}));
+  if(new URLSearchParams(location.search).get('kakao')==='success')setTimeout(()=>{history.replaceState({},'',location.pathname);openModal('mypage')},180);
 
   root.addEventListener('click',e=>{
     const m=e.target.closest('[data-modal]'); if(m){e.preventDefault();openModal(m.dataset.modal);return}
+    if(e.target.closest('[data-kakao-login]')){e.preventDefault();startKakaoLogin();return}
+    if(e.target.closest('[data-install-app]')){e.preventDefault();installApp();return}
     const social=e.target.closest('[data-social]');
     if(social){
       e.preventDefault();
       const kind=social.dataset.social;
       if(kind==='share'){shareSite();return}
       if(kind==='band'){if(!openExternal(publicSite.bandUrl))alert('관리자 설정에서 BAND 주소를 입력해 주세요.');return}
-      if(kind==='kakao'){const u=publicSite.kakaoJoinUrl||publicSite.kakaoUrl;if(!openExternal(u))alert('관리자 설정에서 카카오 1초가입 주소를 입력해 주세요.');return}
     }
   });
   overlay.addEventListener('click',e=>{
     if(e.target===overlay||e.target.closest('[data-close]')){closeModal();return}
     const f=e.target.closest('[data-fruit]'); if(f){showFruit(f.dataset.fruit);return}
     if(e.target.closest('[data-search]')){fillSearch($('#searchInput')?.value||'');return}
+    if(e.target.closest('[data-kakao-login]')){startKakaoLogin();return}
+    if(e.target.closest('[data-install-now]')){if(deferredInstallPrompt){installApp();}return}
+    if(e.target.closest('[data-copy-home]')){navigator.clipboard?.writeText(location.origin).then(()=>alert('홈페이지 주소를 복사했습니다.')).catch(()=>prompt('주소를 복사해 주세요.',location.origin));return}
     const demo=e.target.closest('[data-demo]'); if(demo){const box=demo.closest('.modal-panel'); if(box){demo.textContent='다음 기능 작업에서 이룸3 시스템과 연결';demo.disabled=true;setTimeout(()=>{demo.disabled=false;demo.textContent=demo.dataset.demo==='curation'?'선택 내용 확인하기 →':'상담 연결 예정'},1700)} }
   });
   overlay.addEventListener('input',e=>{if(e.target.id==='searchInput')fillSearch(e.target.value)});

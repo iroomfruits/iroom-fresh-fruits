@@ -233,7 +233,9 @@ hr{border:0;border-top:1px solid var(--line);margin:18px 0}
       <h3>BAND · 상담</h3>
       <div class="field"><label>BAND 주소</label><input id="bandUrl"></div>
       <div class="field"><label>카카오 상담 주소</label><input id="kakaoUrl"></div>
-      <div class="field"><label>카카오 1초가입 주소</label><input id="kakaoJoinUrl" placeholder="카카오 로그인/가입 연결 URL"></div>
+      <div class="field"><label>카카오 JavaScript 키</label><input id="kakaoJsKey" placeholder="Kakao Developers의 JavaScript 키"></div>
+      <div class="switch"><input id="kakaoEnabled" type="checkbox"><span>카카오 로그인 사용</span></div>
+      <div class="small" style="margin-top:8px">서버의 Render 환경변수에 <b>KAKAO_REST_API_KEY</b>와 <b>PUBLIC_BASE_URL</b>을 설정하고, 카카오 Developers에 <code>/api/auth/kakao/callback</code> 리다이렉트 URI를 등록해야 실제 로그인이 완료됩니다.</div>
       <div class="field"><label>네이버 스마트스토어/채널</label><input id="naverUrl"></div>
     </div>
     <div class="formcard">
@@ -244,6 +246,18 @@ hr{border:0;border-top:1px solid var(--line);margin:18px 0}
       <div class="switch"><input id="stockNotify" type="checkbox"><span>저재고 알림</span></div>
     </div>
   </div>
+
+    <div class="formcard">
+      <h3>계절 미리보기</h3>
+      <div class="small">고객 화면에는 계절 선택 버튼을 노출하지 않고, 여기에서만 봄·여름·가을·겨울을 확인합니다. 실제 운영은 월별 자동 전환입니다.</div>
+      <div class="row" style="margin-top:12px">
+        <button class="ghost" type="button" data-admin-season="auto">자동</button>
+        <button class="ghost" type="button" data-admin-season="spring">봄</button>
+        <button class="ghost" type="button" data-admin-season="summer">여름</button>
+        <button class="ghost" type="button" data-admin-season="autumn">가을</button>
+        <button class="ghost" type="button" data-admin-season="winter">겨울</button>
+      </div>
+    </div>
 
     <div class="formcard">
       <h3>관리자 보안</h3>
@@ -368,7 +382,7 @@ let state={
   notice:{text:"고급 국산 종합과일 입고되었습니다.",active:true},
   popup:{title:"",content:"",link:"",active:false}
  },
- site:{siteName:"이룸 fresh fruits",phone:"010-6423-4562",email:"",address:"서울특별시 송파구 송이로15길 33, 상가동 B-103호",businessNo:"775-97-00292",mailOrderNo:"제 2025-서울 송파 -1052호",bankName:"",bankAccount:"",bankOwner:"",tossClientKey:"",tossSecretKey:"",tossEnabled:false,bandUrl:"https://band.us/@iroomfruits",kakaoUrl:"https://open.kakao.com/o/sd7wnrKi",kakaoJoinUrl:"",naverUrl:"",shippingFee:4000,freeShippingFrom:50000,emailNotify:true,stockNotify:true},
+ site:{siteName:"이룸 fresh fruits",phone:"010-6423-4562",email:"",address:"서울특별시 송파구 송이로15길 33, 상가동 B-103호",businessNo:"775-97-00292",mailOrderNo:"제 2025-서울 송파 -1052호",bankName:"",bankAccount:"",bankOwner:"",tossClientKey:"",tossSecretKey:"",tossEnabled:false,bandUrl:"https://band.us/@iroomfruits",kakaoUrl:"https://open.kakao.com/o/sd7wnrKi",kakaoJoinUrl:"",kakaoEnabled:false,kakaoJsKey:"",naverUrl:"",shippingFee:4000,freeShippingFrom:50000,emailNotify:true,stockNotify:true},
  event:{title:"",period:"",desc:"",active:false},coupon:{name:"",discount:0,code:"",expire:""},
  logs:[]
 };
@@ -409,7 +423,7 @@ async function load(){
     if(!state.site.address)state.site.address="서울특별시 송파구 송이로15길 33, 상가동 B-103호";
     if(!state.site.businessNo)state.site.businessNo="775-97-00292";
     if(!state.site.mailOrderNo)state.site.mailOrderNo="제 2025-서울 송파 -1052호";
-    if(typeof state.site.kakaoJoinUrl!=="string")state.site.kakaoJoinUrl="";
+    if(typeof state.site.kakaoJoinUrl!=="string")state.site.kakaoJoinUrl="";if(typeof state.site.kakaoEnabled!=="boolean")state.site.kakaoEnabled=false;if(typeof state.site.kakaoJsKey!=="string")state.site.kakaoJsKey="";
     $("#saveState").textContent="서버 연결됨";
     $("#saveState").style.background="#eaf5ee";
   }catch(e){
@@ -418,7 +432,7 @@ async function load(){
     if(!state.site.address)state.site.address="서울특별시 송파구 송이로15길 33, 상가동 B-103호";
     if(!state.site.businessNo)state.site.businessNo="775-97-00292";
     if(!state.site.mailOrderNo)state.site.mailOrderNo="제 2025-서울 송파 -1052호";
-    if(typeof state.site.kakaoJoinUrl!=="string")state.site.kakaoJoinUrl="";
+    if(typeof state.site.kakaoJoinUrl!=="string")state.site.kakaoJoinUrl="";if(typeof state.site.kakaoEnabled!=="boolean")state.site.kakaoEnabled=false;if(typeof state.site.kakaoJsKey!=="string")state.site.kakaoJsKey="";
     $("#saveState").textContent="서버 연결 확인 필요";
     $("#saveState").style.background="#fff3df";
   }
@@ -477,8 +491,8 @@ function renderLogs(){$("#logList").innerHTML=(state.logs||[]).map(x=>`<div styl
 function fillBanner(){const b=state.banner||{};$("#hero1Image").value=b.hero1?.image||"";$("#hero1Title").value=b.hero1?.title||"";$("#hero1Desc").value=b.hero1?.desc||"";$("#hero2Image").value=b.hero2?.image||"";$("#hero2Title").value=b.hero2?.title||"";$("#hero2Desc").value=b.hero2?.desc||"";$("#hero1Preview").src=b.hero1?.image||"";$("#hero2Preview").src=b.hero2?.image||"";$("#noticeText").value=b.notice?.text||"";$("#noticeActive").checked=!!b.notice?.active;$("#popupTitle").value=b.popup?.title||"";$("#popupContent").value=b.popup?.content||"";$("#popupLink").value=b.popup?.link||"";$("#popupActive").checked=!!b.popup?.active}
 ["hero1Image","hero2Image"].forEach((id,i)=>$("#"+id).oninput=e=>$("#hero"+(i+1)+"Preview").src=e.target.value);
 function collectBanner(){state.banner={hero1:{image:$("#hero1Image").value,title:$("#hero1Title").value,desc:$("#hero1Desc").value},hero2:{image:$("#hero2Image").value,title:$("#hero2Title").value,desc:$("#hero2Desc").value},notice:{text:$("#noticeText").value,active:$("#noticeActive").checked},popup:{title:$("#popupTitle").value,content:$("#popupContent").value,link:$("#popupLink").value,active:$("#popupActive").checked}}}
-function fillSite(){const s=state.site||{};const map={siteName:"siteName",phone:"sitePhone",email:"siteEmail",address:"siteAddress",businessNo:"businessNo",mailOrderNo:"mailOrderNo",bankName:"bankName",bankAccount:"bankAccount",bankOwner:"bankOwner",tossClientKey:"tossClientKey",tossSecretKey:"tossSecretKey",bandUrl:"bandUrl",kakaoUrl:"kakaoUrl",kakaoJoinUrl:"kakaoJoinUrl",naverUrl:"naverUrl",shippingFee:"shippingFee",freeShippingFrom:"freeShippingFrom"};for(const [k,id] of Object.entries(map))$("#"+id).value=s[k]??"";$("#tossEnabled").checked=!!s.tossEnabled;$("#emailNotify").checked=!!s.emailNotify;$("#stockNotify").checked=!!s.stockNotify}
-function collectSite(){state.site={siteName:$("#siteName").value,phone:$("#sitePhone").value,email:$("#siteEmail").value,address:$("#siteAddress").value,businessNo:$("#businessNo").value,mailOrderNo:$("#mailOrderNo").value,bankName:$("#bankName").value,bankAccount:$("#bankAccount").value,bankOwner:$("#bankOwner").value,tossClientKey:$("#tossClientKey").value,tossSecretKey:$("#tossSecretKey").value,tossEnabled:$("#tossEnabled").checked,bandUrl:$("#bandUrl").value,kakaoUrl:$("#kakaoUrl").value,kakaoJoinUrl:$("#kakaoJoinUrl").value,naverUrl:$("#naverUrl").value,shippingFee:Number($("#shippingFee").value),freeShippingFrom:Number($("#freeShippingFrom").value),emailNotify:$("#emailNotify").checked,stockNotify:$("#stockNotify").checked}}
+function fillSite(){const s=state.site||{};const map={siteName:"siteName",phone:"sitePhone",email:"siteEmail",address:"siteAddress",businessNo:"businessNo",mailOrderNo:"mailOrderNo",bankName:"bankName",bankAccount:"bankAccount",bankOwner:"bankOwner",tossClientKey:"tossClientKey",tossSecretKey:"tossSecretKey",bandUrl:"bandUrl",kakaoUrl:"kakaoUrl",kakaoJsKey:"kakaoJsKey",naverUrl:"naverUrl",shippingFee:"shippingFee",freeShippingFrom:"freeShippingFrom"};for(const [k,id] of Object.entries(map))$("#"+id).value=s[k]??"";$("#tossEnabled").checked=!!s.tossEnabled;$("#kakaoEnabled").checked=!!s.kakaoEnabled;$("#emailNotify").checked=!!s.emailNotify;$("#stockNotify").checked=!!s.stockNotify}
+function collectSite(){state.site={siteName:$("#siteName").value,phone:$("#sitePhone").value,email:$("#siteEmail").value,address:$("#siteAddress").value,businessNo:$("#businessNo").value,mailOrderNo:$("#mailOrderNo").value,bankName:$("#bankName").value,bankAccount:$("#bankAccount").value,bankOwner:$("#bankOwner").value,tossClientKey:$("#tossClientKey").value,tossSecretKey:$("#tossSecretKey").value,tossEnabled:$("#tossEnabled").checked,bandUrl:$("#bandUrl").value,kakaoUrl:$("#kakaoUrl").value,kakaoJoinUrl:"",kakaoEnabled:$("#kakaoEnabled").checked,kakaoJsKey:$("#kakaoJsKey").value,naverUrl:$("#naverUrl").value,shippingFee:Number($("#shippingFee").value),freeShippingFrom:Number($("#freeShippingFrom").value),emailNotify:$("#emailNotify").checked,stockNotify:$("#stockNotify").checked}}
 const oldPersist=persist;persist=async function(){if($("#view-banners").classList.contains("active"))collectBanner();if($("#view-site").classList.contains("active"))collectSite();state.event={title:$("#eventTitle").value||state.event.title,period:$("#eventPeriod").value||state.event.period,desc:$("#eventDesc").value||state.event.desc,active:$("#eventActive").checked};state.coupon={name:$("#couponName").value||state.coupon.name,discount:Number($("#couponDiscount").value||state.coupon.discount||0),code:$("#couponCode").value||state.coupon.code,expire:$("#couponExpire").value||state.coupon.expire};return oldPersist()};
 
 
@@ -497,6 +511,8 @@ $("#changeAdminPasswordBtn")?.addEventListener("click",async()=>{
 });
 $("#aiBtn").onclick=async()=>{const p=$("#aiPrompt").value.trim();if(!p)return;$("#aiResult").textContent="작성 중...";try{const r=await fetch("/api/ai",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({prompt:p})});if(r.ok){const d=await r.json();$("#aiResult").textContent=d.text||d.result||JSON.stringify(d);return}}catch(e){}$("#aiResult").textContent="추천 문구: “산지의 신선함을 그대로, 소중한 분께 품격 있게 전하세요. 이룸 fresh fruits가 제철 과일을 엄선해 정성껏 준비합니다.”"};
 
+
+$$('[data-admin-season]').forEach(btn=>btn.addEventListener('click',()=>{const k=btn.dataset.adminSeason;const u=new URL('./index.html',location.href);if(k!=='auto')u.searchParams.set('season',k);window.open(u.href,'_blank','noopener');}));
 
 document.getElementById("adminLoginBtn").addEventListener("click",verifyAdminPassword);
 document.getElementById("adminPasswordInput").addEventListener("keydown",e=>{if(e.key==="Enter")verifyAdminPassword()});

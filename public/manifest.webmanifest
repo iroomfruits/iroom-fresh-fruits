@@ -1,1 +1,24 @@
-{"name":"이룸 fresh fruits","short_name":"이룸","start_url":"/","display":"standalone","background_color":"#fbf7ee","theme_color":"#fbf7ee","icons":[{"src":"/assets/iroom-official-logo.png","sizes":"any","type":"image/png"}]}
+{
+  "name": "이룸 fresh fruits",
+  "short_name": "이룸",
+  "description": "좋은 과일로 마음을 전하는 이룸 fresh fruits",
+  "start_url": "/?source=pwa",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#fbf7f0",
+  "theme_color": "#12362f",
+  "icons": [
+    {
+      "src": "/iroom_assets/app-icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/iroom_assets/app-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
