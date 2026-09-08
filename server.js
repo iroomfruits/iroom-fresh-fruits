@@ -15,6 +15,9 @@ if(!ADMIN_PASSWORD) console.warn("[SECURITY] ADMIN_PASSWORD is not configured. A
 const BASE_URL = process.env.PUBLIC_BASE_URL || `http://localhost:${PORT}`;
 const OPENAI_API_KEY = String(process.env.OPENAI_API_KEY || "").trim();
 const OPENAI_MODEL = String(process.env.OPENAI_MODEL || "gpt-5.6-luna").trim();
+const KAKAO_REST_API_KEY = String(process.env.KAKAO_REST_API_KEY || "").trim();
+const KAKAO_CLIENT_SECRET = String(process.env.KAKAO_CLIENT_SECRET || "").trim();
+const KAKAO_REDIRECT_URI = String(process.env.KAKAO_REDIRECT_URI || `${BASE_URL}/api/auth/kakao/callback`).trim();
 
 if (!process.env.DATABASE_URL) {
   console.error("DATABASE_URL is required. Create a PostgreSQL database and set DATABASE_URL.");
@@ -419,6 +422,9 @@ async function initDb(){
   await pool.query(`ALTER TABLE users ADD COLUMN IF NOT EXISTS address1 TEXT DEFAULT ''`);
   await pool.query(`ALTER TABLE users ADD COLUMN IF NOT EXISTS address2 TEXT DEFAULT ''`);
   await pool.query(`ALTER TABLE users ADD COLUMN IF NOT EXISTS last_login_at TIMESTAMPTZ`);
+  await pool.query(`ALTER TABLE users ADD COLUMN IF NOT EXISTS kakao_id TEXT`);
+  await pool.query(`ALTER TABLE users ADD COLUMN IF NOT EXISTS auth_provider TEXT DEFAULT 'local'`);
+  await pool.query(`CREATE UNIQUE INDEX IF NOT EXISTS idx_users_kakao_id_unique ON users(kakao_id) WHERE kakao_id IS NOT NULL`);
   await pool.query(`ALTER TABLE users ALTER COLUMN email DROP NOT NULL`).catch(()=>{});
   await pool.query(`CREATE UNIQUE INDEX IF NOT EXISTS idx_users_username_unique ON users(username) WHERE username IS NOT NULL`);
 
@@ -523,6 +529,41 @@ app.get("/api/me", async(req,res)=>{
   if(t.admin) return res.json({admin:true});
   const r=await pool.query("SELECT id,username,email,name,phone,postcode,address1,address2,created_at FROM users WHERE id=$1",[t.userId]);
   res.json({user:r.rows[0]||null});
+});
+
+
+// Kakao Login: JavaScript SDK obtains an authorization code, server exchanges it for tokens.
+app.get("/api/auth/kakao/callback", simpleRateLimit({windowMs:10*60*1000,max:20,keyPrefix:"kakao"}), async(req,res)=>{
+  const code=String(req.query.code||"").trim();
+  const error=String(req.query.error||"").trim();
+  if(error||!code) return res.redirect("/?kakao=error");
+  if(!KAKAO_REST_API_KEY) return res.status(503).send("KAKAO_REST_API_KEY가 설정되지 않았습니다.");
+  try{
+    const form=new URLSearchParams({grant_type:"authorization_code",client_id:KAKAO_REST_API_KEY,redirect_uri:KAKAO_REDIRECT_URI,code});
+    if(KAKAO_CLIENT_SECRET)form.set("client_secret",KAKAO_CLIENT_SECRET);
+    const tr=await fetch("https://kauth.kakao.com/oauth/token",{method:"POST",headers:{"Content-Type":"application/x-www-form-urlencoded;charset=utf-8"},body:form.toString()});
+    const td=await tr.json().catch(()=>({}));
+    if(!tr.ok||!td.access_token)throw new Error(td.error_description||td.error||`TOKEN_${tr.status}`);
+    const ur=await fetch("https://kapi.kakao.com/v2/user/me",{headers:{Authorization:`Bearer ${td.access_token}`,"Content-Type":"application/x-www-form-urlencoded;charset=utf-8"}});
+    const ud=await ur.json().catch(()=>({}));
+    if(!ur.ok||!ud.id)throw new Error(ud.msg||`USER_${ur.status}`);
+    const kakaoId=String(ud.id),account=ud.kakao_account||{},profile=account.profile||{};
+    const email=cleanEmail(account.email||"");
+    const name=cleanText(profile.nickname||`카카오회원${kakaoId.slice(-4)}`,60);
+    let user=null;
+    let q=await pool.query("SELECT * FROM users WHERE kakao_id=$1 LIMIT 1",[kakaoId]);user=q.rows[0];
+    if(!user&&email){q=await pool.query("SELECT * FROM users WHERE LOWER(COALESCE(email,''))=$1 LIMIT 1",[email]);user=q.rows[0];}
+    if(user){
+      const r=await pool.query("UPDATE users SET kakao_id=$1,auth_provider='kakao',last_login_at=NOW(),name=CASE WHEN name='' THEN $2 ELSE name END WHERE id=$3 RETURNING *",[kakaoId,name,user.id]);user=r.rows[0];
+    }else{
+      const username=`kakao_${kakaoId}`.slice(0,20);
+      const hash=await bcrypt.hash(crypto.randomBytes(32).toString("hex"),12);
+      const r=await pool.query("INSERT INTO users(username,email,password_hash,name,kakao_id,auth_provider,last_login_at) VALUES($1,$2,$3,$4,$5,'kakao',NOW()) RETURNING *",[username,email||null,hash,name,kakaoId]);user=r.rows[0];
+    }
+    setAuthCookie(res,token({userId:user.id,username:user.username,email:user.email,name:user.name}));
+    logSecurity("kakao_login_success",user.username||kakaoId,req).catch(()=>{});
+    res.redirect("/?kakao=success");
+  }catch(e){console.error("[KAKAO LOGIN]",e.message);logSecurity("kakao_login_failed","kakao",req,e.message).catch(()=>{});res.redirect("/?kakao=error")}
 });
 
 // Products
@@ -785,6 +826,9 @@ app.get("/api/site/footer-config",async(req,res)=>{
         bandUrl:String(site.bandUrl||"https://band.us/@iroomfruits"),
         kakaoUrl:String(site.kakaoUrl||""),
         kakaoJoinUrl:String(site.kakaoJoinUrl||""),
+        kakaoEnabled:Boolean(site.kakaoEnabled),
+        kakaoJsKey:String(site.kakaoJsKey||process.env.KAKAO_JAVASCRIPT_KEY||""),
+        kakaoRedirectUri:KAKAO_REDIRECT_URI,
         naverUrl:String(site.naverUrl||"")
       },
       reviews
@@ -972,7 +1016,7 @@ app.get("/healthz",(req,res)=>res.json({ok:true,time:new Date().toISOString()}))
 
 // static site
 app.use(express.static(path.join(__dirname,"public"),{
-  etag:true,maxAge:"5m",setHeaders(res,file){if(file.endsWith("service-worker.js")||file.endsWith("manifest.webmanifest"))res.setHeader("Cache-Control","no-cache");}
+  etag:true,maxAge:"5m",setHeaders(res,file){if(file.endsWith("sw.js")||file.endsWith("service-worker.js")||file.endsWith("manifest.webmanifest"))res.setHeader("Cache-Control","no-cache");}
 }));
 app.get("*",(req,res)=>res.sendFile(path.join(__dirname,"public","index.html")));
 
