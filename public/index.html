@@ -49,35 +49,76 @@
       </div>
     </section>
 
-    <section class="feature-stack" aria-labelledby="featureStackTitle">
-      <div class="feature-heading">
-        <span class="eyebrow">IROOM SELECTION</span>
-        <h2 id="featureStackTitle">과일을 고르는 세 가지 방법</h2>
-        <p>제철의 맛, 나에게 맞는 구성, 마음을 전하는 선물까지 한 화면에서 간결하게 이어집니다.</p>
+    <section class="selection-section" aria-labelledby="selectionTitle">
+      <div class="selection-heading">
+        <div>
+          <span class="eyebrow">IROOM SELECTION</span>
+          <h2 id="selectionTitle">이룸의 특별한 과일을 만나는 3가지 방법</h2>
+        </div>
+        <p>계절의 맛은 풍성하게, 맞춤과 선물은 목적이 한눈에 보이도록 부드럽게 정리했습니다.</p>
       </div>
 
-      <button class="feature-row feature-seasonal" type="button" data-modal="seasonal">
-        <span class="feature-copy"><small>01 · SEASONAL PICKS</small><strong>제철 과일</strong><em>지금 가장 좋은 계절의 과일을 골라보세요.</em><i>추천 과일 보기 →</i></span>
-        <span class="feature-season-fruits" aria-hidden="true">
-          <img data-season-fruit="0" alt=""><img data-season-fruit="1" alt=""><img data-season-fruit="2" alt="">
+      <div class="selection-grid">
+        <button class="selection-card selection-seasonal" type="button" data-modal="seasonal">
+          <span class="selection-copy">
+            <small>01 · SEASONAL PICKS</small>
+            <strong>제철 과일</strong>
+            <em><b data-season-label>가을</b>, 지금 가장 맛있는 과일 4가지를 만나보세요.</em>
+            <i>추천 과일 보기 <span>→</span></i>
+          </span>
+          <span class="seasonal-quartet" aria-hidden="true">
+            <img data-season-fruit="0" alt=""><img data-season-fruit="1" alt=""><img data-season-fruit="2" alt=""><img data-season-fruit="3" alt="">
+          </span>
+        </button>
+
+        <button class="selection-card selection-curation" type="button" data-modal="curation">
+          <span class="selection-copy">
+            <small>02 · FRUIT CURATION</small>
+            <strong>맞춤 과일</strong>
+            <em>예산 · 용도 · 취향에 맞춰 그날 상태 좋은 과일로 구성합니다.</em>
+            <i>맞춤 추천 받기 <span>→</span></i>
+          </span>
+          <span class="selection-art"><img id="curationArt" src="" alt="맞춤 과일 큐레이션"></span>
+        </button>
+
+        <button class="selection-card selection-gift" type="button" data-modal="gift">
+          <span class="selection-copy">
+            <small>03 · GIFT SELECTION</small>
+            <strong>선물 제안</strong>
+            <em>감사 · 가족 · 기업 선물까지 받는 분의 마음에 맞춰 제안합니다.</em>
+            <i>선물 구성 보기 <span>→</span></i>
+          </span>
+          <span class="selection-art"><img id="giftArt" src="" alt="프리미엄 과일 선물"></span>
+        </button>
+      </div>
+
+      <button class="premium-banner" type="button" data-modal="gift">
+        <span class="premium-copy">
+          <small>PREMIUM GIFT SELECTION</small>
+          <strong>좋은 과일로 마음을 전합니다.</strong>
+          <em>SWEET · HEALTHY · HAPPY</em>
+          <i>선물 상담 <span>→</span></i>
         </span>
+        <span class="premium-art"><img id="premiumArt" src="" alt="이룸 프리미엄 과일 선물"></span>
       </button>
+    </section>
 
-      <button class="feature-row feature-curation" type="button" data-modal="curation">
-        <span class="feature-art-frame"><img id="curationArt" src="" alt="맞춤 과일 큐레이션 이미지"></span>
-        <span class="feature-copy"><small>02 · FRUIT CURATION</small><strong>맞춤 과일</strong><em>예산 · 용도 · 취향에 맞춰 오늘 좋은 과일을 골라드립니다.</em><i>맞춤 추천 받기 →</i></span>
-      </button>
-
-      <button class="feature-row feature-gift" type="button" data-modal="gift">
-        <span class="feature-copy"><small>03 · GIFT SELECTION</small><strong>선물 제안</strong><em>감사, 가족, 기업 선물까지 받는 분에 맞춰 품격 있게 제안합니다.</em><i>선물 구성 보기 →</i></span>
-        <span class="feature-art-frame"><img id="giftArt" src="" alt="프리미엄 과일 선물 이미지"></span>
-      </button>
-
-      <button class="premium-strip" type="button" data-modal="gift">
-        <span><small>PREMIUM GIFT SELECTION</small><strong>좋은 과일로 마음을 전합니다.</strong><em>SWEET · HEALTHY · HAPPY</em></span>
-        <img id="premiumArt" src="" alt="이룸 프리미엄 과일 선물">
-        <b>선물 상담 →</b>
-      </button>
+    <section class="fruit-library" aria-labelledby="libraryTitle">
+      <div class="library-heading">
+        <div>
+          <span class="eyebrow">IROOM FRUIT LIBRARY</span>
+          <h2 id="libraryTitle">오늘 더 만나볼 과일</h2>
+        </div>
+        <p>대표 추천과 겹치지 않는 과일을 계절에 맞춰 가볍게 둘러볼 수 있어요.</p>
+      </div>
+      <div class="library-grid" id="fruitLibraryGrid">
+        <button class="library-card" type="button" data-library-index="0"><img alt=""><b></b><small></small><span>→</span></button>
+        <button class="library-card" type="button" data-library-index="1"><img alt=""><b></b><small></small><span>→</span></button>
+        <button class="library-card" type="button" data-library-index="2"><img alt=""><b></b><small></small><span>→</span></button>
+        <button class="library-card" type="button" data-library-index="3"><img alt=""><b></b><small></small><span>→</span></button>
+        <button class="library-card" type="button" data-library-index="4"><img alt=""><b></b><small></small><span>→</span></button>
+        <button class="library-card" type="button" data-library-index="5"><img alt=""><b></b><small></small><span>→</span></button>
+      </div>
     </section>
 
 <section class="review-section" aria-labelledby="reviewTitle">

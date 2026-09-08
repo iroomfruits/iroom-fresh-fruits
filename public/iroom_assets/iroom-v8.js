@@ -16,10 +16,10 @@
   };
   let publicSite={...PUBLIC_DEFAULT};
   const seasons={
-    spring:{label:'봄',art:'seasonal_clean/spring.jpg',curation:'feature_art/spring_curation.jpg',gift:'feature_art/spring_gift.jpg',premium:'feature_art/spring_premium.jpg',fruits:['딸기','참외','체리','토마토']},
-    summer:{label:'여름',art:'seasonal_clean/summer.jpg',curation:'feature_art/summer_curation.jpg',gift:'feature_art/summer_gift.jpg',premium:'feature_art/summer_premium.jpg',fruits:['수박','청포도','자두','천도복숭아']},
-    autumn:{label:'가을',art:'seasonal_clean/autumn.jpg',curation:'feature_art/autumn_curation.jpg',gift:'feature_art/autumn_gift.jpg',premium:'feature_art/autumn_premium.jpg',fruits:['사과','배','샤인머스캣','감']},
-    winter:{label:'겨울',art:'seasonal_clean/winter.jpg',curation:'feature_art/winter_curation.jpg',gift:'feature_art/winter_gift.jpg',premium:'feature_art/winter_premium.jpg',fruits:['한라봉','딸기','키위','사과']}
+    spring:{label:'봄',art:'hero_clean/spring.jpg',curation:'card_art/spring_curation.jpg',gift:'card_art/spring_gift.jpg',premium:'card_art/spring_premium.jpg',fruits:['딸기','참외','체리','토마토'],library:['청포도','블루베리','키위','파인애플','망고','자몽']},
+    summer:{label:'여름',art:'hero_clean/summer.jpg',curation:'card_art/summer_curation.jpg',gift:'card_art/summer_gift.jpg',premium:'card_art/summer_premium.jpg',fruits:['수박','청포도','자두','천도복숭아'],library:['망고','파인애플','키위','멜론','블루베리','체리']},
+    autumn:{label:'가을',art:'hero_clean/autumn.jpg',curation:'card_art/autumn_curation.jpg',gift:'card_art/autumn_gift.jpg',premium:'card_art/autumn_premium.jpg',fruits:['사과','배','샤인머스캣','감'],library:['석류','무화과','밤','포도','블랙베리','자몽']},
+    winter:{label:'겨울',art:'hero_clean/winter.jpg',curation:'card_art/winter_curation.jpg',gift:'card_art/winter_gift.jpg',premium:'card_art/winter_premium.jpg',fruits:['한라봉','딸기','키위','사과'],library:['오렌지','레몬','자몽','금귤','배','블루베리']}
   };
   const fruitMeta={
     '딸기':['fruits/01_딸기_strawberry.png','향긋하고 산뜻한 단맛'],
@@ -35,7 +35,20 @@
     '한라봉':['fruits/13_한라봉_hallabong.png','진한 향과 산뜻한 단맛'],
     '키위':['fruits/19_키위_kiwi.png','상큼하고 깊은 달콤함'],
     '자두':['fruits/27_자두_plum.png','새콤달콤한 여름 과즙'],
-    '토마토':['fruits/37_토마토_tomato.png','신선하고 산뜻한 자연의 맛']
+    '토마토':['fruits/37_토마토_tomato.png','신선하고 산뜻한 자연의 맛'],
+    '망고':['fruits/07_망고_mango.png','부드럽고 진한 열대의 달콤함'],
+    '파인애플':['fruits/18_파인애플_pineapple.png','상큼하고 풍부한 과즙'],
+    '멜론':['fruits/28_멜론_melon.png','부드럽고 은은한 달콤함'],
+    '블루베리':['fruits/16_블루베리_blueberry.png','작지만 깊고 산뜻한 맛'],
+    '석류':['fruits/24_석류_pomegranate.png','선명하고 진한 가을빛'],
+    '무화과':['fruits/25_무화과_fig.png','부드럽고 깊은 계절의 맛'],
+    '밤':['fruits/26_밤_chestnut.png','고소하고 포근한 가을 맛'],
+    '포도':['fruits/08_포도_purple_grape.png','풍부한 향과 진한 단맛'],
+    '블랙베리':['fruits/34_블랙베리_blackberry.png','짙은 향과 산뜻한 균형'],
+    '자몽':['fruits/15_자몽_grapefruit.png','상큼하고 깨끗한 균형'],
+    '오렌지':['fruits/21_오렌지_orange.png','싱그럽고 풍부한 과즙'],
+    '레몬':['fruits/14_레몬_lemon.png','상큼하고 선명한 향'],
+    '금귤':['fruits/35_금귤_kumquat.png','작고 향긋한 겨울의 맛']
   };
   const allFruitNames=Object.keys(fruitMeta);
   const autoSeason=()=>{const m=new Date().getMonth()+1;return m>=3&&m<=5?'spring':m>=6&&m<=8?'summer':m>=9&&m<=11?'autumn':'winter'};
@@ -53,6 +66,8 @@
     const ca=$('#curationArt'),ga=$('#giftArt'),pa=$('#premiumArt');
     if(ca)ca.src=assets+data.curation;if(ga)ga.src=assets+data.gift;if(pa)pa.src=assets+data.premium;
     $$('[data-season-fruit]').forEach((img,i)=>{const n=data.fruits[i]||data.fruits[0],m=fruitMeta[n];if(m){img.src=assets+m[0];img.alt=n;}});
+    $$('[data-season-label]').forEach(el=>el.textContent=data.label);
+    $$('.library-card').forEach((card,i)=>{const n=(data.library||[])[i];const m=fruitMeta[n];if(!n||!m)return;card.dataset.fruit=n;const im=$('img',card),b=$('b',card),sm=$('small',card);if(im){im.src=assets+m[0];im.alt=n}if(b)b.textContent=n;if(sm)sm.textContent=m[1]});
   }
   applySeason(current);
 
@@ -202,6 +217,8 @@
     const m=e.target.closest('[data-modal]'); if(m){e.preventDefault();openModal(m.dataset.modal);return}
     if(e.target.closest('[data-kakao-login]')){e.preventDefault();startKakaoLogin();return}
     if(e.target.closest('[data-install-app]')){e.preventDefault();installApp();return}
+    const fruit=e.target.closest('[data-fruit]');
+    if(fruit){e.preventDefault();showFruit(fruit.dataset.fruit);return}
     const social=e.target.closest('[data-social]');
     if(social){
       e.preventDefault();
