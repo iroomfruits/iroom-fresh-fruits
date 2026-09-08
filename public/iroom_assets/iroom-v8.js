@@ -2,6 +2,16 @@
   const $=(s,p=document)=>p.querySelector(s), $$=(s,p=document)=>[...p.querySelectorAll(s)];
   const root=$('#iroomFinalBase'); if(!root)return;
   const assets='./iroom_assets/';
+  const PUBLIC_DEFAULT={
+    siteName:'이룸 fresh fruits',
+    businessNo:'775-97-00292',
+    address:'서울특별시 송파구 송이로15길 33, 상가동 B-103호',
+    mailOrderNo:'제 2025-서울 송파 -1052호',
+    bandUrl:'https://band.us/@iroomfruits',
+    kakaoUrl:'https://open.kakao.com/o/sd7wnrKi',
+    kakaoJoinUrl:''
+  };
+  let publicSite={...PUBLIC_DEFAULT};
   const seasons={
     spring:{label:'봄',art:'seasonal_clean/spring.jpg',fruits:['딸기','참외','체리','토마토']},
     summer:{label:'여름',art:'seasonal_clean/summer.jpg',fruits:['수박','청포도','자두','천도복숭아']},
@@ -60,6 +70,9 @@
     else if(type==='search')renderSearch();
     else if(type==='mypage')renderMyPage();
     else if(type==='cart')renderCart();
+    else if(type==='terms')renderTerms();
+    else if(type==='privacy')renderPrivacy();
+    else if(type==='guide')renderGuide();
     overlay.classList.add('open');overlay.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';
     setTimeout(()=>$('button,select,input',overlay)?.focus(),20);
   }
@@ -103,10 +116,64 @@
   function fillSearch(q){const box=$('#searchResults');if(!box)return;q=(q||'').trim();const list=allFruitNames.filter(n=>!q||n.includes(q));box.innerHTML=list.map(n=>`<button type="button" data-fruit="${n}">${n}</button>`).join('')||'<span style="color:#81786e">검색 결과가 없습니다.</span>'}
   function renderMyPage(){setModal('MY PAGE','마이페이지','주문조회 · 회원정보 · 상담내역을 연결할 자리입니다.',`<div class="mini-panel"><p>최종 디자인 베이스에서는 위치와 동작만 확정했습니다. 다음 기능 작업에서 기존 이룸3 로그인/주문조회 시스템을 이 창에 연결합니다.</p></div>`)}
   function renderCart(){setModal('CART','장바구니','고른 상품과 선물 구성을 확인하는 창입니다.',`<div class="mini-panel"><p>현재는 디자인 베이스 단계입니다. 다음 작업에서 기존 이룸3 장바구니 데이터를 그대로 연결합니다.</p></div>`)}
+  function renderTerms(){
+    setModal('TERMS','이용약관','이룸 fresh fruits의 상품 주문과 서비스 이용에 관한 기본 안내입니다.',`
+      <div class="mini-panel"><p><b>주문 · 결제</b><br>상품의 가격, 구성, 배송 가능 여부는 주문 시 표시되는 안내를 기준으로 합니다.</p></div>
+      <div class="mini-panel" style="margin-top:12px"><p><b>배송 · 취소 · 환불</b><br>신선식품의 특성을 고려하여 상품 준비 전 취소 여부와 수령 후 상품 상태를 확인해 주세요. 개별 주문의 처리 기준은 관계 법령과 주문 안내를 따릅니다.</p></div>
+      <div class="mini-panel" style="margin-top:12px"><p><b>고객 안내</b><br>세부 운영 기준은 관리자 설정과 주문 화면의 최신 안내를 우선 적용합니다.</p></div>`);
+  }
+  function renderPrivacy(){
+    setModal('PRIVACY','개인정보처리방침','주문 · 배송 · 상담에 필요한 범위에서만 개인정보를 이용합니다.',`
+      <div class="mini-panel"><p><b>수집 항목</b><br>이름, 연락처, 배송지, 주문 및 상담에 필요한 정보</p></div>
+      <div class="mini-panel" style="margin-top:12px"><p><b>이용 목적</b><br>주문 처리, 배송, 고객 상담, 서비스 이용 확인</p></div>
+      <div class="mini-panel" style="margin-top:12px"><p><b>보관 및 파기</b><br>관련 법령과 거래 보관 의무에 따른 기간 동안 보관한 뒤 안전하게 파기합니다.</p></div>`);
+  }
+  function renderGuide(){
+    setModal('GUIDE','이용안내 · 가이드','이룸을 더 편하게 이용하는 방법을 간단히 안내합니다.',`
+      <div class="story-grid">
+        <article class="story-card"><b>01 · SEASON</b><h3>제철 과일</h3><p>현재 계절에 추천하는 과일을 확인하고 원하는 상품을 선택하세요.</p></article>
+        <article class="story-card"><b>02 · CURATION</b><h3>맞춤 과일</h3><p>예산 · 용도 · 취향을 알려주시면 상황에 맞춰 구성합니다.</p></article>
+        <article class="story-card"><b>03 · GIFT</b><h3>선물 제안</h3><p>감사, 가족, 기업 선물 등 목적에 맞는 구성을 제안합니다.</p></article>
+        <article class="story-card"><b>04 · CONTACT</b><h3>BAND · 카카오</h3><p>하단 빠른 연결 버튼을 이용해 소식과 상담 채널로 이동할 수 있습니다.</p></article>
+      </div>`);
+  }
   function showFruit(n){const m=fruitMeta[n]||['','오늘 상태가 좋은 과일'];setModal('FRUIT',n,m[1],`<div class="fruit-card" style="max-width:420px"><img src="${assets+m[0]}" alt="${n}"><span><b>${n}</b><small>상품 상세 연결은 다음 기능 작업에서 이룸3 상품 데이터와 연결합니다.</small></span></div>`)}
+
+  function applyPublicConfig(data={}){
+    publicSite={...PUBLIC_DEFAULT,...(data.site||data||{})};
+    const bn=$('[data-business-no]'); if(bn)bn.textContent=publicSite.businessNo||PUBLIC_DEFAULT.businessNo;
+    const mo=$('[data-mail-order]'); if(mo)mo.textContent=publicSite.mailOrderNo||PUBLIC_DEFAULT.mailOrderNo;
+    const ad=$('[data-business-address]'); if(ad)ad.textContent=publicSite.address||PUBLIC_DEFAULT.address;
+    const reviews=(data.reviews||[]).filter(r=>r.show!==false).slice(0,3);
+    if(reviews.length){
+      const cards=$$('.review-card');
+      cards.forEach((card,i)=>{if(!reviews[i])return; const p=$('p',card),sm=$('small',card); if(p)p.textContent='“'+String(reviews[i].text||'').replace(/[“”]/g,'')+'”'; if(sm)sm.textContent=reviews[i].author||'이룸 고객';});
+    }
+  }
+  async function loadPublicConfig(){
+    let loaded=null;
+    try{const r=await fetch('/api/site/footer-config',{cache:'no-store'});if(r.ok)loaded=await r.json()}catch(e){}
+    if(!loaded){try{const x=JSON.parse(localStorage.getItem('iroom_admin_store_v60')||'null');if(x)loaded=x}catch(e){}}
+    applyPublicConfig(loaded||{});
+  }
+  function openExternal(url){if(!url)return false; try{window.open(url,'_blank','noopener,noreferrer');return true}catch(e){location.href=url;return true}}
+  async function shareSite(){
+    const data={title:'이룸 fresh fruits',text:'좋은 과일로 마음을 전하는 이룸 fresh fruits',url:location.href};
+    if(navigator.share){try{await navigator.share(data);return}catch(e){if(e?.name==='AbortError')return}}
+    try{await navigator.clipboard.writeText(location.href);alert('홈페이지 주소를 복사했습니다.')}catch(e){prompt('아래 주소를 복사해 주세요.',location.href)}
+  }
+  loadPublicConfig();
 
   root.addEventListener('click',e=>{
     const m=e.target.closest('[data-modal]'); if(m){e.preventDefault();openModal(m.dataset.modal);return}
+    const social=e.target.closest('[data-social]');
+    if(social){
+      e.preventDefault();
+      const kind=social.dataset.social;
+      if(kind==='share'){shareSite();return}
+      if(kind==='band'){if(!openExternal(publicSite.bandUrl))alert('관리자 설정에서 BAND 주소를 입력해 주세요.');return}
+      if(kind==='kakao'){const u=publicSite.kakaoJoinUrl||publicSite.kakaoUrl;if(!openExternal(u))alert('관리자 설정에서 카카오 1초가입 주소를 입력해 주세요.');return}
+    }
   });
   overlay.addEventListener('click',e=>{
     if(e.target===overlay||e.target.closest('[data-close]')){closeModal();return}
