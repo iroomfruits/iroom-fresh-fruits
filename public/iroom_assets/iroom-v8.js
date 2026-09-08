@@ -50,6 +50,35 @@
     '레몬':['fruits/14_레몬_lemon.png','상큼하고 선명한 향'],
     '금귤':['fruits/35_금귤_kumquat.png','작고 향긋한 겨울의 맛']
   };
+  const fruitDetails={
+    '딸기':{season:'겨울 · 봄',summary:'향긋한 향과 산뜻한 단맛, 부드러운 과육이 매력적인 과일입니다.',choose:'꼭지가 싱싱하고 표면의 붉은 빛이 고르며 과육이 무르지 않은 것을 살펴봅니다.',keep:'씻지 않은 상태로 냉장 보관하고, 드시기 직전에 가볍게 세척하는 것이 좋습니다.',enjoy:'차갑게 그대로 즐기거나 요거트·디저트와 함께하면 향이 잘 살아납니다.'},
+    '참외':{season:'봄 · 초여름',summary:'아삭한 식감과 맑고 시원한 달콤함이 특징입니다.',choose:'껍질의 노란색과 흰 줄이 선명하고 묵직하며 향이 은은한 것을 살펴봅니다.',keep:'서늘한 곳에 두었다가 충분히 익으면 냉장 보관해 시원하게 즐기세요.',enjoy:'차갑게 잘라 먹거나 샐러드에 곁들이면 산뜻한 단맛을 즐길 수 있습니다.'},
+    '청포도':{season:'여름 · 가을',summary:'청량한 과즙과 산뜻한 향이 어우러지는 가벼운 달콤함이 매력입니다.',choose:'알이 탱탱하고 송이에 단단히 붙어 있으며 줄기가 지나치게 마르지 않은 것을 살펴봅니다.',keep:'씻지 않은 채 냉장 보관하고 드실 만큼만 꺼내 세척하세요.',enjoy:'충분히 차갑게 하면 아삭한 식감과 향이 더 또렷하게 느껴집니다.'},
+    '체리':{season:'봄 · 여름',summary:'작은 한 알에 상큼함과 깊은 단맛이 함께 들어 있는 과일입니다.',choose:'표면이 매끈하고 윤기가 있으며 꼭지가 푸르고 과육이 단단한 것을 살펴봅니다.',keep:'습기를 줄여 냉장 보관하고 먹기 직전에 세척하는 편이 좋습니다.',enjoy:'그대로 먹거나 치즈·요거트와 곁들이면 풍부한 향을 즐길 수 있습니다.'},
+    '수박':{season:'여름',summary:'풍부한 수분과 시원한 과즙으로 여름에 가장 잘 어울리는 과일입니다.',choose:'크기에 비해 묵직하고 껍질의 무늬가 선명하며 모양이 고른 것을 살펴봅니다.',keep:'통째로는 서늘한 곳에, 자른 뒤에는 밀폐해 냉장 보관하세요.',enjoy:'충분히 차갑게 먹으면 수분감과 청량감이 가장 좋습니다.'},
+    '천도복숭아':{season:'여름',summary:'산뜻한 산미와 향긋한 단맛, 매끄러운 껍질이 특징인 여름 과일입니다.',choose:'은은한 향이 나고 과육이 너무 딱딱하지 않으며 멍이 적은 것을 살펴봅니다.',keep:'단단할 때는 실온에서 후숙한 뒤 냉장 보관하고 너무 오래 차갑게 두지 않는 것이 좋습니다.',enjoy:'먹기 전 잠시 차갑게 두면 향과 과즙의 균형이 좋습니다.'},
+    '사과':{season:'가을 · 겨울',summary:'아삭한 식감과 선명한 단맛, 산뜻한 향의 균형이 좋은 기본 과일입니다.',choose:'표면이 단단하고 묵직하며 멍이나 눌림이 적은 것을 살펴봅니다.',keep:'다른 과일과 분리해 냉장 보관하면 아삭함을 오래 유지하는 데 도움이 됩니다.',enjoy:'그대로 먹거나 치즈·견과류와 곁들이면 단맛과 향이 잘 어울립니다.'},
+    '배':{season:'가을 · 겨울',summary:'시원하고 풍부한 과즙과 부드러운 단맛이 돋보입니다.',choose:'모양이 고르고 묵직하며 껍질에 상처가 적고 단단한 것을 살펴봅니다.',keep:'냉장 보관하면 시원한 과즙과 아삭한 식감을 유지하기 좋습니다.',enjoy:'차갑게 잘라 그대로 먹으면 배 특유의 시원한 단맛이 가장 잘 살아납니다.'},
+    '감':{season:'가을',summary:'계절이 깊어질수록 진해지는 부드럽고 풍성한 단맛이 매력입니다.',choose:'색이 고르고 꼭지 주변이 깨끗하며 단단함이 용도에 맞는 것을 고릅니다.',keep:'단단한 감은 서늘한 곳에, 충분히 익은 감은 냉장 보관하세요.',enjoy:'단단할 때의 아삭함과 후숙했을 때의 부드러움을 취향에 따라 즐길 수 있습니다.'},
+    '샤인머스캣':{season:'여름 · 가을',summary:'아삭한 식감과 향긋하고 맑은 단맛으로 선물용으로도 인기 있는 포도입니다.',choose:'알이 탱탱하고 송이가 단정하며 줄기가 지나치게 마르지 않은 것을 살펴봅니다.',keep:'씻지 않은 상태로 냉장 보관하고 드실 만큼만 세척하세요.',enjoy:'충분히 차갑게 하면 향과 아삭함이 더 또렷하게 느껴집니다.'},
+    '한라봉':{season:'겨울 · 봄',summary:'진한 감귤 향과 산뜻한 단맛, 풍부한 과즙이 특징입니다.',choose:'껍질 색이 고르고 손에 들었을 때 묵직하며 향이 선명한 것을 살펴봅니다.',keep:'서늘한 곳이나 냉장실에 두되 습기가 차지 않도록 보관하세요.',enjoy:'실온에 잠시 두었다 먹으면 향이 더 풍부하게 느껴질 수 있습니다.'},
+    '키위':{season:'연중 · 겨울 추천',summary:'상큼함과 깊은 단맛이 함께 있고 부드러운 과육이 매력적인 과일입니다.',choose:'겉에 상처가 적고 손으로 살짝 눌렀을 때 취향에 맞는 탄력이 있는 것을 고릅니다.',keep:'단단한 것은 실온 후숙, 먹기 좋은 상태가 되면 냉장 보관하세요.',enjoy:'반으로 잘라 스푼으로 먹거나 샐러드와 함께 즐기기 좋습니다.'},
+    '자두':{season:'여름',summary:'새콤달콤한 과즙과 선명한 향으로 여름에 잘 어울립니다.',choose:'표면이 매끈하고 적당히 탄력이 있으며 향이 은은한 것을 살펴봅니다.',keep:'단단하면 실온에서 잠시 후숙하고 익으면 냉장 보관하세요.',enjoy:'너무 차갑지 않게 먹으면 향과 단맛이 더 잘 느껴집니다.'},
+    '토마토':{season:'봄 · 여름',summary:'산뜻한 산미와 자연스러운 단맛, 신선한 과즙을 즐길 수 있습니다.',choose:'색이 고르고 꼭지가 싱싱하며 표면에 상처가 적은 것을 살펴봅니다.',keep:'완전히 익기 전에는 서늘한 실온, 잘 익은 뒤에는 짧게 냉장 보관하세요.',enjoy:'그대로 먹거나 샐러드·치즈와 곁들이면 산뜻한 맛이 잘 살아납니다.'},
+    '망고':{season:'여름 · 수입과일',summary:'부드럽고 진한 열대의 단맛과 풍부한 향이 특징입니다.',choose:'껍질 상태가 깨끗하고 향이 은은하며 살짝 눌렀을 때 부드러운 탄력이 있는 것을 고릅니다.',keep:'단단하면 실온에서 후숙하고 먹기 좋은 상태가 되면 냉장 보관하세요.',enjoy:'차갑게 잘라 먹거나 요거트·디저트와 함께 즐기기 좋습니다.'},
+    '파인애플':{season:'연중 · 여름 추천',summary:'상큼한 산미와 풍부한 과즙, 강한 열대 향이 매력적입니다.',choose:'향이 선명하고 묵직하며 잎과 껍질 상태가 지나치게 마르지 않은 것을 살펴봅니다.',keep:'손질 전에는 서늘하게, 손질 후에는 밀폐해 냉장 보관하세요.',enjoy:'차갑게 먹거나 구워서 즐기면 단맛의 인상이 달라집니다.'},
+    '멜론':{season:'여름',summary:'부드러운 식감과 은은하게 퍼지는 단맛이 특징입니다.',choose:'향이 은은하고 묵직하며 꼭지 반대쪽에 적당한 탄력이 있는 것을 살펴봅니다.',keep:'실온에서 후숙한 뒤 먹기 좋은 상태가 되면 냉장 보관하세요.',enjoy:'먹기 전에 충분히 차갑게 하면 부드러운 단맛을 더 깔끔하게 즐길 수 있습니다.'},
+    '블루베리':{season:'여름 · 수입 연중',summary:'작은 알에 산뜻한 맛과 짙은 베리 향이 담겨 있습니다.',choose:'표면의 하얀 과분이 자연스럽고 알이 단단하며 무르지 않은 것을 살펴봅니다.',keep:'씻지 않고 냉장 보관하며 물기에 약하므로 먹기 직전에 세척하세요.',enjoy:'그대로 먹거나 요거트·샐러드·디저트에 곁들이기 좋습니다.'},
+    '석류':{season:'가을 · 겨울',summary:'선명한 색과 톡톡 터지는 과즙, 산뜻한 산미가 매력입니다.',choose:'들었을 때 묵직하고 껍질이 지나치게 갈라지지 않은 것을 살펴봅니다.',keep:'통째로는 서늘하거나 냉장 보관하고 알을 분리한 뒤에는 밀폐해 냉장 보관하세요.',enjoy:'알 그대로 먹거나 샐러드·요거트에 올리면 색감과 산뜻함을 더할 수 있습니다.'},
+    '무화과':{season:'여름 · 가을',summary:'부드러운 과육과 은은하고 깊은 단맛이 특징인 섬세한 과일입니다.',choose:'표면에 큰 상처가 없고 부드러운 탄력과 은은한 향이 있는 것을 고릅니다.',keep:'쉽게 무르므로 구매 후 빠르게 냉장 보관하고 가급적 빨리 즐기세요.',enjoy:'그대로 먹거나 치즈·견과류와 곁들이면 부드러운 단맛이 잘 어울립니다.'},
+    '밤':{season:'가을 · 겨울',summary:'고소하고 포근한 맛으로 가을 분위기를 가장 잘 보여주는 열매 중 하나입니다.',choose:'껍질에 윤기가 있고 단단하며 벌레 먹은 흔적이나 구멍이 없는 것을 살펴봅니다.',keep:'장기 보관 시에는 냉장·냉동을 활용하고 습기가 차지 않도록 관리하세요.',enjoy:'삶거나 구워 먹으면 고소함과 자연스러운 단맛이 잘 살아납니다.'},
+    '포도':{season:'여름 · 가을',summary:'풍부한 향과 진한 단맛, 탱글한 식감이 매력입니다.',choose:'알이 단단하고 송이에 잘 붙어 있으며 줄기가 너무 마르지 않은 것을 살펴봅니다.',keep:'씻지 않은 채 냉장 보관하고 먹기 직전에 세척하세요.',enjoy:'차갑게 먹으면 포도의 향과 당도가 더 선명하게 느껴집니다.'},
+    '블랙베리':{season:'여름 · 수입 연중',summary:'짙은 베리 향과 산뜻한 산미가 어우러지는 과일입니다.',choose:'알이 무르지 않고 윤기가 있으며 즙이 새지 않는 것을 살펴봅니다.',keep:'물기에 약하므로 씻지 않은 채 냉장 보관하고 빠르게 즐기세요.',enjoy:'요거트·디저트·샐러드에 곁들이면 향과 색감이 돋보입니다.'},
+    '자몽':{season:'겨울 · 수입 연중',summary:'상큼함과 은은한 쌉싸름함이 어우러지는 깨끗한 맛이 특징입니다.',choose:'크기에 비해 묵직하고 껍질이 탄탄하며 향이 은은한 것을 살펴봅니다.',keep:'서늘한 곳 또는 냉장 보관하며 자른 뒤에는 밀폐 보관하세요.',enjoy:'그대로 먹거나 샐러드·음료에 더하면 산뜻한 풍미를 즐길 수 있습니다.'},
+    '오렌지':{season:'겨울 · 수입 연중',summary:'싱그러운 향과 풍부한 과즙, 친숙한 달콤함이 매력입니다.',choose:'크기에 비해 묵직하고 껍질이 탄탄하며 상처가 적은 것을 살펴봅니다.',keep:'서늘한 곳이나 냉장 보관하고 건조하지 않게 관리하세요.',enjoy:'실온에 잠시 두었다 먹으면 감귤 향이 더 잘 느껴질 수 있습니다.'},
+    '레몬':{season:'연중',summary:'선명한 산미와 향으로 다른 과일과 음식의 맛을 또렷하게 해줍니다.',choose:'껍질이 탄탄하고 윤기가 있으며 크기에 비해 묵직한 것을 살펴봅니다.',keep:'냉장 보관하면 수분과 향을 비교적 오래 유지하기 좋습니다.',enjoy:'음료·드레싱·디저트에 소량 더해 상큼한 향을 즐기세요.'},
+    '금귤':{season:'겨울 · 봄',summary:'작은 크기 안에 향긋한 껍질과 상큼한 과즙이 함께 들어 있습니다.',choose:'색이 고르고 껍질이 탄탄하며 향이 선명한 것을 살펴봅니다.',keep:'씻지 않은 상태로 냉장 보관하고 드시기 직전에 세척하세요.',enjoy:'깨끗이 씻어 껍질째 즐기거나 차·디저트에 활용하기 좋습니다.'}
+  };
   const allFruitNames=Object.keys(fruitMeta);
   const autoSeason=()=>{const m=new Date().getMonth()+1;return m>=3&&m<=5?'spring':m>=6&&m<=8?'summer':m>=9&&m<=11?'autumn':'winter'};
   const params=new URLSearchParams(location.search);
@@ -66,6 +95,7 @@
     const ca=$('#curationArt'),ga=$('#giftArt'),pa=$('#premiumArt');
     if(ca)ca.src=assets+data.curation;if(ga)ga.src=assets+data.gift;if(pa)pa.src=assets+data.premium;
     $$('[data-season-fruit]').forEach((img,i)=>{const n=data.fruits[i]||data.fruits[0],m=fruitMeta[n];if(m){img.src=assets+m[0];img.alt=n;}});
+    $$('.premium-fruit-card').forEach((card,i)=>{const n=(data.fruits||[])[i],m=fruitMeta[n];if(!n||!m)return;card.dataset.fruit=n;const im=$('img',card),b=$('b',card),sm=$('small',card);if(im){im.src=assets+m[0];im.alt=n}if(b)b.textContent=n;if(sm)sm.textContent=m[1]});
     $$('[data-season-label]').forEach(el=>el.textContent=data.label);
     $$('.library-card').forEach((card,i)=>{const n=(data.library||[])[i];const m=fruitMeta[n];if(!n||!m)return;card.dataset.fruit=n;const im=$('img',card),b=$('b',card),sm=$('small',card);if(im){im.src=assets+m[0];im.alt=n}if(b)b.textContent=n;if(sm)sm.textContent=m[1]});
   }
@@ -96,7 +126,7 @@
   function renderSeasonal(){
     const d=seasons[current];
     const cards=d.fruits.map(n=>{const m=fruitMeta[n]||['','오늘 상태가 좋은 과일'];return `<button class="fruit-card" type="button" data-fruit="${n}"><img src="${assets+m[0]}" alt="${n}"><span><b>${n}</b><small>${m[1]}</small></span></button>`}).join('');
-    setModal('SEASONAL PICKS',`${d.label}, 지금 가장 맛있는 과일`,`메인 시안의 계절감은 그대로 두고, 실제 선택은 이 창에서 간결하게 이어집니다.`,`<div class="modal-grid">${cards}</div>`);
+    setModal('SEASONAL PICKS',`${d.label} 프리미엄 과일 4선`,`이룸이 계절의 맛과 상태를 기준으로 추천하는 4가지입니다. 과일을 누르면 상세설명을 확인할 수 있어요.`,`<div class="modal-grid">${cards}</div>`);
   }
   function renderCuration(){
     setModal('FRUIT CURATION','당신에게 맞는 과일을 골라드려요','예산 · 용도 · 취향만 알려주시면 그날 상태가 좋은 과일을 기준으로 추천합니다.',`
@@ -184,7 +214,26 @@
     try{const r=await fetch('/api/me',{cache:'no-store'});const d=await r.json();if(d.user){box.innerHTML=`<b>${d.user.name||d.user.username||'이룸 고객'}님, 반갑습니다.</b><span>${d.user.email||''}</span>`;const btn=$('[data-kakao-login]',overlay);if(btn)btn.style.display='none';return}}catch(e){}
     box.innerHTML='<b>로그인이 필요합니다.</b><span>카카오 로그인 또는 기존 이룸 회원 로그인을 연결할 수 있습니다.</span>';
   }
-  function showFruit(n){const m=fruitMeta[n]||['','오늘 상태가 좋은 과일'];setModal('FRUIT',n,m[1],`<div class="fruit-card" style="max-width:420px"><img src="${assets+m[0]}" alt="${n}"><span><b>${n}</b><small>상품 상세 연결은 다음 기능 작업에서 이룸3 상품 데이터와 연결합니다.</small></span></div>`)}
+  function showFruit(n){
+    const m=fruitMeta[n]||['','오늘 상태가 좋은 과일'];
+    const d=fruitDetails[n]||{season:'계절 추천',summary:m[1]||'오늘 상태가 좋은 과일입니다.',choose:'표면 상태와 향, 탄력과 무게를 함께 살펴 신선한 과일을 고릅니다.',keep:'과일의 숙도에 맞춰 실온 또는 냉장 보관해 주세요.',enjoy:'가장 맛있는 상태에서 신선하게 즐겨보세요.'};
+    setModal('FRUIT DETAIL',n,`${m[1]} · ${d.season}`,`
+      <div class="fruit-detail-layout">
+        <div class="fruit-detail-visual"><img src="${assets+m[0]}" alt="${n}"></div>
+        <div class="fruit-detail-summary">
+          <span class="fruit-detail-badge">IROOM FRUIT GUIDE · ${d.season}</span>
+          <h3>${n} 상세설명</h3>
+          <p>${d.summary}</p>
+          <div class="fruit-detail-grid">
+            <div class="fruit-detail-item"><b>맛과 식감</b><span>${m[1]}</span></div>
+            <div class="fruit-detail-item"><b>고르는 기준</b><span>${d.choose}</span></div>
+            <div class="fruit-detail-item"><b>보관 방법</b><span>${d.keep}</span></div>
+            <div class="fruit-detail-item"><b>맛있게 즐기기</b><span>${d.enjoy}</span></div>
+          </div>
+          <div class="fruit-detail-actions"><button class="primary" type="button" data-open-related="curation">이 과일로 맞춤 상담</button><button type="button" data-open-related="gift">선물 구성 보기</button></div>
+        </div>
+      </div>`)
+  }
 
   function applyPublicConfig(data={}){
     publicSite={...PUBLIC_DEFAULT,...(data.site||data||{})};
@@ -234,6 +283,7 @@
     if(e.target.closest('[data-kakao-login]')){startKakaoLogin();return}
     if(e.target.closest('[data-install-now]')){if(deferredInstallPrompt){installApp();}return}
     if(e.target.closest('[data-copy-home]')){navigator.clipboard?.writeText(location.origin).then(()=>alert('홈페이지 주소를 복사했습니다.')).catch(()=>prompt('주소를 복사해 주세요.',location.origin));return}
+    const related=e.target.closest('[data-open-related]'); if(related){openModal(related.dataset.openRelated);return}
     const demo=e.target.closest('[data-demo]'); if(demo){const box=demo.closest('.modal-panel'); if(box){demo.textContent='다음 기능 작업에서 이룸3 시스템과 연결';demo.disabled=true;setTimeout(()=>{demo.disabled=false;demo.textContent=demo.dataset.demo==='curation'?'선택 내용 확인하기 →':'상담 연결 예정'},1700)} }
   });
   overlay.addEventListener('input',e=>{if(e.target.id==='searchInput')fillSearch(e.target.value)});
