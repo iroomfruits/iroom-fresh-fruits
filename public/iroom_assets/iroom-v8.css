@@ -265,3 +265,63 @@ body{background:var(--season-wash-2,#fffaf4)}
 .iroom-assurance-copy{display:block;min-width:0}.iroom-assurance-copy small{display:block;font:10px Georgia,serif;letter-spacing:.18em;color:var(--season-accent,#9b503e);margin-bottom:7px}.iroom-assurance-copy strong{display:block;font-family:"Noto Serif KR","Batang",Georgia,serif;font-size:22px;font-weight:600;letter-spacing:-.035em;color:var(--ink);margin-bottom:5px}.iroom-assurance-copy em{display:block;font-style:normal;color:#776e65;font-family:"Noto Serif KR","Batang",serif;font-size:13px;line-height:1.7}.iroom-assurance-points{display:flex;align-items:center;justify-content:flex-end;gap:9px;white-space:nowrap;color:#6f766e;font-size:11px}.iroom-assurance-points b{font-weight:600;color:#31594f}.iroom-assurance-points i{font-style:normal;color:#b9a99a}
 @media(max-width:900px){.iroom-assurance{grid-template-columns:auto 1fr}.iroom-assurance-points{grid-column:2;justify-content:flex-start;white-space:normal;flex-wrap:wrap}}
 @media(max-width:600px){.iroom-assurance{padding:20px;border-radius:20px;grid-template-columns:1fr;gap:12px}.iroom-assurance-mark{width:42px;height:42px}.iroom-assurance-points{grid-column:auto}.iroom-assurance-copy strong{font-size:20px}}
+
+
+/* IROOM4 V10 — soft seasonal hero + unambiguous Korean brand copy */
+.season-visual>img{
+  filter:saturate(.94) contrast(.97) brightness(1.012);
+}
+.season-visual:after{
+  content:"";position:absolute;inset:0;pointer-events:none;z-index:1;
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,250,242,.055)),
+    radial-gradient(circle at 52% 44%,rgba(255,255,255,.08),transparent 48%);
+  mix-blend-mode:screen;
+}
+.season-copy-fix{
+  position:absolute;z-index:3;left:0;top:0;width:28.5%;height:100%;
+  display:flex;flex-direction:column;justify-content:center;align-items:flex-start;
+  padding:6% 2.2% 7% max(3.2%,38px);
+  color:#12362f;
+  background:linear-gradient(90deg,
+    color-mix(in srgb,var(--season-wash-2,#fffaf4) 98%,white 2%) 0%,
+    color-mix(in srgb,var(--season-wash-2,#fffaf4) 95%,white 5%) 67%,
+    color-mix(in srgb,var(--season-wash-2,#fffaf4) 64%,transparent 36%) 84%,
+    transparent 100%);
+  pointer-events:none;
+}
+.season-copy-brand{
+  display:block;font-family:"Batang","Noto Serif KR",Georgia,serif;
+  font-size:clamp(24px,2.15vw,42px);font-weight:600;letter-spacing:-.04em;line-height:1;
+  margin-bottom:12px;color:#0f342d;
+}
+.season-copy-fix strong{
+  display:block;font-family:"Batang","Noto Serif KR",Georgia,serif;
+  font-size:clamp(26px,2.5vw,49px);font-weight:600;letter-spacing:-.055em;line-height:1.18;
+  max-width:420px;color:#0f342d;
+}
+.season-copy-fix>i{
+  width:30px;height:1px;background:#23443d;margin:22px 0 20px;opacity:.82;
+}
+.season-copy-fix p{
+  margin:0;font-family:"Batang","Noto Serif KR",Georgia,serif;
+  font-size:clamp(13px,1.16vw,20px);line-height:1.62;color:#50655f;letter-spacing:-.025em;
+}
+.season-copy-fix small{
+  display:block;margin-top:34px;font:10px/1.65 Georgia,serif;letter-spacing:.21em;
+  color:#526660;max-width:245px;
+}
+.install-warning{background:var(--season-wash,#fbf1e6)!important;border-color:var(--season-line,#ead5c2)!important}
+.install-warning code{font-family:Consolas,monospace;font-size:11px;word-break:break-all}
+@media(max-width:900px){
+  .season-copy-fix{width:36%;padding-left:22px}
+  .season-copy-fix small{margin-top:18px;font-size:8.5px}
+  .season-copy-fix>i{margin:14px 0}
+}
+@media(max-width:620px){
+  .season-copy-fix{width:44%;padding-left:14px;padding-right:6px;background:linear-gradient(90deg,var(--season-wash-2,#fffaf4) 0%,rgba(255,250,244,.94) 72%,transparent 100%)}
+  .season-copy-brand{font-size:20px;margin-bottom:7px}
+  .season-copy-fix strong{font-size:23px;line-height:1.2}
+  .season-copy-fix p{font-size:11px;line-height:1.5}
+  .season-copy-fix small{display:none}
+}

@@ -16,10 +16,16 @@
   };
   let publicSite={...PUBLIC_DEFAULT};
   const seasons={
-    spring:{label:'봄',art:'hero_clean/spring.jpg',curation:'card_art/spring_curation.jpg',gift:'card_art/spring_gift.jpg',premium:'card_art/spring_premium.jpg',premiumFruits:['금실딸기','성주참외','대저토마토','샤인머스캣'],seasonalFruits:['딸기','참외','토마토','청포도'],library:['블루베리','파인애플','망고','자몽','체리','멜론']},
-    summer:{label:'여름',art:'hero_clean/summer.jpg',curation:'card_art/summer_curation.jpg',gift:'card_art/summer_gift.jpg',premium:'card_art/summer_premium.jpg',premiumFruits:['백도복숭아','고당도수박','샤인머스캣','머스크멜론'],seasonalFruits:['수박','복숭아','자두','포도'],library:['파인애플','키위','블루베리','청포도','자몽','체리']},
-    autumn:{label:'가을',art:'hero_clean/autumn.jpg',curation:'card_art/autumn_curation.jpg',gift:'card_art/autumn_gift.jpg',premium:'card_art/autumn_premium.jpg',premiumFruits:['홍로사과','나주배','샤인머스캣','대봉'],seasonalFruits:['사과','배','감','대봉'],library:['석류','포도','블랙베리','자몽','샤인머스캣','사과']},
-    winter:{label:'겨울',art:'hero_clean/winter.jpg',curation:'card_art/winter_curation.jpg',gift:'card_art/winter_gift.jpg',premium:'card_art/winter_premium.jpg',premiumFruits:['제주감귤','한라봉','금실딸기','부사사과'],seasonalFruits:['제주감귤','한라봉','딸기','사과'],library:['키위','금귤','배','블루베리','자몽','오렌지']}
+    spring:{label:'봄',art:'hero_soft/spring.jpg',curation:'card_art/spring_curation.jpg',gift:'card_art/spring_gift.jpg',premium:'card_art/spring_premium.jpg',premiumFruits:['금실딸기','성주참외','대저토마토','샤인머스캣'],seasonalFruits:['딸기','참외','토마토','청포도'],library:['블루베리','파인애플','망고','자몽','체리','멜론']},
+    summer:{label:'여름',art:'hero_soft/summer.jpg',curation:'card_art/summer_curation.jpg',gift:'card_art/summer_gift.jpg',premium:'card_art/summer_premium.jpg',premiumFruits:['백도복숭아','고당도수박','샤인머스캣','머스크멜론'],seasonalFruits:['수박','복숭아','자두','포도'],library:['파인애플','키위','블루베리','청포도','자몽','체리']},
+    autumn:{label:'가을',art:'hero_soft/autumn.jpg',curation:'card_art/autumn_curation.jpg',gift:'card_art/autumn_gift.jpg',premium:'card_art/autumn_premium.jpg',premiumFruits:['홍로사과','나주배','샤인머스캣','대봉'],seasonalFruits:['사과','배','감','대봉'],library:['석류','포도','블랙베리','자몽','샤인머스캣','사과']},
+    winter:{label:'겨울',art:'hero_soft/winter.jpg',curation:'card_art/winter_curation.jpg',gift:'card_art/winter_gift.jpg',premium:'card_art/winter_premium.jpg',premiumFruits:['제주감귤','한라봉','금실딸기','부사사과'],seasonalFruits:['제주감귤','한라봉','딸기','사과'],library:['키위','금귤','배','블루베리','자몽','오렌지']}
+  };
+  const heroCopy={
+    spring:{title:'봄 제철 과일',desc:'봄의 싱그러움을<br>가장 특별한 선물로',tag:'PREMIUM FRESH FRUITS · IN SPRING'},
+    summer:{title:'여름의 과일',desc:'햇살이 더 달콤하게<br>만드는 계절의 선물',tag:'PREMIUM FRESH FRUITS · IN SUMMER'},
+    autumn:{title:'가을 프리미엄 과일',desc:'깊어가는 계절이 전하는<br>가장 특별한 선물',tag:'PREMIUM FRESH FRUITS · IN AUTUMN'},
+    winter:{title:'겨울 프리미엄 과일',desc:'차가운 계절에 더욱 빛나는<br>자연의 달콤한 선물',tag:'PREMIUM FRESH FRUITS · IN WINTER'}
   };
   const fruitMeta={
     '딸기':['fruits/01_딸기_strawberry.png','향긋하고 산뜻한 단맛'],
@@ -131,6 +137,11 @@
   function applySeason(key){
     current=key; visual.classList.add('is-changing');
     const data=seasons[key]; artwork.alt=`이룸 ${data.label} 계절 메인 시안`;
+    const hc=heroCopy[key]||heroCopy.autumn;
+    const ht=$('#heroSeasonTitle'),hd=$('#heroSeasonDesc'),hg=$('#heroSeasonTag');
+    if(ht)ht.textContent=hc.title;
+    if(hd)hd.innerHTML=hc.desc;
+    if(hg)hg.textContent=hc.tag;
     updateSeasonControls();
     const preload=new Image();
     preload.onload=()=>{artwork.src=preload.src; requestAnimationFrame(()=>visual.classList.remove('is-changing'))};
@@ -227,20 +238,44 @@
       </div>`);
   }
   let deferredInstallPrompt=null;
-  window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredInstallPrompt=e;});
+  const installStatus=()=>document.querySelector('[data-install-status]');
   const isIOS=()=>/iphone|ipad|ipod/i.test(navigator.userAgent);
+  const isStandalone=()=>window.matchMedia?.('(display-mode: standalone)').matches || navigator.standalone===true;
+  const isSecureInstallContext=()=>window.isSecureContext && (location.protocol==='https:' || ['localhost','127.0.0.1'].includes(location.hostname));
+  function setInstallStatus(text){const el=installStatus();if(el)el.textContent=text}
+  window.addEventListener('beforeinstallprompt',e=>{
+    e.preventDefault();
+    deferredInstallPrompt=e;
+    setInstallStatus('설치 준비 완료 · 눌러서 앱처럼 설치');
+  });
+  window.addEventListener('appinstalled',()=>{
+    deferredInstallPrompt=null;
+    setInstallStatus('설치 완료 · 홈 화면이나 바탕화면에서 실행');
+  });
   function renderInstall(){
-    const ios=isIOS();
-    setModal('INSTALL','이룸을 더 빠르게 여는 방법','앱스토어에서 별도 앱을 찾지 않아도, 이 홈페이지를 앱처럼 설치해 사용할 수 있습니다.',`
+    const ios=isIOS(), standalone=isStandalone(), secure=isSecureInstallContext();
+    const localFile=location.protocol==='file:';
+    const state=standalone?'이미 앱 모드로 실행 중입니다.':localFile?'현재 파일을 직접 열어본 상태라 설치 기능을 사용할 수 없습니다.':secure?'설치 가능한 보안 환경에서 열려 있습니다.':'앱 설치는 HTTPS 주소 또는 localhost에서 사용할 수 있습니다.';
+    setModal('INSTALL','이룸을 앱처럼 설치하기',state,`
       <div class="install-note">
-        <div class="install-step"><b>Android · Chrome</b>아래 설치 버튼이 지원되면 바로 설치됩니다. 지원되지 않으면 브라우저 메뉴의 ‘앱 설치’ 또는 ‘홈 화면에 추가’를 이용하세요.</div>
-        <div class="install-step"><b>iPhone · Safari</b>Safari의 공유 버튼을 누른 뒤 ‘홈 화면에 추가’를 선택하세요. iPhone은 웹페이지가 임의로 설치창을 강제로 띄울 수 없습니다.</div>
-        <div class="install-step"><b>Windows · Mac</b>Chrome/Edge 주소창의 설치 아이콘 또는 브라우저 메뉴의 ‘앱 설치’를 이용하면 바탕화면/시작 메뉴에서 바로 열 수 있습니다.</div>
+        <div class="install-step"><b>Android · Chrome / Samsung Internet</b>이 페이지를 HTTPS로 연 뒤 ‘앱 설치’ 버튼을 누르세요. 설치 제안이 아직 준비되지 않았다면 브라우저 메뉴의 ‘홈 화면에 추가’ 또는 ‘앱 설치’를 이용할 수 있습니다.</div>
+        <div class="install-step"><b>iPhone · Safari</b>Safari 하단의 공유 버튼 → ‘홈 화면에 추가’ → ‘추가’를 선택하세요. iOS는 웹사이트가 설치창을 자동으로 띄우는 방식을 지원하지 않습니다.</div>
+        <div class="install-step"><b>Windows · Mac</b>Chrome 또는 Edge에서 HTTPS 주소를 열고 주소창의 설치 아이콘을 누르면 시작 메뉴·Dock·바탕화면에서 앱처럼 사용할 수 있습니다.</div>
+        ${localFile?'<div class="install-step install-warning"><b>지금 확인하는 방법</b>압축파일의 <code>ROOT_루트에_업로드/START_앱설치_미리보기.bat</code>를 실행하면 localhost로 열려 설치 기능을 확인할 수 있습니다.</div>':''}
       </div>
-      <div class="modal-actions"><button class="primary-btn" type="button" data-install-now>${ios?'설치 방법 확인':'지원되면 지금 설치'}</button><button class="secondary-btn" type="button" data-copy-home>홈페이지 주소 복사</button></div>`);
+      <div class="modal-actions"><button class="primary-btn" type="button" data-install-now>${standalone?'이미 설치됨':ios?'iPhone 설치 방법 확인':'지원되면 지금 설치'}</button><button class="secondary-btn" type="button" data-copy-home>홈페이지 주소 복사</button></div>`);
   }
   async function installApp(){
-    if(deferredInstallPrompt){deferredInstallPrompt.prompt();const r=await deferredInstallPrompt.userChoice.catch(()=>null);deferredInstallPrompt=null;return r}
+    if(isStandalone()){alert('이미 앱처럼 설치되어 실행 중입니다.');return}
+    if(deferredInstallPrompt){
+      try{
+        deferredInstallPrompt.prompt();
+        const r=await deferredInstallPrompt.userChoice;
+        if(r?.outcome==='accepted')setInstallStatus('설치 진행 중');
+      }catch(e){}
+      deferredInstallPrompt=null;
+      return;
+    }
     openModal('install');
   }
   async function ensureKakaoSdk(){
@@ -308,7 +343,18 @@
     try{await navigator.clipboard.writeText(location.href);alert('홈페이지 주소를 복사했습니다.')}catch(e){prompt('아래 주소를 복사해 주세요.',location.href)}
   }
   loadPublicConfig();
-  if('serviceWorker' in navigator && location.protocol.startsWith('http'))window.addEventListener('load',()=>navigator.serviceWorker.register('/sw.js').catch(()=>{}));
+  if('serviceWorker' in navigator && (location.protocol==='https:' || location.hostname==='localhost' || location.hostname==='127.0.0.1')){
+    window.addEventListener('load',async()=>{
+      try{
+        await navigator.serviceWorker.register('./sw.js',{scope:'./'});
+        await navigator.serviceWorker.ready;
+        if(isStandalone())setInstallStatus('설치 완료 · 앱 모드로 실행 중');
+        else if(!deferredInstallPrompt)setInstallStatus('설치 기능 준비 중 · 브라우저 메뉴에서도 설치 가능');
+      }catch(e){setInstallStatus('설치 설정을 확인해 주세요')}
+    });
+  }else if(location.protocol==='file:'){
+    setInstallStatus('미리보기 파일 · 설치 확인은 localhost에서 가능');
+  }
   if(new URLSearchParams(location.search).get('kakao')==='success')setTimeout(()=>{history.replaceState({},'',location.pathname);openModal('mypage')},180);
 
   root.addEventListener('click',e=>{
