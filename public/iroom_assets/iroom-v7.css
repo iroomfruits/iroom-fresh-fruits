@@ -1,0 +1,104 @@
+/* V7 — 화면 표시 복구 + 정확한 로고 + 후기/푸터 정돈 + 하단 계절 미리보기 */
+body.iroom-v7{background:#f5efe6!important}
+
+/* 브라우저 기본 button 회색 배경이 시안 위를 가리지 않게 완전 투명화 */
+#iroomV4 .v4-hot-nav button,
+#iroomV4 .v4-hot-icons button,
+#iroomV4 .v4-hot-recos button{
+  -webkit-appearance:none!important;appearance:none!important;
+  border:0!important;background:transparent!important;color:transparent!important;
+  padding:0!important;margin:0!important;box-shadow:none!important;outline:0!important;
+  border-radius:0!important;-webkit-tap-highlight-color:transparent!important
+}
+#iroomV4 .v4-hot-nav button:hover,
+#iroomV4 .v4-hot-icons button:hover,
+#iroomV4 .v4-hot-recos button:hover,
+#iroomV4 .v4-hot-nav button:active,
+#iroomV4 .v4-hot-icons button:active,
+#iroomV4 .v4-hot-recos button:active,
+#iroomV4 .v4-hot-nav button:focus,
+#iroomV4 .v4-hot-icons button:focus,
+#iroomV4 .v4-hot-recos button:focus,
+#iroomV4 .v4-hot-nav button:focus-visible,
+#iroomV4 .v4-hot-icons button:focus-visible,
+#iroomV4 .v4-hot-recos button:focus-visible{
+  border:0!important;background:transparent!important;box-shadow:none!important;outline:0!important
+}
+
+/* 생성 이미지 속 로고를 정확한 최종 로고로 덮어씀 */
+#iroomV4 .v6-hero-band .v4-logo-hot{
+  -webkit-appearance:none!important;appearance:none!important;
+  display:flex!important;align-items:center!important;justify-content:center!important;
+  left:16.0%!important;top:.45%!important;width:13.8%!important;height:9.9%!important;
+  padding:5px 8px!important;margin:0!important;border:0!important;outline:0!important;
+  background:#fffdf9!important;box-shadow:none!important;z-index:8!important;
+  -webkit-tap-highlight-color:transparent!important
+}
+#iroomV4 .v6-hero-band .v4-logo-hot img{
+  display:block!important;width:100%!important;height:100%!important;object-fit:contain!important;
+  filter:none!important;opacity:1!important;transform:none!important
+}
+#iroomV4 .v6-hero-band .v4-logo-hot:focus,
+#iroomV4 .v6-hero-band .v4-logo-hot:focus-visible{outline:0!important;box-shadow:none!important}
+
+/* 시안 블록 사이 숨 쉴 공간을 조금 더 확보 */
+.v6-gap{height:19px!important;background:#fffaf5!important}
+.v6-gap.small{height:13px!important}
+.v6-feature-row{gap:22px!important;padding-left:5.2%!important;padding-right:5.2%!important}
+.v6-feature-card{box-shadow:0 0 0 1px rgba(234,223,211,.48),0 8px 22px rgba(91,67,48,.035)!important}
+
+/* OUR STANDARD — 하단 첫 부분을 1번 시안 톤에 맞게 가볍게 */
+.v5-promise{background:#fbf5ed!important;border-color:#e9dbcd!important;padding-left:7.2%!important;padding-right:7.2%!important}
+.v5-promise-title{padding-top:38px!important;padding-bottom:38px!important}
+.v5-promise>button{padding-top:35px!important;padding-bottom:35px!important}
+.v5-promise>button:hover{background:#fffaf6!important}
+
+/* 후기 섹션 고급스럽게 정돈 */
+.v6-reviews{padding:78px 7.2% 82px!important;background:linear-gradient(180deg,#fffaf5 0%,#fbf5ed 100%)!important}
+.v6-review-head{margin-bottom:34px!important}
+.v6-review-head h2{font-size:40px!important}
+.v6-review-grid{gap:20px!important}
+.v6-review-card{position:relative;padding:32px 32px 30px!important;min-height:210px!important;background:#fffdf9!important;border-color:#e7d9cb!important;box-shadow:0 10px 32px rgba(87,62,42,.035)!important}
+.v6-review-card:before{content:"“";position:absolute;right:24px;top:13px;font:52px/1 Georgia,serif;color:#eadbc9;opacity:.7}
+.v6-review-stars{margin-bottom:20px!important;color:#b27b42!important}
+
+/* 계절 확인용 미리보기 — 공개 페이지 하단에 작고 우아하게 */
+.v7-season-preview{padding:62px 7.2% 68px;background:#fff;border-top:1px solid #eadfd3}
+.v7-season-head{display:flex;justify-content:space-between;align-items:end;gap:28px;margin-bottom:24px}
+.v7-season-head small{display:block;font:11px Georgia,serif;letter-spacing:.24em;color:#8a493b;margin-bottom:9px}
+.v7-season-head h2{margin:0;font-family:"Noto Serif KR",Georgia,serif;font-size:32px;font-weight:500;letter-spacing:-.035em;color:#12362f}
+.v7-season-head p{margin:9px 0 0;color:#7b817d;font-family:"Noto Serif KR",serif;font-size:13px}
+.v7-auto-season{border:1px solid #cdbba7;background:#fffaf5;color:#12362f;border-radius:999px;padding:10px 15px;white-space:nowrap;cursor:pointer}
+.v7-auto-season:hover{background:#f6eee5}
+.v7-season-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.v7-season-card{position:relative;display:block;overflow:hidden;border:1px solid #e6d9cc;background:#fff;padding:0;cursor:pointer;text-align:left;min-height:126px;box-shadow:0 8px 24px rgba(72,52,37,.035);transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease}
+.v7-season-card:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(72,52,37,.07);border-color:#ccb7a2}
+.v7-season-card img{display:block;width:100%;height:82px;object-fit:cover;object-position:center 18%}
+.v7-season-card span{display:flex;align-items:baseline;justify-content:space-between;padding:12px 14px 13px;background:#fffdf9}
+.v7-season-card b{font-family:"Noto Serif KR",serif;font-size:18px;font-weight:600;color:#12362f}
+.v7-season-card small{font:10px Georgia,serif;letter-spacing:.13em;color:#8b7663}
+.v7-season-card.is-active{border-color:#8a493b;box-shadow:0 0 0 1px #8a493b,0 12px 30px rgba(91,58,39,.08)}
+.v7-season-card.is-active:after{content:"NOW";position:absolute;right:8px;top:8px;background:rgba(18,54,47,.9);color:#fff;font:9px Georgia,serif;letter-spacing:.12em;padding:5px 7px}
+
+/* 푸터 — 로고, 빠른 메뉴, 서비스가 한 톤으로 보이도록 */
+.v7-footer{background:linear-gradient(105deg,#0d3228,#123d31)!important;border-top:1px solid rgba(234,210,167,.18)!important;padding-top:48px!important;padding-bottom:52px!important}
+.v7-footer .v5-footer-brand img{height:58px!important;width:260px!important;max-width:100%!important;object-fit:contain!important;object-position:left center!important;filter:brightness(0) invert(1)!important}
+.v7-footer .v5-footer-brand p{margin-top:17px!important;color:#cad8d1!important}
+.v7-footer .v6-footer-title{color:#ead2a7!important}
+.v7-footer button{transition:color .15s ease,transform .15s ease}
+.v7-footer button:hover{color:#f0d59d!important;transform:translateX(2px)}
+.v7-footer-note{display:block;margin-top:10px;max-width:235px;color:#9fb4aa;font-size:11px;line-height:1.65}
+.v7-footer .v6-admin-entry{margin-top:16px!important;background:rgba(255,255,255,.04)!important;border-color:rgba(235,213,173,.35)!important;color:#f2eadb!important}
+
+/* 팝업 포커스도 검은 네모 대신 조용한 링 */
+#iroomV4 .v5-overlay button:focus-visible,
+#iroomV4 .v5-overlay input:focus-visible,
+#iroomV4 .v5-overlay select:focus-visible{outline:2px solid rgba(138,73,59,.38)!important;outline-offset:2px!important}
+
+@media(max-width:1050px){
+ .v6-gap{height:14px!important}.v6-gap.small{height:10px!important}.v6-feature-row{gap:12px!important;padding-left:3.4%!important;padding-right:3.4%!important}
+ .v7-season-preview{padding:50px 5% 56px}.v7-season-grid{grid-template-columns:1fr 1fr}.v7-season-head{align-items:flex-start}
+}
+@media(max-width:700px){
+ .v7-season-preview{padding:42px 20px 48px}.v7-season-head{display:block}.v7-season-head h2{font-size:27px}.v7-auto-season{margin-top:16px}.v7-season-grid{grid-template-columns:1fr 1fr;gap:9px}.v7-season-card img{height:68px}.v7-season-card span{padding:10px 11px}.v7-season-card b{font-size:16px}.v7-footer .v5-footer-brand img{width:230px!important;height:52px!important}
+}
