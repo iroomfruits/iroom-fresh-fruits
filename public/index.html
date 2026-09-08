@@ -2578,24 +2578,24 @@ body>.notice,body>header:not(.k9x-header),body>section.section,body>footer#foote
 #todayPickMedia.iroom-today-media-grid img:nth-of-type(3):last-of-type{grid-column:1/-1}
 </style>
 
-<link rel="stylesheet" href="./iroom_assets/iroom-v4.css">
+<link rel="stylesheet" href="./iroom_assets/iroom-v5.css">
 <script src="./iroom_assets/iroom-season-config-v3.js"></script>
 </head>
-<body class="iroom-v4">
+<body class="iroom-v5">
 
 <div id="iroomV4">
  <main class="v4-shell">
   <section class="v4-artboard-wrap" id="homeV4" aria-label="이룸 fresh fruits 계절 메인">
    <img class="v4-artboard" src="./iroom_assets/seasonal_exact/autumn.png" alt="이룸 계절 프리미엄 과일 홈페이지">
-   <button class="v4-logo-hot" data-scroll="homeV4" aria-label="이룸 fresh fruits 홈"><img src="./iroom_assets/iroom-logo-final.png" alt="이룸 fresh fruits"></button>
+   <button class="v4-logo-hot" data-home aria-label="이룸 fresh fruits 홈"></button>
    <nav class="v4-hot-nav" aria-label="주요 메뉴">
-    <button data-scroll="seasonalPicks" aria-label="Seasonal Picks"></button>
-    <button data-scroll="fruitCuration" aria-label="Fruit Curation"></button>
-    <button data-scroll="giftSelection" aria-label="Gift Selection"></button>
-    <button data-scroll="brandStory" aria-label="Brand Story"></button>
+    <button data-v5-modal="seasonal" aria-label="Seasonal Picks"></button>
+    <button data-v5-modal="curation" aria-label="Fruit Curation"></button>
+    <button data-v5-modal="gift" aria-label="Gift Selection"></button>
+    <button data-v5-modal="brand" aria-label="Brand Story"></button>
    </nav>
    <div class="v4-hot-icons">
-    <button data-action="search" aria-label="검색"></button>
+    <button data-v5-modal="search" aria-label="검색"></button>
     <button data-action="mypage" aria-label="마이페이지"></button>
     <button data-action="cart" aria-label="장바구니"></button>
    </div>
@@ -2603,60 +2603,39 @@ body>.notice,body>header:not(.k9x-header),body>section.section,body>footer#foote
     <button data-fruit="사과" aria-label="추천과일 1"></button><button data-fruit="배" aria-label="추천과일 2"></button><button data-fruit="샤인머스캣" aria-label="추천과일 3"></button><button data-fruit="감" aria-label="추천과일 4"></button>
    </div>
    <div class="v4-hot-features">
-    <button data-scroll="fruitLibrary" aria-label="제철 과일"></button><button data-scroll="fruitCuration" aria-label="맞춤 과일"></button><button data-scroll="giftSelection" aria-label="선물 제안"></button>
+    <button data-v5-modal="seasonal" aria-label="제철 과일"></button><button data-v5-modal="curation" aria-label="맞춤 과일"></button><button data-v5-modal="gift" aria-label="선물 제안"></button>
    </div>
-   <button class="v4-hot-premium" data-scroll="giftSelection" aria-label="Premium Gift Selection"></button>
+   <button class="v4-hot-premium" data-v5-modal="gift" aria-label="Premium Gift Selection"></button>
   </section>
 
-  <section class="v4-section v4-library" id="fruitLibrary">
-   <div class="v4-section-head"><div><small>IROOM FRUIT LIBRARY</small><h2>오늘 더 만나볼 과일</h2></div><p>그날 상태가 좋은 과일을 더 다양하게 만나보세요.<br>과일을 누르면 상품 또는 맞춤 상담으로 이어집니다.</p></div>
-   <div class="v4-fruit-grid"></div>
+  <section class="v5-promise" aria-label="이룸의 약속">
+   <div class="v5-promise-title"><small>OUR STANDARD</small><strong>좋은 과일의 기본을 지킵니다.</strong></div>
+   <button data-v5-modal="brand"><b>01</b><span>산지</span><small>제철과 산지를 봅니다</small></button>
+   <button data-v5-modal="brand"><b>02</b><span>선별</span><small>향·숙도·상태를 봅니다</small></button>
+   <button data-v5-modal="brand"><b>03</b><span>포장</span><small>과일에 맞게 정성껏</small></button>
+   <button data-v5-modal="brand"><b>04</b><span>배송</span><small>좋은 상태 그대로</small></button>
   </section>
 
-  <section class="v4-section v4-tint" id="fruitCuration">
-   <div class="v4-section-head"><div><small>FRUIT CURATION</small><h2>당신에게 맞는 과일을 골라드려요</h2></div><p>예산 · 용도 · 취향을 먼저 듣고<br>오늘 가장 좋은 구성으로 추천합니다.</p></div>
-   <div class="v4-curation-grid">
-    <div class="v4-curation-copy">
-     <div class="v4-process"><article><b>01 · BUDGET</b><h3>예산</h3><p>원하는 금액 안에서 가장 좋은 구성을 찾습니다.</p></article><article><b>02 · PURPOSE</b><h3>용도</h3><p>가정용 · 선물용 · 단체 주문의 목적을 반영합니다.</p></article><article><b>03 · TASTE</b><h3>취향</h3><p>달콤함 · 산뜻함 · 식감 등 선호를 확인합니다.</p></article><article><b>04 · CURATION</b><h3>이룸 추천</h3><p>당일 상태가 좋은 과일로 최종 구성을 제안합니다.</p></article></div>
-     <button class="v4-pill" data-action="custom">맞춤 과일 상담 시작하기 <span>→</span></button>
-    </div>
-    <div class="v4-art-card"><img class="v4-curation-img" alt="이룸 맞춤 과일 큐레이션"></div>
-   </div>
-  </section>
-
-  <section class="v4-section" id="giftSelection">
-   <div class="v4-section-head"><div><small>GIFT SELECTION</small><h2>마음을 전하는 과일 선물</h2></div><p>과일만 고르는 것이 아니라<br>받는 분과 마음까지 생각한 선물을 제안합니다.</p></div>
-   <div class="v4-gift-grid">
-    <div class="v4-art-card v4-gift-visual"><img class="v4-gift-img" alt="이룸 프리미엄 과일 선물"></div>
-    <div class="v4-occasion-list">
-      <button data-action="gift"><span><b>감사 선물</b><small>고마운 마음을 정갈하게 전하고 싶을 때</small></span><i>→</i></button>
-      <button data-action="gift"><span><b>가족 · 건강 선물</b><small>여럿이 함께 즐기기 좋은 균형 구성</small></span><i>→</i></button>
-      <button data-action="gift"><span><b>기업 · 단체 선물</b><small>예산 · 수량 · 포장 조건까지 맞춤 제안</small></span><i>→</i></button>
-    </div>
-   </div>
-  </section>
-
-  <section class="v4-premium-long">
-   <div class="v4-premium-copy"><small>SWEET<br>HEALTHY<br>HAPPY</small><div><h2>Premium<br>Gift Selection</h2><p>좋은 과일로 마음을 전합니다.</p><button data-action="gift">→</button></div></div>
-   <img class="v4-premium-img" alt="Premium Gift Selection">
-  </section>
-
-  <section class="v4-section v4-tint" id="brandStory">
-   <div class="v4-section-head"><div><small>OUR STANDARD</small><h2>이룸이 과일을 고르는 기준</h2></div><p>화려한 설명보다 매일 지키는 기본을 중요하게 생각합니다.</p></div>
-   <div class="v4-standard-grid"><article><b>01 · SOURCE</b><h3>산지</h3><p>제철과 산지의 특성을 살펴 지금 맛이 좋은 과일을 선택합니다.</p></article><article><b>02 · SELECT</b><h3>선별</h3><p>모양뿐 아니라 향 · 숙도 · 단단함과 용도를 함께 확인합니다.</p></article><article><b>03 · PACK</b><h3>포장</h3><p>과일이 눌리거나 흔들리지 않도록 구성에 맞춰 정성스럽게 포장합니다.</p></article><article><b>04 · DELIVERY</b><h3>배송</h3><p>받는 순간까지 좋은 상태가 이어지도록 주문과 배송 흐름을 관리합니다.</p></article></div>
-  </section>
-
-  <section class="v4-section">
-   <div class="v4-section-head"><div><small>FRUIT GUIDE</small><h2>과일을 더 맛있게 즐기는 법</h2></div><p>보관과 후숙의 작은 차이가 과일의 맛을 오래 지켜줍니다.</p></div>
-   <div class="v4-guide-grid"><article><img src="./iroom_assets/fruits/09_사과_apple.png"><div><h3>차갑게 보관할 과일</h3><p>사과와 포도는 냉장 보관하고 수분이 마르지 않게 해주세요.</p></div></article><article><img src="./iroom_assets/fruits/06_복숭아_peach.png"><div><h3>후숙이 필요한 과일</h3><p>복숭아와 망고는 향과 부드러움을 확인한 뒤 먹기 전에 차갑게 하면 좋습니다.</p></div></article><article><img src="./iroom_assets/fruits/19_키위_kiwi.png"><div><h3>선물 받은 과일</h3><p>과일마다 숙도가 다르니 먼저 먹을 순서를 정하면 더 맛있게 즐길 수 있습니다.</p></div></article></div>
-  </section>
-
-  <section class="v4-section v4-reviews v4-tint"><div class="v4-section-head"><div><small>IROOM REVIEW</small><h2>좋은 과일이 좋은 하루가 된 순간</h2></div><p>선물과 일상에서 만난 이룸의 과일 이야기.</p></div><div class="v4-review-grid"><article><div>★★★★★</div><p>“선물 포장이 정갈하고 과일 상태도 좋아서 다시 주문하고 싶어요.”</p><b>과일 선물 고객</b></article><article><div>★★★★★</div><p>“예산만 말씀드렸는데 받는 분에 맞춰 구성을 잘 추천해주셨어요.”</p><b>맞춤 큐레이션 고객</b></article><article><div>★★★★★</div><p>“제철에 맛있는 과일을 바로 볼 수 있어서 고르기 편해요.”</p><b>제철 과일 고객</b></article></div></section>
-
-  <section class="v4-service"><button data-action="search"><small>SEARCH</small><b>과일 찾기</b><span>원하는 과일을 빠르게 찾아보세요 →</span></button><button data-action="custom"><small>CURATION</small><b>맞춤 상담</b><span>예산과 취향에 맞는 구성을 상담하세요 →</span></button><button data-action="cart"><small>ORDER</small><b>장바구니</b><span>담아둔 상품과 주문을 확인하세요 →</span></button></section>
-
-  <footer class="v4-footer"><div><img src="./iroom_assets/iroom-logo-final.png" alt="이룸 fresh fruits"><p>좋은 과일로 마음을 전합니다.<br>SWEET · HEALTHY · HAPPY</p></div><div><h4>QUICK MENU</h4><button data-scroll="seasonalPicks">Seasonal Picks</button><button data-scroll="fruitCuration">Fruit Curation</button><button data-scroll="giftSelection">Gift Selection</button><button data-scroll="brandStory">Brand Story</button></div><div><h4>SERVICE</h4><button data-action="search">상품 검색</button><button data-action="mypage">마이페이지</button><button data-action="cart">장바구니</button><button data-action="custom">맞춤 상담</button></div></footer>
+  <footer class="v5-footer">
+   <div class="v5-footer-brand"><img src="./iroom_assets/iroom-logo-final.png" alt="이룸 fresh fruits"><p>좋은 과일로 마음을 전합니다.<br><span>SWEET · HEALTHY · HAPPY</span></p></div>
+   <nav aria-label="빠른 메뉴"><button data-v5-modal="seasonal">Seasonal Picks</button><button data-v5-modal="curation">Fruit Curation</button><button data-v5-modal="gift">Gift Selection</button><button data-v5-modal="brand">Brand Story</button></nav>
+   <div class="v5-footer-service"><button data-v5-modal="search">상품 검색</button><button data-action="mypage">마이페이지</button><button data-action="cart">장바구니</button><button data-v5-modal="curation">맞춤 상담</button></div>
+  </footer>
  </main>
+
+ <div class="v5-overlay" id="v5Overlay" aria-hidden="true">
+  <div class="v5-dialog" role="dialog" aria-modal="true" aria-labelledby="v5DialogTitle">
+   <button class="v5-close" type="button" aria-label="닫기">×</button>
+   <div class="v5-dialog-kicker" id="v5DialogKicker">IROOM</div>
+   <h2 id="v5DialogTitle">이룸</h2>
+   <p class="v5-dialog-intro" id="v5DialogIntro"></p>
+   <div class="v5-dialog-body" id="v5DialogBody"></div>
+  </div>
+ </div>
+
+ <nav class="v5-mobile-menu" aria-label="모바일 빠른 메뉴">
+  <button data-v5-modal="seasonal">Seasonal</button><button data-v5-modal="curation">Curation</button><button data-v5-modal="gift">Gift</button><button data-v5-modal="brand">Story</button>
+ </nav>
 </div>
 
 <div class="notice"><div class="wrap"><div>🍊 <b>오늘의 입고</b> &nbsp; | &nbsp; 고급 국산 종합과일 입고되었습니다.</div><nav><button id="customerBtn">고객센터</button><button id="ordersBtn">주문조회</button><button id="myBtn">마이페이지</button></nav></div></div>
@@ -4090,5 +4069,5 @@ document.addEventListener("keydown", function(e){
  }
 })();
 </script>
-<script src="./iroom_assets/iroom-v4.js"></script>
+<script src="./iroom_assets/iroom-v5.js"></script>
 </body></html>
