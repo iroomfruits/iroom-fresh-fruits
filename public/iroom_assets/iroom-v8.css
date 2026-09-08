@@ -242,3 +242,26 @@ body{background:var(--season-wash-2,#fffaf4)}
 .premium-fruits-block:first-of-type{background:linear-gradient(145deg,rgba(255,255,255,.94),color-mix(in srgb,var(--season-card) 82%,#f7efe3 18%))}
 .premium-fruits-block:first-of-type .premium-fruit-card:before{content:"국산 엄선";position:absolute;left:10px;top:10px;padding:4px 7px;border-radius:999px;background:color-mix(in srgb,var(--season-accent) 12%,white 88%);color:var(--season-accent);font-size:9px;font-weight:700;letter-spacing:.05em;z-index:2}
 @media(min-width:1800px){.topbar-inner,.selection-section,.fruit-library,.review-section,.public-season-preview,.footer-main,.footer-legal{padding-left:max(6vw,110px);padding-right:max(6vw,110px)}}
+
+
+/* IROOM4 V9 — Fresh promise assurance strip */
+.iroom-assurance{
+  margin-top:24px;
+  padding:24px 28px;
+  border:1px solid var(--season-line,#e8d7c8);
+  border-radius:24px;
+  background:linear-gradient(115deg,var(--season-card,#fffaf4),rgba(255,255,255,.9));
+  box-shadow:0 10px 30px rgba(84,57,38,.035);
+  display:grid;
+  grid-template-columns:auto minmax(0,1fr) auto;
+  align-items:center;
+  gap:20px;
+}
+.iroom-assurance-mark{
+  width:48px;height:48px;border-radius:50%;display:grid;place-items:center;
+  background:var(--season-wash,#fbf1e6);color:var(--season-accent,#7c624e);
+  border:1px solid var(--season-line,#e8d7c8);font-size:22px;font-weight:700;
+}
+.iroom-assurance-copy{display:block;min-width:0}.iroom-assurance-copy small{display:block;font:10px Georgia,serif;letter-spacing:.18em;color:var(--season-accent,#9b503e);margin-bottom:7px}.iroom-assurance-copy strong{display:block;font-family:"Noto Serif KR","Batang",Georgia,serif;font-size:22px;font-weight:600;letter-spacing:-.035em;color:var(--ink);margin-bottom:5px}.iroom-assurance-copy em{display:block;font-style:normal;color:#776e65;font-family:"Noto Serif KR","Batang",serif;font-size:13px;line-height:1.7}.iroom-assurance-points{display:flex;align-items:center;justify-content:flex-end;gap:9px;white-space:nowrap;color:#6f766e;font-size:11px}.iroom-assurance-points b{font-weight:600;color:#31594f}.iroom-assurance-points i{font-style:normal;color:#b9a99a}
+@media(max-width:900px){.iroom-assurance{grid-template-columns:auto 1fr}.iroom-assurance-points{grid-column:2;justify-content:flex-start;white-space:normal;flex-wrap:wrap}}
+@media(max-width:600px){.iroom-assurance{padding:20px;border-radius:20px;grid-template-columns:1fr;gap:12px}.iroom-assurance-mark{width:42px;height:42px}.iroom-assurance-points{grid-column:auto}.iroom-assurance-copy strong{font-size:20px}}
