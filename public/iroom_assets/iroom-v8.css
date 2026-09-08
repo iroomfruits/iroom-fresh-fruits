@@ -434,3 +434,84 @@ html[data-season="winter"] .season-visual>img{clip-path:inset(0 0 0 30%)}
   .season-copy-brand{font-size:18px}.season-copy-fix strong{font-size:22px}.season-copy-fix p{font-size:11px}.season-copy-fix small{display:none}
   .auth-grid{grid-template-columns:1fr}.auth-grid-wide{grid-column:auto}
 }
+
+/* IROOM4 V12 — show the complete approved hero artwork at a calmer scale. */
+.season-stage{
+  padding:22px 0 24px;
+  background:var(--season-wash-2,#fffaf4);
+}
+.season-visual{
+  position:relative;
+  width:min(100%, 1760px);
+  height:clamp(500px,31vw,590px);
+  min-height:0;
+  margin:0 auto;
+  overflow:hidden;
+  background:var(--season-wash-2,#fffaf4);
+  isolation:isolate;
+}
+/* faint atmosphere fills the wide screen; the real artwork itself is never cropped */
+.season-visual:before{
+  content:"";
+  position:absolute;
+  inset:-28px;
+  z-index:0;
+  width:auto!important;
+  background-image:var(--hero-image);
+  background-size:cover;
+  background-position:center;
+  filter:blur(24px) saturate(.75);
+  opacity:.11;
+  transform:scale(1.03);
+  pointer-events:none;
+}
+.season-visual:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:1;
+  background:linear-gradient(90deg,var(--season-wash-2,#fffaf4) 0%,rgba(255,255,255,.04) 20%,rgba(255,255,255,.04) 80%,var(--season-wash-2,#fffaf4) 100%);
+  pointer-events:none;
+  mix-blend-mode:normal;
+}
+.season-visual>img{
+  position:relative!important;
+  z-index:2;
+  display:block;
+  width:auto!important;
+  height:100%!important;
+  max-width:100%!important;
+  max-height:100%!important;
+  min-height:0!important;
+  margin:0 auto;
+  inset:auto!important;
+  transform:none!important;
+  clip-path:none!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  filter:saturate(.93) contrast(.97) brightness(1.015);
+}
+/* The approved artwork already contains the correct seasonal typography. */
+.season-copy-fix{display:none!important}
+
+.header-auth{min-width:58px;justify-content:center}
+.auth-login-only{font-family:Georgia,"Times New Roman",serif;letter-spacing:.08em;font-size:12px}
+
+/* integrated box art: no artificial HTML badge or pasted-looking white label */
+.selection-art,.premium-art{background:color-mix(in srgb,var(--season-wash,#fbf1e6) 72%,white 28%)}
+
+@media(max-width:1180px){
+  .season-visual{height:520px}
+}
+@media(max-width:900px){
+  .season-stage{padding:14px 0 18px}
+  .season-visual{height:470px}
+}
+@media(max-width:760px){
+  .season-stage{padding:8px 0 12px}
+  .season-visual{height:auto;aspect-ratio:1600/930}
+  .season-visual>img{width:100%!important;height:auto!important}
+}
+.login-join-box{margin-top:4px;padding:15px 16px;border:1px solid #e8d7c8;border-radius:14px;background:#fffaf4;display:flex;align-items:center;justify-content:space-between;gap:12px;color:#786e65;font-size:12px}
+.login-join-box button{border:0;background:transparent;color:#0e5a48;font-weight:700;letter-spacing:.03em;text-decoration:underline;text-underline-offset:4px;padding:4px}
+@media(max-width:520px){.login-join-box{align-items:flex-start;flex-direction:column}}

@@ -145,7 +145,9 @@
     updateSeasonControls();
     const preload=new Image();
     preload.onload=()=>{artwork.src=preload.src; requestAnimationFrame(()=>visual.classList.remove('is-changing'))};
-    preload.src=assets+data.art;
+    const heroUrl=assets+data.art;
+    visual.style.setProperty('--hero-image', `url("${heroUrl}")`);
+    preload.src=heroUrl;
     const ca=$('#curationArt'),ga=$('#giftArt'),pa=$('#premiumArt');
     if(ca)ca.src=assets+data.curation;if(ga)ga.src=assets+data.gift;if(pa)pa.src=assets+data.premium;
     $$('.premium-fruit-card:not(.seasonal-fruit-card)').forEach((card,i)=>{const n=(data.premiumFruits||[])[i],m=fruitMeta[n];if(!n||!m)return;card.dataset.fruit=n;const im=$('img',card),b=$('b',card),sm=$('small',card);if(im){im.src=assets+m[0];im.alt=n}if(b)b.textContent=n;if(sm)sm.textContent=m[1]});
@@ -217,13 +219,13 @@
   }
   function fillSearch(q){const box=$('#searchResults');if(!box)return;q=(q||'').trim();const list=allFruitNames.filter(n=>!q||n.includes(q));box.innerHTML=list.map(n=>`<button type="button" data-fruit="${n}">${n}</button>`).join('')||'<span style="color:#81786e">검색 결과가 없습니다.</span>'}
   function renderLogin(){
-    setModal('MEMBER LOGIN','로그인','이룸 회원으로 로그인하면 주문조회와 상담내역을 한곳에서 확인할 수 있습니다.',`
+    setModal('MEMBER','LOGIN','이룸 회원 로그인과 신규 회원가입을 한 창에서 이용할 수 있습니다.',`
       <form class="auth-form" id="loginForm">
         <label><span>아이디 또는 이메일</span><input name="account" autocomplete="username" required placeholder="아이디 또는 이메일"></label>
         <label><span>비밀번호</span><input name="password" type="password" autocomplete="current-password" required placeholder="비밀번호"></label>
-        <button class="primary-btn" type="submit">로그인</button>
-        <button class="kakao-login-btn" type="button" data-kakao-login>카카오 1초 로그인</button>
-        <p class="auth-help">아직 회원이 아니신가요? <button type="button" data-open-related="signup">회원가입</button></p>
+        <button class="primary-btn" type="submit">LOGIN</button>
+        <button class="kakao-login-btn" type="button" data-kakao-login>KAKAO LOGIN</button>
+        <div class="login-join-box"><span>처음 방문하셨나요?</span><button type="button" data-open-related="signup">SIGN UP · 회원가입</button></div>
       </form>`);
   }
   function renderSignup(){
@@ -338,11 +340,11 @@
       const d=await r.json();
       if(d.user){
         const nm=(d.user.name||d.user.username||'회원').replace(/[<>]/g,'');
-        wrap.innerHTML=`<button class="auth-link auth-user" type="button" data-modal="mypage">${nm}님</button><span aria-hidden="true">·</span><button class="auth-link" type="button" data-logout>로그아웃</button>`;
+        wrap.innerHTML=`<button class="auth-link auth-user" type="button" data-modal="mypage">${nm}님</button><span aria-hidden="true">·</span><button class="auth-link" type="button" data-logout>LOGOUT</button>`;
         return;
       }
     }catch(e){}
-    wrap.innerHTML='<button class="auth-link" type="button" data-modal="login">로그인</button><span aria-hidden="true">·</span><button class="auth-link" type="button" data-modal="signup">회원가입</button>';
+    wrap.innerHTML='<button class="auth-link auth-login-only" type="button" data-modal="login">LOGIN</button>';
   }
   async function submitLogin(form){
     const fd=new FormData(form);
