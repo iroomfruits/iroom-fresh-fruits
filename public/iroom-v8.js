@@ -27,6 +27,12 @@
     autumn:['premium_variants/autumn_01_홍로사과.png','premium_variants/autumn_02_나주배.png','premium_variants/autumn_03_샤인머스캣.png','premium_variants/autumn_04_대봉.png'],
     winter:['premium_variants/winter_01_제주감귤.png','premium_variants/winter_02_한라봉.png','premium_variants/winter_03_금실딸기.png','premium_variants/winter_04_부사사과.png']
   };
+  const heroAccents={
+    spring:['fruits/16_블루베리_blueberry.png','fruits/12_샤인머스캣_shine_muscat.png'],
+    summer:['fruits/04_체리_cherry.png','fruits/18_파인애플_pineapple.png'],
+    autumn:['fruits/26_밤_chestnut.png','fruits/27_자두_plum.png'],
+    winter:['fruits/10_배_pear.png','fruits/16_블루베리_blueberry.png']
+  };
   const heroCopy={
     spring:{title:'봄 제철 과일',desc:'봄의 싱그러움을<br>가장 특별한 선물로',tag:'PREMIUM FRESH FRUITS · IN SPRING'},
     summer:{title:'여름의 과일',desc:'햇살이 더 달콤하게<br>만드는 계절의 선물',tag:'PREMIUM FRESH FRUITS · IN SUMMER'},
@@ -149,6 +155,10 @@
     if(hd)hd.innerHTML=hc.desc;
     if(hg)hg.textContent=hc.tag;
     updateSeasonControls();
+    const side=heroAccents[key]||[];
+    const leftAccent=$('#heroAccentLeft'),rightAccent=$('#heroAccentRight');
+    if(leftAccent){leftAccent.src=side[0]?assets+side[0]:'';leftAccent.alt=''}
+    if(rightAccent){rightAccent.src=side[1]?assets+side[1]:'';rightAccent.alt=''}
     const preload=new Image();
     preload.onload=()=>{artwork.src=preload.src; requestAnimationFrame(()=>visual.classList.remove('is-changing'))};
     const heroUrl=assets+data.art;

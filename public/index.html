@@ -11,7 +11,7 @@
 <meta name="apple-mobile-web-app-title" content="이룸">
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="apple-touch-icon" href="./iroom_assets/app-icon-192.png">
-<link rel="stylesheet" href="./iroom_assets/iroom-v8.css?v=23">
+<link rel="stylesheet" href="./iroom_assets/iroom-v8.css?v=24">
 </head>
 <body>
 <div class="site-shell" id="iroomFinalBase">
@@ -28,13 +28,13 @@
         <button type="button" data-modal="brand">Brand Story</button>
       </nav>
 
-      <div class="header-tools header-tools-a">
+      <div class="header-tools header-tools-a" aria-label="빠른 메뉴">
         <button class="header-icon-btn" type="button" data-modal="search" aria-label="과일 검색" title="검색">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 4.2 4.2"></path></svg>
+          <img class="utility-icon" src="./iroom_assets/ui/search.png" alt="">
         </button>
         <div class="header-auth account-wrap" aria-label="회원 메뉴">
           <button class="header-icon-btn account-trigger" type="button" data-account-toggle aria-label="마이이룸 메뉴" aria-expanded="false" title="마이이룸">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.3"></circle><path d="M5.8 20c.5-4.2 2.7-6.4 6.2-6.4s5.7 2.2 6.2 6.4"></path></svg>
+            <img class="utility-icon" src="./iroom_assets/ui/user.png" alt="">
             <span class="account-dot" aria-hidden="true"></span>
           </button>
           <div class="account-popover" data-account-popover hidden>
@@ -50,7 +50,7 @@
           </div>
         </div>
         <button class="header-icon-btn" type="button" data-modal="cart" aria-label="장바구니" title="장바구니">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.7 8.3h10.6l.7 12H6l.7-12Z"></path><path d="M9 8.3V6a3 3 0 0 1 6 0v2.3"></path></svg>
+          <img class="utility-icon" src="./iroom_assets/ui/bag.png" alt="">
           <span class="cart-dot" aria-hidden="true"></span>
         </button>
       </div>
@@ -59,6 +59,8 @@
 
   <main>
     <section class="season-stage" aria-label="계절별 이룸 메인 디자인">
+      <img class="hero-side-fruit hero-side-fruit-left" id="heroAccentLeft" src="" alt="" aria-hidden="true">
+      <img class="hero-side-fruit hero-side-fruit-right" id="heroAccentRight" src="" alt="" aria-hidden="true">
       <div class="season-visual" id="seasonVisual">
         <img id="seasonArtwork" src="" alt="이룸 계절별 프리미엄 과일 메인 시안">
         <div class="season-copy-fix" aria-label="계절 메인 소개">
@@ -291,6 +293,6 @@
   </section>
 </div>
 
-<script src="./iroom_assets/iroom-v8.js?v=23"></script>
+<script src="./iroom_assets/iroom-v8.js?v=24"></script>
 </body>
 </html>

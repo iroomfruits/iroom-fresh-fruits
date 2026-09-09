@@ -1322,3 +1322,57 @@ html[data-season="winter"],.site-shell[data-season="winter"]{
  .account-popover:before{right:72px}.season-stage::before,.season-stage::after{display:none}.season-visual{height:auto}
 }
 \n\n/* IROOM4 V23 — visibly softer section color / refined search modal */\nhtml{--iroom-build:23}\n\n/* Make the section color differences actually visible while keeping fruit cards clean. */\n.premium-fruits-block:first-of-type{\n  background:linear-gradient(135deg,color-mix(in srgb,var(--panel-premium) 86%,#fff 14%),color-mix(in srgb,var(--panel-premium) 72%,#fff 28%))!important;\n}\n.seasonal-fruits-block{\n  background:linear-gradient(135deg,color-mix(in srgb,var(--panel-seasonal) 87%,#fff 13%),color-mix(in srgb,var(--panel-seasonal) 73%,#fff 27%))!important;\n}\n.selection-curation{\n  background:linear-gradient(145deg,color-mix(in srgb,var(--panel-curation) 87%,#fff 13%),color-mix(in srgb,var(--panel-curation) 72%,#fff 28%))!important;\n}\n.selection-gift{\n  background:linear-gradient(145deg,color-mix(in srgb,var(--panel-gift) 88%,#fff 12%),color-mix(in srgb,var(--panel-gift) 73%,#fff 27%))!important;\n}\n.selection-guide{\n  background:linear-gradient(145deg,color-mix(in srgb,var(--panel-guide) 88%,#fff 12%),color-mix(in srgb,var(--panel-guide) 74%,#fff 26%))!important;\n}\n.selection-card{border-color:color-mix(in srgb,var(--season-line) 82%,white 18%);box-shadow:0 14px 30px rgba(78,58,41,.045)}\n.selection-section{\n  background:\n    radial-gradient(ellipse at 2% 8%,color-mix(in srgb,var(--page-glow-a) 82%,transparent),transparent 31%),\n    radial-gradient(ellipse at 98% 54%,color-mix(in srgb,var(--page-glow-b) 70%,transparent),transparent 32%),\n    linear-gradient(180deg,color-mix(in srgb,var(--page-base) 90%,white 10%),color-mix(in srgb,var(--page-soft) 80%,white 20%));\n}\n.fruit-library{background:linear-gradient(180deg,color-mix(in srgb,var(--page-soft2) 78%,white 22%),color-mix(in srgb,var(--page-base) 82%,white 18%))}\n.review-section{background:linear-gradient(180deg,color-mix(in srgb,var(--page-base) 84%,white 16%),color-mix(in srgb,var(--page-soft) 75%,white 25%))}\n\n/* The side fruit accents should be seen, not guessed. */\n.season-stage::before,.season-stage::after{\n  width:clamp(155px,11vw,220px);height:clamp(155px,11vw,220px);opacity:.66;\n  filter:saturate(1.02) contrast(.99) drop-shadow(0 12px 18px rgba(74,55,38,.055));\n}\n.season-stage::before{left:clamp(20px,2.8vw,58px)}\n.season-stage::after{right:clamp(20px,2.8vw,58px)}\n\n/* Search should feel like Iroom, not a full-screen blurred fruit poster. */\n.modal-backdrop[data-modal-type=\"search\"]{\n  background:rgba(247,241,232,.76);\n  backdrop-filter:blur(2px) saturate(.96);\n}\n.modal-backdrop[data-modal-type=\"search\"] .modal-panel{\n  width:min(720px,calc(100vw - 34px));\n  max-height:min(78vh,720px);\n  padding:38px 40px 36px;\n  background:linear-gradient(155deg,#fffdf9 0%,color-mix(in srgb,var(--page-soft2) 44%,#fff 56%) 100%);\n  border:1px solid color-mix(in srgb,var(--season-line) 72%,white 28%);\n  border-radius:24px;\n  box-shadow:0 24px 70px rgba(54,43,34,.13);\n}\n.modal-backdrop[data-modal-type=\"search\"] .modal-panel h2{font-size:32px;margin-bottom:8px}\n.modal-backdrop[data-modal-type=\"search\"] .modal-intro{margin-bottom:22px;color:#7b7066}\n.modal-backdrop[data-modal-type=\"search\"] .modal-close{right:16px;top:14px;width:40px;height:40px;border:1px solid color-mix(in srgb,var(--season-line) 65%,white 35%);border-radius:50%;background:#fffaf4;font-size:24px}\n.search-row-v23{display:grid;grid-template-columns:1fr 84px;gap:10px}\n.search-row-v23 input{height:50px;border:1px solid color-mix(in srgb,var(--season-line) 70%,white 30%);border-radius:14px;background:#fff;padding:0 17px;font-size:14px;outline:none}\n.search-row-v23 input:focus{border-color:color-mix(in srgb,var(--season-accent) 48%,white 52%);box-shadow:0 0 0 3px color-mix(in srgb,var(--season-accent) 8%,transparent)}\n.search-row-v23 button{height:50px;border:0;border-radius:14px;background:#173f35;color:#fff;font-size:13px;font-weight:700}\n.search-quick-label{margin:22px 0 10px;font:10px Georgia,serif;letter-spacing:.18em;color:var(--season-accent)}\n.search-results-v23{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:0}\n.search-result-card{display:grid;grid-template-columns:64px 1fr auto;align-items:center;gap:12px;min-height:82px;padding:10px 12px;border:1px solid color-mix(in srgb,var(--season-line) 60%,white 40%);border-radius:16px;background:rgba(255,255,255,.84);text-align:left;color:#173d35}\n.search-result-card:hover{background:#fff;border-color:color-mix(in srgb,var(--season-accent) 28%,white 72%);transform:translateY(-1px)}\n.search-result-card img{width:62px;height:58px;object-fit:contain}\n.search-result-card span{min-width:0}\n.search-result-card b{display:block;font-family:\"Noto Serif KR\",\"Batang\",serif;font-size:15px;margin-bottom:4px}\n.search-result-card small{display:block;color:#86786d;font-size:10.5px;line-height:1.45;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}\n.search-result-card i{font-style:normal;font-size:10px;color:#6e806f;white-space:nowrap}\n.search-empty{grid-column:1/-1;padding:24px;border:1px dashed color-mix(in srgb,var(--season-line) 60%,white 40%);border-radius:14px;background:rgba(255,255,255,.6);color:#867b71;text-align:center;font-size:12px}\n@media(max-width:640px){\n  .modal-backdrop[data-modal-type=\"search\"] .modal-panel{padding:34px 20px 24px}\n  .search-results-v23{grid-template-columns:1fr}.search-result-card{grid-template-columns:58px 1fr}.search-result-card i{display:none}\n  .search-row-v23{grid-template-columns:1fr 70px}\n}\n
+/* IROOM4 V24 — actual visible point-fruits, distinct premium visuals, reliable A-style menu */
+html{--iroom-build:24}
+
+/* Remove the old ghosted pseudo-fruit accents. Real image elements are used instead. */
+.season-stage::before,.season-stage::after{display:none!important}
+.hero-side-fruit{
+  position:absolute;z-index:2;pointer-events:none;object-fit:contain;
+  width:clamp(130px,9vw,188px);height:clamp(130px,9vw,188px);
+  opacity:.82;filter:saturate(1.03) contrast(1.01) drop-shadow(0 12px 18px rgba(68,50,35,.10));
+  transition:opacity .25s ease,transform .25s ease;
+}
+.hero-side-fruit-left{left:clamp(24px,4vw,76px);top:57%;transform:translateY(-50%) rotate(-7deg)}
+.hero-side-fruit-right{right:clamp(24px,4vw,76px);top:43%;transform:translateY(-50%) rotate(6deg)}
+.season-visual{position:relative;z-index:3}
+@media(max-width:1180px){.hero-side-fruit{width:120px;height:120px;opacity:.72}.hero-side-fruit-left{left:15px}.hero-side-fruit-right{right:15px}}
+@media(max-width:900px){.hero-side-fruit{display:none}}
+
+/* Stronger-but-soft section identity. Fruit cards stay clean. */
+html[data-season="spring"],.site-shell[data-season="spring"]{
+ --panel-premium:#fdecea;--panel-seasonal:#eef4e8;--panel-curation:#f7eee5;--panel-gift:#fbefdf;--panel-guide:#eaf2e9;
+}
+html[data-season="summer"],.site-shell[data-season="summer"]{
+ --panel-premium:#fff4cf;--panel-seasonal:#edf3d6;--panel-curation:#e9f3e5;--panel-gift:#faedcf;--panel-guide:#edf4e4;
+}
+html[data-season="autumn"],.site-shell[data-season="autumn"]{
+ --panel-premium:#f8e4d5;--panel-seasonal:#f5e7dc;--panel-curation:#efe9df;--panel-gift:#f5e3d1;--panel-guide:#e9eee5;
+}
+html[data-season="winter"],.site-shell[data-season="winter"]{
+ --panel-premium:#f6eddd;--panel-seasonal:#e8efe5;--panel-curation:#e6efeb;--panel-gift:#f4ead8;--panel-guide:#e8efea;
+}
+.premium-fruits-block:first-of-type{background:linear-gradient(135deg,var(--panel-premium),color-mix(in srgb,var(--panel-premium) 84%,#fff 16%))!important}
+.seasonal-fruits-block{background:linear-gradient(135deg,var(--panel-seasonal),color-mix(in srgb,var(--panel-seasonal) 84%,#fff 16%))!important}
+.selection-curation{background:linear-gradient(145deg,var(--panel-curation),color-mix(in srgb,var(--panel-curation) 83%,#fff 17%))!important}
+.selection-gift{background:linear-gradient(145deg,var(--panel-gift),color-mix(in srgb,var(--panel-gift) 84%,#fff 16%))!important}
+.selection-guide{background:linear-gradient(145deg,var(--panel-guide),color-mix(in srgb,var(--panel-guide) 84%,#fff 16%))!important}
+.premium-fruit-card,.seasonal-fruit-card,.library-card{background:rgba(255,254,250,.94)!important}
+
+/* Premium fruit pictures are intentionally more editorial and clearly different from seasonal singles. */
+.premium-fruits-block:first-of-type .premium-fruit-card img{
+  height:145px!important;width:100%;object-fit:contain;transform:none!important;filter:none!important;
+}
+.seasonal-fruit-card img{height:124px!important;object-fit:contain}
+
+/* Reliable image-based A-style utility icons: no broken SVG squares. */
+.topbar-inner{grid-template-columns:280px 1fr 170px}
+.header-tools-a{gap:13px}
+.header-icon-btn{width:40px;height:40px;border:1px solid transparent;border-radius:50%;padding:7px;background:transparent}
+.header-icon-btn:hover{border-color:color-mix(in srgb,var(--season-line) 58%,white 42%);background:rgba(255,255,255,.62)}
+.header-icon-btn svg{display:none!important}
+.utility-icon{display:block!important;width:26px!important;height:26px!important;object-fit:contain!important;opacity:.96}
+.account-trigger{border-color:color-mix(in srgb,var(--season-line) 42%,white 58%);background:rgba(255,255,255,.38)}
+.account-popover{right:-46px;top:49px}
+@media(max-width:1180px){.topbar-inner{grid-template-columns:230px 1fr 150px}.header-tools-a{gap:8px}.header-icon-btn{width:37px;height:37px}.utility-icon{width:24px!important;height:24px!important}}
+@media(max-width:760px){.topbar-inner{grid-template-columns:1fr auto}.header-tools-a{gap:4px}.header-icon-btn{width:36px;height:36px;padding:7px}.utility-icon{width:23px!important;height:23px!important}}
