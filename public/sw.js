@@ -1,4 +1,4 @@
-const CACHE="iroom4-v10-static-1";
+const CACHE="iroom4-v14-static-1";
 const CORE=[
   "./",
   "./index.html",

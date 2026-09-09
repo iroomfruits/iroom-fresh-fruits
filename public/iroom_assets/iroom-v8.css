@@ -576,3 +576,92 @@ html[data-season="winter"] .season-visual>img{clip-path:inset(0 0 0 30%)}
   .season-visual>img{width:100%!important;height:auto!important;-webkit-mask-image:none;mask-image:none}
   .season-visual:after{display:none}
 }
+
+/* IROOM4 V14 — use the user's four final seasonal artworks exactly as uploaded.
+   No crop, no stretched duplicate image: the remaining widescreen space is blended with soft seasonal color. */
+.site-shell[data-season="spring"]{--hero-edge:#f7eee5;--hero-edge2:#eef2df;--hero-glow:rgba(229,191,196,.22)}
+.site-shell[data-season="summer"]{--hero-edge:#f7efd8;--hero-edge2:#edf1d4;--hero-glow:rgba(208,222,126,.24)}
+.site-shell[data-season="autumn"]{--hero-edge:#f6e3d2;--hero-edge2:#f2e8d8;--hero-glow:rgba(220,151,104,.24)}
+.site-shell[data-season="winter"]{--hero-edge:#f4ecdf;--hero-edge2:#edf1e7;--hero-glow:rgba(176,196,181,.20)}
+
+.season-stage{
+  padding:18px 0 22px;
+  background:
+    radial-gradient(circle at 8% 22%,var(--hero-glow,rgba(220,180,150,.15)),transparent 28%),
+    radial-gradient(circle at 92% 76%,var(--hero-glow,rgba(220,180,150,.12)),transparent 30%),
+    linear-gradient(90deg,var(--hero-edge,#f7efe5) 0%,var(--hero-edge2,#faf6ef) 24%,var(--season-wash-2,#fffaf4) 50%,var(--hero-edge2,#faf6ef) 76%,var(--hero-edge,#f7efe5) 100%);
+}
+.season-visual{
+  width:min(100%,1760px);
+  height:clamp(500px,31vw,590px);
+  margin:0 auto;
+  overflow:hidden;
+  background:transparent;
+  isolation:isolate;
+}
+/* Never use a stretched or blurred duplicate of the hero artwork. */
+.season-visual:before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:0;
+  background:
+    radial-gradient(ellipse at 50% 48%,rgba(255,255,255,.66) 0%,rgba(255,255,255,.34) 37%,transparent 73%),
+    linear-gradient(90deg,var(--hero-edge,#f7efe5),transparent 19%,transparent 81%,var(--hero-edge,#f7efe5));
+  opacity:1;
+  filter:none;
+  transform:none;
+  pointer-events:none;
+}
+.season-visual:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:3;
+  pointer-events:none;
+  background:
+    linear-gradient(90deg,
+      var(--hero-edge,#f7efe5) 0%,
+      color-mix(in srgb,var(--hero-edge,#f7efe5) 75%,transparent) 5%,
+      transparent 11%,transparent 89%,
+      color-mix(in srgb,var(--hero-edge,#f7efe5) 75%,transparent) 95%,
+      var(--hero-edge,#f7efe5) 100%),
+    linear-gradient(180deg,
+      color-mix(in srgb,var(--hero-edge2,#faf6ef) 65%,transparent) 0%,
+      transparent 5%,transparent 95%,
+      color-mix(in srgb,var(--hero-edge2,#faf6ef) 65%,transparent) 100%);
+}
+.season-visual>img{
+  position:relative!important;
+  z-index:2;
+  display:block;
+  width:auto!important;
+  height:100%!important;
+  max-width:100%!important;
+  max-height:100%!important;
+  margin:0 auto;
+  inset:auto!important;
+  transform:none!important;
+  clip-path:none!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 5.5%,#000 94.5%,transparent 100%);
+  mask-image:linear-gradient(90deg,transparent 0%,#000 5.5%,#000 94.5%,transparent 100%);
+  filter:none;
+}
+.season-visual.is-changing>img{opacity:.58}
+
+@media(max-width:1100px){
+  .season-visual{height:520px}
+}
+@media(max-width:900px){
+  .season-stage{padding:12px 0 16px}
+  .season-visual{height:470px}
+  .season-visual>img{-webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 3%,#000 97%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0%,#000 3%,#000 97%,transparent 100%)}
+}
+@media(max-width:760px){
+  .season-stage{padding:7px 0 10px}
+  .season-visual{height:auto;aspect-ratio:1672/941}
+  .season-visual>img{width:100%!important;height:auto!important;-webkit-mask-image:none;mask-image:none}
+  .season-visual:after{display:none}
+}

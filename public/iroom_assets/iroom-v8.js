@@ -16,10 +16,10 @@
   };
   let publicSite={...PUBLIC_DEFAULT};
   const seasons={
-    spring:{label:'봄',art:'hero_soft/spring.jpg',curation:'card_art/spring_curation.jpg',gift:'card_art/spring_gift.jpg',premium:'card_art/spring_premium.jpg',premiumFruits:['금실딸기','성주참외','대저토마토','샤인머스캣'],seasonalFruits:['딸기','참외','토마토','청포도'],library:['블루베리','파인애플','망고','자몽','체리','멜론']},
-    summer:{label:'여름',art:'hero_soft/summer.jpg',curation:'card_art/summer_curation.jpg',gift:'card_art/summer_gift.jpg',premium:'card_art/summer_premium.jpg',premiumFruits:['백도복숭아','고당도수박','샤인머스캣','머스크멜론'],seasonalFruits:['수박','복숭아','자두','포도'],library:['파인애플','키위','블루베리','청포도','자몽','체리']},
-    autumn:{label:'가을',art:'hero_soft/autumn.jpg',curation:'card_art/autumn_curation.jpg',gift:'card_art/autumn_gift.jpg',premium:'card_art/autumn_premium.jpg',premiumFruits:['홍로사과','나주배','샤인머스캣','대봉'],seasonalFruits:['사과','배','감','대봉'],library:['석류','포도','블랙베리','자몽','샤인머스캣','사과']},
-    winter:{label:'겨울',art:'hero_soft/winter.jpg',curation:'card_art/winter_curation.jpg',gift:'card_art/winter_gift.jpg',premium:'card_art/winter_premium.jpg',premiumFruits:['제주감귤','한라봉','금실딸기','부사사과'],seasonalFruits:['제주감귤','한라봉','딸기','사과'],library:['키위','금귤','배','블루베리','자몽','오렌지']}
+    spring:{label:'봄',art:'hero_final/spring.png',curation:'card_art/spring_curation.jpg',gift:'card_art/spring_gift.jpg',premium:'card_art/spring_premium.jpg',premiumFruits:['금실딸기','성주참외','대저토마토','샤인머스캣'],seasonalFruits:['딸기','참외','토마토','청포도'],library:['블루베리','파인애플','망고','자몽','체리','멜론']},
+    summer:{label:'여름',art:'hero_final/summer.png',curation:'card_art/summer_curation.jpg',gift:'card_art/summer_gift.jpg',premium:'card_art/summer_premium.jpg',premiumFruits:['백도복숭아','고당도수박','샤인머스캣','머스크멜론'],seasonalFruits:['수박','복숭아','자두','포도'],library:['파인애플','키위','블루베리','청포도','자몽','체리']},
+    autumn:{label:'가을',art:'hero_final/autumn.png',curation:'card_art/autumn_curation.jpg',gift:'card_art/autumn_gift.jpg',premium:'card_art/autumn_premium.jpg',premiumFruits:['홍로사과','나주배','샤인머스캣','대봉'],seasonalFruits:['사과','배','감','대봉'],library:['석류','포도','블랙베리','자몽','샤인머스캣','사과']},
+    winter:{label:'겨울',art:'hero_final/winter.png',curation:'card_art/winter_curation.jpg',gift:'card_art/winter_gift.jpg',premium:'card_art/winter_premium.jpg',premiumFruits:['제주감귤','한라봉','금실딸기','부사사과'],seasonalFruits:['제주감귤','한라봉','딸기','사과'],library:['키위','금귤','배','블루베리','자몽','오렌지']}
   };
   const heroCopy={
     spring:{title:'봄 제철 과일',desc:'봄의 싱그러움을<br>가장 특별한 선물로',tag:'PREMIUM FRESH FRUITS · IN SPRING'},
