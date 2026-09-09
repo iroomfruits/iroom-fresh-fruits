@@ -925,3 +925,81 @@ html{--iroom-build:17}
 @media(max-width:760px){.member-chip{width:38px;height:38px;padding:3px;justify-content:center}.member-copy{display:none}.member-fruit{width:29px;height:29px;flex-basis:29px}.header-tools{gap:7px}}
 
 html{--iroom-build:18}
+
+
+/* IROOM4 V19 — clean account control + restrained seasonal accents */
+html{--iroom-build:19}
+
+/* Keep the content cards bright and premium; use season color as a quiet accent, not a fill. */
+.selection-section{
+  background:linear-gradient(180deg,#fffefb 0%,color-mix(in srgb,var(--season-wash-2) 26%,white 74%) 100%);
+}
+.premium-fruits-block:first-of-type,
+.seasonal-fruits-block,
+.selection-curation,
+.selection-gift,
+.selection-guide{
+  background:linear-gradient(145deg,rgba(255,255,255,.985),rgba(255,253,249,.965));
+  border-color:color-mix(in srgb,var(--season-line) 58%,white 42%);
+  box-shadow:0 9px 25px rgba(76,55,38,.025);
+}
+.selection-card:before{display:none}
+.premium-fruit-card,.seasonal-fruit-card,.library-card{
+  background:linear-gradient(180deg,#fff 0%,#fffefc 100%);
+  border-color:color-mix(in srgb,var(--season-line) 52%,white 48%);
+  box-shadow:0 6px 18px rgba(70,52,38,.018);
+}
+.selection-copy small,.eyebrow,.premium-fruits-block .premium-fruits-copy small{
+  color:var(--season-accent);
+}
+.selection-copy strong,.premium-fruits-copy strong{
+  text-decoration-color:color-mix(in srgb,var(--season-accent) 34%,transparent);
+}
+.premium-fruits-block:first-of-type .premium-fruit-card:before{
+  background:color-mix(in srgb,var(--season-accent) 8%,white 92%);
+  color:color-mix(in srgb,var(--season-accent) 82%,#4e443d 18%);
+}
+.guide-chips b{
+  background:#fffefc;
+  border-color:color-mix(in srgb,var(--season-line) 48%,white 52%);
+}
+
+/* My Iroom: one elegant control, no face/fruit character. */
+.topbar-inner{grid-template-columns:280px 1fr 290px}
+.header-tools{gap:12px}
+.member-chip{
+  display:inline-flex;align-items:center;gap:9px;height:42px;padding:4px 13px 4px 9px;
+  border:1px solid color-mix(in srgb,var(--season-line,#dac7b5) 66%,white 34%);
+  border-radius:999px;
+  background:rgba(255,254,251,.94);
+  color:#173f36;
+  box-shadow:0 4px 14px rgba(62,48,35,.025);
+  transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease,background .2s ease;
+}
+.member-chip:hover{
+  transform:translateY(-1px);
+  background:#fff;
+  box-shadow:0 7px 18px rgba(62,48,35,.055);
+  border-color:color-mix(in srgb,var(--season-accent,#9b503e) 28%,white 72%);
+}
+.member-copy{display:flex;flex-direction:column;align-items:flex-start;line-height:1.03}
+.member-copy small{font:8px Georgia,serif;letter-spacing:.17em;color:color-mix(in srgb,var(--season-accent) 72%,#75685f 28%);margin-bottom:4px}
+.member-copy strong{font-family:Georgia,"Times New Roman",serif;font-size:13px;font-weight:600;color:#173f36;white-space:nowrap}
+.member-leaf{
+  position:relative;width:29px;height:29px;flex:0 0 29px;border-radius:50%;
+  background:color-mix(in srgb,var(--season-wash-2) 52%,white 48%);
+  border:1px solid color-mix(in srgb,var(--season-line) 56%,white 44%);
+}
+.member-leaf:before{
+  content:"";position:absolute;left:13px;top:8px;width:2px;height:14px;border-radius:2px;
+  background:#527a5d;transform:rotate(-8deg);transform-origin:bottom center;
+}
+.member-leaf i,.member-leaf b{
+  position:absolute;display:block;width:10px;height:7px;background:#5f8c68;
+  border-radius:90% 12% 90% 12%;top:7px;
+}
+.member-leaf i{left:5px;transform:rotate(28deg)}
+.member-leaf b{right:4px;transform:scaleX(-1) rotate(20deg)}
+.member-chip-user .member-leaf i,.member-chip-user .member-leaf b{background:#4e7b59}
+@media(max-width:1050px){.topbar-inner{grid-template-columns:230px 1fr 250px}.member-chip{padding-right:9px}.member-copy small{display:none}}
+@media(max-width:760px){.member-chip{width:38px;height:38px;padding:4px;justify-content:center}.member-copy{display:none}.member-leaf{width:28px;height:28px;flex-basis:28px}.header-tools{gap:7px}}
