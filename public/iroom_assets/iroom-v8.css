@@ -846,3 +846,82 @@ body,.site-shell{background:color-mix(in srgb,var(--season-wash-2,#fffaf4) 42%,w
 
 /* IROOM4 V17 — cache-refresh marker */
 html{--iroom-build:17}
+
+
+/* IROOM4 V18 — visible-but-soft seasonal card contrast + fruit character member chip */
+.site-shell[data-season="spring"]{
+  --card-premium:#fff8f7;--card-seasonal:#fff3f5;--card-curation:#f5faf3;--card-gift:#fff6ee;--card-guide:#f2f7f0;--card-mini:#fffaf8;
+  --season-glow:rgba(226,151,169,.12);
+}
+.site-shell[data-season="summer"]{
+  --card-premium:#fffbee;--card-seasonal:#f4f9e7;--card-curation:#f1f8ed;--card-gift:#fff7e7;--card-guide:#eff6ef;--card-mini:#fffdf4;
+  --season-glow:rgba(143,177,112,.11);
+}
+.site-shell[data-season="autumn"]{
+  --card-premium:#fff7ed;--card-seasonal:#fff0e4;--card-curation:#f8f3ea;--card-gift:#faeee1;--card-guide:#f2f5eb;--card-mini:#fff9f2;
+  --season-glow:rgba(205,121,74,.13);
+}
+.site-shell[data-season="winter"]{
+  --card-premium:#fff9f1;--card-seasonal:#f2f5ed;--card-curation:#eff5f0;--card-gift:#faf2e6;--card-guide:#edf3ee;--card-mini:#fffaf4;
+  --season-glow:rgba(119,148,126,.11);
+}
+.selection-section{
+  background:
+    radial-gradient(circle at 8% 6%,var(--season-glow),transparent 28%),
+    radial-gradient(circle at 94% 31%,color-mix(in srgb,var(--season-glow) 75%,transparent),transparent 25%),
+    linear-gradient(180deg,#fffefb 0%,color-mix(in srgb,var(--season-wash-2) 62%,white 38%) 100%);
+}
+.premium-fruits-block:first-of-type{
+  background:linear-gradient(145deg,rgba(255,255,255,.87),var(--card-premium));
+}
+.seasonal-fruits-block{
+  background:linear-gradient(145deg,rgba(255,255,255,.84),var(--card-seasonal));
+}
+.selection-curation{
+  background:linear-gradient(150deg,rgba(255,255,255,.84),var(--card-curation));
+}
+.selection-gift{
+  background:linear-gradient(150deg,rgba(255,255,255,.84),var(--card-gift));
+}
+.selection-guide{
+  background:linear-gradient(150deg,rgba(255,255,255,.84),var(--card-guide));
+}
+.selection-card{box-shadow:0 12px 30px rgba(80,57,39,.035)}
+.premium-fruits-block:first-of-type,.seasonal-fruits-block,.selection-curation,.selection-gift,.selection-guide{
+  border-color:color-mix(in srgb,var(--season-line) 76%,white 24%);
+}
+.premium-fruit-card,.seasonal-fruit-card,.library-card{
+  background:linear-gradient(180deg,#fff 0%,rgba(255,255,255,.93) 66%,var(--card-mini) 100%);
+  box-shadow:0 8px 22px rgba(70,52,38,.022);
+}
+.selection-card:before{
+  content:"";position:absolute;inset:0;pointer-events:none;opacity:.42;
+  background:radial-gradient(circle at 8% 8%,color-mix(in srgb,var(--season-glow) 70%,transparent),transparent 22%);
+}
+.premium-fruits-block .premium-fruit-strip,.selection-card .selection-copy,.selection-card .selection-art{position:relative;z-index:1}
+
+/* Account is one visual unit instead of a lonely text label + separate person icon. */
+.topbar-inner{grid-template-columns:280px 1fr 300px}
+.header-tools{gap:12px}
+.header-auth{min-width:0}
+.member-chip{
+  display:inline-flex;align-items:center;gap:9px;height:42px;padding:4px 11px 4px 5px;
+  border:1px solid color-mix(in srgb,var(--season-line,#dac7b5) 74%,white 26%);
+  border-radius:999px;background:linear-gradient(180deg,#fffefc,color-mix(in srgb,var(--season-wash-2,#fff8ef) 58%,white 42%));
+  color:#173f36;box-shadow:0 5px 16px rgba(67,50,37,.035);transition:.2s ease;
+}
+.member-chip:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(67,50,37,.07);border-color:color-mix(in srgb,var(--season-accent,#9b503e) 34%,white 66%)}
+.member-copy{display:flex;flex-direction:column;align-items:flex-start;line-height:1.04}
+.member-copy small{font:8px Georgia,serif;letter-spacing:.16em;color:#9a6c59;margin-bottom:4px}
+.member-copy strong{font-family:Georgia,"Times New Roman",serif;font-size:13px;font-weight:600;color:#163e35;white-space:nowrap}
+.member-fruit{position:relative;width:31px;height:31px;flex:0 0 31px;border-radius:48% 52% 50% 50%;background:linear-gradient(145deg,#ffb25a,#ed7f39);box-shadow:inset 0 -4px 8px rgba(135,71,30,.12),0 4px 10px rgba(109,63,33,.08)}
+.member-fruit:before{content:"";position:absolute;width:11px;height:7px;left:15px;top:-3px;border-radius:80% 15% 80% 15%;background:#4f8b57;transform:rotate(-26deg)}
+.member-fruit:after{content:"";position:absolute;left:14px;top:-4px;width:2px;height:7px;border-radius:2px;background:#6c5537;transform:rotate(8deg)}
+.member-fruit i,.member-fruit b{position:absolute;top:12px;width:3px;height:4px;border-radius:50%;background:#21443d}
+.member-fruit i{left:9px}.member-fruit b{right:9px}
+.member-fruit em{position:absolute;left:11px;top:19px;width:9px;height:4px;border-bottom:1.6px solid #21443d;border-radius:0 0 9px 9px}
+.member-chip-user .member-fruit{background:linear-gradient(145deg,#b8d96e,#7faf56)}
+@media(max-width:1050px){.topbar-inner{grid-template-columns:230px 1fr 260px}.member-chip{padding-right:8px}.member-copy small{display:none}}
+@media(max-width:760px){.member-chip{width:38px;height:38px;padding:3px;justify-content:center}.member-copy{display:none}.member-fruit{width:29px;height:29px;flex-basis:29px}.header-tools{gap:7px}}
+
+html{--iroom-build:18}

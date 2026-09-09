@@ -11,7 +11,7 @@
 <meta name="apple-mobile-web-app-title" content="이룸">
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="apple-touch-icon" href="./iroom_assets/app-icon-192.png">
-<link rel="stylesheet" href="./iroom_assets/iroom-v8.css?v=17">
+<link rel="stylesheet" href="./iroom_assets/iroom-v8.css?v=18">
 </head>
 <body>
 <div class="site-shell" id="iroomFinalBase">
@@ -33,11 +33,11 @@
           <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 4.2 4.2"></path></svg>
         </button>
         <div class="header-auth" aria-label="회원 메뉴">
-          <button class="auth-link auth-login-only" type="button" data-modal="login">Sign In</button>
+          <button class="member-chip auth-login-only" type="button" data-modal="login" aria-label="이룸 로그인">
+            <span class="member-fruit" aria-hidden="true"><i></i><b></b><em></em></span>
+            <span class="member-copy"><small>MY IROOM</small><strong>Sign In</strong></span>
+          </button>
         </div>
-        <button class="icon-btn" type="button" data-modal="mypage" aria-label="마이페이지">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="7" r="3.4"></circle><path d="M5.5 21c.5-5 2.8-7.5 6.5-7.5S18 16 18.5 21"></path></svg>
-        </button>
         <button class="icon-btn" type="button" data-modal="cart" aria-label="장바구니">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.7 8.3h10.6l.7 12H6l.7-12Z"></path><path d="M9 8.3V6a3 3 0 0 1 6 0v2.3"></path></svg>
         </button>
@@ -279,6 +279,6 @@
   </section>
 </div>
 
-<script src="./iroom_assets/iroom-v8.js?v=17"></script>
+<script src="./iroom_assets/iroom-v8.js?v=18"></script>
 </body>
 </html>
