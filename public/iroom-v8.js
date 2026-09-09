@@ -183,10 +183,10 @@
     else if(type==='privacy')renderPrivacy();
     else if(type==='guide')renderGuide();
     else if(type==='install')renderInstall();
-    overlay.classList.add('open');overlay.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';
+    overlay.dataset.modalType=type;overlay.classList.add('open');overlay.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';
     setTimeout(()=>$('button,select,input',overlay)?.focus(),20);
   }
-  function closeModal(){overlay.classList.remove('open');overlay.setAttribute('aria-hidden','true');document.body.style.overflow='';try{lastFocus?.focus()}catch(e){}}
+  function closeModal(){overlay.classList.remove('open');overlay.setAttribute('aria-hidden','true');delete overlay.dataset.modalType;document.body.style.overflow='';try{lastFocus?.focus()}catch(e){}}
   function renderSeasonal(){
     const d=seasons[current];
     const cards=d.seasonalFruits.map(n=>{const m=fruitMeta[n]||['','오늘 상태가 좋은 과일'];return `<button class="fruit-card" type="button" data-fruit="${n}"><img src="${assets+m[0]}" alt="${n}"><span><b>${n}</b><small>${m[1]}</small></span></button>`}).join('');
@@ -220,10 +220,21 @@
       </div>`);
   }
   function renderSearch(){
-    setModal('SEARCH','과일 찾기','과일 이름을 입력하면 빠르게 찾을 수 있습니다.',`<div class="search-row"><input id="searchInput" placeholder="예: 사과, 딸기, 샤인머스캣"><button type="button" data-search>검색</button></div><div class="search-results" id="searchResults"></div>`);
+    setModal('IROOM FRUIT SEARCH','과일을 찾아보세요','원하는 과일을 입력하거나 지금 계절의 추천 과일부터 가볍게 둘러보세요.',`<div class="search-row search-row-v23"><input id="searchInput" placeholder="과일 이름을 입력하세요" autocomplete="off"><button type="button" data-search>찾기</button></div><div class="search-quick-label">지금 추천</div><div class="search-results search-results-v23" id="searchResults"></div>`);
     setTimeout(()=>fillSearch(''),0);
   }
-  function fillSearch(q){const box=$('#searchResults');if(!box)return;q=(q||'').trim();const list=allFruitNames.filter(n=>!q||n.includes(q));box.innerHTML=list.map(n=>`<button type="button" data-fruit="${n}">${n}</button>`).join('')||'<span style="color:#81786e">검색 결과가 없습니다.</span>'}
+  function fillSearch(q){
+    const box=$('#searchResults');if(!box)return;
+    q=(q||'').trim();
+    let list;
+    if(q){list=allFruitNames.filter(n=>n.includes(q)).slice(0,8)}
+    else{
+      const d=seasons[current]||seasons.autumn;
+      list=[...(d.seasonalFruits||[]),...(d.premiumFruits||[]),...(d.library||[])].filter((n,i,a)=>a.indexOf(n)===i).slice(0,6);
+    }
+    if(!list.length){box.innerHTML='<div class="search-empty">검색 결과가 없습니다. 다른 과일 이름으로 찾아보세요.</div>';return}
+    box.innerHTML=list.map(n=>{const m=fruitMeta[n]||fruitMeta[fruitAliasBase[n]]||['','오늘 상태를 확인해 안내드려요'];return `<button class="search-result-card" type="button" data-fruit="${n}"><img src="${assets+m[0]}" alt="${n}"><span><b>${n}</b><small>${m[1]}</small></span><i>상세보기 →</i></button>`}).join('');
+  }
   function renderLogin(){
     setModal('IROOM MEMBER','Sign In','이룸 회원 로그인과 신규 회원가입을 한 창에서 편하게 이용할 수 있습니다.',`
       <form class="auth-form" id="loginForm">
@@ -384,7 +395,7 @@
   function openFruit(n){
     lastFocus=document.activeElement;
     showFruit(n);
-    overlay.classList.add('open');overlay.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';
+    overlay.dataset.modalType=type;overlay.classList.add('open');overlay.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';
     setTimeout(()=>$('button',overlay)?.focus(),20);
   }
   function showFruit(n){
