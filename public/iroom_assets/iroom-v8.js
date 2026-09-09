@@ -246,7 +246,7 @@
   function renderMyPage(){
     setModal('MY PAGE','마이페이지','로그인 상태와 회원 정보를 확인할 수 있습니다.',`
       <div class="login-status" id="myPageStatus"><b>로그인 상태를 확인하고 있습니다.</b><span>잠시만 기다려 주세요.</span></div>
-      <div class="modal-actions"><button class="secondary-btn" type="button" data-logout>로그아웃</button></div>`);
+      <div class="modal-actions"><button class="secondary-btn" type="button" data-logout data-mypage-logout>로그아웃</button></div>`);
     setTimeout(loadMyPageStatus,0);
   }
   function renderCart(){setModal('CART','장바구니','고른 상품과 선물 구성을 확인하는 창입니다.',`<div class="mini-panel"><p>현재는 디자인 베이스 단계입니다. 다음 작업에서 기존 이룸3 장바구니 데이터를 그대로 연결합니다.</p></div>`)}
@@ -328,6 +328,7 @@
       const d=await r.json();
       if(d.user){
         box.innerHTML=`<b>${d.user.name||d.user.username||'이룸 고객'}님, 반갑습니다.</b><span>${d.user.email||d.user.username||''}</span>`;
+        const logoutBtn=document.querySelector('[data-mypage-logout]'); if(logoutBtn) logoutBtn.classList.add('is-visible');
         return;
       }
     }catch(e){}

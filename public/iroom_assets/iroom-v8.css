@@ -756,3 +756,89 @@ html[data-season="winter"] .season-visual>img{clip-path:inset(0 0 0 30%)}
 .kakao-footer-mark{position:absolute;left:clamp(22px,2.7vw,44px);top:27px;width:28px;height:28px;display:block}
 .footer-action.kakao strong{color:#ffe99a}
 @media(max-width:760px){.footer-action.kakao{padding-left:58px}.kakao-footer-mark{left:22px;top:22px}}
+
+/* IROOM4 V16 — lighter editorial seasonal tones.
+   Keep the seasonal identity, but let fruit artwork and typography lead. */
+.site-shell[data-season="spring"]{
+  --card-premium:#fffdfb;--card-seasonal:#fffafa;--card-curation:#fbfdf9;--card-gift:#fffbf6;--card-guide:#fafcf8;--card-mini:#fffdfc;
+  --season-glow:rgba(229,151,166,.055);
+}
+.site-shell[data-season="summer"]{
+  --card-premium:#fffef9;--card-seasonal:#fbfdf5;--card-curation:#f9fcf6;--card-gift:#fffdf5;--card-guide:#fafcf7;--card-mini:#fffefb;
+  --season-glow:rgba(119,161,111,.05);
+}
+.site-shell[data-season="autumn"]{
+  --card-premium:#fffdf9;--card-seasonal:#fffaf5;--card-curation:#fcfaf7;--card-gift:#fdf8f2;--card-guide:#fafbf7;--card-mini:#fffdfa;
+  --season-glow:rgba(202,116,67,.055);
+}
+.site-shell[data-season="winter"]{
+  --card-premium:#fffdf9;--card-seasonal:#fbfcf8;--card-curation:#f9fbf8;--card-gift:#fdfaf5;--card-guide:#f8faf7;--card-mini:#fffefa;
+  --season-glow:rgba(109,137,118,.05);
+}
+body,.site-shell{background:color-mix(in srgb,var(--season-wash-2,#fffaf4) 42%,white 58%)}
+.selection-section{
+  background:
+    radial-gradient(circle at 7% 8%,color-mix(in srgb,var(--season-glow) 70%,transparent),transparent 25%),
+    radial-gradient(circle at 92% 32%,color-mix(in srgb,var(--season-glow) 62%,transparent),transparent 24%),
+    linear-gradient(180deg,#fffefc 0%,color-mix(in srgb,var(--season-wash-2) 48%,white 52%) 100%);
+}
+.selection-card{
+  border-color:color-mix(in srgb,var(--season-line) 58%,white 42%);
+  box-shadow:0 8px 24px rgba(80,57,39,.022);
+}
+.premium-fruits-block:first-of-type,
+.seasonal-fruits-block,
+.selection-curation,
+.selection-gift,
+.selection-guide{
+  box-shadow:0 10px 28px rgba(80,57,39,.018);
+}
+.premium-fruits-block:first-of-type{
+  background:linear-gradient(145deg,rgba(255,255,255,.975),var(--card-premium));
+}
+.seasonal-fruits-block{
+  background:linear-gradient(145deg,rgba(255,255,255,.97),var(--card-seasonal));
+}
+.selection-curation{
+  background:linear-gradient(150deg,rgba(255,255,255,.975),var(--card-curation));
+}
+.selection-gift{
+  background:linear-gradient(150deg,rgba(255,255,255,.975),var(--card-gift));
+}
+.selection-guide{
+  background:linear-gradient(150deg,rgba(255,255,255,.975),var(--card-guide));
+}
+.premium-fruit-card,.seasonal-fruit-card,.library-card{
+  background:linear-gradient(180deg,#fff,#fffefc 72%,var(--card-mini));
+  border-color:color-mix(in srgb,var(--season-line) 55%,white 45%);
+  box-shadow:0 7px 20px rgba(70,52,38,.015);
+}
+.guide-chips b{background:rgba(255,255,255,.82);border-color:color-mix(in srgb,var(--season-line) 52%,white 48%)}
+.premium-banner{
+  background:linear-gradient(110deg,color-mix(in srgb,var(--season-wash) 28%,white 72%),color-mix(in srgb,var(--season-wash-2) 35%,white 65%));
+  border-color:color-mix(in srgb,var(--season-line) 55%,white 45%);
+}
+.fruit-library{
+  background:linear-gradient(180deg,#fff,color-mix(in srgb,var(--season-wash-2) 34%,white 66%));
+}
+.review-section{
+  background:linear-gradient(180deg,#fffefc,color-mix(in srgb,var(--season-wash-2) 34%,white 66%));
+}
+.review-card{background:#fffefc;border-color:color-mix(in srgb,var(--season-line) 56%,white 44%)}
+.iroom-assurance{background:linear-gradient(115deg,#fffefc,color-mix(in srgb,var(--season-wash-2) 38%,white 62%));border-color:color-mix(in srgb,var(--season-line) 55%,white 45%)}
+.public-season-preview{background:linear-gradient(90deg,color-mix(in srgb,var(--season-wash) 30%,white 70%),#fffefc)}
+
+/* Softer modal atmosphere: no muddy or heavy overlay over the watercolor homepage. */
+.modal-backdrop{background:rgba(31,52,45,.10);backdrop-filter:blur(7px) saturate(.88)}
+.modal-panel{
+  background:linear-gradient(180deg,rgba(255,255,255,.985),color-mix(in srgb,var(--season-wash-2) 32%,white 68%));
+  border-color:color-mix(in srgb,var(--season-line) 60%,white 40%);
+  box-shadow:0 26px 74px rgba(44,44,37,.13);
+  border-radius:22px;
+}
+.mini-panel,.login-join-box{background:rgba(255,255,255,.78);border-color:color-mix(in srgb,var(--season-line) 58%,white 42%)}
+.fruit-card,.story-card,.gift-option,.info-card{background:rgba(255,255,255,.88);border-color:color-mix(in srgb,var(--season-line) 60%,white 40%)}
+
+/* Logout is only revealed after an authenticated user is confirmed. */
+[data-mypage-logout]{display:none}
+[data-mypage-logout].is-visible{display:inline-flex}
