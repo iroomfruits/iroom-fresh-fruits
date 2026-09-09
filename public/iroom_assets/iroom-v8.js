@@ -341,11 +341,11 @@
       const d=await r.json();
       if(d.user){
         const nm=(d.user.name||d.user.username||'회원').replace(/[<>]/g,'');
-        wrap.innerHTML=`<button class="member-chip member-chip-user" type="button" data-modal="mypage" aria-label="마이페이지"><span class="member-leaf" aria-hidden="true"><i></i><b></b></span><span class="member-copy"><small>MY IROOM</small><strong>${nm}님</strong></span></button>`;
+        wrap.innerHTML=`<button class="utility-chip member-chip member-chip-user" type="button" data-modal="mypage" aria-label="마이이룸"><span class="member-leaf" aria-hidden="true"><i></i><b></b></span><span class="member-copy"><strong>마이이룸</strong><small>${nm}님</small></span></button>`;
         return;
       }
     }catch(e){}
-    wrap.innerHTML='<button class="member-chip auth-login-only" type="button" data-modal="login" aria-label="이룸 로그인"><span class="member-leaf" aria-hidden="true"><i></i><b></b></span><span class="member-copy"><small>MY IROOM</small><strong>로그인</strong></span></button>';
+    wrap.innerHTML='<button class="utility-chip member-chip auth-login-only" type="button" data-modal="login" aria-label="마이이룸 로그인"><span class="member-leaf" aria-hidden="true"><i></i><b></b></span><span class="member-copy"><strong>마이이룸</strong><small>로그인</small></span></button>';
   }
   async function submitLogin(form){
     const fd=new FormData(form);

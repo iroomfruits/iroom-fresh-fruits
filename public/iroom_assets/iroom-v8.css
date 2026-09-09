@@ -1121,3 +1121,118 @@ body{
   .season-visual:after{display:none}
   .icon-btn{width:38px;height:38px;padding:8px}
 }
+
+/* IROOM4 V21 — editorial watercolor flow + two quiet fruit accents + unified utility chips */
+html{--iroom-build:21}
+
+/* More visible seasonal page atmosphere, while cards remain bright. */
+html[data-season="spring"],.site-shell[data-season="spring"]{
+  --page-base:#faf1ee;--page-soft:#f5e8e5;--page-soft2:#eef3e8;
+  --page-glow-a:rgba(232,178,191,.24);--page-glow-b:rgba(166,195,151,.19);
+}
+html[data-season="summer"],.site-shell[data-season="summer"]{
+  --page-base:#f6f6e5;--page-soft:#eef3d9;--page-soft2:#faf0d5;
+  --page-glow-a:rgba(177,207,105,.24);--page-glow-b:rgba(236,207,91,.18);
+}
+html[data-season="autumn"],.site-shell[data-season="autumn"]{
+  --page-base:#faeee4;--page-soft:#f4dfd1;--page-soft2:#f7e9da;
+  --page-glow-a:rgba(211,132,86,.24);--page-glow-b:rgba(222,172,119,.18);
+}
+html[data-season="winter"],.site-shell[data-season="winter"]{
+  --page-base:#f2f4ec;--page-soft:#e8eee7;--page-soft2:#f4ecdf;
+  --page-glow-a:rgba(124,157,132,.19);--page-glow-b:rgba(204,174,112,.15);
+}
+body{
+  background:
+    radial-gradient(ellipse at 5% 7%,var(--page-glow-a),transparent 36%),
+    radial-gradient(ellipse at 96% 22%,var(--page-glow-b),transparent 38%),
+    radial-gradient(ellipse at 8% 73%,color-mix(in srgb,var(--page-glow-b) 78%,transparent),transparent 37%),
+    radial-gradient(ellipse at 94% 84%,color-mix(in srgb,var(--page-glow-a) 62%,transparent),transparent 34%),
+    linear-gradient(180deg,var(--page-base) 0%,color-mix(in srgb,var(--page-soft) 64%,white 36%) 47%,color-mix(in srgb,var(--page-soft2) 58%,white 42%) 100%);
+}
+
+/* The approved hero remains untouched. The side gutters gain only one quiet fruit each. */
+.season-stage{position:relative;isolation:isolate;overflow:hidden}
+.season-stage::before,.season-stage::after{
+  content:"";position:absolute;z-index:1;pointer-events:none;background-repeat:no-repeat;background-size:contain;background-position:center;
+  width:clamp(105px,8.5vw,170px);height:clamp(105px,8.5vw,170px);opacity:.26;
+  filter:saturate(.80) contrast(.94);transform-origin:center;
+}
+.season-stage::before{left:clamp(18px,3.3vw,70px);top:58%;transform:translateY(-50%) rotate(-8deg)}
+.season-stage::after{right:clamp(18px,3.3vw,70px);top:36%;transform:translateY(-50%) rotate(7deg)}
+html[data-season="spring"] .season-stage::before{background-image:url('./fruits/01_딸기_strawberry.png')}
+html[data-season="spring"] .season-stage::after{background-image:url('./fruits/04_체리_cherry.png')}
+html[data-season="summer"] .season-stage::before{background-image:url('./fruits/27_자두_plum.png')}
+html[data-season="summer"] .season-stage::after{background-image:url('./fruits/06_복숭아_peach.png')}
+html[data-season="autumn"] .season-stage::before{background-image:url('./fruits/09_사과_apple.png')}
+html[data-season="autumn"] .season-stage::after{background-image:url('./fruits/11_감_persimmon.png')}
+html[data-season="winter"] .season-stage::before{background-image:url('./fruits/21_오렌지_orange.png')}
+html[data-season="winter"] .season-stage::after{background-image:url('./fruits/01_딸기_strawberry.png')}
+.season-visual{z-index:2}
+
+/* Make the hero wash feel continuous, not like a centered poster. */
+.season-stage{
+  background:
+    radial-gradient(ellipse at 3% 46%,color-mix(in srgb,var(--page-glow-a) 90%,transparent),transparent 35%),
+    radial-gradient(ellipse at 97% 50%,color-mix(in srgb,var(--page-glow-b) 90%,transparent),transparent 36%),
+    linear-gradient(90deg,var(--page-soft) 0%,color-mix(in srgb,var(--page-soft) 72%,var(--page-base) 28%) 18%,var(--page-base) 42%,var(--page-base) 58%,color-mix(in srgb,var(--page-soft2) 74%,var(--page-base) 26%) 82%,var(--page-soft2) 100%);
+}
+.season-visual:before{
+  background:
+    radial-gradient(ellipse at 13% 52%,color-mix(in srgb,var(--page-glow-a) 88%,transparent),transparent 47%),
+    radial-gradient(ellipse at 87% 48%,color-mix(in srgb,var(--page-glow-b) 84%,transparent),transparent 47%),
+    linear-gradient(90deg,color-mix(in srgb,var(--page-soft) 88%,transparent) 0%,transparent 31%,transparent 69%,color-mix(in srgb,var(--page-soft2) 88%,transparent) 100%);
+}
+.season-visual:after{
+  background:linear-gradient(90deg,
+    var(--page-soft) 0%,color-mix(in srgb,var(--hero-edge) 76%,transparent) 6%,color-mix(in srgb,var(--hero-edge) 32%,transparent) 12%,
+    transparent 18%,transparent 82%,color-mix(in srgb,var(--hero-edge2) 32%,transparent) 88%,color-mix(in srgb,var(--hero-edge2) 76%,transparent) 94%,var(--page-soft2) 100%);
+}
+
+/* Alternating watercolor bands prevent the lower page from becoming a white canvas. */
+.selection-section{
+  background:
+    radial-gradient(ellipse at 5% 15%,color-mix(in srgb,var(--page-glow-a) 72%,transparent),transparent 33%),
+    radial-gradient(ellipse at 96% 55%,color-mix(in srgb,var(--page-glow-b) 54%,transparent),transparent 31%),
+    linear-gradient(180deg,color-mix(in srgb,var(--page-base) 82%,white 18%),color-mix(in srgb,var(--page-soft) 68%,white 32%));
+}
+.fruit-library{
+  background:
+    radial-gradient(ellipse at 93% 12%,color-mix(in srgb,var(--page-glow-b) 52%,transparent),transparent 30%),
+    linear-gradient(180deg,color-mix(in srgb,var(--page-soft2) 62%,white 38%),color-mix(in srgb,var(--page-base) 74%,white 26%));
+}
+.review-section{
+  background:
+    radial-gradient(ellipse at 5% 16%,color-mix(in srgb,var(--page-glow-a) 54%,transparent),transparent 31%),
+    linear-gradient(180deg,color-mix(in srgb,var(--page-base) 78%,white 22%),color-mix(in srgb,var(--page-soft) 60%,white 40%));
+}
+.premium-fruits-block:first-of-type,.seasonal-fruits-block,.selection-curation,.selection-gift,.selection-guide,
+.premium-fruit-card,.seasonal-fruit-card,.library-card,.review-card{background:rgba(255,254,251,.94)}
+
+/* One visual language for Search / My Iroom / Cart. */
+.topbar-inner{grid-template-columns:280px 1fr minmax(320px,390px)}
+.header-tools{display:flex;align-items:center;justify-content:flex-end;gap:8px}
+.utility-chip{
+  min-height:40px;display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:7px 11px;
+  border:1px solid color-mix(in srgb,var(--season-line,#ddcfc2) 58%,white 42%);border-radius:999px;
+  background:rgba(255,254,251,.86);color:#153d35;box-shadow:0 3px 12px rgba(61,48,37,.018);
+  transition:transform .18s ease,border-color .18s ease,background .18s ease,box-shadow .18s ease;
+}
+.utility-chip:hover{transform:translateY(-1px);background:#fff;border-color:color-mix(in srgb,var(--season-accent,#8c725d) 28%,white 72%);box-shadow:0 6px 16px rgba(61,48,37,.045)}
+.utility-chip>svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;flex:0 0 19px}
+.utility-chip>span:not(.member-leaf):not(.member-copy){font-family:"Noto Serif KR","Batang",serif;font-size:12px;white-space:nowrap}
+.header-auth{min-width:0}
+.member-chip{height:40px;padding:5px 11px 5px 6px;gap:7px}
+.member-leaf{width:27px;height:27px;flex-basis:27px}
+.member-copy{display:flex;flex-direction:column;align-items:flex-start;line-height:1.03}
+.member-copy strong{font-family:"Noto Serif KR","Batang",serif;font-size:12px;font-weight:600;white-space:nowrap}
+.member-copy small{font-family:"Pretendard","Noto Sans KR",sans-serif;font-size:9px;letter-spacing:0;margin-top:3px;color:#8b7568;white-space:nowrap}
+
+@media(max-width:1180px){
+  .topbar-inner{grid-template-columns:230px 1fr 285px}.utility-chip>span:not(.member-copy):not(.member-leaf){display:none}.utility-chip{width:40px;padding:7px}.member-chip{width:auto;padding:5px 9px 5px 6px}.member-copy strong{font-size:11px}
+  .season-stage::before,.season-stage::after{width:110px;height:110px;opacity:.18}
+}
+@media(max-width:760px){
+  .season-stage::before,.season-stage::after{display:none}
+  .utility-chip{width:38px;height:38px;min-height:38px;padding:6px}.member-chip{width:38px;padding:4px}.member-copy{display:none}.member-leaf{width:27px;height:27px;flex-basis:27px}
+}
