@@ -6,15 +6,1561 @@
 <title>이룸 fresh fruits | 프리미엄 · 제철 과일</title>
 <meta name="description" content="좋은 과일로 마음을 전하는 이룸 fresh fruits. 프리미엄 과일, 제철 과일, 맞춤 큐레이션, 좋은 마음을 전하는 과일 선물.">
 <meta name="theme-color" content="#fbf7f0">
+<meta name="iroom-build" content="26-self-contained">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="이룸">
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="apple-touch-icon" href="./iroom_assets/app-icon-192.png">
-<link rel="stylesheet" href="./iroom_assets/iroom-v25.css?v=25">
+<style id="iroom-v26-inline-css">
+:root{
+  --paper:#fbf7f0;--paper2:#fffdf9;--ink:#12362f;--muted:#7e746b;--line:#e7dacf;
+  --accent:#9c5b42;--gold:#b77a36;--footer:#10382e;--footer2:#0c3027;
+}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f4efe7;color:var(--ink);font-family:"Pretendard","Noto Sans KR",Arial,sans-serif}button,input,select{font:inherit}button{cursor:pointer}img{display:block;max-width:100%}
+.site-shell{width:min(1600px,100%);margin:0 auto;background:#fff;box-shadow:0 0 0 1px rgba(88,63,43,.03)}
+.topbar{position:sticky;top:0;z-index:40;background:rgba(255,253,249,.97);backdrop-filter:blur(10px);border-bottom:1px solid rgba(224,211,198,.7)}
+.topbar-inner{height:78px;padding:0 clamp(20px,5.2vw,84px);display:grid;grid-template-columns:280px 1fr 180px;align-items:center;gap:16px}
+.brand{border:0;background:transparent;padding:0;width:235px;height:58px;display:flex;align-items:center;justify-content:flex-start;-webkit-tap-highlight-color:transparent}.brand img{width:100%;height:100%;object-fit:contain;object-position:left center}
+.main-nav{display:flex;justify-content:center;gap:clamp(22px,3vw,48px);white-space:nowrap}.main-nav button,.footer-nav button{border:0;background:transparent;color:inherit;padding:10px 0;font-family:Georgia,"Times New Roman",serif;font-size:16px}.main-nav button{position:relative}.main-nav button:after{content:"";position:absolute;left:50%;right:50%;bottom:3px;height:1px;background:var(--ink);transition:.2s}.main-nav button:hover:after{left:0;right:0}
+.header-tools{display:flex;justify-content:flex-end;gap:18px}.icon-btn{width:34px;height:34px;padding:3px;border:0;background:transparent;color:#102f2b;-webkit-tap-highlight-color:transparent}.icon-btn svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:1.55;stroke-linecap:round;stroke-linejoin:round}
+.main-nav button:focus-visible,.icon-btn:focus-visible,.brand:focus-visible{outline:2px solid rgba(156,91,66,.35);outline-offset:3px;border-radius:3px}.hotspot:focus,.hotspot:focus-visible{outline:none!important;box-shadow:none!important}
+.season-stage{background:#fff}.season-visual{position:relative;overflow:hidden;background:var(--paper)}.season-visual>img{width:100%;height:auto;transition:opacity .22s ease}.season-visual.is-changing>img{opacity:.5}
+.hotspot{position:absolute;border:0;background:transparent!important;appearance:none;padding:0;margin:0;box-shadow:none!important;outline:0;color:transparent;-webkit-tap-highlight-color:transparent;border-radius:0}.hotspot:hover{background:rgba(255,255,255,.015)!important}.hotspot:active{transform:translateY(1px)}
+.hotspot-seasonal{left:2.5%;top:56.2%;width:30.6%;height:18.8%}.hotspot-curation{left:34.2%;top:56.2%;width:30.6%;height:18.8%}.hotspot-gift{left:65.9%;top:56.2%;width:31.5%;height:18.8%}.hotspot-premium{left:0;top:75.1%;width:100%;height:24.9%}
+.review-section{padding:88px clamp(28px,7.2vw,116px) 96px;background:linear-gradient(180deg,#fffaf4,#fbf4eb);border-top:1px solid var(--line)}
+.section-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:40px;margin-bottom:36px}.eyebrow{display:block;font:11px/1 Georgia,serif;letter-spacing:.25em;color:#9b503e;margin-bottom:16px}.section-heading h2{font-family:"Noto Serif KR","Batang",Georgia,serif;font-size:clamp(30px,3vw,44px);font-weight:500;letter-spacing:-.045em;margin:0;color:#12362f}.section-heading>p{max-width:330px;margin:0 0 8px;color:#8b7d70;font-family:"Noto Serif KR","Batang",serif;font-size:14px;line-height:1.8}
+.review-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}.review-card{position:relative;min-height:220px;background:#fffdf9;border:1px solid #e6d7c9;padding:34px 32px 28px;box-shadow:0 12px 36px rgba(92,62,42,.035)}.review-card:after{content:"“";position:absolute;right:24px;top:12px;font:60px/1 Georgia,serif;color:#efe1d2}.stars{color:#b27837;letter-spacing:.12em;margin-bottom:24px}.review-card p{position:relative;z-index:1;font-family:"Noto Serif KR","Batang",serif;font-size:15px;line-height:1.9;color:#5c5b55;margin:0 0 24px}.review-card small{font-size:12px;color:#8f877d;font-weight:700}
+.site-footer{background:linear-gradient(110deg,var(--footer),var(--footer2));color:#fff}.footer-main{padding:48px clamp(28px,7.2vw,116px) 40px;display:grid;grid-template-columns:1.4fr .9fr .9fr;gap:70px}.footer-brand img{width:260px;height:70px;object-fit:contain;object-position:left center;filter:brightness(0) invert(1)}.footer-brand p{margin:18px 0 0;color:#ccd9d4;font-size:13px;line-height:1.8}.admin-link{display:inline-flex;margin-top:18px;padding:9px 13px;border:1px solid rgba(255,255,255,.28);border-radius:999px;color:#f7efe1;text-decoration:none;font-size:12px}.admin-link:hover{background:rgba(255,255,255,.07)}.footer-nav{display:flex;flex-direction:column;align-items:flex-start;gap:4px}.footer-nav b{font:12px Georgia,serif;letter-spacing:.15em;color:#efd6a9;margin-bottom:10px}.footer-nav button{color:#fff;font-family:Arial,"Pretendard",sans-serif;font-size:15px;text-align:left}.footer-nav button:hover{color:#efd6a9}
+
+.footer-actions{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid rgba(255,255,255,.08);border-bottom:1px solid rgba(255,255,255,.11);background:rgba(255,255,255,.025)}
+.footer-action{min-height:118px;border:0;border-right:1px solid rgba(255,255,255,.1);background:transparent;color:#fff;text-align:left;padding:24px clamp(24px,4.5vw,72px);transition:background .2s ease,transform .18s ease}.footer-action:last-child{border-right:0}.footer-action:hover{background:rgba(255,255,255,.055)}.footer-action:active{transform:translateY(1px)}.footer-action span{display:block;font:10px Georgia,serif;letter-spacing:.2em;color:#efd6a9;margin-bottom:9px}.footer-action strong{display:block;font-family:"Noto Serif KR","Batang",Georgia,serif;font-size:21px;font-weight:500;margin-bottom:7px}.footer-action small{display:block;color:#b9cbc4;font-size:12px;line-height:1.55}.footer-action.kakao strong{color:#ffe48b}
+.footer-legal{padding:22px clamp(28px,7.2vw,116px);display:flex;justify-content:space-between;align-items:flex-start;gap:30px;border-top:1px solid rgba(255,255,255,.11);background:rgba(0,0,0,.07)}.business-info{display:flex;flex-wrap:wrap;align-items:center;gap:7px 18px;max-width:980px;color:#aebfb9;font-size:11px;line-height:1.7}.business-info strong{color:#f1e6d7;font-size:12px}.business-info b{font-weight:500;color:#c7d4cf}.business-address{flex-basis:100%}.legal-links{display:flex;align-items:center;justify-content:flex-end;gap:14px;flex-wrap:wrap}.legal-links button{border:0;background:transparent;color:#c9d6d1;padding:7px 0;font-size:11px;white-space:nowrap}.legal-links button:hover{color:#efd6a9}.legal-links .admin-link{margin:0;padding:8px 12px}
+.season-preview{border-top:1px solid rgba(255,255,255,.11);padding:18px clamp(28px,7.2vw,116px) 22px;display:flex;justify-content:space-between;align-items:center;gap:28px;background:rgba(0,0,0,.08)}.season-preview span{font:11px Georgia,serif;letter-spacing:.2em;color:#efd6a9}.season-preview small{display:block;margin-top:5px;color:#9fb5ad;font-size:11px}.season-buttons{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}.season-buttons button{border:1px solid rgba(255,255,255,.22);background:transparent;color:#dce8e3;border-radius:999px;padding:8px 13px;font-size:12px}.season-buttons button:hover,.season-buttons button.is-active{background:#f4e8d3;border-color:#f4e8d3;color:#153a31}
+.modal-backdrop{position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;padding:24px;background:rgba(25,41,35,.24);backdrop-filter:blur(8px)}.modal-backdrop.open{display:flex}.modal-panel{position:relative;width:min(780px,100%);max-height:min(86vh,850px);overflow:auto;background:#fffdf9;border:1px solid #e6d7c9;box-shadow:0 28px 80px rgba(44,44,37,.18);padding:48px;border-radius:4px}.modal-close{position:absolute;right:20px;top:17px;width:38px;height:38px;border:0;background:transparent;color:#27463f;font-size:30px;line-height:1}.modal-kicker{display:block;font:11px Georgia,serif;letter-spacing:.22em;color:#9b503e;margin-bottom:12px}.modal-panel h2{font-family:"Noto Serif KR","Batang",Georgia,serif;font-size:34px;font-weight:500;margin:0 42px 12px 0;letter-spacing:-.035em}.modal-intro{font-family:"Noto Serif KR","Batang",serif;color:#786f65;line-height:1.75;margin:0 0 28px}.modal-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.fruit-card,.story-card,.gift-option,.info-card{border:1px solid #e6d8ca;background:#fff;padding:20px;text-align:left;color:var(--ink)}.fruit-card{display:grid;grid-template-columns:92px 1fr;gap:18px;align-items:center}.fruit-card img{width:92px;height:82px;object-fit:contain}.fruit-card b,.gift-option b,.story-card b{display:block;font-family:"Noto Serif KR","Batang",serif;font-size:18px;margin-bottom:6px}.fruit-card small,.gift-option span,.story-card p,.info-card p{color:#7b756d;font-size:12px;line-height:1.7}.modal-form{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.choice label{display:block;font:10px Georgia,serif;letter-spacing:.12em;color:#9b503e;margin-bottom:8px}.choice select,.search-row input{width:100%;border:1px solid #dfd1c3;background:#fff;padding:12px;color:#183b34}.modal-actions{display:flex;gap:10px;margin-top:22px}.primary-btn,.secondary-btn{border:1px solid #173e35;padding:12px 18px;background:#173e35;color:#fff}.secondary-btn{background:#fff;color:#173e35}.gift-list{display:grid;gap:12px}.gift-option{width:100%;padding:20px 22px}.story-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.story-card{min-height:150px}.search-row{display:flex;gap:8px}.search-row button{border:0;background:#173e35;color:#fff;padding:0 20px}.search-results{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}.search-results button{border:1px solid #ded0c1;background:#fff;padding:8px 12px;border-radius:999px;color:#28483f}.mini-panel{background:#fbf4eb;border:1px solid #eadbcd;padding:22px}.mini-panel p{margin:0;color:#736d65;line-height:1.8;font-size:13px}
+@media(max-width:1050px){.topbar-inner{grid-template-columns:230px 1fr 140px}.brand{width:205px}.main-nav{gap:20px}.main-nav button{font-size:14px}.header-tools{gap:10px}.review-grid{gap:14px}.footer-main{gap:36px}.hotspot-seasonal,.hotspot-curation,.hotspot-gift,.hotspot-premium{cursor:pointer}}
+@media(max-width:760px){.footer-actions{grid-template-columns:1fr}.footer-action{min-height:0;border-right:0;border-bottom:1px solid rgba(255,255,255,.1);padding:20px 22px}.footer-action:last-child{border-bottom:0}.footer-legal{padding:22px;display:block}.legal-links{justify-content:flex-start;margin-top:18px;gap:12px 18px}.business-info{display:block}.business-info span{display:block;margin-top:4px}.business-address{margin-top:8px!important}.site-shell{width:100%}.topbar-inner{height:auto;min-height:66px;grid-template-columns:1fr auto;padding:6px 16px 8px}.brand{width:180px;height:50px}.header-tools{grid-column:2;grid-row:1}.main-nav{grid-column:1/-1;grid-row:2;justify-content:flex-start;overflow-x:auto;padding:0 2px 7px;gap:22px;scrollbar-width:none}.main-nav::-webkit-scrollbar{display:none}.main-nav button{font-size:13px}.review-section{padding:58px 20px 64px}.section-heading{display:block}.section-heading>p{margin-top:16px}.review-grid{grid-template-columns:1fr}.review-card{min-height:0}.footer-main{padding:42px 22px 34px;grid-template-columns:1fr;gap:34px}.season-preview{padding:18px 22px 24px;display:block}.season-buttons{justify-content:flex-start;margin-top:13px}.modal-panel{padding:34px 22px}.modal-grid,.story-grid,.modal-form{grid-template-columns:1fr}.fruit-card{grid-template-columns:78px 1fr}.fruit-card img{width:78px;height:70px}.modal-panel h2{font-size:28px}}
+
+
+/* IROOM4 V3: hero crop + richer one-row feature sections */
+.season-stage{padding:0 clamp(0px,1.2vw,18px);background:#fbf7f0}
+.season-visual{aspect-ratio:1600/1015;max-height:none;background:#fbf7f0}
+.season-visual>img{width:100%;height:auto;min-height:100%;object-fit:cover;object-position:top center}
+.hotspot{display:none!important}
+
+.feature-stack{padding:70px clamp(28px,7.2vw,116px) 84px;background:#fffdf9;border-top:1px solid var(--line)}
+.feature-heading{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:end;margin-bottom:28px}
+.feature-heading .eyebrow{grid-column:1/-1;font:10px Georgia,serif;letter-spacing:.22em;color:#9b503e}
+.feature-heading h2{font-family:"Noto Serif KR","Batang",Georgia,serif;font-weight:500;font-size:clamp(30px,3vw,46px);letter-spacing:-.045em;margin:0}
+.feature-heading p{margin:0;color:#81776c;line-height:1.8;max-width:600px;justify-self:end}
+.feature-row{width:100%;min-height:250px;margin:0 0 18px;padding:0;border:1px solid #e6d7c9;background:#fbf4eb;color:var(--ink);display:grid;grid-template-columns:.78fr 1.22fr;align-items:stretch;text-align:left;overflow:hidden;transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease}
+.feature-row:hover{transform:translateY(-2px);box-shadow:0 18px 45px rgba(90,60,40,.07);border-color:#dcc7b5}
+.feature-row:active{transform:translateY(0)}
+.feature-row.feature-curation{grid-template-columns:1.22fr .78fr;background:#fffaf4}
+.feature-copy{padding:42px clamp(28px,4.5vw,70px);display:flex;flex-direction:column;justify-content:center;align-items:flex-start;position:relative;z-index:2}
+.feature-copy small{font:10px Georgia,serif;letter-spacing:.2em;color:#9b503e;margin-bottom:14px}
+.feature-copy strong{font-family:"Noto Serif KR","Batang",Georgia,serif;font-size:clamp(29px,2.6vw,42px);font-weight:500;letter-spacing:-.04em;margin-bottom:13px}
+.feature-copy em{font-style:normal;color:#776e65;font-family:"Noto Serif KR","Batang",serif;line-height:1.8;max-width:430px;font-size:14px}
+.feature-copy i{font-style:normal;margin-top:22px;color:#19473d;font-size:13px;border-bottom:1px solid #19473d;padding-bottom:4px}
+.feature-art-frame{min-height:250px;overflow:hidden;display:block;background:#f7eee4}
+.feature-art-frame img{width:100%;height:100%;object-fit:cover;object-position:center;transform:scale(1.03);transition:transform .28s ease}
+.feature-row:hover .feature-art-frame img{transform:scale(1.055)}
+.feature-season-fruits{position:relative;display:block;min-height:250px;background:radial-gradient(circle at 48% 46%,rgba(255,255,255,.9),rgba(248,238,226,.35) 62%,rgba(248,238,226,0) 80%)}
+.feature-season-fruits img{position:absolute;width:38%;height:78%;object-fit:contain;filter:drop-shadow(0 16px 18px rgba(76,55,35,.07));transition:transform .25s ease}
+.feature-season-fruits img:nth-child(1){left:5%;top:11%;z-index:2;transform:rotate(-4deg)}
+.feature-season-fruits img:nth-child(2){left:32%;top:2%;z-index:3;transform:scale(1.08)}
+.feature-season-fruits img:nth-child(3){right:5%;top:12%;z-index:2;transform:rotate(4deg)}
+.feature-row:hover .feature-season-fruits img:nth-child(1){transform:translateY(-3px) rotate(-4deg)}
+.feature-row:hover .feature-season-fruits img:nth-child(2){transform:translateY(-4px) scale(1.08)}
+.feature-row:hover .feature-season-fruits img:nth-child(3){transform:translateY(-3px) rotate(4deg)}
+.premium-strip{width:100%;min-height:235px;margin-top:26px;border:1px solid #e3d5c8;background:#f8efe5;display:grid;grid-template-columns:.75fr 1.45fr auto;align-items:center;text-align:left;padding:0;color:var(--ink);overflow:hidden}
+.premium-strip>span{padding:36px 20px 36px 46px;position:relative;z-index:2}.premium-strip small{display:block;font:10px Georgia,serif;letter-spacing:.2em;color:#9b503e;margin-bottom:12px}.premium-strip strong{display:block;font-family:"Noto Serif KR","Batang",serif;font-size:28px;font-weight:500;margin-bottom:10px}.premium-strip em{font-style:normal;font:10px Georgia,serif;letter-spacing:.18em;color:#8b7c6e}.premium-strip img{width:100%;height:235px;object-fit:cover}.premium-strip>b{font-size:12px;font-weight:500;margin:0 32px 0 16px;white-space:nowrap;border:1px solid #183e35;border-radius:999px;padding:12px 16px}
+.review-section{border-top:0}
+.footer-actions{grid-template-columns:repeat(4,1fr)}
+.install-note{display:grid;gap:12px}.install-step{border:1px solid #e5d7c9;background:#fff;padding:16px 18px;color:#746e66;line-height:1.7}.install-step b{display:block;color:#183e35;margin-bottom:5px}
+.kakao-login-btn{border:0;background:#FEE500;color:#191919;padding:13px 18px;font-weight:700;width:100%;margin-top:14px}
+.login-status{border:1px solid #e6d8ca;background:#fff;padding:18px;margin-bottom:14px}.login-status b{display:block;margin-bottom:6px}
+
+@media(max-width:900px){
+ .feature-heading{grid-template-columns:1fr}.feature-heading p{justify-self:start}.feature-row,.feature-row.feature-curation{grid-template-columns:1fr}.feature-row.feature-curation .feature-art-frame{order:2}.feature-row.feature-curation .feature-copy{order:1}.feature-art-frame,.feature-season-fruits{min-height:220px}.premium-strip{grid-template-columns:1fr}.premium-strip>span{padding:30px}.premium-strip img{height:210px}.premium-strip>b{margin:18px 30px 30px;width:max-content}.footer-actions{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:600px){.season-stage{padding:0}.season-visual{aspect-ratio:1.15/1}.season-visual>img{width:auto;height:100%;max-width:none;position:absolute;left:50%;transform:translateX(-50%)}.feature-stack{padding:52px 18px 60px}.feature-copy{padding:30px 24px}.feature-art-frame,.feature-season-fruits{min-height:190px}.footer-actions{grid-template-columns:1fr}}
+
+
+/* IROOM4 V4 SOFT — final base refinement */
+:root{--soft-radius:26px;--soft-radius-sm:20px;--soft-shadow:0 16px 46px rgba(94,67,45,.065)}
+.season-stage{padding:0;background:#fbf7f0}
+.season-visual{aspect-ratio:auto;overflow:hidden;background:#fbf7f0}
+.season-visual>img{display:block;width:100%;height:auto;min-height:0;object-fit:contain;object-position:center top}
+
+.selection-section{padding:74px clamp(28px,7.2vw,116px) 68px;background:linear-gradient(180deg,#fffdf9 0%,#fcf7ef 100%);border-top:1px solid rgba(230,216,203,.7)}
+.selection-heading,.library-heading{display:flex;justify-content:space-between;align-items:flex-end;gap:40px;margin-bottom:30px}
+.selection-heading h2,.library-heading h2{font-family:"Noto Serif KR","Batang",Georgia,serif;font-weight:500;font-size:clamp(30px,3vw,44px);letter-spacing:-.045em;margin:0;color:var(--ink)}
+.selection-heading p,.library-heading p{max-width:510px;margin:0 0 5px;color:#84786d;line-height:1.85;font-family:"Noto Serif KR","Batang",serif;font-size:14px}
+.selection-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.selection-card{position:relative;min-width:0;min-height:370px;border:1px solid #eadbcd;border-radius:var(--soft-radius);background:rgba(255,253,249,.96);color:var(--ink);padding:0;text-align:left;overflow:hidden;box-shadow:0 7px 26px rgba(94,67,45,.035);transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease}
+.selection-card:hover{transform:translateY(-4px);box-shadow:var(--soft-shadow);border-color:#dcc7b4}.selection-card:active{transform:translateY(-1px)}
+.selection-copy{position:relative;z-index:2;display:block;padding:31px 32px 14px}
+.selection-copy small,.premium-copy small{display:block;font:10px Georgia,serif;letter-spacing:.19em;color:#9b503e;margin-bottom:12px}
+.selection-copy strong,.premium-copy strong{display:block;font-family:"Noto Serif KR","Batang",Georgia,serif;font-size:30px;font-weight:500;letter-spacing:-.04em;margin-bottom:10px}
+.selection-copy em,.premium-copy em{display:block;font-style:normal;color:#766e65;font-family:"Noto Serif KR","Batang",serif;font-size:13px;line-height:1.75}
+.selection-copy em b{font-weight:500;color:#9b503e}.selection-copy i,.premium-copy i{display:inline-flex;align-items:center;gap:7px;font-style:normal;margin-top:18px;color:#18463c;font-size:12px;border-bottom:1px solid rgba(24,70,60,.55);padding-bottom:4px}.selection-copy i span,.premium-copy i span{transition:transform .2s}.selection-card:hover .selection-copy i span,.premium-banner:hover .premium-copy i span{transform:translateX(3px)}
+.seasonal-quartet{height:190px;margin:0 18px 18px;border-radius:20px;background:radial-gradient(circle at 50% 40%,#fff 0%,#fbf3e9 73%);display:grid;grid-template-columns:repeat(4,1fr);align-items:end;gap:2px;padding:13px 8px 9px;overflow:hidden}
+.seasonal-quartet img{width:100%;height:150px;object-fit:contain;filter:drop-shadow(0 12px 12px rgba(79,54,34,.08));transition:transform .24s ease}.seasonal-quartet img:nth-child(1){transform:rotate(-3deg)}.seasonal-quartet img:nth-child(2){transform:translateY(-8px)}.seasonal-quartet img:nth-child(3){transform:translateY(-1px)}.seasonal-quartet img:nth-child(4){transform:rotate(3deg)}.selection-card:hover .seasonal-quartet img{transform:translateY(-4px) scale(1.025)}
+.selection-art{display:block;height:195px;margin:0 18px 18px;border-radius:20px;overflow:hidden;background:#f8efe5;position:relative}.selection-art:after{content:"";position:absolute;inset:0;box-shadow:inset 0 0 30px rgba(255,253,249,.45);pointer-events:none}.selection-art img{width:100%;height:100%;object-fit:cover;object-position:center;transition:transform .3s ease}.selection-card:hover .selection-art img{transform:scale(1.025)}
+.selection-curation{background:linear-gradient(180deg,#fffdf9,#fff8ef)}.selection-gift{background:linear-gradient(180deg,#fffdf9,#faf3e9)}
+.premium-banner{width:100%;min-height:255px;margin-top:24px;border:1px solid #e8d7c8;border-radius:30px;background:linear-gradient(110deg,#fbf3e9,#fffaf3);display:grid;grid-template-columns:.8fr 1.55fr;align-items:stretch;text-align:left;padding:0;color:var(--ink);overflow:hidden;box-shadow:0 9px 30px rgba(85,59,38,.035);transition:transform .22s ease,box-shadow .22s ease}.premium-banner:hover{transform:translateY(-3px);box-shadow:var(--soft-shadow)}
+.premium-copy{padding:44px 20px 38px 46px;display:flex;flex-direction:column;justify-content:center}.premium-copy strong{font-size:34px}.premium-copy em{font:10px Georgia,serif;letter-spacing:.16em;color:#8c7b6d}.premium-art{min-height:255px;overflow:hidden;display:block;position:relative}.premium-art:before{content:"";position:absolute;z-index:2;left:0;top:0;bottom:0;width:90px;background:linear-gradient(90deg,#fbf3e9,rgba(251,243,233,0));pointer-events:none}.premium-art img{width:100%;height:100%;object-fit:cover;object-position:center;transition:transform .32s ease}.premium-banner:hover .premium-art img{transform:scale(1.02)}
+
+.fruit-library{padding:72px clamp(28px,7.2vw,116px) 78px;background:#fff;border-top:1px solid rgba(231,218,207,.75)}
+.library-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:15px}.library-card{position:relative;min-width:0;border:1px solid #eaded2;border-radius:var(--soft-radius-sm);background:#fffaf4;color:var(--ink);padding:18px 13px 16px;text-align:center;box-shadow:0 5px 20px rgba(84,57,38,.028);transition:.2s ease}.library-card:hover{transform:translateY(-4px);box-shadow:0 13px 32px rgba(84,57,38,.07);border-color:#dbc5b3}.library-card img{width:100%;height:122px;object-fit:contain;margin:0 auto 7px;filter:drop-shadow(0 9px 9px rgba(75,51,33,.06))}.library-card b{display:block;font-family:"Noto Serif KR","Batang",serif;font-size:17px;font-weight:600;margin-bottom:5px}.library-card small{display:block;color:#867a6f;font-size:11px;line-height:1.5;min-height:34px}.library-card>span{position:absolute;right:12px;bottom:10px;width:24px;height:24px;border:1px solid #1d4a40;border-radius:50%;display:grid;place-items:center;font-size:12px;background:#fffdf9}
+.review-section{padding-top:76px;border-top:1px solid rgba(231,218,207,.75)}.review-card{border-radius:20px}.modal-panel{border-radius:24px}.fruit-card,.story-card,.gift-option,.info-card,.mini-panel{border-radius:16px}.primary-btn,.secondary-btn,.search-row input,.search-row button,.choice select{border-radius:12px}
+.footer-action:first-child{border-top-left-radius:0}.admin-link{border-radius:999px}
+
+@media(max-width:1100px){.selection-grid{grid-template-columns:1fr 1fr}.selection-seasonal{grid-column:1/-1}.seasonal-quartet{height:210px}.seasonal-quartet img{height:175px}.library-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:760px){.selection-section,.fruit-library{padding:56px 20px 60px}.selection-heading,.library-heading{display:block}.selection-heading p,.library-heading p{margin-top:15px}.selection-grid{grid-template-columns:1fr}.selection-seasonal{grid-column:auto}.selection-card{min-height:0}.selection-copy{padding:28px 24px 13px}.selection-copy strong{font-size:28px}.seasonal-quartet{height:170px;margin:0 12px 12px;padding:8px 2px}.seasonal-quartet img{height:135px}.selection-art{height:185px;margin:0 12px 12px}.premium-banner{grid-template-columns:1fr}.premium-copy{padding:32px 25px 22px}.premium-copy strong{font-size:30px}.premium-art{min-height:210px}.premium-art:before{display:none}.library-grid{grid-template-columns:repeat(2,1fr);gap:10px}.library-card{padding:13px 8px 14px}.library-card img{height:105px}.library-card small{min-height:31px}.review-card{border-radius:16px}}
+@media(max-width:430px){.seasonal-quartet{grid-template-columns:repeat(2,1fr);height:285px}.seasonal-quartet img{height:125px}.library-grid{grid-template-columns:repeat(2,1fr)}}
+
+
+/* IROOM4 V5 — Premium fruits + rich fruit detail */
+.premium-fruits-block{grid-column:1/-1;display:grid;grid-template-columns:minmax(250px,.8fr) minmax(0,2.2fr);align-items:stretch;min-height:0;padding:0;cursor:default}
+.premium-fruits-block:hover{transform:none;box-shadow:0 7px 26px rgba(94,67,45,.035);border-color:#eadbcd}
+.premium-fruits-copy{display:flex;flex-direction:column;justify-content:center;padding:34px 30px}
+.premium-fruit-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;padding:16px}
+.premium-fruit-card{position:relative;border:1px solid #eaded2;border-radius:18px;background:#fffaf4;color:var(--ink);padding:14px 12px 15px;text-align:center;box-shadow:0 5px 18px rgba(84,57,38,.025);transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease;min-width:0}
+.premium-fruit-card:hover{transform:translateY(-4px);box-shadow:0 13px 30px rgba(84,57,38,.075);border-color:#d9c0aa}
+.premium-fruit-card img{width:100%;height:128px;object-fit:contain;filter:drop-shadow(0 9px 9px rgba(75,51,33,.065))}
+.premium-fruit-card b{display:block;font-family:"Noto Serif KR","Batang",serif;font-size:18px;margin:3px 0 5px}
+.premium-fruit-card small{display:block;color:#84786d;font-size:11px;line-height:1.55;min-height:34px}
+.premium-fruit-card span{display:inline-block;margin-top:9px;font-size:10px;color:#19483e;border-bottom:1px solid rgba(25,72,62,.35);padding-bottom:2px}
+.library-card>span{position:static;width:auto;height:auto;border:0;border-radius:0;display:inline-block;margin-top:9px;font-size:10px;color:#19483e;background:transparent;border-bottom:1px solid rgba(25,72,62,.35);padding-bottom:2px}
+.fruit-detail-layout{display:grid;grid-template-columns:minmax(220px,.85fr) minmax(0,1.35fr);gap:26px;align-items:start}
+.fruit-detail-visual{background:linear-gradient(180deg,#fff9f2,#f8efe5);border:1px solid #eadbcd;border-radius:22px;padding:26px;min-height:310px;display:grid;place-items:center;position:relative;overflow:hidden}
+.fruit-detail-visual:before{content:"";position:absolute;inset:auto -50px -80px auto;width:210px;height:210px;border-radius:50%;background:rgba(224,190,156,.16);filter:blur(3px)}
+.fruit-detail-visual img{position:relative;z-index:1;width:100%;max-width:290px;height:260px;object-fit:contain;filter:drop-shadow(0 18px 18px rgba(78,51,31,.09))}
+.fruit-detail-summary{display:grid;gap:12px}
+.fruit-detail-badge{display:inline-flex;width:max-content;padding:7px 11px;border-radius:999px;background:#f5eadf;color:#9b503e;font:10px Georgia,serif;letter-spacing:.12em}
+.fruit-detail-summary h3{font-family:"Noto Serif KR","Batang",serif;font-size:26px;font-weight:500;margin:1px 0 0}
+.fruit-detail-summary>p{margin:0;color:#756d64;line-height:1.8;font-family:"Noto Serif KR","Batang",serif;font-size:13px}
+.fruit-detail-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:5px}
+.fruit-detail-item{background:#fff;border:1px solid #eaded2;border-radius:14px;padding:15px 16px;min-height:106px}
+.fruit-detail-item b{display:block;font-family:"Noto Serif KR","Batang",serif;font-size:14px;margin-bottom:7px;color:#21483f}
+.fruit-detail-item span{display:block;color:#81776d;font-size:11.5px;line-height:1.7}
+.fruit-detail-actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:8px}
+.fruit-detail-actions button{border:1px solid #21483f;border-radius:999px;background:#fff;color:#21483f;padding:10px 15px;font-size:11px}
+.fruit-detail-actions .primary{background:#21483f;color:#fff}
+@media(max-width:1100px){.premium-fruits-block{grid-template-columns:1fr}.premium-fruits-copy{padding-bottom:12px}.premium-fruit-strip{padding-top:4px}}
+@media(max-width:760px){.premium-fruit-strip{grid-template-columns:repeat(2,1fr);padding:10px 12px 14px}.premium-fruit-card img{height:112px}.fruit-detail-layout{grid-template-columns:1fr}.fruit-detail-visual{min-height:230px}.fruit-detail-visual img{height:205px}.fruit-detail-grid{grid-template-columns:1fr}}
+
+/* IROOM4 V6 — premium + seasonal split, soft guide card */
+.seasonal-fruits-block{background:linear-gradient(120deg,#fffdf9 0%,#fff7ec 100%)}
+.seasonal-fruits-block .premium-fruits-copy small{color:#a45e39}
+.seasonal-fruit-card{background:linear-gradient(180deg,#fffdf9,#fff8ee)}
+.selection-guide{background:linear-gradient(145deg,#fffdf9 0%,#f8f0e6 100%)}
+.selection-guide .selection-copy{height:100%;display:flex;flex-direction:column;justify-content:center;padding-bottom:30px}
+.guide-chips{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:18px}
+.guide-chips b{display:flex;align-items:center;justify-content:center;min-height:40px;padding:8px;border:1px solid #e4d4c4;border-radius:14px;background:rgba(255,255,255,.72);font-size:11px;font-weight:500;color:#6e665e}
+@media(max-width:760px){.guide-chips{grid-template-columns:repeat(2,1fr)}}
+
+
+/* IROOM4 V7 — subtle seasonal color system + compact public season preview */
+.site-shell{
+  --season-wash:#fbf2e8;
+  --season-wash-2:#fffaf4;
+  --season-accent:#a56543;
+  --season-line:#ead7c6;
+  --season-card:#fffaf4;
+  --season-glow:rgba(206,132,82,.10);
+  --season-theme:#fbf2e8;
+}
+.site-shell[data-season="spring"]{
+  --season-wash:#fff5f3;--season-wash-2:#fffaf7;--season-accent:#a76e79;--season-line:#ecd7d4;--season-card:#fff9f7;--season-glow:rgba(229,151,166,.12);--season-theme:#fff5f3;
+}
+.site-shell[data-season="summer"]{
+  --season-wash:#f3f8f0;--season-wash-2:#fbfcf5;--season-accent:#5f8061;--season-line:#d9e4d4;--season-card:#fbfcf7;--season-glow:rgba(119,161,111,.11);--season-theme:#f3f8f0;
+}
+.site-shell[data-season="autumn"]{
+  --season-wash:#fbf1e6;--season-wash-2:#fff9f2;--season-accent:#a5603e;--season-line:#ead5c2;--season-card:#fff9f2;--season-glow:rgba(202,116,67,.13);--season-theme:#fbf1e6;
+}
+.site-shell[data-season="winter"]{
+  --season-wash:#f4f6f1;--season-wash-2:#fbfbf7;--season-accent:#657a6d;--season-line:#dbe2da;--season-card:#fbfcf8;--season-glow:rgba(109,137,118,.11);--season-theme:#f4f6f1;
+}
+.topbar{background:color-mix(in srgb,var(--season-wash-2) 84%,white 16%);border-bottom-color:var(--season-line)}
+.selection-section{
+  background:
+    radial-gradient(circle at 8% 9%,var(--season-glow),transparent 24%),
+    radial-gradient(circle at 91% 30%,var(--season-glow),transparent 23%),
+    linear-gradient(180deg,var(--season-wash-2) 0%,var(--season-wash) 100%);
+  border-top-color:var(--season-line);
+}
+.selection-card,.premium-fruit-card,.library-card,.review-card{border-color:var(--season-line)}
+.premium-fruits-block,.seasonal-fruits-block,.selection-curation,.selection-gift,.selection-guide{background:linear-gradient(145deg,rgba(255,255,255,.86),var(--season-card))}
+.premium-fruit-card,.seasonal-fruit-card,.library-card{background:linear-gradient(180deg,#fff,var(--season-card))}
+.selection-copy small,.eyebrow,.premium-fruits-block .premium-fruits-copy small,.modal-kicker{color:var(--season-accent)}
+.selection-copy em b{color:var(--season-accent)}
+.premium-banner{
+  border-color:var(--season-line);
+  background:
+    radial-gradient(circle at 78% 20%,var(--season-glow),transparent 28%),
+    linear-gradient(110deg,var(--season-wash),var(--season-wash-2));
+}
+.premium-art:before{background:linear-gradient(90deg,var(--season-wash),rgba(255,255,255,0))}
+.fruit-library{
+  background:
+    radial-gradient(circle at 96% 8%,var(--season-glow),transparent 20%),
+    linear-gradient(180deg,#fff,var(--season-wash-2));
+  border-top-color:var(--season-line);
+}
+.review-section{
+  background:
+    radial-gradient(circle at 2% 12%,var(--season-glow),transparent 22%),
+    linear-gradient(180deg,var(--season-wash-2),var(--season-wash));
+  border-top-color:var(--season-line);
+}
+.modal-panel{border-color:var(--season-line);background:linear-gradient(180deg,#fff,var(--season-wash-2))}
+.fruit-detail-badge{background:var(--season-wash);color:var(--season-accent)}
+
+.public-season-preview{
+  display:flex;align-items:center;justify-content:space-between;gap:24px;
+  padding:16px clamp(24px,7.2vw,116px);
+  background:linear-gradient(90deg,var(--season-wash),var(--season-wash-2));
+  border-top:1px solid var(--season-line);border-bottom:1px solid var(--season-line);
+}
+.public-season-preview__copy{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;min-width:0}
+.public-season-preview__copy>span{font:10px Georgia,serif;letter-spacing:.2em;color:var(--season-accent)}
+.public-season-preview__copy strong{font-family:"Noto Serif KR","Batang",serif;font-size:14px;font-weight:500;color:var(--ink);white-space:nowrap}
+.public-season-preview__copy strong b{font-weight:600;color:var(--season-accent)}
+.public-season-preview__copy small{font-size:10.5px;color:#8a7f75}
+.public-season-preview__buttons{display:flex;align-items:center;justify-content:flex-end;gap:7px;flex-wrap:wrap}
+.public-season-preview__buttons button{border:1px solid var(--season-line);background:rgba(255,255,255,.72);color:#315047;border-radius:999px;padding:7px 11px;font-size:11px;transition:.18s ease}
+.public-season-preview__buttons button:hover{transform:translateY(-1px);border-color:var(--season-accent)}
+.public-season-preview__buttons button.is-active{background:var(--season-accent);border-color:var(--season-accent);color:#fff}
+.footer-actions{grid-template-columns:repeat(4,1fr)}
+
+@media(max-width:760px){
+  .public-season-preview{align-items:flex-start;flex-direction:column;padding:14px 20px;gap:10px}
+  .public-season-preview__copy{gap:7px 10px}.public-season-preview__copy small{flex-basis:100%}
+  .public-season-preview__buttons{width:100%;justify-content:flex-start}
+  .footer-actions{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:430px){.public-season-preview__buttons button{padding:6px 10px}.footer-actions{grid-template-columns:1fr}}
+
+
+/* IROOM4 V8 — Korean premium focus + soft full-width edges */
+body{background:var(--season-wash-2,#fffaf4)}
+.site-shell{width:100%;max-width:none;margin:0;background:var(--season-wash-2,#fffaf4);box-shadow:none;border-left:0!important;border-right:0!important;overflow:hidden}
+.topbar{border-left:0!important;border-right:0!important}
+.season-stage{border-left:0!important;border-right:0!important;background:linear-gradient(180deg,var(--season-wash-2),var(--season-wash))}
+.season-visual{width:100%;max-width:none;margin:0;border-left:0!important;border-right:0!important}
+.selection-section,.fruit-library,.review-section,.public-season-preview,.site-footer{border-left:0!important;border-right:0!important}
+.selection-section,.fruit-library,.review-section{box-shadow:none}
+.premium-fruits-block:first-of-type{background:linear-gradient(145deg,rgba(255,255,255,.94),color-mix(in srgb,var(--season-card) 82%,#f7efe3 18%))}
+.premium-fruits-block:first-of-type .premium-fruit-card:before{content:"국산 엄선";position:absolute;left:10px;top:10px;padding:4px 7px;border-radius:999px;background:color-mix(in srgb,var(--season-accent) 12%,white 88%);color:var(--season-accent);font-size:9px;font-weight:700;letter-spacing:.05em;z-index:2}
+@media(min-width:1800px){.topbar-inner,.selection-section,.fruit-library,.review-section,.public-season-preview,.footer-main,.footer-legal{padding-left:max(6vw,110px);padding-right:max(6vw,110px)}}
+
+
+/* IROOM4 V9 — Fresh promise assurance strip */
+.iroom-assurance{
+  margin-top:24px;
+  padding:24px 28px;
+  border:1px solid var(--season-line,#e8d7c8);
+  border-radius:24px;
+  background:linear-gradient(115deg,var(--season-card,#fffaf4),rgba(255,255,255,.9));
+  box-shadow:0 10px 30px rgba(84,57,38,.035);
+  display:grid;
+  grid-template-columns:auto minmax(0,1fr) auto;
+  align-items:center;
+  gap:20px;
+}
+.iroom-assurance-mark{
+  width:48px;height:48px;border-radius:50%;display:grid;place-items:center;
+  background:var(--season-wash,#fbf1e6);color:var(--season-accent,#7c624e);
+  border:1px solid var(--season-line,#e8d7c8);font-size:22px;font-weight:700;
+}
+.iroom-assurance-copy{display:block;min-width:0}.iroom-assurance-copy small{display:block;font:10px Georgia,serif;letter-spacing:.18em;color:var(--season-accent,#9b503e);margin-bottom:7px}.iroom-assurance-copy strong{display:block;font-family:"Noto Serif KR","Batang",Georgia,serif;font-size:22px;font-weight:600;letter-spacing:-.035em;color:var(--ink);margin-bottom:5px}.iroom-assurance-copy em{display:block;font-style:normal;color:#776e65;font-family:"Noto Serif KR","Batang",serif;font-size:13px;line-height:1.7}.iroom-assurance-points{display:flex;align-items:center;justify-content:flex-end;gap:9px;white-space:nowrap;color:#6f766e;font-size:11px}.iroom-assurance-points b{font-weight:600;color:#31594f}.iroom-assurance-points i{font-style:normal;color:#b9a99a}
+@media(max-width:900px){.iroom-assurance{grid-template-columns:auto 1fr}.iroom-assurance-points{grid-column:2;justify-content:flex-start;white-space:normal;flex-wrap:wrap}}
+@media(max-width:600px){.iroom-assurance{padding:20px;border-radius:20px;grid-template-columns:1fr;gap:12px}.iroom-assurance-mark{width:42px;height:42px}.iroom-assurance-points{grid-column:auto}.iroom-assurance-copy strong{font-size:20px}}
+
+
+/* IROOM4 V10 — soft seasonal hero + unambiguous Korean brand copy */
+.season-visual>img{
+  filter:saturate(.94) contrast(.97) brightness(1.012);
+}
+.season-visual:after{
+  content:"";position:absolute;inset:0;pointer-events:none;z-index:1;
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,250,242,.055)),
+    radial-gradient(circle at 52% 44%,rgba(255,255,255,.08),transparent 48%);
+  mix-blend-mode:screen;
+}
+.season-copy-fix{
+  position:absolute;z-index:3;left:0;top:0;width:28.5%;height:100%;
+  display:flex;flex-direction:column;justify-content:center;align-items:flex-start;
+  padding:6% 2.2% 7% max(3.2%,38px);
+  color:#12362f;
+  background:linear-gradient(90deg,
+    color-mix(in srgb,var(--season-wash-2,#fffaf4) 98%,white 2%) 0%,
+    color-mix(in srgb,var(--season-wash-2,#fffaf4) 95%,white 5%) 67%,
+    color-mix(in srgb,var(--season-wash-2,#fffaf4) 64%,transparent 36%) 84%,
+    transparent 100%);
+  pointer-events:none;
+}
+.season-copy-brand{
+  display:block;font-family:"Batang","Noto Serif KR",Georgia,serif;
+  font-size:clamp(24px,2.15vw,42px);font-weight:600;letter-spacing:-.04em;line-height:1;
+  margin-bottom:12px;color:#0f342d;
+}
+.season-copy-fix strong{
+  display:block;font-family:"Batang","Noto Serif KR",Georgia,serif;
+  font-size:clamp(26px,2.5vw,49px);font-weight:600;letter-spacing:-.055em;line-height:1.18;
+  max-width:420px;color:#0f342d;
+}
+.season-copy-fix>i{
+  width:30px;height:1px;background:#23443d;margin:22px 0 20px;opacity:.82;
+}
+.season-copy-fix p{
+  margin:0;font-family:"Batang","Noto Serif KR",Georgia,serif;
+  font-size:clamp(13px,1.16vw,20px);line-height:1.62;color:#50655f;letter-spacing:-.025em;
+}
+.season-copy-fix small{
+  display:block;margin-top:34px;font:10px/1.65 Georgia,serif;letter-spacing:.21em;
+  color:#526660;max-width:245px;
+}
+.install-warning{background:var(--season-wash,#fbf1e6)!important;border-color:var(--season-line,#ead5c2)!important}
+.install-warning code{font-family:Consolas,monospace;font-size:11px;word-break:break-all}
+@media(max-width:900px){
+  .season-copy-fix{width:36%;padding-left:22px}
+  .season-copy-fix small{margin-top:18px;font-size:8.5px}
+  .season-copy-fix>i{margin:14px 0}
+}
+@media(max-width:620px){
+  .season-copy-fix{width:44%;padding-left:14px;padding-right:6px;background:linear-gradient(90deg,var(--season-wash-2,#fffaf4) 0%,rgba(255,250,244,.94) 72%,transparent 100%)}
+  .season-copy-brand{font-size:20px;margin-bottom:7px}
+  .season-copy-fix strong{font-size:23px;line-height:1.2}
+  .season-copy-fix p{font-size:11px;line-height:1.5}
+  .season-copy-fix small{display:none}
+}
+
+/* IROOM4 V11 — compact hero, no baked-copy overlap, visible member actions */
+.topbar-inner{grid-template-columns:280px 1fr 320px}
+.header-tools{align-items:center;gap:12px}
+.header-auth{display:flex;align-items:center;gap:7px;white-space:nowrap;color:#2c4b44;font-size:13px}
+.auth-link{border:0;background:transparent;color:inherit;padding:6px 1px;font-weight:600;letter-spacing:-.02em}
+.auth-link:hover{text-decoration:underline;text-underline-offset:4px}
+.auth-user{color:#0d5a47}
+
+/* The approved seasonal artwork stays the same; only its footprint is reduced. */
+.season-stage{background:var(--season-wash-2,#fffaf4);padding:0}
+.season-visual{
+  position:relative;
+  height:clamp(420px,31vw,500px);
+  min-height:420px;
+  overflow:hidden;
+  background:linear-gradient(90deg,var(--season-wash-2,#fffaf4) 0 34%,color-mix(in srgb,var(--season-wash,#fbf1e6) 82%,white 18%) 100%);
+}
+.season-visual>img{
+  position:absolute;
+  right:-1.2%;
+  top:50%;
+  width:72%;
+  max-width:none;
+  height:auto;
+  max-height:none;
+  transform:translateY(-50%);
+  clip-path:inset(0 0 0 28%);
+  object-fit:contain;
+  object-position:right center;
+  filter:saturate(.93) contrast(.96) brightness(1.02);
+  transition:opacity .22s ease,transform .22s ease;
+}
+/* Soft cover hides the old baked-in title without changing the fruit artwork. */
+.season-visual:before{
+  content:"";
+  position:absolute;
+  z-index:2;
+  inset:0 auto 0 0;
+  width:39%;
+  pointer-events:none;
+  background:linear-gradient(90deg,
+    color-mix(in srgb,var(--season-wash-2,#fffaf4) 99%,white 1%) 0%,
+    color-mix(in srgb,var(--season-wash-2,#fffaf4) 98%,white 2%) 70%,
+    color-mix(in srgb,var(--season-wash-2,#fffaf4) 78%,transparent 22%) 88%,
+    transparent 100%);
+}
+html[data-season="autumn"] .season-visual:before,
+html[data-season="winter"] .season-visual:before{width:42%}
+html[data-season="autumn"] .season-visual>img,
+html[data-season="winter"] .season-visual>img{clip-path:inset(0 0 0 30%)}
+.season-copy-fix{
+  width:34%;
+  height:100%;
+  padding:4.5% 1.4% 5% max(3.2%,38px);
+  background:transparent;
+  justify-content:center;
+}
+.season-copy-brand{font-size:clamp(22px,1.9vw,34px);margin-bottom:10px}
+.season-copy-fix strong{font-size:clamp(25px,2.1vw,40px);max-width:390px;line-height:1.18}
+.season-copy-fix>i{margin:17px 0 16px}
+.season-copy-fix p{font-size:clamp(13px,1vw,17px);line-height:1.58}
+.season-copy-fix small{margin-top:25px;font-size:9px;max-width:230px}
+
+.auth-form{max-width:520px;display:grid;gap:13px}
+.auth-form label{display:grid;gap:7px;color:#45605a;font-size:12px;font-weight:700}
+.auth-form input{width:100%;border:1px solid #dfd0c3;background:#fffdf9;border-radius:12px;padding:13px 14px;color:#163b33;outline:none}
+.auth-form input:focus{border-color:#9f725d;box-shadow:0 0 0 3px rgba(159,114,93,.09)}
+.auth-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.auth-grid-wide{grid-column:1/-1}
+.auth-help{margin:2px 0 0;color:#80756c;font-size:12px;text-align:center}
+.auth-help button,.login-status-actions button{border:0;background:transparent;color:#0f5b49;text-decoration:underline;text-underline-offset:3px;padding:3px 5px}
+.login-status-actions{display:flex;gap:8px;margin-top:12px}
+
+@media(max-width:1180px){
+  .topbar-inner{grid-template-columns:220px 1fr 285px}
+  .brand{width:205px}
+  .header-auth{font-size:12px}
+  .season-visual{height:430px;min-height:430px}
+  .season-visual>img{width:78%}
+  .season-copy-fix{width:38%;padding-left:28px}
+  .season-visual:before{width:43%}
+  html[data-season="autumn"] .season-visual:before,html[data-season="winter"] .season-visual:before{width:45%}
+}
+@media(max-width:900px){
+  .topbar-inner{grid-template-columns:190px 1fr 230px}
+  .brand{width:178px}
+  .main-nav{gap:14px}.main-nav button{font-size:12px}
+  .header-tools{gap:7px}.header-auth{gap:4px;font-size:11px}
+  .icon-btn{width:30px;height:30px}
+  .season-visual{height:390px;min-height:390px}
+  .season-visual>img{width:88%;right:-8%;clip-path:inset(0 0 0 31%)}
+  .season-visual:before{width:48%}
+  html[data-season="autumn"] .season-visual:before,html[data-season="winter"] .season-visual:before{width:50%}
+  .season-copy-fix{width:43%;padding-left:22px}
+  .season-copy-fix small{margin-top:17px}
+}
+@media(max-width:760px){
+  .topbar-inner{grid-template-columns:1fr auto;padding:6px 14px 7px}
+  .header-tools{grid-column:2;grid-row:1}
+  .header-auth{display:none}
+  .season-visual{height:350px;min-height:350px;aspect-ratio:auto}
+  .season-visual>img{width:108%;height:auto;left:auto;right:-30%;top:50%;transform:translateY(-50%);clip-path:inset(0 0 0 34%)}
+  .season-visual:before{width:55%}
+  html[data-season="autumn"] .season-visual:before,html[data-season="winter"] .season-visual:before{width:57%}
+  .season-copy-fix{width:50%;padding:24px 8px 24px 16px}
+  .season-copy-brand{font-size:18px}.season-copy-fix strong{font-size:22px}.season-copy-fix p{font-size:11px}.season-copy-fix small{display:none}
+  .auth-grid{grid-template-columns:1fr}.auth-grid-wide{grid-column:auto}
+}
+
+/* IROOM4 V12 — show the complete approved hero artwork at a calmer scale. */
+.season-stage{
+  padding:22px 0 24px;
+  background:var(--season-wash-2,#fffaf4);
+}
+.season-visual{
+  position:relative;
+  width:min(100%, 1760px);
+  height:clamp(500px,31vw,590px);
+  min-height:0;
+  margin:0 auto;
+  overflow:hidden;
+  background:var(--season-wash-2,#fffaf4);
+  isolation:isolate;
+}
+/* faint atmosphere fills the wide screen; the real artwork itself is never cropped */
+.season-visual:before{
+  content:"";
+  position:absolute;
+  inset:-28px;
+  z-index:0;
+  width:auto!important;
+  background-image:var(--hero-image);
+  background-size:cover;
+  background-position:center;
+  filter:blur(24px) saturate(.75);
+  opacity:.11;
+  transform:scale(1.03);
+  pointer-events:none;
+}
+.season-visual:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:1;
+  background:linear-gradient(90deg,var(--season-wash-2,#fffaf4) 0%,rgba(255,255,255,.04) 20%,rgba(255,255,255,.04) 80%,var(--season-wash-2,#fffaf4) 100%);
+  pointer-events:none;
+  mix-blend-mode:normal;
+}
+.season-visual>img{
+  position:relative!important;
+  z-index:2;
+  display:block;
+  width:auto!important;
+  height:100%!important;
+  max-width:100%!important;
+  max-height:100%!important;
+  min-height:0!important;
+  margin:0 auto;
+  inset:auto!important;
+  transform:none!important;
+  clip-path:none!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  filter:saturate(.93) contrast(.97) brightness(1.015);
+}
+/* The approved artwork already contains the correct seasonal typography. */
+.season-copy-fix{display:none!important}
+
+.header-auth{min-width:58px;justify-content:center}
+.auth-login-only{font-family:Georgia,"Times New Roman",serif;letter-spacing:.08em;font-size:12px}
+
+/* integrated box art: no artificial HTML badge or pasted-looking white label */
+.selection-art,.premium-art{background:color-mix(in srgb,var(--season-wash,#fbf1e6) 72%,white 28%)}
+
+@media(max-width:1180px){
+  .season-visual{height:520px}
+}
+@media(max-width:900px){
+  .season-stage{padding:14px 0 18px}
+  .season-visual{height:470px}
+}
+@media(max-width:760px){
+  .season-stage{padding:8px 0 12px}
+  .season-visual{height:auto;aspect-ratio:1600/930}
+  .season-visual>img{width:100%!important;height:auto!important}
+}
+.login-join-box{margin-top:4px;padding:15px 16px;border:1px solid #e8d7c8;border-radius:14px;background:#fffaf4;display:flex;align-items:center;justify-content:space-between;gap:12px;color:#786e65;font-size:12px}
+.login-join-box button{border:0;background:transparent;color:#0e5a48;font-weight:700;letter-spacing:.03em;text-decoration:underline;text-underline-offset:4px;padding:4px}
+@media(max-width:520px){.login-join-box{align-items:flex-start;flex-direction:column}}
+
+/* IROOM4 V13 — full hero artwork, but feathered into the page instead of looking pasted/cropped. */
+.season-stage{
+  padding:20px 0 22px;
+  overflow:hidden;
+  background:var(--season-wash-2,#fffaf4);
+}
+.season-visual{
+  width:100%;
+  max-width:none;
+  height:clamp(500px,31vw,590px);
+  margin:0 auto;
+  overflow:hidden;
+  background:var(--season-wash-2,#fffaf4);
+}
+.season-visual:before{
+  inset:-60px;
+  background-size:cover;
+  background-position:center;
+  filter:blur(48px) saturate(.82) brightness(1.02);
+  opacity:.24;
+  transform:scale(1.08);
+}
+.season-visual:after{
+  z-index:3;
+  background:
+    linear-gradient(90deg,
+      var(--season-wash-2,#fffaf4) 0%,
+      color-mix(in srgb,var(--season-wash-2,#fffaf4) 55%,transparent) 3.5%,
+      transparent 8%,
+      transparent 92%,
+      color-mix(in srgb,var(--season-wash-2,#fffaf4) 55%,transparent) 96.5%,
+      var(--season-wash-2,#fffaf4) 100%),
+    linear-gradient(180deg,
+      color-mix(in srgb,var(--season-wash-2,#fffaf4) 45%,transparent) 0%,
+      transparent 3%,
+      transparent 97%,
+      color-mix(in srgb,var(--season-wash-2,#fffaf4) 45%,transparent) 100%);
+  pointer-events:none;
+}
+.season-visual>img{
+  z-index:2;
+  height:100%!important;
+  width:auto!important;
+  max-width:100%!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 3%,#000 97%,transparent 100%);
+  mask-image:linear-gradient(90deg,transparent 0%,#000 3%,#000 97%,transparent 100%);
+  filter:saturate(.92) contrast(.965) brightness(1.02);
+}
+@media(max-width:900px){
+  .season-visual{height:470px}
+  .season-visual:before{opacity:.18;filter:blur(34px) saturate(.85)}
+}
+@media(max-width:760px){
+  .season-stage{padding:8px 0 12px}
+  .season-visual{height:auto;aspect-ratio:1600/930}
+  .season-visual>img{width:100%!important;height:auto!important;-webkit-mask-image:none;mask-image:none}
+  .season-visual:after{display:none}
+}
+
+/* IROOM4 V14 — use the user's four final seasonal artworks exactly as uploaded.
+   No crop, no stretched duplicate image: the remaining widescreen space is blended with soft seasonal color. */
+.site-shell[data-season="spring"]{--hero-edge:#f7eee5;--hero-edge2:#eef2df;--hero-glow:rgba(229,191,196,.22)}
+.site-shell[data-season="summer"]{--hero-edge:#f7efd8;--hero-edge2:#edf1d4;--hero-glow:rgba(208,222,126,.24)}
+.site-shell[data-season="autumn"]{--hero-edge:#f6e3d2;--hero-edge2:#f2e8d8;--hero-glow:rgba(220,151,104,.24)}
+.site-shell[data-season="winter"]{--hero-edge:#f4ecdf;--hero-edge2:#edf1e7;--hero-glow:rgba(176,196,181,.20)}
+
+.season-stage{
+  padding:18px 0 22px;
+  background:
+    radial-gradient(circle at 8% 22%,var(--hero-glow,rgba(220,180,150,.15)),transparent 28%),
+    radial-gradient(circle at 92% 76%,var(--hero-glow,rgba(220,180,150,.12)),transparent 30%),
+    linear-gradient(90deg,var(--hero-edge,#f7efe5) 0%,var(--hero-edge2,#faf6ef) 24%,var(--season-wash-2,#fffaf4) 50%,var(--hero-edge2,#faf6ef) 76%,var(--hero-edge,#f7efe5) 100%);
+}
+.season-visual{
+  width:min(100%,1760px);
+  height:clamp(500px,31vw,590px);
+  margin:0 auto;
+  overflow:hidden;
+  background:transparent;
+  isolation:isolate;
+}
+/* Never use a stretched or blurred duplicate of the hero artwork. */
+.season-visual:before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:0;
+  background:
+    radial-gradient(ellipse at 50% 48%,rgba(255,255,255,.66) 0%,rgba(255,255,255,.34) 37%,transparent 73%),
+    linear-gradient(90deg,var(--hero-edge,#f7efe5),transparent 19%,transparent 81%,var(--hero-edge,#f7efe5));
+  opacity:1;
+  filter:none;
+  transform:none;
+  pointer-events:none;
+}
+.season-visual:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:3;
+  pointer-events:none;
+  background:
+    linear-gradient(90deg,
+      var(--hero-edge,#f7efe5) 0%,
+      color-mix(in srgb,var(--hero-edge,#f7efe5) 75%,transparent) 5%,
+      transparent 11%,transparent 89%,
+      color-mix(in srgb,var(--hero-edge,#f7efe5) 75%,transparent) 95%,
+      var(--hero-edge,#f7efe5) 100%),
+    linear-gradient(180deg,
+      color-mix(in srgb,var(--hero-edge2,#faf6ef) 65%,transparent) 0%,
+      transparent 5%,transparent 95%,
+      color-mix(in srgb,var(--hero-edge2,#faf6ef) 65%,transparent) 100%);
+}
+.season-visual>img{
+  position:relative!important;
+  z-index:2;
+  display:block;
+  width:auto!important;
+  height:100%!important;
+  max-width:100%!important;
+  max-height:100%!important;
+  margin:0 auto;
+  inset:auto!important;
+  transform:none!important;
+  clip-path:none!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 5.5%,#000 94.5%,transparent 100%);
+  mask-image:linear-gradient(90deg,transparent 0%,#000 5.5%,#000 94.5%,transparent 100%);
+  filter:none;
+}
+.season-visual.is-changing>img{opacity:.58}
+
+@media(max-width:1100px){
+  .season-visual{height:520px}
+}
+@media(max-width:900px){
+  .season-stage{padding:12px 0 16px}
+  .season-visual{height:470px}
+  .season-visual>img{-webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 3%,#000 97%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0%,#000 3%,#000 97%,transparent 100%)}
+}
+@media(max-width:760px){
+  .season-stage{padding:7px 0 10px}
+  .season-visual{height:auto;aspect-ratio:1672/941}
+  .season-visual>img{width:100%!important;height:auto!important;-webkit-mask-image:none;mask-image:none}
+  .season-visual:after{display:none}
+}
+
+
+/* IROOM4 V15 — soft seasonal card tones + refined member/Kakao UI */
+.site-shell[data-season="spring"]{
+  --card-premium:#fff9f6;--card-seasonal:#fff4f4;--card-curation:#f7faf4;--card-gift:#fff7ee;--card-guide:#f4f7f1;--card-mini:#fffaf7;
+}
+.site-shell[data-season="summer"]{
+  --card-premium:#fffbf1;--card-seasonal:#f5f8e9;--card-curation:#f2f8ee;--card-gift:#fff8e8;--card-guide:#f4f7ed;--card-mini:#fffdf5;
+}
+.site-shell[data-season="autumn"]{
+  --card-premium:#fff8ef;--card-seasonal:#fff2e6;--card-curation:#faf3e9;--card-gift:#f8eee2;--card-guide:#f5f5ec;--card-mini:#fff8f1;
+}
+.site-shell[data-season="winter"]{
+  --card-premium:#fffaf3;--card-seasonal:#f5f6ef;--card-curation:#f1f6f1;--card-gift:#fbf4e8;--card-guide:#f0f4ef;--card-mini:#fafbf6;
+}
+
+.selection-card{
+  border-color:color-mix(in srgb,var(--season-line) 86%,#fff 14%);
+  box-shadow:0 10px 28px rgba(80,57,39,.035);
+}
+.premium-fruits-block:first-of-type{
+  background:
+    radial-gradient(circle at 8% 12%,color-mix(in srgb,var(--season-glow) 55%,transparent),transparent 27%),
+    linear-gradient(145deg,rgba(255,255,255,.92),var(--card-premium,var(--season-card)));
+}
+.seasonal-fruits-block{
+  background:
+    radial-gradient(circle at 94% 10%,color-mix(in srgb,var(--season-glow) 66%,transparent),transparent 28%),
+    linear-gradient(145deg,rgba(255,255,255,.90),var(--card-seasonal,var(--season-card)));
+}
+.selection-curation{
+  background:
+    radial-gradient(circle at 90% 15%,color-mix(in srgb,var(--season-glow) 52%,transparent),transparent 30%),
+    linear-gradient(150deg,rgba(255,255,255,.90),var(--card-curation,var(--season-card)));
+}
+.selection-gift{
+  background:
+    radial-gradient(circle at 8% 88%,color-mix(in srgb,var(--season-glow) 54%,transparent),transparent 29%),
+    linear-gradient(150deg,rgba(255,255,255,.91),var(--card-gift,var(--season-card)));
+}
+.selection-guide{
+  background:
+    radial-gradient(circle at 90% 80%,color-mix(in srgb,var(--season-glow) 42%,transparent),transparent 31%),
+    linear-gradient(150deg,rgba(255,255,255,.91),var(--card-guide,var(--season-card)));
+}
+.premium-fruit-card,.seasonal-fruit-card,.library-card{
+  background:linear-gradient(180deg,rgba(255,255,255,.95),var(--card-mini,var(--season-card)));
+}
+.review-card{
+  background:linear-gradient(160deg,rgba(255,255,255,.96),color-mix(in srgb,var(--season-wash-2) 84%,var(--season-wash) 16%));
+}
+.guide-chips b{
+  background:rgba(255,255,255,.58);
+  border-color:color-mix(in srgb,var(--season-line) 82%,white 18%);
+}
+.selection-card:hover,.premium-fruit-card:hover,.library-card:hover{
+  border-color:color-mix(in srgb,var(--season-accent) 34%,var(--season-line) 66%);
+}
+
+/* Member entry: quieter editorial treatment than all-caps LOGIN */
+.header-auth{min-width:64px}
+.auth-link{
+  font-family:"Noto Serif KR","Batang",Georgia,serif;
+  font-weight:500;
+  letter-spacing:.01em;
+  color:#183d35;
+  text-decoration:none!important;
+  position:relative;
+}
+.auth-login-only{font-family:Georgia,"Times New Roman",serif;font-size:13px;letter-spacing:.025em;font-weight:500}
+.auth-link:after{content:"";position:absolute;left:1px;right:1px;bottom:1px;height:1px;background:var(--season-accent);transform:scaleX(0);transform-origin:left;transition:transform .2s ease}
+.auth-link:hover:after{transform:scaleX(1)}
+.auth-primary-btn{font-family:Georgia,"Times New Roman",serif;font-size:14px;letter-spacing:.035em;font-weight:500}
+.login-join-box{background:linear-gradient(120deg,rgba(255,255,255,.82),var(--season-wash-2));border-color:var(--season-line)}
+.login-join-box button{font-family:Georgia,"Times New Roman",serif;font-weight:500;text-decoration:none;border-bottom:1px solid rgba(14,90,72,.42);padding-bottom:2px}
+
+/* Kakao: recognizable image mark, but styled to sit naturally in the IROOM palette */
+.kakao-login-btn{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  border:1px solid rgba(55,44,20,.10);
+  border-radius:12px;
+  background:#FEE500;color:#191919;padding:12px 18px;font-weight:700;width:100%;margin-top:2px;
+  box-shadow:0 6px 16px rgba(91,72,18,.06);
+}
+.kakao-login-btn img{width:24px;height:24px;display:block;flex:0 0 24px}
+.kakao-login-btn span{font-size:13px;letter-spacing:-.02em}
+.kakao-login-btn:hover{filter:brightness(.985);transform:translateY(-1px)}
+.footer-action.kakao{position:relative;padding-left:clamp(58px,5vw,82px)}
+.kakao-footer-mark{position:absolute;left:clamp(22px,2.7vw,44px);top:27px;width:28px;height:28px;display:block}
+.footer-action.kakao strong{color:#ffe99a}
+@media(max-width:760px){.footer-action.kakao{padding-left:58px}.kakao-footer-mark{left:22px;top:22px}}
+
+/* IROOM4 V16 — lighter editorial seasonal tones.
+   Keep the seasonal identity, but let fruit artwork and typography lead. */
+.site-shell[data-season="spring"]{
+  --card-premium:#fffdfb;--card-seasonal:#fffafa;--card-curation:#fbfdf9;--card-gift:#fffbf6;--card-guide:#fafcf8;--card-mini:#fffdfc;
+  --season-glow:rgba(229,151,166,.055);
+}
+.site-shell[data-season="summer"]{
+  --card-premium:#fffef9;--card-seasonal:#fbfdf5;--card-curation:#f9fcf6;--card-gift:#fffdf5;--card-guide:#fafcf7;--card-mini:#fffefb;
+  --season-glow:rgba(119,161,111,.05);
+}
+.site-shell[data-season="autumn"]{
+  --card-premium:#fffdf9;--card-seasonal:#fffaf5;--card-curation:#fcfaf7;--card-gift:#fdf8f2;--card-guide:#fafbf7;--card-mini:#fffdfa;
+  --season-glow:rgba(202,116,67,.055);
+}
+.site-shell[data-season="winter"]{
+  --card-premium:#fffdf9;--card-seasonal:#fbfcf8;--card-curation:#f9fbf8;--card-gift:#fdfaf5;--card-guide:#f8faf7;--card-mini:#fffefa;
+  --season-glow:rgba(109,137,118,.05);
+}
+body,.site-shell{background:color-mix(in srgb,var(--season-wash-2,#fffaf4) 42%,white 58%)}
+.selection-section{
+  background:
+    radial-gradient(circle at 7% 8%,color-mix(in srgb,var(--season-glow) 70%,transparent),transparent 25%),
+    radial-gradient(circle at 92% 32%,color-mix(in srgb,var(--season-glow) 62%,transparent),transparent 24%),
+    linear-gradient(180deg,#fffefc 0%,color-mix(in srgb,var(--season-wash-2) 48%,white 52%) 100%);
+}
+.selection-card{
+  border-color:color-mix(in srgb,var(--season-line) 58%,white 42%);
+  box-shadow:0 8px 24px rgba(80,57,39,.022);
+}
+.premium-fruits-block:first-of-type,
+.seasonal-fruits-block,
+.selection-curation,
+.selection-gift,
+.selection-guide{
+  box-shadow:0 10px 28px rgba(80,57,39,.018);
+}
+.premium-fruits-block:first-of-type{
+  background:linear-gradient(145deg,rgba(255,255,255,.975),var(--card-premium));
+}
+.seasonal-fruits-block{
+  background:linear-gradient(145deg,rgba(255,255,255,.97),var(--card-seasonal));
+}
+.selection-curation{
+  background:linear-gradient(150deg,rgba(255,255,255,.975),var(--card-curation));
+}
+.selection-gift{
+  background:linear-gradient(150deg,rgba(255,255,255,.975),var(--card-gift));
+}
+.selection-guide{
+  background:linear-gradient(150deg,rgba(255,255,255,.975),var(--card-guide));
+}
+.premium-fruit-card,.seasonal-fruit-card,.library-card{
+  background:linear-gradient(180deg,#fff,#fffefc 72%,var(--card-mini));
+  border-color:color-mix(in srgb,var(--season-line) 55%,white 45%);
+  box-shadow:0 7px 20px rgba(70,52,38,.015);
+}
+.guide-chips b{background:rgba(255,255,255,.82);border-color:color-mix(in srgb,var(--season-line) 52%,white 48%)}
+.premium-banner{
+  background:linear-gradient(110deg,color-mix(in srgb,var(--season-wash) 28%,white 72%),color-mix(in srgb,var(--season-wash-2) 35%,white 65%));
+  border-color:color-mix(in srgb,var(--season-line) 55%,white 45%);
+}
+.fruit-library{
+  background:linear-gradient(180deg,#fff,color-mix(in srgb,var(--season-wash-2) 34%,white 66%));
+}
+.review-section{
+  background:linear-gradient(180deg,#fffefc,color-mix(in srgb,var(--season-wash-2) 34%,white 66%));
+}
+.review-card{background:#fffefc;border-color:color-mix(in srgb,var(--season-line) 56%,white 44%)}
+.iroom-assurance{background:linear-gradient(115deg,#fffefc,color-mix(in srgb,var(--season-wash-2) 38%,white 62%));border-color:color-mix(in srgb,var(--season-line) 55%,white 45%)}
+.public-season-preview{background:linear-gradient(90deg,color-mix(in srgb,var(--season-wash) 30%,white 70%),#fffefc)}
+
+/* Softer modal atmosphere: no muddy or heavy overlay over the watercolor homepage. */
+.modal-backdrop{background:rgba(31,52,45,.10);backdrop-filter:blur(7px) saturate(.88)}
+.modal-panel{
+  background:linear-gradient(180deg,rgba(255,255,255,.985),color-mix(in srgb,var(--season-wash-2) 32%,white 68%));
+  border-color:color-mix(in srgb,var(--season-line) 60%,white 40%);
+  box-shadow:0 26px 74px rgba(44,44,37,.13);
+  border-radius:22px;
+}
+.mini-panel,.login-join-box{background:rgba(255,255,255,.78);border-color:color-mix(in srgb,var(--season-line) 58%,white 42%)}
+.fruit-card,.story-card,.gift-option,.info-card{background:rgba(255,255,255,.88);border-color:color-mix(in srgb,var(--season-line) 60%,white 40%)}
+
+/* Logout is only revealed after an authenticated user is confirmed. */
+[data-mypage-logout]{display:none}
+[data-mypage-logout].is-visible{display:inline-flex}
+
+
+/* IROOM4 V17 — cache-refresh marker */
+html{--iroom-build:17}
+
+
+/* IROOM4 V18 — visible-but-soft seasonal card contrast + fruit character member chip */
+.site-shell[data-season="spring"]{
+  --card-premium:#fff8f7;--card-seasonal:#fff3f5;--card-curation:#f5faf3;--card-gift:#fff6ee;--card-guide:#f2f7f0;--card-mini:#fffaf8;
+  --season-glow:rgba(226,151,169,.12);
+}
+.site-shell[data-season="summer"]{
+  --card-premium:#fffbee;--card-seasonal:#f4f9e7;--card-curation:#f1f8ed;--card-gift:#fff7e7;--card-guide:#eff6ef;--card-mini:#fffdf4;
+  --season-glow:rgba(143,177,112,.11);
+}
+.site-shell[data-season="autumn"]{
+  --card-premium:#fff7ed;--card-seasonal:#fff0e4;--card-curation:#f8f3ea;--card-gift:#faeee1;--card-guide:#f2f5eb;--card-mini:#fff9f2;
+  --season-glow:rgba(205,121,74,.13);
+}
+.site-shell[data-season="winter"]{
+  --card-premium:#fff9f1;--card-seasonal:#f2f5ed;--card-curation:#eff5f0;--card-gift:#faf2e6;--card-guide:#edf3ee;--card-mini:#fffaf4;
+  --season-glow:rgba(119,148,126,.11);
+}
+.selection-section{
+  background:
+    radial-gradient(circle at 8% 6%,var(--season-glow),transparent 28%),
+    radial-gradient(circle at 94% 31%,color-mix(in srgb,var(--season-glow) 75%,transparent),transparent 25%),
+    linear-gradient(180deg,#fffefb 0%,color-mix(in srgb,var(--season-wash-2) 62%,white 38%) 100%);
+}
+.premium-fruits-block:first-of-type{
+  background:linear-gradient(145deg,rgba(255,255,255,.87),var(--card-premium));
+}
+.seasonal-fruits-block{
+  background:linear-gradient(145deg,rgba(255,255,255,.84),var(--card-seasonal));
+}
+.selection-curation{
+  background:linear-gradient(150deg,rgba(255,255,255,.84),var(--card-curation));
+}
+.selection-gift{
+  background:linear-gradient(150deg,rgba(255,255,255,.84),var(--card-gift));
+}
+.selection-guide{
+  background:linear-gradient(150deg,rgba(255,255,255,.84),var(--card-guide));
+}
+.selection-card{box-shadow:0 12px 30px rgba(80,57,39,.035)}
+.premium-fruits-block:first-of-type,.seasonal-fruits-block,.selection-curation,.selection-gift,.selection-guide{
+  border-color:color-mix(in srgb,var(--season-line) 76%,white 24%);
+}
+.premium-fruit-card,.seasonal-fruit-card,.library-card{
+  background:linear-gradient(180deg,#fff 0%,rgba(255,255,255,.93) 66%,var(--card-mini) 100%);
+  box-shadow:0 8px 22px rgba(70,52,38,.022);
+}
+.selection-card:before{
+  content:"";position:absolute;inset:0;pointer-events:none;opacity:.42;
+  background:radial-gradient(circle at 8% 8%,color-mix(in srgb,var(--season-glow) 70%,transparent),transparent 22%);
+}
+.premium-fruits-block .premium-fruit-strip,.selection-card .selection-copy,.selection-card .selection-art{position:relative;z-index:1}
+
+/* Account is one visual unit instead of a lonely text label + separate person icon. */
+.topbar-inner{grid-template-columns:280px 1fr 300px}
+.header-tools{gap:12px}
+.header-auth{min-width:0}
+.member-chip{
+  display:inline-flex;align-items:center;gap:9px;height:42px;padding:4px 11px 4px 5px;
+  border:1px solid color-mix(in srgb,var(--season-line,#dac7b5) 74%,white 26%);
+  border-radius:999px;background:linear-gradient(180deg,#fffefc,color-mix(in srgb,var(--season-wash-2,#fff8ef) 58%,white 42%));
+  color:#173f36;box-shadow:0 5px 16px rgba(67,50,37,.035);transition:.2s ease;
+}
+.member-chip:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(67,50,37,.07);border-color:color-mix(in srgb,var(--season-accent,#9b503e) 34%,white 66%)}
+.member-copy{display:flex;flex-direction:column;align-items:flex-start;line-height:1.04}
+.member-copy small{font:8px Georgia,serif;letter-spacing:.16em;color:#9a6c59;margin-bottom:4px}
+.member-copy strong{font-family:Georgia,"Times New Roman",serif;font-size:13px;font-weight:600;color:#163e35;white-space:nowrap}
+.member-fruit{position:relative;width:31px;height:31px;flex:0 0 31px;border-radius:48% 52% 50% 50%;background:linear-gradient(145deg,#ffb25a,#ed7f39);box-shadow:inset 0 -4px 8px rgba(135,71,30,.12),0 4px 10px rgba(109,63,33,.08)}
+.member-fruit:before{content:"";position:absolute;width:11px;height:7px;left:15px;top:-3px;border-radius:80% 15% 80% 15%;background:#4f8b57;transform:rotate(-26deg)}
+.member-fruit:after{content:"";position:absolute;left:14px;top:-4px;width:2px;height:7px;border-radius:2px;background:#6c5537;transform:rotate(8deg)}
+.member-fruit i,.member-fruit b{position:absolute;top:12px;width:3px;height:4px;border-radius:50%;background:#21443d}
+.member-fruit i{left:9px}.member-fruit b{right:9px}
+.member-fruit em{position:absolute;left:11px;top:19px;width:9px;height:4px;border-bottom:1.6px solid #21443d;border-radius:0 0 9px 9px}
+.member-chip-user .member-fruit{background:linear-gradient(145deg,#b8d96e,#7faf56)}
+@media(max-width:1050px){.topbar-inner{grid-template-columns:230px 1fr 260px}.member-chip{padding-right:8px}.member-copy small{display:none}}
+@media(max-width:760px){.member-chip{width:38px;height:38px;padding:3px;justify-content:center}.member-copy{display:none}.member-fruit{width:29px;height:29px;flex-basis:29px}.header-tools{gap:7px}}
+
+html{--iroom-build:18}
+
+
+/* IROOM4 V19 — clean account control + restrained seasonal accents */
+html{--iroom-build:19}
+
+/* Keep the content cards bright and premium; use season color as a quiet accent, not a fill. */
+.selection-section{
+  background:linear-gradient(180deg,#fffefb 0%,color-mix(in srgb,var(--season-wash-2) 26%,white 74%) 100%);
+}
+.premium-fruits-block:first-of-type,
+.seasonal-fruits-block,
+.selection-curation,
+.selection-gift,
+.selection-guide{
+  background:linear-gradient(145deg,rgba(255,255,255,.985),rgba(255,253,249,.965));
+  border-color:color-mix(in srgb,var(--season-line) 58%,white 42%);
+  box-shadow:0 9px 25px rgba(76,55,38,.025);
+}
+.selection-card:before{display:none}
+.premium-fruit-card,.seasonal-fruit-card,.library-card{
+  background:linear-gradient(180deg,#fff 0%,#fffefc 100%);
+  border-color:color-mix(in srgb,var(--season-line) 52%,white 48%);
+  box-shadow:0 6px 18px rgba(70,52,38,.018);
+}
+.selection-copy small,.eyebrow,.premium-fruits-block .premium-fruits-copy small{
+  color:var(--season-accent);
+}
+.selection-copy strong,.premium-fruits-copy strong{
+  text-decoration-color:color-mix(in srgb,var(--season-accent) 34%,transparent);
+}
+.premium-fruits-block:first-of-type .premium-fruit-card:before{
+  background:color-mix(in srgb,var(--season-accent) 8%,white 92%);
+  color:color-mix(in srgb,var(--season-accent) 82%,#4e443d 18%);
+}
+.guide-chips b{
+  background:#fffefc;
+  border-color:color-mix(in srgb,var(--season-line) 48%,white 52%);
+}
+
+/* My Iroom: one elegant control, no face/fruit character. */
+.topbar-inner{grid-template-columns:280px 1fr 290px}
+.header-tools{gap:12px}
+.member-chip{
+  display:inline-flex;align-items:center;gap:9px;height:42px;padding:4px 13px 4px 9px;
+  border:1px solid color-mix(in srgb,var(--season-line,#dac7b5) 66%,white 34%);
+  border-radius:999px;
+  background:rgba(255,254,251,.94);
+  color:#173f36;
+  box-shadow:0 4px 14px rgba(62,48,35,.025);
+  transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease,background .2s ease;
+}
+.member-chip:hover{
+  transform:translateY(-1px);
+  background:#fff;
+  box-shadow:0 7px 18px rgba(62,48,35,.055);
+  border-color:color-mix(in srgb,var(--season-accent,#9b503e) 28%,white 72%);
+}
+.member-copy{display:flex;flex-direction:column;align-items:flex-start;line-height:1.03}
+.member-copy small{font:8px Georgia,serif;letter-spacing:.17em;color:color-mix(in srgb,var(--season-accent) 72%,#75685f 28%);margin-bottom:4px}
+.member-copy strong{font-family:Georgia,"Times New Roman",serif;font-size:13px;font-weight:600;color:#173f36;white-space:nowrap}
+.member-leaf{
+  position:relative;width:29px;height:29px;flex:0 0 29px;border-radius:50%;
+  background:color-mix(in srgb,var(--season-wash-2) 52%,white 48%);
+  border:1px solid color-mix(in srgb,var(--season-line) 56%,white 44%);
+}
+.member-leaf:before{
+  content:"";position:absolute;left:13px;top:8px;width:2px;height:14px;border-radius:2px;
+  background:#527a5d;transform:rotate(-8deg);transform-origin:bottom center;
+}
+.member-leaf i,.member-leaf b{
+  position:absolute;display:block;width:10px;height:7px;background:#5f8c68;
+  border-radius:90% 12% 90% 12%;top:7px;
+}
+.member-leaf i{left:5px;transform:rotate(28deg)}
+.member-leaf b{right:4px;transform:scaleX(-1) rotate(20deg)}
+.member-chip-user .member-leaf i,.member-chip-user .member-leaf b{background:#4e7b59}
+@media(max-width:1050px){.topbar-inner{grid-template-columns:230px 1fr 250px}.member-chip{padding-right:9px}.member-copy small{display:none}}
+@media(max-width:760px){.member-chip{width:38px;height:38px;padding:4px;justify-content:center}.member-copy{display:none}.member-leaf{width:28px;height:28px;flex-basis:28px}.header-tools{gap:7px}}
+
+/* IROOM4 V20 — COLOR FLOW ONLY
+   No scenery, no extra fruit/leaf artwork, no generated background image.
+   The approved seasonal hero PNG stays untouched; only CSS color washes bridge the sides and tint the page. */
+html{--iroom-build:20}
+
+html[data-season="spring"],.site-shell[data-season="spring"]{
+  --page-base:#fbf5f1;--page-soft:#f7eee9;--page-soft2:#f2f5e9;
+  --page-glow-a:rgba(232,188,197,.18);--page-glow-b:rgba(180,205,166,.15);
+  --hero-edge:#f7efe9;--hero-edge2:#f3f3e8;
+}
+html[data-season="summer"],.site-shell[data-season="summer"]{
+  --page-base:#f8f7e9;--page-soft:#f4f5df;--page-soft2:#fbf4df;
+  --page-glow-a:rgba(190,211,125,.18);--page-glow-b:rgba(238,213,111,.15);
+  --hero-edge:#f3f4df;--hero-edge2:#fbf2df;
+}
+html[data-season="autumn"],.site-shell[data-season="autumn"]{
+  --page-base:#fbf2e9;--page-soft:#f7e8dc;--page-soft2:#f8efe4;
+  --page-glow-a:rgba(218,146,103,.18);--page-glow-b:rgba(225,184,139,.14);
+  --hero-edge:#f7e8dc;--hero-edge2:#faf0e5;
+}
+html[data-season="winter"],.site-shell[data-season="winter"]{
+  --page-base:#f5f5ee;--page-soft:#edf1ea;--page-soft2:#f6f0e5;
+  --page-glow-a:rgba(138,167,143,.15);--page-glow-b:rgba(207,181,125,.12);
+  --hero-edge:#edf1ea;--hero-edge2:#f7f0e5;
+}
+
+body{
+  background:
+    radial-gradient(ellipse at 7% 8%,var(--page-glow-a),transparent 32%),
+    radial-gradient(ellipse at 94% 26%,var(--page-glow-b),transparent 34%),
+    radial-gradient(ellipse at 14% 74%,color-mix(in srgb,var(--page-glow-b) 70%,transparent),transparent 34%),
+    linear-gradient(180deg,var(--page-base) 0%,color-mix(in srgb,var(--page-soft) 42%,white 58%) 48%,var(--page-base) 100%);
+  background-attachment:fixed;
+  transition:background .35s ease;
+}
+.site-shell{background:transparent}
+.topbar{
+  background:color-mix(in srgb,var(--page-base,#fffaf4) 82%,rgba(255,255,255,.96) 18%);
+  border-bottom-color:color-mix(in srgb,var(--season-line,#e5d8cd) 46%,transparent 54%);
+}
+
+/* Hero: the color itself continues to the browser edges; the artwork is never duplicated or altered. */
+.season-stage{
+  padding:18px 0 22px;
+  background:
+    radial-gradient(ellipse at 0% 48%,var(--page-glow-a),transparent 37%),
+    radial-gradient(ellipse at 100% 52%,var(--page-glow-b),transparent 38%),
+    linear-gradient(90deg,var(--page-soft) 0%,var(--hero-edge) 18%,var(--page-base) 38%,var(--page-base) 62%,var(--hero-edge2) 82%,var(--page-soft2) 100%);
+}
+.season-visual{
+  width:100%;max-width:none;margin:0 auto;background:transparent;
+}
+.season-visual:before{
+  content:"";position:absolute;inset:0;z-index:0;filter:none;opacity:1;transform:none;
+  background:
+    radial-gradient(ellipse at 19% 50%,color-mix(in srgb,var(--page-glow-a) 82%,transparent),transparent 43%),
+    radial-gradient(ellipse at 81% 50%,color-mix(in srgb,var(--page-glow-b) 78%,transparent),transparent 43%),
+    linear-gradient(90deg,var(--page-soft) 0%,transparent 28%,transparent 72%,var(--page-soft2) 100%);
+  pointer-events:none;
+}
+.season-visual:after{
+  content:"";position:absolute;inset:0;z-index:3;pointer-events:none;
+  background:linear-gradient(90deg,
+    var(--page-soft) 0%,
+    color-mix(in srgb,var(--hero-edge) 86%,transparent) 5%,
+    color-mix(in srgb,var(--hero-edge) 46%,transparent) 10%,
+    transparent 16%,transparent 84%,
+    color-mix(in srgb,var(--hero-edge2) 46%,transparent) 90%,
+    color-mix(in srgb,var(--hero-edge2) 86%,transparent) 95%,
+    var(--page-soft2) 100%);
+}
+.season-visual>img{
+  -webkit-mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.42) 4%,#000 9%,#000 91%,rgba(0,0,0,.42) 96%,transparent 100%);
+  mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.42) 4%,#000 9%,#000 91%,rgba(0,0,0,.42) 96%,transparent 100%);
+}
+
+/* The page is no longer white from section to section. Cards stay bright so the fruit remains the focus. */
+.selection-section{
+  background:
+    radial-gradient(ellipse at 6% 14%,color-mix(in srgb,var(--page-glow-a) 62%,transparent),transparent 31%),
+    linear-gradient(180deg,color-mix(in srgb,var(--page-base) 72%,white 28%),color-mix(in srgb,var(--page-soft) 54%,white 46%));
+}
+.fruit-library{
+  background:linear-gradient(180deg,color-mix(in srgb,var(--page-soft2) 42%,white 58%),color-mix(in srgb,var(--page-base) 68%,white 32%));
+}
+.review-section{
+  background:
+    radial-gradient(ellipse at 93% 12%,color-mix(in srgb,var(--page-glow-b) 58%,transparent),transparent 30%),
+    linear-gradient(180deg,color-mix(in srgb,var(--page-base) 70%,white 30%),color-mix(in srgb,var(--page-soft) 48%,white 52%));
+}
+.public-season-preview{
+  background:linear-gradient(90deg,color-mix(in srgb,var(--page-soft) 66%,white 34%),color-mix(in srgb,var(--page-soft2) 58%,white 42%));
+}
+.premium-fruits-block:first-of-type,.seasonal-fruits-block,.selection-curation,.selection-gift,.selection-guide,
+.premium-fruit-card,.seasonal-fruit-card,.library-card,.review-card{
+  background:rgba(255,254,251,.91);
+}
+
+/* Header tools: one calm visual family, without a character. */
+.header-tools{align-items:center;gap:9px}
+.icon-btn{
+  width:40px;height:40px;padding:8px;border:1px solid color-mix(in srgb,var(--season-line,#ddcfc2) 54%,white 46%);
+  border-radius:999px;background:rgba(255,254,251,.82);box-shadow:0 3px 12px rgba(61,48,37,.02);
+  transition:background .2s ease,border-color .2s ease,transform .2s ease;
+}
+.icon-btn:hover{background:#fff;transform:translateY(-1px);border-color:color-mix(in srgb,var(--season-accent,#8c725d) 24%,white 76%)}
+.member-chip{height:40px;background:rgba(255,254,251,.86);box-shadow:0 3px 12px rgba(61,48,37,.02)}
+.member-copy strong{font-family:"Noto Serif KR","Batang",Georgia,serif;letter-spacing:-.01em}
+.member-copy small{color:color-mix(in srgb,var(--season-accent,#8c725d) 62%,#756d65 38%)}
+
+@media(max-width:760px){
+  body{background-attachment:scroll}
+  .season-stage{padding:7px 0 10px}
+  .season-visual>img{-webkit-mask-image:none;mask-image:none}
+  .season-visual:after{display:none}
+  .icon-btn{width:38px;height:38px;padding:8px}
+}
+
+/* IROOM4 V21 — editorial watercolor flow + two quiet fruit accents + unified utility chips */
+html{--iroom-build:21}
+
+/* More visible seasonal page atmosphere, while cards remain bright. */
+html[data-season="spring"],.site-shell[data-season="spring"]{
+  --page-base:#faf1ee;--page-soft:#f5e8e5;--page-soft2:#eef3e8;
+  --page-glow-a:rgba(232,178,191,.24);--page-glow-b:rgba(166,195,151,.19);
+}
+html[data-season="summer"],.site-shell[data-season="summer"]{
+  --page-base:#f6f6e5;--page-soft:#eef3d9;--page-soft2:#faf0d5;
+  --page-glow-a:rgba(177,207,105,.24);--page-glow-b:rgba(236,207,91,.18);
+}
+html[data-season="autumn"],.site-shell[data-season="autumn"]{
+  --page-base:#faeee4;--page-soft:#f4dfd1;--page-soft2:#f7e9da;
+  --page-glow-a:rgba(211,132,86,.24);--page-glow-b:rgba(222,172,119,.18);
+}
+html[data-season="winter"],.site-shell[data-season="winter"]{
+  --page-base:#f2f4ec;--page-soft:#e8eee7;--page-soft2:#f4ecdf;
+  --page-glow-a:rgba(124,157,132,.19);--page-glow-b:rgba(204,174,112,.15);
+}
+body{
+  background:
+    radial-gradient(ellipse at 5% 7%,var(--page-glow-a),transparent 36%),
+    radial-gradient(ellipse at 96% 22%,var(--page-glow-b),transparent 38%),
+    radial-gradient(ellipse at 8% 73%,color-mix(in srgb,var(--page-glow-b) 78%,transparent),transparent 37%),
+    radial-gradient(ellipse at 94% 84%,color-mix(in srgb,var(--page-glow-a) 62%,transparent),transparent 34%),
+    linear-gradient(180deg,var(--page-base) 0%,color-mix(in srgb,var(--page-soft) 64%,white 36%) 47%,color-mix(in srgb,var(--page-soft2) 58%,white 42%) 100%);
+}
+
+/* The approved hero remains untouched. The side gutters gain only one quiet fruit each. */
+.season-stage{position:relative;isolation:isolate;overflow:hidden}
+.season-stage::before,.season-stage::after{
+  content:"";position:absolute;z-index:1;pointer-events:none;background-repeat:no-repeat;background-size:contain;background-position:center;
+  width:clamp(105px,8.5vw,170px);height:clamp(105px,8.5vw,170px);opacity:.26;
+  filter:saturate(.80) contrast(.94);transform-origin:center;
+}
+.season-stage::before{left:clamp(18px,3.3vw,70px);top:58%;transform:translateY(-50%) rotate(-8deg)}
+.season-stage::after{right:clamp(18px,3.3vw,70px);top:36%;transform:translateY(-50%) rotate(7deg)}
+html[data-season="spring"] .season-stage::before{background-image:url('./fruits/01_딸기_strawberry.png')}
+html[data-season="spring"] .season-stage::after{background-image:url('./fruits/04_체리_cherry.png')}
+html[data-season="summer"] .season-stage::before{background-image:url('./fruits/27_자두_plum.png')}
+html[data-season="summer"] .season-stage::after{background-image:url('./fruits/06_복숭아_peach.png')}
+html[data-season="autumn"] .season-stage::before{background-image:url('./fruits/09_사과_apple.png')}
+html[data-season="autumn"] .season-stage::after{background-image:url('./fruits/11_감_persimmon.png')}
+html[data-season="winter"] .season-stage::before{background-image:url('./fruits/21_오렌지_orange.png')}
+html[data-season="winter"] .season-stage::after{background-image:url('./fruits/01_딸기_strawberry.png')}
+.season-visual{z-index:2}
+
+/* Make the hero wash feel continuous, not like a centered poster. */
+.season-stage{
+  background:
+    radial-gradient(ellipse at 3% 46%,color-mix(in srgb,var(--page-glow-a) 90%,transparent),transparent 35%),
+    radial-gradient(ellipse at 97% 50%,color-mix(in srgb,var(--page-glow-b) 90%,transparent),transparent 36%),
+    linear-gradient(90deg,var(--page-soft) 0%,color-mix(in srgb,var(--page-soft) 72%,var(--page-base) 28%) 18%,var(--page-base) 42%,var(--page-base) 58%,color-mix(in srgb,var(--page-soft2) 74%,var(--page-base) 26%) 82%,var(--page-soft2) 100%);
+}
+.season-visual:before{
+  background:
+    radial-gradient(ellipse at 13% 52%,color-mix(in srgb,var(--page-glow-a) 88%,transparent),transparent 47%),
+    radial-gradient(ellipse at 87% 48%,color-mix(in srgb,var(--page-glow-b) 84%,transparent),transparent 47%),
+    linear-gradient(90deg,color-mix(in srgb,var(--page-soft) 88%,transparent) 0%,transparent 31%,transparent 69%,color-mix(in srgb,var(--page-soft2) 88%,transparent) 100%);
+}
+.season-visual:after{
+  background:linear-gradient(90deg,
+    var(--page-soft) 0%,color-mix(in srgb,var(--hero-edge) 76%,transparent) 6%,color-mix(in srgb,var(--hero-edge) 32%,transparent) 12%,
+    transparent 18%,transparent 82%,color-mix(in srgb,var(--hero-edge2) 32%,transparent) 88%,color-mix(in srgb,var(--hero-edge2) 76%,transparent) 94%,var(--page-soft2) 100%);
+}
+
+/* Alternating watercolor bands prevent the lower page from becoming a white canvas. */
+.selection-section{
+  background:
+    radial-gradient(ellipse at 5% 15%,color-mix(in srgb,var(--page-glow-a) 72%,transparent),transparent 33%),
+    radial-gradient(ellipse at 96% 55%,color-mix(in srgb,var(--page-glow-b) 54%,transparent),transparent 31%),
+    linear-gradient(180deg,color-mix(in srgb,var(--page-base) 82%,white 18%),color-mix(in srgb,var(--page-soft) 68%,white 32%));
+}
+.fruit-library{
+  background:
+    radial-gradient(ellipse at 93% 12%,color-mix(in srgb,var(--page-glow-b) 52%,transparent),transparent 30%),
+    linear-gradient(180deg,color-mix(in srgb,var(--page-soft2) 62%,white 38%),color-mix(in srgb,var(--page-base) 74%,white 26%));
+}
+.review-section{
+  background:
+    radial-gradient(ellipse at 5% 16%,color-mix(in srgb,var(--page-glow-a) 54%,transparent),transparent 31%),
+    linear-gradient(180deg,color-mix(in srgb,var(--page-base) 78%,white 22%),color-mix(in srgb,var(--page-soft) 60%,white 40%));
+}
+.premium-fruits-block:first-of-type,.seasonal-fruits-block,.selection-curation,.selection-gift,.selection-guide,
+.premium-fruit-card,.seasonal-fruit-card,.library-card,.review-card{background:rgba(255,254,251,.94)}
+
+/* One visual language for Search / My Iroom / Cart. */
+.topbar-inner{grid-template-columns:280px 1fr minmax(320px,390px)}
+.header-tools{display:flex;align-items:center;justify-content:flex-end;gap:8px}
+.utility-chip{
+  min-height:40px;display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:7px 11px;
+  border:1px solid color-mix(in srgb,var(--season-line,#ddcfc2) 58%,white 42%);border-radius:999px;
+  background:rgba(255,254,251,.86);color:#153d35;box-shadow:0 3px 12px rgba(61,48,37,.018);
+  transition:transform .18s ease,border-color .18s ease,background .18s ease,box-shadow .18s ease;
+}
+.utility-chip:hover{transform:translateY(-1px);background:#fff;border-color:color-mix(in srgb,var(--season-accent,#8c725d) 28%,white 72%);box-shadow:0 6px 16px rgba(61,48,37,.045)}
+.utility-chip>svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;flex:0 0 19px}
+.utility-chip>span:not(.member-leaf):not(.member-copy){font-family:"Noto Serif KR","Batang",serif;font-size:12px;white-space:nowrap}
+.header-auth{min-width:0}
+.member-chip{height:40px;padding:5px 11px 5px 6px;gap:7px}
+.member-leaf{width:27px;height:27px;flex-basis:27px}
+.member-copy{display:flex;flex-direction:column;align-items:flex-start;line-height:1.03}
+.member-copy strong{font-family:"Noto Serif KR","Batang",serif;font-size:12px;font-weight:600;white-space:nowrap}
+.member-copy small{font-family:"Pretendard","Noto Sans KR",sans-serif;font-size:9px;letter-spacing:0;margin-top:3px;color:#8b7568;white-space:nowrap}
+
+@media(max-width:1180px){
+  .topbar-inner{grid-template-columns:230px 1fr 285px}.utility-chip>span:not(.member-copy):not(.member-leaf){display:none}.utility-chip{width:40px;padding:7px}.member-chip{width:auto;padding:5px 9px 5px 6px}.member-copy strong{font-size:11px}
+  .season-stage::before,.season-stage::after{width:110px;height:110px;opacity:.18}
+}
+@media(max-width:760px){
+  .season-stage::before,.season-stage::after{display:none}
+  .utility-chip{width:38px;height:38px;min-height:38px;padding:6px}.member-chip{width:38px;padding:4px}.member-copy{display:none}.member-leaf{width:27px;height:27px;flex-basis:27px}
+}
+
+
+/* IROOM4 V22 — complete editorial menu / visible side fruit / distinct premium visuals */
+html{--iroom-build:22}
+
+/* 1. The side fruit accents are intentionally visible now, but remain secondary to the approved hero. */
+.season-stage::before,.season-stage::after{
+  z-index:5;
+  width:clamp(140px,10vw,205px);height:clamp(140px,10vw,205px);
+  opacity:.54;
+  filter:saturate(.98) contrast(.98) drop-shadow(0 14px 18px rgba(83,62,39,.08));
+}
+.season-stage::before{left:clamp(16px,2.3vw,52px);top:67%;transform:translateY(-50%) rotate(-7deg)}
+.season-stage::after{right:clamp(16px,2.3vw,52px);top:31%;transform:translateY(-50%) rotate(6deg)}
+.season-stage:has(.season-visual)::before,.season-stage:has(.season-visual)::after{pointer-events:none}
+
+/* slightly broader visual rhythm without cropping or stretching the approved hero */
+.season-visual{height:clamp(515px,31.8vw,605px)}
+.season-visual>img{filter:saturate(.98) contrast(.985) brightness(1.008)}
+
+/* 2. Section-by-section watercolor tones. Strong enough to read, still pale enough for fruit artwork. */
+html[data-season="spring"],.site-shell[data-season="spring"]{
+ --panel-premium:#fff3ef;--panel-seasonal:#f5f7ec;--panel-curation:#f3f7f0;--panel-gift:#fff5ed;--panel-guide:#f3f5ee;--mini-premium:#fff9f5;--mini-seasonal:#fbfcf5;
+}
+html[data-season="summer"],.site-shell[data-season="summer"]{
+ --panel-premium:#fff8e5;--panel-seasonal:#f0f5dd;--panel-curation:#eef5e7;--panel-gift:#fff5dc;--panel-guide:#f1f5e8;--mini-premium:#fffdf3;--mini-seasonal:#f8faee;
+}
+html[data-season="autumn"],.site-shell[data-season="autumn"]{
+ --panel-premium:#fff1e5;--panel-seasonal:#f8eadf;--panel-curation:#f5eee5;--panel-gift:#f8e9dc;--panel-guide:#f2f2e9;--mini-premium:#fff8f1;--mini-seasonal:#fff8f2;
+}
+html[data-season="winter"],.site-shell[data-season="winter"]{
+ --panel-premium:#fbf5e9;--panel-seasonal:#edf2ea;--panel-curation:#ebf2ed;--panel-gift:#f8f0df;--panel-guide:#edf2ed;--mini-premium:#fffaf2;--mini-seasonal:#f7faf5;
+}
+.premium-fruits-block:first-of-type{background:linear-gradient(135deg,rgba(255,255,255,.78),var(--panel-premium))!important}
+.seasonal-fruits-block{background:linear-gradient(135deg,rgba(255,255,255,.78),var(--panel-seasonal))!important}
+.selection-curation{background:linear-gradient(145deg,rgba(255,255,255,.76),var(--panel-curation))!important}
+.selection-gift{background:linear-gradient(145deg,rgba(255,255,255,.76),var(--panel-gift))!important}
+.selection-guide{background:linear-gradient(145deg,rgba(255,255,255,.78),var(--panel-guide))!important}
+.premium-fruits-block:first-of-type .premium-fruit-card:not(.seasonal-fruit-card){background:linear-gradient(180deg,#fff,var(--mini-premium))!important}
+.seasonal-fruit-card{background:linear-gradient(180deg,#fff,var(--mini-seasonal))!important}
+.selection-card{border-color:color-mix(in srgb,var(--season-line) 72%,white 28%);box-shadow:0 14px 34px rgba(76,57,41,.035)}
+.selection-grid{gap:24px}
+
+/* Premium and seasonal may be the same fruit, but premium now uses a separate composed visual asset. */
+.premium-fruits-block:first-of-type .premium-fruit-card img{height:138px;transform:scale(1.02);filter:none}
+.seasonal-fruit-card img{height:128px;filter:drop-shadow(0 9px 9px rgba(75,51,33,.055))}
+
+/* 3. A-style utility menu: three clean line icons; account details live in a popover. */
+.topbar-inner{grid-template-columns:280px 1fr 180px}
+.header-tools-a{display:flex;align-items:center;justify-content:flex-end;gap:16px;overflow:visible}
+.header-icon-btn{
+ position:relative;width:38px;height:38px;border:0;background:transparent;color:#153d35;padding:7px;border-radius:50%;
+ display:inline-flex;align-items:center;justify-content:center;transition:background .18s ease,transform .18s ease;color .18s ease;
+}
+.header-icon-btn svg{width:23px;height:23px;fill:none;stroke:currentColor;stroke-width:1.45;stroke-linecap:round;stroke-linejoin:round}
+.header-icon-btn:hover{background:color-mix(in srgb,var(--page-soft) 72%,white 28%);transform:translateY(-1px)}
+.account-wrap{position:relative;display:block;min-width:0}
+.account-dot,.cart-dot{position:absolute;right:5px;top:4px;width:6px;height:6px;border-radius:50%;background:var(--season-accent);opacity:0;transform:scale(.7);transition:.18s ease}
+.account-dot.is-on{opacity:1;transform:scale(1)}
+.account-popover{
+ position:absolute;right:-48px;top:48px;width:260px;z-index:80;border:1px solid color-mix(in srgb,var(--season-line) 70%,white 30%);border-radius:18px;
+ background:rgba(255,254,250,.98);box-shadow:0 20px 55px rgba(49,42,34,.12);padding:17px;backdrop-filter:blur(14px);
+}
+.account-popover[hidden]{display:none!important}
+.account-popover:before{content:"";position:absolute;right:58px;top:-7px;width:12px;height:12px;background:rgba(255,254,250,.98);border-left:1px solid color-mix(in srgb,var(--season-line) 70%,white 30%);border-top:1px solid color-mix(in srgb,var(--season-line) 70%,white 30%);transform:rotate(45deg)}
+.account-popover-head{padding:4px 5px 13px;border-bottom:1px solid color-mix(in srgb,var(--season-line) 48%,white 52%)}
+.account-popover-head small{display:block;font:9px Georgia,serif;letter-spacing:.18em;color:var(--season-accent);margin-bottom:6px}
+.account-popover-head strong{display:block;font-family:"Noto Serif KR","Batang",serif;font-size:20px;font-weight:600;color:#153d35}
+.account-popover-head span{display:block;margin-top:5px;font-size:11px;color:#8b7c70}
+.account-popover-menu{padding-top:8px;display:grid;gap:2px}
+.account-popover-menu button{width:100%;border:0;background:transparent;padding:10px 7px;display:flex;align-items:center;gap:8px;text-align:left;color:#284940;font-size:12px;border-radius:10px}
+.account-popover-menu button:hover{background:color-mix(in srgb,var(--page-soft) 58%,white 42%)}
+.account-popover-menu button>span{margin-left:auto}.account-popover-menu button[hidden]{display:none!important}
+.account-kakao i{display:inline-flex;width:20px;height:20px;border-radius:50%;align-items:center;justify-content:center;background:#FEE500;color:#191919;font-style:normal;font-weight:800;font-size:10px}
+
+@media(max-width:1180px){
+ .topbar-inner{grid-template-columns:230px 1fr 155px}.header-tools-a{gap:10px}
+ .season-stage::before,.season-stage::after{width:128px;height:128px;opacity:.42}
+}
+@media(max-width:900px){.season-stage::before,.season-stage::after{opacity:.28;width:105px;height:105px}.season-visual{height:475px}}
+@media(max-width:760px){
+ .topbar-inner{grid-template-columns:1fr auto}.header-tools-a{gap:5px}.header-icon-btn{width:36px;height:36px;padding:7px}
+ .account-popover{position:fixed;right:14px;top:64px;width:min(280px,calc(100vw - 28px))}
+ .account-popover:before{right:72px}.season-stage::before,.season-stage::after{display:none}.season-visual{height:auto}
+}
+
+
+/* IROOM4 V23 — visibly softer section color / refined search modal */
+html{--iroom-build:23}
+
+/* Make the section color differences actually visible while keeping fruit cards clean. */
+.premium-fruits-block:first-of-type{
+  background:linear-gradient(135deg,color-mix(in srgb,var(--panel-premium) 86%,#fff 14%),color-mix(in srgb,var(--panel-premium) 72%,#fff 28%))!important;
+}
+.seasonal-fruits-block{
+  background:linear-gradient(135deg,color-mix(in srgb,var(--panel-seasonal) 87%,#fff 13%),color-mix(in srgb,var(--panel-seasonal) 73%,#fff 27%))!important;
+}
+.selection-curation{
+  background:linear-gradient(145deg,color-mix(in srgb,var(--panel-curation) 87%,#fff 13%),color-mix(in srgb,var(--panel-curation) 72%,#fff 28%))!important;
+}
+.selection-gift{
+  background:linear-gradient(145deg,color-mix(in srgb,var(--panel-gift) 88%,#fff 12%),color-mix(in srgb,var(--panel-gift) 73%,#fff 27%))!important;
+}
+.selection-guide{
+  background:linear-gradient(145deg,color-mix(in srgb,var(--panel-guide) 88%,#fff 12%),color-mix(in srgb,var(--panel-guide) 74%,#fff 26%))!important;
+}
+.selection-card{border-color:color-mix(in srgb,var(--season-line) 82%,white 18%);box-shadow:0 14px 30px rgba(78,58,41,.045)}
+.selection-section{
+  background:
+    radial-gradient(ellipse at 2% 8%,color-mix(in srgb,var(--page-glow-a) 82%,transparent),transparent 31%),
+    radial-gradient(ellipse at 98% 54%,color-mix(in srgb,var(--page-glow-b) 70%,transparent),transparent 32%),
+    linear-gradient(180deg,color-mix(in srgb,var(--page-base) 90%,white 10%),color-mix(in srgb,var(--page-soft) 80%,white 20%));
+}
+.fruit-library{background:linear-gradient(180deg,color-mix(in srgb,var(--page-soft2) 78%,white 22%),color-mix(in srgb,var(--page-base) 82%,white 18%))}
+.review-section{background:linear-gradient(180deg,color-mix(in srgb,var(--page-base) 84%,white 16%),color-mix(in srgb,var(--page-soft) 75%,white 25%))}
+
+/* The side fruit accents should be seen, not guessed. */
+.season-stage::before,.season-stage::after{
+  width:clamp(155px,11vw,220px);height:clamp(155px,11vw,220px);opacity:.66;
+  filter:saturate(1.02) contrast(.99) drop-shadow(0 12px 18px rgba(74,55,38,.055));
+}
+.season-stage::before{left:clamp(20px,2.8vw,58px)}
+.season-stage::after{right:clamp(20px,2.8vw,58px)}
+
+/* Search should feel like Iroom, not a full-screen blurred fruit poster. */
+.modal-backdrop[data-modal-type=\"search\"]{
+  background:rgba(247,241,232,.76);
+  backdrop-filter:blur(2px) saturate(.96);
+}
+.modal-backdrop[data-modal-type=\"search\"] .modal-panel{
+  width:min(720px,calc(100vw - 34px));
+  max-height:min(78vh,720px);
+  padding:38px 40px 36px;
+  background:linear-gradient(155deg,#fffdf9 0%,color-mix(in srgb,var(--page-soft2) 44%,#fff 56%) 100%);
+  border:1px solid color-mix(in srgb,var(--season-line) 72%,white 28%);
+  border-radius:24px;
+  box-shadow:0 24px 70px rgba(54,43,34,.13);
+}
+.modal-backdrop[data-modal-type=\"search\"] .modal-panel h2{font-size:32px;margin-bottom:8px}
+.modal-backdrop[data-modal-type=\"search\"] .modal-intro{margin-bottom:22px;color:#7b7066}
+.modal-backdrop[data-modal-type=\"search\"] .modal-close{right:16px;top:14px;width:40px;height:40px;border:1px solid color-mix(in srgb,var(--season-line) 65%,white 35%);border-radius:50%;background:#fffaf4;font-size:24px}
+.search-row-v23{display:grid;grid-template-columns:1fr 84px;gap:10px}
+.search-row-v23 input{height:50px;border:1px solid color-mix(in srgb,var(--season-line) 70%,white 30%);border-radius:14px;background:#fff;padding:0 17px;font-size:14px;outline:none}
+.search-row-v23 input:focus{border-color:color-mix(in srgb,var(--season-accent) 48%,white 52%);box-shadow:0 0 0 3px color-mix(in srgb,var(--season-accent) 8%,transparent)}
+.search-row-v23 button{height:50px;border:0;border-radius:14px;background:#173f35;color:#fff;font-size:13px;font-weight:700}
+.search-quick-label{margin:22px 0 10px;font:10px Georgia,serif;letter-spacing:.18em;color:var(--season-accent)}
+.search-results-v23{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:0}
+.search-result-card{display:grid;grid-template-columns:64px 1fr auto;align-items:center;gap:12px;min-height:82px;padding:10px 12px;border:1px solid color-mix(in srgb,var(--season-line) 60%,white 40%);border-radius:16px;background:rgba(255,255,255,.84);text-align:left;color:#173d35}
+.search-result-card:hover{background:#fff;border-color:color-mix(in srgb,var(--season-accent) 28%,white 72%);transform:translateY(-1px)}
+.search-result-card img{width:62px;height:58px;object-fit:contain}
+.search-result-card span{min-width:0}
+.search-result-card b{display:block;font-family:\"Noto Serif KR\",\"Batang\",serif;font-size:15px;margin-bottom:4px}
+.search-result-card small{display:block;color:#86786d;font-size:10.5px;line-height:1.45;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.search-result-card i{font-style:normal;font-size:10px;color:#6e806f;white-space:nowrap}
+.search-empty{grid-column:1/-1;padding:24px;border:1px dashed color-mix(in srgb,var(--season-line) 60%,white 40%);border-radius:14px;background:rgba(255,255,255,.6);color:#867b71;text-align:center;font-size:12px}
+@media(max-width:640px){
+  .modal-backdrop[data-modal-type=\"search\"] .modal-panel{padding:34px 20px 24px}
+  .search-results-v23{grid-template-columns:1fr}.search-result-card{grid-template-columns:58px 1fr}.search-result-card i{display:none}
+  .search-row-v23{grid-template-columns:1fr 70px}
+}
+
+
+/* IROOM4 V25 — FINAL EDITORIAL COMPOSITION
+   Authoritative visual layer: broader hero composition, distinct premium visuals,
+   visible seasonal panels, clean A-style utilities, and Kakao consultation. */
+html{--iroom-build:25}
+
+/* --- V25 seasonal palette: warm editorial, never plain white --- */
+html[data-season="spring"],.site-shell[data-season="spring"]{
+  --v25-page:#faf2ef; --v25-page2:#f2f4e8; --v25-premium:#f8e8e5; --v25-seasonal:#edf3e7;
+  --v25-curation:#f6eee6; --v25-gift:#faebdf; --v25-guide:#eaf1e9; --v25-accent:#9f6b73; --v25-line:#e7d3ce;
+}
+html[data-season="summer"],.site-shell[data-season="summer"]{
+  --v25-page:#f7f6e5; --v25-page2:#f9f0d7; --v25-premium:#fbefcf; --v25-seasonal:#eaf1d5;
+  --v25-curation:#e9f1e4; --v25-gift:#f8ecd0; --v25-guide:#e9f0e3; --v25-accent:#6f815b; --v25-line:#dce1c9;
+}
+html[data-season="autumn"],.site-shell[data-season="autumn"]{
+  --v25-page:#f9eee5; --v25-page2:#f4e7db; --v25-premium:#f4dfcf; --v25-seasonal:#eee9de;
+  --v25-curation:#eee9e1; --v25-gift:#f3e1d2; --v25-guide:#e8eee5; --v25-accent:#9d6749; --v25-line:#e4cfbf;
+}
+html[data-season="winter"],.site-shell[data-season="winter"]{
+  --v25-page:#f2f4ed; --v25-page2:#f5ecdf; --v25-premium:#f3e8d8; --v25-seasonal:#e5ede4;
+  --v25-curation:#e7efeb; --v25-gift:#f2e6d5; --v25-guide:#e5ede8; --v25-accent:#637c6d; --v25-line:#d7ded5;
+}
+body{
+  background:
+    radial-gradient(ellipse at 4% 7%,color-mix(in srgb,var(--v25-page2) 76%,transparent),transparent 34%),
+    radial-gradient(ellipse at 96% 28%,color-mix(in srgb,var(--v25-page) 78%,transparent),transparent 36%),
+    linear-gradient(180deg,var(--v25-page),color-mix(in srgb,var(--v25-page2) 74%,#fff 26%) 55%,var(--v25-page));
+}
+.site-shell{background:transparent}
+.topbar{background:rgba(255,253,248,.965);border-bottom:1px solid color-mix(in srgb,var(--v25-line) 65%,transparent)}
+
+/* --- HERO: widen the composition without stretching/cropping the approved art --- */
+.season-stage::before,.season-stage::after{display:none!important}
+.season-stage{
+  position:relative;overflow:hidden;isolation:isolate;padding:16px 0 24px;
+  background:
+    radial-gradient(ellipse at 8% 52%,color-mix(in srgb,var(--v25-page2) 82%,transparent),transparent 38%),
+    radial-gradient(ellipse at 92% 46%,color-mix(in srgb,var(--v25-page) 84%,transparent),transparent 39%),
+    linear-gradient(90deg,var(--v25-page2) 0%,color-mix(in srgb,var(--v25-page) 88%,#fff 12%) 25%,color-mix(in srgb,var(--v25-page) 88%,#fff 12%) 75%,var(--v25-page2) 100%);
+}
+.season-visual{position:relative;z-index:3;width:100%;height:clamp(515px,31vw,590px);overflow:hidden;background:transparent}
+.season-visual:before{
+  content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:linear-gradient(90deg,var(--v25-page2) 0%,transparent 18%,transparent 82%,var(--v25-page2) 100%);
+}
+.season-visual:after{display:none!important}
+.season-visual>img{
+  position:relative!important;z-index:2;display:block;height:100%!important;width:auto!important;max-width:none!important;margin:0 auto;
+  object-fit:contain!important;object-position:center!important;mask-image:none!important;-webkit-mask-image:none!important;filter:none!important;
+}
+.hero-side-fruit{
+  display:block!important;position:absolute;z-index:4;pointer-events:none;object-fit:contain;
+  width:clamp(190px,13vw,270px);height:clamp(190px,13vw,270px);opacity:.94;
+  filter:saturate(1.03) contrast(1.01) drop-shadow(0 18px 22px rgba(64,49,34,.10));
+}
+.hero-side-fruit-left{left:clamp(28px,6.1vw,118px);top:61%;transform:translateY(-50%) rotate(-6deg)}
+.hero-side-fruit-right{right:clamp(28px,6.1vw,118px);top:39%;transform:translateY(-50%) rotate(5deg)}
+/* soften only the empty perimeter, never the fruit itself */
+.season-stage .hero-side-fruit:after{display:none}
+@media(min-width:1500px){
+  .hero-side-fruit{width:245px;height:245px}.hero-side-fruit-left{left:7vw}.hero-side-fruit-right{right:7vw}
+}
+@media(max-width:1180px){
+  .hero-side-fruit{width:150px;height:150px;opacity:.9}.hero-side-fruit-left{left:18px}.hero-side-fruit-right{right:18px}
+}
+@media(max-width:920px){.hero-side-fruit{display:none!important}.season-visual{height:470px}}
+@media(max-width:760px){.season-stage{padding:8px 0 12px}.season-visual{height:auto;aspect-ratio:1672/941}.season-visual>img{width:100%!important;height:auto!important}}
+
+/* --- SECTION RHYTHM: visible, luxurious, season-aware color blocks --- */
+.selection-section{
+  background:
+    radial-gradient(ellipse at 2% 10%,color-mix(in srgb,var(--v25-page2) 64%,transparent),transparent 29%),
+    radial-gradient(ellipse at 98% 64%,color-mix(in srgb,var(--v25-page) 72%,transparent),transparent 30%),
+    linear-gradient(180deg,color-mix(in srgb,var(--v25-page) 84%,#fff 16%),color-mix(in srgb,var(--v25-page2) 72%,#fff 28%));
+}
+.selection-grid{gap:28px}
+.selection-card{border:1px solid var(--v25-line)!important;box-shadow:0 16px 38px rgba(73,55,40,.045);border-radius:30px!important}
+.premium-fruits-block:first-of-type{
+  background:linear-gradient(135deg,color-mix(in srgb,var(--v25-premium) 90%,#fff 10%),color-mix(in srgb,var(--v25-premium) 74%,#fff 26%))!important;
+  box-shadow:inset 0 1px rgba(255,255,255,.65),0 16px 38px rgba(73,55,40,.045);
+}
+.seasonal-fruits-block{
+  background:linear-gradient(135deg,color-mix(in srgb,var(--v25-seasonal) 92%,#fff 8%),color-mix(in srgb,var(--v25-seasonal) 75%,#fff 25%))!important;
+}
+.selection-curation{background:linear-gradient(145deg,var(--v25-curation),color-mix(in srgb,var(--v25-curation) 72%,#fff 28%))!important}
+.selection-gift{background:linear-gradient(145deg,var(--v25-gift),color-mix(in srgb,var(--v25-gift) 72%,#fff 28%))!important}
+.selection-guide{background:linear-gradient(145deg,var(--v25-guide),color-mix(in srgb,var(--v25-guide) 72%,#fff 28%))!important}
+.selection-copy small,.premium-fruits-copy small,.eyebrow{color:var(--v25-accent)!important}
+.selection-copy i,.premium-copy i{color:#18463c}
+
+/* individual fruit cards remain bright, but premium gets a different editorial presentation */
+.premium-fruit-card,.seasonal-fruit-card,.library-card{background:rgba(255,254,250,.965)!important;border-color:color-mix(in srgb,var(--v25-line) 82%,#fff 18%)!important}
+.premium-fruits-block:first-of-type .premium-fruit-card:not(.seasonal-fruit-card){
+  background:linear-gradient(180deg,#fffdf9 0%,color-mix(in srgb,var(--v25-premium) 38%,#fff 62%) 100%)!important;
+}
+.premium-fruits-block:first-of-type .premium-fruit-card:before{
+  content:"국산 프리미엄"!important;background:color-mix(in srgb,var(--v25-premium) 72%,#fff 28%)!important;color:var(--v25-accent)!important;
+}
+.premium-fruits-block:first-of-type .premium-fruit-card img{height:150px!important;max-width:96%;margin:0 auto;object-fit:contain;filter:drop-shadow(0 12px 14px rgba(66,49,31,.075))!important}
+.seasonal-fruit-card img{height:120px!important;max-width:86%;margin:0 auto;object-fit:contain;filter:drop-shadow(0 8px 10px rgba(66,49,31,.055))!important}
+.premium-fruit-card:hover{transform:translateY(-4px);box-shadow:0 15px 32px rgba(70,51,34,.075)}
+
+/* lower sections inherit the page atmosphere instead of returning to white */
+.iroom-assurance{background:linear-gradient(115deg,color-mix(in srgb,var(--v25-guide) 72%,#fff 28%),rgba(255,255,255,.88));border-color:var(--v25-line)}
+.premium-banner{background:linear-gradient(110deg,color-mix(in srgb,var(--v25-gift) 86%,#fff 14%),color-mix(in srgb,var(--v25-page2) 78%,#fff 22%));border-color:var(--v25-line)}
+.fruit-library{background:linear-gradient(180deg,color-mix(in srgb,var(--v25-page2) 70%,#fff 30%),color-mix(in srgb,var(--v25-page) 78%,#fff 22%))}
+.review-section{background:linear-gradient(180deg,color-mix(in srgb,var(--v25-page) 77%,#fff 23%),color-mix(in srgb,var(--v25-page2) 66%,#fff 34%))}
+.review-card{background:rgba(255,254,250,.94);border-color:var(--v25-line)}
+
+/* --- HEADER A: exactly three visual icons, no floating login text/chip --- */
+.topbar-inner{grid-template-columns:280px minmax(0,1fr) 178px!important}
+.header-tools-a{display:flex!important;align-items:center;justify-content:flex-end;gap:10px!important;overflow:visible}
+.header-icon-btn{
+  width:42px!important;height:42px!important;padding:8px!important;border:1px solid transparent!important;border-radius:50%!important;
+  display:inline-flex!important;align-items:center!important;justify-content:center!important;background:transparent!important;color:#173e35!important;
+}
+.header-icon-btn:hover{background:color-mix(in srgb,var(--v25-page2) 66%,#fff 34%)!important;border-color:var(--v25-line)!important;transform:translateY(-1px)}
+.utility-icon{display:block!important;width:26px!important;height:26px!important;object-fit:contain!important;opacity:1!important}
+.account-trigger{background:transparent!important;border-color:transparent!important}
+.account-popover{right:-44px!important;top:50px!important;width:270px;border-radius:20px!important;border-color:var(--v25-line)!important;background:rgba(255,254,250,.985)!important}
+.account-popover-menu button:hover{background:color-mix(in srgb,var(--v25-page) 62%,#fff 38%)!important}
+.account-chat i{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;background:#173e35;color:#fff;font:700 10px/1 Arial}
+.account-kakao i{background:#FEE500!important;color:#191919!important}
+
+/* Kakao open-chat CTA: consultation is distinct from Kakao login */
+.kakao-chat-btn{border:0;border-radius:999px;background:#173e35;color:#fff;padding:11px 17px;font-size:12px;font-weight:700;display:inline-flex;align-items:center;gap:8px}
+.kakao-chat-btn:before{content:"K";display:grid;place-items:center;width:22px;height:22px;border-radius:50%;background:#FEE500;color:#191919;font:800 11px/1 Arial}
+.kakao-chat-btn:hover{transform:translateY(-1px);filter:brightness(1.03)}
+.assurance-chat{border:1px solid color-mix(in srgb,var(--v25-accent) 35%,#fff 65%);border-radius:999px;background:rgba(255,255,255,.64);color:#21483f;padding:9px 13px;font-size:11px;white-space:nowrap}
+.assurance-chat:hover{background:#fff}
+.footer-action.kakao-chat strong{color:#ffe48b}
+
+/* cleaner modal finish */
+.modal-panel{border-radius:26px;background:linear-gradient(155deg,#fffdf9,color-mix(in srgb,var(--v25-page2) 42%,#fff 58%));border-color:var(--v25-line)}
+.modal-backdrop{background:rgba(37,47,41,.20);backdrop-filter:blur(5px)}
+
+@media(max-width:1180px){.topbar-inner{grid-template-columns:230px 1fr 158px!important}}
+@media(max-width:760px){
+  .topbar-inner{grid-template-columns:1fr auto!important}.main-nav{display:none}.header-tools-a{gap:3px!important}.header-icon-btn{width:38px!important;height:38px!important;padding:7px!important}
+  .account-popover{position:fixed!important;right:12px!important;top:64px!important;width:min(286px,calc(100vw - 24px))!important}
+  .iroom-assurance{grid-template-columns:1fr}.assurance-chat{justify-self:start}
+}
+
+</style>
+<!-- IROOM4 V26 SELF-CONTAINED: CSS/JS embedded to prevent asset-load failures -->
 </head>
 <body>
-<div class="site-shell" id="iroomFinalBase" data-build="25">
+<div class="site-shell" id="iroomFinalBase" data-build="26">
   <header class="topbar">
     <div class="topbar-inner">
       <button class="brand" type="button" data-home aria-label="이룸 fresh fruits 홈">
@@ -295,6 +1841,524 @@
   </section>
 </div>
 
-<script src="./iroom_assets/iroom-v25.js?v=25"></script>
+<script id="iroom-v26-inline-js">
+(function(){
+  const $=(s,p=document)=>p.querySelector(s), $$=(s,p=document)=>[...p.querySelectorAll(s)];
+  const root=$('#iroomFinalBase'); if(!root)return;
+  const assets='./iroom_assets/';
+  const PUBLIC_DEFAULT={
+    siteName:'이룸 fresh fruits',
+    businessNo:'775-97-00292',
+    address:'서울특별시 송파구 송이로15길 33, 상가동 B-103호',
+    mailOrderNo:'제 2025-서울 송파 -1052호',
+    bandUrl:'https://band.us/@iroomfruits',
+    kakaoUrl:'https://open.kakao.com/o/sd7wnrKi',
+    kakaoJoinUrl:'',
+    kakaoEnabled:false,
+    kakaoJsKey:'',
+    kakaoRedirectUri:''
+  };
+  let publicSite={...PUBLIC_DEFAULT};
+  const seasons={
+    spring:{label:'봄',art:'hero_final/spring.png',curation:'card_art/spring_curation.jpg',gift:'card_art/spring_gift.jpg',premium:'card_art/spring_premium.jpg',premiumFruits:['금실딸기','성주참외','대저토마토','샤인머스캣'],seasonalFruits:['딸기','참외','토마토','청포도'],library:['블루베리','파인애플','망고','자몽','체리','멜론']},
+    summer:{label:'여름',art:'hero_final/summer.png',curation:'card_art/summer_curation.jpg',gift:'card_art/summer_gift.jpg',premium:'card_art/summer_premium.jpg',premiumFruits:['백도복숭아','고당도수박','샤인머스캣','머스크멜론'],seasonalFruits:['수박','복숭아','자두','포도'],library:['파인애플','키위','블루베리','청포도','자몽','체리']},
+    autumn:{label:'가을',art:'hero_final/autumn.png',curation:'card_art/autumn_curation.jpg',gift:'card_art/autumn_gift.jpg',premium:'card_art/autumn_premium.jpg',premiumFruits:['홍로사과','나주배','샤인머스캣','대봉'],seasonalFruits:['사과','배','감','대봉'],library:['석류','포도','블랙베리','자몽','샤인머스캣','사과']},
+    winter:{label:'겨울',art:'hero_final/winter.png',curation:'card_art/winter_curation.jpg',gift:'card_art/winter_gift.jpg',premium:'card_art/winter_premium.jpg',premiumFruits:['제주감귤','한라봉','금실딸기','부사사과'],seasonalFruits:['제주감귤','한라봉','딸기','사과'],library:['키위','금귤','배','블루베리','자몽','오렌지']}
+  };
+  const premiumVisuals={
+    spring:['premium_v25/spring_01.png','premium_v25/spring_02.png','premium_v25/spring_03.png','premium_v25/spring_04.png'],
+    summer:['premium_v25/summer_01.png','premium_v25/summer_02.png','premium_v25/summer_03.png','premium_v25/summer_04.png'],
+    autumn:['premium_v25/autumn_01.png','premium_v25/autumn_02.png','premium_v25/autumn_03.png','premium_v25/autumn_04.png'],
+    winter:['premium_v25/winter_01.png','premium_v25/winter_02.png','premium_v25/winter_03.png','premium_v25/winter_04.png']
+  };
+  const heroAccents={
+    spring:['fruits/16_블루베리_blueberry.png','fruits/12_샤인머스캣_shine_muscat.png'],
+    summer:['fruits/04_체리_cherry.png','fruits/18_파인애플_pineapple.png'],
+    autumn:['fruits/26_밤_chestnut.png','fruits/27_자두_plum.png'],
+    winter:['fruits/10_배_pear.png','fruits/16_블루베리_blueberry.png']
+  };
+  const heroCopy={
+    spring:{title:'봄 제철 과일',desc:'봄의 싱그러움을<br>가장 특별한 선물로',tag:'PREMIUM FRESH FRUITS · IN SPRING'},
+    summer:{title:'여름의 과일',desc:'햇살이 더 달콤하게<br>만드는 계절의 선물',tag:'PREMIUM FRESH FRUITS · IN SUMMER'},
+    autumn:{title:'가을 프리미엄 과일',desc:'깊어가는 계절이 전하는<br>가장 특별한 선물',tag:'PREMIUM FRESH FRUITS · IN AUTUMN'},
+    winter:{title:'겨울 프리미엄 과일',desc:'차가운 계절에 더욱 빛나는<br>자연의 달콤한 선물',tag:'PREMIUM FRESH FRUITS · IN WINTER'}
+  };
+  const fruitMeta={
+    '딸기':['fruits/01_딸기_strawberry.png','향긋하고 산뜻한 단맛'],
+    '참외':['fruits/02_참외_korean_melon.png','아삭하고 맑은 달콤함'],
+    '청포도':['fruits/03_청포도_green_grape.png','청량하고 향긋한 단맛'],
+    '체리':['fruits/04_체리_cherry.png','상큼하고 진한 과즙'],
+    '수박':['fruits/05_수박_watermelon.png','시원하고 풍부한 과즙'],
+    '천도복숭아':['fruits/06_복숭아_peach.png','산뜻하고 향긋한 여름 맛'],
+    '복숭아':['fruits/06_복숭아_peach.png','부드럽고 향긋한 여름의 단맛'],
+    '사과':['fruits/09_사과_apple.png','아삭하고 선명한 달콤함'],
+    '배':['fruits/10_배_pear.png','시원하고 풍부한 과즙'],
+    '감':['fruits/11_감_persimmon.png','깊고 진한 계절의 단맛'],
+    '대봉':['fruits/11_감_persimmon.png','후숙할수록 부드럽고 깊어지는 가을 단맛'],
+    '샤인머스캣':['fruits/12_샤인머스캣_shine_muscat.png','향긋하고 맑은 달콤함'],
+    '한라봉':['fruits/13_한라봉_hallabong.png','진한 향과 산뜻한 단맛'],
+    '키위':['fruits/19_키위_kiwi.png','상큼하고 깊은 달콤함'],
+    '자두':['fruits/27_자두_plum.png','새콤달콤한 여름 과즙'],
+    '토마토':['fruits/37_토마토_tomato.png','신선하고 산뜻한 자연의 맛'],
+    '망고':['fruits/07_망고_mango.png','부드럽고 진한 열대의 달콤함'],
+    '파인애플':['fruits/18_파인애플_pineapple.png','상큼하고 풍부한 과즙'],
+    '멜론':['fruits/28_멜론_melon.png','부드럽고 은은한 달콤함'],
+    '블루베리':['fruits/16_블루베리_blueberry.png','작지만 깊고 산뜻한 맛'],
+    '석류':['fruits/24_석류_pomegranate.png','선명하고 진한 가을빛'],
+    '무화과':['fruits/25_무화과_fig.png','부드럽고 깊은 계절의 맛'],
+    '밤':['fruits/26_밤_chestnut.png','고소하고 포근한 가을 맛'],
+    '포도':['fruits/08_포도_purple_grape.png','풍부한 향과 진한 단맛'],
+    '블랙베리':['fruits/34_블랙베리_blackberry.png','짙은 향과 산뜻한 균형'],
+    '자몽':['fruits/15_자몽_grapefruit.png','상큼하고 깨끗한 균형'],
+    '오렌지':['fruits/21_오렌지_orange.png','싱그럽고 풍부한 과즙'],
+    '제주감귤':['fruits/21_오렌지_orange.png','산뜻한 향과 친숙한 겨울의 달콤함'],
+    '레몬':['fruits/14_레몬_lemon.png','상큼하고 선명한 향'],
+    '금귤':['fruits/35_금귤_kumquat.png','작고 향긋한 겨울의 맛']
+  };
+  const fruitAliasBase={
+    '금실딸기':'딸기','성주참외':'참외','대저토마토':'토마토',
+    '백도복숭아':'복숭아','고당도수박':'수박','머스크멜론':'멜론',
+    '홍로사과':'사과','나주배':'배','부사사과':'사과'
+  };
+  const premiumTaglines={
+    '금실딸기':'국산 프리미엄 딸기의 향긋한 단맛',
+    '성주참외':'아삭하고 맑은 국산 참외의 달콤함',
+    '대저토마토':'산뜻한 감칠맛과 균형 잡힌 풍미',
+    '백도복숭아':'부드러운 과육과 풍부한 향',
+    '고당도수박':'시원한 과즙과 선명한 여름 단맛',
+    '머스크멜론':'은은한 향과 부드러운 고급 단맛',
+    '홍로사과':'아삭한 식감과 산뜻한 국산 사과의 맛',
+    '나주배':'시원한 과즙과 깔끔한 단맛',
+    '부사사과':'단단한 식감과 깊은 겨울 단맛'
+  };
+  Object.entries(fruitAliasBase).forEach(([name,base])=>{
+    if(!fruitMeta[name]&&fruitMeta[base])fruitMeta[name]=[fruitMeta[base][0],premiumTaglines[name]||fruitMeta[base][1]];
+  });
+  const fruitDetails={
+    '딸기':{season:'겨울 · 봄',summary:'향긋한 향과 산뜻한 단맛, 부드러운 과육이 매력적인 과일입니다.',choose:'꼭지가 싱싱하고 표면의 붉은 빛이 고르며 과육이 무르지 않은 것을 살펴봅니다.',keep:'씻지 않은 상태로 냉장 보관하고, 드시기 직전에 가볍게 세척하는 것이 좋습니다.',enjoy:'차갑게 그대로 즐기거나 요거트·디저트와 함께하면 향이 잘 살아납니다.'},
+    '참외':{season:'봄 · 초여름',summary:'아삭한 식감과 맑고 시원한 달콤함이 특징입니다.',choose:'껍질의 노란색과 흰 줄이 선명하고 묵직하며 향이 은은한 것을 살펴봅니다.',keep:'서늘한 곳에 두었다가 충분히 익으면 냉장 보관해 시원하게 즐기세요.',enjoy:'차갑게 잘라 먹거나 샐러드에 곁들이면 산뜻한 단맛을 즐길 수 있습니다.'},
+    '청포도':{season:'여름 · 가을',summary:'청량한 과즙과 산뜻한 향이 어우러지는 가벼운 달콤함이 매력입니다.',choose:'알이 탱탱하고 송이에 단단히 붙어 있으며 줄기가 지나치게 마르지 않은 것을 살펴봅니다.',keep:'씻지 않은 채 냉장 보관하고 드실 만큼만 꺼내 세척하세요.',enjoy:'충분히 차갑게 하면 아삭한 식감과 향이 더 또렷하게 느껴집니다.'},
+    '체리':{season:'봄 · 여름',summary:'작은 한 알에 상큼함과 깊은 단맛이 함께 들어 있는 과일입니다.',choose:'표면이 매끈하고 윤기가 있으며 꼭지가 푸르고 과육이 단단한 것을 살펴봅니다.',keep:'습기를 줄여 냉장 보관하고 먹기 직전에 세척하는 편이 좋습니다.',enjoy:'그대로 먹거나 치즈·요거트와 곁들이면 풍부한 향을 즐길 수 있습니다.'},
+    '수박':{season:'여름',summary:'풍부한 수분과 시원한 과즙으로 여름에 가장 잘 어울리는 과일입니다.',choose:'크기에 비해 묵직하고 껍질의 무늬가 선명하며 모양이 고른 것을 살펴봅니다.',keep:'통째로는 서늘한 곳에, 자른 뒤에는 밀폐해 냉장 보관하세요.',enjoy:'충분히 차갑게 먹으면 수분감과 청량감이 가장 좋습니다.'},
+    '천도복숭아':{season:'여름',summary:'산뜻한 산미와 향긋한 단맛, 매끄러운 껍질이 특징인 여름 과일입니다.',choose:'은은한 향이 나고 과육이 너무 딱딱하지 않으며 멍이 적은 것을 살펴봅니다.',keep:'단단할 때는 실온에서 후숙한 뒤 냉장 보관하고 너무 오래 차갑게 두지 않는 것이 좋습니다.',enjoy:'먹기 전 잠시 차갑게 두면 향과 과즙의 균형이 좋습니다.'},
+    '복숭아':{season:'여름',summary:'부드러운 과육과 풍부한 향, 촉촉한 과즙이 어우러지는 대표 여름 과일입니다.',choose:'향이 은은하게 올라오고 표면에 큰 멍이 없으며 손으로 살짝 눌렀을 때 적당한 탄력이 있는 것을 살펴봅니다.',keep:'단단할 때는 실온에서 후숙한 뒤 먹기 좋은 상태가 되면 냉장 보관하세요.',enjoy:'먹기 전 잠시 차갑게 두면 향과 과즙, 부드러운 식감을 균형 있게 즐길 수 있습니다.'},
+    '사과':{season:'가을 · 겨울',summary:'아삭한 식감과 선명한 단맛, 산뜻한 향의 균형이 좋은 기본 과일입니다.',choose:'표면이 단단하고 묵직하며 멍이나 눌림이 적은 것을 살펴봅니다.',keep:'다른 과일과 분리해 냉장 보관하면 아삭함을 오래 유지하는 데 도움이 됩니다.',enjoy:'그대로 먹거나 치즈·견과류와 곁들이면 단맛과 향이 잘 어울립니다.'},
+    '배':{season:'가을 · 겨울',summary:'시원하고 풍부한 과즙과 부드러운 단맛이 돋보입니다.',choose:'모양이 고르고 묵직하며 껍질에 상처가 적고 단단한 것을 살펴봅니다.',keep:'냉장 보관하면 시원한 과즙과 아삭한 식감을 유지하기 좋습니다.',enjoy:'차갑게 잘라 그대로 먹으면 배 특유의 시원한 단맛이 가장 잘 살아납니다.'},
+    '감':{season:'가을',summary:'계절이 깊어질수록 진해지는 부드럽고 풍성한 단맛이 매력입니다.',choose:'색이 고르고 꼭지 주변이 깨끗하며 단단함이 용도에 맞는 것을 고릅니다.',keep:'단단한 감은 서늘한 곳에, 충분히 익은 감은 냉장 보관하세요.',enjoy:'단단할 때의 아삭함과 후숙했을 때의 부드러움을 취향에 따라 즐길 수 있습니다.'},
+    '대봉':{season:'가을 · 초겨울',summary:'큼직한 과실이 충분히 후숙되면 촉촉하고 진한 단맛을 즐길 수 있는 가을 대표 과일입니다.',choose:'색이 고르고 꼭지가 단단히 붙어 있으며 상처가 적은 것을 고릅니다. 후숙용은 지나치게 무르지 않은 것이 좋습니다.',keep:'상온에서 부드럽게 후숙한 뒤 먹기 좋은 상태가 되면 냉장 보관하세요.',enjoy:'완전히 후숙해 숟가락으로 떠먹거나 살짝 얼려 홍시처럼 즐기면 좋습니다.'},
+    '샤인머스캣':{season:'여름 · 가을',summary:'아삭한 식감과 향긋하고 맑은 단맛으로 선물용으로도 인기 있는 포도입니다.',choose:'알이 탱탱하고 송이가 단정하며 줄기가 지나치게 마르지 않은 것을 살펴봅니다.',keep:'씻지 않은 상태로 냉장 보관하고 드실 만큼만 세척하세요.',enjoy:'충분히 차갑게 하면 향과 아삭함이 더 또렷하게 느껴집니다.'},
+    '한라봉':{season:'겨울 · 봄',summary:'진한 감귤 향과 산뜻한 단맛, 풍부한 과즙이 특징입니다.',choose:'껍질 색이 고르고 손에 들었을 때 묵직하며 향이 선명한 것을 살펴봅니다.',keep:'서늘한 곳이나 냉장실에 두되 습기가 차지 않도록 보관하세요.',enjoy:'실온에 잠시 두었다 먹으면 향이 더 풍부하게 느껴질 수 있습니다.'},
+    '키위':{season:'연중 · 겨울 추천',summary:'상큼함과 깊은 단맛이 함께 있고 부드러운 과육이 매력적인 과일입니다.',choose:'겉에 상처가 적고 손으로 살짝 눌렀을 때 취향에 맞는 탄력이 있는 것을 고릅니다.',keep:'단단한 것은 실온 후숙, 먹기 좋은 상태가 되면 냉장 보관하세요.',enjoy:'반으로 잘라 스푼으로 먹거나 샐러드와 함께 즐기기 좋습니다.'},
+    '자두':{season:'여름',summary:'새콤달콤한 과즙과 선명한 향으로 여름에 잘 어울립니다.',choose:'표면이 매끈하고 적당히 탄력이 있으며 향이 은은한 것을 살펴봅니다.',keep:'단단하면 실온에서 잠시 후숙하고 익으면 냉장 보관하세요.',enjoy:'너무 차갑지 않게 먹으면 향과 단맛이 더 잘 느껴집니다.'},
+    '토마토':{season:'봄 · 여름',summary:'산뜻한 산미와 자연스러운 단맛, 신선한 과즙을 즐길 수 있습니다.',choose:'색이 고르고 꼭지가 싱싱하며 표면에 상처가 적은 것을 살펴봅니다.',keep:'완전히 익기 전에는 서늘한 실온, 잘 익은 뒤에는 짧게 냉장 보관하세요.',enjoy:'그대로 먹거나 샐러드·치즈와 곁들이면 산뜻한 맛이 잘 살아납니다.'},
+    '망고':{season:'여름 · 수입과일',summary:'부드럽고 진한 열대의 단맛과 풍부한 향이 특징입니다.',choose:'껍질 상태가 깨끗하고 향이 은은하며 살짝 눌렀을 때 부드러운 탄력이 있는 것을 고릅니다.',keep:'단단하면 실온에서 후숙하고 먹기 좋은 상태가 되면 냉장 보관하세요.',enjoy:'차갑게 잘라 먹거나 요거트·디저트와 함께 즐기기 좋습니다.'},
+    '파인애플':{season:'연중 · 여름 추천',summary:'상큼한 산미와 풍부한 과즙, 강한 열대 향이 매력적입니다.',choose:'향이 선명하고 묵직하며 잎과 껍질 상태가 지나치게 마르지 않은 것을 살펴봅니다.',keep:'손질 전에는 서늘하게, 손질 후에는 밀폐해 냉장 보관하세요.',enjoy:'차갑게 먹거나 구워서 즐기면 단맛의 인상이 달라집니다.'},
+    '멜론':{season:'여름',summary:'부드러운 식감과 은은하게 퍼지는 단맛이 특징입니다.',choose:'향이 은은하고 묵직하며 꼭지 반대쪽에 적당한 탄력이 있는 것을 살펴봅니다.',keep:'실온에서 후숙한 뒤 먹기 좋은 상태가 되면 냉장 보관하세요.',enjoy:'먹기 전에 충분히 차갑게 하면 부드러운 단맛을 더 깔끔하게 즐길 수 있습니다.'},
+    '블루베리':{season:'여름 · 수입 연중',summary:'작은 알에 산뜻한 맛과 짙은 베리 향이 담겨 있습니다.',choose:'표면의 하얀 과분이 자연스럽고 알이 단단하며 무르지 않은 것을 살펴봅니다.',keep:'씻지 않고 냉장 보관하며 물기에 약하므로 먹기 직전에 세척하세요.',enjoy:'그대로 먹거나 요거트·샐러드·디저트에 곁들이기 좋습니다.'},
+    '석류':{season:'가을 · 겨울',summary:'선명한 색과 톡톡 터지는 과즙, 산뜻한 산미가 매력입니다.',choose:'들었을 때 묵직하고 껍질이 지나치게 갈라지지 않은 것을 살펴봅니다.',keep:'통째로는 서늘하거나 냉장 보관하고 알을 분리한 뒤에는 밀폐해 냉장 보관하세요.',enjoy:'알 그대로 먹거나 샐러드·요거트에 올리면 색감과 산뜻함을 더할 수 있습니다.'},
+    '무화과':{season:'여름 · 가을',summary:'부드러운 과육과 은은하고 깊은 단맛이 특징인 섬세한 과일입니다.',choose:'표면에 큰 상처가 없고 부드러운 탄력과 은은한 향이 있는 것을 고릅니다.',keep:'쉽게 무르므로 구매 후 빠르게 냉장 보관하고 가급적 빨리 즐기세요.',enjoy:'그대로 먹거나 치즈·견과류와 곁들이면 부드러운 단맛이 잘 어울립니다.'},
+    '밤':{season:'가을 · 겨울',summary:'고소하고 포근한 맛으로 가을 분위기를 가장 잘 보여주는 열매 중 하나입니다.',choose:'껍질에 윤기가 있고 단단하며 벌레 먹은 흔적이나 구멍이 없는 것을 살펴봅니다.',keep:'장기 보관 시에는 냉장·냉동을 활용하고 습기가 차지 않도록 관리하세요.',enjoy:'삶거나 구워 먹으면 고소함과 자연스러운 단맛이 잘 살아납니다.'},
+    '포도':{season:'여름 · 가을',summary:'풍부한 향과 진한 단맛, 탱글한 식감이 매력입니다.',choose:'알이 단단하고 송이에 잘 붙어 있으며 줄기가 너무 마르지 않은 것을 살펴봅니다.',keep:'씻지 않은 채 냉장 보관하고 먹기 직전에 세척하세요.',enjoy:'차갑게 먹으면 포도의 향과 당도가 더 선명하게 느껴집니다.'},
+    '블랙베리':{season:'여름 · 수입 연중',summary:'짙은 베리 향과 산뜻한 산미가 어우러지는 과일입니다.',choose:'알이 무르지 않고 윤기가 있으며 즙이 새지 않는 것을 살펴봅니다.',keep:'물기에 약하므로 씻지 않은 채 냉장 보관하고 빠르게 즐기세요.',enjoy:'요거트·디저트·샐러드에 곁들이면 향과 색감이 돋보입니다.'},
+    '자몽':{season:'겨울 · 수입 연중',summary:'상큼함과 은은한 쌉싸름함이 어우러지는 깨끗한 맛이 특징입니다.',choose:'크기에 비해 묵직하고 껍질이 탄탄하며 향이 은은한 것을 살펴봅니다.',keep:'서늘한 곳 또는 냉장 보관하며 자른 뒤에는 밀폐 보관하세요.',enjoy:'그대로 먹거나 샐러드·음료에 더하면 산뜻한 풍미를 즐길 수 있습니다.'},
+    '오렌지':{season:'겨울 · 수입 연중',summary:'싱그러운 향과 풍부한 과즙, 친숙한 달콤함이 매력입니다.',choose:'크기에 비해 묵직하고 껍질이 탄탄하며 상처가 적은 것을 살펴봅니다.',keep:'서늘한 곳이나 냉장 보관하고 건조하지 않게 관리하세요.',enjoy:'실온에 잠시 두었다 먹으면 감귤 향이 더 잘 느껴질 수 있습니다.'},
+    '제주감귤':{season:'겨울',summary:'겨울이면 가장 먼저 떠오르는 친숙한 감귤 향과 산뜻한 단맛, 풍부한 과즙이 매력입니다.',choose:'껍질 색이 고르고 손에 들었을 때 묵직하며 지나치게 말랑하거나 상처 난 과실은 피합니다.',keep:'통풍이 잘되는 서늘한 곳에 두고 오래 보관할 때는 상태를 확인하며 냉장 보관하세요.',enjoy:'실온에서 향을 살려 먹거나 차갑게 두어 상큼하게 즐겨도 좋습니다.'},
+    '레몬':{season:'연중',summary:'선명한 산미와 향으로 다른 과일과 음식의 맛을 또렷하게 해줍니다.',choose:'껍질이 탄탄하고 윤기가 있으며 크기에 비해 묵직한 것을 살펴봅니다.',keep:'냉장 보관하면 수분과 향을 비교적 오래 유지하기 좋습니다.',enjoy:'음료·드레싱·디저트에 소량 더해 상큼한 향을 즐기세요.'},
+    '금귤':{season:'겨울 · 봄',summary:'작은 크기 안에 향긋한 껍질과 상큼한 과즙이 함께 들어 있습니다.',choose:'색이 고르고 껍질이 탄탄하며 향이 선명한 것을 살펴봅니다.',keep:'씻지 않은 상태로 냉장 보관하고 드시기 직전에 세척하세요.',enjoy:'깨끗이 씻어 껍질째 즐기거나 차·디저트에 활용하기 좋습니다.'}
+  };
+  const allFruitNames=Object.keys(fruitMeta);
+  const autoSeason=()=>{const m=new Date().getMonth()+1;return m>=3&&m<=5?'spring':m>=6&&m<=8?'summer':m>=9&&m<=11?'autumn':'winter'};
+  const params=new URLSearchParams(location.search);
+  const forced=params.get('season');
+  const valid=['spring','summer','autumn','winter'];
+  let seasonMode=valid.includes(forced)?forced:'auto';
+  let current=seasonMode==='auto'?autoSeason():seasonMode;
+  const artwork=$('#seasonArtwork'), visual=$('#seasonVisual');
+  const seasonThemeColors={spring:'#fff5f3',summer:'#f3f8f0',autumn:'#fbf1e6',winter:'#f4f6f1'};
+  function updateSeasonControls(){
+    const data=seasons[current];
+    root.dataset.season=current;
+    document.documentElement.dataset.season=current;
+    const metaTheme=document.querySelector('meta[name="theme-color"]'); if(metaTheme)metaTheme.setAttribute('content',seasonThemeColors[current]||'#fbf7f0');
+    $$('[data-season-status]').forEach(el=>el.textContent=`${data.label}${seasonMode==='auto'?' · 자동':''}`);
+    $$('[data-public-season]').forEach(btn=>btn.classList.toggle('is-active',btn.dataset.publicSeason===seasonMode));
+  }
+  function setSeasonMode(mode){
+    seasonMode=valid.includes(mode)?mode:'auto';
+    const u=new URL(location.href);
+    if(seasonMode==='auto')u.searchParams.delete('season'); else u.searchParams.set('season',seasonMode);
+    history.replaceState({},'',u.pathname+(u.searchParams.toString()?`?${u.searchParams.toString()}`:'')+u.hash);
+    applySeason(seasonMode==='auto'?autoSeason():seasonMode);
+  }
+  function applySeason(key){
+    current=key; visual.classList.add('is-changing');
+    const data=seasons[key]; artwork.alt=`이룸 ${data.label} 계절 메인 시안`;
+    const hc=heroCopy[key]||heroCopy.autumn;
+    const ht=$('#heroSeasonTitle'),hd=$('#heroSeasonDesc'),hg=$('#heroSeasonTag');
+    if(ht)ht.textContent=hc.title;
+    if(hd)hd.innerHTML=hc.desc;
+    if(hg)hg.textContent=hc.tag;
+    updateSeasonControls();
+    const side=heroAccents[key]||[];
+    const leftAccent=$('#heroAccentLeft'),rightAccent=$('#heroAccentRight');
+    if(leftAccent){leftAccent.src=side[0]?assets+side[0]:'';leftAccent.alt=''}
+    if(rightAccent){rightAccent.src=side[1]?assets+side[1]:'';rightAccent.alt=''}
+    const preload=new Image();
+    preload.onload=()=>{artwork.src=preload.src; requestAnimationFrame(()=>visual.classList.remove('is-changing'))};
+    const heroUrl=assets+data.art;
+    visual.style.setProperty('--hero-image', `url("${heroUrl}")`);
+    preload.src=heroUrl;
+    const ca=$('#curationArt'),ga=$('#giftArt'),pa=$('#premiumArt');
+    if(ca)ca.src=assets+data.curation;if(ga)ga.src=assets+data.gift;if(pa)pa.src=assets+data.premium;
+    $$('.premium-fruit-card:not(.seasonal-fruit-card)').forEach((card,i)=>{const n=(data.premiumFruits||[])[i],m=fruitMeta[n];if(!n||!m)return;const visual=((premiumVisuals[current]||[])[i]||m[0]);card.dataset.fruit=n;card.dataset.visual=visual;const im=$('img',card),b=$('b',card),sm=$('small',card);if(im){im.src=assets+visual;im.alt=n+' 프리미엄 이미지'}if(b)b.textContent=n;if(sm)sm.textContent=m[1]});
+    $$('.seasonal-fruit-card').forEach((card,i)=>{const n=(data.seasonalFruits||[])[i],m=fruitMeta[n];if(!n||!m)return;card.dataset.fruit=n;delete card.dataset.visual;const im=$('img',card),b=$('b',card),sm=$('small',card);if(im){im.src=assets+m[0];im.alt=n}if(b)b.textContent=n;if(sm)sm.textContent=m[1]});
+    $$('[data-season-label]').forEach(el=>el.textContent=data.label);
+    $$('.library-card').forEach((card,i)=>{const n=(data.library||[])[i];const m=fruitMeta[n];if(!n||!m)return;card.dataset.fruit=n;const im=$('img',card),b=$('b',card),sm=$('small',card);if(im){im.src=assets+m[0];im.alt=n}if(b)b.textContent=n;if(sm)sm.textContent=m[1]});
+  }
+  applySeason(current);
+
+  $('[data-home]')?.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+
+  const overlay=$('#modalBackdrop'), kicker=$('#modalKicker'), title=$('#modalTitle'), intro=$('#modalIntro'), body=$('#modalBody');
+  let lastFocus=null;
+  const setModal=(k,t,i,h)=>{kicker.textContent=k;title.textContent=t;intro.innerHTML=i||'';body.innerHTML=h||''};
+  function openModal(type){
+    lastFocus=document.activeElement;
+    if(type==='seasonal')renderSeasonal();
+    else if(type==='curation')renderCuration();
+    else if(type==='gift')renderGift();
+    else if(type==='brand')renderBrand();
+    else if(type==='search')renderSearch();
+    else if(type==='login')renderLogin();
+    else if(type==='signup')renderSignup();
+    else if(type==='mypage')renderMyPage();
+    else if(type==='cart')renderCart();
+    else if(type==='terms')renderTerms();
+    else if(type==='privacy')renderPrivacy();
+    else if(type==='guide')renderGuide();
+    else if(type==='install')renderInstall();
+    overlay.dataset.modalType=type;overlay.classList.add('open');overlay.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';
+    setTimeout(()=>$('button,select,input',overlay)?.focus(),20);
+  }
+  function closeModal(){overlay.classList.remove('open');overlay.setAttribute('aria-hidden','true');delete overlay.dataset.modalType;document.body.style.overflow='';try{lastFocus?.focus()}catch(e){}}
+  function renderSeasonal(){
+    const d=seasons[current];
+    const cards=d.seasonalFruits.map(n=>{const m=fruitMeta[n]||['','오늘 상태가 좋은 과일'];return `<button class="fruit-card" type="button" data-fruit="${n}"><img src="${assets+m[0]}" alt="${n}"><span><b>${n}</b><small>${m[1]}</small></span></button>`}).join('');
+    setModal('SEASONAL PICKS',`${d.label} 제철 과일 4선`,`지금 계절에 가장 맛이 좋은 과일 4가지를 골랐습니다. 과일을 누르면 상세설명을 확인할 수 있어요.`,`<div class="modal-grid">${cards}</div>`);
+  }
+  function renderCuration(){
+    setModal('FRUIT CURATION','당신에게 맞는 과일을 골라드려요','예산 · 용도 · 취향만 알려주시면 그날 상태가 좋은 과일을 기준으로 추천합니다.',`
+      <div class="modal-form">
+        <div class="choice"><label>01 · BUDGET</label><select id="budget"><option>3만원 이하</option><option selected>3~5만원</option><option>5~8만원</option><option>8~12만원</option><option>12만원 이상</option></select></div>
+        <div class="choice"><label>02 · PURPOSE</label><select id="purpose"><option>가정용</option><option selected>감사 선물</option><option>가족 · 건강 선물</option><option>기업 · 단체 선물</option></select></div>
+        <div class="choice"><label>03 · TASTE</label><select id="taste"><option>아주 달콤하게</option><option selected>달콤하고 부드럽게</option><option>달콤·새콤 균형</option><option>상큼하게</option></select></div>
+      </div>
+      <div class="mini-panel" style="margin-top:18px"><p><b>이룸 추천 방식</b><br>많이 보여드리기보다 예산과 상황에 맞는 과일을 골라 구성합니다. 상담에서는 당일 상태와 예산을 함께 확인해 추천해드립니다.</p></div>
+      <div class="modal-actions"><button class="primary-btn" type="button" data-kakao-chat>카카오 오픈채팅 상담 →</button><button class="secondary-btn" type="button" data-close>닫기</button></div>`);
+  }
+  function renderGift(){
+    setModal('GIFT SELECTION','좋은 마음을 전하는 과일 선물','과일보다 먼저 받는 분과 전하고 싶은 마음을 생각해 정성스럽게 구성합니다.',`
+      <div class="gift-list">
+        <button class="gift-option" type="button" data-kakao-chat><b>감사 선물</b><span>고마운 마음을 정갈하게 전하고 싶을 때 · 상담하기 →</span></button>
+        <button class="gift-option" type="button" data-kakao-chat><b>가족 · 건강 선물</b><span>여럿이 함께 즐기기 좋은 균형 구성 · 상담하기 →</span></button>
+        <button class="gift-option" type="button" data-kakao-chat><b>기업 · 단체 선물</b><span>예산 · 수량 · 포장 조건까지 맞춤 제안 · 상담하기 →</span></button>
+      </div>`);
+  }
+  function renderBrand(){
+    setModal('BRAND STORY','이룸이 과일을 고르는 기준','화려한 설명보다 매일 지키는 기본을 중요하게 생각합니다.',`
+      <div class="story-grid">
+        <article class="story-card"><b>01 · SOURCE</b><h3>산지</h3><p>제철과 산지의 특성을 살펴 지금 맛이 좋은 과일을 선택합니다.</p></article>
+        <article class="story-card"><b>02 · SELECT</b><h3>선별</h3><p>모양뿐 아니라 향 · 숙도 · 단단함과 용도를 함께 확인합니다.</p></article>
+        <article class="story-card"><b>03 · PACK</b><h3>포장</h3><p>과일이 눌리거나 흔들리지 않도록 구성에 맞춰 정성스럽게 포장합니다.</p></article>
+        <article class="story-card"><b>04 · DELIVERY</b><h3>배송</h3><p>받는 순간까지 좋은 상태가 이어지도록 주문과 배송 흐름을 관리합니다.</p></article>
+      </div>`);
+  }
+  function renderSearch(){
+    setModal('IROOM FRUIT SEARCH','과일을 찾아보세요','원하는 과일을 입력하거나 지금 계절의 추천 과일부터 가볍게 둘러보세요.',`<div class="search-row search-row-v23"><input id="searchInput" placeholder="과일 이름을 입력하세요" autocomplete="off"><button type="button" data-search>찾기</button></div><div class="search-quick-label">지금 추천</div><div class="search-results search-results-v23" id="searchResults"></div>`);
+    setTimeout(()=>fillSearch(''),0);
+  }
+  function fillSearch(q){
+    const box=$('#searchResults');if(!box)return;
+    q=(q||'').trim();
+    let list;
+    if(q){list=allFruitNames.filter(n=>n.includes(q)).slice(0,8)}
+    else{
+      const d=seasons[current]||seasons.autumn;
+      list=[...(d.seasonalFruits||[]),...(d.premiumFruits||[]),...(d.library||[])].filter((n,i,a)=>a.indexOf(n)===i).slice(0,6);
+    }
+    if(!list.length){box.innerHTML='<div class="search-empty">검색 결과가 없습니다. 다른 과일 이름으로 찾아보세요.</div>';return}
+    box.innerHTML=list.map(n=>{const m=fruitMeta[n]||fruitMeta[fruitAliasBase[n]]||['','오늘 상태를 확인해 안내드려요'];return `<button class="search-result-card" type="button" data-fruit="${n}"><img src="${assets+m[0]}" alt="${n}"><span><b>${n}</b><small>${m[1]}</small></span><i>상세보기 →</i></button>`}).join('');
+  }
+  function renderLogin(){
+    setModal('IROOM MEMBER','Sign In','이룸 회원 로그인과 신규 회원가입을 한 창에서 편하게 이용할 수 있습니다.',`
+      <form class="auth-form" id="loginForm">
+        <label><span>아이디 또는 이메일</span><input name="account" autocomplete="username" required placeholder="아이디 또는 이메일"></label>
+        <label><span>비밀번호</span><input name="password" type="password" autocomplete="current-password" required placeholder="비밀번호"></label>
+        <button class="primary-btn auth-primary-btn" type="submit">Sign In</button>
+        <button class="kakao-login-btn" type="button" data-kakao-login><img src="./iroom_assets/kakao-mark.svg" alt="" aria-hidden="true"><span>카카오로 1초 시작하기</span></button>
+        <div class="login-join-box"><span>처음 방문하셨나요?</span><button type="button" data-open-related="signup">Create Account · 회원가입</button></div>
+      </form>`);
+  }
+  function renderSignup(){
+    setModal('MEMBER JOIN','회원가입','기본 정보만 입력하면 이룸 회원으로 가입할 수 있습니다.',`
+      <form class="auth-form auth-form-signup" id="signupForm">
+        <div class="auth-grid">
+          <label><span>아이디</span><input name="username" minlength="4" maxlength="20" autocomplete="username" required placeholder="영문·숫자 4~20자"></label>
+          <label><span>이름</span><input name="name" autocomplete="name" required placeholder="이름"></label>
+          <label><span>비밀번호</span><input name="password" type="password" minlength="6" autocomplete="new-password" required placeholder="6자 이상"></label>
+          <label><span>이메일</span><input name="email" type="email" autocomplete="email" placeholder="선택 입력"></label>
+          <label class="auth-grid-wide"><span>휴대폰</span><input name="phone" autocomplete="tel" placeholder="선택 입력"></label>
+        </div>
+        <button class="primary-btn" type="submit">회원가입</button>
+        <button class="kakao-login-btn" type="button" data-kakao-login><img src="./iroom_assets/kakao-mark.svg" alt="" aria-hidden="true"><span>카카오로 1초 가입 · 로그인</span></button>
+        <p class="auth-help">이미 회원이신가요? <button type="button" data-open-related="login">로그인</button></p>
+      </form>`);
+  }
+  function renderMyPage(){
+    setModal('MY PAGE','마이페이지','로그인 상태와 회원 정보를 확인할 수 있습니다.',`
+      <div class="login-status" id="myPageStatus"><b>로그인 상태를 확인하고 있습니다.</b><span>잠시만 기다려 주세요.</span></div>
+      <div class="modal-actions"><button class="secondary-btn" type="button" data-logout data-mypage-logout>로그아웃</button></div>`);
+    setTimeout(loadMyPageStatus,0);
+  }
+  function renderCart(){setModal('CART','장바구니','고른 상품과 선물 구성을 확인하는 창입니다.',`<div class="mini-panel"><p>현재는 디자인 베이스 단계입니다. 다음 작업에서 기존 이룸3 장바구니 데이터를 그대로 연결합니다.</p></div>`)}
+  function renderTerms(){
+    setModal('TERMS','이용약관','이룸 fresh fruits의 상품 주문과 서비스 이용에 관한 기본 안내입니다.',`
+      <div class="mini-panel"><p><b>주문 · 결제</b><br>상품의 가격, 구성, 배송 가능 여부는 주문 시 표시되는 안내를 기준으로 합니다.</p></div>
+      <div class="mini-panel" style="margin-top:12px"><p><b>배송 · 취소 · 환불</b><br>신선식품의 특성을 고려하여 상품 준비 전 취소 여부와 수령 후 상품 상태를 확인해 주세요. 개별 주문의 처리 기준은 관계 법령과 주문 안내를 따릅니다.</p></div>
+      <div class="mini-panel" style="margin-top:12px"><p><b>고객 안내</b><br>세부 운영 기준은 관리자 설정과 주문 화면의 최신 안내를 우선 적용합니다.</p></div>`);
+  }
+  function renderPrivacy(){
+    setModal('PRIVACY','개인정보처리방침','주문 · 배송 · 상담에 필요한 범위에서만 개인정보를 이용합니다.',`
+      <div class="mini-panel"><p><b>수집 항목</b><br>이름, 연락처, 배송지, 주문 및 상담에 필요한 정보</p></div>
+      <div class="mini-panel" style="margin-top:12px"><p><b>이용 목적</b><br>주문 처리, 배송, 고객 상담, 서비스 이용 확인</p></div>
+      <div class="mini-panel" style="margin-top:12px"><p><b>보관 및 파기</b><br>관련 법령과 거래 보관 의무에 따른 기간 동안 보관한 뒤 안전하게 파기합니다.</p></div>`);
+  }
+  function renderGuide(){
+    setModal('GUIDE','이용안내 · 가이드','이룸을 더 편하게 이용하는 방법을 간단히 안내합니다.',`
+      <div class="story-grid">
+        <article class="story-card"><b>01 · PREMIUM</b><h3>프리미엄 과일</h3><p>이룸이 품질과 상태를 기준으로 엄선한 과일을 확인하세요.</p></article><article class="story-card"><b>02 · SEASON</b><h3>제철 과일</h3><p>지금 계절에 특히 맛이 좋은 과일 4가지를 만나보세요.</p></article>
+        <article class="story-card"><b>03 · CURATION</b><h3>맞춤 과일</h3><p>예산 · 용도 · 취향을 알려주시면 상황에 맞춰 구성합니다.</p></article>
+        <article class="story-card"><b>04 · GIFT</b><h3>선물 제안</h3><p>감사, 가족, 기업 선물 등 목적에 맞는 구성을 제안합니다.</p></article>
+        <article class="story-card"><b>05 · CONTACT</b><h3>BAND · 카카오</h3><p>BAND에서 소식을 확인하고, 카카오 오픈채팅에서 과일·선물 상담을 바로 시작할 수 있습니다.</p></article>
+      </div>`);
+  }
+  let deferredInstallPrompt=null;
+  const installStatus=()=>document.querySelector('[data-install-status]');
+  const isIOS=()=>/iphone|ipad|ipod/i.test(navigator.userAgent);
+  const isStandalone=()=>window.matchMedia?.('(display-mode: standalone)').matches || navigator.standalone===true;
+  const isSecureInstallContext=()=>window.isSecureContext && (location.protocol==='https:' || ['localhost','127.0.0.1'].includes(location.hostname));
+  function setInstallStatus(text){const el=installStatus();if(el)el.textContent=text}
+  window.addEventListener('beforeinstallprompt',e=>{
+    e.preventDefault();
+    deferredInstallPrompt=e;
+    setInstallStatus('설치 준비 완료 · 눌러서 앱처럼 설치');
+  });
+  window.addEventListener('appinstalled',()=>{
+    deferredInstallPrompt=null;
+    setInstallStatus('설치 완료 · 홈 화면이나 바탕화면에서 실행');
+  });
+  function renderInstall(){
+    const ios=isIOS(), standalone=isStandalone(), secure=isSecureInstallContext();
+    const localFile=location.protocol==='file:';
+    const state=standalone?'이미 앱 모드로 실행 중입니다.':localFile?'현재 파일을 직접 열어본 상태라 설치 기능을 사용할 수 없습니다.':secure?'설치 가능한 보안 환경에서 열려 있습니다.':'앱 설치는 HTTPS 주소 또는 localhost에서 사용할 수 있습니다.';
+    setModal('INSTALL','이룸을 앱처럼 설치하기',state,`
+      <div class="install-note">
+        <div class="install-step"><b>Android · Chrome / Samsung Internet</b>이 페이지를 HTTPS로 연 뒤 ‘앱 설치’ 버튼을 누르세요. 설치 제안이 아직 준비되지 않았다면 브라우저 메뉴의 ‘홈 화면에 추가’ 또는 ‘앱 설치’를 이용할 수 있습니다.</div>
+        <div class="install-step"><b>iPhone · Safari</b>Safari 하단의 공유 버튼 → ‘홈 화면에 추가’ → ‘추가’를 선택하세요. iOS는 웹사이트가 설치창을 자동으로 띄우는 방식을 지원하지 않습니다.</div>
+        <div class="install-step"><b>Windows · Mac</b>Chrome 또는 Edge에서 HTTPS 주소를 열고 주소창의 설치 아이콘을 누르면 시작 메뉴·Dock·바탕화면에서 앱처럼 사용할 수 있습니다.</div>
+        ${localFile?'<div class="install-step install-warning"><b>지금 확인하는 방법</b>압축파일의 <code>ROOT_루트에_업로드/START_앱설치_미리보기.bat</code>를 실행하면 localhost로 열려 설치 기능을 확인할 수 있습니다.</div>':''}
+      </div>
+      <div class="modal-actions"><button class="primary-btn" type="button" data-install-now>${standalone?'이미 설치됨':ios?'iPhone 설치 방법 확인':'지원되면 지금 설치'}</button><button class="secondary-btn" type="button" data-copy-home>홈페이지 주소 복사</button></div>`);
+  }
+  async function installApp(){
+    if(isStandalone()){alert('이미 앱처럼 설치되어 실행 중입니다.');return}
+    if(deferredInstallPrompt){
+      try{
+        deferredInstallPrompt.prompt();
+        const r=await deferredInstallPrompt.userChoice;
+        if(r?.outcome==='accepted')setInstallStatus('설치 진행 중');
+      }catch(e){}
+      deferredInstallPrompt=null;
+      return;
+    }
+    openModal('install');
+  }
+  async function ensureKakaoSdk(){
+    if(window.Kakao)return true;
+    return new Promise(resolve=>{const s=document.createElement('script');s.src='https://t1.kakaocdn.net/kakao_js_sdk/2.8.3/kakao.min.js';s.onload=()=>resolve(true);s.onerror=()=>resolve(false);document.head.appendChild(s)});
+  }
+  async function startKakaoLogin(){
+    if(!publicSite.kakaoEnabled||!publicSite.kakaoJsKey){alert('카카오 로그인은 관리자 설정에서 JavaScript 키를 등록하고 사용을 켜야 합니다.');return}
+    const ok=await ensureKakaoSdk();if(!ok||!window.Kakao){alert('카카오 로그인 모듈을 불러오지 못했습니다.');return}
+    try{if(!Kakao.isInitialized())Kakao.init(publicSite.kakaoJsKey);Kakao.Auth.authorize({redirectUri:publicSite.kakaoRedirectUri||`${location.origin}/api/auth/kakao/callback`})}catch(e){alert('카카오 로그인 설정을 확인해 주세요.')}
+  }
+  async function loadMyPageStatus(){
+    const box=$('#myPageStatus');if(!box)return;
+    try{
+      const r=await fetch('/api/me',{cache:'no-store',credentials:'same-origin'});
+      const d=await r.json();
+      if(d.user){
+        box.innerHTML=`<b>${d.user.name||d.user.username||'이룸 고객'}님, 반갑습니다.</b><span>${d.user.email||d.user.username||''}</span>`;
+        const logoutBtn=document.querySelector('[data-mypage-logout]'); if(logoutBtn) logoutBtn.classList.add('is-visible');
+        return;
+      }
+    }catch(e){}
+    box.innerHTML='<b>로그인이 필요합니다.</b><span>상단의 로그인·회원가입 또는 카카오 로그인을 이용해 주세요.</span><div class="login-status-actions"><button type="button" data-open-related="login">로그인</button><button type="button" data-open-related="signup">회원가입</button></div>';
+  }
+  async function updateHeaderAuth(){
+    const wrap=$('.header-auth');if(!wrap)return;
+    let user=null;
+    try{
+      const r=await fetch('/api/me',{cache:'no-store',credentials:'same-origin'});
+      const d=await r.json();user=d.user||null;
+    }catch(e){}
+    const logged=!!user;
+    wrap.classList.toggle('is-logged-in',logged);
+    const nm=logged?String(user.name||user.username||'회원').replace(/[<>]/g,''):'';
+    const status=$('.account-status-name',wrap);if(status)status.textContent=logged?`${nm}님, 반갑습니다.`:'로그인이 필요합니다.';
+    $$('[data-guest-only]',wrap).forEach(el=>el.hidden=logged);
+    $$('[data-user-only]',wrap).forEach(el=>el.hidden=!logged);
+    const dot=$('.account-dot',wrap);if(dot)dot.classList.toggle('is-on',logged);
+  }
+  async function submitLogin(form){
+    const fd=new FormData(form);
+    const account=String(fd.get('account')||'').trim();
+    const password=String(fd.get('password')||'');
+    try{
+      const r=await fetch('/api/login',{method:'POST',headers:{'Content-Type':'application/json'},credentials:'same-origin',body:JSON.stringify({username:account,password})});
+      const d=await r.json();
+      if(!r.ok)throw new Error(d.error||'로그인에 실패했습니다.');
+      await updateHeaderAuth();closeModal();setTimeout(()=>openModal('mypage'),80);
+    }catch(e){alert(e.message||'로그인 서버 연결을 확인해 주세요.')}
+  }
+  async function submitSignup(form){
+    const fd=new FormData(form);
+    const payload=Object.fromEntries(fd.entries());
+    try{
+      const r=await fetch('/api/signup',{method:'POST',headers:{'Content-Type':'application/json'},credentials:'same-origin',body:JSON.stringify(payload)});
+      const d=await r.json();
+      if(!r.ok)throw new Error(d.error||'회원가입에 실패했습니다.');
+      await updateHeaderAuth();closeModal();setTimeout(()=>openModal('mypage'),80);
+    }catch(e){alert(e.message||'회원가입 서버 연결을 확인해 주세요.')}
+  }
+  async function logoutUser(){
+    try{await fetch('/api/logout',{method:'POST',credentials:'same-origin'})}catch(e){}
+    await updateHeaderAuth();
+    if(overlay.classList.contains('open')){closeModal();}
+  }
+  function openFruit(n,visualPath=""){
+    lastFocus=document.activeElement;
+    showFruit(n,visualPath);
+    overlay.dataset.modalType=type;overlay.classList.add('open');overlay.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';
+    setTimeout(()=>$('button',overlay)?.focus(),20);
+  }
+  function showFruit(n,visualPath=""){
+    const m=fruitMeta[n]||['','오늘 상태가 좋은 과일'];
+    const d=fruitDetails[n]||fruitDetails[fruitAliasBase[n]]||{season:'계절 추천',summary:m[1]||'오늘 상태가 좋은 과일입니다.',choose:'표면 상태와 향, 탄력과 무게를 함께 살펴 신선한 과일을 고릅니다.',keep:'과일의 숙도에 맞춰 실온 또는 냉장 보관해 주세요.',enjoy:'가장 맛있는 상태에서 신선하게 즐겨보세요.'};
+    setModal('FRUIT DETAIL',n,`${m[1]} · ${d.season}`,`
+      <div class="fruit-detail-layout">
+        <div class="fruit-detail-visual"><img src="${assets+(visualPath||m[0])}" alt="${n}"></div>
+        <div class="fruit-detail-summary">
+          <span class="fruit-detail-badge">IROOM FRUIT GUIDE · ${d.season}</span>
+          <h3>${n} 상세설명</h3>
+          <p>${d.summary}</p>
+          <div class="fruit-detail-grid">
+            <div class="fruit-detail-item"><b>맛과 식감</b><span>${m[1]}</span></div>
+            <div class="fruit-detail-item"><b>고르는 기준</b><span>${d.choose}</span></div>
+            <div class="fruit-detail-item"><b>보관 방법</b><span>${d.keep}</span></div>
+            <div class="fruit-detail-item"><b>맛있게 즐기기</b><span>${d.enjoy}</span></div>
+          </div>
+          <div class="fruit-detail-actions"><button class="primary" type="button" data-open-related="curation">이 과일로 맞춤 상담</button><button type="button" data-open-related="gift">선물 구성 보기</button></div>
+        </div>
+      </div>`)
+  }
+
+  function applyPublicConfig(data={}){
+    publicSite={...PUBLIC_DEFAULT,...(data.site||data||{})};
+    const bn=$('[data-business-no]'); if(bn)bn.textContent=publicSite.businessNo||PUBLIC_DEFAULT.businessNo;
+    const mo=$('[data-mail-order]'); if(mo)mo.textContent=publicSite.mailOrderNo||PUBLIC_DEFAULT.mailOrderNo;
+    const ad=$('[data-business-address]'); if(ad)ad.textContent=publicSite.address||PUBLIC_DEFAULT.address;
+    const reviews=(data.reviews||[]).filter(r=>r.show!==false).slice(0,3);
+    if(reviews.length){
+      const cards=$$('.review-card');
+      cards.forEach((card,i)=>{if(!reviews[i])return; const p=$('p',card),sm=$('small',card); if(p)p.textContent='“'+String(reviews[i].text||'').replace(/[“”]/g,'')+'”'; if(sm)sm.textContent=reviews[i].author||'이룸 고객';});
+    }
+  }
+  async function loadPublicConfig(){
+    let loaded=null;
+    try{const r=await fetch('/api/site/footer-config',{cache:'no-store'});if(r.ok)loaded=await r.json()}catch(e){}
+    if(!loaded){try{const x=JSON.parse(localStorage.getItem('iroom_admin_store_v60')||'null');if(x)loaded=x}catch(e){}}
+    applyPublicConfig(loaded||{});
+  }
+  function openExternal(url){if(!url)return false; try{window.open(url,'_blank','noopener,noreferrer');return true}catch(e){location.href=url;return true}}
+  function openKakaoChat(){const url=publicSite.kakaoUrl||PUBLIC_DEFAULT.kakaoUrl; if(!openExternal(url))alert('카카오 오픈채팅 주소를 확인해 주세요.')}
+  async function shareSite(){
+    const data={title:'이룸 fresh fruits',text:'좋은 과일로 마음을 전하는 이룸 fresh fruits',url:location.href};
+    if(navigator.share){try{await navigator.share(data);return}catch(e){if(e?.name==='AbortError')return}}
+    try{await navigator.clipboard.writeText(location.href);alert('홈페이지 주소를 복사했습니다.')}catch(e){prompt('아래 주소를 복사해 주세요.',location.href)}
+  }
+  loadPublicConfig();
+  updateHeaderAuth();
+  if('serviceWorker' in navigator && (location.protocol==='https:' || location.hostname==='localhost' || location.hostname==='127.0.0.1')){
+    window.addEventListener('load',async()=>{
+      try{
+        await navigator.serviceWorker.register('./sw.js',{scope:'./'});
+        await navigator.serviceWorker.ready;
+        if(isStandalone())setInstallStatus('설치 완료 · 앱 모드로 실행 중');
+        else if(!deferredInstallPrompt)setInstallStatus('설치 기능 준비 중 · 브라우저 메뉴에서도 설치 가능');
+      }catch(e){setInstallStatus('설치 설정을 확인해 주세요')}
+    });
+  }else if(location.protocol==='file:'){
+    setInstallStatus('미리보기 파일 · 설치 확인은 localhost에서 가능');
+  }
+  if(new URLSearchParams(location.search).get('kakao')==='success')setTimeout(async()=>{history.replaceState({},'',location.pathname);await updateHeaderAuth();openModal('mypage')},180);
+
+  root.addEventListener('click',e=>{
+    const accountToggle=e.target.closest('[data-account-toggle]');
+    if(accountToggle){
+      e.preventDefault();const wrap=accountToggle.closest('.account-wrap');const pop=$('[data-account-popover]',wrap);
+      const open=pop?.hasAttribute('hidden');$$('[data-account-popover]').forEach(p=>p.setAttribute('hidden',''));
+      if(pop&&open){pop.removeAttribute('hidden');accountToggle.setAttribute('aria-expanded','true')}else accountToggle.setAttribute('aria-expanded','false');
+      return;
+    }
+    const relatedRoot=e.target.closest('[data-open-related]');if(relatedRoot){e.preventDefault();$$('[data-account-popover]').forEach(p=>p.setAttribute('hidden',''));openModal(relatedRoot.dataset.openRelated);return}
+    const seasonBtn=e.target.closest('[data-public-season]'); if(seasonBtn){e.preventDefault();setSeasonMode(seasonBtn.dataset.publicSeason);return}
+    const m=e.target.closest('[data-modal]'); if(m){e.preventDefault();$$('[data-account-popover]').forEach(p=>p.setAttribute('hidden',''));openModal(m.dataset.modal);return}
+    if(e.target.closest('[data-kakao-chat]')){e.preventDefault();openKakaoChat();return}
+    if(e.target.closest('[data-kakao-login]')){e.preventDefault();startKakaoLogin();return}
+    if(e.target.closest('[data-logout]')){e.preventDefault();logoutUser();return}
+    if(e.target.closest('[data-install-app]')){e.preventDefault();installApp();return}
+    const fruit=e.target.closest('[data-fruit]');
+    if(fruit){e.preventDefault();openFruit(fruit.dataset.fruit,fruit.dataset.visual||'');return}
+    const social=e.target.closest('[data-social]');
+    if(social){
+      e.preventDefault();
+      const kind=social.dataset.social;
+      if(kind==='share'){shareSite();return}
+      if(kind==='band'){if(!openExternal(publicSite.bandUrl))alert('관리자 설정에서 BAND 주소를 입력해 주세요.');return}
+    }
+  });
+  overlay.addEventListener('click',e=>{
+    if(e.target===overlay||e.target.closest('[data-close]')){closeModal();return}
+    const f=e.target.closest('[data-fruit]'); if(f){showFruit(f.dataset.fruit);return}
+    if(e.target.closest('[data-search]')){fillSearch($('#searchInput')?.value||'');return}
+    if(e.target.closest('[data-kakao-chat]')){openKakaoChat();return}
+    if(e.target.closest('[data-kakao-login]')){startKakaoLogin();return}
+    if(e.target.closest('[data-logout]')){logoutUser();return}
+    if(e.target.closest('[data-install-now]')){if(deferredInstallPrompt){installApp();}return}
+    if(e.target.closest('[data-copy-home]')){navigator.clipboard?.writeText(location.origin).then(()=>alert('홈페이지 주소를 복사했습니다.')).catch(()=>prompt('주소를 복사해 주세요.',location.origin));return}
+    const related=e.target.closest('[data-open-related]'); if(related){openModal(related.dataset.openRelated);return}
+    const demo=e.target.closest('[data-demo]'); if(demo){const box=demo.closest('.modal-panel'); if(box){demo.textContent='다음 기능 작업에서 이룸3 시스템과 연결';demo.disabled=true;setTimeout(()=>{demo.disabled=false;demo.textContent=demo.dataset.demo==='curation'?'선택 내용 확인하기 →':'상담 연결 예정'},1700)} }
+  });
+  overlay.addEventListener('submit',e=>{
+    if(e.target.id==='loginForm'){e.preventDefault();submitLogin(e.target);return}
+    if(e.target.id==='signupForm'){e.preventDefault();submitSignup(e.target);return}
+  });
+  overlay.addEventListener('input',e=>{if(e.target.id==='searchInput')fillSearch(e.target.value)});
+  document.addEventListener('click',e=>{if(!e.target.closest('.account-wrap')){$$('[data-account-popover]').forEach(p=>p.setAttribute('hidden',''));$$('[data-account-toggle]').forEach(b=>b.setAttribute('aria-expanded','false'))}});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'){$$('[data-account-popover]').forEach(p=>p.setAttribute('hidden',''));$$('[data-account-toggle]').forEach(b=>b.setAttribute('aria-expanded','false'));if(overlay.classList.contains('open'))closeModal()}});
+})();
+
+</script>
 </body>
 </html>

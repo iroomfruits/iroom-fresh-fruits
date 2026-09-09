@@ -1,10 +1,10 @@
-const CACHE="iroom4-v25-static-1";
+const CACHE="iroom4-v26-static-1";
 const CORE=[
   "./",
   "./index.html",
   "./manifest.webmanifest",
-  "./iroom_assets/iroom-v25.css?v=25",
-  "./iroom_assets/iroom-v25.js?v=25",
+  "./iroom_assets/iroom-v25.css?v=26",
+  "./iroom_assets/iroom-v25.js?v=26",
   "./iroom_assets/iroom-logo-final.png",
   "./iroom_assets/app-icon-192.png",
   "./iroom_assets/app-icon-512.png"
