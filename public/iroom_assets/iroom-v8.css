@@ -665,3 +665,94 @@ html[data-season="winter"] .season-visual>img{clip-path:inset(0 0 0 30%)}
   .season-visual>img{width:100%!important;height:auto!important;-webkit-mask-image:none;mask-image:none}
   .season-visual:after{display:none}
 }
+
+
+/* IROOM4 V15 — soft seasonal card tones + refined member/Kakao UI */
+.site-shell[data-season="spring"]{
+  --card-premium:#fff9f6;--card-seasonal:#fff4f4;--card-curation:#f7faf4;--card-gift:#fff7ee;--card-guide:#f4f7f1;--card-mini:#fffaf7;
+}
+.site-shell[data-season="summer"]{
+  --card-premium:#fffbf1;--card-seasonal:#f5f8e9;--card-curation:#f2f8ee;--card-gift:#fff8e8;--card-guide:#f4f7ed;--card-mini:#fffdf5;
+}
+.site-shell[data-season="autumn"]{
+  --card-premium:#fff8ef;--card-seasonal:#fff2e6;--card-curation:#faf3e9;--card-gift:#f8eee2;--card-guide:#f5f5ec;--card-mini:#fff8f1;
+}
+.site-shell[data-season="winter"]{
+  --card-premium:#fffaf3;--card-seasonal:#f5f6ef;--card-curation:#f1f6f1;--card-gift:#fbf4e8;--card-guide:#f0f4ef;--card-mini:#fafbf6;
+}
+
+.selection-card{
+  border-color:color-mix(in srgb,var(--season-line) 86%,#fff 14%);
+  box-shadow:0 10px 28px rgba(80,57,39,.035);
+}
+.premium-fruits-block:first-of-type{
+  background:
+    radial-gradient(circle at 8% 12%,color-mix(in srgb,var(--season-glow) 55%,transparent),transparent 27%),
+    linear-gradient(145deg,rgba(255,255,255,.92),var(--card-premium,var(--season-card)));
+}
+.seasonal-fruits-block{
+  background:
+    radial-gradient(circle at 94% 10%,color-mix(in srgb,var(--season-glow) 66%,transparent),transparent 28%),
+    linear-gradient(145deg,rgba(255,255,255,.90),var(--card-seasonal,var(--season-card)));
+}
+.selection-curation{
+  background:
+    radial-gradient(circle at 90% 15%,color-mix(in srgb,var(--season-glow) 52%,transparent),transparent 30%),
+    linear-gradient(150deg,rgba(255,255,255,.90),var(--card-curation,var(--season-card)));
+}
+.selection-gift{
+  background:
+    radial-gradient(circle at 8% 88%,color-mix(in srgb,var(--season-glow) 54%,transparent),transparent 29%),
+    linear-gradient(150deg,rgba(255,255,255,.91),var(--card-gift,var(--season-card)));
+}
+.selection-guide{
+  background:
+    radial-gradient(circle at 90% 80%,color-mix(in srgb,var(--season-glow) 42%,transparent),transparent 31%),
+    linear-gradient(150deg,rgba(255,255,255,.91),var(--card-guide,var(--season-card)));
+}
+.premium-fruit-card,.seasonal-fruit-card,.library-card{
+  background:linear-gradient(180deg,rgba(255,255,255,.95),var(--card-mini,var(--season-card)));
+}
+.review-card{
+  background:linear-gradient(160deg,rgba(255,255,255,.96),color-mix(in srgb,var(--season-wash-2) 84%,var(--season-wash) 16%));
+}
+.guide-chips b{
+  background:rgba(255,255,255,.58);
+  border-color:color-mix(in srgb,var(--season-line) 82%,white 18%);
+}
+.selection-card:hover,.premium-fruit-card:hover,.library-card:hover{
+  border-color:color-mix(in srgb,var(--season-accent) 34%,var(--season-line) 66%);
+}
+
+/* Member entry: quieter editorial treatment than all-caps LOGIN */
+.header-auth{min-width:64px}
+.auth-link{
+  font-family:"Noto Serif KR","Batang",Georgia,serif;
+  font-weight:500;
+  letter-spacing:.01em;
+  color:#183d35;
+  text-decoration:none!important;
+  position:relative;
+}
+.auth-login-only{font-family:Georgia,"Times New Roman",serif;font-size:13px;letter-spacing:.025em;font-weight:500}
+.auth-link:after{content:"";position:absolute;left:1px;right:1px;bottom:1px;height:1px;background:var(--season-accent);transform:scaleX(0);transform-origin:left;transition:transform .2s ease}
+.auth-link:hover:after{transform:scaleX(1)}
+.auth-primary-btn{font-family:Georgia,"Times New Roman",serif;font-size:14px;letter-spacing:.035em;font-weight:500}
+.login-join-box{background:linear-gradient(120deg,rgba(255,255,255,.82),var(--season-wash-2));border-color:var(--season-line)}
+.login-join-box button{font-family:Georgia,"Times New Roman",serif;font-weight:500;text-decoration:none;border-bottom:1px solid rgba(14,90,72,.42);padding-bottom:2px}
+
+/* Kakao: recognizable image mark, but styled to sit naturally in the IROOM palette */
+.kakao-login-btn{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  border:1px solid rgba(55,44,20,.10);
+  border-radius:12px;
+  background:#FEE500;color:#191919;padding:12px 18px;font-weight:700;width:100%;margin-top:2px;
+  box-shadow:0 6px 16px rgba(91,72,18,.06);
+}
+.kakao-login-btn img{width:24px;height:24px;display:block;flex:0 0 24px}
+.kakao-login-btn span{font-size:13px;letter-spacing:-.02em}
+.kakao-login-btn:hover{filter:brightness(.985);transform:translateY(-1px)}
+.footer-action.kakao{position:relative;padding-left:clamp(58px,5vw,82px)}
+.kakao-footer-mark{position:absolute;left:clamp(22px,2.7vw,44px);top:27px;width:28px;height:28px;display:block}
+.footer-action.kakao strong{color:#ffe99a}
+@media(max-width:760px){.footer-action.kakao{padding-left:58px}.kakao-footer-mark{left:22px;top:22px}}

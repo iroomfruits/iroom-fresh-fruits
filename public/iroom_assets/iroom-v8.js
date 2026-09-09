@@ -219,13 +219,13 @@
   }
   function fillSearch(q){const box=$('#searchResults');if(!box)return;q=(q||'').trim();const list=allFruitNames.filter(n=>!q||n.includes(q));box.innerHTML=list.map(n=>`<button type="button" data-fruit="${n}">${n}</button>`).join('')||'<span style="color:#81786e">검색 결과가 없습니다.</span>'}
   function renderLogin(){
-    setModal('MEMBER','LOGIN','이룸 회원 로그인과 신규 회원가입을 한 창에서 이용할 수 있습니다.',`
+    setModal('IROOM MEMBER','Sign In','이룸 회원 로그인과 신규 회원가입을 한 창에서 편하게 이용할 수 있습니다.',`
       <form class="auth-form" id="loginForm">
         <label><span>아이디 또는 이메일</span><input name="account" autocomplete="username" required placeholder="아이디 또는 이메일"></label>
         <label><span>비밀번호</span><input name="password" type="password" autocomplete="current-password" required placeholder="비밀번호"></label>
-        <button class="primary-btn" type="submit">LOGIN</button>
-        <button class="kakao-login-btn" type="button" data-kakao-login>KAKAO LOGIN</button>
-        <div class="login-join-box"><span>처음 방문하셨나요?</span><button type="button" data-open-related="signup">SIGN UP · 회원가입</button></div>
+        <button class="primary-btn auth-primary-btn" type="submit">Sign In</button>
+        <button class="kakao-login-btn" type="button" data-kakao-login><img src="./iroom_assets/kakao-mark.svg" alt="" aria-hidden="true"><span>카카오로 1초 시작하기</span></button>
+        <div class="login-join-box"><span>처음 방문하셨나요?</span><button type="button" data-open-related="signup">Create Account · 회원가입</button></div>
       </form>`);
   }
   function renderSignup(){
@@ -239,7 +239,7 @@
           <label class="auth-grid-wide"><span>휴대폰</span><input name="phone" autocomplete="tel" placeholder="선택 입력"></label>
         </div>
         <button class="primary-btn" type="submit">회원가입</button>
-        <button class="kakao-login-btn" type="button" data-kakao-login>카카오로 빠르게 가입·로그인</button>
+        <button class="kakao-login-btn" type="button" data-kakao-login><img src="./iroom_assets/kakao-mark.svg" alt="" aria-hidden="true"><span>카카오로 1초 가입 · 로그인</span></button>
         <p class="auth-help">이미 회원이신가요? <button type="button" data-open-related="login">로그인</button></p>
       </form>`);
   }
@@ -340,11 +340,11 @@
       const d=await r.json();
       if(d.user){
         const nm=(d.user.name||d.user.username||'회원').replace(/[<>]/g,'');
-        wrap.innerHTML=`<button class="auth-link auth-user" type="button" data-modal="mypage">${nm}님</button><span aria-hidden="true">·</span><button class="auth-link" type="button" data-logout>LOGOUT</button>`;
+        wrap.innerHTML=`<button class="auth-link auth-user" type="button" data-modal="mypage">${nm}님</button><span aria-hidden="true">·</span><button class="auth-link" type="button" data-logout>Sign Out</button>`;
         return;
       }
     }catch(e){}
-    wrap.innerHTML='<button class="auth-link auth-login-only" type="button" data-modal="login">LOGIN</button>';
+    wrap.innerHTML='<button class="auth-link auth-login-only" type="button" data-modal="login">Sign In</button>';
   }
   async function submitLogin(form){
     const fd=new FormData(form);

@@ -11,7 +11,7 @@
 <meta name="apple-mobile-web-app-title" content="이룸">
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="apple-touch-icon" href="./iroom_assets/app-icon-192.png">
-<link rel="stylesheet" href="./iroom_assets/iroom-v8.css">
+<link rel="stylesheet" href="./iroom_assets/iroom-v8.css?v=15">
 </head>
 <body>
 <div class="site-shell" id="iroomFinalBase">
@@ -33,7 +33,7 @@
           <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 4.2 4.2"></path></svg>
         </button>
         <div class="header-auth" aria-label="회원 메뉴">
-          <button class="auth-link auth-login-only" type="button" data-modal="login">LOGIN</button>
+          <button class="auth-link auth-login-only" type="button" data-modal="login">Sign In</button>
         </div>
         <button class="icon-btn" type="button" data-modal="mypage" aria-label="마이페이지">
           <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="7" r="3.4"></circle><path d="M5.5 21c.5-5 2.8-7.5 6.5-7.5S18 16 18.5 21"></path></svg>
@@ -220,7 +220,8 @@
         <span>COMMUNITY</span><strong>BAND 연결</strong><small>이룸 소식과 입고 알림을 확인하세요</small>
       </button>
       <button class="footer-action kakao" type="button" data-kakao-login>
-        <span>KAKAO</span><strong>카카오 로그인</strong><small>카카오로 빠르게 로그인하고 이룸 회원과 연결</small>
+        <img class="kakao-footer-mark" src="./iroom_assets/kakao-mark.svg" alt="" aria-hidden="true">
+        <span>KAKAO</span><strong>카카오 1초 연결</strong><small>카카오 계정으로 빠르게 시작하고 이룸 회원과 연결</small>
       </button>
       <button class="footer-action" type="button" data-install-app>
         <span>INSTALL</span><strong>앱 · 바로가기 설치</strong><small data-install-status>휴대폰 홈 화면과 PC에서 앱처럼 빠르게 열기</small>
@@ -278,6 +279,6 @@
   </section>
 </div>
 
-<script src="./iroom_assets/iroom-v8.js"></script>
+<script src="./iroom_assets/iroom-v8.js?v=15"></script>
 </body>
 </html>
