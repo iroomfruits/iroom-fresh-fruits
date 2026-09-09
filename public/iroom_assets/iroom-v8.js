@@ -345,7 +345,7 @@
         return;
       }
     }catch(e){}
-    wrap.innerHTML='<button class="member-chip auth-login-only" type="button" data-modal="login" aria-label="이룸 로그인"><span class="member-leaf" aria-hidden="true"><i></i><b></b></span><span class="member-copy"><small>MY IROOM</small><strong>Sign In</strong></span></button>';
+    wrap.innerHTML='<button class="member-chip auth-login-only" type="button" data-modal="login" aria-label="이룸 로그인"><span class="member-leaf" aria-hidden="true"><i></i><b></b></span><span class="member-copy"><small>MY IROOM</small><strong>로그인</strong></span></button>';
   }
   async function submitLogin(form){
     const fd=new FormData(form);

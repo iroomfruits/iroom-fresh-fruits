@@ -1003,3 +1003,121 @@ html{--iroom-build:19}
 .member-chip-user .member-leaf i,.member-chip-user .member-leaf b{background:#4e7b59}
 @media(max-width:1050px){.topbar-inner{grid-template-columns:230px 1fr 250px}.member-chip{padding-right:9px}.member-copy small{display:none}}
 @media(max-width:760px){.member-chip{width:38px;height:38px;padding:4px;justify-content:center}.member-copy{display:none}.member-leaf{width:28px;height:28px;flex-basis:28px}.header-tools{gap:7px}}
+
+/* IROOM4 V20 — COLOR FLOW ONLY
+   No scenery, no extra fruit/leaf artwork, no generated background image.
+   The approved seasonal hero PNG stays untouched; only CSS color washes bridge the sides and tint the page. */
+html{--iroom-build:20}
+
+html[data-season="spring"],.site-shell[data-season="spring"]{
+  --page-base:#fbf5f1;--page-soft:#f7eee9;--page-soft2:#f2f5e9;
+  --page-glow-a:rgba(232,188,197,.18);--page-glow-b:rgba(180,205,166,.15);
+  --hero-edge:#f7efe9;--hero-edge2:#f3f3e8;
+}
+html[data-season="summer"],.site-shell[data-season="summer"]{
+  --page-base:#f8f7e9;--page-soft:#f4f5df;--page-soft2:#fbf4df;
+  --page-glow-a:rgba(190,211,125,.18);--page-glow-b:rgba(238,213,111,.15);
+  --hero-edge:#f3f4df;--hero-edge2:#fbf2df;
+}
+html[data-season="autumn"],.site-shell[data-season="autumn"]{
+  --page-base:#fbf2e9;--page-soft:#f7e8dc;--page-soft2:#f8efe4;
+  --page-glow-a:rgba(218,146,103,.18);--page-glow-b:rgba(225,184,139,.14);
+  --hero-edge:#f7e8dc;--hero-edge2:#faf0e5;
+}
+html[data-season="winter"],.site-shell[data-season="winter"]{
+  --page-base:#f5f5ee;--page-soft:#edf1ea;--page-soft2:#f6f0e5;
+  --page-glow-a:rgba(138,167,143,.15);--page-glow-b:rgba(207,181,125,.12);
+  --hero-edge:#edf1ea;--hero-edge2:#f7f0e5;
+}
+
+body{
+  background:
+    radial-gradient(ellipse at 7% 8%,var(--page-glow-a),transparent 32%),
+    radial-gradient(ellipse at 94% 26%,var(--page-glow-b),transparent 34%),
+    radial-gradient(ellipse at 14% 74%,color-mix(in srgb,var(--page-glow-b) 70%,transparent),transparent 34%),
+    linear-gradient(180deg,var(--page-base) 0%,color-mix(in srgb,var(--page-soft) 42%,white 58%) 48%,var(--page-base) 100%);
+  background-attachment:fixed;
+  transition:background .35s ease;
+}
+.site-shell{background:transparent}
+.topbar{
+  background:color-mix(in srgb,var(--page-base,#fffaf4) 82%,rgba(255,255,255,.96) 18%);
+  border-bottom-color:color-mix(in srgb,var(--season-line,#e5d8cd) 46%,transparent 54%);
+}
+
+/* Hero: the color itself continues to the browser edges; the artwork is never duplicated or altered. */
+.season-stage{
+  padding:18px 0 22px;
+  background:
+    radial-gradient(ellipse at 0% 48%,var(--page-glow-a),transparent 37%),
+    radial-gradient(ellipse at 100% 52%,var(--page-glow-b),transparent 38%),
+    linear-gradient(90deg,var(--page-soft) 0%,var(--hero-edge) 18%,var(--page-base) 38%,var(--page-base) 62%,var(--hero-edge2) 82%,var(--page-soft2) 100%);
+}
+.season-visual{
+  width:100%;max-width:none;margin:0 auto;background:transparent;
+}
+.season-visual:before{
+  content:"";position:absolute;inset:0;z-index:0;filter:none;opacity:1;transform:none;
+  background:
+    radial-gradient(ellipse at 19% 50%,color-mix(in srgb,var(--page-glow-a) 82%,transparent),transparent 43%),
+    radial-gradient(ellipse at 81% 50%,color-mix(in srgb,var(--page-glow-b) 78%,transparent),transparent 43%),
+    linear-gradient(90deg,var(--page-soft) 0%,transparent 28%,transparent 72%,var(--page-soft2) 100%);
+  pointer-events:none;
+}
+.season-visual:after{
+  content:"";position:absolute;inset:0;z-index:3;pointer-events:none;
+  background:linear-gradient(90deg,
+    var(--page-soft) 0%,
+    color-mix(in srgb,var(--hero-edge) 86%,transparent) 5%,
+    color-mix(in srgb,var(--hero-edge) 46%,transparent) 10%,
+    transparent 16%,transparent 84%,
+    color-mix(in srgb,var(--hero-edge2) 46%,transparent) 90%,
+    color-mix(in srgb,var(--hero-edge2) 86%,transparent) 95%,
+    var(--page-soft2) 100%);
+}
+.season-visual>img{
+  -webkit-mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.42) 4%,#000 9%,#000 91%,rgba(0,0,0,.42) 96%,transparent 100%);
+  mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.42) 4%,#000 9%,#000 91%,rgba(0,0,0,.42) 96%,transparent 100%);
+}
+
+/* The page is no longer white from section to section. Cards stay bright so the fruit remains the focus. */
+.selection-section{
+  background:
+    radial-gradient(ellipse at 6% 14%,color-mix(in srgb,var(--page-glow-a) 62%,transparent),transparent 31%),
+    linear-gradient(180deg,color-mix(in srgb,var(--page-base) 72%,white 28%),color-mix(in srgb,var(--page-soft) 54%,white 46%));
+}
+.fruit-library{
+  background:linear-gradient(180deg,color-mix(in srgb,var(--page-soft2) 42%,white 58%),color-mix(in srgb,var(--page-base) 68%,white 32%));
+}
+.review-section{
+  background:
+    radial-gradient(ellipse at 93% 12%,color-mix(in srgb,var(--page-glow-b) 58%,transparent),transparent 30%),
+    linear-gradient(180deg,color-mix(in srgb,var(--page-base) 70%,white 30%),color-mix(in srgb,var(--page-soft) 48%,white 52%));
+}
+.public-season-preview{
+  background:linear-gradient(90deg,color-mix(in srgb,var(--page-soft) 66%,white 34%),color-mix(in srgb,var(--page-soft2) 58%,white 42%));
+}
+.premium-fruits-block:first-of-type,.seasonal-fruits-block,.selection-curation,.selection-gift,.selection-guide,
+.premium-fruit-card,.seasonal-fruit-card,.library-card,.review-card{
+  background:rgba(255,254,251,.91);
+}
+
+/* Header tools: one calm visual family, without a character. */
+.header-tools{align-items:center;gap:9px}
+.icon-btn{
+  width:40px;height:40px;padding:8px;border:1px solid color-mix(in srgb,var(--season-line,#ddcfc2) 54%,white 46%);
+  border-radius:999px;background:rgba(255,254,251,.82);box-shadow:0 3px 12px rgba(61,48,37,.02);
+  transition:background .2s ease,border-color .2s ease,transform .2s ease;
+}
+.icon-btn:hover{background:#fff;transform:translateY(-1px);border-color:color-mix(in srgb,var(--season-accent,#8c725d) 24%,white 76%)}
+.member-chip{height:40px;background:rgba(255,254,251,.86);box-shadow:0 3px 12px rgba(61,48,37,.02)}
+.member-copy strong{font-family:"Noto Serif KR","Batang",Georgia,serif;letter-spacing:-.01em}
+.member-copy small{color:color-mix(in srgb,var(--season-accent,#8c725d) 62%,#756d65 38%)}
+
+@media(max-width:760px){
+  body{background-attachment:scroll}
+  .season-stage{padding:7px 0 10px}
+  .season-visual>img{-webkit-mask-image:none;mask-image:none}
+  .season-visual:after{display:none}
+  .icon-btn{width:38px;height:38px;padding:8px}
+}
