@@ -1,19 +1,4 @@
-const CACHE="iroom4-v26-static-1";
-const CORE=[
-  "./",
-  "./index.html",
-  "./manifest.webmanifest",
-  "./iroom_assets/iroom-v25.css?v=26",
-  "./iroom_assets/iroom-v25.js?v=26",
-  "./iroom_assets/iroom-logo-final.png",
-  "./iroom_assets/app-icon-192.png",
-  "./iroom_assets/app-icon-512.png"
-];
-self.addEventListener("install",event=>{self.skipWaiting();event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(CORE)).catch(()=>{}));});
-self.addEventListener("activate",event=>{event.waitUntil(Promise.all([caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k)))),self.clients.claim()]));});
-self.addEventListener("fetch",event=>{
-  const req=event.request;if(req.method!=="GET")return;const url=new URL(req.url);
-  if(url.origin!==self.location.origin || url.pathname.includes("/api/"))return;
-  if(req.mode==="navigate"){event.respondWith(fetch(req,{cache:"no-store"}).then(res=>{const copy=res.clone();caches.open(CACHE).then(c=>c.put("./index.html",copy)).catch(()=>{});return res;}).catch(()=>caches.match("./index.html")));return;}
-  event.respondWith(fetch(req).then(res=>{if(res&&res.ok){const copy=res.clone();caches.open(CACHE).then(c=>c.put(req,copy)).catch(()=>{});}return res;}).catch(()=>caches.match(req)));
-});
+const CACHE="iroom4-v27-final";
+self.addEventListener("install",e=>{self.skipWaiting();});
+self.addEventListener("activate",e=>{e.waitUntil((async()=>{for(const k of await caches.keys())if(k!==CACHE)await caches.delete(k);await self.clients.claim();})());});
+self.addEventListener("fetch",e=>{const r=e.request;if(r.method!=="GET")return;const u=new URL(r.url);if(u.origin!==self.location.origin||u.pathname.includes("/api/"))return;if(r.mode==="navigate"){e.respondWith(fetch(r,{cache:"no-store"}).catch(()=>caches.match("./index.html")));return;}e.respondWith(fetch(r,{cache:"no-store"}).then(res=>{if(res&&res.ok){const c=res.clone();caches.open(CACHE).then(x=>x.put(r,c)).catch(()=>{});}return res;}).catch(()=>caches.match(r)));});

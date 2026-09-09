@@ -6,7 +6,7 @@
 <title>이룸 fresh fruits | 프리미엄 · 제철 과일</title>
 <meta name="description" content="좋은 과일로 마음을 전하는 이룸 fresh fruits. 프리미엄 과일, 제철 과일, 맞춤 큐레이션, 좋은 마음을 전하는 과일 선물.">
 <meta name="theme-color" content="#fbf7f0">
-<meta name="iroom-build" content="26-self-contained">
+<meta name="iroom-build" content="27-final-polish">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="이룸">
@@ -1416,7 +1416,7 @@ html{--iroom-build:23}
 /* IROOM4 V25 — FINAL EDITORIAL COMPOSITION
    Authoritative visual layer: broader hero composition, distinct premium visuals,
    visible seasonal panels, clean A-style utilities, and Kakao consultation. */
-html{--iroom-build:25}
+html{--iroom-build:27}
 
 /* --- V25 seasonal palette: warm editorial, never plain white --- */
 html[data-season="spring"],.site-shell[data-season="spring"]{
@@ -1556,6 +1556,94 @@ body{
   .iroom-assurance{grid-template-columns:1fr}.assurance-chat{justify-self:start}
 }
 
+
+
+/* IROOM4 V27 — FINAL POLISH: integrated hero accents, distinct premium composites,
+   richer editorial section tones, reliable inline header icons, translucent premium modals. */
+html{--iroom-build:27}
+html[data-season="spring"],.site-shell[data-season="spring"]{
+  --v27-premium:#f5e5e2;--v27-seasonal:#e9f0e5;--v27-curation:#f1e9e2;--v27-gift:#f5e6da;--v27-guide:#e5ece5;--v27-library:#f6ece8;--v27-review:#f2e9e5;--v27-modal:#f4ece8;
+}
+html[data-season="summer"],.site-shell[data-season="summer"]{
+  --v27-premium:#f7edcf;--v27-seasonal:#e6edd4;--v27-curation:#e7eee0;--v27-gift:#f4e7c9;--v27-guide:#e4eadc;--v27-library:#f4efd9;--v27-review:#ecebdc;--v27-modal:#eef0df;
+}
+html[data-season="autumn"],.site-shell[data-season="autumn"]{
+  --v27-premium:#f2ddcc;--v27-seasonal:#e8e5d9;--v27-curation:#ece4da;--v27-gift:#f1dac8;--v27-guide:#e2e9df;--v27-library:#f3e5d9;--v27-review:#eee2d8;--v27-modal:#eee2d7;
+}
+html[data-season="winter"],.site-shell[data-season="winter"]{
+  --v27-premium:#efe4d5;--v27-seasonal:#e1e9df;--v27-curation:#e4ebe7;--v27-gift:#efe2d0;--v27-guide:#dfe8e2;--v27-library:#ece8df;--v27-review:#e8e8e0;--v27-modal:#e7ebe5;
+}
+
+/* Header: never depend on image icon files again. */
+.utility-svg{display:block;width:27px;height:27px;fill:none;stroke:#173e35;stroke-width:1.65;stroke-linecap:round;stroke-linejoin:round}
+.header-icon-btn{width:42px!important;height:42px!important;border-radius:50%!important;transition:background .18s ease,border-color .18s ease,transform .18s ease!important}
+.header-icon-btn:hover{background:rgba(255,255,255,.72)!important;border-color:var(--v25-line)!important}
+.header-tools-a{gap:8px!important}
+.account-popover{box-shadow:0 22px 55px rgba(54,43,33,.14)!important}
+
+/* Hero: point fruit now sits at the edge of the approved art instead of floating in empty space. */
+.season-stage{padding:16px 0 22px!important}
+.season-visual{height:clamp(520px,31vw,590px)!important}
+.hero-side-fruit{
+  width:clamp(160px,10.2vw,205px)!important;height:clamp(160px,10.2vw,205px)!important;opacity:.9!important;
+  filter:saturate(1.02) contrast(1.01) drop-shadow(0 15px 20px rgba(72,52,34,.085))!important;
+}
+.hero-side-fruit-left{left:max(22px,calc(50% - 660px))!important;top:59%!important;transform:translateY(-50%) rotate(-4deg)!important}
+.hero-side-fruit-right{right:max(22px,calc(50% - 660px))!important;top:42%!important;transform:translateY(-50%) rotate(4deg)!important}
+@media(max-width:1340px){.hero-side-fruit{width:145px!important;height:145px!important}.hero-side-fruit-left{left:24px!important}.hero-side-fruit-right{right:24px!important}}
+@media(max-width:1040px){.hero-side-fruit{display:none!important}}
+
+/* Premium fruit is a deliberately different editorial composition from seasonal single-fruit cards. */
+.premium-fruit-card{overflow:hidden}
+.premium-composite{height:154px;position:relative;margin:-2px 0 2px;border-radius:18px;overflow:hidden;background:radial-gradient(ellipse at 50% 72%,rgba(211,183,153,.15),transparent 53%)}
+.premium-aura{position:absolute;inset:19% 13% 5%;border-radius:50%;background:radial-gradient(ellipse,rgba(234,211,188,.27),rgba(255,255,255,0) 67%)}
+.pc-fruit{position:absolute!important;height:auto!important;max-width:none!important;object-fit:contain!important;margin:0!important;filter:drop-shadow(0 9px 9px rgba(64,45,28,.07))!important;pointer-events:none}
+.pc-a{width:62%!important;left:19%;top:5%;z-index:3;transform:rotate(-1deg)}
+.pc-b{width:46%!important;left:-1%;top:35%;z-index:2;transform:rotate(-9deg) scale(.86);opacity:.94}
+.pc-c{width:46%!important;right:-1%;top:34%;z-index:1;transform:rotate(9deg) scale(.84);opacity:.92}
+.premium-fruit-card:nth-child(2) .pc-a{transform:rotate(2deg)}
+.premium-fruit-card:nth-child(3) .pc-b{transform:rotate(-4deg) scale(.82)}
+.premium-fruit-card:nth-child(4) .pc-c{transform:rotate(5deg) scale(.88)}
+.premium-composite-detail{height:270px;width:100%;margin:0;background:radial-gradient(ellipse at 50% 68%,rgba(211,183,153,.18),transparent 58%)}
+.premium-composite-detail .pc-a{width:64%!important;left:18%;top:4%}
+.premium-composite-detail .pc-b{width:48%!important;top:39%}
+.premium-composite-detail .pc-c{width:48%!important;top:37%}
+
+/* Section colors: visible enough to create rhythm, still restrained and premium. */
+.selection-section{background:linear-gradient(180deg,color-mix(in srgb,var(--v25-page) 82%,#fff 18%),color-mix(in srgb,var(--v25-page2) 76%,#fff 24%))!important}
+.premium-fruits-block:first-of-type{background:linear-gradient(135deg,var(--v27-premium),color-mix(in srgb,var(--v27-premium) 76%,#fff 24%))!important}
+.seasonal-fruits-block{background:linear-gradient(135deg,var(--v27-seasonal),color-mix(in srgb,var(--v27-seasonal) 76%,#fff 24%))!important}
+.selection-curation{background:linear-gradient(145deg,var(--v27-curation),color-mix(in srgb,var(--v27-curation) 72%,#fff 28%))!important}
+.selection-gift{background:linear-gradient(145deg,var(--v27-gift),color-mix(in srgb,var(--v27-gift) 72%,#fff 28%))!important}
+.selection-guide{background:linear-gradient(145deg,var(--v27-guide),color-mix(in srgb,var(--v27-guide) 72%,#fff 28%))!important}
+.iroom-assurance{background:linear-gradient(115deg,color-mix(in srgb,var(--v27-guide) 86%,#fff 14%),rgba(255,253,249,.86))!important}
+.premium-banner{background:linear-gradient(108deg,color-mix(in srgb,var(--v27-gift) 90%,#fff 10%),color-mix(in srgb,var(--v25-page2) 72%,#fff 28%))!important}
+.fruit-library{background:linear-gradient(180deg,var(--v27-library),color-mix(in srgb,var(--v27-library) 72%,#fff 28%))!important}
+.review-section{background:linear-gradient(180deg,var(--v27-review),color-mix(in srgb,var(--v27-review) 70%,#fff 30%))!important}
+.library-card,.review-card{background:rgba(255,253,249,.86)!important;box-shadow:0 11px 28px rgba(72,52,35,.035)}
+.selection-card{box-shadow:0 14px 38px rgba(72,52,35,.042)!important}
+
+/* Modal returns to the translucent, layered IROOM look. */
+.modal-backdrop{background:rgba(38,47,41,.18)!important;backdrop-filter:blur(13px) saturate(.86)!important}
+.modal-panel{
+  background:linear-gradient(145deg,rgba(255,253,249,.91),color-mix(in srgb,var(--v27-modal) 79%,rgba(255,255,255,.78) 21%))!important;
+  border:1px solid color-mix(in srgb,var(--v25-line) 82%,rgba(255,255,255,.65) 18%)!important;
+  box-shadow:0 30px 85px rgba(44,40,34,.18)!important;backdrop-filter:blur(22px) saturate(.9)!important;
+}
+.modal-panel:before{content:"";position:absolute;inset:0;pointer-events:none;border-radius:inherit;background:radial-gradient(ellipse at 12% 8%,rgba(255,255,255,.5),transparent 29%),radial-gradient(ellipse at 92% 88%,color-mix(in srgb,var(--v25-page2) 48%,transparent),transparent 33%)}
+.modal-panel>*{position:relative;z-index:1}
+.gift-list{gap:13px!important}
+.gift-option{border-radius:20px!important;border-color:color-mix(in srgb,var(--v25-line) 78%,#fff 22%)!important;box-shadow:inset 0 1px rgba(255,255,255,.62);transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease!important}
+.gift-option:nth-child(1){background:linear-gradient(120deg,color-mix(in srgb,var(--v27-gift) 68%,#fff 32%),rgba(255,252,246,.78))!important}
+.gift-option:nth-child(2){background:linear-gradient(120deg,color-mix(in srgb,var(--v27-guide) 68%,#fff 32%),rgba(255,252,246,.78))!important}
+.gift-option:nth-child(3){background:linear-gradient(120deg,color-mix(in srgb,var(--v27-premium) 65%,#fff 35%),rgba(255,252,246,.78))!important}
+.gift-option:hover{transform:translateY(-2px);border-color:color-mix(in srgb,var(--v25-accent) 38%,#fff 62%)!important;box-shadow:0 12px 25px rgba(66,48,32,.06)}
+.story-card,.fruit-card,.info-card,.mini-panel{background:rgba(255,253,249,.73)!important;backdrop-filter:blur(7px)}
+
+@media(max-width:760px){
+  .premium-composite{height:122px}.premium-composite-detail{height:220px}
+  .utility-svg{width:24px;height:24px}
+}
 </style>
 <!-- IROOM4 V26 SELF-CONTAINED: CSS/JS embedded to prevent asset-load failures -->
 </head>
@@ -1576,11 +1664,11 @@ body{
 
       <div class="header-tools header-tools-a" aria-label="빠른 메뉴">
         <button class="header-icon-btn" type="button" data-modal="search" aria-label="과일 검색" title="검색">
-          <img class="utility-icon" src="./iroom_assets/ui_v25/search.png" alt="">
+          <svg class="utility-svg" viewBox="0 0 32 32" aria-hidden="true"><circle cx="14" cy="14" r="8.3"></circle><path d="M20.2 20.2 27 27"></path></svg>
         </button>
         <div class="header-auth account-wrap" aria-label="회원 메뉴">
           <button class="header-icon-btn account-trigger" type="button" data-account-toggle aria-label="마이이룸 메뉴" aria-expanded="false" title="마이이룸">
-            <img class="utility-icon" src="./iroom_assets/ui_v25/user.png" alt="">
+            <svg class="utility-svg" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="10.2" r="4.4"></circle><path d="M8.2 27c.5-6 3.2-9.1 7.8-9.1S23.3 21 23.8 27"></path></svg>
             <span class="account-dot" aria-hidden="true"></span>
           </button>
           <div class="account-popover" data-account-popover hidden>
@@ -1597,7 +1685,7 @@ body{
           </div>
         </div>
         <button class="header-icon-btn" type="button" data-modal="cart" aria-label="장바구니" title="장바구니">
-          <img class="utility-icon" src="./iroom_assets/ui_v25/bag.png" alt="">
+          <svg class="utility-svg" viewBox="0 0 32 32" aria-hidden="true"><path d="M8.2 11.5h15.6l-1.1 15H9.3l-1.1-15Z"></path><path d="M12 12V9.2a4 4 0 0 1 8 0V12"></path></svg>
           <span class="cart-dot" aria-hidden="true"></span>
         </button>
       </div>
@@ -1872,10 +1960,10 @@ body{
     winter:['premium_v25/winter_01.png','premium_v25/winter_02.png','premium_v25/winter_03.png','premium_v25/winter_04.png']
   };
   const heroAccents={
-    spring:['fruits/16_블루베리_blueberry.png','fruits/12_샤인머스캣_shine_muscat.png'],
-    summer:['fruits/04_체리_cherry.png','fruits/18_파인애플_pineapple.png'],
-    autumn:['fruits/26_밤_chestnut.png','fruits/27_자두_plum.png'],
-    winter:['fruits/10_배_pear.png','fruits/16_블루베리_blueberry.png']
+    spring:['fruits/16_블루베리_blueberry.png','fruits/03_청포도_green_grape.png'],
+    summer:['fruits/04_체리_cherry.png','fruits/06_복숭아_peach.png'],
+    autumn:['fruits/26_밤_chestnut.png','fruits/08_포도_purple_grape.png'],
+    winter:['fruits/10_배_pear.png','fruits/35_금귤_kumquat.png']
   };
   const heroCopy={
     spring:{title:'봄 제철 과일',desc:'봄의 싱그러움을<br>가장 특별한 선물로',tag:'PREMIUM FRESH FRUITS · IN SPRING'},
@@ -1967,6 +2055,17 @@ body{
     '금귤':{season:'겨울 · 봄',summary:'작은 크기 안에 향긋한 껍질과 상큼한 과즙이 함께 들어 있습니다.',choose:'색이 고르고 껍질이 탄탄하며 향이 선명한 것을 살펴봅니다.',keep:'씻지 않은 상태로 냉장 보관하고 드시기 직전에 세척하세요.',enjoy:'깨끗이 씻어 껍질째 즐기거나 차·디저트에 활용하기 좋습니다.'}
   };
   const allFruitNames=Object.keys(fruitMeta);
+  function premiumCompositeMarkup(path,name,detail=false){
+    const cls=detail?'premium-composite premium-composite-detail':'premium-composite';
+    return `<div class="${cls}" role="img" aria-label="${name} 프리미엄 편집 이미지"><span class="premium-aura" aria-hidden="true"></span><img class="pc-fruit pc-a" src="${assets+path}" alt=""><img class="pc-fruit pc-b" src="${assets+path}" alt=""><img class="pc-fruit pc-c" src="${assets+path}" alt=""></div>`;
+  }
+  function paintPremiumCard(card,n,m,i){
+    card.dataset.fruit=n;card.dataset.premium='1';delete card.dataset.visual;
+    card.querySelector('.premium-composite')?.remove();
+    const legacy=card.querySelector(':scope > img');if(legacy)legacy.remove();
+    card.insertAdjacentHTML('afterbegin',premiumCompositeMarkup(m[0],n,false));
+    const b=$('b',card),sm=$('small',card);if(b)b.textContent=n;if(sm)sm.textContent=m[1];
+  }
   const autoSeason=()=>{const m=new Date().getMonth()+1;return m>=3&&m<=5?'spring':m>=6&&m<=8?'summer':m>=9&&m<=11?'autumn':'winter'};
   const params=new URLSearchParams(location.search);
   const forced=params.get('season');
@@ -2010,7 +2109,7 @@ body{
     preload.src=heroUrl;
     const ca=$('#curationArt'),ga=$('#giftArt'),pa=$('#premiumArt');
     if(ca)ca.src=assets+data.curation;if(ga)ga.src=assets+data.gift;if(pa)pa.src=assets+data.premium;
-    $$('.premium-fruit-card:not(.seasonal-fruit-card)').forEach((card,i)=>{const n=(data.premiumFruits||[])[i],m=fruitMeta[n];if(!n||!m)return;const visual=((premiumVisuals[current]||[])[i]||m[0]);card.dataset.fruit=n;card.dataset.visual=visual;const im=$('img',card),b=$('b',card),sm=$('small',card);if(im){im.src=assets+visual;im.alt=n+' 프리미엄 이미지'}if(b)b.textContent=n;if(sm)sm.textContent=m[1]});
+    $$('.premium-fruit-card:not(.seasonal-fruit-card)').forEach((card,i)=>{const n=(data.premiumFruits||[])[i],m=fruitMeta[n];if(!n||!m)return;paintPremiumCard(card,n,m,i)});
     $$('.seasonal-fruit-card').forEach((card,i)=>{const n=(data.seasonalFruits||[])[i],m=fruitMeta[n];if(!n||!m)return;card.dataset.fruit=n;delete card.dataset.visual;const im=$('img',card),b=$('b',card),sm=$('small',card);if(im){im.src=assets+m[0];im.alt=n}if(b)b.textContent=n;if(sm)sm.textContent=m[1]});
     $$('[data-season-label]').forEach(el=>el.textContent=data.label);
     $$('.library-card').forEach((card,i)=>{const n=(data.library||[])[i];const m=fruitMeta[n];if(!n||!m)return;card.dataset.fruit=n;const im=$('img',card),b=$('b',card),sm=$('small',card);if(im){im.src=assets+m[0];im.alt=n}if(b)b.textContent=n;if(sm)sm.textContent=m[1]});
@@ -2246,18 +2345,18 @@ body{
     await updateHeaderAuth();
     if(overlay.classList.contains('open')){closeModal();}
   }
-  function openFruit(n,visualPath=""){
+  function openFruit(n,isPremium=false){
     lastFocus=document.activeElement;
-    showFruit(n,visualPath);
-    overlay.dataset.modalType=type;overlay.classList.add('open');overlay.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';
+    showFruit(n,isPremium);
+    overlay.dataset.modalType='fruit';overlay.classList.add('open');overlay.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';
     setTimeout(()=>$('button',overlay)?.focus(),20);
   }
-  function showFruit(n,visualPath=""){
+  function showFruit(n,isPremium=false){
     const m=fruitMeta[n]||['','오늘 상태가 좋은 과일'];
     const d=fruitDetails[n]||fruitDetails[fruitAliasBase[n]]||{season:'계절 추천',summary:m[1]||'오늘 상태가 좋은 과일입니다.',choose:'표면 상태와 향, 탄력과 무게를 함께 살펴 신선한 과일을 고릅니다.',keep:'과일의 숙도에 맞춰 실온 또는 냉장 보관해 주세요.',enjoy:'가장 맛있는 상태에서 신선하게 즐겨보세요.'};
     setModal('FRUIT DETAIL',n,`${m[1]} · ${d.season}`,`
       <div class="fruit-detail-layout">
-        <div class="fruit-detail-visual"><img src="${assets+(visualPath||m[0])}" alt="${n}"></div>
+        <div class="fruit-detail-visual">${isPremium?premiumCompositeMarkup(m[0],n,true):`<img src="${assets+m[0]}" alt="${n}">`}</div>
         <div class="fruit-detail-summary">
           <span class="fruit-detail-badge">IROOM FRUIT GUIDE · ${d.season}</span>
           <h3>${n} 상세설명</h3>
@@ -2302,7 +2401,7 @@ body{
   if('serviceWorker' in navigator && (location.protocol==='https:' || location.hostname==='localhost' || location.hostname==='127.0.0.1')){
     window.addEventListener('load',async()=>{
       try{
-        await navigator.serviceWorker.register('./sw.js',{scope:'./'});
+        await navigator.serviceWorker.register('./sw.js?v=27',{scope:'./',updateViaCache:'none'});
         await navigator.serviceWorker.ready;
         if(isStandalone())setInstallStatus('설치 완료 · 앱 모드로 실행 중');
         else if(!deferredInstallPrompt)setInstallStatus('설치 기능 준비 중 · 브라우저 메뉴에서도 설치 가능');
@@ -2329,7 +2428,7 @@ body{
     if(e.target.closest('[data-logout]')){e.preventDefault();logoutUser();return}
     if(e.target.closest('[data-install-app]')){e.preventDefault();installApp();return}
     const fruit=e.target.closest('[data-fruit]');
-    if(fruit){e.preventDefault();openFruit(fruit.dataset.fruit,fruit.dataset.visual||'');return}
+    if(fruit){e.preventDefault();openFruit(fruit.dataset.fruit,fruit.dataset.premium==='1');return}
     const social=e.target.closest('[data-social]');
     if(social){
       e.preventDefault();
@@ -2340,7 +2439,7 @@ body{
   });
   overlay.addEventListener('click',e=>{
     if(e.target===overlay||e.target.closest('[data-close]')){closeModal();return}
-    const f=e.target.closest('[data-fruit]'); if(f){showFruit(f.dataset.fruit);return}
+    const f=e.target.closest('[data-fruit]'); if(f){showFruit(f.dataset.fruit,false);return}
     if(e.target.closest('[data-search]')){fillSearch($('#searchInput')?.value||'');return}
     if(e.target.closest('[data-kakao-chat]')){openKakaoChat();return}
     if(e.target.closest('[data-kakao-login]')){startKakaoLogin();return}
