@@ -842,3 +842,7 @@ body,.site-shell{background:color-mix(in srgb,var(--season-wash-2,#fffaf4) 42%,w
 /* Logout is only revealed after an authenticated user is confirmed. */
 [data-mypage-logout]{display:none}
 [data-mypage-logout].is-visible{display:inline-flex}
+
+
+/* IROOM4 V17 — cache-refresh marker */
+html{--iroom-build:17}
