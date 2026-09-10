@@ -6,10 +6,10 @@
 <title>이룸 fresh fruits | 오늘 가장 좋은 과일</title>
 <meta name="description" content="국산 프리미엄 과일과 제철 과일을 오늘의 상태에 맞춰 고르는 이룸 fresh fruits.">
 <meta name="theme-color" content="#fbf6ee">
-<meta name="iroom-build" content="34-commerce-editorial">
+<meta name="iroom-build" content="35-reference-implemented">
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="apple-touch-icon" href="./iroom_assets/app-icon-192.png">
-<link rel="stylesheet" href="./iroom_assets/iroom-v34.css?v=34">
+<link rel="stylesheet" href="./iroom_assets/iroom-v35.css?v=35">
 </head>
 <body>
 <div class="site-shell" id="iroomApp" data-season="autumn">
@@ -19,10 +19,11 @@
         <img src="./iroom_assets/iroom-logo-final.png" alt="이룸 fresh fruits">
       </button>
       <nav class="main-nav" aria-label="주요 메뉴">
-        <button type="button" data-scroll="today">Today's Picks</button>
-        <button type="button" data-scroll="premium">Premium Fruits</button>
-        <button type="button" data-modal="gift">Gift Selection</button>
-        <button type="button" data-modal="brand">Brand Story</button>
+        <button type="button" data-scroll="home">홈</button>
+        <button type="button" data-scroll="premium">프리미엄 과일</button>
+        <button type="button" data-scroll="seasonal">제철 이야기</button>
+        <button type="button" data-scroll="promise">이룸의 약속</button>
+        <button type="button" data-modal="guide">고객센터</button>
       </nav>
       <div class="header-tools">
         <button class="icon-btn" type="button" data-modal="search" aria-label="과일 검색"><svg viewBox="0 0 32 32"><circle cx="14" cy="14" r="8.2"></circle><path d="M20 20l7 7"></path></svg></button>
@@ -39,6 +40,7 @@
           </div>
         </div>
         <button class="icon-btn cart-icon" type="button" data-modal="cart" aria-label="장바구니"><svg viewBox="0 0 32 32"><path d="M8.2 11.5h15.6l-1.1 15H9.3z"></path><path d="M12 12V9.2a4 4 0 0 1 8 0V12"></path></svg></button>
+        <button class="header-season-cta" type="button" data-scroll="today">지금, 제철의 맛을 <span>→</span></button>
       </div>
     </div>
   </header>
@@ -47,7 +49,7 @@
     <section class="hero" id="home">
       <div class="hero-inner wide">
         <div class="hero-copy">
-          <span class="eyebrow">KOREAN PREMIUM FRUITS</span>
+          <span class="eyebrow">IROOM FRESH FRUITS</span>
           <h1><span>이룸</span><br><b data-hero-title>가을 프리미엄 과일</b></h1>
           <p data-hero-copy>깊어가는 계절이 전하는 가장 특별한 맛을 오늘의 상태로 골라드립니다.</p>
           <div class="hero-rule"></div>
@@ -55,13 +57,14 @@
           <small>오늘의 맛 · 산지 · 상태를 함께 보고 고릅니다.</small>
         </div>
         <div class="hero-fruit-stage" id="heroFruitStage" aria-label="계절별 추천 과일"></div>
+        <aside class="hero-side-note" aria-hidden="true"><span data-season-side>계절이<br>더<br>맛있어지는<br>순간</span><i></i><small>GOOD<br>FRUITS<br>BRIGHTER<br>DAYS</small></aside>
       </div>
     </section>
 
     <section class="today-section section-pad" id="today">
-      <div class="section-head wide">
-        <div><span class="eyebrow">TODAY'S IROOM PICK</span><h2>오늘 이룸이 고른 과일</h2></div>
-        <p>예쁜 사진보다 먼저 오늘의 맛과 상태를 봅니다. 산지와 구성은 입고 상황에 따라 달라질 수 있습니다.</p>
+      <div class="section-head wide today-head">
+        <div><span class="eyebrow">TODAY'S IROOM PICK</span><h2>이룸의 오늘, 프리미엄 과일</h2><p class="today-sub">지금 가장 맛있는 계절 과일만, 믿을 수 있는 산지에서 정직하게 소개합니다.</p></div>
+        <div class="today-head-tools"><p>지금 가장 맛있는 제철 과일을 만나보세요.</p><div class="today-arrows"><button type="button" data-carousel-prev aria-label="이전 과일">‹</button><button type="button" data-carousel-next aria-label="다음 과일">›</button></div></div>
       </div>
       <div class="today-grid wide" id="todayGrid"></div>
     </section>
@@ -90,7 +93,7 @@
       </div>
     </section>
 
-    <section class="promise-section">
+    <section class="promise-section" id="promise">
       <div class="promise wide">
         <span class="promise-mark">✓</span>
         <div><small>IROOM FRESH PROMISE</small><h2>맛과 상태를 끝까지 살핍니다</h2><p>오늘 받은 과일의 맛이나 상태가 기대에 미치지 않으면 상담 후 정성껏 다시 도와드립니다.</p></div>
@@ -129,6 +132,6 @@
 </div>
 
 <div class="modal-backdrop" id="modalBackdrop" aria-hidden="true"><section class="modal-panel" role="dialog" aria-modal="true"><button class="modal-close" type="button" data-close aria-label="닫기">×</button><span class="modal-kicker" id="modalKicker"></span><h2 id="modalTitle"></h2><p class="modal-intro" id="modalIntro"></p><div id="modalBody"></div></section></div>
-<script src="./iroom_assets/iroom-v34.js?v=34" defer></script>
+<script src="./iroom_assets/iroom-v35.js?v=35" defer></script>
 </body>
 </html>
