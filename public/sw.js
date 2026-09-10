@@ -1,4 +1,4 @@
-const CACHE="iroom4-v27-final";
+const CACHE="iroom-v28-final";
 self.addEventListener("install",e=>{self.skipWaiting();});
 self.addEventListener("activate",e=>{e.waitUntil((async()=>{for(const k of await caches.keys())if(k!==CACHE)await caches.delete(k);await self.clients.claim();})());});
 self.addEventListener("fetch",e=>{const r=e.request;if(r.method!=="GET")return;const u=new URL(r.url);if(u.origin!==self.location.origin||u.pathname.includes("/api/"))return;if(r.mode==="navigate"){e.respondWith(fetch(r,{cache:"no-store"}).catch(()=>caches.match("./index.html")));return;}e.respondWith(fetch(r,{cache:"no-store"}).then(res=>{if(res&&res.ok){const c=res.clone();caches.open(CACHE).then(x=>x.put(r,c)).catch(()=>{});}return res;}).catch(()=>caches.match(r)));});
