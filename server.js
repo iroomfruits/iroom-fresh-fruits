@@ -481,17 +481,6 @@ async function initDb(){
     ["v37-peach","복숭아","부드럽고 향긋한 여름 단맛의 복숭아입니다.","4kg",29000,30,"/iroom_assets/fruits/06_복숭아_peach.png","과일",131],
     ["v37-melon","멜론","부드럽고 은은한 달콤함의 멜론입니다.","2수",24000,30,"/iroom_assets/fruits/28_멜론_melon.png","과일",132],
     ["v37-green-grape","청포도","청량하고 향긋한 단맛의 청포도입니다.","2kg",24000,30,"/iroom_assets/fruits/03_청포도_green_grape.png","과일",133]
-    ,["v40-avocado","아보카도","고소하고 부드러운 식감의 프리미엄 아보카도입니다.","5~6과",23000,30,"/iroom_assets/fruits/22_아보카도_avocado.png","수입과일",134]
-    ,["v40-dragonfruit","용과","담백하고 청량한 열대의 맛을 즐기는 용과입니다.","3~4과",26000,30,"/iroom_assets/fruits/23_용과_dragonfruit.png","수입과일",135]
-    ,["v40-banana","바나나","부드럽고 편안한 달콤함의 바나나입니다.","1.5kg 내외",12000,30,"/iroom_assets/fruits/29_바나나_banana.png","수입과일",136]
-    ,["v40-lime","라임","또렷하고 상쾌한 시트러스 향의 라임입니다.","8~10과",16000,30,"/iroom_assets/fruits/30_라임_lime.png","수입과일",137]
-    ,["v40-passionfruit","패션후르츠","향긋하고 선명한 새콤달콤함의 패션후르츠입니다.","1kg",24000,30,"/iroom_assets/fruits/31_패션후르츠_passionfruit.png","수입과일",138]
-    ,["v40-mangosteen","망고스틴","부드럽고 깨끗한 열대의 단맛을 즐기는 망고스틴입니다.","1kg",35000,30,"/iroom_assets/fruits/32_망고스틴_mangosteen.png","수입과일",139]
-    ,["v40-lychee","리치","은은한 꽃향과 맑은 단맛의 리치입니다.","1kg",26000,30,"/iroom_assets/fruits/33_리치_lychee.png","수입과일",140]
-    ,["v40-lemon","레몬","깨끗하고 산뜻한 시트러스 향의 레몬입니다.","8~10과",15000,30,"/iroom_assets/fruits/14_레몬_lemon.png","수입과일",141]
-    ,["v40-orange","오렌지","풍부한 과즙과 산뜻한 향의 오렌지입니다.","8~10과",18000,30,"/iroom_assets/fruits/21_오렌지_orange.png","수입과일",142]
-    ,["v40-raspberry","라즈베리","화사한 산미와 부드러운 향의 라즈베리입니다.","500g",28000,30,"/iroom_assets/fruits/17_라즈베리_raspberry.png","수입과일",143]
-    ,["v40-chestnut","밤","포근하고 고소한 가을 풍미의 국내산 밤입니다.","2kg",22000,30,"/iroom_assets/fruits/26_밤_chestnut.png","과일",144]
   ];
   for(const p of commerceSeed){
     await pool.query(`
