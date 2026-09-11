@@ -1,0 +1,154 @@
+{
+  "version": "v40",
+  "count": 37,
+  "images": [
+    {
+      "name": "딸기",
+      "src": "/iroom_assets/fruits/01_딸기_strawberry.png"
+    },
+    {
+      "name": "참외",
+      "src": "/iroom_assets/fruits/02_참외_korean_melon.png"
+    },
+    {
+      "name": "청포도",
+      "src": "/iroom_assets/fruits/03_청포도_green_grape.png"
+    },
+    {
+      "name": "체리",
+      "src": "/iroom_assets/fruits/04_체리_cherry.png"
+    },
+    {
+      "name": "수박",
+      "src": "/iroom_assets/fruits/05_수박_watermelon.png"
+    },
+    {
+      "name": "복숭아",
+      "src": "/iroom_assets/fruits/06_복숭아_peach.png"
+    },
+    {
+      "name": "망고",
+      "src": "/iroom_assets/fruits/07_망고_mango.png"
+    },
+    {
+      "name": "포도",
+      "src": "/iroom_assets/fruits/08_포도_purple_grape.png"
+    },
+    {
+      "name": "사과",
+      "src": "/iroom_assets/fruits/09_사과_apple.png"
+    },
+    {
+      "name": "배",
+      "src": "/iroom_assets/fruits/10_배_pear.png"
+    },
+    {
+      "name": "감",
+      "src": "/iroom_assets/fruits/11_감_persimmon.png"
+    },
+    {
+      "name": "샤인머스캣",
+      "src": "/iroom_assets/fruits/12_샤인머스캣_shine_muscat.png"
+    },
+    {
+      "name": "한라봉",
+      "src": "/iroom_assets/fruits/13_한라봉_hallabong.png"
+    },
+    {
+      "name": "레몬",
+      "src": "/iroom_assets/fruits/14_레몬_lemon.png"
+    },
+    {
+      "name": "자몽",
+      "src": "/iroom_assets/fruits/15_자몽_grapefruit.png"
+    },
+    {
+      "name": "블루베리",
+      "src": "/iroom_assets/fruits/16_블루베리_blueberry.png"
+    },
+    {
+      "name": "라즈베리",
+      "src": "/iroom_assets/fruits/17_라즈베리_raspberry.png"
+    },
+    {
+      "name": "파인애플",
+      "src": "/iroom_assets/fruits/18_파인애플_pineapple.png"
+    },
+    {
+      "name": "키위",
+      "src": "/iroom_assets/fruits/19_키위_kiwi.png"
+    },
+    {
+      "name": "한라봉",
+      "src": "/iroom_assets/fruits/20_한라봉_hallabong_2.png"
+    },
+    {
+      "name": "오렌지",
+      "src": "/iroom_assets/fruits/21_오렌지_orange.png"
+    },
+    {
+      "name": "아보카도",
+      "src": "/iroom_assets/fruits/22_아보카도_avocado.png"
+    },
+    {
+      "name": "용과",
+      "src": "/iroom_assets/fruits/23_용과_dragonfruit.png"
+    },
+    {
+      "name": "석류",
+      "src": "/iroom_assets/fruits/24_석류_pomegranate.png"
+    },
+    {
+      "name": "무화과",
+      "src": "/iroom_assets/fruits/25_무화과_fig.png"
+    },
+    {
+      "name": "밤",
+      "src": "/iroom_assets/fruits/26_밤_chestnut.png"
+    },
+    {
+      "name": "자두",
+      "src": "/iroom_assets/fruits/27_자두_plum.png"
+    },
+    {
+      "name": "멜론",
+      "src": "/iroom_assets/fruits/28_멜론_melon.png"
+    },
+    {
+      "name": "바나나",
+      "src": "/iroom_assets/fruits/29_바나나_banana.png"
+    },
+    {
+      "name": "라임",
+      "src": "/iroom_assets/fruits/30_라임_lime.png"
+    },
+    {
+      "name": "패션후르츠",
+      "src": "/iroom_assets/fruits/31_패션후르츠_passionfruit.png"
+    },
+    {
+      "name": "망고스틴",
+      "src": "/iroom_assets/fruits/32_망고스틴_mangosteen.png"
+    },
+    {
+      "name": "리치",
+      "src": "/iroom_assets/fruits/33_리치_lychee.png"
+    },
+    {
+      "name": "블랙베리",
+      "src": "/iroom_assets/fruits/34_블랙베리_blackberry.png"
+    },
+    {
+      "name": "금귤",
+      "src": "/iroom_assets/fruits/35_금귤_kumquat.png"
+    },
+    {
+      "name": "체리",
+      "src": "/iroom_assets/fruits/36_체리_cherry_2.png"
+    },
+    {
+      "name": "토마토",
+      "src": "/iroom_assets/fruits/37_토마토_tomato.png"
+    }
+  ]
+}
