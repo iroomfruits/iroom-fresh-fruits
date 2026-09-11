@@ -6,10 +6,10 @@
 <title>이룸 fresh fruits | 오늘 가장 좋은 과일</title>
 <meta name="description" content="국산 프리미엄 과일과 제철 과일을 오늘의 상태에 맞춰 고르는 이룸 fresh fruits.">
 <meta name="theme-color" content="#fbf6ee">
-<meta name="iroom-build" content="42-hover-pause-slider">
+<meta name="iroom-build" content="43-calm-shopping-cart-fix">
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="apple-touch-icon" href="./iroom_assets/app-icon-192.png">
-<link rel="stylesheet" href="./iroom_assets/iroom-v42.css?v=42">
+<link rel="stylesheet" href="./iroom_assets/iroom-v43.css?v=43">
 </head>
 <body>
 <div class="market-notice" role="status" aria-live="polite">
@@ -80,7 +80,7 @@
         <div><span class="eyebrow">01 · KOREAN PREMIUM FRUITS</span><h2>프리미엄 과일</h2><p>국산 산지와 품질을 기준으로 이룸이 한 번 더 엄선한 과일입니다.</p></div>
         <div class="section-actions"><button type="button" data-modal="premium">프리미엄 과일 더보기</button></div>
       </div>
-      <div class="premium-grid wide commerce-carousel" id="premiumGrid"></div>
+      <div class="premium-grid wide commerce-carousel manual-carousel" id="premiumGrid"></div>
     </section>
 
     <section class="seasonal-section section-pad" id="seasonal">
@@ -88,7 +88,7 @@
         <div><span class="eyebrow">02 · SEASONAL FRUITS</span><h2>지금, 가장 맛있는 제철 과일</h2><p>계절이 선택하는 가장 맛있는 순간. <b data-season-label>가을</b>의 제철 과일을 만나보세요.</p></div>
         <div class="section-actions"><button type="button" data-modal="seasonal">제철 과일 더보기</button></div>
       </div>
-      <div class="seasonal-grid wide commerce-carousel" id="seasonalGrid"></div>
+      <div class="seasonal-grid wide commerce-carousel manual-carousel" id="seasonalGrid"></div>
     </section>
 
     <section class="library-section section-pad">
@@ -96,7 +96,7 @@
         <div><span class="eyebrow">IROOM FRUIT LIBRARY</span><h2>오늘 더 만나볼 과일</h2></div>
         <p>프리미엄 추천 외에도 다양한 과일을 둘러보고 상세설명까지 확인해보세요.</p>
       </div>
-      <div class="library-grid wide seamless-carousel" id="libraryGrid"></div>
+      <div class="library-grid wide seamless-carousel calm-library-grid" id="libraryGrid"></div>
     </section>
 
 
@@ -140,6 +140,6 @@
 </div>
 
 <div class="modal-backdrop" id="modalBackdrop" aria-hidden="true"><section class="modal-panel" role="dialog" aria-modal="true"><button class="modal-close" type="button" data-close aria-label="닫기">×</button><span class="modal-kicker" id="modalKicker"></span><h2 id="modalTitle"></h2><p class="modal-intro" id="modalIntro"></p><div id="modalBody"></div></section></div>
-<script src="./iroom_assets/iroom-v42.js?v=42" defer></script>
+<script src="./iroom_assets/iroom-v43.js?v=43" defer></script>
 </body>
 </html>
