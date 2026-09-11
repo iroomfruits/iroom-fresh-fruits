@@ -443,6 +443,52 @@ async function initDb(){
       ON CONFLICT(slug) DO NOTHING
     `,p);
   }
+
+  // V37 commerce starters: exact storefront names so every visible sale fruit can
+  // resolve to a real product id. Prices/stock are starter values and remain
+  // editable from the existing admin product manager as market prices change.
+  const commerceSeed = [
+    ["v37-geumsil-strawberry","금실딸기","향긋하고 산뜻한 프리미엄 딸기입니다.","1kg 내외",25000,30,"/iroom_assets/fruits/01_딸기_strawberry.png","과일",101],
+    ["v37-seongju-melon","성주참외","아삭하고 맑은 단맛의 성주 참외입니다.","2kg",24000,30,"/iroom_assets/fruits/02_참외_korean_melon.png","과일",102],
+    ["v37-daejeo-tomato","대저토마토","신선하고 산뜻한 자연의 맛을 살린 대저토마토입니다.","2kg",18000,30,"/iroom_assets/fruits/37_토마토_tomato.png","과일",103],
+    ["v37-shine-muscat","샤인머스캣","향긋하고 맑은 달콤함이 좋은 샤인머스캣입니다.","2kg (3~4송이)",28000,30,"/iroom_assets/fruits/12_샤인머스캣_shine_muscat.png","과일",104],
+    ["v37-cherry","체리","상큼하고 진한 과즙을 즐기는 체리입니다.","1kg",32000,30,"/iroom_assets/fruits/04_체리_cherry.png","과일",105],
+    ["v37-white-peach","백도복숭아","부드럽고 향긋한 여름 단맛의 백도복숭아입니다.","4kg",29000,30,"/iroom_assets/fruits/06_복숭아_peach.png","과일",106],
+    ["v37-high-sugar-watermelon","고당도수박","시원하고 풍부한 과즙을 즐기는 고당도수박입니다.","1통",25000,30,"/iroom_assets/fruits/05_수박_watermelon.png","과일",107],
+    ["v37-musk-melon","머스크멜론","부드럽고 은은한 달콤함의 머스크멜론입니다.","2수",26000,30,"/iroom_assets/fruits/28_멜론_melon.png","과일",108],
+    ["v37-plum","자두","새콤달콤한 과즙이 좋은 자두입니다.","2kg",19000,30,"/iroom_assets/fruits/27_자두_plum.png","과일",109],
+    ["v37-purple-grape","포도","풍부한 향과 진한 단맛의 포도입니다.","2kg",26000,30,"/iroom_assets/fruits/08_포도_purple_grape.png","과일",110],
+    ["v37-hongro-apple","홍로사과","아삭하고 선명한 달콤함의 홍로사과입니다.","3kg",32000,30,"/iroom_assets/fruits/09_사과_apple.png","과일",111],
+    ["v37-naju-pear","나주배","시원하고 풍부한 과즙의 나주배입니다.","5kg (7~9과)",38000,30,"/iroom_assets/fruits/10_배_pear.png","과일",112],
+    ["v37-daebong","대봉","후숙할수록 부드럽고 깊어지는 단맛의 대봉입니다.","3kg",26000,30,"/iroom_assets/fruits/11_감_persimmon.png","과일",113],
+    ["v37-pomegranate","석류","선명하고 진한 가을빛의 석류입니다.","2kg",28000,30,"/iroom_assets/fruits/24_석류_pomegranate.png","과일",114],
+    ["v37-jeju-mandarin","제주감귤","새콤달콤하고 산뜻한 겨울 맛의 제주감귤입니다.","5kg",25000,30,"/iroom_assets/fruits/21_오렌지_orange.png","과일",115],
+    ["v37-busa-apple","부사사과","아삭하고 선명한 달콤함의 부사사과입니다.","3kg",32000,30,"/iroom_assets/fruits/09_사과_apple.png","과일",116],
+    ["v37-kiwi","키위","상큼하고 깊은 달콤함의 키위입니다.","2kg",22000,30,"/iroom_assets/fruits/19_키위_kiwi.png","과일",117],
+    ["v37-blueberry","블루베리","작지만 깊고 산뜻한 맛의 블루베리입니다.","500g",24000,30,"/iroom_assets/fruits/16_블루베리_blueberry.png","과일",118],
+    ["v37-grapefruit","자몽","상큼하고 깨끗한 균형의 자몽입니다.","6과",22000,30,"/iroom_assets/fruits/15_자몽_grapefruit.png","과일",119],
+    ["v37-mango","망고","부드럽고 진한 열대의 달콤함을 즐기는 망고입니다.","2~3과",29000,30,"/iroom_assets/fruits/07_망고_mango.png","과일",120],
+    ["v37-pineapple","파인애플","상큼하고 풍부한 과즙의 파인애플입니다.","2수",18000,30,"/iroom_assets/fruits/18_파인애플_pineapple.png","과일",121],
+    ["v37-blackberry","블랙베리","짙은 향과 산뜻한 균형의 블랙베리입니다.","500g",26000,30,"/iroom_assets/fruits/34_블랙베리_blackberry.png","과일",122],
+    ["v37-kumquat","금귤","작고 향긋한 상큼함의 금귤입니다.","2kg",23000,30,"/iroom_assets/fruits/35_금귤_kumquat.png","과일",123],
+    ["v37-apple","사과","아삭하고 선명한 달콤함의 사과입니다.","3kg",32000,30,"/iroom_assets/fruits/09_사과_apple.png","과일",124],
+    ["v37-pear","배","시원하고 풍부한 과즙의 배입니다.","5kg (7~9과)",38000,30,"/iroom_assets/fruits/10_배_pear.png","과일",125],
+    ["v37-persimmon","감","깊고 진한 계절의 단맛을 즐기는 감입니다.","3kg",24000,30,"/iroom_assets/fruits/11_감_persimmon.png","과일",126],
+    ["v37-strawberry","딸기","향긋하고 산뜻한 단맛의 딸기입니다.","1kg 내외",22000,30,"/iroom_assets/fruits/01_딸기_strawberry.png","과일",127],
+    ["v37-korean-melon","참외","아삭하고 맑은 달콤함의 참외입니다.","2kg",22000,30,"/iroom_assets/fruits/02_참외_korean_melon.png","과일",128],
+    ["v37-tomato","토마토","신선하고 산뜻한 자연의 맛을 즐기는 토마토입니다.","2kg",16000,30,"/iroom_assets/fruits/37_토마토_tomato.png","과일",129],
+    ["v37-watermelon","수박","시원하고 풍부한 과즙의 수박입니다.","1통",25000,30,"/iroom_assets/fruits/05_수박_watermelon.png","과일",130],
+    ["v37-peach","복숭아","부드럽고 향긋한 여름 단맛의 복숭아입니다.","4kg",29000,30,"/iroom_assets/fruits/06_복숭아_peach.png","과일",131],
+    ["v37-melon","멜론","부드럽고 은은한 달콤함의 멜론입니다.","2수",24000,30,"/iroom_assets/fruits/28_멜론_melon.png","과일",132],
+    ["v37-green-grape","청포도","청량하고 향긋한 단맛의 청포도입니다.","2kg",24000,30,"/iroom_assets/fruits/03_청포도_green_grape.png","과일",133]
+  ];
+  for(const p of commerceSeed){
+    await pool.query(`
+      INSERT INTO products(slug,name,description,unit,price,stock,image,category,sort_order)
+      VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9)
+      ON CONFLICT(slug) DO NOTHING
+    `,p);
+  }
 }
 
 // Health
