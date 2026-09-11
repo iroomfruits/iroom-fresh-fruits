@@ -194,54 +194,82 @@ linear-gradient(115deg,#fff6eb 0%,#fffaf0 44%,#f2f1df 100%);border-bottom:1px so
 }
 .commerce-actions button:disabled{opacity:.46;cursor:not-allowed;transform:none}.checkout-form textarea{width:100%;border:1px solid rgba(100,75,55,.14);background:rgba(255,255,255,.48);border-radius:14px;padding:13px 15px;font:inherit;color:inherit}
 
-/* =============================================================
-   IROOM V38 — seamless rotation + whole-card detail interaction
-   ============================================================= */
-.clickable-product{cursor:pointer;position:relative;transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease}
-.clickable-product:hover{transform:translateY(-2px);box-shadow:0 16px 34px rgba(53,42,31,.08)}
-.clickable-product:focus-visible{outline:2px solid rgba(24,83,67,.52);outline-offset:3px}
-.clickable-product button,.clickable-product a,.clickable-product input,.clickable-product select,.clickable-product textarea,.clickable-product label{position:relative;z-index:2}
-.text-detail{display:none!important}
 
-/* Arrow controls are removed in V38. The shelves rotate gently on their own. */
-.today-arrows,.circle-nav{display:none!important}
-.today-grid,.premium-grid.commerce-carousel,.seasonal-grid.commerce-carousel,.library-grid.seamless-carousel{
-  scroll-behavior:smooth;
-  scroll-snap-type:x proximity;
+/* =========================================================
+   IROOM V38 — natural infinite slide + image detail + A header
+   ========================================================= */
+
+/* A-style editorial header */
+.topbar{height:86px}
+.topbar-inner{grid-template-columns:280px minmax(0,1fr) 230px}
+.a-nav{gap:0;align-items:stretch;height:100%}
+.a-nav button{
+  min-width:150px;height:100%;padding:0 22px!important;
+  display:grid!important;grid-template-columns:24px auto;align-content:center;align-items:center;
+  gap:10px;position:relative;text-align:left
+}
+.a-nav button+button:before{
+  content:"";position:absolute;left:0;top:26%;bottom:26%;width:1px;background:rgba(24,66,56,.09)
+}
+.a-nav .nav-mark{font-size:13px;color:#a56a4d;opacity:.78;line-height:1}
+.a-nav .nav-copy{display:flex;flex-direction:column;gap:3px;white-space:nowrap}
+.a-nav .nav-copy b{font:600 14px/1.1 Georgia,serif;letter-spacing:-.01em}
+.a-nav .nav-copy small{font:500 9px/1.1 var(--serif);color:#8e8175;letter-spacing:.01em}
+.a-nav button:after{bottom:16px}
+
+/* hero no longer carries a CTA button */
+.hero-copy .hero-rule{margin-bottom:12px}
+
+/* Natural continuous carousels */
+.today-grid,.premium-grid.commerce-carousel,.seasonal-grid.commerce-carousel{
+  scroll-snap-type:none!important;
+  scroll-behavior:auto!important;
   overscroll-behavior-inline:contain;
   -webkit-overflow-scrolling:touch;
+  cursor:grab;
+  user-select:none
+}
+.today-grid.is-dragging,.premium-grid.commerce-carousel.is-dragging,.seasonal-grid.commerce-carousel.is-dragging{
+  cursor:grabbing
+}
+.today-grid img,.commerce-carousel img{user-select:none;-webkit-user-drag:none}
+.today-head-tools{opacity:.78}
+.today-arrows,.circle-nav{display:none!important}
+
+/* Product imagery itself opens the detail window. */
+.image-detail-trigger{
+  border:0;background:transparent;padding:0;margin:0;cursor:pointer;color:inherit;
+  -webkit-tap-highlight-color:transparent
+}
+.hero-fruit.image-detail-trigger{border:0;background:transparent;padding:0}
+.hero-fruit.image-detail-trigger:focus-visible,
+.today-visual.image-detail-trigger:focus-visible,
+.image-wrap.image-detail-trigger:focus-visible,
+.library-image-hit.image-detail-trigger:focus-visible,
+.modal-image-hit.image-detail-trigger:focus-visible{
+  outline:2px solid rgba(31,91,73,.55);outline-offset:3px
+}
+.today-visual.image-detail-trigger,.image-wrap.image-detail-trigger{width:100%}
+.product-card .image-wrap.image-detail-trigger{display:grid}
+.library-image-hit{width:100%;display:grid;place-items:center}
+.library-image-hit img{max-width:100%}
+.modal-image-hit{display:block;border-radius:16px;overflow:hidden}
+.modal-image-hit img{display:block;width:100%;height:100%;object-fit:contain}
+.image-detail-trigger img{transition:transform .24s ease,filter .24s ease}
+.image-detail-trigger:hover img{transform:scale(1.025);filter:saturate(1.03)}
+.text-detail{display:none!important}
+
+/* Give cards slightly cleaner bottoms after removing detail text. */
+.commerce-card .commerce-actions,.commerce-library .commerce-actions{margin-bottom:2px}
+
+@media(max-width:1180px){
+  .topbar-inner{grid-template-columns:210px minmax(0,1fr) 170px}
+  .a-nav button{min-width:126px;padding-inline:14px!important}
+  .a-nav .nav-copy b{font-size:12px}.a-nav .nav-copy small{font-size:8px}
+}
+@media(max-width:760px){
+  .topbar{height:70px}.a-nav{display:none}
 }
 
-/* Six visible cards on desktop, then responsive swipe shelves. */
-.library-grid.seamless-carousel{
-  display:flex!important;
-  grid-template-columns:none!important;
-  gap:14px;
-  overflow-x:auto;
-  padding-bottom:8px;
-  scrollbar-width:none;
-}
-.library-grid.seamless-carousel::-webkit-scrollbar{display:none}
-.library-grid.seamless-carousel .library-card{
-  flex:0 0 calc((100% - 70px)/6);
-  min-width:190px;
-  scroll-snap-align:start;
-  min-height:345px;
-}
-.library-grid.seamless-carousel .library-card>img{height:132px;object-fit:contain}
-
-/* The service trio now follows the fruit library, as requested. */
-.library-section+.service-section{border-top:1px solid rgba(73,60,45,.05)}
-
-@media(max-width:1280px){
-  .library-grid.seamless-carousel .library-card{flex-basis:calc((100% - 42px)/4)}
-}
-@media(max-width:900px){
-  .library-grid.seamless-carousel .library-card{flex-basis:calc((100% - 28px)/3)}
-}
-@media(max-width:680px){
-  .library-grid.seamless-carousel .library-card{flex-basis:calc((100% - 14px)/2)}
-}
-@media(max-width:480px){
-  .library-grid.seamless-carousel .library-card{flex-basis:82%;min-width:245px}
-}
+.modal-shop-card>.modal-image-hit{width:130px;height:115px;background:rgba(255,255,255,.22)}
+@media(max-width:760px){.modal-shop-card>.modal-image-hit{width:92px;height:88px}}
