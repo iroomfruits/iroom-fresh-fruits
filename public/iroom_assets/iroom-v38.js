@@ -3,7 +3,7 @@ const $=(s,p=document)=>p.querySelector(s), $$=(s,p=document)=>[...p.querySelect
 const root=$('#iroomApp'); if(!root)return;
 const A='./iroom_assets/';
 const KAKAO='https://open.kakao.com/o/sd7wnrKi';
-const CART_KEY='iroom_cart_v37';
+const CART_KEY='iroom_cart_v38';
 const won=n=>Number(n||0).toLocaleString('ko-KR')+'원';
 const esc=s=>String(s??'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
 
@@ -41,11 +41,11 @@ function updateCartCount(){const n=cart.reduce((s,x)=>s+Number(x.qty||0),0);$$('
 function displayPrice(p){return p?.price>0?won(p.price):'오늘 시세 확인'}
 function productVisual(name,visual=''){return A+(visual||meta(name)[0])}
 
-function heroCard(name,i,visual=''){return `<div class="hero-fruit f${i+1}"><button type="button" class="hero-fruit-click" data-fruit="${esc(name)}" data-visual="${esc(visual)}" aria-label="${esc(name)} 상세보기"><img src="${productVisual(name,visual)}" alt="${esc(name)}"></button><span>${esc(name)}</span></div>`}
+function heroCard(name,i,visual=''){return `<div class="hero-fruit f${i+1}"><img src="${productVisual(name,visual)}" alt="${esc(name)}"><span>${esc(name)}</span></div>`}
 function commerceButtons(name,visual='',compact=false){const p=productFor(name),sold=Number(p.stock||0)<=0;return `<div class="commerce-actions ${compact?'compact':''}"><button type="button" class="buy-btn" data-buy-now data-name="${esc(name)}" data-visual="${esc(visual)}" ${sold?'disabled':''}>${sold?'입고 확인':'BUY NOW'}</button><button type="button" class="cart-btn" data-cart-add data-name="${esc(name)}" data-visual="${esc(visual)}" ${sold?'disabled':''}>장바구니</button></div>`}
-function todayCard([name,origin,state]){const m=meta(name),p=productFor(name);return `<article class="today-card" data-card-name="${esc(name)}"><button type="button" class="today-visual fruit-visual-button" data-fruit="${esc(name)}" aria-label="${esc(name)} 상세보기"><img src="${A+m[0]}" alt="${esc(name)}"></button><div class="today-body"><div class="today-topline"><small>오늘의 이룸 PICK</small><span>${esc(state)}</span></div><h3>${esc(name)}</h3><p>${m[1]}. 오늘 맛과 상태를 확인해 안내합니다.</p><div class="product-meta"><button type="button" data-info-type="origin" data-info-name="${esc(name)}" data-info-value="${esc(origin)}">산지 · ${esc(origin)}</button><button type="button" data-info-type="config" data-info-name="${esc(name)}">구성 · ${esc(p.unit||'상담 확인')}</button></div><div class="sale-price"><small>오늘 판매가</small><b>${displayPrice(p)}</b></div>${commerceButtons(name,'',true)}</div></article>`}
-function productCard(name,img,premium=false){const m=meta(name),p=productFor(name),v=img||m[0];return `<article class="product-card commerce-card">${premium?'<span class="badge">국산 프리미엄</span>':''}<button type="button" class="image-wrap fruit-visual-button" data-fruit="${esc(name)}" data-visual="${esc(v)}" aria-label="${esc(name)} 상세보기"><img src="${A+v}" alt="${esc(name)}"></button><h3>${esc(name)}</h3><p>${m[1]}</p><div class="mini-sale"><span>${esc(p.unit||'구성 상담')}</span><b>${displayPrice(p)}</b></div>${commerceButtons(name,v,true)}</article>`}
-function libraryCard(name){const m=meta(name),p=productFor(name);return `<article class="library-card commerce-library"><button type="button" class="library-image fruit-visual-button" data-fruit="${esc(name)}" aria-label="${esc(name)} 상세보기"><img src="${A+m[0]}" alt="${esc(name)}"></button><b>${esc(name)}</b><small>${m[1]}</small><div class="library-price">${displayPrice(p)}</div>${commerceButtons(name,'',true)}</article>`}
+function todayCard([name,origin,state]){const m=meta(name),p=productFor(name),v=m[0];return `<article class="today-card clickable-product" data-card-fruit="${esc(name)}" data-card-visual="${esc(v)}"><div class="today-visual"><img src="${A+v}" alt="${esc(name)}"></div><div class="today-body"><div class="today-topline"><small>오늘의 이룸 PICK</small><span>${esc(state)}</span></div><h3>${esc(name)}</h3><p>${m[1]}. 오늘 맛과 상태를 확인해 안내합니다.</p><div class="product-meta"><button type="button" data-info-type="origin" data-info-name="${esc(name)}" data-info-value="${esc(origin)}">산지 · ${esc(origin)}</button><button type="button" data-info-type="config" data-info-name="${esc(name)}">구성 · ${esc(p.unit||'상담 확인')}</button></div><div class="sale-price"><small>오늘 판매가</small><b>${displayPrice(p)}</b></div>${commerceButtons(name,v,true)}</div></article>`}
+function productCard(name,img,premium=false){const m=meta(name),p=productFor(name),v=img||m[0];return `<article class="product-card commerce-card clickable-product" data-card-fruit="${esc(name)}" data-card-visual="${esc(v)}">${premium?'<span class="badge">국산 프리미엄</span>':''}<div class="image-wrap"><img src="${A+v}" alt="${esc(name)}"></div><h3>${esc(name)}</h3><p>${m[1]}</p><div class="mini-sale"><span>${esc(p.unit||'구성 상담')}</span><b>${displayPrice(p)}</b></div>${commerceButtons(name,v,true)}</article>`}
+function libraryCard(name){const m=meta(name),p=productFor(name),v=m[0];return `<article class="library-card commerce-library clickable-product" data-card-fruit="${esc(name)}" data-card-visual="${esc(v)}"><img src="${A+v}" alt="${esc(name)}"><b>${esc(name)}</b><small>${m[1]}</small><div class="library-price">${displayPrice(p)}</div>${commerceButtons(name,v,true)}</article>`}
 
 function applySeason(key){
  current=key;const d=seasons[key];root.dataset.season=key;
@@ -56,8 +56,8 @@ function applySeason(key){
  $('#premiumGrid').innerHTML=d.premium.map((n,i)=>productCard(n,d.premiumImg?.[i]||'',true)).join('');
  $('#seasonalGrid').innerHTML=d.seasonal.map(n=>productCard(n,'',false)).join('');
  $('#libraryGrid').innerHTML=d.library.map(libraryCard).join('');
- setTimeout(initNaturalCarousels,0);
  $('#curationArt').src=A+d.curation;$('#giftArt').src=A+d.gift;
+ requestAnimationFrame(setupAllCarousels);
  $$('[data-season-label]').forEach(x=>x.textContent=d.label);$$('[data-season-status]').forEach(x=>x.textContent=d.label+(mode==='auto'?' · 자동':''));$$('[data-season-side]').forEach(x=>x.innerHTML=`${d.label}이<br>더<br>맛있어지는<br>순간`);$$('[data-season]').forEach(b=>b.classList.toggle('active',b.dataset.season===mode));
 }
 async function loadProducts(){try{const r=await fetch('/api/products',{credentials:'same-origin'});if(r.ok){const d=await r.json();storeProducts=Array.isArray(d.products)?d.products:[]}}catch(_){storeProducts=[]}}
@@ -73,7 +73,7 @@ function openModal(type){if(type==='premium')renderPremium();else if(type==='sea
 function closeModal(){overlay.classList.remove('open');overlay.setAttribute('aria-hidden','true');document.body.style.overflow=''}
 $('[data-close]').onclick=closeModal;overlay.onclick=e=>{if(e.target===overlay)closeModal()};document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});$$('[data-modal]').forEach(b=>b.onclick=()=>{pop.hidden=true;openModal(b.dataset.modal)});
 
-function modalCommerceCard(name,visual=''){const m=meta(name),p=productFor(name);return `<article class="modal-shop-card"><button type="button" class="modal-shop-image fruit-visual-button" data-fruit="${esc(name)}" data-visual="${esc(visual)}" aria-label="${esc(name)} 상세보기"><img src="${productVisual(name,visual)}" alt="${esc(name)}"></button><div><b>${esc(name)}</b><small>${m[1]}</small><span>${esc(p.unit||'구성 상담')} · <strong>${displayPrice(p)}</strong></span>${commerceButtons(name,visual,true)}</div></article>`}
+function modalCommerceCard(name,visual=''){const m=meta(name),p=productFor(name),v=visual||m[0];return `<article class="modal-shop-card clickable-product" data-card-fruit="${esc(name)}" data-card-visual="${esc(v)}"><img src="${productVisual(name,v)}" alt="${esc(name)}"><div><b>${esc(name)}</b><small>${m[1]}</small><span>${esc(p.unit||'구성 상담')} · <strong>${displayPrice(p)}</strong></span>${commerceButtons(name,v,true)}</div></article>`}
 function renderPremium(){const d=seasons[current];setModal('KOREAN PREMIUM FRUITS',`${d.label} 프리미엄 과일`,`페이지를 이동하지 않고 지금 판매 중인 프리미엄 구성을 한눈에 확인하세요.`,`<div class="modal-shop-grid">${d.premium.map((n,i)=>modalCommerceCard(n,d.premiumImg?.[i]||'')).join('')}</div>`)}
 function renderSeasonal(){const d=seasons[current];setModal('SEASONAL FRUITS',`${d.label}, 지금 가장 맛있는 과일`,`계절과 당일 상태를 함께 보고 고른 제철 과일입니다.`,`<div class="modal-shop-grid">${d.seasonal.map(n=>modalCommerceCard(n)).join('')}</div>`)}
 function renderPromise(){setModal('IROOM FRESH PROMISE','맛과 상태를 끝까지 살핍니다.','이룸은 오늘 상태가 기준에 맞지 않으면 무리하게 권하지 않습니다.',`<div class="guide-grid"><div class="guide-box"><b>당일 품질 확인</b><p>향 · 숙도 · 탄력과 선물 목적을 함께 살핍니다.</p></div><div class="guide-box"><b>시세·입고 반영</b><p>산지 시세와 입고 상태를 반영해 판매가와 구성이 달라질 수 있습니다.</p></div><div class="guide-box"><b>빠른 상담</b><p>가격·구성·배송이 궁금하면 카카오 상담으로 바로 연결됩니다.</p></div><div class="guide-box"><b>정성스러운 안내</b><p>받은 과일의 맛이나 상태가 기대와 다르면 상담 후 도와드립니다.</p></div></div>`)}
@@ -106,6 +106,7 @@ document.addEventListener('click',e=>{
  const cm=e.target.closest('[data-close-modal]');if(cm){closeModal();return}
  const info=e.target.closest('[data-info-type]');if(info){e.preventDefault();showTodayInfo(info.dataset.infoName,info.dataset.infoType,info.dataset.infoValue||'');return}
  const f=e.target.closest('[data-fruit]');if(f){e.preventDefault();showFruit(f.dataset.fruit,f.dataset.visual||'');return}
+ const card=e.target.closest('[data-card-fruit]');if(card&&!e.target.closest('button,a,input,select,textarea,label')){e.preventDefault();showFruit(card.dataset.cardFruit,card.dataset.cardVisual||'');return}
  const o=e.target.closest('[data-open]');if(o){openModal(o.dataset.open);return}
 });
 
@@ -113,24 +114,24 @@ const band=$('[data-band]');if(band)band.onclick=()=>window.open('https://band.u
 let deferredPrompt=null;window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e});const install=$('[data-install]');if(install)install.onclick=async()=>{if(deferredPrompt){deferredPrompt.prompt();deferredPrompt=null}else alert('브라우저 메뉴에서 “앱 설치” 또는 “홈 화면에 추가”를 이용해 주세요.')};
 async function updateAccount(){let user=null;try{const r=await fetch('/api/me',{credentials:'same-origin'});if(r.ok){const d=await r.json();user=d.user||d}}catch(_){}$('[data-account-status]').textContent=user?.name||user?.username||'로그인이 필요합니다.';$$('[data-guest-only]').forEach(x=>x.hidden=!!user);$$('[data-user-only]').forEach(x=>x.hidden=!user)}
 const logout=$('[data-logout]');if(logout)logout.onclick=async()=>{try{await fetch('/api/logout',{method:'POST'})}catch(_){}await updateAccount();pop.hidden=true};
-const CAROUSEL_DELAY=4600;
-function carouselStep(el){const card=el.firstElementChild;if(!card)return Math.max(260,el.clientWidth*.72);const gap=parseFloat(getComputedStyle(el).gap||'0')||0;return card.getBoundingClientRect().width+gap}
-function setupNaturalCarousel(sel){const el=$(sel);if(!el)return;
- if(!el._iroomSlider){const st=el._iroomSlider={paused:false,dragging:false,startX:0,startScroll:0};
-  el.addEventListener('mouseenter',()=>st.paused=true);el.addEventListener('mouseleave',()=>{st.paused=false;st.dragging=false;el.classList.remove('is-dragging')});
-  el.addEventListener('focusin',()=>st.paused=true);el.addEventListener('focusout',()=>st.paused=false);
-  el.addEventListener('touchstart',()=>st.paused=true,{passive:true});el.addEventListener('touchend',()=>{setTimeout(()=>st.paused=false,900)},{passive:true});
-  el.onpointerdown=e=>{if(e.pointerType==='touch'||e.target.closest('button,input,a'))return;st.dragging=true;st.paused=true;st.startX=e.clientX;st.startScroll=el.scrollLeft;el.classList.add('is-dragging');try{el.setPointerCapture(e.pointerId)}catch(_){}};
-  el.onpointermove=e=>{if(!st.dragging)return;el.scrollLeft=st.startScroll-(e.clientX-st.startX)};
-  el.onpointerup=e=>{if(!st.dragging)return;st.dragging=false;el.classList.remove('is-dragging');try{el.releasePointerCapture(e.pointerId)}catch(_){};setTimeout(()=>st.paused=false,700)};
-  el.onpointercancel=()=>{st.dragging=false;st.paused=false;el.classList.remove('is-dragging')};
-  el.dataset.naturalSlider='true';
- }
- const st=el._iroomSlider;if(st.timer)clearInterval(st.timer);
- const tick=()=>{if(st.paused||st.dragging||document.hidden||el.scrollWidth<=el.clientWidth+4)return;const max=el.scrollWidth-el.clientWidth;const step=carouselStep(el);if(el.scrollLeft>=max-step*.45)el.scrollTo({left:0,behavior:'smooth'});else el.scrollBy({left:step,behavior:'smooth'})};
- st.timer=setInterval(tick,CAROUSEL_DELAY);
+const carouselTimers=new Map();
+function stopCarousel(sel){const old=carouselTimers.get(sel);if(old){clearInterval(old);carouselTimers.delete(sel)}}
+function setupSeamlessCarousel(sel,interval=4600){
+ const el=$(sel);if(!el)return;stopCarousel(sel);
+ el.querySelectorAll('[data-loop-clone]').forEach(n=>n.remove());
+ const originals=[...el.children];if(originals.length<2)return;
+ const frag=document.createDocumentFragment();
+ originals.forEach(n=>{const c=n.cloneNode(true);c.dataset.loopClone='1';c.setAttribute('aria-hidden','true');frag.appendChild(c)});el.appendChild(frag);
+ let paused=false,settleTimer=0;
+ const loopPoint=()=>{const c=el.querySelector('[data-loop-clone]');return c?c.offsetLeft-originals[0].offsetLeft:0};
+ const normalize=()=>{const p=loopPoint();if(p>0&&el.scrollLeft>=p-2){el.scrollLeft-=p}};
+ const step=()=>{if(paused||document.hidden||overlay?.classList.contains('open'))return;const cards=[...el.children];if(cards.length<2)return;const dx=Math.max(1,cards[1].offsetLeft-cards[0].offsetLeft);el.scrollBy({left:dx,behavior:'smooth'});clearTimeout(settleTimer);settleTimer=setTimeout(normalize,850)};
+ const pause=()=>{paused=true}; const resume=()=>{paused=false;clearTimeout(settleTimer);settleTimer=setTimeout(normalize,180)};
+ el.onmouseenter=pause;el.onmouseleave=resume;el.onfocusin=pause;el.onfocusout=resume;el.ontouchstart=pause;el.ontouchend=resume;el.onpointerdown=pause;el.onpointerup=resume;
+ if('onscrollend' in el)el.onscrollend=normalize;
+ carouselTimers.set(sel,setInterval(step,interval));
 }
-function initNaturalCarousels(){['#todayGrid','#premiumGrid','#seasonalGrid'].forEach(setupNaturalCarousel)}
+function setupAllCarousels(){setupSeamlessCarousel('#todayGrid',4700);setupSeamlessCarousel('#premiumGrid',4900);setupSeamlessCarousel('#seasonalGrid',5100);setupSeamlessCarousel('#libraryGrid',4300)}
 
-(async()=>{await loadProducts();applySeason(current);initNaturalCarousels();updateCartCount();updateAccount();try{if('serviceWorker'in navigator)navigator.serviceWorker.register('./sw.js?v=38').catch(()=>{})}catch(_){}})();
+(async()=>{await loadProducts();applySeason(current);updateCartCount();updateAccount();try{if('serviceWorker'in navigator)navigator.serviceWorker.register('./sw.js?v=38').catch(()=>{})}catch(_){}})();
 })();
