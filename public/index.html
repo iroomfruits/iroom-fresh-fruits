@@ -6,13 +6,21 @@
 <title>이룸 fresh fruits | 오늘 가장 좋은 과일</title>
 <meta name="description" content="국산 프리미엄 과일과 제철 과일을 오늘의 상태에 맞춰 고르는 이룸 fresh fruits.">
 <meta name="theme-color" content="#fbf6ee">
-<meta name="iroom-build" content="38-seamless-card-slider">
+<meta name="iroom-build" content="39-notice-admin-history">
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="apple-touch-icon" href="./iroom_assets/app-icon-192.png">
-<link rel="stylesheet" href="./iroom_assets/iroom-v38.css?v=38">
+<link rel="stylesheet" href="./iroom_assets/iroom-v39.css?v=39">
 </head>
 <body>
-<div class="market-notice" role="status"><span>매일 산지 시세와 입고 상태를 반영하고 있어 상품 가격이 수시로 변경될 수 있습니다.</span></div>
+<div class="market-notice" role="status" aria-live="polite">
+  <span class="notice-badge">IROOM NOTICE</span>
+  <div class="notice-window" aria-label="이룸 공지사항">
+    <div class="notice-track" data-notice-track>
+      <span>오늘 받은 과일의 맛이나 상태가 기대에 미치지 않으면 상담 후 정성껏 다시 도와드립니다.</span>
+      <span>매일 산지 시세와 입고 상태를 반영하고 있어 상품 가격이 수시로 변경될 수 있습니다.</span>
+    </div>
+  </div>
+</div>
 <div class="site-shell" id="iroomApp" data-season="autumn">
   <header class="topbar">
     <div class="topbar-inner">
@@ -135,6 +143,6 @@
 </div>
 
 <div class="modal-backdrop" id="modalBackdrop" aria-hidden="true"><section class="modal-panel" role="dialog" aria-modal="true"><button class="modal-close" type="button" data-close aria-label="닫기">×</button><span class="modal-kicker" id="modalKicker"></span><h2 id="modalTitle"></h2><p class="modal-intro" id="modalIntro"></p><div id="modalBody"></div></section></div>
-<script src="./iroom_assets/iroom-v38.js?v=38" defer></script>
+<script src="./iroom_assets/iroom-v39.js?v=39" defer></script>
 </body>
 </html>

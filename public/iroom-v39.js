@@ -1,0 +1,187 @@
+(()=>{
+const $=(s,p=document)=>p.querySelector(s), $$=(s,p=document)=>[...p.querySelectorAll(s)];
+const root=$('#iroomApp'); if(!root)return;
+const A='./iroom_assets/';
+const KAKAO='https://open.kakao.com/o/sd7wnrKi';
+const CART_KEY='iroom_cart_v38';
+const won=n=>Number(n||0).toLocaleString('ko-KR')+'원';
+const esc=s=>String(s??'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
+
+const fruits={
+'딸기':['fruits/01_딸기_strawberry.png','향긋하고 산뜻한 단맛'],'참외':['fruits/02_참외_korean_melon.png','아삭하고 맑은 달콤함'],'청포도':['fruits/03_청포도_green_grape.png','청량하고 향긋한 단맛'],'체리':['fruits/04_체리_cherry.png','상큼하고 진한 과즙'],'수박':['fruits/05_수박_watermelon.png','시원하고 풍부한 과즙'],'복숭아':['fruits/06_복숭아_peach.png','부드럽고 향긋한 여름 단맛'],'망고':['fruits/07_망고_mango.png','부드럽고 진한 열대의 달콤함'],'포도':['fruits/08_포도_purple_grape.png','풍부한 향과 진한 단맛'],'사과':['fruits/09_사과_apple.png','아삭하고 선명한 달콤함'],'배':['fruits/10_배_pear.png','시원하고 풍부한 과즙'],'감':['fruits/11_감_persimmon.png','깊고 진한 계절의 단맛'],'대봉':['fruits/11_감_persimmon.png','후숙할수록 부드럽고 깊어지는 단맛'],'샤인머스캣':['fruits/12_샤인머스캣_shine_muscat.png','향긋하고 맑은 달콤함'],'한라봉':['fruits/13_한라봉_hallabong.png','진한 향과 산뜻한 단맛'],'자몽':['fruits/15_자몽_grapefruit.png','상큼하고 깨끗한 균형'],'블루베리':['fruits/16_블루베리_blueberry.png','작지만 깊고 산뜻한 맛'],'파인애플':['fruits/18_파인애플_pineapple.png','상큼하고 풍부한 과즙'],'키위':['fruits/19_키위_kiwi.png','상큼하고 깊은 달콤함'],'제주감귤':['fruits/21_오렌지_orange.png','새콤달콤하고 산뜻한 겨울 맛'],'석류':['fruits/24_석류_pomegranate.png','선명하고 진한 가을빛'],'자두':['fruits/27_자두_plum.png','새콤달콤한 과즙'],'멜론':['fruits/28_멜론_melon.png','부드럽고 은은한 달콤함'],'블랙베리':['fruits/34_블랙베리_blackberry.png','짙은 향과 산뜻한 균형'],'금귤':['fruits/35_금귤_kumquat.png','작고 향긋한 상큼함'],'토마토':['fruits/37_토마토_tomato.png','신선하고 산뜻한 자연의 맛']};
+const alias={'금실딸기':'딸기','성주참외':'참외','대저토마토':'토마토','백도복숭아':'복숭아','고당도수박':'수박','머스크멜론':'멜론','홍로사과':'사과','나주배':'배','부사사과':'사과','샤인머스켓':'샤인머스캣'};
+const origins={
+'금실딸기':'국내 산지','딸기':'국내 산지','성주참외':'경북 성주','참외':'경북 성주','대저토마토':'부산 대저','토마토':'국내 산지','샤인머스캣':'국내 산지','체리':'입고별 안내','백도복숭아':'국내 산지','복숭아':'국내 산지','고당도수박':'국내 산지','수박':'국내 산지','머스크멜론':'국내 산지','멜론':'국내 산지','자두':'국내 산지','포도':'국내 산지','홍로사과':'경북 청송 등','사과':'국내 산지','나주배':'전남 나주','배':'전남 나주','대봉':'경남·전남 산지','감':'국내 산지','석류':'입고별 안내','제주감귤':'제주','한라봉':'제주','부사사과':'국내 산지','키위':'국내·입고별 안내','블루베리':'국내·입고별 안내','자몽':'입고별 안내','망고':'입고별 안내','파인애플':'입고별 안내','블랙베리':'입고별 안내','금귤':'제주·국내 산지','청포도':'국내 산지'};
+const starter={
+'금실딸기':[25000,'1kg 내외'],'딸기':[22000,'1kg 내외'],'성주참외':[24000,'2kg'],'참외':[22000,'2kg'],'대저토마토':[18000,'2kg'],'토마토':[16000,'2kg'],'샤인머스캣':[28000,'2kg (3~4송이)'],'체리':[32000,'1kg'],'백도복숭아':[29000,'4kg'],'복숭아':[29000,'4kg'],'고당도수박':[25000,'1통'],'수박':[25000,'1통'],'머스크멜론':[26000,'2수'],'멜론':[24000,'2수'],'자두':[19000,'2kg'],'포도':[26000,'2kg'],'홍로사과':[32000,'3kg'],'사과':[32000,'3kg'],'나주배':[38000,'5kg (7~9과)'],'배':[38000,'5kg (7~9과)'],'대봉':[26000,'3kg'],'감':[24000,'3kg'],'석류':[28000,'2kg'],'제주감귤':[25000,'5kg'],'한라봉':[28000,'3kg'],'부사사과':[32000,'3kg'],'키위':[22000,'2kg'],'블루베리':[24000,'500g'],'자몽':[22000,'6과'],'망고':[29000,'2~3과'],'파인애플':[18000,'2수'],'블랙베리':[26000,'500g'],'금귤':[23000,'2kg'],'청포도':[24000,'2kg']};
+
+const seasons={
+ spring:{label:'봄',heroCopy:'봄의 싱그러움을 가장 좋은 상태로 골라 산뜻하게 전합니다.',hero:['딸기','참외','청포도','토마토','체리'],heroImg:[null,null,null,'hero_elements/spring_tomato.png',null],today:[['금실딸기','국내 산지','당일 선별'],['성주참외','경북 성주','입고 상태 확인'],['대저토마토','부산 대저','당일 상태 확인'],['샤인머스캣','국내 산지','당일 상태 확인'],['체리','입고별 안내','당일 선별'],['사과','국내 산지','입고 상태 확인'],['나주배','전남 나주','입고 상태 확인'],['블루베리','입고별 안내','당일 선별'],['제주감귤','제주','입고 상태 확인'],['키위','국내 산지','숙도 확인']],premium:['금실딸기','성주참외','대저토마토','샤인머스캣','체리','블루베리','사과','나주배'],premiumImg:['premium_single_v36/spring_01.png','premium_single_v36/spring_02.png','premium_single_v36/spring_03.png','premium_single_v36/spring_04.png',null,null,null,null],seasonal:['딸기','참외','토마토','청포도','체리','사과','배','블루베리'],library:['홍로사과','나주배','샤인머스캣','대봉','석류','제주감귤','키위','자몽','포도','블랙베리'],curation:'feature_art/spring_curation.jpg',gift:'feature_art/spring_gift.jpg'},
+ summer:{label:'여름',heroCopy:'햇살이 더 달콤하게 만든 여름 과일을 시원하고 풍성하게 골라드립니다.',hero:['수박','복숭아','샤인머스캣','자두','멜론'],today:[['백도복숭아','국내 산지','숙도 확인'],['고당도수박','국내 산지','당일 선별'],['샤인머스캣','국내 산지','입고 상태 확인'],['머스크멜론','국내 산지','숙도 확인'],['자두','국내 산지','당일 상태 확인'],['포도','국내 산지','당일 선별'],['체리','입고별 안내','당일 선별'],['블루베리','입고별 안내','당일 선별'],['망고','입고별 안내','숙도 확인'],['파인애플','입고별 안내','숙도 확인']],premium:['백도복숭아','고당도수박','샤인머스캣','머스크멜론','자두','포도','체리','블루베리'],premiumImg:['premium_single_v36/summer_01.png','premium_single_v36/summer_02.png','premium_single_v36/summer_03.png','premium_single_v36/summer_04.png',null,null,null,null],seasonal:['수박','복숭아','자두','포도','멜론','샤인머스캣','체리','블루베리'],library:['블루베리','파인애플','망고','자몽','체리','멜론','포도','키위','석류','샤인머스캣'],curation:'feature_art/summer_curation.jpg',gift:'feature_art/summer_gift.jpg'},
+ autumn:{label:'가을',heroCopy:'깊어가는 계절이 전하는 가장 특별한 맛을 오늘의 상태로 골라드립니다.',hero:['홍로사과','나주배','샤인머스캣','대봉','석류'],today:[['홍로사과','경북 청송 등','당일 선별'],['나주배','전남 나주','입고 상태 확인'],['샤인머스캣','국내 산지','당일 상태 확인'],['대봉','경남·전남 산지','후숙 상태 확인'],['석류','입고별 안내','당일 선별'],['포도','국내 산지','당일 선별'],['자몽','입고별 안내','입고 상태 확인'],['블랙베리','입고별 안내','당일 선별'],['사과','국내 산지','입고 상태 확인'],['배','전남 나주','입고 상태 확인']],premium:['홍로사과','나주배','샤인머스캣','대봉','석류','포도','자몽','사과'],premiumImg:['premium_single_v36/autumn_01.png','premium_single_v36/autumn_02.png','premium_single_v36/autumn_03.png','premium_single_v36/autumn_04.png',null,null,null,null],seasonal:['사과','배','감','대봉','샤인머스캣','포도','석류','자몽'],library:['석류','포도','블랙베리','자몽','샤인머스캣','사과','배','키위','블루베리','제주감귤'],curation:'feature_art/autumn_curation.jpg',gift:'feature_art/autumn_gift.jpg'},
+ winter:{label:'겨울',heroCopy:'차가운 계절에 더 빛나는 자연의 달콤함을 신선하게 골라 전합니다.',hero:['제주감귤','부사사과','금실딸기','한라봉','키위'],today:[['제주감귤','제주','당일 입고 확인'],['한라봉','제주','숙도 확인'],['금실딸기','국내 산지','당일 선별'],['부사사과','국내 산지','입고 상태 확인'],['키위','국내·입고별 안내','숙도 확인'],['나주배','전남 나주','입고 상태 확인'],['사과','국내 산지','입고 상태 확인'],['자몽','입고별 안내','입고 상태 확인'],['블루베리','입고별 안내','당일 선별'],['금귤','제주·국내 산지','당일 선별']],premium:['제주감귤','한라봉','금실딸기','부사사과','키위','나주배','블루베리','자몽'],premiumImg:['premium_single_v36/winter_01.png','premium_single_v36/winter_02.png','premium_single_v36/winter_03.png','premium_single_v36/winter_04.png',null,null,null,null],seasonal:['제주감귤','한라봉','딸기','사과','배','키위','금귤','자몽'],library:['키위','금귤','배','블루베리','자몽','제주감귤','사과','딸기','한라봉','석류'],curation:'feature_art/winter_curation.jpg',gift:'feature_art/winter_gift.jpg'}
+};
+const details={choose:'표면과 탄력, 향, 무게감과 숙도를 함께 살펴 좋은 상태의 과일을 고릅니다.',keep:'과일의 숙도에 맞춰 실온 또는 냉장 보관하고, 드시기 전에 상태를 확인해 주세요.',enjoy:'향과 식감이 가장 좋은 상태에서 신선하게 즐겨보세요.'};
+const autoSeason=()=>{const m=new Date().getMonth()+1;return m>=3&&m<=5?'spring':m>=6&&m<=8?'summer':m>=9&&m<=11?'autumn':'winter'};
+let mode='auto',current=autoSeason(),storeProducts=[];
+let cart=[];try{cart=JSON.parse(localStorage.getItem(CART_KEY)||'[]');if(!Array.isArray(cart))cart=[]}catch(_){cart=[]}
+
+function meta(name){return fruits[name]||fruits[alias[name]]||['fruits/09_사과_apple.png','오늘 상태가 좋은 과일']}
+function norm(s){return String(s||'').replace(/\s+/g,'').replace(/샤인머스켓/g,'샤인머스캣').replace(/경북|전남|제주|특선|프리미엄|신고/g,'')}
+function productFor(name){
+ const candidates=[name,alias[name]].filter(Boolean).map(norm);
+ let p=storeProducts.find(x=>candidates.includes(norm(x.name)));
+ if(!p)p=storeProducts.find(x=>candidates.some(n=>norm(x.name).includes(n)||n.includes(norm(x.name))));
+ if(p)return {...p,origin:origins[name]||origins[alias[name]]||'입고별 안내'};
+ const st=starter[name]||starter[alias[name]]||[0,'구성 상담'];
+ return {id:null,name,price:st[0],unit:st[1],stock:99,origin:origins[name]||origins[alias[name]]||'입고별 안내',description:meta(name)[1]};
+}
+function saveCart(){localStorage.setItem(CART_KEY,JSON.stringify(cart));updateCartCount()}
+function updateCartCount(){const n=cart.reduce((s,x)=>s+Number(x.qty||0),0);$$('[data-cart-count]').forEach(x=>{x.textContent=n;x.hidden=!n})}
+function displayPrice(p){return p?.price>0?won(p.price):'오늘 시세 확인'}
+function productVisual(name,visual=''){return A+(visual||meta(name)[0])}
+
+function heroCard(name,i,visual=''){return `<div class="hero-fruit f${i+1}"><img src="${productVisual(name,visual)}" alt="${esc(name)}"><span>${esc(name)}</span></div>`}
+function commerceButtons(name,visual='',compact=false){const p=productFor(name),sold=Number(p.stock||0)<=0;return `<div class="commerce-actions ${compact?'compact':''}"><button type="button" class="buy-btn" data-buy-now data-name="${esc(name)}" data-visual="${esc(visual)}" ${sold?'disabled':''}>${sold?'입고 확인':'BUY NOW'}</button><button type="button" class="cart-btn" data-cart-add data-name="${esc(name)}" data-visual="${esc(visual)}" ${sold?'disabled':''}>장바구니</button></div>`}
+function todayCard([name,origin,state]){const m=meta(name),p=productFor(name),v=m[0];return `<article class="today-card clickable-product" data-card-fruit="${esc(name)}" data-card-visual="${esc(v)}"><div class="today-visual"><img src="${A+v}" alt="${esc(name)}"></div><div class="today-body"><div class="today-topline"><small>오늘의 이룸 PICK</small><span>${esc(state)}</span></div><h3>${esc(name)}</h3><p>${m[1]}. 오늘 맛과 상태를 확인해 안내합니다.</p><div class="product-meta"><button type="button" data-info-type="origin" data-info-name="${esc(name)}" data-info-value="${esc(origin)}">산지 · ${esc(origin)}</button><button type="button" data-info-type="config" data-info-name="${esc(name)}">구성 · ${esc(p.unit||'상담 확인')}</button></div><div class="sale-price"><small>오늘 판매가</small><b>${displayPrice(p)}</b></div>${commerceButtons(name,v,true)}</div></article>`}
+function productCard(name,img,premium=false){const m=meta(name),p=productFor(name),v=img||m[0];return `<article class="product-card commerce-card clickable-product" data-card-fruit="${esc(name)}" data-card-visual="${esc(v)}">${premium?'<span class="badge">국산 프리미엄</span>':''}<div class="image-wrap"><img src="${A+v}" alt="${esc(name)}"></div><h3>${esc(name)}</h3><p>${m[1]}</p><div class="mini-sale"><span>${esc(p.unit||'구성 상담')}</span><b>${displayPrice(p)}</b></div>${commerceButtons(name,v,true)}</article>`}
+function libraryCard(name){const m=meta(name),p=productFor(name),v=m[0];return `<article class="library-card commerce-library clickable-product" data-card-fruit="${esc(name)}" data-card-visual="${esc(v)}"><img src="${A+v}" alt="${esc(name)}"><b>${esc(name)}</b><small>${m[1]}</small><div class="library-price">${displayPrice(p)}</div>${commerceButtons(name,v,true)}</article>`}
+
+function applySeason(key){
+ current=key;const d=seasons[key];root.dataset.season=key;
+ $('#heroFruitStage').innerHTML=d.hero.map((n,i)=>heroCard(n,i,d.heroImg?.[i]||'')).join('');
+ $('[data-hero-title]').innerHTML=`${d.label} 프리미엄<br>과일`;
+ $('[data-hero-copy]').textContent=d.heroCopy;
+ $('#todayGrid').innerHTML=d.today.map(todayCard).join('');
+ $('#premiumGrid').innerHTML=d.premium.map((n,i)=>productCard(n,d.premiumImg?.[i]||'',true)).join('');
+ $('#seasonalGrid').innerHTML=d.seasonal.map(n=>productCard(n,'',false)).join('');
+ $('#libraryGrid').innerHTML=d.library.map(libraryCard).join('');
+ $('#curationArt').src=A+d.curation;$('#giftArt').src=A+d.gift;
+ requestAnimationFrame(setupAllCarousels);
+ $$('[data-season-label]').forEach(x=>x.textContent=d.label);$$('[data-season-status]').forEach(x=>x.textContent=d.label+(mode==='auto'?' · 자동':''));$$('[data-season-side]').forEach(x=>x.innerHTML=`${d.label}이<br>더<br>맛있어지는<br>순간`);$$('[data-season]').forEach(b=>b.classList.toggle('active',b.dataset.season===mode));
+}
+async function loadProducts(){try{const r=await fetch('/api/products',{credentials:'same-origin'});if(r.ok){const d=await r.json();storeProducts=Array.isArray(d.products)?d.products:[]}}catch(_){storeProducts=[]}}
+
+$$('[data-home]').forEach(b=>b.onclick=()=>scrollTo({top:0,behavior:'smooth'}));
+$$('[data-scroll]').forEach(b=>b.onclick=()=>{const el=document.getElementById(b.dataset.scroll);if(el)el.scrollIntoView({behavior:'smooth',block:'start'})});
+$$('[data-season]').forEach(b=>b.onclick=()=>{mode=b.dataset.season;applySeason(mode==='auto'?autoSeason():mode)});
+
+/* V39: notice ticker + predictable ESC/browser-back behaviour for every UI layer. */
+const noticeTrack=$('[data-notice-track]');
+if(noticeTrack&&noticeTrack.children.length>1&&!matchMedia('(prefers-reduced-motion: reduce)').matches){
+ let noticeIndex=0;
+ setInterval(()=>{noticeIndex=(noticeIndex+1)%noticeTrack.children.length;noticeTrack.style.transform=`translateY(-${noticeIndex*100}%)`},5200);
+}
+const pop=$('[data-account-popover]'),accountToggle=$('[data-account-toggle]');
+const overlay=$('#modalBackdrop'),k=$('#modalKicker'),title=$('#modalTitle'),intro=$('#modalIntro'),body=$('#modalBody');
+const uiKind=()=>history.state?.iroomUi||'';
+function setUiHistory(kind,replace=false){
+ const next={...(history.state||{})};
+ if(kind)next.iroomUi=kind;else delete next.iroomUi;
+ (replace?history.replaceState:history.pushState).call(history,next,'',location.href);
+}
+function hideAccountDirect(){if(pop)pop.hidden=true}
+function showAccount(){
+ if(!pop||!pop.hidden)return;
+ pop.hidden=false;
+ if(uiKind()==='modal')return;
+ if(uiKind()==='account')return;
+ setUiHistory('account',false);
+}
+function closeAccount(){
+ if(!pop||pop.hidden)return;
+ if(uiKind()==='account')history.back();else hideAccountDirect();
+}
+accountToggle.onclick=e=>{e.stopPropagation();pop.hidden?showAccount():closeAccount()};
+document.addEventListener('click',e=>{if(pop&&!pop.hidden&&!e.target.closest('.account-wrap'))closeAccount()});
+function setModal(kk,t,i,h){k.textContent=kk;title.textContent=t;intro.innerHTML=i||'';body.innerHTML=h||''}
+function hideOverlayDirect(){overlay.classList.remove('open');overlay.setAttribute('aria-hidden','true');document.body.style.overflow=''}
+function showOverlay(){
+ const wasOpen=overlay.classList.contains('open');
+ overlay.classList.add('open');overlay.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';
+ hideAccountDirect();
+ if(!wasOpen){
+   if(uiKind()==='account')setUiHistory('modal',true);
+   else if(uiKind()!=='modal')setUiHistory('modal',false);
+ }
+}
+function openModal(type){if(type==='premium')renderPremium();else if(type==='seasonal')renderSeasonal();else if(type==='promise')renderPromise();else if(type==='curation')renderCuration();else if(type==='gift')renderGift();else if(type==='brand')renderBrand();else if(type==='guide')renderGuide();else if(type==='search')renderSearch();else if(type==='login')renderLogin();else if(type==='signup')renderSignup();else if(type==='mypage')renderMyPage();else if(type==='cart')renderCart();else if(type==='terms')renderTerms();else if(type==='privacy')renderPrivacy();showOverlay()}
+function closeModal(){
+ if(!overlay.classList.contains('open'))return;
+ if(uiKind()==='modal')history.back();else hideOverlayDirect();
+}
+$('[data-close]').onclick=closeModal;
+overlay.onclick=e=>{if(e.target===overlay)closeModal()};
+window.addEventListener('popstate',()=>{
+ if(uiKind()!=='modal')hideOverlayDirect();
+ if(uiKind()!=='account')hideAccountDirect();
+});
+document.addEventListener('keydown',e=>{
+ if(e.key!=='Escape')return;
+ if(overlay.classList.contains('open')){e.preventDefault();closeModal();return}
+ if(pop&&!pop.hidden){e.preventDefault();closeAccount()}
+});
+$$('[data-modal]').forEach(b=>b.onclick=()=>{hideAccountDirect();openModal(b.dataset.modal)});
+
+function modalCommerceCard(name,visual=''){const m=meta(name),p=productFor(name),v=visual||m[0];return `<article class="modal-shop-card clickable-product" data-card-fruit="${esc(name)}" data-card-visual="${esc(v)}"><img src="${productVisual(name,v)}" alt="${esc(name)}"><div><b>${esc(name)}</b><small>${m[1]}</small><span>${esc(p.unit||'구성 상담')} · <strong>${displayPrice(p)}</strong></span>${commerceButtons(name,v,true)}</div></article>`}
+function renderPremium(){const d=seasons[current];setModal('KOREAN PREMIUM FRUITS',`${d.label} 프리미엄 과일`,`페이지를 이동하지 않고 지금 판매 중인 프리미엄 구성을 한눈에 확인하세요.`,`<div class="modal-shop-grid">${d.premium.map((n,i)=>modalCommerceCard(n,d.premiumImg?.[i]||'')).join('')}</div>`)}
+function renderSeasonal(){const d=seasons[current];setModal('SEASONAL FRUITS',`${d.label}, 지금 가장 맛있는 과일`,`계절과 당일 상태를 함께 보고 고른 제철 과일입니다.`,`<div class="modal-shop-grid">${d.seasonal.map(n=>modalCommerceCard(n)).join('')}</div>`)}
+function renderPromise(){setModal('IROOM FRESH PROMISE','맛과 상태를 끝까지 살핍니다.','이룸은 오늘 상태가 기준에 맞지 않으면 무리하게 권하지 않습니다.',`<div class="guide-grid"><div class="guide-box"><b>당일 품질 확인</b><p>향 · 숙도 · 탄력과 선물 목적을 함께 살핍니다.</p></div><div class="guide-box"><b>시세·입고 반영</b><p>산지 시세와 입고 상태를 반영해 판매가와 구성이 달라질 수 있습니다.</p></div><div class="guide-box"><b>빠른 상담</b><p>가격·구성·배송이 궁금하면 카카오 상담으로 바로 연결됩니다.</p></div><div class="guide-box"><b>정성스러운 안내</b><p>받은 과일의 맛이나 상태가 기대와 다르면 상담 후 도와드립니다.</p></div></div>`)}
+function renderCuration(){setModal('FRUIT CURATION','맞춤 과일 큐레이션','예산 · 용도 · 취향을 알려주시면 오늘 상태 좋은 과일을 기준으로 추천합니다.',`<div class="guide-grid"><div class="guide-box"><b>01 · 예산</b><p>원하는 금액 안에서 가장 좋은 구성을 찾습니다.</p></div><div class="guide-box"><b>02 · 용도</b><p>가정용 · 선물용 · 단체 주문 목적을 반영합니다.</p></div><div class="guide-box"><b>03 · 취향</b><p>달콤함 · 산뜻함 · 식감 등 선호를 확인합니다.</p></div><div class="guide-box"><b>04 · 오늘의 상태</b><p>기준에 못 미치는 과일은 억지로 권하지 않습니다.</p></div></div><p><button class="primary" data-kakao-chat>카카오로 맞춤 상담</button></p>`)}
+function renderGift(){setModal('GIFT SELECTION','마음을 전하는 과일 선물','과일보다 먼저 받는 분과 전하고 싶은 마음을 생각해 정성스럽게 구성합니다.',`<div class="gift-options"><button class="gift-option" data-kakao-chat><b>감사 선물</b><span>고마운 마음을 정갈하게 전하고 싶을 때</span></button><button class="gift-option" data-kakao-chat><b>가족 · 건강 선물</b><span>여럿이 함께 즐기기 좋은 균형 구성</span></button><button class="gift-option" data-kakao-chat><b>기업 · 단체 선물</b><span>예산 · 수량 · 포장 조건까지 맞춤 제안</span></button></div>`)}
+function renderBrand(){setModal('BRAND STORY','좋은 과일로 마음을 전합니다.','이룸은 보여주기보다 맛과 상태를 먼저 봅니다.',`<div class="guide-grid"><div class="guide-box"><b>산지와 제철</b><p>지금 맛이 좋은 시기와 산지를 살핍니다.</p></div><div class="guide-box"><b>당일 선별</b><p>향 · 숙도 · 단단함과 용도를 함께 확인합니다.</p></div><div class="guide-box"><b>정성스러운 포장</b><p>받는 순간까지 좋은 상태가 이어지도록 준비합니다.</p></div><div class="guide-box"><b>맛 우선 원칙</b><p>오늘 맛이 부족하면 무리하게 권하기보다 더 좋은 날을 안내합니다.</p></div></div>`)}
+function renderGuide(){setModal('CUSTOMER CENTER','이룸 고객센터','가격 · 주문 · 배송 · 보관까지 필요한 내용을 편하게 확인하세요.',`<div class="guide-grid"><div class="guide-box"><b>가격 · 구성 문의</b><p>매일 시세를 반영하므로 상품 페이지와 카카오 상담에서 최신 구성을 확인해 주세요.</p></div><div class="guide-box"><b>배송 안내</b><p>상품과 지역에 따라 배송 일정이 달라질 수 있습니다.</p></div><div class="guide-box"><b>보관 방법</b><p>과일의 숙도에 맞춰 실온 또는 냉장 보관합니다.</p></div><div class="guide-box"><b>카카오 상담</b><p>빠른 상담이 필요하면 오픈채팅으로 문의하세요.</p></div></div><p><button class="primary" data-kakao-chat>카카오 상담</button></p>`)}
+function renderSearch(){setModal('SEARCH','과일 찾기','과일 이름을 입력하면 빠르게 찾을 수 있습니다.',`<div class="search-row"><input id="fruitSearch" placeholder="예: 사과, 딸기, 샤인머스캣"><button id="fruitSearchBtn">검색</button></div><div class="search-results" id="searchResults"></div>`);const draw=q=>{$('#searchResults').innerHTML=Object.keys(fruits).filter(n=>!q||n.includes(q)).slice(0,28).map(n=>`<button data-fruit="${esc(n)}">${esc(n)}</button>`).join('')};draw('');$('#fruitSearchBtn').onclick=()=>draw($('#fruitSearch').value.trim());$('#fruitSearch').onkeydown=e=>{if(e.key==='Enter')draw(e.target.value.trim())}}
+function renderLogin(){setModal('MEMBER','로그인','주문과 상담 기록을 편하게 확인하세요.',`<form class="form-grid" id="loginForm"><input name="account" placeholder="아이디 또는 이메일" required><input name="password" type="password" placeholder="비밀번호" required><div class="form-actions"><button class="primary">로그인</button><button type="button" class="secondary" data-open="signup">회원가입</button></div></form>`);$('#loginForm').onsubmit=async e=>{e.preventDefault();const fd=new FormData(e.currentTarget);try{const r=await fetch('/api/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({username:fd.get('account'),password:fd.get('password')})});if(!r.ok)throw 0;closeModal();await updateAccount()}catch(_){alert('로그인 서버 연결을 확인해 주세요.')}}}
+function renderSignup(){setModal('MEMBER','회원가입','이룸의 주문과 상담을 더 편하게 이용하세요.',`<form class="form-grid" id="signupForm"><input name="username" placeholder="아이디" required><input name="name" placeholder="이름" required><input name="phone" placeholder="연락처"><input name="password" type="password" placeholder="비밀번호" required><div class="form-actions"><button class="primary">가입하기</button></div></form>`);$('#signupForm').onsubmit=async e=>{e.preventDefault();const fd=new FormData(e.currentTarget);try{const r=await fetch('/api/signup',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(Object.fromEntries(fd.entries()))});if(!r.ok)throw 0;closeModal();await updateAccount()}catch(_){alert('회원가입 서버 연결을 확인해 주세요.')}}}
+function renderMyPage(){setModal('MY IROOM','MY IROOM','로그인 상태와 주문 관련 기능을 확인할 수 있습니다.',`<div class="guide-grid"><div class="guide-box"><b>주문 확인</b><p>주문 및 상담 내역을 확인합니다.</p></div><div class="guide-box"><b>맞춤 상담</b><p>카카오 오픈채팅에서 빠르게 상담할 수 있습니다.</p></div></div><p><button class="primary" data-kakao-chat>카카오 상담</button></p>`)}
+function renderTerms(){setModal('TERMS','이용약관','이룸 fresh fruits 서비스 이용을 위한 기본 안내입니다.',`<div class="guide-box"><p>상품의 구성과 가격, 배송 일정은 계절과 산지 상황에 따라 달라질 수 있습니다. 주문 전 최종 상품 정보와 결제 안내를 확인해 주세요.</p></div>`)}
+function renderPrivacy(){setModal('PRIVACY','개인정보처리방침','상담과 주문 처리를 위해 필요한 최소한의 정보만 사용합니다.',`<div class="guide-box"><p>주문·배송·상담을 위한 정보는 관련 법령과 내부 운영 기준에 따라 안전하게 관리합니다.</p></div>`)}
+
+function showTodayInfo(name,type,value=''){const m=meta(name),p=productFor(name);if(type==='origin'){setModal('TODAY PICK',`${name} 산지 안내`,`${name}의 산지는 당일 입고와 품질 상태에 따라 달라질 수 있습니다.`,`<div class="today-info"><div><b>오늘 안내 산지</b><p>${esc(value||p.origin||'입고별 안내')}</p></div><div><b>이룸의 확인 기준</b><p>산지명만 보지 않고 숙도·향·탄력·당일 상태까지 함께 확인합니다.</p></div></div><p><button class="primary" data-kakao-chat>오늘 입고 산지 문의</button></p>`)}else{setModal('TODAY PICK',`${name} 구성 안내`,`${m[1]}. 현재 판매 구성과 중량을 확인하세요.`,`<div class="today-info"><div><b>현재 구성</b><p>${esc(p.unit||'구성 상담')}</p></div><div><b>선물 · 가정용</b><p>받는 분과 예산에 맞춰 포장과 구성을 제안할 수 있습니다.</p></div></div><p><button class="primary" data-kakao-chat>구성 상담하기</button></p>`)}showOverlay()}
+function showFruit(name,visual=''){const m=meta(name),p=productFor(name);setModal('FRUIT DETAIL',name,`${m[1]} · ${seasons[current].label} 추천`,`<div class="fruit-detail commerce-detail"><div class="fruit-detail-visual"><img src="${productVisual(name,visual)}" alt="${esc(name)}"></div><div class="fruit-detail-content"><h3>${esc(name)} 상세설명</h3><p>${m[1]}. 이룸은 계절과 당일 상태를 함께 살펴 좋은 과일을 골라드립니다.</p><div class="product-facts"><span><small>판매가</small><b>${displayPrice(p)}</b></span><span><small>구성</small><b>${esc(p.unit||'구성 상담')}</b></span><span><small>산지</small><b>${esc(p.origin||'입고별 안내')}</b></span><span><small>재고</small><b>${p.stock>0?'판매중':'입고 확인'}</b></span></div><div class="detail-grid"><div><b>맛과 식감</b><span>${m[1]}</span></div><div><b>고르는 기준</b><span>${details.choose}</span></div><div><b>보관 방법</b><span>${details.keep}</span></div><div><b>맛있게 즐기기</b><span>${details.enjoy}</span></div></div><div class="qty-buy"><label>수량 <input type="number" min="1" max="20" value="1" id="detailQty"></label><button class="primary" data-buy-now data-name="${esc(name)}" data-visual="${esc(visual)}" data-qty-source="detailQty">BUY NOW</button><button class="secondary" data-cart-add data-name="${esc(name)}" data-visual="${esc(visual)}" data-qty-source="detailQty">ADD TO CART</button></div></div></div>`);showOverlay()}
+
+function addToCart(name,qty=1,visual=''){const p=productFor(name);qty=Math.max(1,Math.min(20,Number(qty)||1));const existing=cart.find(x=>(p.id&&x.id===p.id)||(!p.id&&x.name===name));if(existing)existing.qty+=qty;else cart.push({id:p.id||null,name,price:Number(p.price||0),unit:p.unit||'구성 상담',qty,visual:visual||meta(name)[0]});saveCart();return p}
+function renderCart(){const total=cart.reduce((s,x)=>s+(Number(x.price||0)*Number(x.qty||0)),0);setModal('SHOPPING BAG','장바구니',cart.length?'선택한 과일과 수량을 확인하세요.':'아직 장바구니가 비어 있습니다.',cart.length?`<div class="cart-list">${cart.map((x,i)=>`<div class="cart-item"><img src="${productVisual(x.name,x.visual)}" alt="${esc(x.name)}"><div><b>${esc(x.name)}</b><small>${esc(x.unit||'')}</small><strong>${x.price?won(x.price):'가격 확인'}</strong></div><div class="cart-qty"><button data-cart-step="-1" data-index="${i}">−</button><span>${x.qty}</span><button data-cart-step="1" data-index="${i}">＋</button><button class="cart-remove" data-cart-remove data-index="${i}">삭제</button></div></div>`).join('')}</div><div class="cart-total"><span>상품 합계</span><b>${won(total)}</b></div><div class="cart-bottom"><button class="secondary" data-kakao-chat>가격·구성 상담</button><button class="primary" data-checkout>주문하기</button></div>`:`<div class="empty-cart"><p>판매 과일에서 장바구니 버튼을 눌러 담아보세요.</p><button class="primary" data-close-modal>계속 쇼핑하기</button></div>`)}
+function renderCheckout(){if(!cart.length){renderCart();return}const total=cart.reduce((s,x)=>s+x.price*x.qty,0);setModal('CHECKOUT','주문 정보 입력','주문 접수 후 입금 및 배송 안내를 확인할 수 있습니다.',`<div class="checkout-summary">${cart.map(x=>`<div><span>${esc(x.name)} × ${x.qty}</span><b>${won(x.price*x.qty)}</b></div>`).join('')}<strong><span>총 상품금액</span><b>${won(total)}</b></strong></div><form id="checkoutForm" class="checkout-form"><div class="form-grid"><input name="customer_name" placeholder="주문자명" required><input name="phone" placeholder="연락처" required><input name="email" type="email" placeholder="이메일 (선택)"><input name="postcode" placeholder="우편번호 (선택)"><input class="full" name="address1" placeholder="배송지 주소" required><input class="full" name="address2" placeholder="상세주소"><textarea class="full" name="memo" placeholder="배송 메모"></textarea></div><div class="checkout-notice">매일 시세와 입고 상태를 반영합니다. 화면에 표시된 판매가와 주문 합계를 다시 확인해 주세요.</div><button class="primary checkout-submit">주문 접수하기</button></form>`);showOverlay();const form=$('#checkoutForm');form.onsubmit=async e=>{e.preventDefault();const missing=cart.some(x=>!x.id);if(missing){alert('일부 상품은 관리자 상품정보 연결이 필요합니다. 카카오 상담으로 빠르게 주문을 도와드릴게요.');window.open(KAKAO,'_blank','noopener');return}const fd=new FormData(form);const payload=Object.fromEntries(fd.entries());payload.items=cart.map(x=>({product_id:x.id,qty:x.qty}));try{const r=await fetch('/api/orders',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});const d=await r.json();if(!r.ok)throw new Error(d.error||'주문 처리 오류');cart=[];saveCart();setModal('ORDER COMPLETE','주문이 접수되었습니다.',`주문번호 <b>${esc(d.order_no||'')}</b>`, `<div class="order-complete"><p>총 결제 예정 금액 <b>${won(d.total_amount||0)}</b></p><p>${esc(d.bank?.name||'')} ${esc(d.bank?.account||'')}<br>예금주 ${esc(d.bank?.holder||'')}</p><button class="primary" data-close-modal>확인</button></div>`)}catch(err){alert(err.message||'주문 처리 중 오류가 발생했습니다.')}}}
+
+function qtyFrom(el){const id=el.dataset.qtySource;return id?Number(document.getElementById(id)?.value||1):1}
+document.addEventListener('click',e=>{
+ const kc=e.target.closest('[data-kakao-chat]');if(kc){e.preventDefault();window.open(KAKAO,'_blank','noopener');return}
+ const buy=e.target.closest('[data-buy-now]');if(buy){e.preventDefault();addToCart(buy.dataset.name,qtyFrom(buy),buy.dataset.visual||'');renderCheckout();return}
+ const add=e.target.closest('[data-cart-add]');if(add){e.preventDefault();addToCart(add.dataset.name,qtyFrom(add),add.dataset.visual||'');add.classList.add('added');const old=add.textContent;add.textContent='담았어요';setTimeout(()=>{add.classList.remove('added');add.textContent=old},900);return}
+ const step=e.target.closest('[data-cart-step]');if(step){const i=Number(step.dataset.index),delta=Number(step.dataset.cartStep);if(cart[i])cart[i].qty=Math.max(1,Math.min(20,cart[i].qty+delta));saveCart();renderCart();return}
+ const rem=e.target.closest('[data-cart-remove]');if(rem){cart.splice(Number(rem.dataset.index),1);saveCart();renderCart();return}
+ const checkout=e.target.closest('[data-checkout]');if(checkout){renderCheckout();return}
+ const cm=e.target.closest('[data-close-modal]');if(cm){closeModal();return}
+ const info=e.target.closest('[data-info-type]');if(info){e.preventDefault();showTodayInfo(info.dataset.infoName,info.dataset.infoType,info.dataset.infoValue||'');return}
+ const f=e.target.closest('[data-fruit]');if(f){e.preventDefault();showFruit(f.dataset.fruit,f.dataset.visual||'');return}
+ const card=e.target.closest('[data-card-fruit]');if(card&&!e.target.closest('button,a,input,select,textarea,label')){e.preventDefault();showFruit(card.dataset.cardFruit,card.dataset.cardVisual||'');return}
+ const o=e.target.closest('[data-open]');if(o){openModal(o.dataset.open);return}
+});
+
+const band=$('[data-band]');if(band)band.onclick=()=>window.open('https://band.us/@iroomfruits','_blank','noopener');const share=$('[data-share]');if(share)share.onclick=async()=>{try{if(navigator.share)await navigator.share({title:'이룸 fresh fruits',url:location.href});else{await navigator.clipboard.writeText(location.href);alert('주소를 복사했습니다.')}}catch(_){}};
+let deferredPrompt=null;window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e});const install=$('[data-install]');if(install)install.onclick=async()=>{if(deferredPrompt){deferredPrompt.prompt();deferredPrompt=null}else alert('브라우저 메뉴에서 “앱 설치” 또는 “홈 화면에 추가”를 이용해 주세요.')};
+async function updateAccount(){let user=null;try{const r=await fetch('/api/me',{credentials:'same-origin'});if(r.ok){const d=await r.json();user=d.user||d}}catch(_){}$('[data-account-status]').textContent=user?.name||user?.username||'로그인이 필요합니다.';$$('[data-guest-only]').forEach(x=>x.hidden=!!user);$$('[data-user-only]').forEach(x=>x.hidden=!user)}
+const logout=$('[data-logout]');if(logout)logout.onclick=async()=>{try{await fetch('/api/logout',{method:'POST'})}catch(_){}await updateAccount();closeAccount()};
+const carouselTimers=new Map();
+function stopCarousel(sel){const old=carouselTimers.get(sel);if(old){clearInterval(old);carouselTimers.delete(sel)}}
+function setupSeamlessCarousel(sel,interval=4600){
+ const el=$(sel);if(!el)return;stopCarousel(sel);
+ el.querySelectorAll('[data-loop-clone]').forEach(n=>n.remove());
+ const originals=[...el.children];if(originals.length<2)return;
+ const frag=document.createDocumentFragment();
+ originals.forEach(n=>{const c=n.cloneNode(true);c.dataset.loopClone='1';c.setAttribute('aria-hidden','true');frag.appendChild(c)});el.appendChild(frag);
+ let paused=false,settleTimer=0;
+ const loopPoint=()=>{const c=el.querySelector('[data-loop-clone]');return c?c.offsetLeft-originals[0].offsetLeft:0};
+ const normalize=()=>{const p=loopPoint();if(p>0&&el.scrollLeft>=p-2){el.scrollLeft-=p}};
+ const step=()=>{if(paused||document.hidden||overlay?.classList.contains('open'))return;const cards=[...el.children];if(cards.length<2)return;const dx=Math.max(1,cards[1].offsetLeft-cards[0].offsetLeft);el.scrollBy({left:dx,behavior:'smooth'});clearTimeout(settleTimer);settleTimer=setTimeout(normalize,850)};
+ const pause=()=>{paused=true}; const resume=()=>{paused=false;clearTimeout(settleTimer);settleTimer=setTimeout(normalize,180)};
+ el.onmouseenter=pause;el.onmouseleave=resume;el.onfocusin=pause;el.onfocusout=resume;el.ontouchstart=pause;el.ontouchend=resume;el.onpointerdown=pause;el.onpointerup=resume;
+ if('onscrollend' in el)el.onscrollend=normalize;
+ carouselTimers.set(sel,setInterval(step,interval));
+}
+function setupAllCarousels(){setupSeamlessCarousel('#todayGrid',4700);setupSeamlessCarousel('#premiumGrid',4900);setupSeamlessCarousel('#seasonalGrid',5100);setupSeamlessCarousel('#libraryGrid',4300)}
+
+(async()=>{await loadProducts();applySeason(current);updateCartCount();updateAccount();try{if('serviceWorker'in navigator)navigator.serviceWorker.register('./sw.js?v=39').catch(()=>{})}catch(_){}})();
+})();
