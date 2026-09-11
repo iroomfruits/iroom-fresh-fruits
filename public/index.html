@@ -6,7 +6,7 @@
 <title>이룸 fresh fruits | 오늘 가장 좋은 과일</title>
 <meta name="description" content="국산 프리미엄 과일과 제철 과일을 오늘의 상태에 맞춰 고르는 이룸 fresh fruits.">
 <meta name="theme-color" content="#fbf6ee">
-<meta name="iroom-build" content="38-image-swipe-aheader">
+<meta name="iroom-build" content="38-seamless-card-slider">
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="apple-touch-icon" href="./iroom_assets/app-icon-192.png">
 <link rel="stylesheet" href="./iroom_assets/iroom-v38.css?v=38">
@@ -20,10 +20,11 @@
         <img src="./iroom_assets/iroom-logo-final.png" alt="이룸 fresh fruits">
       </button>
       <nav class="main-nav" aria-label="주요 메뉴">
-        <button type="button" data-modal="seasonal">Seasonal Picks</button>
-        <button type="button" data-modal="curation">Fruit Curation</button>
-        <button type="button" data-modal="gift">Gift Selection</button>
-        <button type="button" data-modal="brand">Brand Story</button>
+        <button type="button" data-home>홈</button>
+        <button type="button" data-modal="premium">프리미엄 과일</button>
+        <button type="button" data-modal="seasonal">제철 이야기</button>
+        <button type="button" data-modal="promise">이룸의 약속</button>
+        <button type="button" data-modal="guide">고객센터</button>
       </nav>
       <div class="header-tools">
         <button class="icon-btn" type="button" data-modal="search" aria-label="과일 검색"><svg viewBox="0 0 32 32"><circle cx="14" cy="14" r="8.2"></circle><path d="M20 20l7 7"></path></svg></button>
@@ -40,6 +41,7 @@
           </div>
         </div>
         <button class="icon-btn cart-icon" type="button" data-modal="cart" aria-label="장바구니"><svg viewBox="0 0 32 32"><path d="M8.2 11.5h15.6l-1.1 15H9.3z"></path><path d="M12 12V9.2a4 4 0 0 1 8 0V12"></path></svg><span class="cart-count" data-cart-count hidden>0</span></button>
+        <button class="header-season-cta" type="button" data-scroll="today">지금, 제철의 맛을 <span>→</span></button>
       </div>
     </div>
   </header>
@@ -84,6 +86,15 @@
       <div class="seasonal-grid wide commerce-carousel" id="seasonalGrid"></div>
     </section>
 
+    <section class="library-section section-pad">
+      <div class="section-head wide compact">
+        <div><span class="eyebrow">IROOM FRUIT LIBRARY</span><h2>오늘 더 만나볼 과일</h2></div>
+        <p>프리미엄 추천 외에도 다양한 과일을 둘러보고 상세설명까지 확인해보세요.</p>
+      </div>
+      <div class="library-grid wide seamless-carousel" id="libraryGrid"></div>
+    </section>
+
+
     <section class="service-section section-pad">
       <div class="service-grid wide">
         <button class="service-card curation" type="button" data-modal="curation"><span>FRUIT CURATION</span><h3>맞춤 과일</h3><p>예산 · 용도 · 취향에 맞춰 오늘 상태 좋은 과일로 구성합니다.</p><i>맞춤 추천 받기</i><img id="curationArt" alt="맞춤 과일"></button>
@@ -92,20 +103,13 @@
       </div>
     </section>
 
+
     <section class="promise-section" id="promise">
       <div class="promise wide">
         <span class="promise-mark">✓</span>
         <div><small>IROOM FRESH PROMISE</small><h2>맛과 상태를 끝까지 살핍니다</h2><p>오늘 받은 과일의 맛이나 상태가 기대에 미치지 않으면 상담 후 정성껏 다시 도와드립니다.</p></div>
         <div class="promise-points"><b>당일 품질 확인</b><b>빠른 상담</b><b>정성스러운 안내</b></div>
       </div>
-    </section>
-
-    <section class="library-section section-pad">
-      <div class="section-head wide compact">
-        <div><span class="eyebrow">IROOM FRUIT LIBRARY</span><h2>오늘 더 만나볼 과일</h2></div>
-        <p>프리미엄 추천 외에도 다양한 과일을 둘러보고 상세설명까지 확인해보세요.</p>
-      </div>
-      <div class="library-grid wide" id="libraryGrid"></div>
     </section>
 
     <section class="review-section section-pad">

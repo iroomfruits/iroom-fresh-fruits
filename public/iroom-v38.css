@@ -194,43 +194,54 @@ linear-gradient(115deg,#fff6eb 0%,#fffaf0 44%,#f2f1df 100%);border-bottom:1px so
 }
 .commerce-actions button:disabled{opacity:.46;cursor:not-allowed;transform:none}.checkout-form textarea{width:100%;border:1px solid rgba(100,75,55,.14);background:rgba(255,255,255,.48);border-radius:14px;padding:13px 15px;font:inherit;color:inherit}
 
-
-/* =========================================================
-   IROOM V38 — image-detail, natural swipe, A-style header
-   ========================================================= */
-.topbar{height:78px;background:rgba(255,252,247,.96)}
-.topbar-inner{grid-template-columns:260px 1fr 190px;width:min(1480px,calc(100% - 56px))}
-.brand img{width:196px}
-.main-nav{gap:46px}
-.main-nav button{font-family:Georgia,"Times New Roman",var(--serif);font-size:15px;letter-spacing:-.01em}
-.header-tools{gap:10px}
-.header-season-cta{display:none!important}
-.section-actions{gap:0}
-.section-actions .circle-nav,.today-arrows{display:none!important}
-.today-head-tools{align-self:end}
-.today-head-tools>p{white-space:normal;text-align:right}
-
-/* Product details open from the fruit image itself. */
-.fruit-visual-button,.hero-fruit-click,.library-image,.modal-shop-image{border:0;margin:0;padding:0;background:transparent;color:inherit;cursor:pointer;font:inherit}
-.fruit-visual-button{position:relative}
-.fruit-visual-button:after,.hero-fruit-click:after,.library-image:after,.modal-shop-image:after{content:"";position:absolute;inset:7px;border:1px solid transparent;border-radius:inherit;pointer-events:none;transition:.2s}
-.fruit-visual-button:hover:after,.fruit-visual-button:focus-visible:after,.hero-fruit-click:hover:after,.hero-fruit-click:focus-visible:after,.library-image:hover:after,.library-image:focus-visible:after,.modal-shop-image:hover:after,.modal-shop-image:focus-visible:after{border-color:rgba(22,76,62,.18)}
-.hero-fruit-click{display:block;width:100%;height:calc(100% - 22px);position:relative;border-radius:30px}
-.hero-fruit-click img{width:100%;height:100%;object-fit:contain}
-.today-visual{width:100%}
-.image-wrap{width:100%;display:grid;place-items:center}
-.library-image{width:126px;height:118px;position:relative;border-radius:16px;display:grid;place-items:center}
-.library-image img{width:112px!important;height:110px!important;object-fit:contain}
-.modal-shop-image{width:130px;height:115px;position:relative;border-radius:16px;background:rgba(255,255,255,.22);display:grid;place-items:center}
-.modal-shop-image img{width:100%;height:100%;object-fit:contain;border-radius:inherit;background:transparent!important}
-.modal-shop-card>img{display:none}
+/* =============================================================
+   IROOM V38 — seamless rotation + whole-card detail interaction
+   ============================================================= */
+.clickable-product{cursor:pointer;position:relative;transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease}
+.clickable-product:hover{transform:translateY(-2px);box-shadow:0 16px 34px rgba(53,42,31,.08)}
+.clickable-product:focus-visible{outline:2px solid rgba(24,83,67,.52);outline-offset:3px}
+.clickable-product button,.clickable-product a,.clickable-product input,.clickable-product select,.clickable-product textarea,.clickable-product label{position:relative;z-index:2}
 .text-detail{display:none!important}
 
-/* Natural horizontal shelf: auto movement + finger swipe + desktop drag. */
-.today-grid,.premium-grid.commerce-carousel,.seasonal-grid.commerce-carousel{scroll-behavior:smooth;scroll-snap-type:x proximity;overscroll-behavior-inline:contain;cursor:grab;user-select:none;-webkit-user-select:none}
-.today-grid.is-dragging,.premium-grid.commerce-carousel.is-dragging,.seasonal-grid.commerce-carousel.is-dragging{cursor:grabbing;scroll-snap-type:none}
-.today-grid button,.premium-grid button,.seasonal-grid button{user-select:auto;-webkit-user-select:auto}
-.today-card,.commerce-carousel .product-card{scroll-snap-align:start}
+/* Arrow controls are removed in V38. The shelves rotate gently on their own. */
+.today-arrows,.circle-nav{display:none!important}
+.today-grid,.premium-grid.commerce-carousel,.seasonal-grid.commerce-carousel,.library-grid.seamless-carousel{
+  scroll-behavior:smooth;
+  scroll-snap-type:x proximity;
+  overscroll-behavior-inline:contain;
+  -webkit-overflow-scrolling:touch;
+}
 
-@media(max-width:1180px){.topbar-inner{grid-template-columns:220px 1fr 160px}.main-nav{gap:25px}.main-nav button{font-size:13px}}
-@media(max-width:760px){.topbar{height:70px}.topbar-inner{grid-template-columns:1fr auto;width:calc(100% - 28px)}.brand img{width:160px}.main-nav{display:none}.header-tools{grid-column:2}.modal-shop-image{width:92px;height:88px}.library-image{width:112px;height:104px}}
+/* Six visible cards on desktop, then responsive swipe shelves. */
+.library-grid.seamless-carousel{
+  display:flex!important;
+  grid-template-columns:none!important;
+  gap:14px;
+  overflow-x:auto;
+  padding-bottom:8px;
+  scrollbar-width:none;
+}
+.library-grid.seamless-carousel::-webkit-scrollbar{display:none}
+.library-grid.seamless-carousel .library-card{
+  flex:0 0 calc((100% - 70px)/6);
+  min-width:190px;
+  scroll-snap-align:start;
+  min-height:345px;
+}
+.library-grid.seamless-carousel .library-card>img{height:132px;object-fit:contain}
+
+/* The service trio now follows the fruit library, as requested. */
+.library-section+.service-section{border-top:1px solid rgba(73,60,45,.05)}
+
+@media(max-width:1280px){
+  .library-grid.seamless-carousel .library-card{flex-basis:calc((100% - 42px)/4)}
+}
+@media(max-width:900px){
+  .library-grid.seamless-carousel .library-card{flex-basis:calc((100% - 28px)/3)}
+}
+@media(max-width:680px){
+  .library-grid.seamless-carousel .library-card{flex-basis:calc((100% - 14px)/2)}
+}
+@media(max-width:480px){
+  .library-grid.seamless-carousel .library-card{flex-basis:82%;min-width:245px}
+}
