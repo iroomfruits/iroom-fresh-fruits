@@ -29,7 +29,7 @@ a{text-decoration:none;color:inherit}
 .content{padding:18px;max-width:1440px;width:100%}
 .view{display:none}.view.active{display:block}
 .grid5{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
-.stat{background:#f8f4ec;border:1px solid #f0e8dc;padding:18px;border-radius:4px}.stat b{display:block;font-size:25px;margin-top:7px}
+.stat{background:#f8f4ec;border:1px solid #f0e8dc;padding:18px;border-radius:4px;text-align:left;color:inherit;font:inherit}.stat b{display:block;font-size:25px;margin-top:7px}.stat-link{width:100%;cursor:pointer;transition:transform .16s ease,box-shadow .16s ease,border-color .16s ease}.stat-link:hover{transform:translateY(-2px);border-color:#dbcbb9;box-shadow:0 10px 24px rgba(72,54,35,.07)}.stat-link:focus-visible{outline:2px solid #2f6557;outline-offset:2px}.traffic-detail{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}.traffic-metric{padding:18px;border:1px solid #eee4d7;background:#fbf8f2;border-radius:10px}.traffic-metric.active{border-color:#2f6557;box-shadow:0 0 0 2px rgba(47,101,87,.08)}.traffic-metric b{display:block;font-size:26px;margin:6px 0}.traffic-metric small{color:#7d736a;line-height:1.55}@media(max-width:1000px){.traffic-detail{grid-template-columns:repeat(2,1fr)}}
 .section-title{font-size:21px;margin:22px 0 14px}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 .card{border:1px solid var(--line);border-radius:15px;padding:18px;background:#fff}.card.gold{background:#fff3d9;border-color:#e4bd68}.card.ok{background:#f2faf5;border-color:#b9d8c7}
 .card h3{margin:0 0 8px;font-size:16px}.small{font-size:12px;color:var(--muted);line-height:1.7}
@@ -100,6 +100,7 @@ hr{border:0;border-top:1px solid var(--line);margin:18px 0}
     <button data-view="orders">주문·배송</button>
     <button data-view="refunds">취소·환불</button>
     <button data-view="members">회원관리</button>
+    <button data-view="traffic">홍보·유입</button>
     <button data-view="events">이벤트</button>
     <button data-view="coupons">쿠폰</button>
     <button data-view="reviews">리뷰</button>
@@ -114,19 +115,19 @@ hr{border:0;border-top:1px solid var(--line);margin:18px 0}
 
 <section class="view active" id="view-home">
   <div class="grid5">
-    <div class="stat">상품<b id="stProducts">0</b></div>
-    <div class="stat">주문<b id="stOrders">0</b></div>
-    <div class="stat">회원<b id="stMembers">0</b></div>
-    <div class="stat">취소/환불<b id="stRefunds">0</b></div>
-    <div class="stat">저재고<b id="stLow">0</b></div>
+    <button class="stat stat-link" type="button" data-view="products">상품<b id="stProducts">0</b></button>
+    <button class="stat stat-link" type="button" data-view="orders">주문<b id="stOrders">0</b></button>
+    <button class="stat stat-link" type="button" data-view="members">회원<b id="stMembers">0</b></button>
+    <button class="stat stat-link" type="button" data-view="refunds">취소/환불<b id="stRefunds">0</b></button>
+    <button class="stat stat-link" type="button" data-view="products" data-low-stock>저재고<b id="stLow">0</b></button>
   </div>
   <h2 class="section-title">홍보·유입 현황</h2>
   <div class="grid5">
-    <div class="stat">방문<b id="stVisits">0</b></div>
-    <div class="stat">공유<b id="stShares">0</b></div>
-    <div class="stat">BAND 클릭<b id="stBand">0</b></div>
-    <div class="stat">장바구니<b id="stCart">0</b></div>
-    <div class="stat">주문<b id="stOrderTrack">0</b></div>
+    <button class="stat stat-link" type="button" data-view="traffic" data-traffic-focus="visits">방문<b id="stVisits">0</b></button>
+    <button class="stat stat-link" type="button" data-view="traffic" data-traffic-focus="shares">공유<b id="stShares">0</b></button>
+    <button class="stat stat-link" type="button" data-view="traffic" data-traffic-focus="band">BAND 클릭<b id="stBand">0</b></button>
+    <button class="stat stat-link" type="button" data-view="traffic" data-traffic-focus="cart">장바구니<b id="stCart">0</b></button>
+    <button class="stat stat-link" type="button" data-view="orders">주문<b id="stOrderTrack">0</b></button>
   </div>
   <div class="cards" style="margin-top:16px">
     <button class="card gold" data-view="images"><h3>🖼 이미지·동영상 보관함</h3><div class="small">메인/상품/배너 사진을 업로드하고 적용</div></button>
@@ -164,13 +165,17 @@ hr{border:0;border-top:1px solid var(--line);margin:18px 0}
     <div><h2>상품관리</h2><div class="small">판매상품, 가격, 재고, 노출순서, NEW/BEST 표시를 관리합니다.</div></div>
     <button class="primary" id="addProductBtn">＋ 상품 등록</button>
   </div>
-  <div class="toolbar"><input id="productSearch" placeholder="상품명 검색"><select id="productFilter"><option value="">전체</option><option>판매중</option><option>품절</option><option>숨김</option></select></div>
+  <div class="toolbar"><input id="productSearch" placeholder="상품명 검색"><select id="productFilter"><option value="">전체</option><option>판매중</option><option>품절</option><option>숨김</option><option value="저재고">저재고 (3개 이하)</option></select></div>
   <div class="table-wrap"><table><thead><tr><th>사진</th><th>상품명</th><th>가격</th><th>재고</th><th>상태</th><th>표시</th><th>관리</th></tr></thead><tbody id="productRows"></tbody></table></div>
 </section>
 
 <section class="view" id="view-images">
   <div class="row" style="justify-content:space-between"><div><h2>이미지 보관 폴더</h2><div class="small">관리자가 업로드한 이미지를 보관하고 메인/상품/배너에 바로 적용할 수 있습니다.</div></div><label class="primary">＋ 이미지 업로드<input id="imageUpload" type="file" accept="image/*" multiple hidden></label></div>
   <div class="warn">큰 사진은 자동으로 축소해 저장합니다. 메인 이미지는 가로형 1600×700 이상을 권장합니다.</div>
+  <h3 style="margin:22px 0 10px">이룸 기본 과일 이미지</h3>
+  <div class="small" style="margin-bottom:10px">국산·수입 과일 이미지를 상품 등록과 카드 구성에 바로 사용할 수 있습니다.</div>
+  <div id="fruitAssetLibrary" class="imglib"></div>
+  <h3 style="margin:26px 0 10px">내 업로드 이미지</h3>
   <div id="imageLibrary" class="imglib"></div>
 </section>
 
@@ -182,6 +187,18 @@ hr{border:0;border-top:1px solid var(--line);margin:18px 0}
 
 <section class="view" id="view-refunds"><h2>취소·환불</h2><div class="table-wrap"><table><thead><tr><th>주문</th><th>고객</th><th>금액</th><th>사유</th><th>상태</th><th>처리</th></tr></thead><tbody id="refundRows"></tbody></table></div></section>
 <section class="view" id="view-members"><h2>회원관리</h2><div class="table-wrap"><table><thead><tr><th>아이디</th><th>이름</th><th>연락처</th><th>이메일</th><th>가입일</th><th>상태</th></tr></thead><tbody id="memberRows"></tbody></table></div></section>
+
+<section class="view" id="view-traffic">
+  <div><h2>홍보·유입 상세</h2><div class="small">현재 서버에 집계된 누적 수치를 항목별로 확인합니다. 항목 카드를 누르면 해당 수치가 강조됩니다.</div></div>
+  <div class="traffic-detail" style="margin-top:16px">
+    <div class="traffic-metric" data-traffic-card="visits"><span>방문</span><b id="trafficVisits">0</b><small>홈페이지 방문 집계</small></div>
+    <div class="traffic-metric" data-traffic-card="shares"><span>공유</span><b id="trafficShares">0</b><small>공유 기능 사용 집계</small></div>
+    <div class="traffic-metric" data-traffic-card="band"><span>BAND 클릭</span><b id="trafficBand">0</b><small>BAND 연결 클릭 집계</small></div>
+    <div class="traffic-metric" data-traffic-card="cart"><span>장바구니</span><b id="trafficCart">0</b><small>장바구니 담기 집계</small></div>
+    <div class="traffic-metric" data-traffic-card="orders"><span>주문</span><b id="trafficOrders">0</b><small>주문 전환 집계</small></div>
+  </div>
+  <div class="notice" style="margin-top:16px">상세 방문자 식별정보는 저장하지 않고 운영에 필요한 집계 숫자만 표시합니다.</div>
+</section>
 
 <section class="view" id="view-events"><h2>이벤트</h2><div class="formcard formgrid"><div class="field"><label>이벤트 제목</label><input id="eventTitle"></div><div class="field"><label>기간</label><input id="eventPeriod"></div><div class="field"><label>설명</label><textarea id="eventDesc"></textarea></div><div class="field"><label>노출</label><div class="switch"><input id="eventActive" type="checkbox"><span>홈페이지에 표시</span></div></div></div><button class="primary" onclick="saveSection()">저장</button></section>
 
@@ -401,10 +418,21 @@ let state={
 };
 function $(s){return document.querySelector(s)} function $$(s){return Array.from(document.querySelectorAll(s))}
 function esc(s){return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]))}
-function openModal(id){$("#"+id).classList.add("open")} function closeModal(id){$("#"+id).classList.remove("open")}
+function adminModalOpen(){return $(".modal.open")}
+function hideAdminModalDirect(id){const el=id?$("#"+id):adminModalOpen();if(el)el.classList.remove("open")}
+function openModal(id){const el=$("#"+id);if(!el)return;const was=!!adminModalOpen();el.classList.add("open");if(!was){const st={...(history.state||{}),iroomAdminModal:id};history.pushState(st,"",location.href)}}
+function closeModal(id){const el=id?$("#"+id):adminModalOpen();if(!el)return;if(history.state?.iroomAdminModal)history.back();else hideAdminModalDirect(id)}
+window.addEventListener("popstate",()=>{if(!history.state?.iroomAdminModal)hideAdminModalDirect()});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&adminModalOpen()){e.preventDefault();closeModal(adminModalOpen().id)}})
 function log(msg){state.logs.unshift(new Date().toLocaleString("ko-KR")+" · "+msg);state.logs=state.logs.slice(0,100)}
-function goto(view){$$(".view").forEach(v=>v.classList.remove("active"));$("#view-"+view)?.classList.add("active");$$("[data-view]").forEach(b=>b.classList.toggle("active",b.dataset.view===view));if(view==="products")renderProducts();if(view==="images")renderImages();if(view==="orders")renderOrders();if(view==="members")renderMembers();if(view==="refunds")renderRefunds();if(view==="reviews")renderReviews();if(view==="inquiries")renderInquiries();if(view==="logs")renderLogs();if(view==="banners")fillBanner();if(view==="site")fillSite()}
-$$("[data-view]").forEach(b=>b.addEventListener("click",()=>goto(b.dataset.view)));
+function goto(view){$$(".view").forEach(v=>v.classList.remove("active"));$("#view-"+view)?.classList.add("active");$$("[data-view]").forEach(b=>b.classList.toggle("active",b.dataset.view===view));if(view==="products")renderProducts();if(view==="images")renderImages();if(view==="orders")renderOrders();if(view==="members")renderMembers();if(view==="refunds")renderRefunds();if(view==="reviews")renderReviews();if(view==="inquiries")renderInquiries();if(view==="logs")renderLogs();if(view==="traffic")renderTraffic();if(view==="banners")fillBanner();if(view==="site")fillSite()}
+$$("[data-view]").forEach(b=>b.addEventListener("click",()=>{
+ const focus=b.dataset.trafficFocus||"";
+ if(b.dataset.view==="products"&&!b.hasAttribute("data-low-stock")){const f=$("#productFilter");if(f)f.value=""}
+ goto(b.dataset.view);
+ if(focus)setTimeout(()=>focusTraffic(focus),0);
+ if(b.hasAttribute("data-low-stock")){const f=$("#productFilter");if(f){f.value="저재고";renderProducts()}}
+}));
 
 async function load(){
   try{
@@ -471,11 +499,19 @@ function renderAll(){
  $("#stVisits").textContent=state.tracking?.visits||0;$("#stShares").textContent=state.tracking?.shares||0;$("#stBand").textContent=state.tracking?.band||0;$("#stCart").textContent=state.tracking?.cart||0;$("#stOrderTrack").textContent=state.tracking?.orders||0;
  $("#checkProduct").textContent=(state.products?.length||0)+"개 등록";$("#checkImages").textContent=(state.images?.length||0)+"개 보관 중";$("#checkPhone").textContent=state.site?.phone||"미입력";$("#checkBank").textContent=state.site?.bankAccount||"미입력";$("#checkBand").textContent=state.site?.bandUrl?"연결됨":"미연결";$("#checkBiz").textContent=state.site?.businessNo?"입력됨":"미입력";
  $("#lowStockBox").textContent=low.length?low.map(x=>x.name+" ("+x.stock+"개)").join(", "):"저재고 상품이 없습니다.";
- renderProducts();renderImages();renderOrders();renderMembers();renderRefunds();renderReviews();renderInquiries();renderLogs();
+ renderProducts();renderImages();renderOrders();renderMembers();renderRefunds();renderReviews();renderInquiries();renderLogs();renderTraffic();
 }
+function renderTraffic(){
+ const t=state.tracking||{};
+ [["trafficVisits","visits"],["trafficShares","shares"],["trafficBand","band"],["trafficCart","cart"],["trafficOrders","orders"]].forEach(([id,key])=>{const el=$("#"+id);if(el)el.textContent=t[key]||0});
+}
+function focusTraffic(key){$$("[data-traffic-card]").forEach(x=>x.classList.toggle("active",x.dataset.trafficCard===key));const el=$("[data-traffic-card='"+key+"']");if(el)el.scrollIntoView({behavior:"smooth",block:"center"})}
 function renderProducts(){
  const q=($("#productSearch")?.value||"").toLowerCase(),f=$("#productFilter")?.value||"";
- const arr=(state.products||[]).map((x,i)=>({...x,_i:i})).filter(x=>(!q||x.name.toLowerCase().includes(q))&&(!f||x.status===f)).sort((a,b)=>(a.order||99)-(b.order||99));
+ const arr=(state.products||[]).map((x,i)=>({...x,_i:i})).filter(x=>{
+  const statusOk=!f||(f==="저재고"?Number(x.stock)<=3:x.status===f);
+  return (!q||x.name.toLowerCase().includes(q))&&statusOk;
+ }).sort((a,b)=>(a.order||99)-(b.order||99));
  $("#productRows").innerHTML=arr.map(x=>`<tr><td><img src="${esc(x.image)}" style="width:54px;height:44px;object-fit:cover;border-radius:7px"></td><td><b>${esc(x.name)}</b><br><span class="small">${esc(x.unit)}</span></td><td>${Number(x.price||0).toLocaleString()}원</td><td>${x.stock}</td><td><span class="badge">${esc(x.status)}</span></td><td>${esc(x.badge||"-")}</td><td><button class="ghost" onclick="editProduct(${x._i})">수정</button> <button class="ghost" onclick="deleteProduct(${x._i})">삭제</button></td></tr>`).join("");
 }
 $("#productSearch").oninput=renderProducts;$("#productFilter").onchange=renderProducts;
@@ -486,7 +522,11 @@ $("#saveProductBtn").onclick=async()=>{const x={name:$("#pName").value.trim(),pr
 
 $("#imageUpload").onchange=async e=>{for(const file of e.target.files){if(!file.type.startsWith("image/"))continue;const data=await resizeImage(file,1200,900,.86);state.images.unshift({name:file.name,data,createdAt:new Date().toISOString()})}log("이미지 업로드");persist();e.target.value=""};
 function resizeImage(file,maxW,maxH,q){return new Promise(res=>{const fr=new FileReader();fr.onload=()=>{const im=new Image();im.onload=()=>{let w=im.width,h=im.height,r=Math.min(1,maxW/w,maxH/h);const c=document.createElement("canvas");c.width=Math.round(w*r);c.height=Math.round(h*r);c.getContext("2d").drawImage(im,0,0,c.width,c.height);res(c.toDataURL("image/jpeg",q))};im.src=fr.result};fr.readAsDataURL(file)})}
-function renderImages(){const box=$("#imageLibrary");if(!box)return;box.innerHTML=(state.images||[]).map((x,i)=>`<div class="imgitem"><img src="${x.data}"><div><b>${esc(x.name)}</b><br><button class="ghost" onclick="copyImage(${i})">주소복사</button> <button class="ghost" onclick="useHero(${i})">메인적용</button> <button class="ghost" onclick="delImage(${i})">삭제</button></div></div>`).join("")||'<div class="notice">보관된 이미지가 없습니다.</div>'}
+
+const BUILTIN_FRUIT_IMAGES=[{"name": "딸기", "src": "/iroom_assets/fruits/01_딸기_strawberry.png"}, {"name": "참외", "src": "/iroom_assets/fruits/02_참외_korean_melon.png"}, {"name": "청포도", "src": "/iroom_assets/fruits/03_청포도_green_grape.png"}, {"name": "체리", "src": "/iroom_assets/fruits/04_체리_cherry.png"}, {"name": "수박", "src": "/iroom_assets/fruits/05_수박_watermelon.png"}, {"name": "복숭아", "src": "/iroom_assets/fruits/06_복숭아_peach.png"}, {"name": "망고", "src": "/iroom_assets/fruits/07_망고_mango.png"}, {"name": "포도", "src": "/iroom_assets/fruits/08_포도_purple_grape.png"}, {"name": "사과", "src": "/iroom_assets/fruits/09_사과_apple.png"}, {"name": "배", "src": "/iroom_assets/fruits/10_배_pear.png"}, {"name": "감", "src": "/iroom_assets/fruits/11_감_persimmon.png"}, {"name": "샤인머스캣", "src": "/iroom_assets/fruits/12_샤인머스캣_shine_muscat.png"}, {"name": "한라봉", "src": "/iroom_assets/fruits/13_한라봉_hallabong.png"}, {"name": "레몬", "src": "/iroom_assets/fruits/14_레몬_lemon.png"}, {"name": "자몽", "src": "/iroom_assets/fruits/15_자몽_grapefruit.png"}, {"name": "블루베리", "src": "/iroom_assets/fruits/16_블루베리_blueberry.png"}, {"name": "라즈베리", "src": "/iroom_assets/fruits/17_라즈베리_raspberry.png"}, {"name": "파인애플", "src": "/iroom_assets/fruits/18_파인애플_pineapple.png"}, {"name": "키위", "src": "/iroom_assets/fruits/19_키위_kiwi.png"}, {"name": "한라봉", "src": "/iroom_assets/fruits/20_한라봉_hallabong_2.png"}, {"name": "오렌지", "src": "/iroom_assets/fruits/21_오렌지_orange.png"}, {"name": "아보카도", "src": "/iroom_assets/fruits/22_아보카도_avocado.png"}, {"name": "용과", "src": "/iroom_assets/fruits/23_용과_dragonfruit.png"}, {"name": "석류", "src": "/iroom_assets/fruits/24_석류_pomegranate.png"}, {"name": "무화과", "src": "/iroom_assets/fruits/25_무화과_fig.png"}, {"name": "밤", "src": "/iroom_assets/fruits/26_밤_chestnut.png"}, {"name": "자두", "src": "/iroom_assets/fruits/27_자두_plum.png"}, {"name": "멜론", "src": "/iroom_assets/fruits/28_멜론_melon.png"}, {"name": "바나나", "src": "/iroom_assets/fruits/29_바나나_banana.png"}, {"name": "라임", "src": "/iroom_assets/fruits/30_라임_lime.png"}, {"name": "패션후르츠", "src": "/iroom_assets/fruits/31_패션후르츠_passionfruit.png"}, {"name": "망고스틴", "src": "/iroom_assets/fruits/32_망고스틴_mangosteen.png"}, {"name": "리치", "src": "/iroom_assets/fruits/33_리치_lychee.png"}, {"name": "블랙베리", "src": "/iroom_assets/fruits/34_블랙베리_blackberry.png"}, {"name": "금귤", "src": "/iroom_assets/fruits/35_금귤_kumquat.png"}, {"name": "체리", "src": "/iroom_assets/fruits/36_체리_cherry_2.png"}, {"name": "토마토", "src": "/iroom_assets/fruits/37_토마토_tomato.png"}];
+function copyAsset(src){navigator.clipboard.writeText(src).then(()=>alert("이미지 주소를 복사했습니다."));}
+function renderBuiltinFruitImages(){const box=$("#fruitAssetLibrary");if(!box)return;box.innerHTML=BUILTIN_FRUIT_IMAGES.map(x=>`<div class="imgitem"><img src="${x.src}" alt="${esc(x.name)}"><div><b>${esc(x.name)}</b><br><button class="ghost" onclick='copyAsset(${JSON.stringify(x.src)})'>주소복사</button></div></div>`).join("")}
+function renderImages(){renderBuiltinFruitImages();const box=$("#imageLibrary");if(!box)return;box.innerHTML=(state.images||[]).map((x,i)=>`<div class="imgitem"><img src="${x.data}"><div><b>${esc(x.name)}</b><br><button class="ghost" onclick="copyImage(${i})">주소복사</button> <button class="ghost" onclick="useHero(${i})">메인적용</button> <button class="ghost" onclick="delImage(${i})">삭제</button></div></div>`).join("")||'<div class="notice">보관된 이미지가 없습니다.</div>'}
 window.copyImage=i=>navigator.clipboard?.writeText(state.images[i].data).then(()=>alert("이미지 주소를 복사했습니다."));
 window.useHero=i=>{state.banner.hero1.image=state.images[i].data;log("메인 이미지 변경");persist();goto("banners")};
 window.delImage=i=>{if(confirm("이미지를 삭제할까요?")){state.images.splice(i,1);persist()}};

@@ -245,3 +245,81 @@ linear-gradient(115deg,#fff6eb 0%,#fffaf0 44%,#f2f1df 100%);border-bottom:1px so
 @media(max-width:480px){
   .library-grid.seamless-carousel .library-card{flex-basis:82%;min-width:245px}
 }
+
+/* =============================================================
+   IROOM V39 — dual notice ticker + stable A header
+   ============================================================= */
+.market-notice{
+  min-height:32px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:14px;
+  overflow:hidden;
+  padding:0 18px;
+  background:linear-gradient(90deg,rgba(238,232,218,.92),rgba(246,241,229,.96),rgba(229,236,226,.92));
+  border-bottom:1px solid rgba(36,75,63,.08);
+  color:#665f57;
+}
+.notice-badge{
+  flex:0 0 auto;
+  font:700 9px/1 Georgia,serif;
+  letter-spacing:.16em;
+  color:#9b6046;
+}
+.notice-window{height:22px;overflow:hidden;min-width:0;display:flex;align-items:flex-start}
+.notice-track{height:22px;display:flex;flex-direction:column;transition:transform .65s cubic-bezier(.22,.61,.36,1);will-change:transform}
+.notice-track>span{height:22px;min-height:22px;display:flex;align-items:center;justify-content:center;white-space:nowrap;font:500 11px/1.25 var(--serif);letter-spacing:.01em}
+
+/* Keep the requested A-style Korean navigation visually stable. */
+.main-nav{white-space:nowrap}
+.main-nav button{letter-spacing:-.015em}
+
+@media(max-width:760px){
+  .market-notice{gap:8px;padding-inline:10px;justify-content:flex-start}
+  .notice-badge{display:none}
+  .notice-window{width:100%}
+  .notice-track>span{justify-content:flex-start;font-size:9px;white-space:normal;line-height:1.25}
+}
+
+
+/* =============================================================
+   IROOM V40 — exact A header + continuous shelves + richer catalog
+   ============================================================= */
+.topbar{height:92px;background:rgba(255,252,247,.72);border-bottom:0;backdrop-filter:blur(18px) saturate(1.03);padding:10px 0 8px}
+.topbar-inner{height:74px;width:min(1500px,calc(100% - 54px));grid-template-columns:270px 1fr 210px;padding:0 22px;border:1px solid rgba(91,69,52,.09);border-radius:26px;background:rgba(255,252,246,.88);box-shadow:0 12px 34px rgba(69,51,36,.055)}
+.brand img{width:190px}
+.main-nav.a-nav{display:flex;justify-content:center;gap:0;align-items:center;height:100%}
+.main-nav.a-nav button{min-width:164px;height:48px;padding:6px 20px;border:0;background:transparent;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;position:relative;cursor:pointer}
+.main-nav.a-nav button+button:before{content:"";position:absolute;left:0;top:12px;bottom:12px;width:1px;background:rgba(62,76,66,.11)}
+.main-nav.a-nav button:after{bottom:1px;height:1px}
+.main-nav.a-nav span{font:600 14px/1.05 Georgia,"Times New Roman",serif;letter-spacing:.01em;color:#173f37}
+.main-nav.a-nav small{font:500 9px/1.1 var(--serif);letter-spacing:-.02em;color:#9b8c7d;white-space:nowrap}
+.header-tools{gap:5px}.header-season-cta{display:none!important}.icon-btn{width:39px;height:39px}.icon-btn svg{width:23px;height:23px}
+.imported-badge{background:rgba(232,240,231,.92)!important;color:#4d715e!important}
+
+/* The shelves move continuously; no snap-back animation and no visible return to card 1. */
+.today-grid,.premium-grid.commerce-carousel,.seasonal-grid.commerce-carousel,.library-grid.seamless-carousel{scroll-behavior:auto!important;scroll-snap-type:none!important;overflow-x:auto!important;overscroll-behavior-inline:contain;scrollbar-width:none}
+.today-grid::-webkit-scrollbar,.premium-grid.commerce-carousel::-webkit-scrollbar,.seasonal-grid.commerce-carousel::-webkit-scrollbar,.library-grid.seamless-carousel::-webkit-scrollbar{display:none}
+.today-grid .today-card,.commerce-carousel .product-card,.library-grid.seamless-carousel .library-card{scroll-snap-align:none!important}
+
+@media(max-width:1180px){.topbar-inner{grid-template-columns:220px 1fr 155px}.main-nav.a-nav button{min-width:132px;padding-inline:12px}.main-nav.a-nav span{font-size:12px}.main-nav.a-nav small{font-size:8px}.brand img{width:168px}}
+@media(max-width:850px){.topbar{height:72px;padding:5px 0}.topbar-inner{height:62px;width:calc(100% - 22px);grid-template-columns:1fr auto;padding:0 12px;border-radius:20px}.brand img{width:150px}.main-nav.a-nav{display:none}.header-tools{grid-column:2}}
+.main-nav.a-nav button{min-width:172px;display:grid;grid-template-columns:21px auto;grid-template-rows:19px 13px;column-gap:7px;row-gap:0;align-content:center;justify-content:center}
+.main-nav.a-nav .nav-icon{grid-row:1/3;grid-column:1;width:19px;height:19px;display:grid;place-items:center;color:#315c51;opacity:.86}
+.main-nav.a-nav .nav-icon svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.25;stroke-linecap:round;stroke-linejoin:round}
+.main-nav.a-nav span{grid-row:1;grid-column:2;align-self:end;text-align:left}
+.main-nav.a-nav small{grid-row:2;grid-column:2;align-self:start;text-align:left}
+@media(max-width:1180px){.main-nav.a-nav button{min-width:140px;grid-template-columns:18px auto;column-gap:5px;padding-inline:8px}.main-nav.a-nav .nav-icon{width:17px;height:17px}.main-nav.a-nav .nav-icon svg{width:16px;height:16px}}
+
+
+/* =============================================================
+   IROOM V41 — hero CTA removed + dependable continuous shelves
+   ============================================================= */
+.hero-copy .hero-rule + small{margin-top:0}
+.today-grid,.premium-grid.commerce-carousel,.seasonal-grid.commerce-carousel,.library-grid.seamless-carousel{
+  scroll-behavior:auto!important;
+  scroll-snap-type:none!important;
+  -webkit-overflow-scrolling:touch;
+  will-change:scroll-position;
+}

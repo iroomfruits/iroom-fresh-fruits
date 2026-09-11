@@ -3,23 +3,25 @@ const $=(s,p=document)=>p.querySelector(s), $$=(s,p=document)=>[...p.querySelect
 const root=$('#iroomApp'); if(!root)return;
 const A='./iroom_assets/';
 const KAKAO='https://open.kakao.com/o/sd7wnrKi';
-const CART_KEY='iroom_cart_v38';
+const CART_KEY='iroom_cart_v40';
 const won=n=>Number(n||0).toLocaleString('ko-KR')+'원';
 const esc=s=>String(s??'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
 
 const fruits={
-'딸기':['fruits/01_딸기_strawberry.png','향긋하고 산뜻한 단맛'],'참외':['fruits/02_참외_korean_melon.png','아삭하고 맑은 달콤함'],'청포도':['fruits/03_청포도_green_grape.png','청량하고 향긋한 단맛'],'체리':['fruits/04_체리_cherry.png','상큼하고 진한 과즙'],'수박':['fruits/05_수박_watermelon.png','시원하고 풍부한 과즙'],'복숭아':['fruits/06_복숭아_peach.png','부드럽고 향긋한 여름 단맛'],'망고':['fruits/07_망고_mango.png','부드럽고 진한 열대의 달콤함'],'포도':['fruits/08_포도_purple_grape.png','풍부한 향과 진한 단맛'],'사과':['fruits/09_사과_apple.png','아삭하고 선명한 달콤함'],'배':['fruits/10_배_pear.png','시원하고 풍부한 과즙'],'감':['fruits/11_감_persimmon.png','깊고 진한 계절의 단맛'],'대봉':['fruits/11_감_persimmon.png','후숙할수록 부드럽고 깊어지는 단맛'],'샤인머스캣':['fruits/12_샤인머스캣_shine_muscat.png','향긋하고 맑은 달콤함'],'한라봉':['fruits/13_한라봉_hallabong.png','진한 향과 산뜻한 단맛'],'자몽':['fruits/15_자몽_grapefruit.png','상큼하고 깨끗한 균형'],'블루베리':['fruits/16_블루베리_blueberry.png','작지만 깊고 산뜻한 맛'],'파인애플':['fruits/18_파인애플_pineapple.png','상큼하고 풍부한 과즙'],'키위':['fruits/19_키위_kiwi.png','상큼하고 깊은 달콤함'],'제주감귤':['fruits/21_오렌지_orange.png','새콤달콤하고 산뜻한 겨울 맛'],'석류':['fruits/24_석류_pomegranate.png','선명하고 진한 가을빛'],'자두':['fruits/27_자두_plum.png','새콤달콤한 과즙'],'멜론':['fruits/28_멜론_melon.png','부드럽고 은은한 달콤함'],'블랙베리':['fruits/34_블랙베리_blackberry.png','짙은 향과 산뜻한 균형'],'금귤':['fruits/35_금귤_kumquat.png','작고 향긋한 상큼함'],'토마토':['fruits/37_토마토_tomato.png','신선하고 산뜻한 자연의 맛']};
+'딸기':['fruits/01_딸기_strawberry.png','향긋하고 산뜻한 단맛'],'참외':['fruits/02_참외_korean_melon.png','아삭하고 맑은 달콤함'],'청포도':['fruits/03_청포도_green_grape.png','청량하고 향긋한 단맛'],'체리':['fruits/04_체리_cherry.png','상큼하고 진한 과즙'],'수박':['fruits/05_수박_watermelon.png','시원하고 풍부한 과즙'],'복숭아':['fruits/06_복숭아_peach.png','부드럽고 향긋한 여름 단맛'],'망고':['fruits/07_망고_mango.png','부드럽고 진한 열대의 달콤함'],'포도':['fruits/08_포도_purple_grape.png','풍부한 향과 진한 단맛'],'사과':['fruits/09_사과_apple.png','아삭하고 선명한 달콤함'],'배':['fruits/10_배_pear.png','시원하고 풍부한 과즙'],'감':['fruits/11_감_persimmon.png','깊고 진한 계절의 단맛'],'대봉':['fruits/11_감_persimmon.png','후숙할수록 부드럽고 깊어지는 단맛'],'샤인머스캣':['fruits/12_샤인머스캣_shine_muscat.png','향긋하고 맑은 달콤함'],'한라봉':['fruits/13_한라봉_hallabong.png','진한 향과 산뜻한 단맛'],'레몬':['fruits/14_레몬_lemon.png','깨끗하고 산뜻한 시트러스 향'],'자몽':['fruits/15_자몽_grapefruit.png','상큼하고 깨끗한 균형'],'블루베리':['fruits/16_블루베리_blueberry.png','작지만 깊고 산뜻한 맛'],'라즈베리':['fruits/17_라즈베리_raspberry.png','화사한 산미와 부드러운 향'],'파인애플':['fruits/18_파인애플_pineapple.png','상큼하고 풍부한 과즙'],'키위':['fruits/19_키위_kiwi.png','상큼하고 깊은 달콤함'],'오렌지':['fruits/21_오렌지_orange.png','풍부한 과즙과 산뜻한 향'],'제주감귤':['fruits/21_오렌지_orange.png','새콤달콤하고 산뜻한 겨울 맛'],'아보카도':['fruits/22_아보카도_avocado.png','고소하고 부드러운 식감'],'용과':['fruits/23_용과_dragonfruit.png','담백하고 청량한 열대의 맛'],'석류':['fruits/24_석류_pomegranate.png','선명하고 진한 가을빛'],'무화과':['fruits/25_무화과_fig.png','부드럽고 은은한 단맛'],'밤':['fruits/26_밤_chestnut.png','포근하고 고소한 가을 풍미'],'자두':['fruits/27_자두_plum.png','새콤달콤한 과즙'],'멜론':['fruits/28_멜론_melon.png','부드럽고 은은한 달콤함'],'바나나':['fruits/29_바나나_banana.png','부드럽고 편안한 달콤함'],'라임':['fruits/30_라임_lime.png','또렷하고 상쾌한 시트러스 향'],'패션후르츠':['fruits/31_패션후르츠_passionfruit.png','향긋하고 선명한 새콤달콤함'],'망고스틴':['fruits/32_망고스틴_mangosteen.png','부드럽고 깨끗한 열대의 단맛'],'리치':['fruits/33_리치_lychee.png','은은한 꽃향과 맑은 단맛'],'블랙베리':['fruits/34_블랙베리_blackberry.png','짙은 향과 산뜻한 균형'],'금귤':['fruits/35_금귤_kumquat.png','작고 향긋한 상큼함'],'토마토':['fruits/37_토마토_tomato.png','신선하고 산뜻한 자연의 맛']};
 const alias={'금실딸기':'딸기','성주참외':'참외','대저토마토':'토마토','백도복숭아':'복숭아','고당도수박':'수박','머스크멜론':'멜론','홍로사과':'사과','나주배':'배','부사사과':'사과','샤인머스켓':'샤인머스캣'};
+const imported=new Set(['체리','망고','자몽','블루베리','라즈베리','파인애플','키위','아보카도','용과','바나나','라임','패션후르츠','망고스틴','리치','레몬','오렌지','블랙베리']);
 const origins={
-'금실딸기':'국내 산지','딸기':'국내 산지','성주참외':'경북 성주','참외':'경북 성주','대저토마토':'부산 대저','토마토':'국내 산지','샤인머스캣':'국내 산지','체리':'입고별 안내','백도복숭아':'국내 산지','복숭아':'국내 산지','고당도수박':'국내 산지','수박':'국내 산지','머스크멜론':'국내 산지','멜론':'국내 산지','자두':'국내 산지','포도':'국내 산지','홍로사과':'경북 청송 등','사과':'국내 산지','나주배':'전남 나주','배':'전남 나주','대봉':'경남·전남 산지','감':'국내 산지','석류':'입고별 안내','제주감귤':'제주','한라봉':'제주','부사사과':'국내 산지','키위':'국내·입고별 안내','블루베리':'국내·입고별 안내','자몽':'입고별 안내','망고':'입고별 안내','파인애플':'입고별 안내','블랙베리':'입고별 안내','금귤':'제주·국내 산지','청포도':'국내 산지'};
+'금실딸기':'국내 산지','딸기':'국내 산지','성주참외':'경북 성주','참외':'경북 성주','대저토마토':'부산 대저','토마토':'국내 산지','샤인머스캣':'국내 산지','백도복숭아':'국내 산지','복숭아':'국내 산지','고당도수박':'국내 산지','수박':'국내 산지','머스크멜론':'국내 산지','멜론':'국내 산지','자두':'국내 산지','포도':'국내 산지','홍로사과':'경북 청송 등','사과':'국내 산지','나주배':'전남 나주','배':'전남 나주','대봉':'경남·전남 산지','감':'국내 산지','석류':'입고별 안내','제주감귤':'제주','한라봉':'제주','부사사과':'국내 산지','금귤':'제주·국내 산지','청포도':'국내 산지','밤':'국내 산지','무화과':'국내 산지',
+'체리':'미국·뉴질랜드 등','망고':'태국·페루 등','자몽':'미국·이스라엘 등','블루베리':'국내·칠레·페루 등','라즈베리':'미국·멕시코 등','파인애플':'필리핀·코스타리카 등','키위':'국내·뉴질랜드 등','아보카도':'멕시코·페루 등','용과':'베트남 등','바나나':'필리핀·에콰도르 등','라임':'멕시코 등','패션후르츠':'베트남 등','망고스틴':'태국 등','리치':'태국·중국 등','레몬':'미국·칠레 등','오렌지':'미국·호주 등','블랙베리':'멕시코·미국 등'};
 const starter={
-'금실딸기':[25000,'1kg 내외'],'딸기':[22000,'1kg 내외'],'성주참외':[24000,'2kg'],'참외':[22000,'2kg'],'대저토마토':[18000,'2kg'],'토마토':[16000,'2kg'],'샤인머스캣':[28000,'2kg (3~4송이)'],'체리':[32000,'1kg'],'백도복숭아':[29000,'4kg'],'복숭아':[29000,'4kg'],'고당도수박':[25000,'1통'],'수박':[25000,'1통'],'머스크멜론':[26000,'2수'],'멜론':[24000,'2수'],'자두':[19000,'2kg'],'포도':[26000,'2kg'],'홍로사과':[32000,'3kg'],'사과':[32000,'3kg'],'나주배':[38000,'5kg (7~9과)'],'배':[38000,'5kg (7~9과)'],'대봉':[26000,'3kg'],'감':[24000,'3kg'],'석류':[28000,'2kg'],'제주감귤':[25000,'5kg'],'한라봉':[28000,'3kg'],'부사사과':[32000,'3kg'],'키위':[22000,'2kg'],'블루베리':[24000,'500g'],'자몽':[22000,'6과'],'망고':[29000,'2~3과'],'파인애플':[18000,'2수'],'블랙베리':[26000,'500g'],'금귤':[23000,'2kg'],'청포도':[24000,'2kg']};
+'금실딸기':[25000,'1kg 내외'],'딸기':[22000,'1kg 내외'],'성주참외':[24000,'2kg'],'참외':[22000,'2kg'],'대저토마토':[18000,'2kg'],'토마토':[16000,'2kg'],'샤인머스캣':[28000,'2kg (3~4송이)'],'체리':[32000,'1kg'],'백도복숭아':[29000,'4kg'],'복숭아':[29000,'4kg'],'고당도수박':[25000,'1통'],'수박':[25000,'1통'],'머스크멜론':[26000,'2수'],'멜론':[24000,'2수'],'자두':[19000,'2kg'],'포도':[26000,'2kg'],'홍로사과':[32000,'3kg'],'사과':[32000,'3kg'],'나주배':[38000,'5kg (7~9과)'],'배':[38000,'5kg (7~9과)'],'대봉':[26000,'3kg'],'감':[24000,'3kg'],'석류':[28000,'2kg'],'제주감귤':[25000,'5kg'],'한라봉':[28000,'3kg'],'부사사과':[32000,'3kg'],'키위':[22000,'2kg'],'블루베리':[24000,'500g'],'자몽':[22000,'6과'],'망고':[29000,'2~3과'],'파인애플':[18000,'2수'],'블랙베리':[26000,'500g'],'금귤':[23000,'2kg'],'청포도':[24000,'2kg'],'아보카도':[23000,'5~6과'],'용과':[26000,'3~4과'],'바나나':[12000,'1.5kg 내외'],'라임':[16000,'8~10과'],'패션후르츠':[24000,'1kg'],'망고스틴':[35000,'1kg'],'리치':[26000,'1kg'],'레몬':[15000,'8~10과'],'오렌지':[18000,'8~10과'],'라즈베리':[28000,'500g'],'밤':[22000,'2kg'],'무화과':[26000,'1kg']};
 
 const seasons={
- spring:{label:'봄',heroCopy:'봄의 싱그러움을 가장 좋은 상태로 골라 산뜻하게 전합니다.',hero:['딸기','참외','청포도','토마토','체리'],heroImg:[null,null,null,'hero_elements/spring_tomato.png',null],today:[['금실딸기','국내 산지','당일 선별'],['성주참외','경북 성주','입고 상태 확인'],['대저토마토','부산 대저','당일 상태 확인'],['샤인머스캣','국내 산지','당일 상태 확인'],['체리','입고별 안내','당일 선별'],['사과','국내 산지','입고 상태 확인'],['나주배','전남 나주','입고 상태 확인'],['블루베리','입고별 안내','당일 선별'],['제주감귤','제주','입고 상태 확인'],['키위','국내 산지','숙도 확인']],premium:['금실딸기','성주참외','대저토마토','샤인머스캣','체리','블루베리','사과','나주배'],premiumImg:['premium_single_v36/spring_01.png','premium_single_v36/spring_02.png','premium_single_v36/spring_03.png','premium_single_v36/spring_04.png',null,null,null,null],seasonal:['딸기','참외','토마토','청포도','체리','사과','배','블루베리'],library:['홍로사과','나주배','샤인머스캣','대봉','석류','제주감귤','키위','자몽','포도','블랙베리'],curation:'feature_art/spring_curation.jpg',gift:'feature_art/spring_gift.jpg'},
- summer:{label:'여름',heroCopy:'햇살이 더 달콤하게 만든 여름 과일을 시원하고 풍성하게 골라드립니다.',hero:['수박','복숭아','샤인머스캣','자두','멜론'],today:[['백도복숭아','국내 산지','숙도 확인'],['고당도수박','국내 산지','당일 선별'],['샤인머스캣','국내 산지','입고 상태 확인'],['머스크멜론','국내 산지','숙도 확인'],['자두','국내 산지','당일 상태 확인'],['포도','국내 산지','당일 선별'],['체리','입고별 안내','당일 선별'],['블루베리','입고별 안내','당일 선별'],['망고','입고별 안내','숙도 확인'],['파인애플','입고별 안내','숙도 확인']],premium:['백도복숭아','고당도수박','샤인머스캣','머스크멜론','자두','포도','체리','블루베리'],premiumImg:['premium_single_v36/summer_01.png','premium_single_v36/summer_02.png','premium_single_v36/summer_03.png','premium_single_v36/summer_04.png',null,null,null,null],seasonal:['수박','복숭아','자두','포도','멜론','샤인머스캣','체리','블루베리'],library:['블루베리','파인애플','망고','자몽','체리','멜론','포도','키위','석류','샤인머스캣'],curation:'feature_art/summer_curation.jpg',gift:'feature_art/summer_gift.jpg'},
- autumn:{label:'가을',heroCopy:'깊어가는 계절이 전하는 가장 특별한 맛을 오늘의 상태로 골라드립니다.',hero:['홍로사과','나주배','샤인머스캣','대봉','석류'],today:[['홍로사과','경북 청송 등','당일 선별'],['나주배','전남 나주','입고 상태 확인'],['샤인머스캣','국내 산지','당일 상태 확인'],['대봉','경남·전남 산지','후숙 상태 확인'],['석류','입고별 안내','당일 선별'],['포도','국내 산지','당일 선별'],['자몽','입고별 안내','입고 상태 확인'],['블랙베리','입고별 안내','당일 선별'],['사과','국내 산지','입고 상태 확인'],['배','전남 나주','입고 상태 확인']],premium:['홍로사과','나주배','샤인머스캣','대봉','석류','포도','자몽','사과'],premiumImg:['premium_single_v36/autumn_01.png','premium_single_v36/autumn_02.png','premium_single_v36/autumn_03.png','premium_single_v36/autumn_04.png',null,null,null,null],seasonal:['사과','배','감','대봉','샤인머스캣','포도','석류','자몽'],library:['석류','포도','블랙베리','자몽','샤인머스캣','사과','배','키위','블루베리','제주감귤'],curation:'feature_art/autumn_curation.jpg',gift:'feature_art/autumn_gift.jpg'},
- winter:{label:'겨울',heroCopy:'차가운 계절에 더 빛나는 자연의 달콤함을 신선하게 골라 전합니다.',hero:['제주감귤','부사사과','금실딸기','한라봉','키위'],today:[['제주감귤','제주','당일 입고 확인'],['한라봉','제주','숙도 확인'],['금실딸기','국내 산지','당일 선별'],['부사사과','국내 산지','입고 상태 확인'],['키위','국내·입고별 안내','숙도 확인'],['나주배','전남 나주','입고 상태 확인'],['사과','국내 산지','입고 상태 확인'],['자몽','입고별 안내','입고 상태 확인'],['블루베리','입고별 안내','당일 선별'],['금귤','제주·국내 산지','당일 선별']],premium:['제주감귤','한라봉','금실딸기','부사사과','키위','나주배','블루베리','자몽'],premiumImg:['premium_single_v36/winter_01.png','premium_single_v36/winter_02.png','premium_single_v36/winter_03.png','premium_single_v36/winter_04.png',null,null,null,null],seasonal:['제주감귤','한라봉','딸기','사과','배','키위','금귤','자몽'],library:['키위','금귤','배','블루베리','자몽','제주감귤','사과','딸기','한라봉','석류'],curation:'feature_art/winter_curation.jpg',gift:'feature_art/winter_gift.jpg'}
+ spring:{label:'봄',heroCopy:'봄의 싱그러움을 가장 좋은 상태로 골라 산뜻하게 전합니다.',hero:['딸기','참외','청포도','토마토','체리'],heroImg:[null,null,null,'hero_elements/spring_tomato.png',null],today:[['금실딸기','국내 산지','당일 선별'],['성주참외','경북 성주','입고 상태 확인'],['대저토마토','부산 대저','당일 상태 확인'],['샤인머스캣','국내 산지','당일 상태 확인'],['체리','미국·뉴질랜드 등','당일 선별'],['망고','태국·페루 등','숙도 확인'],['자몽','미국·이스라엘 등','입고 상태 확인'],['아보카도','멕시코·페루 등','숙도 확인'],['블루베리','국내·칠레·페루 등','당일 선별'],['오렌지','미국·호주 등','입고 상태 확인']],premium:['금실딸기','성주참외','대저토마토','샤인머스캣','망고','체리','자몽','아보카도'],premiumImg:['premium_single_v36/spring_01.png','premium_single_v36/spring_02.png','premium_single_v36/spring_03.png','premium_single_v36/spring_04.png',null,null,null,null],seasonal:['사과','배','청포도','키위','파인애플','블루베리','오렌지','레몬'],library:['홍로사과','나주배','샤인머스캣','대봉','석류','제주감귤','키위','자몽','포도','블랙베리','망고','아보카도'],curation:'feature_art/spring_curation.jpg',gift:'feature_art/spring_gift.jpg'},
+ summer:{label:'여름',heroCopy:'햇살이 더 달콤하게 만든 여름 과일을 시원하고 풍성하게 골라드립니다.',hero:['수박','복숭아','샤인머스캣','자두','멜론'],today:[['백도복숭아','국내 산지','숙도 확인'],['고당도수박','국내 산지','당일 선별'],['샤인머스캣','국내 산지','입고 상태 확인'],['머스크멜론','국내 산지','숙도 확인'],['자두','국내 산지','당일 상태 확인'],['망고','태국·페루 등','숙도 확인'],['체리','미국·뉴질랜드 등','당일 선별'],['파인애플','필리핀·코스타리카 등','숙도 확인'],['용과','베트남 등','입고 상태 확인'],['리치','태국·중국 등','당일 선별']],premium:['백도복숭아','고당도수박','머스크멜론','샤인머스캣','망고','체리','파인애플','용과'],premiumImg:['premium_single_v36/summer_01.png','premium_single_v36/summer_02.png','premium_single_v36/summer_04.png','premium_single_v36/summer_03.png',null,null,null,null],seasonal:['자두','포도','블루베리','키위','리치','패션후르츠','망고스틴','바나나'],library:['블루베리','파인애플','망고','자몽','체리','멜론','포도','키위','석류','샤인머스캣','용과','리치'],curation:'feature_art/summer_curation.jpg',gift:'feature_art/summer_gift.jpg'},
+ autumn:{label:'가을',heroCopy:'깊어가는 계절이 전하는 가장 특별한 맛을 오늘의 상태로 골라드립니다.',hero:['홍로사과','나주배','샤인머스캣','대봉','석류'],today:[['홍로사과','경북 청송 등','당일 선별'],['나주배','전남 나주','입고 상태 확인'],['샤인머스캣','국내 산지','당일 상태 확인'],['대봉','경남·전남 산지','후숙 상태 확인'],['석류','입고별 안내','당일 선별'],['망고','태국·페루 등','숙도 확인'],['자몽','미국·이스라엘 등','입고 상태 확인'],['아보카도','멕시코·페루 등','숙도 확인'],['망고스틴','태국 등','입고 상태 확인'],['패션후르츠','베트남 등','당일 선별']],premium:['홍로사과','나주배','샤인머스캣','대봉','석류','망고','자몽','아보카도'],premiumImg:['premium_single_v36/autumn_01.png','premium_single_v36/autumn_02.png','premium_single_v36/autumn_03.png','premium_single_v36/autumn_04.png',null,null,null,null],seasonal:['포도','밤','블랙베리','키위','파인애플','용과','망고스틴','패션후르츠'],library:['석류','포도','블랙베리','자몽','샤인머스캣','사과','배','키위','블루베리','제주감귤','망고','아보카도'],curation:'feature_art/autumn_curation.jpg',gift:'feature_art/autumn_gift.jpg'},
+ winter:{label:'겨울',heroCopy:'차가운 계절에 더 빛나는 자연의 달콤함을 신선하게 골라 전합니다.',hero:['제주감귤','부사사과','금실딸기','한라봉','키위'],today:[['제주감귤','제주','당일 입고 확인'],['한라봉','제주','숙도 확인'],['금실딸기','국내 산지','당일 선별'],['부사사과','국내 산지','입고 상태 확인'],['나주배','전남 나주','입고 상태 확인'],['키위','국내·뉴질랜드 등','숙도 확인'],['자몽','미국·이스라엘 등','입고 상태 확인'],['블루베리','국내·칠레·페루 등','당일 선별'],['오렌지','미국·호주 등','입고 상태 확인'],['망고','태국·페루 등','숙도 확인']],premium:['제주감귤','한라봉','금실딸기','부사사과','나주배','샤인머스캣','키위','체리'],premiumImg:['premium_single_v36/winter_01.png','premium_single_v36/winter_02.png','premium_single_v36/winter_03.png','premium_single_v36/winter_04.png',null,null,null,null],seasonal:['금귤','자몽','블루베리','레몬','오렌지','바나나','아보카도','망고'],library:['키위','금귤','배','블루베리','자몽','제주감귤','사과','딸기','한라봉','석류','오렌지','레몬'],curation:'feature_art/winter_curation.jpg',gift:'feature_art/winter_gift.jpg'}
 };
 const details={choose:'표면과 탄력, 향, 무게감과 숙도를 함께 살펴 좋은 상태의 과일을 고릅니다.',keep:'과일의 숙도에 맞춰 실온 또는 냉장 보관하고, 드시기 전에 상태를 확인해 주세요.',enjoy:'향과 식감이 가장 좋은 상태에서 신선하게 즐겨보세요.'};
 const autoSeason=()=>{const m=new Date().getMonth()+1;return m>=3&&m<=5?'spring':m>=6&&m<=8?'summer':m>=9&&m<=11?'autumn':'winter'};
@@ -44,7 +46,7 @@ function productVisual(name,visual=''){return A+(visual||meta(name)[0])}
 function heroCard(name,i,visual=''){return `<div class="hero-fruit f${i+1}"><img src="${productVisual(name,visual)}" alt="${esc(name)}"><span>${esc(name)}</span></div>`}
 function commerceButtons(name,visual='',compact=false){const p=productFor(name),sold=Number(p.stock||0)<=0;return `<div class="commerce-actions ${compact?'compact':''}"><button type="button" class="buy-btn" data-buy-now data-name="${esc(name)}" data-visual="${esc(visual)}" ${sold?'disabled':''}>${sold?'입고 확인':'BUY NOW'}</button><button type="button" class="cart-btn" data-cart-add data-name="${esc(name)}" data-visual="${esc(visual)}" ${sold?'disabled':''}>장바구니</button></div>`}
 function todayCard([name,origin,state]){const m=meta(name),p=productFor(name),v=m[0];return `<article class="today-card clickable-product" data-card-fruit="${esc(name)}" data-card-visual="${esc(v)}"><div class="today-visual"><img src="${A+v}" alt="${esc(name)}"></div><div class="today-body"><div class="today-topline"><small>오늘의 이룸 PICK</small><span>${esc(state)}</span></div><h3>${esc(name)}</h3><p>${m[1]}. 오늘 맛과 상태를 확인해 안내합니다.</p><div class="product-meta"><button type="button" data-info-type="origin" data-info-name="${esc(name)}" data-info-value="${esc(origin)}">산지 · ${esc(origin)}</button><button type="button" data-info-type="config" data-info-name="${esc(name)}">구성 · ${esc(p.unit||'상담 확인')}</button></div><div class="sale-price"><small>오늘 판매가</small><b>${displayPrice(p)}</b></div>${commerceButtons(name,v,true)}</div></article>`}
-function productCard(name,img,premium=false){const m=meta(name),p=productFor(name),v=img||m[0];return `<article class="product-card commerce-card clickable-product" data-card-fruit="${esc(name)}" data-card-visual="${esc(v)}">${premium?'<span class="badge">국산 프리미엄</span>':''}<div class="image-wrap"><img src="${A+v}" alt="${esc(name)}"></div><h3>${esc(name)}</h3><p>${m[1]}</p><div class="mini-sale"><span>${esc(p.unit||'구성 상담')}</span><b>${displayPrice(p)}</b></div>${commerceButtons(name,v,true)}</article>`}
+function productCard(name,img,premium=false){const m=meta(name),p=productFor(name),v=img||m[0];const base=alias[name]||name;const badge=premium?`<span class="badge ${imported.has(base)?'imported-badge':''}">${imported.has(base)?'수입 프리미엄':'국산 프리미엄'}</span>`:'';return `<article class="product-card commerce-card clickable-product" data-card-fruit="${esc(name)}" data-card-visual="${esc(v)}">${badge}<div class="image-wrap"><img src="${A+v}" alt="${esc(name)}"></div><h3>${esc(name)}</h3><p>${m[1]}</p><div class="mini-sale"><span>${esc(p.unit||'구성 상담')}</span><b>${displayPrice(p)}</b></div>${commerceButtons(name,v,true)}</article>`}
 function libraryCard(name){const m=meta(name),p=productFor(name),v=m[0];return `<article class="library-card commerce-library clickable-product" data-card-fruit="${esc(name)}" data-card-visual="${esc(v)}"><img src="${A+v}" alt="${esc(name)}"><b>${esc(name)}</b><small>${m[1]}</small><div class="library-price">${displayPrice(p)}</div>${commerceButtons(name,v,true)}</article>`}
 
 function applySeason(key){
@@ -65,13 +67,63 @@ async function loadProducts(){try{const r=await fetch('/api/products',{credentia
 $$('[data-home]').forEach(b=>b.onclick=()=>scrollTo({top:0,behavior:'smooth'}));
 $$('[data-scroll]').forEach(b=>b.onclick=()=>{const el=document.getElementById(b.dataset.scroll);if(el)el.scrollIntoView({behavior:'smooth',block:'start'})});
 $$('[data-season]').forEach(b=>b.onclick=()=>{mode=b.dataset.season;applySeason(mode==='auto'?autoSeason():mode)});
-const pop=$('[data-account-popover]');$('[data-account-toggle]').onclick=e=>{e.stopPropagation();pop.hidden=!pop.hidden};document.addEventListener('click',e=>{if(!e.target.closest('.account-wrap'))pop.hidden=true});
+
+/* V39: notice ticker + predictable ESC/browser-back behaviour for every UI layer. */
+const noticeTrack=$('[data-notice-track]');
+if(noticeTrack&&noticeTrack.children.length>1&&!matchMedia('(prefers-reduced-motion: reduce)').matches){
+ let noticeIndex=0;
+ setInterval(()=>{noticeIndex=(noticeIndex+1)%noticeTrack.children.length;noticeTrack.style.transform=`translateY(-${noticeIndex*100}%)`},5200);
+}
+const pop=$('[data-account-popover]'),accountToggle=$('[data-account-toggle]');
 const overlay=$('#modalBackdrop'),k=$('#modalKicker'),title=$('#modalTitle'),intro=$('#modalIntro'),body=$('#modalBody');
+const uiKind=()=>history.state?.iroomUi||'';
+function setUiHistory(kind,replace=false){
+ const next={...(history.state||{})};
+ if(kind)next.iroomUi=kind;else delete next.iroomUi;
+ (replace?history.replaceState:history.pushState).call(history,next,'',location.href);
+}
+function hideAccountDirect(){if(pop)pop.hidden=true}
+function showAccount(){
+ if(!pop||!pop.hidden)return;
+ pop.hidden=false;
+ if(uiKind()==='modal')return;
+ if(uiKind()==='account')return;
+ setUiHistory('account',false);
+}
+function closeAccount(){
+ if(!pop||pop.hidden)return;
+ if(uiKind()==='account')history.back();else hideAccountDirect();
+}
+accountToggle.onclick=e=>{e.stopPropagation();pop.hidden?showAccount():closeAccount()};
+document.addEventListener('click',e=>{if(pop&&!pop.hidden&&!e.target.closest('.account-wrap'))closeAccount()});
 function setModal(kk,t,i,h){k.textContent=kk;title.textContent=t;intro.innerHTML=i||'';body.innerHTML=h||''}
-function showOverlay(){overlay.classList.add('open');overlay.setAttribute('aria-hidden','false');document.body.style.overflow='hidden'}
+function hideOverlayDirect(){overlay.classList.remove('open');overlay.setAttribute('aria-hidden','true');document.body.style.overflow=''}
+function showOverlay(){
+ const wasOpen=overlay.classList.contains('open');
+ overlay.classList.add('open');overlay.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';
+ hideAccountDirect();
+ if(!wasOpen){
+   if(uiKind()==='account')setUiHistory('modal',true);
+   else if(uiKind()!=='modal')setUiHistory('modal',false);
+ }
+}
 function openModal(type){if(type==='premium')renderPremium();else if(type==='seasonal')renderSeasonal();else if(type==='promise')renderPromise();else if(type==='curation')renderCuration();else if(type==='gift')renderGift();else if(type==='brand')renderBrand();else if(type==='guide')renderGuide();else if(type==='search')renderSearch();else if(type==='login')renderLogin();else if(type==='signup')renderSignup();else if(type==='mypage')renderMyPage();else if(type==='cart')renderCart();else if(type==='terms')renderTerms();else if(type==='privacy')renderPrivacy();showOverlay()}
-function closeModal(){overlay.classList.remove('open');overlay.setAttribute('aria-hidden','true');document.body.style.overflow=''}
-$('[data-close]').onclick=closeModal;overlay.onclick=e=>{if(e.target===overlay)closeModal()};document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});$$('[data-modal]').forEach(b=>b.onclick=()=>{pop.hidden=true;openModal(b.dataset.modal)});
+function closeModal(){
+ if(!overlay.classList.contains('open'))return;
+ if(uiKind()==='modal')history.back();else hideOverlayDirect();
+}
+$('[data-close]').onclick=closeModal;
+overlay.onclick=e=>{if(e.target===overlay)closeModal()};
+window.addEventListener('popstate',()=>{
+ if(uiKind()!=='modal')hideOverlayDirect();
+ if(uiKind()!=='account')hideAccountDirect();
+});
+document.addEventListener('keydown',e=>{
+ if(e.key!=='Escape')return;
+ if(overlay.classList.contains('open')){e.preventDefault();closeModal();return}
+ if(pop&&!pop.hidden){e.preventDefault();closeAccount()}
+});
+$$('[data-modal]').forEach(b=>b.onclick=()=>{hideAccountDirect();openModal(b.dataset.modal)});
 
 function modalCommerceCard(name,visual=''){const m=meta(name),p=productFor(name),v=visual||m[0];return `<article class="modal-shop-card clickable-product" data-card-fruit="${esc(name)}" data-card-visual="${esc(v)}"><img src="${productVisual(name,v)}" alt="${esc(name)}"><div><b>${esc(name)}</b><small>${m[1]}</small><span>${esc(p.unit||'구성 상담')} · <strong>${displayPrice(p)}</strong></span>${commerceButtons(name,v,true)}</div></article>`}
 function renderPremium(){const d=seasons[current];setModal('KOREAN PREMIUM FRUITS',`${d.label} 프리미엄 과일`,`페이지를 이동하지 않고 지금 판매 중인 프리미엄 구성을 한눈에 확인하세요.`,`<div class="modal-shop-grid">${d.premium.map((n,i)=>modalCommerceCard(n,d.premiumImg?.[i]||'')).join('')}</div>`)}
@@ -113,25 +165,78 @@ document.addEventListener('click',e=>{
 const band=$('[data-band]');if(band)band.onclick=()=>window.open('https://band.us/@iroomfruits','_blank','noopener');const share=$('[data-share]');if(share)share.onclick=async()=>{try{if(navigator.share)await navigator.share({title:'이룸 fresh fruits',url:location.href});else{await navigator.clipboard.writeText(location.href);alert('주소를 복사했습니다.')}}catch(_){}};
 let deferredPrompt=null;window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e});const install=$('[data-install]');if(install)install.onclick=async()=>{if(deferredPrompt){deferredPrompt.prompt();deferredPrompt=null}else alert('브라우저 메뉴에서 “앱 설치” 또는 “홈 화면에 추가”를 이용해 주세요.')};
 async function updateAccount(){let user=null;try{const r=await fetch('/api/me',{credentials:'same-origin'});if(r.ok){const d=await r.json();user=d.user||d}}catch(_){}$('[data-account-status]').textContent=user?.name||user?.username||'로그인이 필요합니다.';$$('[data-guest-only]').forEach(x=>x.hidden=!!user);$$('[data-user-only]').forEach(x=>x.hidden=!user)}
-const logout=$('[data-logout]');if(logout)logout.onclick=async()=>{try{await fetch('/api/logout',{method:'POST'})}catch(_){}await updateAccount();pop.hidden=true};
+const logout=$('[data-logout]');if(logout)logout.onclick=async()=>{try{await fetch('/api/logout',{method:'POST'})}catch(_){}await updateAccount();closeAccount()};
 const carouselTimers=new Map();
-function stopCarousel(sel){const old=carouselTimers.get(sel);if(old){clearInterval(old);carouselTimers.delete(sel)}}
-function setupSeamlessCarousel(sel,interval=4600){
+function stopCarousel(sel){
+ const state=carouselTimers.get(sel);
+ if(state?.raf)cancelAnimationFrame(state.raf);
+ if(state?.resumeTimer)clearTimeout(state.resumeTimer);
+ state?.abort?.abort();
+ state?.observer?.disconnect();
+ carouselTimers.delete(sel);
+}
+function setupSeamlessCarousel(sel,speed=.55){
  const el=$(sel);if(!el)return;stopCarousel(sel);
  el.querySelectorAll('[data-loop-clone]').forEach(n=>n.remove());
  const originals=[...el.children];if(originals.length<2)return;
- const frag=document.createDocumentFragment();
- originals.forEach(n=>{const c=n.cloneNode(true);c.dataset.loopClone='1';c.setAttribute('aria-hidden','true');frag.appendChild(c)});el.appendChild(frag);
- let paused=false,settleTimer=0;
- const loopPoint=()=>{const c=el.querySelector('[data-loop-clone]');return c?c.offsetLeft-originals[0].offsetLeft:0};
- const normalize=()=>{const p=loopPoint();if(p>0&&el.scrollLeft>=p-2){el.scrollLeft-=p}};
- const step=()=>{if(paused||document.hidden||overlay?.classList.contains('open'))return;const cards=[...el.children];if(cards.length<2)return;const dx=Math.max(1,cards[1].offsetLeft-cards[0].offsetLeft);el.scrollBy({left:dx,behavior:'smooth'});clearTimeout(settleTimer);settleTimer=setTimeout(normalize,850)};
- const pause=()=>{paused=true}; const resume=()=>{paused=false;clearTimeout(settleTimer);settleTimer=setTimeout(normalize,180)};
- el.onmouseenter=pause;el.onmouseleave=resume;el.onfocusin=pause;el.onfocusout=resume;el.ontouchstart=pause;el.ontouchend=resume;el.onpointerdown=pause;el.onpointerup=resume;
- if('onscrollend' in el)el.onscrollend=normalize;
- carouselTimers.set(sel,setInterval(step,interval));
-}
-function setupAllCarousels(){setupSeamlessCarousel('#todayGrid',4700);setupSeamlessCarousel('#premiumGrid',4900);setupSeamlessCarousel('#seasonalGrid',5100);setupSeamlessCarousel('#libraryGrid',4300)}
+ const before=originals.map(n=>{const c=n.cloneNode(true);c.dataset.loopClone='before';c.setAttribute('aria-hidden','true');return c});
+ const after=originals.map(n=>{const c=n.cloneNode(true);c.dataset.loopClone='after';c.setAttribute('aria-hidden','true');return c});
+ const bf=document.createDocumentFragment(),af=document.createDocumentFragment();
+ before.forEach(n=>bf.appendChild(n));after.forEach(n=>af.appendChild(n));
+ el.prepend(bf);el.append(af);
 
-(async()=>{await loadProducts();applySeason(current);updateCartCount();updateAccount();try{if('serviceWorker'in navigator)navigator.serviceWorker.register('./sw.js?v=38').catch(()=>{})}catch(_){}})();
+ let paused=false,resumeTimer=0,raf=0,loopWidth=0,startX=0,last=performance.now(),measured=false;
+ const abort=new AbortController();
+ const signal=abort.signal;
+ const contentX=node=>node.getBoundingClientRect().left-el.getBoundingClientRect().left+el.scrollLeft;
+ const measure=()=>{
+   if(!document.body.contains(el))return;
+   startX=contentX(originals[0]);
+   const nextX=contentX(after[0]);
+   loopWidth=Math.max(1,nextX-startX);
+   if(!measured||el.scrollLeft<2||el.scrollLeft>startX+loopWidth*1.25)el.scrollLeft=startX;
+   measured=true;
+ };
+ const normalize=()=>{
+   if(!measured||loopWidth<2)return;
+   while(el.scrollLeft>=startX+loopWidth)el.scrollLeft-=loopWidth;
+   while(el.scrollLeft<=startX-loopWidth+2)el.scrollLeft+=loopWidth;
+ };
+ const frame=now=>{
+   const dt=Math.min(48,Math.max(0,now-last));last=now;
+   if(measured&&!paused&&!document.hidden&&!overlay?.classList.contains('open')){
+     el.scrollLeft+=speed*(dt/16.67);
+     normalize();
+   }
+   raf=requestAnimationFrame(frame);
+ };
+ const pause=()=>{paused=true;clearTimeout(resumeTimer)};
+ const resumeSoon=(delay=900)=>{clearTimeout(resumeTimer);resumeTimer=setTimeout(()=>{normalize();paused=false;last=performance.now()},delay)};
+
+ // Hover alone no longer stops autoplay. Only active interaction pauses the shelf.
+ el.addEventListener('pointerdown',pause,{signal});
+ el.addEventListener('pointerup',()=>resumeSoon(),{signal});
+ el.addEventListener('pointercancel',()=>resumeSoon(),{signal});
+ el.addEventListener('touchstart',pause,{passive:true,signal});
+ el.addEventListener('touchend',()=>resumeSoon(),{passive:true,signal});
+ el.addEventListener('wheel',()=>{pause();resumeSoon(700)},{passive:true,signal});
+ el.addEventListener('focusin',pause,{signal});
+ el.addEventListener('focusout',()=>resumeSoon(),{signal});
+ document.addEventListener('visibilitychange',()=>{if(!document.hidden){last=performance.now();requestAnimationFrame(measure)}},{signal});
+
+ const observer='ResizeObserver' in window?new ResizeObserver(()=>requestAnimationFrame(measure)):null;
+ if(observer)observer.observe(el);
+ window.addEventListener('resize',()=>requestAnimationFrame(measure),{passive:true,signal});
+ requestAnimationFrame(()=>requestAnimationFrame(measure));
+ raf=requestAnimationFrame(frame);
+ carouselTimers.set(sel,{get raf(){return raf},get resumeTimer(){return resumeTimer},abort,observer});
+}
+function setupAllCarousels(){
+ setupSeamlessCarousel('#todayGrid',.58);
+ setupSeamlessCarousel('#premiumGrid',.52);
+ setupSeamlessCarousel('#seasonalGrid',.54);
+ setupSeamlessCarousel('#libraryGrid',.62);
+}
+
+(async()=>{await loadProducts();applySeason(current);updateCartCount();updateAccount();try{if('serviceWorker'in navigator)navigator.serviceWorker.register('./sw.js?v=41').catch(()=>{})}catch(_){}})();
 })();
