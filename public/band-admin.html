@@ -595,7 +595,7 @@ const oldPersist=persist;persist=async function(){if($("#view-banners").classLis
 
 
 let visualSeason='spring',visualSelection=null;
-function visualFrameUrl(){const u=new URL('./index.html',location.href);u.searchParams.set('adminPreview','1');u.searchParams.set('season',visualSeason);u.searchParams.set('_',Date.now());return u.href}
+function visualFrameUrl(){const u=new URL('/admin-preview',location.origin);u.searchParams.set('adminPreview','1');u.searchParams.set('season',visualSeason);u.searchParams.set('_',Date.now());return u.href}
 function renderVisualEditor(){const frame=$('#visualPreviewFrame');if(frame&&!frame.src)frame.src=visualFrameUrl();$$('[data-visual-season]').forEach(b=>b.classList.toggle('active',b.dataset.visualSeason===visualSeason))}
 function reloadVisualFrame(){const frame=$('#visualPreviewFrame');if(frame)frame.src=visualFrameUrl()}
 $$('[data-visual-season]').forEach(btn=>btn.addEventListener('click',()=>{visualSeason=btn.dataset.visualSeason;visualSelection=null;clearVisualFields();$$('[data-visual-season]').forEach(b=>b.classList.toggle('active',b===btn));reloadVisualFrame()}));
