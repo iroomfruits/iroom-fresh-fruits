@@ -58,6 +58,8 @@ hr{border:0;border-top:1px solid var(--line);margin:18px 0}
 .admin-login-box input{width:100%;border:1px solid #dcd4c8;border-radius:10px;padding:13px;margin-bottom:11px}
 .admin-login-box button{width:100%;border:0;border-radius:10px;background:#082d20;color:#fff;padding:13px;font-weight:800}
 .admin-login-msg{font-size:12px;color:#b03d3d;min-height:18px;margin-top:9px}
+
+.visual-editor-shell{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:14px;align-items:start}.visual-preview-wrap{border:1px solid var(--line);border-radius:16px;background:#f4f0e8;padding:10px;overflow:hidden}.visual-preview-toolbar{display:flex;gap:8px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-bottom:10px}.visual-preview-toolbar .row{gap:6px}.visual-preview-frame{width:100%;height:980px;border:0;border-radius:12px;background:#fff;box-shadow:0 8px 26px rgba(50,38,25,.08)}.visual-edit-panel{position:sticky;top:145px;border:1px solid var(--line);border-radius:16px;padding:16px;background:#fff;box-shadow:0 12px 30px rgba(45,34,22,.06)}.visual-edit-panel h3{margin:0 0 6px}.visual-selected-preview{height:190px;border:1px dashed #d7cab8;border-radius:14px;background:#faf7f1;display:grid;place-items:center;overflow:hidden;margin:12px 0}.visual-selected-preview img{width:100%;height:100%;object-fit:contain}.visual-editor-empty{padding:26px 14px;border:1px dashed #d9cfbf;border-radius:12px;background:#faf8f3;color:#80766c;text-align:center;line-height:1.7}.visual-save-row{display:flex;gap:8px;margin-top:12px}.visual-save-row button{flex:1}.editor-note{font-size:12px;line-height:1.7;color:#746b62;background:#f8f4ec;border-radius:10px;padding:10px;margin:10px 0}.image-drop-label{display:block;border:1px solid #ded3c4;border-radius:10px;padding:11px;text-align:center;background:#fffaf2;font-weight:700;cursor:pointer}.image-drop-label input{display:none}.visual-editor-status{font-size:12px;min-height:18px;margin-top:8px;color:#256044}@media(max-width:1120px){.visual-editor-shell{grid-template-columns:1fr}.visual-edit-panel{position:static}.visual-preview-frame{height:780px}}
 </style>
 </head>
 <body>
@@ -84,6 +86,7 @@ hr{border:0;border-top:1px solid var(--line);margin:18px 0}
     <button class="tab active" data-view="home">🏠 관리자 홈</button>
     <button class="tab" data-view="products">📦 상품관리</button>
     <button class="tab" data-view="images">🖼 이미지 보관함</button>
+    <button class="tab" data-view="visual">🪄 상품 화면 편집</button>
     <button class="tab" data-view="orders">🚚 주문·배송</button>
     <button class="tab" data-view="site">⚙ 전체설정</button>
     <button class="tab" data-view="ai">✨ AI 도우미</button>
@@ -97,6 +100,7 @@ hr{border:0;border-top:1px solid var(--line);margin:18px 0}
     <button class="active" data-view="home">대시보드</button>
     <button data-view="products">상품관리</button>
     <button data-view="images">이미지 보관 폴더</button>
+    <button data-view="visual">상품 화면 편집</button>
     <button data-view="orders">주문·배송</button>
     <button data-view="refunds">취소·환불</button>
     <button data-view="members">회원관리</button>
@@ -131,6 +135,7 @@ hr{border:0;border-top:1px solid var(--line);margin:18px 0}
   </div>
   <div class="cards" style="margin-top:16px">
     <button class="card gold" data-view="images"><h3>🖼 이미지·동영상 보관함</h3><div class="small">메인/상품/배너 사진을 업로드하고 적용</div></button>
+    <button class="card gold" data-view="visual"><h3>🪄 홈페이지에서 바로 편집</h3><div class="small">실제 화면을 보면서 상품 이미지와 이름을 클릭해 수정</div></button>
     <button class="card" data-view="products"><h3>＋ 상품 바로 등록</h3><div class="small">상품 등록 후 홈페이지에 즉시 적용</div></button>
     <button class="card" data-view="orders"><h3>🚚 주문·배송 관리</h3><div class="small">송장번호와 배송상태 빠르게 처리</div></button>
   </div>
@@ -177,6 +182,42 @@ hr{border:0;border-top:1px solid var(--line);margin:18px 0}
   <div id="fruitAssetLibrary" class="imglib"></div>
   <h3 style="margin:26px 0 10px">내 업로드 이미지</h3>
   <div id="imageLibrary" class="imglib"></div>
+</section>
+
+<section class="view" id="view-visual">
+  <div class="row" style="justify-content:space-between;align-items:flex-end">
+    <div><h2>상품 화면 편집</h2><div class="small">실제 홈페이지 전체 화면에서 상품을 클릭한 뒤 이미지와 표시 이름을 바로 수정합니다.</div></div>
+    <button class="ghost" id="visualRefreshBtn" type="button">미리보기 새로고침</button>
+  </div>
+  <div class="notice">① 계절 선택 → ② 홈페이지에서 바꿀 과일 클릭 → ③ 오른쪽에서 이름/이미지 수정 → ④ 적용 저장. 가격·재고·실제 주문상품 연결은 기존 <b>상품관리</b>에서 그대로 관리합니다.</div>
+  <div class="visual-editor-shell">
+    <div class="visual-preview-wrap">
+      <div class="visual-preview-toolbar">
+        <b>실제 홈페이지 미리보기</b>
+        <div class="row">
+          <button class="ghost visual-season active" type="button" data-visual-season="spring">봄</button>
+          <button class="ghost visual-season" type="button" data-visual-season="summer">여름</button>
+          <button class="ghost visual-season" type="button" data-visual-season="autumn">가을</button>
+          <button class="ghost visual-season" type="button" data-visual-season="winter">겨울</button>
+        </div>
+      </div>
+      <iframe class="visual-preview-frame" id="visualPreviewFrame" title="홈페이지 상품 편집 미리보기"></iframe>
+    </div>
+    <aside class="visual-edit-panel">
+      <h3>선택한 상품 편집</h3>
+      <div class="small" id="visualSlotInfo">홈페이지에서 수정할 상품을 클릭하세요.</div>
+      <div id="visualEditorEmpty" class="visual-editor-empty">왼쪽 홈페이지에서<br><b>상품 이미지나 카드를 클릭</b>하면<br>여기에 편집 항목이 나타납니다.</div>
+      <div id="visualEditorFields" hidden>
+        <div class="visual-selected-preview"><img id="visualImagePreview" alt="선택한 상품 이미지"></div>
+        <div class="field"><label>홈페이지 표시 이름</label><input id="visualProductName" placeholder="상품 이름"></div>
+        <div class="field" style="margin-top:10px"><label>이미지 주소</label><input id="visualProductImage" placeholder="이미지 URL 또는 기존 이미지 경로"></div>
+        <label class="image-drop-label" style="margin-top:10px">새 이미지 파일 선택<input id="visualImageFile" type="file" accept="image/*"></label>
+        <div class="editor-note">이 편집은 <b>선택한 계절의 선택한 위치</b>에만 적용됩니다. 같은 과일이라도 다른 계절이나 다른 구역은 따로 바꿀 수 있습니다.</div>
+        <div class="visual-save-row"><button class="ghost" id="visualResetBtn" type="button">기본값으로 복원</button><button class="primary" id="visualSaveBtn" type="button">이 위치에 적용</button></div>
+        <div class="visual-editor-status" id="visualEditorStatus"></div>
+      </div>
+    </aside>
+  </div>
 </section>
 
 <section class="view" id="view-orders">
@@ -414,6 +455,7 @@ let state={
  },
  site:{siteName:"이룸 fresh fruits",phone:"010-6423-4562",email:"",address:"서울특별시 송파구 송이로15길 33, 상가동 B-103호",businessNo:"775-97-00292",mailOrderNo:"제 2025-서울 송파 -1052호",bankName:"",bankAccount:"",bankOwner:"",tossClientKey:"",tossSecretKey:"",tossEnabled:false,bandUrl:"https://band.us/@iroomfruits",kakaoUrl:"https://open.kakao.com/o/sd7wnrKi",kakaoJoinUrl:"",kakaoEnabled:false,kakaoJsKey:"",naverUrl:"",shippingFee:4000,freeShippingFrom:50000,emailNotify:true,stockNotify:true},
  event:{title:"",period:"",desc:"",active:false},coupon:{name:"",discount:0,code:"",expire:""},
+ homepageConfig:{},
  logs:[]
 };
 function $(s){return document.querySelector(s)} function $$(s){return Array.from(document.querySelectorAll(s))}
@@ -425,7 +467,7 @@ function closeModal(id){const el=id?$("#"+id):adminModalOpen();if(!el)return;if(
 window.addEventListener("popstate",()=>{if(!history.state?.iroomAdminModal)hideAdminModalDirect()});
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&adminModalOpen()){e.preventDefault();closeModal(adminModalOpen().id)}})
 function log(msg){state.logs.unshift(new Date().toLocaleString("ko-KR")+" · "+msg);state.logs=state.logs.slice(0,100)}
-function goto(view){$$(".view").forEach(v=>v.classList.remove("active"));$("#view-"+view)?.classList.add("active");$$("[data-view]").forEach(b=>b.classList.toggle("active",b.dataset.view===view));if(view==="products")renderProducts();if(view==="images")renderImages();if(view==="orders")renderOrders();if(view==="members")renderMembers();if(view==="refunds")renderRefunds();if(view==="reviews")renderReviews();if(view==="inquiries")renderInquiries();if(view==="logs")renderLogs();if(view==="traffic")renderTraffic();if(view==="banners")fillBanner();if(view==="site")fillSite()}
+function goto(view){$$(".view").forEach(v=>v.classList.remove("active"));$("#view-"+view)?.classList.add("active");$$("[data-view]").forEach(b=>b.classList.toggle("active",b.dataset.view===view));if(view==="products")renderProducts();if(view==="images")renderImages();if(view==="orders")renderOrders();if(view==="members")renderMembers();if(view==="refunds")renderRefunds();if(view==="reviews")renderReviews();if(view==="inquiries")renderInquiries();if(view==="logs")renderLogs();if(view==="traffic")renderTraffic();if(view==="banners")fillBanner();if(view==="site")fillSite();if(view==="visual")renderVisualEditor()}
 $$("[data-view]").forEach(b=>b.addEventListener("click",()=>{
  const focus=b.dataset.trafficFocus||"";
  if(b.dataset.view==="products"&&!b.hasAttribute("data-low-stock")){const f=$("#productFilter");if(f)f.value=""}
@@ -436,13 +478,14 @@ $$("[data-view]").forEach(b=>b.addEventListener("click",()=>{
 
 async function load(){
   try{
-    const [storeR,productsR,ordersR,usersR]=await Promise.all([
+    const [storeR,productsR,ordersR,usersR,configR]=await Promise.all([
       fetch("/api/store",{cache:"no-store"}),
       fetch("/api/admin/products",{cache:"no-store"}),
       fetch("/api/admin/orders",{cache:"no-store"}),
-      fetch("/api/admin/users",{cache:"no-store"})
+      fetch("/api/admin/users",{cache:"no-store"}),
+      fetch("/api/admin/site/homepage-config",{cache:"no-store"})
     ]);
-    if([storeR,productsR,ordersR,usersR].some(r=>r.status===401)){
+    if([storeR,productsR,ordersR,usersR,configR].some(r=>r.status===401)){
       lockAdmin("로그인 시간이 만료되었습니다. 다시 로그인해 주세요.");
       renderAll();return;
     }
@@ -451,6 +494,7 @@ async function load(){
     const pd=productsR.ok?await productsR.json():{products:d.products||[]};
     const od=ordersR.ok?await ordersR.json():{orders:d.orders||[]};
     const ud=usersR.ok?await usersR.json():{users:d.members||[]};
+    const cd=configR.ok?await configR.json():{config:{}};
     state={...state,...d,
       products:(pd.products||[]).map(p=>({
         id:p.id,name:p.name,price:Number(p.price||0),unit:p.unit||"",stock:Number(p.stock||0),
@@ -458,7 +502,8 @@ async function load(){
         image:p.image||"",order:Number(p.sort_order||0),desc:p.description||"",category:p.category||"과일"
       })),
       orders:(od.orders||[]).map(o=>({...o,id:o.id,orderNo:o.order_no,name:o.customer_name,phone:o.phone,total:o.total_amount,createdAt:o.created_at})),
-      members:(ud.users||[]).map(u=>({...u,createdAt:u.created_at}))
+      members:(ud.users||[]).map(u=>({...u,createdAt:u.created_at})),
+      homepageConfig:cd.config||{}
     };
     state.site={...(state.site||{})};
     if(!state.site.address)state.site.address="서울특별시 송파구 송이로15길 33, 상가동 B-103호";
@@ -547,6 +592,23 @@ function collectBanner(){state.banner={hero1:{image:$("#hero1Image").value,title
 function fillSite(){const s=state.site||{};const map={siteName:"siteName",phone:"sitePhone",email:"siteEmail",address:"siteAddress",businessNo:"businessNo",mailOrderNo:"mailOrderNo",bankName:"bankName",bankAccount:"bankAccount",bankOwner:"bankOwner",tossClientKey:"tossClientKey",tossSecretKey:"tossSecretKey",bandUrl:"bandUrl",kakaoUrl:"kakaoUrl",kakaoJsKey:"kakaoJsKey",naverUrl:"naverUrl",shippingFee:"shippingFee",freeShippingFrom:"freeShippingFrom"};for(const [k,id] of Object.entries(map))$("#"+id).value=s[k]??"";$("#tossEnabled").checked=!!s.tossEnabled;$("#kakaoEnabled").checked=!!s.kakaoEnabled;$("#emailNotify").checked=!!s.emailNotify;$("#stockNotify").checked=!!s.stockNotify}
 function collectSite(){state.site={siteName:$("#siteName").value,phone:$("#sitePhone").value,email:$("#siteEmail").value,address:$("#siteAddress").value,businessNo:$("#businessNo").value,mailOrderNo:$("#mailOrderNo").value,bankName:$("#bankName").value,bankAccount:$("#bankAccount").value,bankOwner:$("#bankOwner").value,tossClientKey:$("#tossClientKey").value,tossSecretKey:$("#tossSecretKey").value,tossEnabled:$("#tossEnabled").checked,bandUrl:$("#bandUrl").value,kakaoUrl:$("#kakaoUrl").value,kakaoJoinUrl:"",kakaoEnabled:$("#kakaoEnabled").checked,kakaoJsKey:$("#kakaoJsKey").value,naverUrl:$("#naverUrl").value,shippingFee:Number($("#shippingFee").value),freeShippingFrom:Number($("#freeShippingFrom").value),emailNotify:$("#emailNotify").checked,stockNotify:$("#stockNotify").checked}}
 const oldPersist=persist;persist=async function(){if($("#view-banners").classList.contains("active"))collectBanner();if($("#view-site").classList.contains("active"))collectSite();state.event={title:$("#eventTitle").value||state.event.title,period:$("#eventPeriod").value||state.event.period,desc:$("#eventDesc").value||state.event.desc,active:$("#eventActive").checked};state.coupon={name:$("#couponName").value||state.coupon.name,discount:Number($("#couponDiscount").value||state.coupon.discount||0),code:$("#couponCode").value||state.coupon.code,expire:$("#couponExpire").value||state.coupon.expire};return oldPersist()};
+
+
+let visualSeason='spring',visualSelection=null;
+function visualFrameUrl(){const u=new URL('./index.html',location.href);u.searchParams.set('adminPreview','1');u.searchParams.set('season',visualSeason);u.searchParams.set('_',Date.now());return u.href}
+function renderVisualEditor(){const frame=$('#visualPreviewFrame');if(frame&&!frame.src)frame.src=visualFrameUrl();$$('[data-visual-season]').forEach(b=>b.classList.toggle('active',b.dataset.visualSeason===visualSeason))}
+function reloadVisualFrame(){const frame=$('#visualPreviewFrame');if(frame)frame.src=visualFrameUrl()}
+$$('[data-visual-season]').forEach(btn=>btn.addEventListener('click',()=>{visualSeason=btn.dataset.visualSeason;visualSelection=null;clearVisualFields();$$('[data-visual-season]').forEach(b=>b.classList.toggle('active',b===btn));reloadVisualFrame()}));
+$('#visualRefreshBtn')?.addEventListener('click',reloadVisualFrame);
+function visualImageSrc(v){v=String(v||'');if(/^data:image\//i.test(v)||/^https?:\/\//i.test(v)||v.startsWith('/'))return v;return './iroom_assets/'+v}
+function clearVisualFields(){visualSelection=null;$('#visualEditorEmpty').hidden=false;$('#visualEditorFields').hidden=true;$('#visualSlotInfo').textContent='홈페이지에서 수정할 상품을 클릭하세요.';$('#visualEditorStatus').textContent=''}
+window.addEventListener('message',e=>{if(e.origin!==location.origin)return;const d=e.data||{};if(d.type!=='iroom-product-select')return;visualSelection=d;$('#visualEditorEmpty').hidden=true;$('#visualEditorFields').hidden=false;const parts=String(d.editKey||'').split('|');const sectionNames={hero:'메인 과일',today:'오늘의 이룸 PICK',premium:'프리미엄 과일',seasonal:'제철 과일',library:'오늘 더 만나볼 과일'};$('#visualSlotInfo').textContent=`${sectionNames[parts[1]]||parts[1]||'상품'} · ${Number(parts[2]||0)+1}번째 위치 · 원본 ${d.baseName||''}`;$('#visualProductName').value=d.displayName||d.baseName||'';$('#visualProductImage').value=d.visual||'';$('#visualImagePreview').src=visualImageSrc(d.visual);$('#visualEditorStatus').textContent=''});
+$('#visualProductImage')?.addEventListener('input',e=>{$('#visualImagePreview').src=visualImageSrc(e.target.value)});
+$('#visualImageFile')?.addEventListener('change',async e=>{const file=e.target.files?.[0];if(!file)return;$('#visualEditorStatus').textContent='이미지를 최적화하는 중...';const data=await resizeImage(file,900,650,.78);$('#visualProductImage').value=data;$('#visualImagePreview').src=data;$('#visualEditorStatus').textContent='새 이미지가 준비되었습니다. 적용 저장을 눌러주세요.';e.target.value=''});
+function visualOverrideContainer(editKey,create=true){const [season,section,indexRaw]=String(editKey||'').split('|'),index=Number(indexRaw);if(!season||!section||!Number.isFinite(index))return null;state.homepageConfig=state.homepageConfig||{};if(create){state.homepageConfig.productEditor=state.homepageConfig.productEditor||{};state.homepageConfig.productEditor[season]=state.homepageConfig.productEditor[season]||{};state.homepageConfig.productEditor[season][section]=state.homepageConfig.productEditor[season][section]||[]}const arr=state.homepageConfig?.productEditor?.[season]?.[section];return arr?{arr,index,season,section}:null}
+async function saveHomepageVisualConfig(){const r=await fetch('/api/admin/site/homepage-config',{method:'PUT',credentials:'same-origin',headers:{'Content-Type':'application/json'},body:JSON.stringify({config:state.homepageConfig||{}})});const d=await r.json().catch(()=>({}));if(!r.ok)throw new Error(d.error||'저장 실패');state.homepageConfig=d.config||state.homepageConfig;return d}
+$('#visualSaveBtn')?.addEventListener('click',async()=>{if(!visualSelection)return;const c=visualOverrideContainer(visualSelection.editKey,true);if(!c)return;const name=$('#visualProductName').value.trim()||visualSelection.baseName,image=$('#visualProductImage').value.trim();c.arr[c.index]={name,image};$('#visualEditorStatus').textContent='저장 중...';try{await saveHomepageVisualConfig();$('#visualEditorStatus').textContent='홈페이지에 저장되었습니다.';log(`상품 화면 수정 · ${name}`);reloadVisualFrame()}catch(err){$('#visualEditorStatus').textContent=err.message||'저장에 실패했습니다.'}});
+$('#visualResetBtn')?.addEventListener('click',async()=>{if(!visualSelection)return;if(!confirm('이 위치의 이름과 이미지를 기본값으로 복원할까요?'))return;const c=visualOverrideContainer(visualSelection.editKey,false);if(c)c.arr[c.index]=null;$('#visualEditorStatus').textContent='복원 중...';try{await saveHomepageVisualConfig();clearVisualFields();reloadVisualFrame()}catch(err){$('#visualEditorStatus').textContent=err.message||'복원에 실패했습니다.'}});
 
 
 $("#changeAdminPasswordBtn")?.addEventListener("click",async()=>{
