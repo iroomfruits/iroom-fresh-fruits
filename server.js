@@ -37,12 +37,13 @@ app.disable("x-powered-by");
 
 // Security headers without adding new runtime dependencies.
 app.use((req,res,next)=>{
+  const isAdminPreview=req.path==="/admin-preview";
   res.setHeader("X-Content-Type-Options","nosniff");
-  res.setHeader("X-Frame-Options","DENY");
+  res.setHeader("X-Frame-Options",isAdminPreview?"SAMEORIGIN":"DENY");
   res.setHeader("Referrer-Policy","strict-origin-when-cross-origin");
   res.setHeader("Permissions-Policy","camera=(), microphone=(), geolocation=(), payment=(self)");
   res.setHeader("Cross-Origin-Opener-Policy","same-origin-allow-popups");
-  res.setHeader("Content-Security-Policy","frame-ancestors 'none'; object-src 'none'; base-uri 'self'; form-action 'self'");
+  res.setHeader("Content-Security-Policy",`${isAdminPreview?"frame-ancestors 'self'":"frame-ancestors 'none'"}; object-src 'none'; base-uri 'self'; form-action 'self'`);
   if(req.secure || process.env.NODE_ENV==="production") res.setHeader("Strict-Transport-Security","max-age=31536000; includeSubDomains");
   if(req.path.startsWith("/api/admin") || req.path==="/api/me") res.setHeader("Cache-Control","no-store");
   next();
@@ -1069,6 +1070,7 @@ app.get("/api/payment/config",(req,res)=>{
 
 app.get("/band-order.html",(req,res)=>res.sendFile(path.join(__dirname,"public","band-order.html")));
 app.get("/band-admin.html",(req,res)=>res.sendFile(path.join(__dirname,"public","band-admin.html")));
+app.get("/admin-preview",(req,res)=>{res.setHeader("Cache-Control","no-store");res.sendFile(path.join(__dirname,"public","index.html"))});
 app.get("/healthz",(req,res)=>res.json({ok:true,time:new Date().toISOString()}));
 
 // static site
