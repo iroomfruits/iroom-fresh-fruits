@@ -29,7 +29,7 @@ const pool = new Pool({
   ssl: process.env.DATABASE_URL.includes("localhost") ? false : { rejectUnauthorized: false }
 });
 
-app.use(express.json({ limit: "6mb" }));
+app.use(express.json({ limit: "20mb" }));
 app.use(express.urlencoded({ extended: true }));
 
 app.set("trust proxy",1);
@@ -974,7 +974,7 @@ app.put("/api/admin/site/homepage-config",requireAdmin,async(req,res)=>{
   try{
     const raw=req.body&&typeof req.body.config==="object"?req.body.config:{};
     const json=JSON.stringify(raw);
-    if(json.length>3500000)return res.status(413).json({ok:false,error:"설정/이미지 용량이 너무 큽니다. 사진 수나 크기를 줄여주세요."});
+    if(json.length>15000000)return res.status(413).json({ok:false,error:"상품 화면 편집 데이터가 너무 큽니다. 고해상도 사진 수를 줄여주세요."});
     const saved=await putSetting("homepage_config",raw);
     logSecurity("admin_homepage_config_updated","admin",req,"homepage_config");
     res.json({ok:true,config:saved.setting_value,updatedAt:saved.updated_at});
