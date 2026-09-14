@@ -160,6 +160,19 @@ async function putSetting(key,value){
   `,[key,JSON.stringify(value)]);
   return r.rows[0];
 }
+
+async function getPaymentBankInfo(){
+  let site={};
+  try{
+    const saved=await getSetting("iroom1_store",{});
+    site=(saved&&saved.site)||{};
+  }catch(_){}
+  return {
+    name:String(site.bankName||process.env.BANK_NAME||"우리은행").trim(),
+    account:String(site.bankAccount||process.env.BANK_ACCOUNT||"1005-203-135891").trim(),
+    holder:String(site.bankOwner||process.env.BANK_HOLDER||"한효철").trim()
+  };
+}
 function extractOpenAIResult(data){
   const texts=[], sources=[];
   for(const item of (data?.output||[])){
@@ -219,6 +232,7 @@ ${cleanLongText(details,3500)}
 }
 async function notifyOrder(order,items){
   const c=mailSettings();
+  const bank=await getPaymentBankInfo();
   const lines=items.map(i=>`${i.product_name} × ${i.qty} = ${money(i.line_total)}`).join("\n");
   const status={seller:{sent:false,reason:""},customer:{sent:false,reason:""}};
 
@@ -228,13 +242,16 @@ async function notifyOrder(order,items){
 연락처: ${order.phone}
 이메일: ${order.email||"-"}
 배송지: ${order.postcode||""} ${order.address1||""} ${order.address2||""}
+배송지역: ${{normal:"일반지역",jeju:"제주도",remote:"제주 외 도서산간"}[order.shipping_region]||"일반지역"}
 배송메모: ${order.memo||"-"}
 
 ${lines}
 
+상품금액: ${money(order.subtotal||Math.max(0,Number(order.total_amount||0)-Number(order.shipping_fee||0)))}
+배송비: ${Number(order.shipping_fee||0)===0?"무료":money(order.shipping_fee)}
 총금액: ${money(order.total_amount)}
-입금계좌: 우리은행 1005-203-135891
-예금주: 이룸 fresh fruits`;
+입금계좌: ${bank.name} ${bank.account}
+예금주: ${bank.holder}`;
 
   if(!c.orderEmail){
     status.seller.reason="ORDER_EMAIL_MISSING";
@@ -254,12 +271,15 @@ ${lines}
     const customer=`${order.customer_name} 고객님, 이룸 fresh fruits 주문이 접수되었습니다.
 
 주문번호: ${order.order_no}
+배송지역: ${{normal:"일반지역",jeju:"제주도",remote:"제주 외 도서산간"}[order.shipping_region]||"일반지역"}
 
 ${lines}
 
+상품금액: ${money(order.subtotal||Math.max(0,Number(order.total_amount||0)-Number(order.shipping_fee||0)))}
+배송비: ${Number(order.shipping_fee||0)===0?"무료":money(order.shipping_fee)}
 총금액: ${money(order.total_amount)}
-우리은행 1005-203-135891
-예금주: 이룸 fresh fruits
+${bank.name} ${bank.account}
+예금주: ${bank.holder}
 
 입금 확인 후 정성껏 선별·포장해 배송하겠습니다.`;
     try{
@@ -426,6 +446,9 @@ async function initDb(){
   await pool.query(`ALTER TABLE users ADD COLUMN IF NOT EXISTS kakao_id TEXT`);
   await pool.query(`ALTER TABLE users ADD COLUMN IF NOT EXISTS auth_provider TEXT DEFAULT 'local'`);
   await pool.query(`CREATE UNIQUE INDEX IF NOT EXISTS idx_users_kakao_id_unique ON users(kakao_id) WHERE kakao_id IS NOT NULL`);
+  await pool.query(`ALTER TABLE orders ADD COLUMN IF NOT EXISTS subtotal INTEGER NOT NULL DEFAULT 0`).catch(()=>{});
+  await pool.query(`ALTER TABLE orders ADD COLUMN IF NOT EXISTS shipping_fee INTEGER NOT NULL DEFAULT 0`).catch(()=>{});
+  await pool.query(`ALTER TABLE orders ADD COLUMN IF NOT EXISTS shipping_region TEXT NOT NULL DEFAULT 'normal'`).catch(()=>{});
   await pool.query(`ALTER TABLE users ALTER COLUMN email DROP NOT NULL`).catch(()=>{});
   await pool.query(`CREATE UNIQUE INDEX IF NOT EXISTS idx_users_username_unique ON users(username) WHERE username IS NOT NULL`);
 
@@ -632,15 +655,16 @@ app.get("/api/products", async(req,res)=>{
 
 // Orders
 app.post("/api/orders", simpleRateLimit({windowMs:10*60*1000,max:20,keyPrefix:"order"}), async(req,res)=>{
-  const {items,customer_name,phone,email="",postcode="",address1,address2="",memo="",payment_method="무통장입금"}=req.body||{};
+  const {items,customer_name,phone,email="",postcode="",address1,address2="",memo="",payment_method="무통장입금",shipping_region="normal"}=req.body||{};
   const safeCustomer=cleanText(customer_name,60),safePhone=cleanPhone(phone),safeEmail=cleanEmail(email),safePost=cleanText(postcode,12),safeAddr1=cleanText(address1,180),safeAddr2=cleanText(address2,120),safeMemo=cleanText(memo,500);
+  const safeShippingRegion=["normal","jeju","remote"].includes(String(shipping_region))?String(shipping_region):"normal";
   if(!Array.isArray(items)||!items.length||items.length>30) return res.status(400).json({error:"주문 상품이 없습니다."});
   if(!safeCustomer||!safePhone||!safeAddr1) return res.status(400).json({error:"주문자명, 연락처, 배송지를 입력해주세요."});
 
   const client=await pool.connect();
   try{
     await client.query("BEGIN");
-    let total=0;
+    let subtotal=0;
     const finalItems=[];
     for(const it of items){
       const pid=Number(it.product_id||it.id);
@@ -649,15 +673,26 @@ app.post("/api/orders", simpleRateLimit({windowMs:10*60*1000,max:20,keyPrefix:"o
       const p=pr.rows[0];
       if(!p||!p.is_active) throw new Error("판매하지 않는 상품이 포함되어 있습니다.");
       if(p.stock<qty) throw new Error(`${p.name} 재고가 부족합니다.`);
-      const line=p.price*qty; total+=line;
+      const line=p.price*qty; subtotal+=line;
       finalItems.push({p,qty,line});
     }
+    const savedStore=await getSetting("iroom1_store",{});
+    const savedValue=savedStore?.setting_value||savedStore||{};
+    const site=savedValue.site||{};
+    const baseShipping=Math.max(0,Number(site.shippingFee ?? 4000)||0);
+    const freeFrom=Math.max(0,Number(site.freeShippingFrom ?? 50000)||0);
+    const jejuExtra=Math.max(0,Number(site.jejuShippingExtra ?? 4000)||0);
+    const remoteExtra=Math.max(0,Number(site.remoteShippingExtra ?? 5000)||0);
+    const baseFee=(freeFrom>0 && subtotal>=freeFrom)?0:baseShipping;
+    const regionalExtra=safeShippingRegion==="jeju"?jejuExtra:safeShippingRegion==="remote"?remoteExtra:0;
+    const shippingFee=baseFee+regionalExtra;
+    const total=subtotal+shippingFee;
     const t=readToken(req);
     const ono=orderNo();
     const or=await client.query(`
-      INSERT INTO orders(order_no,user_id,customer_name,phone,email,postcode,address1,address2,memo,payment_method,total_amount)
-      VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11) RETURNING *
-    `,[ono,t?.userId||null,safeCustomer,safePhone,safeEmail,safePost,safeAddr1,safeAddr2,safeMemo,cleanText(payment_method,40),total]);
+      INSERT INTO orders(order_no,user_id,customer_name,phone,email,postcode,address1,address2,memo,payment_method,subtotal,shipping_fee,total_amount,shipping_region)
+      VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14) RETURNING *
+    `,[ono,t?.userId||null,safeCustomer,safePhone,safeEmail,safePost,safeAddr1,safeAddr2,safeMemo,cleanText(payment_method,40),subtotal,shippingFee,total,safeShippingRegion]);
     const order=or.rows[0];
     for(const x of finalItems){
       await client.query(`
@@ -673,12 +708,8 @@ app.post("/api/orders", simpleRateLimit({windowMs:10*60*1000,max:20,keyPrefix:"o
     }));
     const mail_status=await notifyOrder(orderForMail,itemsForMail);
     res.json({
-      ok:true,order_no:ono,total_amount:total,mail_status,
-      bank:{
-        name:process.env.BANK_NAME||"우리은행",
-        account:process.env.BANK_ACCOUNT||"1005-203-135891",
-        holder:process.env.BANK_HOLDER||"이룸 fresh fruits"
-      }
+      ok:true,order_no:ono,subtotal,shipping_fee:shippingFee,total_amount:total,free_shipping_from:freeFrom,shipping_region:safeShippingRegion,shipping_region_label:({normal:"일반지역",jeju:"제주도",remote:"제주 외 도서산간"}[safeShippingRegion]),regional_extra:regionalExtra,mail_status,
+      bank:await getPaymentBankInfo()
     });
   }catch(e){
     await client.query("ROLLBACK");
@@ -713,10 +744,19 @@ app.get("/api/order/:orderNo", simpleRateLimit({windowMs:10*60*1000,max:20,keyPr
 });
 
 // Admin auth
-app.post("/api/admin/login",simpleRateLimit({windowMs:30*60*1000,max:8,keyPrefix:"admin"}),(req,res)=>{
+app.post("/api/admin/login",simpleRateLimit({windowMs:30*60*1000,max:8,keyPrefix:"admin"}),async(req,res)=>{
   const {password}=req.body||{};
-  if(!ADMIN_PASSWORD) return res.status(503).json({error:"관리자 비밀번호가 서버에 설정되지 않았습니다."});
-  if(!password || !safeEqual(password,ADMIN_PASSWORD)){
+  let valid=false;
+  try{
+    const saved=await getSetting("admin_password_hash",{});
+    const hash=String(saved?.hash||"");
+    if(hash) valid=!!password && await bcrypt.compare(String(password),hash);
+    else valid=!!password && !!ADMIN_PASSWORD && safeEqual(String(password),ADMIN_PASSWORD);
+  }catch(_){valid=!!password && !!ADMIN_PASSWORD && safeEqual(String(password),ADMIN_PASSWORD)}
+  if(!ADMIN_PASSWORD){
+    try{const saved=await getSetting("admin_password_hash",{});if(!saved?.hash)return res.status(503).json({error:"관리자 비밀번호가 서버에 설정되지 않았습니다."})}catch(_){return res.status(503).json({error:"관리자 비밀번호가 서버에 설정되지 않았습니다."})}
+  }
+  if(!valid){
     logSecurity("admin_login_failed","admin",req);
     return res.status(401).json({error:"관리자 비밀번호가 올바르지 않습니다."});
   }
@@ -726,6 +766,17 @@ app.post("/api/admin/login",simpleRateLimit({windowMs:30*60*1000,max:8,keyPrefix
 app.post("/api/admin/logout",(req,res)=>{res.clearCookie("iroom_token");res.json({ok:true});});
 app.get("/api/admin/me",(req,res)=>{const t=readToken(req);res.json({admin:!!t?.admin});});
 app.get("/api/admin/session",(req,res)=>{const t=readToken(req);if(!t?.admin)return res.status(401).json({authenticated:false});res.json({authenticated:true});});
+
+app.post("/api/admin/password",requireAdmin,async(req,res)=>{
+  try{
+    const password=String(req.body?.password||"");
+    if(password.length<10)return res.status(400).json({error:"관리자 비밀번호는 10자 이상으로 설정해 주세요."});
+    const hash=await bcrypt.hash(password,12);
+    await putSetting("admin_password_hash",{hash,updatedAt:new Date().toISOString()});
+    logSecurity("admin_password_changed","admin",req);
+    res.json({ok:true,message:"관리자 비밀번호가 변경되었습니다."});
+  }catch(e){res.status(500).json({error:"관리자 비밀번호 변경에 실패했습니다."})}
+});
 
 
 app.post("/api/consultations",simpleRateLimit({windowMs:10*60*1000,max:12,keyPrefix:"consult"}),async(req,res)=>{
@@ -867,6 +918,12 @@ app.post("/api/admin/ai/assist",
 
 
 
+// Public-safe payment information. Uses admin site settings first, then Render env, then safe defaults.
+app.get("/api/site/payment-info",async(req,res)=>{
+  try{res.json({ok:true,bank:await getPaymentBankInfo()})}
+  catch(e){res.status(500).json({ok:false,error:"입금계좌 정보를 불러오지 못했습니다."})}
+});
+
 // Public-safe footer/review configuration for IROOM4 storefront.
 app.get("/api/site/footer-config",async(req,res)=>{
   try{
@@ -878,16 +935,25 @@ app.get("/api/site/footer-config",async(req,res)=>{
       ok:true,
       site:{
         siteName:String(site.siteName||"이룸 fresh fruits"),
+        representative:String(site.representative||"한효철"),
+        phone:String(site.phone||"070-7762-3651"),
+        email:String(site.email||"iroom4562@naver.com"),
         address:String(site.address||"서울특별시 송파구 송이로15길 33, 상가동 B-103호"),
         businessNo:String(site.businessNo||"775-97-00292"),
         mailOrderNo:String(site.mailOrderNo||"제 2025-서울 송파 -1052호"),
+        hostingProvider:String(site.hostingProvider||"Render"),
         bandUrl:String(site.bandUrl||"https://band.us/@iroomfruits"),
         kakaoUrl:String(site.kakaoUrl||""),
         kakaoJoinUrl:String(site.kakaoJoinUrl||""),
         kakaoEnabled:Boolean(site.kakaoEnabled),
         kakaoJsKey:String(site.kakaoJsKey||process.env.KAKAO_JAVASCRIPT_KEY||""),
         kakaoRedirectUri:KAKAO_REDIRECT_URI,
-        naverUrl:String(site.naverUrl||"")
+        naverUrl:String(site.naverUrl||""),
+        shippingFee:Number.isFinite(Number(site.shippingFee))?Number(site.shippingFee):4000,
+        freeShippingFrom:Number.isFinite(Number(site.freeShippingFrom))?Number(site.freeShippingFrom):50000,
+        jejuShippingExtra:Number.isFinite(Number(site.jejuShippingExtra))?Number(site.jejuShippingExtra):4000,
+        remoteShippingExtra:Number.isFinite(Number(site.remoteShippingExtra))?Number(site.remoteShippingExtra):5000,
+        courier:String(site.courier||"")
       },
       reviews
     });
