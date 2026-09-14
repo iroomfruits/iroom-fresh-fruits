@@ -1,5 +1,5 @@
-const CACHE='iroom-v53-premium-gift-box-all-seasons';
-const CORE=['./','./index.html','./manifest.webmanifest','./iroom_assets/iroom-v53.css','./iroom_assets/iroom-v53.js','./iroom_assets/iroom-logo-final.png','./iroom_assets/app-icon-192.png','./iroom_assets/app-icon-512.png'];
+const CACHE='iroom-v56-remote-area-shipping-policy';
+const CORE=['./','./index.html','./manifest.webmanifest','./iroom_assets/iroom-v56.css','./iroom_assets/iroom-v56.js','./iroom_assets/iroom-logo-final.png','./iroom_assets/app-icon-192.png','./iroom_assets/app-icon-512.png'];
 self.addEventListener('install',e=>{self.skipWaiting();e.waitUntil(caches.open(CACHE).then(c=>c.addAll(CORE)).catch(()=>{}))});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});
-self.addEventListener('fetch',e=>{if(e.request.method!=='GET')return;const u=new URL(e.request.url);if(u.origin!==location.origin)return;e.respondWith(fetch(e.request).then(r=>{const copy=r.clone();caches.open(CACHE).then(c=>c.put(e.request,copy)).catch(()=>{});return r}).catch(()=>caches.match(e.request).then(r=>r||caches.match('./index.html'))))});
+self.addEventListener('fetch',e=>{if(e.request.method!=='GET')return;const u=new URL(e.request.url);if(u.origin!==location.origin)return;if(u.pathname.startsWith('/api/')||u.pathname.includes('band-admin.html')||u.pathname.includes('admin-preview')){e.respondWith(fetch(e.request));return}e.respondWith(fetch(e.request).then(r=>{const copy=r.clone();caches.open(CACHE).then(c=>c.put(e.request,copy)).catch(()=>{});return r}).catch(()=>caches.match(e.request).then(r=>r||caches.match('./index.html'))))});
