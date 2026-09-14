@@ -1,0 +1,12 @@
+이룸홈1 V56.1 프리미엄 이미지 핫픽스
+
+원인: V56 JS는 premium_box_v53/*.png를 요청했지만 경량 GitHub 패치에 추가된 실제 파일은 *.webp여서 이미지가 404로 깨졌습니다.
+
+수정:
+- 프리미엄 16개 이미지 경로를 .webp로 통일
+- iroom-v561.js / iroom-v561.css 신규 파일 사용
+- index.html 버전 변경으로 브라우저 캐시 우회
+- 서비스워커 캐시명을 iroom-v561-premium-image-hotfix로 변경
+- 배송/회원/주문/관리자 기능은 V56 그대로 유지
+
+압축 해제 후 내용 전체를 GitHub 루트에 업로드하고 Commit changes -> Render 배포 완료 -> Ctrl+F5 하세요.
