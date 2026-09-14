@@ -60,6 +60,8 @@ hr{border:0;border-top:1px solid var(--line);margin:18px 0}
 .admin-login-msg{font-size:12px;color:#b03d3d;min-height:18px;margin-top:9px}
 
 .visual-editor-shell{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:14px;align-items:start}.visual-preview-wrap{border:1px solid var(--line);border-radius:16px;background:#f4f0e8;padding:10px;overflow:hidden}.visual-preview-toolbar{display:flex;gap:8px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-bottom:10px}.visual-preview-toolbar .row{gap:6px}.visual-preview-frame{width:100%;height:980px;border:0;border-radius:12px;background:#fff;box-shadow:0 8px 26px rgba(50,38,25,.08)}.visual-edit-panel{position:sticky;top:145px;border:1px solid var(--line);border-radius:16px;padding:16px;background:#fff;box-shadow:0 12px 30px rgba(45,34,22,.06)}.visual-edit-panel h3{margin:0 0 6px}.visual-selected-preview{height:190px;border:1px dashed #d7cab8;border-radius:14px;background:#faf7f1;display:grid;place-items:center;overflow:hidden;margin:12px 0}.visual-selected-preview img{width:100%;height:100%;object-fit:contain}.visual-editor-empty{padding:26px 14px;border:1px dashed #d9cfbf;border-radius:12px;background:#faf8f3;color:#80766c;text-align:center;line-height:1.7}.visual-save-row{display:flex;gap:8px;margin-top:12px}.visual-save-row button{flex:1}.editor-note{font-size:12px;line-height:1.7;color:#746b62;background:#f8f4ec;border-radius:10px;padding:10px;margin:10px 0}.image-drop-label{display:block;border:1px solid #ded3c4;border-radius:10px;padding:11px;text-align:center;background:#fffaf2;font-weight:700;cursor:pointer}.image-drop-label input{display:none}.visual-editor-status{font-size:12px;min-height:18px;margin-top:8px;color:#256044}@media(max-width:1120px){.visual-editor-shell{grid-template-columns:1fr}.visual-edit-panel{position:static}.visual-preview-frame{height:780px}}
+
+.visual-section-editor{border:1px solid var(--line);border-radius:14px;background:#fff;padding:14px;margin-bottom:14px}.visual-section-editor h3{margin:0 0 5px}.visual-section-editor summary{cursor:pointer;font-weight:800;color:#315b50}.visual-section-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:12px}.visual-section-grid .full{grid-column:1/-1}.visual-subhead{margin:14px 0 7px;padding-top:12px;border-top:1px solid var(--line);font-weight:900;color:#315b50}.visual-two-preview{display:grid;grid-template-columns:1fr 1fr;gap:8px}.visual-two-preview .visual-selected-preview{height:145px;margin:8px 0}.visual-edit-panel textarea{width:100%;min-height:72px;resize:vertical}.visual-mini-actions{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}.visual-mini-actions button{font-size:11px;padding:8px 10px}.detail-field-note{font-size:11px;color:#82776b;line-height:1.6;margin-top:5px}@media(max-width:720px){.visual-section-grid,.visual-two-preview{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -135,7 +137,7 @@ hr{border:0;border-top:1px solid var(--line);margin:18px 0}
   </div>
   <div class="cards" style="margin-top:16px">
     <button class="card gold" data-view="images"><h3>🖼 이미지·동영상 보관함</h3><div class="small">메인/상품/배너 사진을 업로드하고 적용</div></button>
-    <button class="card gold" data-view="visual"><h3>🪄 홈페이지에서 바로 편집</h3><div class="small">실제 화면을 보면서 상품 이미지와 이름을 클릭해 수정</div></button>
+    <button class="card gold" data-view="visual"><h3>🪄 홈페이지에서 바로 편집</h3><div class="small">카드 이미지부터 상세 실제 이미지·설명까지 화면에서 직접 수정</div></button>
     <button class="card" data-view="products"><h3>＋ 상품 바로 등록</h3><div class="small">상품 등록 후 홈페이지에 즉시 적용</div></button>
     <button class="card" data-view="orders"><h3>🚚 주문·배송 관리</h3><div class="small">송장번호와 배송상태 빠르게 처리</div></button>
   </div>
@@ -185,15 +187,35 @@ hr{border:0;border-top:1px solid var(--line);margin:18px 0}
 </section>
 
 <section class="view" id="view-visual">
-  <div class="row" style="justify-content:space-between;align-items:flex-end">
-    <div><h2>상품 화면 편집</h2><div class="small">실제 홈페이지 전체 화면에서 상품을 클릭한 뒤 이미지와 표시 이름을 바로 수정합니다.</div></div>
-    <button class="ghost" id="visualRefreshBtn" type="button">미리보기 새로고침</button>
+  <div class="row" style="justify-content:space-between"><div><h2>상품 화면 편집</h2><div class="small">실제 홈페이지를 보면서 카드 화면부터 상세보기까지 고객에게 보이는 내용을 직접 구성합니다.</div></div><button class="ghost" id="visualRefreshBtn" type="button">미리보기 새로고침</button></div>
+  <div class="visual-section-editor">
+    <details open>
+      <summary>현재 계절 섹션 문구 편집</summary>
+      <div class="small" style="margin-top:6px">선택한 계절의 메인/오늘의 PICK/프리미엄/제철/과일 라이브러리 제목과 설명을 바꿀 수 있습니다.</div>
+      <div class="visual-section-grid">
+        <div class="field"><label>메인 제목</label><input id="visualHeroTitle" placeholder="예: 봄 프리미엄
+과일"></div>
+        <div class="field"><label>메인 설명</label><input id="visualHeroCopy" placeholder="메인 소개 문구"></div>
+        <div class="field"><label>오늘의 PICK 제목</label><input id="visualTodayTitle"></div>
+        <div class="field"><label>오늘의 PICK 설명</label><input id="visualTodayCopy"></div>
+        <div class="field"><label>프리미엄 제목</label><input id="visualPremiumTitle"></div>
+        <div class="field"><label>프리미엄 더보기 버튼</label><input id="visualPremiumButton"></div>
+        <div class="field full"><label>프리미엄 설명</label><input id="visualPremiumCopy"></div>
+        <div class="field"><label>제철 제목</label><input id="visualSeasonalTitle"></div>
+        <div class="field"><label>제철 더보기 버튼</label><input id="visualSeasonalButton"></div>
+        <div class="field full"><label>제철 설명</label><input id="visualSeasonalCopy"></div>
+        <div class="field"><label>과일 더보기 제목</label><input id="visualLibraryTitle"></div>
+        <div class="field"><label>과일 더보기 버튼</label><input id="visualLibraryButton"></div>
+        <div class="field full"><label>과일 더보기 설명</label><input id="visualLibraryCopy"></div>
+      </div>
+      <div class="visual-save-row"><button class="ghost" id="visualSectionResetBtn" type="button">계절 문구 기본값</button><button class="primary" id="visualSectionSaveBtn" type="button">계절 문구 저장</button></div>
+      <div class="visual-editor-status" id="visualSectionStatus"></div>
+    </details>
   </div>
-  <div class="notice">① 계절 선택 → ② 홈페이지에서 바꿀 과일 클릭 → ③ 오른쪽에서 이름/이미지 수정 → ④ 적용 저장. 가격·재고·실제 주문상품 연결은 기존 <b>상품관리</b>에서 그대로 관리합니다.</div>
   <div class="visual-editor-shell">
     <div class="visual-preview-wrap">
       <div class="visual-preview-toolbar">
-        <b>실제 홈페이지 미리보기</b>
+        <div class="row"><b>실제 홈페이지 미리보기</b><span class="small">상품 카드나 이미지를 클릭하세요.</span></div>
         <div class="row">
           <button class="ghost visual-season active" type="button" data-visual-season="spring">봄</button>
           <button class="ghost visual-season" type="button" data-visual-season="summer">여름</button>
@@ -204,16 +226,34 @@ hr{border:0;border-top:1px solid var(--line);margin:18px 0}
       <iframe class="visual-preview-frame" id="visualPreviewFrame" title="홈페이지 상품 편집 미리보기"></iframe>
     </div>
     <aside class="visual-edit-panel">
-      <h3>선택한 상품 편집</h3>
+      <h3>선택한 상품 전체 편집</h3>
       <div class="small" id="visualSlotInfo">홈페이지에서 수정할 상품을 클릭하세요.</div>
-      <div id="visualEditorEmpty" class="visual-editor-empty">왼쪽 홈페이지에서<br><b>상품 이미지나 카드를 클릭</b>하면<br>여기에 편집 항목이 나타납니다.</div>
+      <div id="visualEditorEmpty" class="visual-editor-empty">왼쪽 홈페이지에서<br><b>상품 이미지나 카드를 클릭</b>하면<br>카드와 상세보기 편집 항목이 나타납니다.</div>
       <div id="visualEditorFields" hidden>
-        <div class="visual-selected-preview"><img id="visualImagePreview" alt="선택한 상품 이미지"></div>
+        <div class="visual-subhead">① 카드 / 목록 화면</div>
+        <div class="visual-selected-preview"><img id="visualImagePreview" alt="카드 이미지"></div>
         <div class="field"><label>홈페이지 표시 이름</label><input id="visualProductName" placeholder="상품 이름"></div>
-        <div class="field" style="margin-top:10px"><label>이미지 주소</label><input id="visualProductImage" placeholder="이미지 URL 또는 기존 이미지 경로"></div>
-        <label class="image-drop-label" style="margin-top:10px">새 이미지 파일 선택<input id="visualImageFile" type="file" accept="image/*"></label>
-        <div class="editor-note">이 편집은 <b>선택한 계절의 선택한 위치</b>에만 적용됩니다. 같은 과일이라도 다른 계절이나 다른 구역은 따로 바꿀 수 있습니다.</div>
-        <div class="visual-save-row"><button class="ghost" id="visualResetBtn" type="button">기본값으로 복원</button><button class="primary" id="visualSaveBtn" type="button">이 위치에 적용</button></div>
+        <div class="field" style="margin-top:9px"><label>카드 짧은 설명</label><textarea id="visualCardCopy" placeholder="카드에 표시할 맛/특징 설명"></textarea></div>
+        <div class="field" style="margin-top:9px"><label>카드 이미지 주소</label><input id="visualProductImage" placeholder="이미지 URL 또는 기존 이미지 경로"></div>
+        <label class="image-drop-label" style="margin-top:9px">카드 이미지 파일 선택<input id="visualImageFile" type="file" accept="image/*"></label>
+        <div class="field" style="margin-top:9px"><label>오늘의 PICK 산지 표시 <span class="small">(해당 영역만)</span></label><input id="visualCardOrigin" placeholder="예: 전남 나주"></div>
+        <div class="field" style="margin-top:9px"><label>오늘의 PICK 상태 표시 <span class="small">(해당 영역만)</span></label><input id="visualCardState" placeholder="예: 당일 선별"></div>
+
+        <div class="visual-subhead">② 상세보기 화면</div>
+        <div class="visual-two-preview"><div><div class="small">카드 이미지</div><div class="visual-selected-preview"><img id="visualCardMiniPreview" alt="카드 이미지"></div></div><div><div class="small">상세 실제 이미지</div><div class="visual-selected-preview"><img id="visualDetailImagePreview" alt="상세 이미지"></div></div></div>
+        <div class="field"><label>상세보기 실제 이미지 주소</label><input id="visualDetailImage" placeholder="실제 과일 사진 URL/경로"></div>
+        <label class="image-drop-label" style="margin-top:9px">상세 실제 이미지 파일 선택<input id="visualDetailImageFile" type="file" accept="image/*"></label>
+        <div class="visual-mini-actions"><button class="ghost" id="visualUseCardForDetailBtn" type="button">카드 이미지를 상세에도 사용</button><button class="ghost" id="visualOpenDetailBtn" type="button">상세보기 미리보기</button></div>
+        <div class="field"><label>상세 제목</label><input id="visualDetailTitle" placeholder="예: 나주배 상세설명"></div>
+        <div class="field" style="margin-top:9px"><label>상세 소개 문구</label><textarea id="visualDetailIntro" placeholder="상품을 소개하는 문장"></textarea></div>
+        <div class="field" style="margin-top:9px"><label>상세 산지</label><input id="visualDetailOrigin" placeholder="비워두면 상품 기본 산지 사용"></div>
+        <div class="field" style="margin-top:9px"><label>맛과 식감</label><textarea id="visualDetailTaste" placeholder="비워두면 기본 설명 사용"></textarea></div>
+        <div class="field" style="margin-top:9px"><label>고르는 기준</label><textarea id="visualDetailChoose" placeholder="선별 기준"></textarea></div>
+        <div class="field" style="margin-top:9px"><label>보관 방법</label><textarea id="visualDetailKeep" placeholder="보관 안내"></textarea></div>
+        <div class="field" style="margin-top:9px"><label>맛있게 즐기기</label><textarea id="visualDetailEnjoy" placeholder="섭취/후숙 안내"></textarea></div>
+        <div class="field" style="margin-top:9px"><label>추가 상품 안내</label><textarea id="visualDetailNotice" placeholder="배송, 포장, 시즌 안내 등"></textarea></div>
+        <div class="editor-note"><b>가격·재고·판매단위</b>는 주문 DB와 정확히 연결되어야 하므로 관리자 <b>상품관리</b>에서 수정합니다. 여기서는 고객에게 보이는 이름·이미지·설명·상세내용을 계절/위치별로 자유롭게 구성합니다.</div>
+        <div class="visual-save-row"><button class="ghost" id="visualResetBtn" type="button">이 위치 전체 기본값</button><button class="primary" id="visualSaveBtn" type="button">카드+상세 모두 저장</button></div>
         <div class="visual-editor-status" id="visualEditorStatus"></div>
       </div>
     </aside>
@@ -618,20 +658,31 @@ const oldPersist=persist;persist=async function(){if($("#view-banners").classLis
 
 let visualSeason='spring',visualSelection=null;
 function visualFrameUrl(){const u=new URL('/admin-preview',location.origin);u.searchParams.set('adminPreview','1');u.searchParams.set('season',visualSeason);u.searchParams.set('_',Date.now());return u.href}
-function renderVisualEditor(){const frame=$('#visualPreviewFrame');if(frame&&!frame.src)frame.src=visualFrameUrl();$$('[data-visual-season]').forEach(b=>b.classList.toggle('active',b.dataset.visualSeason===visualSeason))}
+function visualSeasonConfig(create=true){state.homepageConfig=state.homepageConfig||{};if(create){state.homepageConfig.seasonCopy=state.homepageConfig.seasonCopy||{};state.homepageConfig.seasonCopy[visualSeason]=state.homepageConfig.seasonCopy[visualSeason]||{}}return state.homepageConfig?.seasonCopy?.[visualSeason]||{}}
+const visualSectionDefaults={spring:{heroTitle:'봄 프리미엄\n과일',heroCopy:'봄의 싱그러움을 가장 좋은 상태로 골라 산뜻하게 전합니다.'},summer:{heroTitle:'여름 프리미엄\n과일',heroCopy:'햇살이 더 달콤하게 만든 여름 과일을 시원하고 풍성하게 골라드립니다.'},autumn:{heroTitle:'가을 프리미엄\n과일',heroCopy:'깊어가는 계절이 전하는 가장 특별한 맛을 오늘의 상태로 골라드립니다.'},winter:{heroTitle:'겨울 프리미엄\n과일',heroCopy:'차가운 계절에 더 빛나는 자연의 달콤함을 신선하게 골라 전합니다.'}};
+const commonSectionDefaults={todayTitle:'이룸의 오늘, 프리미엄 과일',todayCopy:'지금 가장 맛있는 계절 과일만, 믿을 수 있는 산지에서 정직하게 소개합니다.',premiumTitle:'프리미엄 과일',premiumCopy:'산지와 품질, 당일 상태를 한 번 더 살펴 고른 이룸의 시그니처 셀렉션입니다.',premiumButton:'프리미엄 과일 더보기',seasonalTitle:'지금, 가장 맛있는 제철 과일',seasonalCopy:'계절이 선택하는 가장 맛있는 순간의 제철 과일을 만나보세요.',seasonalButton:'제철 과일 더보기',libraryTitle:'오늘 더 만나볼 과일',libraryCopy:'오늘 눈여겨볼 과일 4가지만 먼저 보여드려요. 더보기에서 전체 과일을 한눈에 확인할 수 있습니다.',libraryButton:'오늘 과일 더보기'};
+function fillVisualSectionEditor(){const c=visualSeasonConfig(false),d={...commonSectionDefaults,...(visualSectionDefaults[visualSeason]||{}),...c};const map={visualHeroTitle:'heroTitle',visualHeroCopy:'heroCopy',visualTodayTitle:'todayTitle',visualTodayCopy:'todayCopy',visualPremiumTitle:'premiumTitle',visualPremiumCopy:'premiumCopy',visualPremiumButton:'premiumButton',visualSeasonalTitle:'seasonalTitle',visualSeasonalCopy:'seasonalCopy',visualSeasonalButton:'seasonalButton',visualLibraryTitle:'libraryTitle',visualLibraryCopy:'libraryCopy',visualLibraryButton:'libraryButton'};Object.entries(map).forEach(([id,key])=>{const el=$('#'+id);if(el)el.value=d[key]||''})}
+function collectVisualSectionEditor(){const c=visualSeasonConfig(true),map={visualHeroTitle:'heroTitle',visualHeroCopy:'heroCopy',visualTodayTitle:'todayTitle',visualTodayCopy:'todayCopy',visualPremiumTitle:'premiumTitle',visualPremiumCopy:'premiumCopy',visualPremiumButton:'premiumButton',visualSeasonalTitle:'seasonalTitle',visualSeasonalCopy:'seasonalCopy',visualSeasonalButton:'seasonalButton',visualLibraryTitle:'libraryTitle',visualLibraryCopy:'libraryCopy',visualLibraryButton:'libraryButton'};Object.entries(map).forEach(([id,key])=>{const v=$('#'+id)?.value?.trim()||'';if(v)c[key]=v;else delete c[key]});return c}
+function renderVisualEditor(){const frame=$('#visualPreviewFrame');if(frame&&!frame.src)frame.src=visualFrameUrl();$$('[data-visual-season]').forEach(b=>b.classList.toggle('active',b.dataset.visualSeason===visualSeason));fillVisualSectionEditor()}
 function reloadVisualFrame(){const frame=$('#visualPreviewFrame');if(frame)frame.src=visualFrameUrl()}
-$$('[data-visual-season]').forEach(btn=>btn.addEventListener('click',()=>{visualSeason=btn.dataset.visualSeason;visualSelection=null;clearVisualFields();$$('[data-visual-season]').forEach(b=>b.classList.toggle('active',b===btn));reloadVisualFrame()}));
+$$('[data-visual-season]').forEach(btn=>btn.addEventListener('click',()=>{visualSeason=btn.dataset.visualSeason;visualSelection=null;clearVisualFields();$$('[data-visual-season]').forEach(b=>b.classList.toggle('active',b===btn));fillVisualSectionEditor();reloadVisualFrame()}));
 $('#visualRefreshBtn')?.addEventListener('click',reloadVisualFrame);
 function visualImageSrc(v){v=String(v||'');if(/^data:image\//i.test(v)||/^https?:\/\//i.test(v)||v.startsWith('/'))return v;return './iroom_assets/'+v}
 function clearVisualFields(){visualSelection=null;$('#visualEditorEmpty').hidden=false;$('#visualEditorFields').hidden=true;$('#visualSlotInfo').textContent='홈페이지에서 수정할 상품을 클릭하세요.';$('#visualEditorStatus').textContent=''}
-window.addEventListener('message',e=>{if(e.origin!==location.origin)return;const d=e.data||{};if(d.type!=='iroom-product-select')return;visualSelection=d;$('#visualEditorEmpty').hidden=true;$('#visualEditorFields').hidden=false;const parts=String(d.editKey||'').split('|');const sectionNames={hero:'메인 과일',today:'오늘의 이룸 PICK',premium:'프리미엄 과일',seasonal:'제철 과일',library:'오늘 더 만나볼 과일'};$('#visualSlotInfo').textContent=`${sectionNames[parts[1]]||parts[1]||'상품'} · ${Number(parts[2]||0)+1}번째 위치 · 원본 ${d.baseName||''}`;$('#visualProductName').value=d.displayName||d.baseName||'';$('#visualProductImage').value=d.visual||'';$('#visualImagePreview').src=visualImageSrc(d.visual);$('#visualEditorStatus').textContent=''});
-$('#visualProductImage')?.addEventListener('input',e=>{$('#visualImagePreview').src=visualImageSrc(e.target.value)});
-$('#visualImageFile')?.addEventListener('change',async e=>{const file=e.target.files?.[0];if(!file)return;$('#visualEditorStatus').textContent='이미지를 최적화하는 중...';const data=await resizeImage(file,900,650,.78);$('#visualProductImage').value=data;$('#visualImagePreview').src=data;$('#visualEditorStatus').textContent='새 이미지가 준비되었습니다. 적용 저장을 눌러주세요.';e.target.value=''});
 function visualOverrideContainer(editKey,create=true){const [season,section,indexRaw]=String(editKey||'').split('|'),index=Number(indexRaw);if(!season||!section||!Number.isFinite(index))return null;state.homepageConfig=state.homepageConfig||{};if(create){state.homepageConfig.productEditor=state.homepageConfig.productEditor||{};state.homepageConfig.productEditor[season]=state.homepageConfig.productEditor[season]||{};state.homepageConfig.productEditor[season][section]=state.homepageConfig.productEditor[season][section]||[]}const arr=state.homepageConfig?.productEditor?.[season]?.[section];return arr?{arr,index,season,section}:null}
+function currentVisualOverride(){if(!visualSelection)return {};const c=visualOverrideContainer(visualSelection.editKey,false);return c?.arr?.[c.index]||{}}
+function syncVisualPreviews(){const card=$('#visualProductImage')?.value||visualSelection?.visual||'',detail=$('#visualDetailImage')?.value||card;if($('#visualImagePreview'))$('#visualImagePreview').src=visualImageSrc(card);if($('#visualCardMiniPreview'))$('#visualCardMiniPreview').src=visualImageSrc(card);if($('#visualDetailImagePreview'))$('#visualDetailImagePreview').src=visualImageSrc(detail)}
+window.addEventListener('message',e=>{if(e.origin!==location.origin)return;const d=e.data||{};if(d.type!=='iroom-product-select')return;visualSelection=d;$('#visualEditorEmpty').hidden=true;$('#visualEditorFields').hidden=false;const parts=String(d.editKey||'').split('|');const sectionNames={hero:'메인 과일',today:'오늘의 이룸 PICK',premium:'프리미엄 과일',seasonal:'제철 과일',library:'오늘 더 만나볼 과일'};$('#visualSlotInfo').textContent=`${sectionNames[parts[1]]||parts[1]||'상품'} · ${Number(parts[2]||0)+1}번째 위치 · 원본 ${d.baseName||''}`;const o=currentVisualOverride();$('#visualProductName').value=o.name||d.displayName||d.baseName||'';$('#visualProductImage').value=o.image||d.visual||'';$('#visualCardCopy').value=o.cardCopy||'';$('#visualCardOrigin').value=o.cardOrigin||'';$('#visualCardState').value=o.cardState||'';$('#visualDetailImage').value=o.detailImage||'';$('#visualDetailTitle').value=o.detailTitle||'';$('#visualDetailIntro').value=o.detailIntro||'';$('#visualDetailOrigin').value=o.detailOrigin||'';$('#visualDetailTaste').value=o.detailTaste||'';$('#visualDetailChoose').value=o.detailChoose||'';$('#visualDetailKeep').value=o.detailKeep||'';$('#visualDetailEnjoy').value=o.detailEnjoy||'';$('#visualDetailNotice').value=o.detailNotice||'';syncVisualPreviews();$('#visualEditorStatus').textContent=''});
+$('#visualProductImage')?.addEventListener('input',syncVisualPreviews);$('#visualDetailImage')?.addEventListener('input',syncVisualPreviews);
+$('#visualImageFile')?.addEventListener('change',async e=>{const file=e.target.files?.[0];if(!file)return;$('#visualEditorStatus').textContent='카드 이미지를 최적화하는 중...';const data=await resizeImage(file,900,700,.76);$('#visualProductImage').value=data;syncVisualPreviews();$('#visualEditorStatus').textContent='카드 이미지가 준비되었습니다. 저장을 눌러주세요.';e.target.value=''});
+$('#visualDetailImageFile')?.addEventListener('change',async e=>{const file=e.target.files?.[0];if(!file)return;$('#visualEditorStatus').textContent='상세 이미지를 최적화하는 중...';const data=await resizeImage(file,1100,900,.78);$('#visualDetailImage').value=data;syncVisualPreviews();$('#visualEditorStatus').textContent='상세 실제 이미지가 준비되었습니다. 저장을 눌러주세요.';e.target.value=''});
+$('#visualUseCardForDetailBtn')?.addEventListener('click',()=>{$('#visualDetailImage').value=$('#visualProductImage').value;syncVisualPreviews()});
+$('#visualOpenDetailBtn')?.addEventListener('click',()=>{if(!visualSelection)return;const frame=$('#visualPreviewFrame');frame?.contentWindow?.postMessage({type:'iroom-preview-open-detail',...visualSelection,displayName:$('#visualProductName').value||visualSelection.displayName,visual:$('#visualProductImage').value||visualSelection.visual},location.origin)});
 async function saveHomepageVisualConfig(){const r=await fetch('/api/admin/site/homepage-config',{method:'PUT',credentials:'same-origin',headers:{'Content-Type':'application/json'},body:JSON.stringify({config:state.homepageConfig||{}})});const d=await r.json().catch(()=>({}));if(!r.ok)throw new Error(d.error||'저장 실패');state.homepageConfig=d.config||state.homepageConfig;return d}
-$('#visualSaveBtn')?.addEventListener('click',async()=>{if(!visualSelection)return;const c=visualOverrideContainer(visualSelection.editKey,true);if(!c)return;const name=$('#visualProductName').value.trim()||visualSelection.baseName,image=$('#visualProductImage').value.trim();c.arr[c.index]={name,image};$('#visualEditorStatus').textContent='저장 중...';try{await saveHomepageVisualConfig();$('#visualEditorStatus').textContent='홈페이지에 저장되었습니다.';log(`상품 화면 수정 · ${name}`);reloadVisualFrame()}catch(err){$('#visualEditorStatus').textContent=err.message||'저장에 실패했습니다.'}});
-$('#visualResetBtn')?.addEventListener('click',async()=>{if(!visualSelection)return;if(!confirm('이 위치의 이름과 이미지를 기본값으로 복원할까요?'))return;const c=visualOverrideContainer(visualSelection.editKey,false);if(c)c.arr[c.index]=null;$('#visualEditorStatus').textContent='복원 중...';try{await saveHomepageVisualConfig();clearVisualFields();reloadVisualFrame()}catch(err){$('#visualEditorStatus').textContent=err.message||'복원에 실패했습니다.'}});
-
+$('#visualSaveBtn')?.addEventListener('click',async()=>{if(!visualSelection)return;const c=visualOverrideContainer(visualSelection.editKey,true);if(!c)return;const name=$('#visualProductName').value.trim()||visualSelection.baseName,image=$('#visualProductImage').value.trim();const fields={name,image,cardCopy:$('#visualCardCopy').value.trim(),cardOrigin:$('#visualCardOrigin').value.trim(),cardState:$('#visualCardState').value.trim(),detailImage:$('#visualDetailImage').value.trim(),detailTitle:$('#visualDetailTitle').value.trim(),detailIntro:$('#visualDetailIntro').value.trim(),detailOrigin:$('#visualDetailOrigin').value.trim(),detailTaste:$('#visualDetailTaste').value.trim(),detailChoose:$('#visualDetailChoose').value.trim(),detailKeep:$('#visualDetailKeep').value.trim(),detailEnjoy:$('#visualDetailEnjoy').value.trim(),detailNotice:$('#visualDetailNotice').value.trim()};Object.keys(fields).forEach(k=>{if(!fields[k]&&k!=='name'&&k!=='image')delete fields[k]});c.arr[c.index]=fields;$('#visualEditorStatus').textContent='카드와 상세보기를 저장하는 중...';try{await saveHomepageVisualConfig();$('#visualEditorStatus').textContent='카드 + 상세보기 전체가 홈페이지에 저장되었습니다.';log(`상품 전체 화면 수정 · ${name}`);reloadVisualFrame()}catch(err){$('#visualEditorStatus').textContent=err.message||'저장에 실패했습니다.'}});
+$('#visualResetBtn')?.addEventListener('click',async()=>{if(!visualSelection)return;if(!confirm('이 위치의 카드와 상세보기 설정을 모두 기본값으로 복원할까요?'))return;const c=visualOverrideContainer(visualSelection.editKey,false);if(c)c.arr[c.index]=null;$('#visualEditorStatus').textContent='복원 중...';try{await saveHomepageVisualConfig();clearVisualFields();reloadVisualFrame()}catch(err){$('#visualEditorStatus').textContent=err.message||'복원에 실패했습니다.'}});
+$('#visualSectionSaveBtn')?.addEventListener('click',async()=>{collectVisualSectionEditor();$('#visualSectionStatus').textContent='저장 중...';try{await saveHomepageVisualConfig();$('#visualSectionStatus').textContent='현재 계절의 섹션 문구가 저장되었습니다.';reloadVisualFrame()}catch(err){$('#visualSectionStatus').textContent=err.message||'저장 실패'}});
+$('#visualSectionResetBtn')?.addEventListener('click',async()=>{if(!confirm(`${visualSeason} 계절의 섹션 문구를 모두 기본값으로 되돌릴까요?`))return;if(state.homepageConfig?.seasonCopy)delete state.homepageConfig.seasonCopy[visualSeason];try{await saveHomepageVisualConfig();fillVisualSectionEditor();reloadVisualFrame();$('#visualSectionStatus').textContent='기본 문구로 복원되었습니다.'}catch(err){$('#visualSectionStatus').textContent=err.message||'복원 실패'}});
 
 $("#changeAdminPasswordBtn")?.addEventListener("click",async()=>{
   const a=$("#newAdminPassword").value,b=$("#newAdminPassword2").value;
