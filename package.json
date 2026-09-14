@@ -1,10 +1,10 @@
 {
   "name":"iroom-home1",
-  "version":"56.0.0",
+  "version":"54.0.0",
   "private":true,
   "description":"IROOM Fresh Fruits consumer storefront and admin system",
   "main":"server.js",
-  "scripts":{"start":"node server.js","check":"node --check server.js && node --check public/iroom_assets/iroom-v56.js"},
+  "scripts":{"start":"node server.js","check":"node --check server.js && node --check public/iroom_assets/iroom-v54.js"},
   "engines":{"node":">=18"},
   "dependencies":{
     "bcryptjs":"^2.4.3",
