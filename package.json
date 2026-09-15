@@ -1,12 +1,12 @@
 {
   "name": "iroom-home1",
-  "version": "60.5.0",
+  "version": "60.6.0",
   "private": true,
-  "description": "IROOM Fresh Fruits V60.4 cross-platform PWA install card and custom IROOM app icon for Chrome, Edge, Android and iPhone",
+  "description": "IROOM Fresh Fruits V60.6 clickable installed-app card for Chrome, Edge, Android and iPhone PWA experience",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "check": "node --check server.js && node --check public/iroom_assets/iroom-v60-4.js"
+    "check": "node --check server.js && node --check public/iroom_assets/iroom-v60-6.js"
   },
   "engines": {
     "node": ">=18"

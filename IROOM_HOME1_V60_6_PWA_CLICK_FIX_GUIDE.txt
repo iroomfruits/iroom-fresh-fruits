@@ -1,0 +1,14 @@
+IROOM HOME1 V60.6 PWA INSTALL CARD CLICK FIX
+
+수정 내용
+- 설치된 앱(PWA standalone)에서도 설치 카드의 버튼을 비활성화하지 않음
+- 설치 완료 상태의 버튼 문구를 “이룸 앱 홈으로 가기”로 변경
+- 설치된 앱에서 버튼 클릭 시 앱 홈(현재 페이지 최상단)으로 이동
+- 일반 브라우저에서는 기존대로 Chrome/Edge/Android 설치 프롬프트 또는 iPhone 설치 안내 제공
+- 서비스워커 캐시 버전 갱신: iroom-v60-6-installed-button-clickable
+
+배포 후
+1. GitHub에 패치 파일을 덮어쓰기
+2. Render 배포 완료 확인
+3. 설치된 앱 완전 종료 후 재실행
+4. 필요시 브라우저에서 Ctrl+F5
