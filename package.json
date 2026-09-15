@@ -1,8 +1,8 @@
 {
   "name": "iroom-home1",
-  "version": "60.0.0",
+  "version": "60.0.1",
   "private": true,
-  "description": "IROOM Fresh Fruits consumer storefront, complete admin operations, verified save flow, and security-hardened system",
+  "description": "IROOM Fresh Fruits V60.1 admin login origin hotfix, complete admin operations, verified save flow, and security-hardened system",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",

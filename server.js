@@ -86,8 +86,26 @@ function simpleRateLimit({windowMs,max,keyPrefix,message}){
 }
 setInterval(()=>{const n=Date.now();for(const [k,v] of rateBuckets)if(n>v.reset)rateBuckets.delete(k)},10*60*1000).unref();
 
-function expectedOrigin(req){
-  try{return new URL(BASE_URL).origin}catch(_){return `${req.protocol}://${req.get("host")}`}
+function requestOrigin(req){
+  const forwardedProto=String(req.get("x-forwarded-proto")||"").split(",")[0].trim();
+  const forwardedHost=String(req.get("x-forwarded-host")||"").split(",")[0].trim();
+  const proto=forwardedProto || req.protocol || "https";
+  const host=forwardedHost || String(req.get("host")||"").trim();
+  if(!host)return "";
+  try{return new URL(`${proto}://${host}`).origin}catch(_){return ""}
+}
+function allowedRequestOrigins(req){
+  const allowed=new Set();
+  try{if(BASE_URL)allowed.add(new URL(BASE_URL).origin)}catch(_){}
+  const live=requestOrigin(req);
+  if(live)allowed.add(live);
+  // Optional comma-separated custom domains, useful while moving between Render/custom domains.
+  for(const item of String(process.env.ALLOWED_ORIGINS||"").split(",")){
+    const value=item.trim();
+    if(!value)continue;
+    try{allowed.add(new URL(value).origin)}catch(_){}
+  }
+  return allowed;
 }
 function sameOriginGuard(req,res,next){
   if(["GET","HEAD","OPTIONS"].includes(req.method)) return next();
@@ -99,8 +117,10 @@ function sameOriginGuard(req,res,next){
     if(ref){try{source=new URL(ref).origin}catch(_){source=""}}
   }
   if(source){
-    try{if(new URL(source).origin!==expectedOrigin(req))return res.status(403).json({error:"허용되지 않은 요청입니다."})}
-    catch(_){return res.status(403).json({error:"허용되지 않은 요청입니다."})}
+    try{
+      const sourceOrigin=new URL(source).origin;
+      if(!allowedRequestOrigins(req).has(sourceOrigin))return res.status(403).json({error:"허용되지 않은 요청입니다."});
+    }catch(_){return res.status(403).json({error:"허용되지 않은 요청입니다."})}
   }else if(req.cookies?.[AUTH_COOKIE] || req.cookies?.iroom_token){
     return res.status(403).json({error:"요청 출처를 확인할 수 없습니다."});
   }
