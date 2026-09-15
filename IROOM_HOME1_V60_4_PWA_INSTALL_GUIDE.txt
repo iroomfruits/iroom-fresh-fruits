@@ -1,0 +1,30 @@
+IROOM HOME1 V60.4 — 앱 설치 / 아이콘 적용
+
+적용 내용
+1. 사용자가 제공한 이룸 fresh fruits 로고 이미지를 PWA 앱 아이콘으로 적용
+   - 64x64 favicon
+   - 180x180 iPhone Apple Touch Icon
+   - 192x192 PWA icon
+   - 512x512 PWA icon
+   - 512x512 maskable icon
+2. Chrome / Edge / Android
+   - 브라우저가 beforeinstallprompt를 제공하면 홈페이지의 “이룸 앱 설치하기” 버튼으로 기본 설치창 실행
+3. iPhone / iPad
+   - Safari 공유 → 홈 화면에 추가 → 추가 순서의 전용 설치 안내 제공
+4. 기존 alert 안내 제거
+5. 고객이 볼 수 있는 큰 앱 설치 카드 추가
+   - 이룸 앱 아이콘 표시
+   - Chrome / Edge / Android / iPhone 지원 표시
+   - 설치 카드 닫기 시 7일간 숨김
+   - 이미 앱으로 실행 중이면 자동 숨김
+6. 서비스워커 캐시 V60.4로 갱신해 새 아이콘/JS/CSS가 이전 캐시와 섞이지 않도록 처리
+
+주의
+- 이미 설치된 기존 PWA의 아이콘은 운영체제/브라우저 캐시 때문에 즉시 바뀌지 않을 수 있습니다.
+- V60.4 배포 후 기존 이룸 앱을 제거하고 홈페이지에서 다시 설치하면 새 이룸 아이콘이 확실하게 적용됩니다.
+- iPhone은 일반 웹 브라우저의 자동 설치 팝업을 지원하지 않으므로 Safari의 “홈 화면에 추가” 절차를 사용합니다.
+
+정적 검사
+- server.js node --check 통과
+- public/iroom_assets/iroom-v60-4.js node --check 통과
+- manifest.webmanifest JSON 검증 통과
