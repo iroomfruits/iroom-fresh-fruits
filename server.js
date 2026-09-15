@@ -1359,7 +1359,7 @@ app.get("/api/admin/operations",requireAdmin,async(req,res)=>{
     if(!flags.dbTransportAppropriate)warnings.push("PostgreSQL 연결 방식을 확인하세요. Render 내부 URL은 사설망 연결, 외부 URL은 sslmode=require 사용을 권장합니다.");
     if(!flags.emailConfigured)warnings.push("주문 이메일 알림(Brevo) 설정이 완전하지 않습니다.");
     if(!flags.tossClientConfigured||!flags.tossSecretConfigured)warnings.push("토스 결제 운영키가 아직 완전하게 연결되지 않았습니다.");
-    res.json({ok:true,version:"60.0.0",time:db.rows[0].now,flags,warnings,counts:{products:pc.rows[0].count,stock:pc.rows[0].stock,orders:oc.rows[0].count,users:uc.rows[0].count}});
+    res.json({ok:true,version:"60.2.0",time:db.rows[0].now,flags,warnings,counts:{products:pc.rows[0].count,stock:pc.rows[0].stock,orders:oc.rows[0].count,users:uc.rows[0].count}});
   }catch(e){
     console.error("[OPERATIONS]",e.message);
     res.status(500).json({ok:false,error:"운영 상태를 점검하지 못했습니다."});
@@ -1380,7 +1380,7 @@ app.get("/api/admin/backup",requireAdmin,async(req,res)=>{
       pool.query("SELECT id,event_type,actor,ip_hash,detail,created_at FROM security_events ORDER BY id DESC LIMIT 500")
     ]);
     const payload={
-      meta:{product:"IROOM HOME1",version:"60.0.0",createdAt:new Date().toISOString(),notice:"비밀번호 해시, JWT 비밀키, 결제 Secret Key는 백업에 포함하지 않습니다."},
+      meta:{product:"IROOM HOME1",version:"60.2.0",createdAt:new Date().toISOString(),notice:"비밀번호 해시, JWT 비밀키, 결제 Secret Key는 백업에 포함하지 않습니다."},
       store:store?.setting_value||store||{},
       homepageConfig:home?.setting_value||home||{},
       todayPick:today?.setting_value||today||{},
@@ -1435,7 +1435,7 @@ let httpServer=null;
 function startHttp(){
   if(serverStarted)return;
   serverStarted=true;
-  httpServer=app.listen(PORT,()=>console.log(`IROOM HOME1 V60 listening on ${PORT}`));
+  httpServer=app.listen(PORT,()=>console.log(`IROOM HOME1 V60.2 listening on ${PORT}`));
   httpServer.requestTimeout=30000;
   httpServer.headersTimeout=35000;
   httpServer.keepAliveTimeout=5000;

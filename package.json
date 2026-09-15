@@ -1,12 +1,12 @@
 {
   "name": "iroom-home1",
-  "version": "60.0.1",
+  "version": "60.2.0",
   "private": true,
-  "description": "IROOM Fresh Fruits V60.1 admin login origin hotfix, complete admin operations, verified save flow, and security-hardened system",
+  "description": "IROOM Fresh Fruits V60.2 unified product exposure manager for premium/seasonal and complete admin operations",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "check": "node --check server.js && node --check public/iroom_assets/iroom-v60.js"
+    "check": "node --check server.js && node --check public/iroom_assets/iroom-v60-2.js"
   },
   "engines": {
     "node": ">=18"
