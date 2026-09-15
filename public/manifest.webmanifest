@@ -10,25 +10,25 @@
     "standalone",
     "minimal-ui"
   ],
-  "background_color": "#fbf7f0",
-  "theme_color": "#12362f",
+  "background_color": "#fffdf8",
+  "theme_color": "#0a6c2d",
   "orientation": "any",
   "prefer_related_applications": false,
   "icons": [
     {
-      "src": "./iroom_assets/app-icon-192.png",
+      "src": "./iroom_assets/iroom-app-icon-192-v60.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "./iroom_assets/app-icon-512.png",
+      "src": "./iroom_assets/iroom-app-icon-512-v60.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "./iroom_assets/app-icon-512.png",
+      "src": "./iroom_assets/iroom-app-icon-512-v60.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
