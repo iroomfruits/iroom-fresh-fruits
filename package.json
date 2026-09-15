@@ -1,16 +1,21 @@
 {
-  "name":"iroom-home1",
-  "version":"54.0.0",
-  "private":true,
-  "description":"IROOM Fresh Fruits consumer storefront and admin system",
-  "main":"server.js",
-  "scripts":{"start":"node server.js","check":"node --check server.js && node --check public/iroom_assets/iroom-v54.js"},
-  "engines":{"node":">=18"},
-  "dependencies":{
-    "bcryptjs":"^2.4.3",
-    "cookie-parser":"^1.4.7",
-    "express":"^4.21.2",
-    "jsonwebtoken":"^9.0.2",
-    "pg":"^8.13.3"
+  "name": "iroom-home1",
+  "version": "60.0.0",
+  "private": true,
+  "description": "IROOM Fresh Fruits consumer storefront, complete admin operations, verified save flow, and security-hardened system",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "check": "node --check server.js && node --check public/iroom_assets/iroom-v60.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.7",
+    "express": "^4.22.3",
+    "jsonwebtoken": "^9.0.2",
+    "pg": "^8.23.0"
   }
 }

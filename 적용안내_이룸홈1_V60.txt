@@ -1,0 +1,48 @@
+이룸홈1 V60 · 관리자 전체편집 + 운영/보안 점검 강화
+
+핵심 기능
+- 관리자 홈의 상품/이미지/연락처/입금계좌/BAND/사업장정보 카드 클릭 이동
+- 홈페이지 바로편집: 계절별 메인/오늘의 PICK/프리미엄/제철/과일 더보기
+- 영역별 상품 추가/삭제/순서변경/기본구성 복원
+- 카드 이미지 + 상세 실제 이미지 + 상세 제목/설명/산지/맛/선별/보관/섭취/안내 편집
+- 상단 로고/맞춤과일/선물영역 이미지 편집
+- 저장 전 미리보기, 상세보기 미리보기, 저장 후 공개 홈페이지 설정 revision 일치 검증
+- 상품 가격/재고/판매상태/판매단위 관리
+- 주문/배송 상태 관리, 회원 확인, 리뷰, 이미지 보관함, 사이트/배송/정책 설정
+- 운영·보안 점검, 최근 보안 이벤트, 운영 백업 JSON 다운로드
+- PWA 앱 아이콘: 사용자가 확정한 이룸 fresh fruits 로고 적용
+
+V60 보안 보강
+- 관리자 쿠키: HttpOnly + SameSite=Strict + 운영환경 __Host- 접두사
+- 관리자 비밀번호 bcrypt 해시 저장
+- 관리자 비밀번호 변경 시 이전 관리자 세션 전체 무효화
+- 관리자 로그인/회원 로그인/주문/상담/AI 요청 rate limit
+- 상태변경 API allowlist 적용
+- 홈페이지 편집 JSON 구조/길이 방어 및 prototype pollution 키 제거
+- 홈페이지 편집 저장 후 SHA-256 기반 revision 검증
+- CSP / HSTS / X-Frame-Options / nosniff / Permissions-Policy 적용
+- 관리자/API 캐시 방지
+- 보안 이벤트 180일 초과 자동 정리
+- DB 연결: Render 내부 DATABASE_URL은 사설망 방식, 외부 URL은 sslmode=require 방식에 맞게 처리
+- 실제 Secret Key(JWT/Toss/Brevo/OpenAI/Kakao)는 코드/백업에 저장하지 않음
+
+중요 배포 환경변수
+DATABASE_URL
+JWT_SECRET (48자 이상 난수 권장)
+ADMIN_PASSWORD
+PUBLIC_BASE_URL=https://실제주소
+NODE_ENV=production
+
+선택/연동 환경변수
+BREVO_API_KEY / BREVO_SENDER_EMAIL / ORDER_EMAIL
+KAKAO_REST_API_KEY / KAKAO_CLIENT_SECRET / KAKAO_JAVASCRIPT_KEY
+TOSS_CLIENT_KEY / TOSS_SECRET_KEY
+OPENAI_API_KEY
+
+토스 결제
+- 현재 V60은 토스 키 준비/운영상태 점검까지 포함합니다.
+- 실제 승인/결제완료 검증은 토스 계약 및 운영키 발급 후 서버 승인 API를 연결해야 최종 운영 가능합니다.
+
+주의
+- '완벽한 보안'을 코드만으로 보증할 수는 없습니다. 실배포 후 HTTPS, 환경변수, DB, 이메일, 카카오, 결제, 모바일/PWA, 주문/재고 동시성 테스트를 반드시 진행하세요.
+- GitHub에는 .env 실제값을 절대 올리지 마세요.

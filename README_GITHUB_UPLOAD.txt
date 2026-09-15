@@ -1,11 +1,7 @@
-IROOM HOME1 V56 - GitHub Full Lite
+IROOM HOME1 V60 GITHUB FULL LITE
 
-이 폴더는 GitHub 웹 업로드용 경량 전체본입니다.
-ZIP 파일 자체를 GitHub 저장소에 올리지 마세요.
-1) ZIP을 PC에서 압축 해제
-2) 압축 해제한 폴더 안의 내용 전체(server.js, package.json, .env.example, public 폴더)를 저장소 루트에 업로드
-3) 기존 파일이 있으면 같은 경로로 덮어쓰기
-
-전체 백업본에서 과거 버전 CSS/JS 및 미사용 이미지 자산을 제거했고,
-현재 V56에 사용되는 프리미엄 이미지는 WebP로 최적화했습니다.
-기능/디자인/배송정책은 V56 기준입니다.
+1. ZIP을 풀어 저장소 최상단에 파일/폴더 내용을 업로드합니다. ZIP 자체를 올리지 마세요.
+2. Render 환경변수는 .env.example을 참고해 입력합니다.
+3. DATABASE_URL/JWT_SECRET/ADMIN_PASSWORD/PUBLIC_BASE_URL은 필수입니다.
+4. Toss 실결제는 계약/키와 서버 결제승인 검증이 완료되기 전까지 운영 결제로 사용하지 마세요.
+5. 배포 후 IROOM_HOME1_V60_AUDIT.md의 실서비스 테스트 목록을 확인하세요.
