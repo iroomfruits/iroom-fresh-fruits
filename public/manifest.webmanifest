@@ -16,19 +16,19 @@
   "prefer_related_applications": false,
   "icons": [
     {
-      "src": "./iroom_assets/iroom-app-icon-192-v60-4.png",
+      "src": "./iroom_assets/iroom-app-icon-192-v60-5.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "./iroom_assets/iroom-app-icon-512-v60-4.png",
+      "src": "./iroom_assets/iroom-app-icon-512-v60-5.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "./iroom_assets/iroom-app-icon-512-maskable-v60-4.png",
+      "src": "./iroom_assets/iroom-app-icon-512-maskable-v60-5.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
@@ -41,7 +41,7 @@
       "url": "./?source=pwa#seasonal",
       "icons": [
         {
-          "src": "./iroom_assets/iroom-app-icon-192-v60-4.png",
+          "src": "./iroom_assets/iroom-app-icon-192-v60-5.png",
           "sizes": "192x192",
           "type": "image/png"
         }
