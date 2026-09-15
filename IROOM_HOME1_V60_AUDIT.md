@@ -68,3 +68,10 @@ V60은 기존 V57을 기준으로 관리자 편집 범위, 저장 검증, 세션
 - band-admin.html inline script: node --check 통과
 - 관리자 HTML ID 212개 / 중복 0개
 - 정적 selector ID 참조 누락 0개
+
+
+## V60.1 관리자 로그인 Origin 핫픽스
+- 증상: 관리자 로그인 POST가 비밀번호 검증 전에 `허용되지 않은 요청입니다.`로 403 차단될 수 있었음.
+- 원인: `PUBLIC_BASE_URL`의 origin만 신뢰해 Render 기본 도메인/커스텀 도메인/변경된 배포 URL과 실제 접속 origin이 다를 때 동일 사이트 요청까지 거부함.
+- 수정: 설정된 `PUBLIC_BASE_URL`에 더해 실제 요청의 `X-Forwarded-Proto` + `X-Forwarded-Host`(또는 Host)를 정상 origin으로 인정. 필요 시 `ALLOWED_ORIGINS`에 추가 정상 도메인 지정 가능.
+- `Sec-Fetch-Site: cross-site` 차단 및 출처 검증은 유지하여 CSRF 방어 의도는 보존함.
