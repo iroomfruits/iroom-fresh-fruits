@@ -1,12 +1,12 @@
 {
   "name": "iroom-home1",
-  "version": "60.2.0",
+  "version": "60.3.0",
   "private": true,
-  "description": "IROOM Fresh Fruits V60.2 unified product exposure manager for premium/seasonal and complete admin operations",
+  "description": "IROOM Fresh Fruits V60.3 Kakao open-chat connection fix with admin-configurable public chat URL",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "check": "node --check server.js && node --check public/iroom_assets/iroom-v60-2.js"
+    "check": "node --check server.js && node --check public/iroom_assets/iroom-v60-3.js"
   },
   "engines": {
     "node": ">=18"

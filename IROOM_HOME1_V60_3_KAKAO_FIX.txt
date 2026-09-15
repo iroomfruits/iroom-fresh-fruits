@@ -1,0 +1,8 @@
+IROOM HOME1 V60.3 KAKAO CONNECTION FIX
+
+- 카카오 상담 주소를 프런트 코드 상수로 고정하지 않고 관리자 설정의 site.kakaoUrl을 사용합니다.
+- 관리자 카카오 상담 주소가 비어 있거나 잘못된 경우 https://open.kakao.com/o/sd7wnrKi 로 안전하게 대체합니다.
+- open.kakao.com HTTPS 주소만 상담 링크로 허용합니다.
+- 새 창 열기가 팝업 정책에 의해 막히는 경우 같은 창 이동으로 한 번 더 시도합니다.
+- PWA/브라우저 캐시 갱신을 위해 서비스워커 캐시를 iroom-v60-3-kakao-link-fix로 변경했습니다.
+- 실제 설정값: https://open.kakao.com/o/sd7wnrKi
