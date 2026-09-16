@@ -1,10 +1,10 @@
-const CACHE='iroom-v60-8-smart-install-one-tap';
+const CACHE='iroom-v60-9-install-banner-brand-icon';
 const CORE=[
   './','./index.html','./manifest.webmanifest','./favicon.ico',
-  './iroom_assets/iroom-v60-8.css','./iroom_assets/iroom-v60-8.js','./iroom_assets/iroom-logo-final.png',
-  './iroom_assets/iroom-app-icon-32-v60-8.png','./iroom_assets/iroom-app-icon-64-v60-8.png',
-  './iroom_assets/iroom-app-icon-180-v60-8.png','./iroom_assets/iroom-app-icon-192-v60-8.png',
-  './iroom_assets/iroom-app-icon-512-v60-8.png','./iroom_assets/iroom-app-icon-512-maskable-v60-8.png'
+  './iroom_assets/iroom-v60-9.css','./iroom_assets/iroom-v60-9.js','./iroom_assets/iroom-logo-final.png','./iroom_assets/iroom-install-banner-v60-9.webp',
+  './iroom_assets/iroom-app-icon-32-v60-9.png','./iroom_assets/iroom-app-icon-64-v60-9.png',
+  './iroom_assets/iroom-app-icon-180-v60-9.png','./iroom_assets/iroom-app-icon-192-v60-9.png',
+  './iroom_assets/iroom-app-icon-512-v60-9.png','./iroom_assets/iroom-app-icon-512-maskable-v60-9.png'
 ];
 self.addEventListener('install',e=>{self.skipWaiting();e.waitUntil(caches.open(CACHE).then(c=>c.addAll(CORE)).catch(()=>{}))});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});
