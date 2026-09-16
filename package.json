@@ -1,12 +1,12 @@
 {
   "name": "iroom-home1",
-  "version": "60.9.0",
+  "version": "60.10.0",
   "private": true,
-  "description": "IROOM Fresh Fruits V60.8 smart one-tap PWA install with optimized app/shortcut icons",
+  "description": "IROOM Fresh Fruits V60.10 compact one-button PWA install UX for Chrome, Edge, Android and iPhone",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "check": "node --check server.js && node --check public/iroom_assets/iroom-v60-8.js && node --check public/sw.js"
+    "check": "node --check server.js && node --check public/iroom_assets/iroom-v60-10.js && node --check public/sw.js"
   },
   "engines": {
     "node": ">=18"
