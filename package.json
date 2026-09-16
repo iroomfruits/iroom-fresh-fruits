@@ -1,6 +1,6 @@
 {
   "name": "iroom-home1",
-  "version": "60.8.0",
+  "version": "60.9.0",
   "private": true,
   "description": "IROOM Fresh Fruits V60.8 smart one-tap PWA install with optimized app/shortcut icons",
   "main": "server.js",
