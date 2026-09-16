@@ -1,12 +1,12 @@
 {
   "name": "iroom-home1",
-  "version": "60.11.0",
+  "version": "60.12.0",
   "private": true,
-  "description": "IROOM Fresh Fruits V60.11 unified Kakao consultation and app install CTA",
+  "description": "IROOM Fresh Fruits V60.12 unified CTA CSS rendering fix",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "check": "node --check server.js && node --check public/iroom_assets/iroom-v60-11.js && node --check public/sw.js"
+    "check": "node --check server.js && node --check public/iroom_assets/iroom-v60-12.js && node --check public/sw.js"
   },
   "engines": {
     "node": ">=18"
