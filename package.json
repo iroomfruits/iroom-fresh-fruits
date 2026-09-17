@@ -1,12 +1,12 @@
 {
   "name": "iroom-home1",
-  "version": "60.13.0",
+  "version": "60.14.0",
   "private": true,
-  "description": "IROOM Fresh Fruits V60.13 trust, conversion, mobile UX and SEO refinement",
+  "description": "IROOM Fresh Fruits V60.14 direct guest order flow from trust strip",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "check": "node --check server.js && node --check public/iroom_assets/iroom-v60-13.js && node --check public/sw.js"
+    "check": "node --check server.js && node --check public/iroom_assets/iroom-v60-14.js && node --check public/sw.js"
   },
   "engines": {
     "node": ">=18"
