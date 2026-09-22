@@ -1,7 +1,9 @@
-const CACHE='iroom-v60-19-home2-image-safe';
+const CACHE='iroom-v60-20-home2-luxury';
 const CORE=[
   './','./index.html','./home2.html','./manifest.webmanifest','./favicon.ico',
-  './iroom_assets/iroom-v60-15.css','./iroom_assets/iroom-v60-15.js','./iroom_assets/iroom-v60-16-dual.css','./iroom_assets/iroom-v60-16-home2.css','./iroom_assets/iroom-v60-16-dual.js','./iroom_assets/iroom-v60-17-home2.css','./iroom_assets/iroom-v60-17-dual.js','./iroom_assets/iroom-v60-19-home2.css','./iroom_assets/iroom-v60-19-home2.js','./iroom_assets/home2-hero-premium.png','./iroom_assets/iroom-owner-sketch-v60-16.png','./iroom_assets/iroom-logo-final.png',
+  './iroom_assets/iroom-v60-15.css','./iroom_assets/iroom-v60-15.js','./iroom_assets/iroom-v60-16-dual.css',
+  './iroom_assets/iroom-v60-20-luxury.css','./iroom_assets/iroom-v60-20-luxury.js',
+  './iroom_assets/home2-hero-premium.png','./iroom_assets/iroom-owner-sketch-v60-16.png','./iroom_assets/iroom-logo-final.png',
   './iroom_assets/iroom-app-icon-32-v60-10.png','./iroom_assets/iroom-app-icon-64-v60-10.png',
   './iroom_assets/iroom-app-icon-180-v60-10.png','./iroom_assets/iroom-app-icon-192-v60-10.png',
   './iroom_assets/iroom-app-icon-512-v60-10.png','./iroom_assets/iroom-app-icon-512-maskable-v60-10.png'
