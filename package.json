@@ -1,12 +1,12 @@
 {
   "name": "iroom-home1",
-  "version": "60.18.0",
+  "version": "60.19.0",
   "private": true,
-  "description": "IROOM Fresh Fruits V60.18 dual home: Home2 photo-rich premium storefront with hero slider, full commerce sections and dedicated mobile UX",
+  "description": "IROOM Fresh Fruits V60.19 dual home: Home2 image-safe premium storefront with compact deploy patch and robust fallback cards",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "check": "node --check server.js && node --check public/iroom_assets/iroom-v60-15.js && node --check public/iroom_assets/iroom-v60-17-dual.js && node --check public/iroom_assets/iroom-v60-18-home2.js && node --check public/sw.js"
+    "check": "node --check server.js && node --check public/iroom_assets/iroom-v60-15.js && node --check public/iroom_assets/iroom-v60-17-dual.js && node --check public/iroom_assets/iroom-v60-19-home2.js && node --check public/sw.js"
   },
   "engines": {
     "node": ">=18"
