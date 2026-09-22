@@ -369,6 +369,18 @@ hr{border:0;border-top:1px solid var(--line);margin:18px 0}
 
 <section class="view" id="view-site">
   <h2>사이트 · 결제 · 알림</h2>
+  <div class="formcard" id="dualHomeCard" style="margin:14px 0 18px">
+    <div class="row" style="justify-content:space-between;align-items:flex-start;gap:18px">
+      <div><h3 style="margin-top:0">공개 홈페이지 디자인</h3><div class="small">상품·주문·회원·관리자 데이터는 하나로 공유하고, 고객에게 보이는 메인 디자인만 선택합니다.</div></div>
+      <span class="chip" id="publicHomeStyleStatus">확인 중</span>
+    </div>
+    <div class="grid2" style="margin-top:12px">
+      <div class="card"><h3>홈페이지 1 · Original</h3><div class="small">현재까지 운영해온 기능 중심 디자인 + 하단 IROOM NOTE</div><div class="row" style="margin-top:10px"><button class="ghost" type="button" id="previewHome1Btn">미리보기</button><button class="primary" type="button" id="publishHome1Btn">메인으로 사용</button></div></div>
+      <div class="card"><h3>홈페이지 2 · Premium Editorial</h3><div class="small">아이보리·딥그린 중심의 새 프리미엄 디자인. 모바일은 새 전용 레이아웃으로 표시됩니다.</div><div class="row" style="margin-top:10px"><button class="ghost" type="button" id="previewHome2Btn">미리보기</button><button class="primary" type="button" id="publishHome2Btn">메인으로 사용</button></div></div>
+    </div>
+    <div class="notice" id="dualHomeMessage" style="margin-top:10px">홈페이지 1과 2는 같은 상품·주문 DB를 사용합니다.</div>
+  </div>
+
   <div class="grid2">
     <div class="formcard">
       <h3>기본 정보</h3>
@@ -630,7 +642,7 @@ function goto(view,{push=true}={}){
   $$('.view').forEach(v=>v.classList.remove('active'));$('#view-'+view)?.classList.add('active');
   $$('[data-view]').forEach(b=>b.classList.toggle('active',b.dataset.view===view));
   const back=$('#adminBackBtn');if(back)back.hidden=view==='home';
-  if(view==='products')renderProducts();if(view==='images')renderImages();if(view==='orders')renderOrders();if(view==='members')renderMembers();if(view==='refunds')renderRefunds();if(view==='reviews')renderReviews();if(view==='inquiries')renderInquiries();if(view==='logs')renderLogs();if(view==='traffic')renderTraffic();if(view==='banners')fillBanner();if(view==='site')fillSite();if(view==='visual')renderVisualEditor();if(view==='operations')loadOperations();
+  if(view==='products')renderProducts();if(view==='images')renderImages();if(view==='orders')renderOrders();if(view==='members')renderMembers();if(view==='refunds')renderRefunds();if(view==='reviews')renderReviews();if(view==='inquiries')renderInquiries();if(view==='logs')renderLogs();if(view==='traffic')renderTraffic();if(view==='banners')fillBanner();if(view==='site'){fillSite();loadPublicHomeStyle();}if(view==='visual')renderVisualEditor();if(view==='operations')loadOperations();
 }
 try{history.replaceState({...history.state,iroomAdminView:'home',iroomAdminModal:null},'',location.href)}catch(_){}
 window.addEventListener('popstate',e=>{if(e.state?.iroomAdminModal)return;goto(e.state?.iroomAdminView||'home',{push:false})});
@@ -947,6 +959,24 @@ $("#aiBtn").onclick=async()=>{const p=$("#aiPrompt").value.trim();if(!p)return;$
 
 
 $$('[data-admin-season]').forEach(btn=>btn.addEventListener('click',()=>{const k=btn.dataset.adminSeason;const u=new URL('./index.html',location.href);if(k!=='auto')u.searchParams.set('season',k);window.open(u.href,'_blank','noopener');}));
+
+
+async function loadPublicHomeStyle(){
+ const status=$("#publicHomeStyleStatus"),msg=$("#dualHomeMessage");
+ try{const r=await fetch("/api/admin/site/home-style",{cache:"no-store"}),d=await r.json();if(!r.ok)throw new Error(d.error||"확인 실패");const label=d.style==="home2"?"홈페이지 2 공개 중":"홈페이지 1 공개 중";if(status)status.textContent=label;if(msg)msg.textContent=`현재 ${label} · 두 버전은 상품/주문/회원 DB를 함께 사용합니다.`}
+ catch(e){if(status)status.textContent="확인 필요";if(msg)msg.textContent=e.message||"현재 공개 디자인을 확인하지 못했습니다."}
+}
+async function publishHomeStyle(style){
+ const label=style==="home2"?"홈페이지 2 · Premium Editorial":"홈페이지 1 · Original";if(!confirm(`${label}을 고객에게 보이는 공개 메인으로 전환할까요?`))return;
+ const msg=$("#dualHomeMessage");if(msg)msg.textContent="공개 메인 전환 중...";
+ try{const r=await fetch("/api/admin/site/home-style",{method:"PUT",credentials:"same-origin",headers:{"Content-Type":"application/json"},body:JSON.stringify({style})}),d=await r.json();if(!r.ok)throw new Error(d.error||"전환 실패");await loadPublicHomeStyle();if(msg)msg.textContent=`${style==="home2"?"홈페이지 2":"홈페이지 1"}를 공개 메인으로 전환했습니다. 새 창에서 / 주소를 열어 확인하세요.`}
+ catch(e){if(msg)msg.textContent=e.message||"전환에 실패했습니다."}
+}
+$("#previewHome1Btn")?.addEventListener("click",()=>window.open("/home1","_blank","noopener"));
+$("#previewHome2Btn")?.addEventListener("click",()=>window.open("/home2","_blank","noopener"));
+$("#publishHome1Btn")?.addEventListener("click",()=>publishHomeStyle("home1"));
+$("#publishHome2Btn")?.addEventListener("click",()=>publishHomeStyle("home2"));
+loadPublicHomeStyle();
 
 document.getElementById("adminLoginBtn").addEventListener("click",verifyAdminPassword);
 document.getElementById("adminPasswordInput").addEventListener("keydown",e=>{if(e.key==="Enter")verifyAdminPassword()});
