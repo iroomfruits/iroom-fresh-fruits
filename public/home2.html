@@ -7,7 +7,7 @@
 <title>이룸 fresh fruits | Premium Home</title>
 <meta content="국산 프리미엄 과일과 제철 과일을 오늘의 상태에 맞춰 고르는 이룸 fresh fruits." name="description"/>
 <meta content="#fbf6ee" name="theme-color"/>
-<meta content="60-17-dual-home-home2" name="iroom-build"/>
+<meta content="60-18-home2-slider-detail" name="iroom-build"/>
 <meta content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" name="robots"/>
 <link href="https://iroom-fresh-fruits.onrender.com/" rel="canonical"/>
 <meta content="website" property="og:type"/>
@@ -19,7 +19,7 @@
 <meta content="https://iroom-fresh-fruits.onrender.com/iroom_assets/iroom-logo-final.png" property="og:image"/>
 <meta content="summary_large_image" name="twitter:card"/>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"OnlineStore","name":"이룸 fresh fruits","url":"https://iroom-fresh-fruits.onrender.com/","description":"국산 프리미엄 과일과 제철 과일을 오늘의 상태에 맞춰 고르는 과일 전문점","telephone":"070-7762-3651","email":"iroom4562@naver.com","address":{"@type":"PostalAddress","addressCountry":"KR","addressRegion":"서울특별시","addressLocality":"송파구","streetAddress":"송이로 15길 33"}}</script>
-<link href="./manifest.webmanifest?v=60.17" rel="manifest"/>
+<link href="./manifest.webmanifest?v=60.18" rel="manifest"/>
 <meta content="yes" name="mobile-web-app-capable"/>
 <meta content="yes" name="apple-mobile-web-app-capable"/>
 <meta content="default" name="apple-mobile-web-app-status-bar-style"/>
@@ -39,12 +39,12 @@
     window.dispatchEvent(new Event('iroom-install-ready'));
   },{capture:true});
   if('serviceWorker' in navigator&&location.protocol!=='file:'){
-    window.addEventListener('load',()=>navigator.serviceWorker.register('/sw.js?v=60.17').catch(()=>{}),{once:true});
+    window.addEventListener('load',()=>navigator.serviceWorker.register('/sw.js?v=60.18').catch(()=>{}),{once:true});
   }
 })();
 </script>
 <link href="./iroom_assets/iroom-v60-15.css?v=60.15" rel="stylesheet"/>
-<link href="./iroom_assets/iroom-v60-16-dual.css?v=60.17" rel="stylesheet"/><link href="./iroom_assets/iroom-v60-17-home2.css?v=60.17" rel="stylesheet"/></head>
+<link href="./iroom_assets/iroom-v60-16-dual.css?v=60.17" rel="stylesheet"/><link href="./iroom_assets/iroom-v60-17-home2.css?v=60.17" rel="stylesheet"/><link href="./iroom_assets/iroom-v60-18-home2.css?v=60.18" rel="stylesheet"/></head>
 <body class="home2-mode">
 <div aria-live="polite" class="market-notice" role="status">
 <span class="notice-badge">IROOM NOTICE</span>
@@ -86,109 +86,129 @@
 <button aria-expanded="false" aria-label="메뉴 열기" class="icon-btn home2-menu-btn" data-home2-menu="" type="button"><span></span><span></span><span></span></button></div>
 </div>
 </header><div class="home2-mobile-nav" data-home2-mobile-nav="" hidden=""><div class="home2-mobile-nav-inner"><div class="home2-mobile-nav-head"><b>IROOM MENU</b><button aria-label="메뉴 닫기" data-home2-menu-close="" type="button">×</button></div><button data-modal="seasonal" type="button">제철 과일</button><button data-modal="curation" type="button">맞춤 과일</button><button data-modal="gift" type="button">선물하기</button><button data-modal="brand" type="button">이룸 이야기</button><button data-order-lookup="" type="button">비회원 주문조회</button><button class="home2-mobile-kakao" data-kakao-chat="" type="button">카카오 상담하기</button></div></div>
-<main>
-<section class="hero" id="home">
-<div class="hero-inner wide">
-<div class="hero-copy"><span class="eyebrow">IROOM FRESH PROMISE</span><h1>좋은 과일이<br/><b>좋은 하루를 만듭니다.</b></h1><p>자연이 주는 가장 좋은 순간을, 이룸이 직접 고르고 정성껏 전합니다.</p><button class="hero2-primary" data-scroll="premium" type="button">지금, 제철 과일 보기 <span>›</span></button><div class="hero2-mini-trust"><span>꼼꼼한 선별</span><span>신선한 배송</span><span>마음을 담은 포장</span></div></div>
-<div aria-label="이룸 프리미엄 과일" class="hero-fruit-stage home2-hero-photo" id="heroFruitStage"></div>
-<aside aria-hidden="true" class="hero-side-note"><span>Good Fruits<br/>Brighter Days</span><small>좋은 과일이<br/>더 좋은 오늘을 만듭니다.</small></aside>
-</div><div class="home2-hero-dots" aria-hidden="true"><i class="active"></i><i></i><i></i></div>
-</section>
-<section aria-label="구매 안심 안내" class="purchase-trust-strip wide">
-<button data-modal="promise" type="button"><span>✓</span><b>당일 품질 확인</b><small>맛·숙도·상태 확인</small></button>
-<button data-modal="shipping" type="button"><span>🚚</span><b data-trust-shipping="">5만원 이상 무료배송</b><small>지역별 추가운임 안내</small></button>
-<button aria-label="비회원 주문 바로 시작" class="purchase-trust-item" data-guest-order="" type="button"><span>◎</span><b>비회원도 주문 가능</b><small>회원가입 없이 바로 주문</small></button>
-<button data-kakao-chat="" type="button"><span>K</span><b>품질 상담</b><small>수령 후 상태도 빠르게 상담</small></button>
-</section><section aria-label="과일 빠른 선택" class="home2-category-strip wide"><button data-fruit="사과" type="button"><img alt="" src="./iroom_assets/fruits/09_사과_apple.png"/><span>사과</span></button><button data-fruit="샤인머스캣" type="button"><img alt="" src="./iroom_assets/fruits/12_샤인머스캣_shine_muscat.png"/><span>포도</span></button><button data-fruit="제주감귤" type="button"><img alt="" src="./iroom_assets/fruits/21_오렌지_orange.png"/><span>감귤 · 오렌지</span></button><button data-fruit="복숭아" type="button"><img alt="" src="./iroom_assets/fruits/06_복숭아_peach.png"/><span>복숭아</span></button><button data-fruit="배" type="button"><img alt="" src="./iroom_assets/fruits/10_배_pear.png"/><span>배</span></button><button data-fruit="딸기" type="button"><img alt="" src="./iroom_assets/fruits/01_딸기_strawberry.png"/><span>딸기</span></button><button data-fruit="멜론" type="button"><img alt="" src="./iroom_assets/fruits/28_멜론_melon.png"/><span>멜론</span></button><button data-modal="gift" type="button"><span class="home2-gift-icon">🎁</span><span>선물세트</span></button><button class="home2-category-more" data-modal="library" type="button"><small>SEASON</small><b>지금, 가장 맛있는<br/>제철 과일을 만나보세요.</b><i>›</i></button></section>
-<section class="today-section section-pad" id="today">
-<div class="section-head wide today-head">
-<div><span class="eyebrow">TODAY'S IROOM PICK</span><h2 data-today-title="">이룸의 오늘, 프리미엄 과일</h2><p class="today-sub" data-today-copy="">지금 가장 맛있는 계절 과일만, 믿을 수 있는 산지에서 정직하게 소개합니다.</p></div>
-<div class="today-head-tools"><p>지금 가장 맛있는 제철 과일을 자연스럽게 둘러보세요.</p></div>
-</div>
-<div class="today-grid wide" id="todayGrid"></div>
+<main class="home2-main">
+<section class="h2-hero-slider" id="home" data-home2-hero-slider aria-label="이룸 추천 슬라이드">
+  <div class="h2-hero-track" data-h2-hero-track>
+    <article class="h2-hero-slide is-active" data-h2-slide="0">
+      <div class="h2-hero-copy wide">
+        <div class="h2-hero-text">
+          <span class="eyebrow">IROOM FRESH PROMISE</span>
+          <h1>좋은 과일이<br/><b>좋은 하루를 만듭니다.</b></h1>
+          <p>자연이 주는 가장 좋은 순간을, 이룸이 직접 고르고 정성껏 전합니다.</p>
+          <div class="h2-hero-actions"><button class="h2-primary" data-scroll="premium" type="button">지금, 좋은 과일 보기 <span>›</span></button><button class="h2-link" data-modal="brand" type="button">이룸 이야기</button></div>
+          <div class="h2-hero-trust"><span>당일 품질 확인</span><span>신선한 배송</span><span>정성 포장</span></div>
+        </div>
+        <div class="h2-hero-media"><img src="./iroom_assets/home2-hero-premium.png" alt="이룸 프리미엄 과일 선물박스" fetchpriority="high" decoding="async"/><span class="h2-photo-note">Good Fruits<br/>Brighter Days</span></div>
+      </div>
+    </article>
+    <article class="h2-hero-slide" data-h2-slide="1" aria-hidden="true">
+      <div class="h2-hero-copy wide">
+        <div class="h2-hero-text">
+          <span class="eyebrow">TODAY'S IROOM PICK</span>
+          <h2>오늘 가장 좋은 상태의<br/><b>과일만 골라 소개합니다.</b></h2>
+          <p>산지와 당도, 숙도와 외관까지. 오늘 먹기 좋은 과일을 한 번 더 살펴 고릅니다.</p>
+          <div class="h2-hero-actions"><button class="h2-primary" data-scroll="today" type="button">오늘의 PICK 보기 <span>›</span></button><button class="h2-link" data-modal="promise" type="button">선별 기준 보기</button></div>
+          <div class="h2-hero-trust"><span>산지 확인</span><span>맛·숙도 확인</span><span>상태 상담</span></div>
+        </div>
+        <div class="h2-hero-media h2-media-editorial"><img src="./iroom_assets/premium_editorial/autumn_03_shine.jpg" alt="신선한 샤인머스캣" loading="eager" decoding="async"/><div class="h2-media-card"><small>DAILY SELECTION</small><strong>매일 달라지는 과일 상태를<br/>직접 확인합니다.</strong></div></div>
+      </div>
+    </article>
+    <article class="h2-hero-slide" data-h2-slide="2" aria-hidden="true">
+      <div class="h2-hero-copy wide">
+        <div class="h2-hero-text">
+          <span class="eyebrow">PREMIUM GIFT SELECTION</span>
+          <h2>소중한 마음을<br/><b>과일에 정성껏 담습니다.</b></h2>
+          <p>부모님, 거래처, 기업·단체 선물까지 예산과 목적에 맞춰 좋은 과일로 구성합니다.</p>
+          <div class="h2-hero-actions"><button class="h2-primary" data-modal="gift" type="button">선물 구성 상담 <span>›</span></button><button class="h2-link" data-kakao-chat type="button">카카오 상담</button></div>
+          <div class="h2-hero-trust"><span>예산 맞춤</span><span>프리미엄 포장</span><span>다중 배송 상담</span></div>
+        </div>
+        <div class="h2-hero-media h2-media-gift"><img src="./iroom_assets/premium_box_v53/autumn_01.png" alt="이룸 프리미엄 사과 선물세트" loading="eager" decoding="async"/><div class="h2-media-card"><small>GIFT WORTHY</small><strong>받는 순간까지<br/>품격 있게.</strong></div></div>
+      </div>
+    </article>
+  </div>
+  <div class="h2-hero-controls wide">
+    <div class="h2-hero-dots" role="tablist" aria-label="슬라이드 선택"><button class="is-active" data-h2-dot="0" aria-label="1번 슬라이드"></button><button data-h2-dot="1" aria-label="2번 슬라이드"></button><button data-h2-dot="2" aria-label="3번 슬라이드"></button></div>
+    <div class="h2-hero-count"><b data-h2-current>01</b><span>/</span><em>03</em></div>
+    <div class="h2-hero-arrows"><button data-h2-prev type="button" aria-label="이전 슬라이드">‹</button><button data-h2-next type="button" aria-label="다음 슬라이드">›</button></div>
+  </div>
+  <div id="heroFruitStage" class="hero-fruit-stage" hidden aria-hidden="true"></div>
 </section>
 
-<section class="home2-help-card wide"><button data-modal="curation" type="button"><span class="home2-help-icon">◇</span><div><small>어떤 과일을 고를지 고민되세요?</small><strong>예산과 용도만 알려주세요.</strong><span>오늘 상태 좋은 과일로 정성껏 추천해드립니다.</span></div><i>›</i></button></section><section aria-label="상담 및 앱 설치" class="contact-install-band wide">
-<div aria-hidden="true" class="contact-install-brand">
-<img alt="" src="./iroom_assets/iroom-logo-final.png"/>
-</div>
-<div class="contact-install-copy">
-<small>어떤 과일을 고를지 고민되세요?</small>
-<strong>예산과 용도만 알려주세요.</strong>
-<span>오늘 상태 좋은 과일로 정성껏 추천해드립니다.</span>
-</div>
-<button class="contact-kakao-button" data-kakao-chat="" type="button">
-<span aria-hidden="true" class="kakao-badge">K</span><b>카카오 상담하기</b>
-</button>
-<div class="contact-install-slot" data-app-install-card="">
-<button aria-label="이룸 앱 설치" class="action-install-button" data-install="" type="button">
-<img alt="" aria-hidden="true" src="./iroom_assets/iroom-app-icon-64-v60-10.png"/>
-<span data-install-label="">이룸 앱 설치</span><b aria-hidden="true">›</b>
-</button>
-<span aria-live="polite" class="sr-only" data-install-status="">설치 가능 여부를 확인하고 있습니다.</span>
-</div>
-</section><section class="premium-section section-pad" id="premium">
-<div class="split-head wide">
-<div class="premium-heading"><span class="eyebrow">01 · IROOM SIGNATURE SELECTION</span><h2 data-premium-title="">프리미엄 과일</h2><p data-premium-copy="">산지와 품질, 당일 상태를 한 번 더 살펴 고른 이룸의 시그니처 셀렉션입니다.</p><div class="premium-signature-note"><span>SELECTED DAILY</span><i></i><span>QUALITY FIRST</span><i></i><span>GIFT WORTHY</span></div></div>
-<div class="section-actions"><button data-modal="premium" data-premium-button="" type="button">프리미엄 과일 더보기</button></div>
-</div>
-<div class="premium-grid wide commerce-carousel manual-carousel" id="premiumGrid"></div>
-</section><aside aria-label="이룸 운영자의 한마디" class="owner-signature-note wide">
-<img alt="이룸 운영자 캐릭터" class="owner-signature-face" decoding="async" loading="lazy" src="./iroom_assets/iroom-owner-sketch-v60-16.png"/>
-<div class="owner-signature-copy"><small>IROOM NOTE</small><strong>좋은 과일을 직접 보고, 직접 고릅니다.</strong><span>오늘도 좋은 상태를 확인해 정성껏 보내드릴게요.</span></div>
-<span class="owner-signature-brand">IROOM <i>fresh fruits</i></span>
-</aside>
-<section class="home2-mobile-quicklinks wide" aria-label="고객 안내 바로가기">
-  <button data-modal="terms" type="button"><span>▤</span><b>이용약관</b></button>
-  <button data-modal="privacy" type="button"><span>♙</span><b>개인정보처리방침</b></button>
-  <button data-modal="shipping" type="button"><span>▱</span><b>배송·교환·환불</b></button>
-  <button data-order-lookup="" type="button"><span>▣</span><b>비회원 주문조회</b></button>
-  <button data-modal="guide" type="button"><span>◌</span><b>고객센터</b></button>
+<section aria-label="구매 안심 안내" class="purchase-trust-strip wide h2-trust-strip">
+  <button data-modal="promise" type="button"><span>✓</span><b>당일 품질 확인</b><small>맛·숙도·상태를 한 번 더 확인</small></button>
+  <button data-modal="shipping" type="button"><span>🚚</span><b data-trust-shipping>5만원 이상 무료배송</b><small>지역별 추가운임 안내</small></button>
+  <button aria-label="비회원 주문 바로 시작" data-guest-order type="button"><span>◎</span><b>비회원 바로 주문</b><small>회원가입 없이 간편하게</small></button>
+  <button data-kakao-chat type="button"><span>K</span><b>품질 상담</b><small>수령 후 상태도 빠르게 상담</small></button>
 </section>
-<section class="seasonal-section section-pad" id="seasonal">
-<div class="split-head wide">
-<div><span class="eyebrow">02 · SEASONAL FRUITS</span><h2 data-seasonal-title="">지금, 가장 맛있는 제철 과일</h2><p data-seasonal-copy="">계절이 선택하는 가장 맛있는 순간. <b data-season-label="">가을</b>의 제철 과일을 만나보세요.</p></div>
-<div class="section-actions"><button data-modal="seasonal" data-seasonal-button="" type="button">제철 과일 더보기</button></div>
-</div>
-<div class="seasonal-grid wide commerce-carousel manual-carousel" id="seasonalGrid"></div>
+
+<section aria-label="과일 빠른 선택" class="home2-category-strip wide h2-category-strip">
+  <button data-fruit="사과" type="button"><img alt="" src="./iroom_assets/fruits/09_사과_apple.png"/><span>사과</span></button>
+  <button data-fruit="샤인머스캣" type="button"><img alt="" src="./iroom_assets/fruits/12_샤인머스캣_shine_muscat.png"/><span>포도</span></button>
+  <button data-fruit="제주감귤" type="button"><img alt="" src="./iroom_assets/fruits/21_오렌지_orange.png"/><span>감귤 · 오렌지</span></button>
+  <button data-fruit="복숭아" type="button"><img alt="" src="./iroom_assets/fruits/06_복숭아_peach.png"/><span>복숭아</span></button>
+  <button data-fruit="배" type="button"><img alt="" src="./iroom_assets/fruits/10_배_pear.png"/><span>배</span></button>
+  <button data-fruit="딸기" type="button"><img alt="" src="./iroom_assets/fruits/01_딸기_strawberry.png"/><span>딸기</span></button>
+  <button data-fruit="멜론" type="button"><img alt="" src="./iroom_assets/fruits/28_멜론_melon.png"/><span>멜론</span></button>
+  <button data-modal="gift" type="button"><span class="home2-gift-icon">🎁</span><span>선물세트</span></button>
+  <button class="home2-category-more" data-modal="library" type="button"><small>ALL FRUITS</small><b>오늘 준비한 과일<br/>한눈에 보기</b><i>›</i></button>
 </section>
-<section class="library-section section-pad">
-<div class="split-head wide library-head">
-<div><span class="eyebrow">IROOM FRUIT LIBRARY</span><h2 data-library-title="">오늘 더 만나볼 과일</h2><p data-library-copy="">오늘 눈여겨볼 과일 4가지만 먼저 보여드려요. 더보기에서 전체 과일을 한눈에 확인할 수 있습니다.</p></div>
-<div class="section-actions"><button data-library-button="" data-modal="library" type="button">오늘 과일 더보기</button></div>
-</div>
-<div class="library-grid wide seamless-carousel calm-library-grid" id="libraryGrid"></div>
+
+<section class="today-section section-pad h2-today" id="today">
+  <div class="section-head wide h2-section-head">
+    <div><span class="eyebrow">TODAY'S IROOM PICK</span><h2 data-today-title>오늘 이룸이 먼저 고른 과일</h2><p class="today-sub" data-today-copy>지금 가장 맛있는 계절 과일만, 믿을 수 있는 산지에서 정직하게 소개합니다.</p></div>
+    <div class="h2-section-side"><span>오늘 입고 · 당일 상태 기준</span><div class="h2-carousel-buttons"><button data-h2-carousel-prev="#todayGrid" aria-label="이전 상품">‹</button><button data-h2-carousel-next="#todayGrid" aria-label="다음 상품">›</button></div></div>
+  </div>
+  <div class="today-grid wide h2-product-rail" id="todayGrid"></div>
 </section>
-<section class="service-section section-pad">
-<div class="service-grid wide">
-<button class="service-card curation" data-modal="curation" type="button"><span>FRUIT CURATION</span><h3>맞춤 과일</h3><p>예산 · 용도 · 취향에 맞춰 오늘 상태 좋은 과일로 구성합니다.</p><i>맞춤 추천 받기</i><img alt="맞춤 과일" decoding="async" id="curationArt" loading="lazy"/></button>
-<button class="service-card gift" data-modal="gift" type="button"><span>GIFT SELECTION</span><h3>마음을 전하는 과일 선물</h3><p>감사 · 가족 · 기업 선물까지 받는 분과 목적에 맞춰 제안합니다.</p><i>선물 구성 보기</i><img alt="과일 선물" decoding="async" id="giftArt" loading="lazy"/></button>
-<button class="service-card guide" data-modal="guide" type="button"><span>IROOM GUIDE</span><h3>이룸 가이드</h3><p>보관법, 먹는 순서, 좋은 과일을 고르는 기준을 한곳에서 확인하세요.</p><div class="guide-mini"><b>보관 방법</b><b>맛있게 즐기기</b><b>과일 고르는 법</b><b>계절 달력</b></div></button>
-</div>
+
+<section class="premium-section section-pad h2-premium" id="premium">
+  <div class="split-head wide h2-section-head">
+    <div class="premium-heading"><span class="eyebrow">01 · IROOM SIGNATURE SELECTION</span><h2 data-premium-title>프리미엄 과일</h2><p data-premium-copy>산지와 품질, 당일 상태를 한 번 더 살펴 고른 이룸의 시그니처 셀렉션입니다.</p><div class="premium-signature-note"><span>SELECTED DAILY</span><i></i><span>QUALITY FIRST</span><i></i><span>GIFT WORTHY</span></div></div>
+    <div class="section-actions h2-section-actions"><button data-modal="premium" data-premium-button type="button">프리미엄 과일 더보기</button><div class="h2-carousel-buttons"><button data-h2-carousel-prev="#premiumGrid" aria-label="이전 상품">‹</button><button data-h2-carousel-next="#premiumGrid" aria-label="다음 상품">›</button></div></div>
+  </div>
+  <div class="premium-grid wide commerce-carousel manual-carousel h2-product-rail" id="premiumGrid"></div>
 </section>
-<section class="promise-section" id="promise">
-<div class="promise wide">
-<span class="promise-mark">✓</span>
-<div><small>IROOM FRESH PROMISE</small><h2>맛과 상태를 끝까지 살핍니다</h2><p>오늘 받은 과일의 맛이나 상태가 기대에 미치지 않으면 상담 후 정성껏 다시 도와드립니다.</p></div>
-<div class="promise-points"><b>당일 품질 확인</b><b>빠른 상담</b><b>정성스러운 안내</b></div>
-</div>
+
+<section class="h2-gift-editorial wide">
+  <div class="h2-gift-copy"><span class="eyebrow">PREMIUM GIFT</span><h2>마음을 전하는<br/>이룸 프리미엄 선물</h2><p>감사와 축하, 부모님과 거래처 선물까지. 받는 분과 예산에 맞춰 제철 과일 중심으로 정성껏 제안합니다.</p><div class="h2-gift-points"><span>예산 맞춤 구성</span><span>고급 포장</span><span>여러 배송지 상담</span></div><button data-modal="gift" type="button">선물세트 상담하기 <b>›</b></button></div>
+  <div class="h2-gift-gallery"><button data-modal="gift" type="button"><img src="./iroom_assets/premium_box_v53/autumn_01.png" alt="프리미엄 과일 선물세트" loading="lazy"/><span><small>IROOM GIFT 01</small><b>프리미엄 사과 세트</b></span></button><button data-modal="gift" type="button"><img src="./iroom_assets/premium_box_v53/autumn_03.png" alt="프리미엄 샤인머스캣 선물세트" loading="lazy"/><span><small>IROOM GIFT 02</small><b>샤인머스캣 세트</b></span></button><button data-modal="gift" type="button"><img src="./iroom_assets/premium_box_v53/autumn_02.png" alt="프리미엄 과일 선물세트" loading="lazy"/><span><small>IROOM GIFT 03</small><b>제철 과일 구성</b></span></button></div>
 </section>
-<section class="review-section section-pad" hidden="" id="reviewSection">
-<div class="section-head wide compact"><div><span class="eyebrow">REAL REVIEW</span><h2>좋은 과일이 좋은 하루가 된 순간</h2></div><p>관리자가 실제 구매·상담 후기로 확인한 이야기만 공개합니다.</p></div>
-<div class="review-grid wide" id="reviewGrid"></div>
+
+<section class="seasonal-section section-pad h2-seasonal" id="seasonal">
+  <div class="split-head wide h2-section-head"><div><span class="eyebrow">02 · SEASONAL FRUITS</span><h2 data-seasonal-title>지금, 가장 맛있는 제철 과일</h2><p data-seasonal-copy>계절이 선택하는 가장 맛있는 순간. <b data-season-label>가을</b>의 제철 과일을 만나보세요.</p></div><div class="section-actions h2-section-actions"><button data-modal="seasonal" data-seasonal-button type="button">제철 과일 더보기</button><div class="h2-carousel-buttons"><button data-h2-carousel-prev="#seasonalGrid" aria-label="이전 상품">‹</button><button data-h2-carousel-next="#seasonalGrid" aria-label="다음 상품">›</button></div></div></div>
+  <div class="seasonal-grid wide commerce-carousel manual-carousel h2-product-rail" id="seasonalGrid"></div>
 </section>
-<div class="app-install-guide" data-install-guide="" hidden="">
-<button aria-label="닫기" class="app-install-guide-backdrop" data-install-guide-close="" type="button"></button>
-<section aria-labelledby="appInstallGuideTitle" aria-modal="true" class="app-install-guide-panel" role="dialog">
-<button aria-label="닫기" class="app-install-guide-close" data-install-guide-close="" type="button">×</button>
-<img alt="" aria-hidden="true" src="./iroom_assets/iroom-app-icon-192-v60-10.png"/>
-<small>IROOM APP</small>
-<h2 id="appInstallGuideTitle">이룸 앱 설치</h2>
-<div data-install-guide-body=""></div>
-<button class="app-install-guide-done" data-install-guide-close="" type="button">확인</button>
+
+<section class="service-section section-pad h2-service-section">
+  <div class="section-head wide h2-section-head"><div><span class="eyebrow">IROOM SERVICE</span><h2>고르기 어렵다면, 이룸이 같이 고릅니다.</h2><p>과일을 잘 몰라도 괜찮습니다. 예산과 용도만 알려주세요.</p></div></div>
+  <div class="service-grid wide h2-service-grid">
+    <button class="service-card curation" data-modal="curation" type="button"><span>FRUIT CURATION</span><h3>예산 · 용도 맞춤 과일</h3><p>가정용, 손님상, 병문안, 답례 등 상황에 맞춰 오늘 상태 좋은 과일을 추천합니다.</p><i>맞춤 추천 받기</i><img alt="맞춤 과일" decoding="async" id="curationArt" loading="lazy"/></button>
+    <button class="service-card gift" data-modal="gift" type="button"><span>GIFT SELECTION</span><h3>마음을 전하는 선물</h3><p>부모님·거래처·직원·행사 선물까지 받는 분과 목적에 맞춰 구성합니다.</p><i>선물 구성 보기</i><img alt="과일 선물" decoding="async" id="giftArt" loading="lazy"/></button>
+    <button class="service-card guide" data-modal="guide" type="button"><span>IROOM GUIDE</span><h3>맛있게 먹는 방법까지</h3><p>보관법, 먹는 순서, 후숙과 제철 정보를 간단하게 확인하세요.</p><div class="guide-mini"><b>보관 방법</b><b>후숙 안내</b><b>고르는 법</b><b>계절 달력</b></div></button>
+  </div>
 </section>
-</div>
-<section class="season-check wide"><div><small>SEASON VIEW</small><strong>현재 <b data-season-status="">가을</b></strong><span>월별 자동 전환 · 관리자 확인용</span></div><div class="season-buttons"><button data-season="auto">자동</button><button data-season="spring">봄</button><button data-season="summer">여름</button><button data-season="autumn">가을</button><button data-season="winter">겨울</button></div></section>
+
+<section class="h2-journey-section">
+  <div class="wide"><div class="h2-journey-heading"><span class="eyebrow">FROM ORIGIN TO YOUR TABLE</span><h2>좋은 과일이 도착하기까지</h2><p>산지에서 고객님의 식탁까지, 이룸이 중요하게 보는 네 가지 과정입니다.</p></div><div class="h2-journey-grid"><article><span>01</span><i>⌕</i><h3>산지와 입고 확인</h3><p>계절과 산지를 살피고 오늘 들어온 과일의 상태를 확인합니다.</p></article><article><span>02</span><i>✓</i><h3>맛 · 숙도 · 외관 선별</h3><p>먹는 시기와 용도에 맞게 당도와 숙도, 외관을 한 번 더 살핍니다.</p></article><article><span>03</span><i>□</i><h3>과일별 맞춤 포장</h3><p>눌림과 흔들림을 줄이도록 과일 특성에 맞춰 꼼꼼히 포장합니다.</p></article><article><span>04</span><i>→</i><h3>배송 후 품질 상담</h3><p>수령 후 상태가 기대와 다르면 사진과 함께 빠르게 상담해드립니다.</p></article></div></div>
+</section>
+
+<section class="library-section section-pad h2-library-section">
+  <div class="split-head wide h2-section-head library-head"><div><span class="eyebrow">IROOM FRUIT LIBRARY</span><h2 data-library-title>오늘 더 만나볼 과일</h2><p data-library-copy>메인에 다 담지 못한 과일도 오늘 입고 상태와 함께 확인해보세요.</p></div><div class="section-actions h2-section-actions"><button data-library-button data-modal="library" type="button">전체 과일 보기</button><div class="h2-carousel-buttons"><button data-h2-carousel-prev="#libraryGrid" aria-label="이전 상품">‹</button><button data-h2-carousel-next="#libraryGrid" aria-label="다음 상품">›</button></div></div></div>
+  <div class="library-grid wide seamless-carousel calm-library-grid h2-library-rail" id="libraryGrid"></div>
+</section>
+
+<section class="promise-section h2-promise-section" id="promise"><div class="promise wide"><span class="promise-mark">✓</span><div><small>IROOM FRESH PROMISE</small><h2>맛과 상태를 끝까지 살핍니다</h2><p>오늘 받은 과일의 맛이나 상태가 기대에 미치지 않으면 상담 후 정성껏 다시 도와드립니다.</p></div><div class="promise-points"><b>당일 품질 확인</b><b>빠른 상담</b><b>정성스러운 안내</b></div></div></section>
+
+<section class="review-section section-pad h2-review-section" hidden id="reviewSection"><div class="section-head wide compact h2-section-head"><div><span class="eyebrow">REAL REVIEW</span><h2>고객이 전하는 진짜 후기</h2></div><p>관리자가 실제 구매·상담 후기로 확인한 이야기만 공개합니다.</p></div><div class="review-grid wide" id="reviewGrid"></div></section>
+
+<aside aria-label="이룸 운영자의 한마디" class="owner-signature-note wide h2-owner-note"><img alt="이룸 운영자 캐릭터" class="owner-signature-face" decoding="async" loading="lazy" src="./iroom_assets/iroom-owner-sketch-v60-16.png"/><div class="owner-signature-copy"><small>IROOM NOTE</small><strong>좋은 과일을 직접 보고, 직접 고릅니다.</strong><span>오늘도 좋은 상태를 확인해 정성껏 보내드릴게요.</span></div><span class="owner-signature-brand">IROOM <i>fresh fruits</i></span></aside>
+
+<section aria-label="상담 및 앱 설치" class="contact-install-band wide h2-contact-band"><div aria-hidden="true" class="contact-install-brand"><img alt="" src="./iroom_assets/iroom-logo-final.png"/></div><div class="contact-install-copy"><small>어떤 과일을 고를지 고민되세요?</small><strong>예산과 용도만 알려주세요.</strong><span>오늘 상태 좋은 과일로 정성껏 추천해드립니다.</span></div><button class="contact-kakao-button" data-kakao-chat type="button"><span aria-hidden="true" class="kakao-badge">K</span><b>카카오 상담하기</b></button><div class="contact-install-slot" data-app-install-card><button aria-label="이룸 앱 설치" class="action-install-button" data-install type="button"><img alt="" aria-hidden="true" src="./iroom_assets/iroom-app-icon-64-v60-10.png"/><span data-install-label>이룸 앱 설치</span><b aria-hidden="true">›</b></button><span aria-live="polite" class="sr-only" data-install-status>설치 가능 여부를 확인하고 있습니다.</span></div></section>
+
+<section class="home2-mobile-quicklinks wide" aria-label="고객 안내 바로가기"><button data-modal="terms" type="button"><span>▤</span><b>이용약관</b></button><button data-modal="privacy" type="button"><span>♙</span><b>개인정보처리방침</b></button><button data-modal="shipping" type="button"><span>▱</span><b>배송·교환·환불</b></button><button data-order-lookup type="button"><span>▣</span><b>비회원 주문조회</b></button><button data-modal="guide" type="button"><span>◌</span><b>고객센터</b></button></section>
+
+<div class="app-install-guide" data-install-guide hidden><button aria-label="닫기" class="app-install-guide-backdrop" data-install-guide-close type="button"></button><section aria-labelledby="appInstallGuideTitle" aria-modal="true" class="app-install-guide-panel" role="dialog"><button aria-label="닫기" class="app-install-guide-close" data-install-guide-close type="button">×</button><img alt="" aria-hidden="true" src="./iroom_assets/iroom-app-icon-192-v60-10.png"/><small>IROOM APP</small><h2 id="appInstallGuideTitle">이룸 앱 설치</h2><div data-install-guide-body></div><button class="app-install-guide-done" data-install-guide-close type="button">확인</button></section></div>
+<section class="season-check wide" hidden><div><small>SEASON VIEW</small><strong>현재 <b data-season-status>가을</b></strong><span>월별 자동 전환 · 관리자 확인용</span></div><div class="season-buttons"><button data-season="auto">자동</button><button data-season="spring">봄</button><button data-season="summer">여름</button><button data-season="autumn">가을</button><button data-season="winter">겨울</button></div></section>
 </main>
 <footer class="site-footer">
 <div class="footer-main wide"><div class="footer-brand"><img alt="이룸 fresh fruits" src="./iroom_assets/iroom-logo-final.png"/><p>좋은 과일로 마음을 전합니다.<br/>SWEET · HEALTHY · HAPPY</p></div><div class="footer-links"><button data-modal="terms">이용약관</button><button data-modal="privacy">개인정보처리방침</button><button data-modal="shipping">배송·교환·환불</button><button data-order-lookup="">비회원 주문조회</button><button data-modal="guide">고객센터</button><button data-install=""><span data-install-label="">이룸 앱 설치</span></button></div><div class="footer-social"><button data-band="">Band</button><button data-kakao-chat="">Kakao</button><button data-share="">Share</button></div></div>
@@ -197,5 +217,5 @@
 </div>
 <div aria-hidden="true" class="modal-backdrop" id="modalBackdrop"><section aria-modal="true" class="modal-panel" role="dialog"><button aria-label="닫기" class="modal-close" data-close="" type="button">×</button><span class="modal-kicker" id="modalKicker"></span><h2 id="modalTitle"></h2><p class="modal-intro" id="modalIntro"></p><div id="modalBody"></div></section></div>
 <script defer="" src="./iroom_assets/iroom-v60-15.js?v=60.17"></script>
-<script defer="True" src="./iroom_assets/iroom-v60-17-dual.js?v=60.17"></script></body>
+<script defer="True" src="./iroom_assets/iroom-v60-17-dual.js?v=60.17"></script><script defer src="./iroom_assets/iroom-v60-18-home2.js?v=60.18"></script></body>
 </html>
