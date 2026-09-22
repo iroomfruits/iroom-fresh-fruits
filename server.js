@@ -549,6 +549,8 @@ async function initDb(){
   await pool.query(`ALTER TABLE orders ADD COLUMN IF NOT EXISTS subtotal INTEGER NOT NULL DEFAULT 0`).catch(()=>{});
   await pool.query(`ALTER TABLE orders ADD COLUMN IF NOT EXISTS shipping_fee INTEGER NOT NULL DEFAULT 0`).catch(()=>{});
   await pool.query(`ALTER TABLE orders ADD COLUMN IF NOT EXISTS shipping_region TEXT NOT NULL DEFAULT 'normal'`).catch(()=>{});
+  await pool.query(`ALTER TABLE orders ADD COLUMN IF NOT EXISTS privacy_agreed_at TIMESTAMPTZ`).catch(()=>{});
+  await pool.query(`ALTER TABLE orders ADD COLUMN IF NOT EXISTS terms_agreed_at TIMESTAMPTZ`).catch(()=>{});
   await pool.query(`ALTER TABLE users ALTER COLUMN email DROP NOT NULL`).catch(()=>{});
   await pool.query(`CREATE UNIQUE INDEX IF NOT EXISTS idx_users_username_unique ON users(username) WHERE username IS NOT NULL`);
 
@@ -755,12 +757,15 @@ app.get("/api/products", async(req,res)=>{
 
 // Orders
 app.post("/api/orders", simpleRateLimit({windowMs:10*60*1000,max:20,keyPrefix:"order"}), async(req,res)=>{
-  const {items,customer_name,phone,email="",postcode="",address1,address2="",memo="",payment_method="무통장입금",shipping_region="normal"}=req.body||{};
+  const {items,customer_name,phone,email="",postcode="",address1,address2="",memo="",payment_method="무통장입금",shipping_region="normal",privacy_consent=false,terms_consent=false}=req.body||{};
   const safeCustomer=cleanText(customer_name,60),safePhone=cleanPhone(phone),safeEmail=cleanEmail(email),safePost=cleanText(postcode,12),safeAddr1=cleanText(address1,180),safeAddr2=cleanText(address2,120),safeMemo=cleanText(memo,500);
+  const privacyAgreed=privacy_consent===true || String(privacy_consent).toLowerCase()==="yes" || String(privacy_consent)==="1";
+  const termsAgreed=terms_consent===true || String(terms_consent).toLowerCase()==="yes" || String(terms_consent)==="1";
   const safeShippingRegion=["normal","jeju","remote"].includes(String(shipping_region))?String(shipping_region):"normal";
   const safePayment=["무통장입금","토스결제"].includes(String(payment_method))?String(payment_method):"무통장입금";
   if(!Array.isArray(items)||!items.length||items.length>30) return res.status(400).json({error:"주문 상품이 없습니다."});
   if(!safeCustomer||!safePhone||!safeAddr1) return res.status(400).json({error:"주문자명, 연락처, 배송지를 입력해주세요."});
+  if(!privacyAgreed||!termsAgreed) return res.status(400).json({error:"개인정보 수집·이용과 구매조건 확인에 동의해주세요."});
 
   const client=await pool.connect();
   try{
@@ -791,8 +796,8 @@ app.post("/api/orders", simpleRateLimit({windowMs:10*60*1000,max:20,keyPrefix:"o
     const t=readToken(req);
     const ono=orderNo();
     const or=await client.query(`
-      INSERT INTO orders(order_no,user_id,customer_name,phone,email,postcode,address1,address2,memo,payment_method,subtotal,shipping_fee,total_amount,shipping_region)
-      VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14) RETURNING *
+      INSERT INTO orders(order_no,user_id,customer_name,phone,email,postcode,address1,address2,memo,payment_method,subtotal,shipping_fee,total_amount,shipping_region,privacy_agreed_at,terms_agreed_at)
+      VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,NOW(),NOW()) RETURNING *
     `,[ono,t?.userId||null,safeCustomer,safePhone,safeEmail,safePost,safeAddr1,safeAddr2,safeMemo,safePayment,subtotal,shippingFee,total,safeShippingRegion]);
     const order=or.rows[0];
     for(const x of finalItems){
@@ -816,6 +821,30 @@ app.post("/api/orders", simpleRateLimit({windowMs:10*60*1000,max:20,keyPrefix:"o
     await client.query("ROLLBACK");
     res.status(400).json({error:e.message||"주문 처리 중 오류가 발생했습니다."});
   }finally{client.release();}
+});
+
+app.post("/api/orders/lookup", simpleRateLimit({windowMs:10*60*1000,max:10,keyPrefix:"guest_order_lookup",message:"주문조회 요청이 많습니다. 잠시 후 다시 시도해주세요."}), async(req,res)=>{
+  const ono=cleanText(req.body?.order_no,40).toUpperCase();
+  const phoneDigits=cleanPhone(req.body?.phone).replace(/\D/g,"");
+  if(!ono || phoneDigits.length<9) return res.status(400).json({error:"주문번호와 주문자 연락처를 정확히 입력해주세요."});
+  const r=await pool.query(`
+    SELECT o.id,o.order_no,o.status,o.payment_status,o.payment_method,o.subtotal,o.shipping_fee,o.total_amount,o.shipping_region,o.created_at,o.updated_at,
+      COALESCE(json_agg(json_build_object(
+        'product_name',oi.product_name,'unit_price',oi.unit_price,'qty',oi.qty,'line_total',oi.line_total
+      ) ORDER BY oi.id) FILTER (WHERE oi.id IS NOT NULL),'[]'::json) items
+    FROM orders o LEFT JOIN order_items oi ON oi.order_id=o.id
+    WHERE UPPER(o.order_no)=UPPER($1) AND regexp_replace(o.phone,'[^0-9]','','g')=$2
+    GROUP BY o.id
+    LIMIT 1
+  `,[ono,phoneDigits]);
+  if(!r.rows[0]) return res.status(404).json({error:"일치하는 주문을 찾지 못했습니다. 주문번호와 연락처를 다시 확인해주세요."});
+  const order=r.rows[0];
+  res.setHeader("Cache-Control","no-store");
+  res.json({ok:true,order:{
+    order_no:order.order_no,status:order.status,payment_status:order.payment_status,payment_method:order.payment_method,
+    subtotal:order.subtotal,shipping_fee:order.shipping_fee,total_amount:order.total_amount,shipping_region:order.shipping_region,
+    created_at:order.created_at,updated_at:order.updated_at,items:order.items
+  }});
 });
 
 app.get("/api/my/orders", requireUser, async(req,res)=>{
@@ -1361,7 +1390,7 @@ app.get("/api/admin/operations",requireAdmin,async(req,res)=>{
     if(!flags.dbTransportAppropriate)warnings.push("PostgreSQL 연결 방식을 확인하세요. Render 내부 URL은 사설망 연결, 외부 URL은 sslmode=require 사용을 권장합니다.");
     if(!flags.emailConfigured)warnings.push("주문 이메일 알림(Brevo) 설정이 완전하지 않습니다.");
     if(!flags.tossClientConfigured||!flags.tossSecretConfigured)warnings.push("토스 결제 운영키가 아직 완전하게 연결되지 않았습니다.");
-    res.json({ok:true,version:"60.13.0",time:db.rows[0].now,flags,warnings,counts:{products:pc.rows[0].count,stock:pc.rows[0].stock,orders:oc.rows[0].count,users:uc.rows[0].count}});
+    res.json({ok:true,version:"60.15.0",time:db.rows[0].now,flags,warnings,counts:{products:pc.rows[0].count,stock:pc.rows[0].stock,orders:oc.rows[0].count,users:uc.rows[0].count}});
   }catch(e){
     console.error("[OPERATIONS]",e.message);
     res.status(500).json({ok:false,error:"운영 상태를 점검하지 못했습니다."});
@@ -1382,7 +1411,7 @@ app.get("/api/admin/backup",requireAdmin,async(req,res)=>{
       pool.query("SELECT id,event_type,actor,ip_hash,detail,created_at FROM security_events ORDER BY id DESC LIMIT 500")
     ]);
     const payload={
-      meta:{product:"IROOM HOME1",version:"60.13.0",createdAt:new Date().toISOString(),notice:"비밀번호 해시, JWT 비밀키, 결제 Secret Key는 백업에 포함하지 않습니다."},
+      meta:{product:"IROOM HOME1",version:"60.15.0",createdAt:new Date().toISOString(),notice:"비밀번호 해시, JWT 비밀키, 결제 Secret Key는 백업에 포함하지 않습니다."},
       store:store?.setting_value||store||{},
       homepageConfig:home?.setting_value||home||{},
       todayPick:today?.setting_value||today||{},
