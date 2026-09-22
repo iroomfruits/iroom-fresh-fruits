@@ -1121,6 +1121,19 @@ app.get("/api/site/footer-config",async(req,res)=>{
   }
 });
 
+
+app.get("/api/site/home-style",async(req,res)=>{
+  try{const style=await getSetting("public_home_style","home1");const v=String(style?.setting_value??style??"home1");res.json({ok:true,style:["home1","home2"].includes(v)?v:"home1"})}
+  catch(e){res.json({ok:true,style:"home1"})}
+});
+app.get("/api/admin/site/home-style",requireAdmin,async(req,res)=>{
+  const style=await getSetting("public_home_style","home1");const v=String(style?.setting_value??style??"home1");res.json({ok:true,style:["home1","home2"].includes(v)?v:"home1"});
+});
+app.put("/api/admin/site/home-style",requireAdmin,async(req,res)=>{
+  const style=String(req.body?.style||"").trim();if(!["home1","home2"].includes(style))return res.status(400).json({ok:false,error:"홈페이지 버전을 확인해 주세요."});
+  await putSetting("public_home_style",style);logSecurity("admin_home_style_updated","admin",req,style);res.json({ok:true,style});
+});
+
 app.get("/api/site/homepage-config",async(req,res)=>{
   res.set("Cache-Control","no-store, no-cache, must-revalidate, proxy-revalidate");
   res.set("Pragma","no-cache");
@@ -1449,7 +1462,15 @@ app.get("/band-admin.html",(req,res)=>res.sendFile(path.join(__dirname,"public",
 app.get("/admin-preview",(req,res)=>{res.setHeader("Cache-Control","no-store");res.sendFile(path.join(__dirname,"public","index.html"))});
 app.get("/healthz",(req,res)=>res.json({ok:true,time:new Date().toISOString()}));
 
-// static site
+// static site + dual public homes
+app.get("/home1",(req,res)=>res.sendFile(path.join(__dirname,"public","index.html")));
+app.get("/home2",(req,res)=>res.sendFile(path.join(__dirname,"public","home2.html")));
+app.get("/home1/",(req,res)=>res.redirect(301,"/home1"));
+app.get("/home2/",(req,res)=>res.redirect(301,"/home2"));
+app.get("/",async(req,res)=>{
+  try{const style=await getSetting("public_home_style","home1");const v=String(style?.setting_value??style??"home1");return res.sendFile(path.join(__dirname,"public",v==="home2"?"home2.html":"index.html"))}
+  catch(_){return res.sendFile(path.join(__dirname,"public","index.html"))}
+});
 app.use(express.static(path.join(__dirname,"public"),{
   etag:true,maxAge:"5m",setHeaders(res,file){if(file.endsWith("sw.js")||file.endsWith("service-worker.js")||file.endsWith("manifest.webmanifest"))res.setHeader("Cache-Control","no-cache");}
 }));
@@ -1466,7 +1487,7 @@ let httpServer=null;
 function startHttp(){
   if(serverStarted)return;
   serverStarted=true;
-  httpServer=app.listen(PORT,()=>console.log(`IROOM HOME1 V60.2 listening on ${PORT}`));
+  httpServer=app.listen(PORT,()=>console.log(`IROOM HOME1 V60.17 DUAL HOME listening on ${PORT}`));
   httpServer.requestTimeout=30000;
   httpServer.headersTimeout=35000;
   httpServer.keepAliveTimeout=5000;
