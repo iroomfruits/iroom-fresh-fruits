@@ -1,12 +1,12 @@
 {
   "name": "iroom-home1",
-  "version": "60.20.0",
+  "version": "60.21.0",
   "private": true,
-  "description": "IROOM Fresh Fruits V60.20 dual home: Home2 Luxury Premium House with seasonal editorial layout and compact image-safe storefront",
+  "description": "IROOM Fresh Fruits V60.21 dual home: Home2 luxury real-photo storefront with compact aligned cards and Home2-only gift editorial",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "check": "node --check server.js && node --check public/iroom_assets/iroom-v60-15.js && node --check public/iroom_assets/iroom-v60-20-luxury.js && node --check public/sw.js"
+    "check": "node --check server.js && node --check public/iroom_assets/iroom-v60-15.js && node --check public/iroom_assets/iroom-v60-20-luxury.js && node --check public/iroom_assets/iroom-v60-21-home2-real.js && node --check public/sw.js"
   },
   "engines": {
     "node": ">=18"
