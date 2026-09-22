@@ -1,7 +1,7 @@
-const CACHE='iroom-v60-14-guest-order-flow';
+const CACHE='iroom-v60-15-premium-order-care';
 const CORE=[
   './','./index.html','./manifest.webmanifest','./favicon.ico',
-  './iroom_assets/iroom-v60-14.css','./iroom_assets/iroom-v60-14.js','./iroom_assets/iroom-logo-final.png',
+  './iroom_assets/iroom-v60-15.css','./iroom_assets/iroom-v60-15.js','./iroom_assets/iroom-logo-final.png',
   './iroom_assets/iroom-app-icon-32-v60-10.png','./iroom_assets/iroom-app-icon-64-v60-10.png',
   './iroom_assets/iroom-app-icon-180-v60-10.png','./iroom_assets/iroom-app-icon-192-v60-10.png',
   './iroom_assets/iroom-app-icon-512-v60-10.png','./iroom_assets/iroom-app-icon-512-maskable-v60-10.png'
