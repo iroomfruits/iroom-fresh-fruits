@@ -1,8 +1,8 @@
 {
   "name": "iroom-home1",
-  "version": "60.21.0",
+  "version": "60.22.0",
   "private": true,
-  "description": "IROOM Fresh Fruits V60.21 dual home: Home2 luxury real-photo storefront with compact aligned cards and Home2-only gift editorial",
+  "description": "IROOM Fresh Fruits V60.22 dual home: Home2 atelier-style real-photo luxury storefront with compact aligned cards",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
