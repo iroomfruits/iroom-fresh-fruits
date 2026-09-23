@@ -1,0 +1,158 @@
+/* IROOM HOME2 V60.22 — ATELIER REAL PHOTO / COMPACT LUXURY */
+/* Goal: keep Home2 distinct from Home1, unify all photography to a moody real-photo atelier tone,
+   remove oversize crops/blank cards/text collisions, keep desktop/mobile proportions disciplined. */
+
+.home2-mode{--atelier-deep:#0d4a3b;--atelier-ink:#123d34;--atelier-paper:#fbf8f1;--atelier-line:rgba(21,65,53,.11);--atelier-taupe:#827365}
+
+/* Consistent photographic treatment like the approved first hero */
+.home2-mode .lux-today .today-visual,
+.home2-mode .home2-gift-photo,
+.home2-mode .lux-seasonal .image-wrap,
+.home2-mode .service-card,
+.home2-mode .lux-category>button{position:relative;overflow:hidden}
+.home2-mode .lux-today .today-visual:after,
+.home2-mode .home2-gift-photo:after,
+.home2-mode .lux-seasonal .image-wrap:after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(180deg,rgba(18,29,25,.02),rgba(31,23,18,.16)),radial-gradient(circle at 50% 40%,transparent 48%,rgba(31,24,20,.13) 100%)
+}
+.home2-mode .lux-today .today-visual img,
+.home2-mode .home2-gift-photo img,
+.home2-mode .lux-seasonal .image-wrap img,
+.home2-mode .lux-category img,
+.home2-mode .service-card img{
+  filter:saturate(.84) contrast(1.07) brightness(.86) sepia(.05)!important;
+  transform:scale(1.002);transition:transform .45s ease,filter .45s ease
+}
+.home2-mode .today-card:hover .today-visual img,
+.home2-mode .home2-gift-card:hover .home2-gift-photo img,
+.home2-mode .lux-seasonal .product-card:hover .image-wrap img{transform:scale(1.035);filter:saturate(.9) contrast(1.08) brightness(.9)!important}
+
+/* Main hero: elegant photo, never giant/cut awkwardly */
+.home2-mode .h2-hero-track,.home2-mode .h2-hero-copy,.home2-mode .h2-hero-media{height:470px!important;min-height:470px!important}
+.home2-mode .h2-hero-media>img{object-fit:cover!important;object-position:center 52%!important;filter:saturate(.80) contrast(1.05) brightness(.84) sepia(.06)!important}
+.home2-mode .h2-hero-media:before{background:linear-gradient(90deg,rgba(248,243,234,.56),rgba(248,243,234,.10) 22%,transparent 48%),linear-gradient(180deg,rgba(11,37,31,.03),rgba(8,33,27,.20))!important}
+.home2-mode .h2-photo-collage{height:470px!important;min-height:470px!important;gap:7px!important;padding:12px!important;background:#183b32!important}
+.home2-mode .h2-photo-collage img{filter:saturate(.82) contrast(1.07) brightness(.83) sepia(.06)!important}
+.home2-mode .h2-hero-text{padding-top:54px!important;padding-bottom:70px!important}
+.home2-mode .h2-hero-text h1,.home2-mode .h2-hero-text h2{font-size:clamp(40px,3.5vw,58px)!important;line-height:1.08!important}
+
+/* Editorial rows must size to content — no forced empty columns */
+.home2-mode .luxury-editorial-row{align-items:start!important;gap:14px!important;margin-bottom:14px!important}
+.home2-mode .luxury-editorial-row>section{align-self:start!important;height:auto!important;min-height:0!important}
+.home2-mode .lux-today,.home2-mode .lux-premium,.home2-mode .lux-service,.home2-mode .lux-seasonal,.home2-mode .lux-review{padding:22px!important;min-height:0!important;height:auto!important}
+.home2-mode .h2-section-head{min-height:0!important;margin-bottom:14px!important;align-items:end!important}
+.home2-mode .h2-section-head h2{margin-bottom:4px!important}
+.home2-mode .h2-section-head p{margin:0!important}
+
+/* TODAY — compact 4-card editorial shelf */
+.home2-mode #todayGrid{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:9px!important;overflow:visible!important;padding:0!important}
+.home2-mode .lux-today .today-card{display:flex!important;flex-direction:column!important;height:100%!important;min-height:0!important;border-radius:13px!important;background:#fffdf9!important}
+.home2-mode .lux-today .today-visual{height:104px!important;min-height:104px!important;max-height:104px!important;background:#26251f!important}
+.home2-mode .lux-today .today-visual img{width:100%!important;height:100%!important;object-fit:cover!important;object-position:center!important}
+.home2-mode .lux-today .today-body{display:flex!important;flex:1!important;flex-direction:column!important;padding:10px 10px 9px!important;min-height:150px!important}
+.home2-mode .lux-today .today-topline{min-height:18px!important;margin:0 0 5px!important}
+.home2-mode .lux-today .today-topline small{font-size:6.2px!important}
+.home2-mode .lux-today .today-topline span{font-size:6px!important;padding:3px 5px!important}
+.home2-mode .lux-today .today-body h3{font-size:12px!important;line-height:1.25!important}
+.home2-mode .lux-today .today-body>p{font-size:7.2px!important;line-height:1.45!important;min-height:31px!important;margin:4px 0 0!important;-webkit-line-clamp:2!important}
+.home2-mode .lux-today .sale-price{margin-top:auto!important;padding-top:7px!important}
+.home2-mode .lux-today .sale-price b{font-size:14px!important;white-space:nowrap!important}
+.home2-mode .lux-today .commerce-actions{grid-template-columns:1fr 34px!important;gap:5px!important;margin-top:8px!important}
+.home2-mode .lux-today .buy-btn,.home2-mode .lux-today .cart-btn{height:34px!important;font-size:7px!important;border-radius:7px!important}
+.home2-mode .lux-today .cart-btn{font-size:0!important}.home2-mode .lux-today .cart-btn:after{content:"+";font-size:16px!important}
+
+/* GIFT — same visual rhythm as TODAY; no tall empty white body */
+.home2-mode .home2-gift-grid{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:9px!important;align-items:start!important}
+.home2-mode .home2-gift-card{display:flex!important;flex-direction:column!important;height:auto!important;min-height:0!important;border:1px solid var(--atelier-line)!important;border-radius:13px!important;overflow:hidden!important;background:#fffdf9!important}
+.home2-mode .home2-gift-photo{display:block!important;width:100%!important;height:108px!important;min-height:108px!important;max-height:108px!important;padding:0!important;border:0!important;background:#26251f!important}
+.home2-mode .home2-gift-photo img{width:100%!important;height:100%!important;object-fit:cover!important;object-position:center!important;display:block!important}
+.home2-mode .home2-gift-body{display:flex!important;flex-direction:column!important;padding:10px!important;min-height:145px!important;height:auto!important}
+.home2-mode .home2-gift-body small{font-size:6px!important}
+.home2-mode .home2-gift-body h3{font-size:12px!important;line-height:1.25!important;margin:6px 0 4px!important;min-height:30px!important;display:-webkit-box!important;-webkit-line-clamp:2!important;-webkit-box-orient:vertical!important;overflow:hidden!important}
+.home2-mode .home2-gift-body p{font-size:7px!important;line-height:1.45!important;min-height:31px!important;-webkit-line-clamp:2!important}
+.home2-mode .home2-gift-cta{margin-top:auto!important;padding:7px 10px!important;font-size:6.5px!important}
+
+/* SERVICE — remove all text-on-photo collisions; photo above, copy below */
+.home2-mode .h2-service-grid{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:9px!important;align-items:start!important}
+.home2-mode .service-card{display:flex!important;flex-direction:column!important;min-height:0!important;height:auto!important;padding:0!important;border:1px solid var(--atelier-line)!important;border-radius:13px!important;background:#fffdf9!important;color:var(--atelier-ink)!important;text-align:left!important;overflow:hidden!important}
+.home2-mode .service-card:before{display:none!important}
+.home2-mode .service-card img{position:static!important;order:-1!important;width:100%!important;height:104px!important;min-height:104px!important;max-height:104px!important;object-fit:cover!important;object-position:center!important;opacity:1!important;display:block!important}
+.home2-mode .service-card>span{position:static!important;color:#9a704e!important;font:700 6px/1 var(--lux-serif)!important;letter-spacing:.14em!important;padding:10px 11px 0!important;margin:0!important;z-index:auto!important}
+.home2-mode .service-card h3{position:static!important;color:var(--atelier-ink)!important;font:700 13px/1.25 var(--lux-serif)!important;margin:6px 11px 0!important;min-height:33px!important;z-index:auto!important;text-shadow:none!important}
+.home2-mode .service-card p{position:static!important;color:#776f65!important;font-size:7px!important;line-height:1.5!important;margin:4px 11px 0!important;min-height:34px!important;display:-webkit-box!important;-webkit-line-clamp:3!important;-webkit-box-orient:vertical!important;overflow:hidden!important;z-index:auto!important;text-shadow:none!important}
+.home2-mode .service-card>i{position:static!important;align-self:flex-start!important;margin:8px 11px 11px!important;padding:7px 10px!important;border:1px solid rgba(18,73,59,.15)!important;border-radius:999px!important;background:#f6f1e8!important;color:var(--atelier-deep)!important;font-size:6.5px!important;font-style:normal!important;line-height:1!important;z-index:auto!important;text-shadow:none!important}
+.home2-mode .service-card.guide{background:#fffdf9!important}
+.home2-mode .guide-mini{display:none!important}
+
+/* Journey remains premium but typographic wrapping must never collide */
+.home2-mode .lux-journey{height:auto!important;min-height:0!important;padding:24px!important}
+.home2-mode .h2-journey-heading{grid-template-columns:minmax(0,1fr) minmax(220px,.8fr)!important;gap:18px!important;align-items:end!important}
+.home2-mode .h2-journey-heading h2{font-size:26px!important;line-height:1.15!important;word-break:keep-all!important}
+.home2-mode .h2-journey-heading p{font-size:8px!important;line-height:1.55!important;word-break:keep-all!important}
+.home2-mode .h2-journey-grid article{min-width:0!important;min-height:145px!important;padding:18px 11px 9px!important}
+.home2-mode .h2-journey-grid h3{font-size:10px!important;line-height:1.3!important;word-break:keep-all!important}
+.home2-mode .h2-journey-grid p{font-size:6.5px!important;line-height:1.5!important;word-break:keep-all!important}
+
+/* Seasonal — compact and no long empty bottom */
+.home2-mode .lux-seasonal .h2-product-rail{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:8px!important;overflow:visible!important;padding:0!important}
+.home2-mode .lux-seasonal .product-card{height:auto!important;min-height:0!important;display:flex!important;flex-direction:column!important;background:#fffdf9!important}
+.home2-mode .lux-seasonal .image-wrap{height:86px!important;min-height:86px!important;max-height:86px!important;background:#26251f!important}
+.home2-mode .lux-seasonal .image-wrap img{width:100%!important;height:100%!important;object-fit:cover!important}
+.home2-mode .lux-seasonal .product-card h3{font-size:9px!important;line-height:1.25!important;padding:7px 7px 0!important}
+.home2-mode .lux-seasonal .product-card>p{font-size:6px!important;line-height:1.35!important;padding:0 7px!important;min-height:18px!important;margin-top:2px!important}
+.home2-mode .lux-seasonal .mini-sale{margin:5px 7px 8px!important;padding-top:5px!important}
+.home2-mode .lux-seasonal .mini-sale b{font-size:10px!important}
+.home2-mode .lux-seasonal .commerce-actions{display:none!important}
+
+/* Reviews — eliminate oversized empty panel, make two reviews fill neatly */
+.home2-mode .lux-review{height:auto!important;min-height:0!important}
+.home2-mode .lux-review .review-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:9px!important;align-items:stretch!important}
+.home2-mode .lux-review .review-card{min-height:118px!important;height:auto!important;grid-template-columns:minmax(0,1fr) 58px!important;padding:12px!important;align-items:center!important}
+.home2-mode .lux-review .review-card img{width:58px!important;height:58px!important}
+.home2-mode .lux-review .review-card p{font-size:9px!important;line-height:1.5!important;margin:5px 0!important}
+
+/* category circles: small, refined, photo-like not giant */
+.home2-mode .lux-category img{width:38px!important;height:38px!important;border-radius:50%!important;object-fit:cover!important;box-shadow:0 0 0 1px rgba(29,62,52,.08),0 4px 11px rgba(42,32,24,.08)!important}
+
+@media(max-width:1180px){
+ .home2-mode .h2-hero-track,.home2-mode .h2-hero-copy,.home2-mode .h2-hero-media{height:430px!important;min-height:430px!important}
+ .home2-mode #todayGrid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+ .home2-mode .lux-today .today-visual{height:112px!important;min-height:112px!important;max-height:112px!important}
+ .home2-mode .home2-gift-photo{height:104px!important;min-height:104px!important;max-height:104px!important}
+ .home2-mode .service-card img{height:96px!important;min-height:96px!important;max-height:96px!important}
+}
+
+@media(max-width:760px){
+ .home2-mode .h2-hero-track,.home2-mode .h2-hero-copy,.home2-mode .h2-hero-media{height:390px!important;min-height:390px!important}
+ .home2-mode .h2-hero-text{padding:28px 10px 52px 17px!important;width:61%!important}
+ .home2-mode .h2-hero-text h1,.home2-mode .h2-hero-text h2{font-size:24px!important;line-height:1.08!important}
+ .home2-mode .h2-hero-media{width:64%!important}
+ .home2-mode .luxury-editorial-row{display:block!important;margin:0!important}
+ .home2-mode .luxury-editorial-row>section{padding:17px 14px 18px!important;margin:0!important;border-radius:0!important;border-left:0!important;border-right:0!important}
+ .home2-mode #todayGrid{display:flex!important;gap:8px!important;overflow-x:auto!important;scroll-snap-type:x mandatory!important;padding:0 1px 6px!important}
+ .home2-mode .lux-today .today-card{flex:0 0 72%!important;scroll-snap-align:start!important}
+ .home2-mode .lux-today .today-visual{height:122px!important;min-height:122px!important;max-height:122px!important}
+ .home2-mode .lux-today .today-body{min-height:152px!important}
+ .home2-mode .home2-gift-grid{display:flex!important;gap:8px!important;overflow-x:auto!important;scroll-snap-type:x mandatory!important;padding:0 1px 6px!important}
+ .home2-mode .home2-gift-card{flex:0 0 76%!important;scroll-snap-align:start!important}
+ .home2-mode .home2-gift-photo{height:118px!important;min-height:118px!important;max-height:118px!important}
+ .home2-mode .home2-gift-body{min-height:142px!important}
+ .home2-mode .h2-service-grid{display:flex!important;gap:8px!important;overflow-x:auto!important;scroll-snap-type:x mandatory!important;padding:0 1px 6px!important}
+ .home2-mode .service-card{flex:0 0 78%!important;scroll-snap-align:start!important}
+ .home2-mode .service-card img{height:112px!important;min-height:112px!important;max-height:112px!important}
+ .home2-mode .service-card h3{font-size:13px!important}
+ .home2-mode .service-card p{display:-webkit-box!important;font-size:7px!important;min-height:31px!important}
+ .home2-mode .lux-journey{padding:18px 14px!important}
+ .home2-mode .h2-journey-heading{display:block!important}
+ .home2-mode .h2-journey-heading h2{font-size:20px!important;max-width:240px!important}
+ .home2-mode .h2-journey-heading p{margin-top:6px!important;text-align:left!important;font-size:6.5px!important}
+ .home2-mode .h2-journey-grid article{min-height:124px!important;padding:14px 6px 6px!important}
+ .home2-mode .h2-journey-grid h3{font-size:7.4px!important}
+ .home2-mode .h2-journey-grid p{font-size:5.3px!important}
+ .home2-mode .lux-seasonal .h2-product-rail{grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:5px!important}
+ .home2-mode .lux-seasonal .image-wrap{height:72px!important;min-height:72px!important;max-height:72px!important}
+ .home2-mode .lux-review .review-grid{grid-template-columns:1fr!important}
+ .home2-mode .lux-review .review-card{grid-template-columns:minmax(0,1fr) 50px!important;min-height:104px!important}
+ .home2-mode .lux-review .review-card img{width:50px!important;height:50px!important;display:block!important}
+}
