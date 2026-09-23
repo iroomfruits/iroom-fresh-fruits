@@ -1,4 +1,4 @@
-const CACHE='iroom-v60-23-home2-stilllife-luxury';
+const CACHE='iroom-v60-24-eazypple-refresh';
 const CORE=[
   './','./index.html','./home2.html','./manifest.webmanifest','./favicon.ico',
   './iroom_assets/iroom-v60-15.css','./iroom_assets/iroom-v60-15.js','./iroom_assets/iroom-v60-16-dual.css',

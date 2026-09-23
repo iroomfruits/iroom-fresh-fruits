@@ -14,11 +14,11 @@
   const indexMap={
     spring:{'딸기':1,'금실딸기':1,'참외':2,'성주참외':2,'체리':3,'샤인머스캣':4},
     summer:{'복숭아':1,'백도복숭아':1,'샤인머스캣':2,'멜론':3,'머스크멜론':3,'포도':4,'거봉':4},
-    autumn:{'사과':1,'홍로사과':1,'부사':1,'배':2,'나주배':2,'샤인머스캣':3,'대봉':4,'단감':4,'감':4},
+    autumn:{'사과':1,'홍로사과':1,'이지플':1,'부사':1,'배':2,'나주배':2,'샤인머스캣':3,'대봉':4,'단감':4,'감':4},
     winter:{'감귤':1,'제주감귤':1,'오렌지':1,'한라봉':2,'레드향':2,'딸기':3,'금실딸기':3,'사과':4,'부사':4}
   };
   const exact={
-    '사과':'fruit_apple.webp','홍로사과':'fruit_apple.webp','부사':'fruit_apple.webp',
+    '사과':'fruit_apple.webp','홍로사과':'fruit_apple.webp','이지플':'fruit_apple.webp','부사':'fruit_apple.webp',
     '배':'fruit_pear.webp','나주배':'fruit_pear.webp',
     '샤인머스캣':'fruit_shine.webp','포도':'fruit_grape.webp','거봉':'fruit_grape.webp',
     '대봉':'fruit_persimmon.webp','단감':'fruit_persimmon.webp','감':'fruit_persimmon.webp',
