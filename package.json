@@ -1,6 +1,6 @@
 {
   "name": "iroom-home1",
-  "version": "60.30.0",
+  "version": "60.31.0",
   "private": true,
   "description": "IROOM Fresh Fruits V60.30 dual home: Home2 rebuilt from the approved Green Still Life visual while preserving Home1 commerce and modal systems",
   "main": "server.js",
@@ -8,6 +8,14 @@
     "start": "node server.js",
     "check": "node --check server.js && node --check public/iroom_assets/iroom-v60-15.js && node --check public/iroom_assets/iroom-v60-30-home2-green-still.js && node --check public/sw.js"
   },
-  "engines": {"node": ">=18"},
-  "dependencies": {"bcryptjs":"^2.4.3","cookie-parser":"^1.4.7","express":"^4.22.3","jsonwebtoken":"^9.0.2","pg":"^8.23.0"}
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.7",
+    "express": "^4.22.3",
+    "jsonwebtoken": "^9.0.2",
+    "pg": "^8.23.0"
+  }
 }
