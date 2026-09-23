@@ -1,12 +1,12 @@
 {
   "name": "iroom-home1",
-  "version": "60.26.0",
+  "version": "60.27.0",
   "private": true,
-  "description": "IROOM Fresh Fruits V60.26 dual home: Home2 rebuilt as a museum-like still-life luxury gallery with no autoplay flicker",
+  "description": "IROOM Fresh Fruits V60.27 dual home: Home2 rebuilt from scratch as a single luxury still-life editorial concept",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "check": "node --check server.js && node --check public/iroom_assets/iroom-v60-15.js && node --check public/iroom_assets/iroom-v60-26-home2-museum.js && node --check public/sw.js"
+    "check": "node --check server.js && node --check public/iroom_assets/iroom-v60-15.js && node --check public/iroom_assets/iroom-v60-27-home2-editorial.js && node --check public/sw.js"
   },
   "engines": {
     "node": ">=18"
