@@ -557,7 +557,7 @@ async function initDb(){
   const seed = [
     ["shine-muscat","샤인머스켓","향긋한 머스캣 향과 높은 당도가 특징인 프리미엄 포도입니다.","2kg (3~4송이)",28000,30,"/assets/prod-shine.jpg","과일",10],
     ["naju-pear","나주 신고배 특선","아삭한 식감과 풍부한 과즙이 좋은 나주 신고배 특선입니다.","5kg (7~9과)",38000,30,"/assets/prod-pear.jpg","과일",20],
-    ["red-apple","경북 홍사과","산뜻한 향과 달콤한 맛이 균형 잡힌 경북 홍사과입니다.","3kg",32000,30,"/assets/prod-apple.jpg","과일",30],
+    ["red-apple","이지플","달콤하면서도 진한 맛이 특징인 국내 육성 사과 이지플입니다.","3kg",32000,30,"/assets/prod-apple.jpg","과일",30],
     ["hallabong","제주 한라봉","향이 진하고 과즙이 풍부한 제주 한라봉입니다.","3kg",28000,30,"/assets/prod-hallabong.jpg","과일",40],
     ["premium-gift","프리미엄 과일세트","받는 분과 예산에 맞춰 엄선한 과일을 품격 있게 구성한 선물세트입니다.","혼합 구성",85000,20,"/assets/prod-gift.jpg","선물세트",50],
     ["white-peach","복숭아 백도","부드러운 과육과 향긋한 단맛이 좋은 백도 복숭아입니다.","4kg",29000,30,"/assets/prod-peach.jpg","과일",60]
@@ -584,7 +584,7 @@ async function initDb(){
     ["v37-musk-melon","머스크멜론","부드럽고 은은한 달콤함의 머스크멜론입니다.","2수",26000,30,"/iroom_assets/fruits/28_멜론_melon.png","과일",108],
     ["v37-plum","자두","새콤달콤한 과즙이 좋은 자두입니다.","2kg",19000,30,"/iroom_assets/fruits/27_자두_plum.png","과일",109],
     ["v37-purple-grape","포도","풍부한 향과 진한 단맛의 포도입니다.","2kg",26000,30,"/iroom_assets/fruits/08_포도_purple_grape.png","과일",110],
-    ["v37-hongro-apple","홍로사과","아삭하고 선명한 달콤함의 홍로사과입니다.","3kg",32000,30,"/iroom_assets/fruits/09_사과_apple.png","과일",111],
+    ["v37-hongro-apple","이지플","달콤하면서도 진한 맛이 좋은 국내 육성 사과 이지플입니다.","3kg",32000,30,"/iroom_assets/fruits/09_사과_apple.png","과일",111],
     ["v37-naju-pear","나주배","시원하고 풍부한 과즙의 나주배입니다.","5kg (7~9과)",38000,30,"/iroom_assets/fruits/10_배_pear.png","과일",112],
     ["v37-daebong","대봉","후숙할수록 부드럽고 깊어지는 단맛의 대봉입니다.","3kg",26000,30,"/iroom_assets/fruits/11_감_persimmon.png","과일",113],
     ["v37-pomegranate","석류","선명하고 진한 가을빛의 석류입니다.","2kg",28000,30,"/iroom_assets/fruits/24_석류_pomegranate.png","과일",114],
@@ -626,6 +626,32 @@ async function initDb(){
       ON CONFLICT(slug) DO NOTHING
     `,p);
   }
+
+  // V60.24: autumn apple refresh — replace storefront Hongro labels with Eazypple (이지플).
+  // Historical order_items are intentionally left unchanged; only the current product catalog
+  // and saved homepage configuration are migrated so existing customer order records remain accurate.
+  await pool.query(`
+    UPDATE products
+       SET name='이지플',
+           description='달콤하면서도 진한 맛이 좋은 국내 육성 사과 이지플입니다.',
+           updated_at=NOW()
+     WHERE slug IN ('red-apple','v37-hongro-apple')
+        OR name IN ('홍로사과','경북 홍사과')
+  `).catch(()=>{});
+  await pool.query(`
+    UPDATE site_settings
+       SET setting_value = replace(replace(setting_value::text, '"홍로사과"', '"이지플"'), '"경북 홍사과"', '"이지플"')::jsonb,
+           updated_at=NOW()
+     WHERE setting_value::text LIKE '%홍로사과%'
+        OR setting_value::text LIKE '%경북 홍사과%'
+  `).catch(()=>{});
+  // Keep only the commerce-era Easypple item active to avoid duplicate storefront products.
+  await pool.query(`
+    UPDATE products
+       SET is_active=FALSE, updated_at=NOW()
+     WHERE slug='red-apple'
+       AND EXISTS (SELECT 1 FROM products WHERE slug='v37-hongro-apple')
+  `).catch(()=>{});
 }
 
 // Health
