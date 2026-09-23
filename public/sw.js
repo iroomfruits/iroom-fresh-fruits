@@ -1,8 +1,9 @@
-const CACHE='iroom-v60-30-home2-green-still-life';
+const CACHE='iroom-v60-31-home2-daily-fruits';
 const CORE=[
   './','./index.html','./home2.html','./manifest.webmanifest','./favicon.ico',
   './iroom_assets/iroom-v60-15.css','./iroom_assets/iroom-v60-15.js',
-  './iroom_assets/iroom-v60-30-home2-green-still.css','./iroom_assets/iroom-v60-30-home2-green-still.js',
+  './iroom_assets/iroom-v60-31-home2-daily-fruits.css',
+  './iroom_assets/green_home2/daily_banana.webp','./iroom_assets/green_home2/daily_mandarin.webp','./iroom_assets/green_home2/daily_kiwi.webp','./iroom_assets/green_home2/daily_strawberry.webp','./iroom_assets/green_home2/daily_blueberry.webp','./iroom_assets/iroom-v60-30-home2-green-still.js',
   './iroom_assets/green_home2/hero_green_still.webp','./iroom_assets/green_home2/owner_sketch.webp','./iroom_assets/green_home2/gift.webp',
   './iroom_assets/green_home2/apple.webp','./iroom_assets/green_home2/pear.webp','./iroom_assets/green_home2/shine.webp','./iroom_assets/green_home2/persimmon.webp','./iroom_assets/green_home2/pomegranate.webp','./iroom_assets/green_home2/grape.webp',
   './iroom_assets/green_home2/banana.webp','./iroom_assets/green_home2/mandarin.webp','./iroom_assets/green_home2/kiwi.webp','./iroom_assets/green_home2/strawberry.webp','./iroom_assets/green_home2/blueberry.webp',

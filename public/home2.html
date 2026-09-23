@@ -4,21 +4,21 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>이룸 fresh fruits | Green Still Life</title>
-<meta name="description" content="햇살 아래 가장 좋은 과일을 고르는 이룸 fresh fruits의 그린 스틸라이프 홈. 프리미엄 과일, 일상의 과일, 선물과 맞춤 큐레이션을 만나보세요.">
+<meta name="description" content="햇살 아래 가장 좋은 과일을 고르는 이룸 fresh fruits의 그린 스틸라이프 홈. 프리미엄 과일, 프리미엄 일상과일, 선물과 맞춤 큐레이션을 만나보세요.">
 <meta name="theme-color" content="#dfe7d2">
-<meta name="iroom-build" content="60-30-home2-green-still-life">
-<link rel="manifest" href="./manifest.webmanifest?v=60.30">
-<link rel="icon" href="./favicon.ico?v=60.30">
+<meta name="iroom-build" content="60-31-home2-daily-fruits">
+<link rel="manifest" href="./manifest.webmanifest?v=60.31">
+<link rel="icon" href="./favicon.ico?v=60.31">
 <link rel="apple-touch-icon" sizes="180x180" href="./iroom_assets/iroom-app-icon-180-v60-10.png">
 <script>
 (()=>{
   window.__iroomInstallPrompt=null;window.__iroomInstallReady=false;
   addEventListener('beforeinstallprompt',e=>{e.preventDefault();window.__iroomInstallPrompt=e;window.__iroomInstallReady=true;dispatchEvent(new Event('iroom-install-ready'))},{capture:true});
-  if('serviceWorker'in navigator&&location.protocol!=='file:')addEventListener('load',()=>navigator.serviceWorker.register('/sw.js?v=60.30').catch(()=>{}),{once:true});
+  if('serviceWorker'in navigator&&location.protocol!=='file:')addEventListener('load',()=>navigator.serviceWorker.register('/sw.js?v=60.31').catch(()=>{}),{once:true});
 })();
 </script>
 <link rel="stylesheet" href="./iroom_assets/iroom-v60-15.css?v=60.15">
-<link rel="stylesheet" href="./iroom_assets/iroom-v60-30-home2-green-still.css?v=60.30">
+<link rel="stylesheet" href="./iroom_assets/iroom-v60-31-home2-daily-fruits.css?v=60.31">
 </head>
 <body class="home2-mode home2-v30">
 <div id="iroomApp" class="gs-shell" data-season="autumn">
@@ -104,14 +104,14 @@
 
     <section class="gs-daily gs-section" id="daily">
       <header class="gs-daily-copy">
-        <span>DAILY FRUITS</span><h2>일상의 과일</h2><p>매일 만나는 신선한 행복,<br>건강한 일상을 채우는 이룸의 과일입니다.</p>
+        <span>DAILY FRUITS</span><h2>프리미엄 일상과일</h2><p>매일 즐기는 좋은 과일을<br>이룸의 기준으로 골랐습니다.</p>
       </header>
       <div class="gs-daily-list">
-        <button type="button" data-fruit="바나나" data-display-name="바나나"><span><img src="./iroom_assets/green_home2/banana.webp" alt=""></span><b>바나나</b></button>
-        <button type="button" data-fruit="제주감귤" data-display-name="감귤"><span><img src="./iroom_assets/green_home2/mandarin.webp" alt=""></span><b>감귤</b></button>
-        <button type="button" data-fruit="키위" data-display-name="키위"><span><img src="./iroom_assets/green_home2/kiwi.webp" alt=""></span><b>키위</b></button>
-        <button type="button" data-fruit="딸기" data-display-name="딸기"><span><img src="./iroom_assets/green_home2/strawberry.webp" alt=""></span><b>딸기</b></button>
-        <button type="button" data-fruit="블루베리" data-display-name="블루베리"><span><img src="./iroom_assets/green_home2/blueberry.webp" alt=""></span><b>블루베리</b></button>
+        <button type="button" data-fruit="바나나" data-display-name="바나나"><span><img src="./iroom_assets/green_home2/daily_banana.webp" alt="바나나 과일 사진" loading="lazy"></span><b>바나나</b></button>
+        <button type="button" data-fruit="제주감귤" data-display-name="감귤"><span><img src="./iroom_assets/green_home2/daily_mandarin.webp" alt="감귤 과일 사진" loading="lazy"></span><b>감귤</b></button>
+        <button type="button" data-fruit="키위" data-display-name="키위"><span><img src="./iroom_assets/green_home2/daily_kiwi.webp" alt="키위 과일 사진" loading="lazy"></span><b>키위</b></button>
+        <button type="button" data-fruit="딸기" data-display-name="딸기"><span><img src="./iroom_assets/green_home2/daily_strawberry.webp" alt="딸기 과일 사진" loading="lazy"></span><b>딸기</b></button>
+        <button type="button" data-fruit="블루베리" data-display-name="블루베리"><span><img src="./iroom_assets/green_home2/daily_blueberry.webp" alt="블루베리 과일 사진" loading="lazy"></span><b>블루베리</b></button>
         <button class="gs-more-fruit" type="button" data-modal="search"><span>⌁</span><b>더 많은<br>제철 과일 보기</b><em>→</em></button>
       </div>
     </section>
@@ -157,7 +157,7 @@
 
 <div aria-hidden="true" class="modal-backdrop" id="modalBackdrop"><section aria-modal="true" class="modal-panel" role="dialog"><button aria-label="닫기" class="modal-close" data-close type="button">×</button><span class="modal-kicker" id="modalKicker"></span><h2 id="modalTitle"></h2><p class="modal-intro" id="modalIntro"></p><div id="modalBody"></div></section></div>
 <div class="app-install-guide" data-install-guide hidden><button aria-label="닫기" class="app-install-guide-backdrop" data-install-guide-close type="button"></button><section aria-labelledby="appInstallGuideTitle" aria-modal="true" class="app-install-guide-panel" role="dialog"><button aria-label="닫기" class="app-install-guide-close" data-install-guide-close type="button">×</button><img alt="" aria-hidden="true" src="./iroom_assets/iroom-app-icon-192-v60-10.png"><small>IROOM APP</small><h2 id="appInstallGuideTitle">이룸 앱 설치</h2><div data-install-guide-body></div><button class="app-install-guide-done" data-install-guide-close type="button">확인</button></section></div>
-<script defer src="./iroom_assets/iroom-v60-15.js?v=60.30"></script>
-<script defer src="./iroom_assets/iroom-v60-30-home2-green-still.js?v=60.30"></script>
+<script defer src="./iroom_assets/iroom-v60-15.js?v=60.31"></script>
+<script defer src="./iroom_assets/iroom-v60-30-home2-green-still.js?v=60.31"></script>
 </body>
 </html>
