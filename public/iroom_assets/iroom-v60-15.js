@@ -568,7 +568,14 @@ function setupManualCarousel(sel){
 }
 function setupAllCarousels(){
  if(previewMode){stopCarousel('#todayGrid');stopCarousel('#premiumGrid');stopCarousel('#seasonalGrid');stopCarousel('#libraryGrid');return}
- // Keep motion focused: only Today's IROOM PICK auto-plays.
+ // Home2 V60.26 is a still-life gallery: never auto-scroll product rails.
+ if(document.body.classList.contains('home2-mode')){
+   stopCarousel('#todayGrid');stopCarousel('#premiumGrid');stopCarousel('#seasonalGrid');stopCarousel('#libraryGrid');
+   $('#todayGrid')?.querySelectorAll('[data-loop-clone]').forEach(n=>n.remove());
+   $('#seasonalGrid')?.querySelectorAll('[data-loop-clone]').forEach(n=>n.remove());
+   return;
+ }
+ // Home1 keeps its original motion behavior.
  setupSeamlessCarousel('#todayGrid',.50);
  setupManualCarousel('#premiumGrid');
  setupManualCarousel('#seasonalGrid');
@@ -576,5 +583,5 @@ function setupAllCarousels(){
  $('#libraryGrid')?.querySelectorAll('[data-loop-clone]').forEach(n=>n.remove());
 }
 
-(async()=>{if(previewMode)document.body.classList.add('admin-preview-mode');await Promise.all([loadProducts(),loadHomepageConfig(),loadPublicConfig(),loadPaymentInfo()]);applySeason(current);updateCartCount();updateAccount();try{if(!previewMode&&'serviceWorker'in navigator)navigator.serviceWorker.register('./sw.js?v=60.19').catch(()=>{})}catch(_){}})();
+(async()=>{if(previewMode)document.body.classList.add('admin-preview-mode');await Promise.all([loadProducts(),loadHomepageConfig(),loadPublicConfig(),loadPaymentInfo()]);applySeason(current);updateCartCount();updateAccount();try{if(!previewMode&&'serviceWorker'in navigator)navigator.serviceWorker.register('./sw.js?v=60.26').catch(()=>{})}catch(_){}})();
 })();

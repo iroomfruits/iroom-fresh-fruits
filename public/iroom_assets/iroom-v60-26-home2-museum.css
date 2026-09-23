@@ -1,0 +1,278 @@
+/* IROOM HOME2 V60.26 — STILL LIFE MUSEUM
+   Home2 only. Home1/shared commerce remains in iroom-v60-15.css. */
+:root{
+  --m-ink:#17372f;
+  --m-dark:#101b17;
+  --m-dark2:#16241e;
+  --m-olive:#2d4238;
+  --m-stone:#d7cebf;
+  --m-limestone:#e8e0d4;
+  --m-ivory:#f3eee5;
+  --m-paper:#faf6ee;
+  --m-gold:#a88046;
+  --m-bronze:#80633c;
+  --m-line:rgba(55,43,31,.18);
+  --m-shadow:0 30px 80px rgba(28,21,14,.12);
+}
+html{scroll-behavior:smooth}
+body.home2-mode{margin:0;background:var(--m-stone);color:var(--m-ink);font-family:"Noto Sans KR","Apple SD Gothic Neo",system-ui,sans-serif}
+body.home2-mode .market-notice{display:none!important}
+body.home2-mode .site-shell{background:var(--m-stone)!important;overflow:hidden}
+body.home2-mode .wide{width:min(1460px,calc(100% - 64px));max-width:none;margin-inline:auto}
+body.home2-mode button{font:inherit}
+body.home2-mode img{display:block;max-width:100%}
+
+/* Header: quieter, gallery-like, but keeps all shared actions */
+body.home2-mode .topbar{position:relative!important;top:auto!important;background:#0f1916!important;border-bottom:1px solid rgba(211,190,151,.24)!important;box-shadow:none!important;z-index:30}
+body.home2-mode .topbar-inner{width:min(1460px,calc(100% - 64px))!important;max-width:none!important;height:82px!important;margin:auto!important;padding:0!important;background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important}
+body.home2-mode .brand{width:210px!important;justify-content:flex-start!important;background:#f3eee5!important;border:1px solid rgba(184,151,98,.24)!important;border-radius:2px!important;padding:9px 14px!important}
+body.home2-mode .brand img{width:168px!important;height:auto!important}
+body.home2-mode .main-nav{gap:0!important;align-self:stretch!important}
+body.home2-mode .main-nav button{height:100%!important;min-width:132px!important;padding:0 24px!important;border-left:1px solid rgba(236,224,205,.12)!important;color:#e8e0d3!important;background:transparent!important;border-radius:0!important}
+body.home2-mode .main-nav button:last-child{border-right:1px solid rgba(236,224,205,.12)!important}
+body.home2-mode .main-nav button:hover{background:rgba(255,255,255,.035)!important}
+body.home2-mode .main-nav button span{font-family:Georgia,"Times New Roman","Noto Serif KR",serif!important;font-weight:600!important;letter-spacing:.05em!important}
+body.home2-mode .main-nav button small,.home2-mode .main-nav .nav-icon{display:none!important}
+body.home2-mode .header-tools{gap:8px!important}
+body.home2-mode .icon-btn{color:#e8e0d3!important;border-color:rgba(232,224,211,.24)!important;background:transparent!important}
+body.home2-mode .icon-btn svg{stroke:currentColor!important}
+body.home2-mode .home2-header-kakao{height:42px!important;border-radius:2px!important;background:#d5b477!important;color:#14231d!important;box-shadow:none!important;padding:0 18px!important}
+body.home2-mode .home2-header-kakao span{background:#0f1916!important;color:#e7ca8f!important}
+body.home2-mode .home2-menu-btn{display:none!important}
+
+/* Museum hero */
+.museum-main{background:
+  radial-gradient(900px 500px at 14% 8%,rgba(255,255,255,.16),transparent 60%),
+  repeating-linear-gradient(0deg,rgba(75,59,39,.018) 0 1px,transparent 1px 4px),
+  linear-gradient(180deg,#d7cec0 0,#e8e0d4 22%,#cfc4b4 42%,#ece5da 66%,#d3c8b8 100%);
+  padding-bottom:48px}
+.museum-hero{background:
+  radial-gradient(800px 420px at 68% 50%,rgba(178,143,87,.12),transparent 62%),
+  linear-gradient(115deg,#0d1714 0 48%,#15241f 48% 100%);
+  border-bottom:1px solid rgba(202,170,116,.34);position:relative;padding:48px 0 0;overflow:hidden}
+.museum-hero:before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,rgba(255,255,255,.012) 0 1px,transparent 1px 5px);pointer-events:none}
+.museum-hero-shell{display:grid;grid-template-columns:minmax(360px,.82fr) minmax(620px,1.45fr);gap:58px;align-items:center;min-height:620px;position:relative;z-index:1}
+.museum-hero-copy{padding:36px 0 50px;color:#f2eadf}
+.museum-kicker,.museum-section-head span,.museum-manifesto>span,.museum-gift-copy>span,.museum-process-title>span,.museum-community-head>span,.museum-contact span{display:block;font:700 11px/1.2 Georgia,"Times New Roman",serif;letter-spacing:.23em;color:#c9a869;text-transform:uppercase}
+.museum-hero-copy h1{margin:28px 0 24px;font:400 clamp(44px,4.2vw,74px)/1.04 Georgia,"Noto Serif KR",serif;letter-spacing:-.045em;color:#f4ede2}
+.museum-hero-copy h1 em{font-style:normal;color:#ddc492}
+.museum-hero-copy>p{max-width:480px;margin:0;color:#bfb7ab;font-size:15px;line-height:1.9;word-break:keep-all}
+.museum-hero-actions{display:flex;gap:10px;margin-top:34px}
+.museum-solid,.museum-ghost{height:50px;padding:0 24px;border-radius:0;border:1px solid #c7a76d;cursor:pointer;font-weight:700;font-size:13px;letter-spacing:.02em}
+.museum-solid{background:#c7a76d;color:#101b17}
+.museum-ghost{background:transparent;color:#e9dfd0}
+.museum-signature{margin-top:54px;padding-top:18px;border-top:1px solid rgba(226,204,165,.25);display:grid;grid-template-columns:42px auto;gap:2px 14px;max-width:410px}
+.museum-signature span{grid-row:1/3;font:400 28px/1 Georgia,serif;color:#c9a869}
+.museum-signature b{font:600 11px/1.2 Georgia,serif;letter-spacing:.18em;color:#e9dfd0}
+.museum-signature small{font-size:9px;color:#8e8b83;letter-spacing:.08em}
+.museum-hero-art{margin:0;padding:0 0 34px;position:relative}
+.museum-frame{background:#101512;border:1px solid rgba(223,194,139,.38);padding:16px;box-shadow:0 40px 90px rgba(0,0,0,.36),0 0 0 7px rgba(111,84,45,.18);position:relative}
+.museum-frame:before{content:"";position:absolute;inset:7px;border:1px solid rgba(239,219,181,.12);pointer-events:none}
+.museum-mat{height:462px;background:#2a2e2a;padding:18px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.museum-mat img{width:100%;height:100%;object-fit:contain;background:#171b18;filter:saturate(.76) contrast(1.03) brightness(.91);transition:opacity .18s ease}
+.museum-hero-art figcaption{display:flex;align-items:baseline;gap:16px;margin-top:18px;color:#a9a298}
+.museum-hero-art figcaption span{font:700 10px Georgia,serif;letter-spacing:.18em;color:#c9a869}
+.museum-hero-art figcaption b{font:400 16px Georgia,serif;color:#efe6d8}
+.museum-hero-art figcaption small{margin-left:auto;font-size:10px;color:#85837d}
+.museum-exhibit-index{position:relative;z-index:2;display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid rgba(224,205,171,.18)}
+.museum-exhibit-index button{position:relative;text-align:left;border:0;border-right:1px solid rgba(224,205,171,.16);background:transparent;color:#bdb5aa;padding:18px 24px 22px;cursor:pointer;display:grid;grid-template-columns:34px 1fr;gap:2px 12px}
+.museum-exhibit-index button:last-child{border-right:0}
+.museum-exhibit-index button:after{content:"";position:absolute;left:0;right:100%;bottom:0;height:2px;background:#c9a869;transition:right .24s ease}
+.museum-exhibit-index button.is-active:after{right:0}
+.museum-exhibit-index button span{grid-row:1/3;font:400 20px Georgia,serif;color:#806c4d}
+.museum-exhibit-index button b{font:500 13px Georgia,serif;color:#eee5d8}
+.museum-exhibit-index button small{font-size:9px;color:#76736d}
+
+/* Manifesto */
+.museum-manifesto{margin-top:52px;padding:68px 72px 58px;background:#f0e9de;border:1px solid rgba(77,59,37,.18);box-shadow:var(--m-shadow);position:relative}
+.museum-manifesto:before{content:"IROOM";position:absolute;right:54px;top:31px;font:400 92px/1 Georgia,serif;letter-spacing:.08em;color:rgba(45,62,54,.045)}
+.museum-manifesto h2{margin:20px 0 18px;font:400 clamp(34px,3.1vw,52px)/1.18 Georgia,"Noto Serif KR",serif;letter-spacing:-.035em;color:#17372f}
+.museum-manifesto>p{max-width:720px;margin:0;color:#756c61;font-size:14px;line-height:1.9;word-break:keep-all}
+.museum-manifesto-meta{margin-top:42px;border-top:1px solid var(--m-line);padding-top:18px;display:flex;gap:16px;align-items:center;color:#71685d;font-size:10px;letter-spacing:.04em}
+.museum-manifesto-meta b{font:700 9px Georgia,serif;letter-spacing:.18em;color:#987644}
+.museum-manifesto-meta i{height:1px;width:34px;background:rgba(69,52,34,.2)}
+
+/* Shared section header */
+.museum-section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:50px;margin-bottom:28px}
+.museum-section-head h2{margin:12px 0 0;font:400 clamp(30px,2.8vw,46px)/1.12 Georgia,"Noto Serif KR",serif;letter-spacing:-.035em;color:#17372f}
+.museum-section-head>p{max-width:430px;margin:0;color:#746b60;font-size:12px;line-height:1.8;text-align:right;word-break:keep-all}
+
+/* Curated commerce: looks like catalogue plates, not a generic shopping grid */
+.museum-selection{padding:92px 0 88px;background:#d4cbbc;border-top:1px solid rgba(92,68,42,.14);border-bottom:1px solid rgba(92,68,42,.16)}
+.museum-product-grid{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:18px!important;overflow:visible!important;opacity:0;transition:opacity .18s linear}
+.home2-products-ready .museum-product-grid{opacity:1}
+.museum-product-grid .today-card{display:grid!important;grid-template-rows:210px auto!important;min-width:0!important;width:auto!important;background:#f4eee4!important;border:1px solid rgba(80,57,34,.20)!important;border-radius:0!important;box-shadow:0 18px 38px rgba(45,32,19,.08)!important;overflow:hidden!important;scroll-snap-align:none!important}
+.museum-product-grid .today-card:nth-child(n+5){display:none!important}
+.museum-product-grid .today-visual{height:210px!important;min-height:210px!important;max-height:210px!important;background:#151b18!important;padding:14px!important;overflow:hidden!important;border:0!important}
+.museum-product-grid .today-visual img{width:100%!important;height:100%!important;object-fit:cover!important;filter:saturate(.74) brightness(.90) contrast(1.03)!important}
+.museum-product-grid .today-body{padding:18px 18px 16px!important;display:flex!important;flex-direction:column!important;min-height:236px!important}
+.museum-product-grid .today-topline{display:flex!important;justify-content:space-between!important;align-items:center!important;margin-bottom:12px!important}
+.museum-product-grid .today-topline small{font:700 8px Georgia,serif!important;letter-spacing:.16em!important;color:#a47c42!important}
+.museum-product-grid .today-topline span{font-size:8px!important;color:#877c6d!important;border:1px solid rgba(87,66,42,.14)!important;background:#eee6d8!important;border-radius:99px!important;padding:5px 8px!important}
+.museum-product-grid h3{font:500 22px/1.2 Georgia,"Noto Serif KR",serif!important;color:#183b31!important;margin:0 0 6px!important}
+.museum-product-grid .today-body>p{font-size:10px!important;line-height:1.6!important;color:#7d7469!important;margin:0!important;min-height:32px!important}
+.museum-product-grid .product-meta{display:none!important}
+.museum-product-grid .sale-price{margin-top:auto!important;padding-top:14px!important;border-top:1px solid rgba(75,56,37,.12)!important;display:flex!important;align-items:baseline!important;justify-content:space-between!important}
+.museum-product-grid .sale-price small{font-size:8px!important;color:#8b8174!important}
+.museum-product-grid .sale-price b{font:600 20px Georgia,serif!important;color:#193a31!important}
+.museum-product-grid .commerce-actions{display:grid!important;grid-template-columns:1fr 42px!important;gap:7px!important;margin-top:12px!important}
+.museum-product-grid .commerce-actions button{height:42px!important;border-radius:0!important;border:1px solid #17372f!important;font-size:9px!important;font-weight:800!important}
+.museum-product-grid .buy-btn{background:#17372f!important;color:#f5eee4!important}
+.museum-product-grid .cart-btn{background:#a77d40!important;color:#fff!important;border-color:#a77d40!important;font-size:0!important}
+.museum-product-grid .cart-btn:after{content:"+";font-size:18px}
+
+/* Gift hall */
+.museum-gift-hall{padding:92px 0;background:linear-gradient(120deg,#101b17,#172820 60%,#21332a);color:#eee4d5}
+.museum-gift-layout{display:grid;grid-template-columns:minmax(500px,1.05fr) minmax(440px,.95fr);gap:72px;align-items:center}
+.museum-gift-art{margin:0}
+.museum-frame.dark{background:#070d0a;border-color:rgba(206,172,111,.42);box-shadow:0 34px 80px rgba(0,0,0,.4),0 0 0 8px rgba(126,93,48,.16)}
+.museum-gift-art .museum-mat{height:380px;background:#0b0f0c}
+.museum-gift-art .museum-mat img{object-fit:contain;filter:saturate(.72) brightness(.83) contrast(1.06)}
+.museum-gift-art figcaption{margin-top:14px;font:700 9px Georgia,serif;letter-spacing:.22em;color:#a98a58}
+.museum-gift-copy h2{margin:18px 0 18px;font:400 clamp(36px,3vw,52px)/1.15 Georgia,"Noto Serif KR",serif;letter-spacing:-.035em;color:#efe5d5}
+.museum-gift-copy>p{max-width:510px;color:#a9a298;font-size:13px;line-height:1.85}
+.museum-gift-options{margin-top:32px;border-top:1px solid rgba(232,216,188,.16)}
+.museum-gift-options button{width:100%;display:grid;grid-template-columns:42px 1fr 20px;gap:4px 12px;text-align:left;align-items:center;padding:19px 2px;border:0;border-bottom:1px solid rgba(232,216,188,.16);background:transparent;color:#e8ded0;cursor:pointer}
+.museum-gift-options small{grid-row:1/3;font:400 18px Georgia,serif;color:#8f744b}
+.museum-gift-options b{font:500 16px Georgia,"Noto Serif KR",serif}
+.museum-gift-options span{font-size:9px;color:#827e76}
+.museum-gift-options i{grid-column:3;grid-row:1/3;font-style:normal;font-size:22px;color:#b69865}
+
+/* Atelier: text as exhibition plaques */
+.museum-atelier{padding:92px 0}
+.museum-atelier-grid{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid rgba(72,54,35,.18);background:#e8dfd2;box-shadow:0 25px 60px rgba(45,32,19,.08)}
+.museum-atelier-grid button{min-height:300px;padding:36px 34px;text-align:left;border:0;border-right:1px solid rgba(72,54,35,.18);background:linear-gradient(150deg,rgba(255,255,255,.32),rgba(255,255,255,.03));color:#17372f;cursor:pointer;position:relative}
+.museum-atelier-grid button:last-child{border-right:0}
+.museum-atelier-grid button:hover{background:#f0e9de}
+.museum-atelier-grid button>span{position:absolute;right:28px;top:24px;font:400 56px Georgia,serif;color:rgba(129,96,51,.15)}
+.museum-atelier-grid small{font:700 9px Georgia,serif;letter-spacing:.19em;color:#9b7541}
+.museum-atelier-grid h3{margin:38px 0 12px;font:500 28px/1.18 Georgia,"Noto Serif KR",serif}
+.museum-atelier-grid p{max-width:330px;font-size:11px;line-height:1.75;color:#786f64}
+.museum-atelier-grid b{position:absolute;left:34px;bottom:34px;font-size:10px;letter-spacing:.04em;color:#17372f}
+
+/* Dark process hall */
+.museum-process{background:#162820;padding:90px 0;color:#eee5d8;border-top:1px solid rgba(215,181,120,.2);border-bottom:1px solid rgba(215,181,120,.2)}
+.museum-process-inner{display:grid;grid-template-columns:.7fr 1.3fr;gap:70px;align-items:start}
+.museum-process-title h2{margin:18px 0 16px;font:400 44px/1.15 Georgia,"Noto Serif KR",serif;letter-spacing:-.035em}
+.museum-process-title p{font-size:11px;color:#a49e93;line-height:1.7}
+.museum-process-grid{display:grid;grid-template-columns:repeat(2,1fr);border-top:1px solid rgba(231,216,188,.18);border-left:1px solid rgba(231,216,188,.18)}
+.museum-process-grid article{min-height:190px;padding:24px 26px;border-right:1px solid rgba(231,216,188,.18);border-bottom:1px solid rgba(231,216,188,.18);position:relative}
+.museum-process-grid small{position:absolute;right:18px;top:16px;font:400 20px Georgia,serif;color:#7e6a49}
+.museum-process-grid h3{margin:0 0 28px;font:700 9px Georgia,serif;letter-spacing:.18em;color:#b4925d}
+.museum-process-grid b{display:block;font:500 16px Georgia,"Noto Serif KR",serif;margin-bottom:8px}
+.museum-process-grid p{font-size:9px;line-height:1.7;color:#8f918b;margin:0}
+
+/* Seasonal gallery */
+.museum-seasonal{padding:92px 0;background:#eee8de}
+.museum-season-grid{display:grid!important;grid-template-columns:repeat(4,1fr)!important;gap:16px!important;overflow:visible!important;opacity:0;transition:opacity .18s linear}
+.home2-products-ready .museum-season-grid{opacity:1}
+.museum-season-grid .product-card{display:block!important;min-width:0!important;width:auto!important;background:#f8f3eb!important;border:1px solid rgba(76,57,37,.18)!important;border-radius:0!important;box-shadow:0 15px 38px rgba(45,32,19,.065)!important;overflow:hidden!important}
+.museum-season-grid .product-card:nth-child(n+5){display:none!important}
+.museum-season-grid .image-wrap{display:block!important;width:100%!important;height:156px!important;min-height:156px!important;max-height:156px!important;padding:12px!important;border:0!important;background:#1b201d!important;border-radius:0!important;overflow:hidden!important}
+.museum-season-grid .image-wrap img{width:100%!important;height:100%!important;object-fit:cover!important;filter:saturate(.72) brightness(.91) contrast(1.02)!important}
+.museum-season-grid h3{margin:14px 16px 4px!important;font:500 18px Georgia,"Noto Serif KR",serif!important;color:#17372f!important}
+.museum-season-grid>article>p{margin:0 16px!important;font-size:9px!important;line-height:1.55!important;color:#7d7469!important;min-height:28px!important}
+.museum-season-grid .mini-sale{margin:10px 16px 16px!important;padding-top:10px!important;border-top:1px solid rgba(75,56,37,.11)!important;display:flex!important;justify-content:space-between!important;align-items:baseline!important}
+.museum-season-grid .mini-sale span{font-size:8px!important;color:#8a8175!important}
+.museum-season-grid .mini-sale b{font:600 17px Georgia,serif!important;color:#17372f!important}
+.museum-season-grid .commerce-actions{display:none!important}
+
+/* Reviews + owner */
+.museum-community{display:grid;grid-template-columns:1.15fr .85fr;gap:18px;padding:0 0 74px}
+.museum-review,.museum-owner{background:#f2ece3;border:1px solid rgba(77,59,37,.18);min-height:280px;box-shadow:0 18px 45px rgba(45,32,19,.07)}
+.museum-review{padding:34px 38px}
+.museum-community-head h2{margin:10px 0 6px;font:400 28px Georgia,"Noto Serif KR",serif;color:#17372f}
+.museum-community-head p{font-size:9px;color:#7a7166}
+.museum-review .review-grid{display:grid!important;grid-template-columns:repeat(2,1fr)!important;gap:12px!important;margin-top:24px!important}
+.museum-review .review-card{background:#faf6ef!important;border:1px solid rgba(75,56,37,.14)!important;border-radius:0!important;padding:18px!important;min-height:135px!important;display:block!important}
+.museum-review .review-card img{display:none!important}
+.museum-review .review-card p{font:400 13px/1.75 Georgia,"Noto Serif KR",serif!important;color:#30483f!important}
+.museum-review .review-card em{font-size:8px!important;color:#82786b!important}
+.museum-owner{display:grid;grid-template-columns:110px 1fr;align-items:center;padding:34px 42px;position:relative;overflow:hidden}
+.museum-owner:after{content:"IROOM";position:absolute;right:18px;bottom:-10px;font:400 82px Georgia,serif;color:rgba(47,61,52,.045);letter-spacing:.08em}
+.museum-owner img{width:92px;opacity:.34;filter:grayscale(1)}
+.museum-owner small{font:700 9px Georgia,serif;letter-spacing:.18em;color:#9a7544}
+.museum-owner strong{display:block;margin:10px 0 8px;font:500 22px Georgia,"Noto Serif KR",serif;color:#17372f}
+.museum-owner p{margin:0;font-size:9px;line-height:1.7;color:#776e62;max-width:360px}
+
+/* Contact / footer */
+.museum-contact{margin-bottom:22px;background:#b79a68;color:#11251e;padding:28px 34px;display:flex;align-items:center;justify-content:space-between;gap:24px;border:1px solid rgba(70,48,23,.25)}
+.museum-contact h2{margin:7px 0 5px;font:500 26px Georgia,"Noto Serif KR",serif}
+.museum-contact p{margin:0;font-size:9px;color:#473b2d}
+.museum-contact>div>span{color:#4d3c27}
+.museum-contact-actions{display:flex;gap:8px}
+.museum-contact-actions button{height:42px;padding:0 16px;border:1px solid rgba(17,37,30,.45);background:#f3eadb;color:#17372f;font-size:9px;font-weight:700;cursor:pointer}
+.museum-contact-actions button:first-child{background:#17372f;color:#f4ecdf;border-color:#17372f}
+.museum-contact-actions button b{display:inline-flex;width:20px;height:20px;border-radius:50%;align-items:center;justify-content:center;background:#f6d500;color:#111;margin-right:5px}
+.museum-quicklinks{display:flex!important;justify-content:center!important;gap:0!important;margin-bottom:12px!important;background:transparent!important;border:0!important}
+.museum-quicklinks button{border:0!important;border-right:1px solid rgba(62,47,31,.18)!important;background:transparent!important;padding:5px 14px!important;color:#665d52!important;font-size:8px!important}
+.museum-quicklinks button:last-child{border-right:0!important}
+body.home2-mode .site-footer{background:#0e1814!important;border-top:1px solid rgba(206,173,115,.25)!important;color:#cfc5b7!important}
+body.home2-mode .site-footer .wide{width:min(1460px,calc(100% - 64px))!important}
+body.home2-mode .footer-brand img{filter:brightness(0) invert(1);opacity:.86}
+body.home2-mode .site-footer button,body.home2-mode .site-footer a,body.home2-mode .site-footer span{color:#b6ada1!important}
+body.home2-mode .modal-panel{border-radius:0!important;border:1px solid rgba(91,69,43,.22)!important;background:#f6f0e7!important}
+body.home2-mode .modal-panel .primary{background:#17372f!important}
+.museum-compat{display:none!important}
+
+/* Prevent any shared carousel/flicker styling from winning */
+body.home2-mode #todayGrid,body.home2-mode #seasonalGrid{transform:none!important;scroll-behavior:auto!important}
+body.home2-mode #todayGrid [data-loop-clone],body.home2-mode #seasonalGrid [data-loop-clone]{display:none!important}
+
+@media(max-width:1180px){
+ body.home2-mode .wide{width:min(100% - 36px,1120px)}
+ body.home2-mode .topbar-inner{width:calc(100% - 36px)!important}
+ body.home2-mode .main-nav button{min-width:104px!important;padding:0 13px!important}
+ .museum-hero-shell{grid-template-columns:.85fr 1.15fr;gap:30px;min-height:540px}
+ .museum-mat{height:390px}
+ .museum-product-grid,.museum-season-grid{grid-template-columns:repeat(2,1fr)!important}
+ .museum-product-grid .today-card:nth-child(n+5),.museum-season-grid .product-card:nth-child(n+5){display:none!important}
+ .museum-gift-layout{grid-template-columns:1fr 1fr;gap:34px}
+ .museum-process-inner{grid-template-columns:1fr;gap:34px}
+}
+
+@media(max-width:760px){
+ body.home2-mode .wide{width:calc(100% - 24px)}
+ body.home2-mode .topbar-inner{width:calc(100% - 24px)!important;height:68px!important}
+ body.home2-mode .brand{width:174px!important;padding:7px 10px!important}
+ body.home2-mode .brand img{width:150px!important}
+ body.home2-mode .main-nav,body.home2-mode .header-tools>.account-wrap,body.home2-mode .header-tools>.icon-btn:not(.cart-icon),body.home2-mode .home2-header-kakao{display:none!important}
+ body.home2-mode .home2-menu-btn{display:flex!important;color:#eee5d8!important;border:0!important}
+ body.home2-mode .cart-icon{display:flex!important}
+ .home2-mobile-nav{background:rgba(10,19,16,.98)!important;color:#eee4d5!important}
+ .home2-mobile-nav-inner{background:#101b17!important;border-color:rgba(201,168,105,.28)!important}
+ .museum-main{padding-bottom:24px;background:linear-gradient(180deg,#d3c8b9,#e7dfd3 25%,#cfc3b2 55%,#ece5db)}
+ .museum-hero{padding-top:0}
+ .museum-hero-shell{display:block;min-height:0;width:100%!important}
+ .museum-hero-copy{padding:34px 22px 28px;background:#101b17}
+ .museum-hero-copy h1{font-size:36px;margin:20px 0 18px}
+ .museum-hero-copy>p{font-size:11px;line-height:1.75}
+ .museum-hero-actions{margin-top:24px;display:grid;grid-template-columns:1fr 1fr}
+ .museum-solid,.museum-ghost{height:44px;padding:0 10px;font-size:10px}
+ .museum-signature{display:none}
+ .museum-hero-art{padding:0 14px 20px;background:#101b17}
+ .museum-frame{padding:9px;box-shadow:0 20px 50px rgba(0,0,0,.35),0 0 0 4px rgba(111,84,45,.18)}
+ .museum-mat{height:250px;padding:9px}
+ .museum-hero-art figcaption{margin-top:10px;gap:8px}
+ .museum-hero-art figcaption small{display:none}
+ .museum-exhibit-index{width:100%!important;grid-template-columns:repeat(3,1fr)}
+ .museum-exhibit-index button{grid-template-columns:1fr;padding:14px 10px;text-align:center}
+ .museum-exhibit-index button span{grid-row:auto;font-size:15px}
+ .museum-exhibit-index button b{font-size:9px}.museum-exhibit-index button small{display:none}
+ .museum-manifesto{margin-top:20px;padding:38px 24px}.museum-manifesto:before{font-size:54px;right:16px}
+ .museum-manifesto h2{font-size:28px}.museum-manifesto>p{font-size:10px}.museum-manifesto-meta{flex-wrap:wrap;gap:8px}.museum-manifesto-meta i{width:16px}
+ .museum-selection,.museum-gift-hall,.museum-atelier,.museum-seasonal{padding:54px 0}
+ .museum-section-head{display:block;margin-bottom:22px}.museum-section-head h2{font-size:27px}.museum-section-head>p{margin-top:10px;text-align:left;font-size:9px}
+ .museum-product-grid{display:flex!important;gap:10px!important;overflow-x:auto!important;scroll-snap-type:x mandatory!important;padding-bottom:8px!important}
+ .museum-product-grid .today-card{flex:0 0 78%!important;scroll-snap-align:start!important;grid-template-rows:175px auto!important}
+ .museum-product-grid .today-visual{height:175px!important;min-height:175px!important;max-height:175px!important;padding:10px!important}
+ .museum-product-grid .today-body{min-height:220px!important;padding:16px!important}
+ .museum-gift-layout{display:block}.museum-gift-art .museum-mat{height:250px}.museum-gift-copy{margin-top:38px}.museum-gift-copy h2{font-size:30px}
+ .museum-atelier-grid{display:block}.museum-atelier-grid button{min-height:230px;border-right:0;border-bottom:1px solid rgba(72,54,35,.18);padding:28px 24px}.museum-atelier-grid button:last-child{border-bottom:0}.museum-atelier-grid button h3{margin-top:28px;font-size:24px}.museum-atelier-grid button b{left:24px;bottom:26px}
+ .museum-process{padding:54px 0}.museum-process-title h2{font-size:30px}.museum-process-grid{grid-template-columns:1fr}.museum-process-grid article{min-height:150px}
+ .museum-season-grid{display:flex!important;gap:10px!important;overflow-x:auto!important;scroll-snap-type:x mandatory!important;padding-bottom:8px!important}.museum-season-grid .product-card{flex:0 0 58%!important;scroll-snap-align:start!important}.museum-season-grid .image-wrap{height:132px!important;min-height:132px!important;max-height:132px!important}
+ .museum-community{display:block;padding-bottom:42px}.museum-review,.museum-owner{min-height:0}.museum-review{padding:26px 22px}.museum-review .review-grid{grid-template-columns:1fr!important}.museum-owner{margin-top:12px;grid-template-columns:76px 1fr;padding:26px 22px}.museum-owner img{width:62px}.museum-owner strong{font-size:18px}
+ .museum-contact{display:block;margin-bottom:12px;padding:24px 20px}.museum-contact h2{font-size:22px}.museum-contact-actions{display:grid;grid-template-columns:1fr 1fr;margin-top:18px}.museum-contact-actions button:first-child{grid-column:1/3}
+ .museum-quicklinks{overflow-x:auto!important;justify-content:flex-start!important;width:100%!important;padding:8px 10px!important}.museum-quicklinks button{white-space:nowrap!important}
+ body.home2-mode .footer-main,body.home2-mode .footer-legal{width:calc(100% - 28px)!important}
+}
