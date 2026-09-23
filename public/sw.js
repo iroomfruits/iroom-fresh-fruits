@@ -1,10 +1,12 @@
-const CACHE='iroom-v60-29-home2-private-market';
+const CACHE='iroom-v60-30-home2-green-still-life';
 const CORE=[
   './','./index.html','./home2.html','./manifest.webmanifest','./favicon.ico',
   './iroom_assets/iroom-v60-15.css','./iroom_assets/iroom-v60-15.js',
-  './iroom_assets/iroom-v60-29-home2-private-market.css','./iroom_assets/iroom-v60-29-home2-private-market.js',
-  './iroom_assets/private_market/gift_mix.webp','./iroom_assets/private_market/apple.webp','./iroom_assets/private_market/pear.webp','./iroom_assets/private_market/shine.webp','./iroom_assets/private_market/persimmon.webp','./iroom_assets/private_market/pomegranate.webp','./iroom_assets/private_market/grape.webp',
-  './iroom_assets/iroom-owner-sketch-v60-16.png','./iroom_assets/iroom-logo-final.png','./iroom_assets/kakao-mark.svg',
+  './iroom_assets/iroom-v60-30-home2-green-still.css','./iroom_assets/iroom-v60-30-home2-green-still.js',
+  './iroom_assets/green_home2/hero_green_still.webp','./iroom_assets/green_home2/owner_sketch.webp','./iroom_assets/green_home2/gift.webp',
+  './iroom_assets/green_home2/apple.webp','./iroom_assets/green_home2/pear.webp','./iroom_assets/green_home2/shine.webp','./iroom_assets/green_home2/persimmon.webp','./iroom_assets/green_home2/pomegranate.webp','./iroom_assets/green_home2/grape.webp',
+  './iroom_assets/green_home2/banana.webp','./iroom_assets/green_home2/mandarin.webp','./iroom_assets/green_home2/kiwi.webp','./iroom_assets/green_home2/strawberry.webp','./iroom_assets/green_home2/blueberry.webp',
+  './iroom_assets/iroom-logo-final.png','./iroom_assets/kakao-mark.svg',
   './iroom_assets/iroom-app-icon-32-v60-10.png','./iroom_assets/iroom-app-icon-64-v60-10.png','./iroom_assets/iroom-app-icon-180-v60-10.png','./iroom_assets/iroom-app-icon-192-v60-10.png','./iroom_assets/iroom-app-icon-512-v60-10.png','./iroom_assets/iroom-app-icon-512-maskable-v60-10.png'
 ];
 self.addEventListener('install',e=>{self.skipWaiting();e.waitUntil(caches.open(CACHE).then(c=>c.addAll(CORE)).catch(()=>{}))});
