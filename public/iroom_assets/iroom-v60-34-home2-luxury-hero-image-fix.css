@@ -1,0 +1,191 @@
+
+/* IROOM HOME2 V60.34 — Luxury Hero & Image Recovery
+   Goal: deeper editorial luxury, no excessive leaf decoration, fully visible product imagery. */
+body.home2-mode{
+  --lux34-ink:#173628;
+  --lux34-green:#294f39;
+  --lux34-deep:#173b2b;
+  --lux34-sage:#e6ebdc;
+  --lux34-cream:#fbf8ee;
+  --lux34-champagne:#c7aa72;
+  background:
+    radial-gradient(circle at 8% 8%,rgba(255,252,236,.94),transparent 34%),
+    radial-gradient(circle at 92% 20%,rgba(207,218,194,.56),transparent 36%),
+    linear-gradient(180deg,#f5f6eb 0%,#edf1e4 100%);
+}
+body.home2-mode .gs-header{
+  background:rgba(251,250,241,.90)!important;
+  backdrop-filter:blur(18px) saturate(1.08);
+  -webkit-backdrop-filter:blur(18px) saturate(1.08);
+  border-bottom:1px solid rgba(42,71,50,.08)!important;
+}
+
+/* Hero: editorial depth rather than more decoration */
+body.home2-mode .gs-hero{
+  position:relative;
+  isolation:isolate;
+  border:1px solid rgba(150,131,88,.16)!important;
+  border-radius:0 0 30px 30px!important;
+  overflow:hidden!important;
+  box-shadow:
+    0 34px 90px rgba(26,47,33,.14),
+    0 1px 0 rgba(255,255,255,.72) inset!important;
+  background:#dfe6d5;
+}
+body.home2-mode .gs-hero:before{
+  content:"";
+  position:absolute;inset:0;z-index:2;pointer-events:none;
+  background:
+    linear-gradient(90deg,rgba(249,249,235,.98) 0%,rgba(248,249,236,.89) 18%,rgba(244,246,229,.54) 37%,rgba(24,46,31,.03) 59%,rgba(13,31,22,.15) 100%),
+    linear-gradient(180deg,rgba(255,255,255,.08),transparent 70%,rgba(19,38,27,.12));
+}
+body.home2-mode .gs-hero:after{
+  content:"";
+  position:absolute;left:0;right:0;bottom:0;height:1px;z-index:4;
+  background:linear-gradient(90deg,transparent,rgba(193,164,104,.66),transparent);
+}
+body.home2-mode .gs-hero-image{
+  filter:saturate(.94) contrast(1.055) brightness(.99)!important;
+  transform:scale(1.008);
+}
+body.home2-mode .gs-hero-shade{display:none!important}
+body.home2-mode .gs-hero-copy{
+  z-index:3!important;
+  max-width:570px!important;
+  padding:42px 40px 38px 50px!important;
+  border-left:1px solid rgba(183,155,97,.42);
+  background:linear-gradient(90deg,rgba(250,249,235,.40),rgba(250,249,235,0));
+  text-shadow:0 1px 0 rgba(255,255,255,.34);
+}
+body.home2-mode .gs-kicker{
+  letter-spacing:.28em!important;
+  font-size:11px!important;
+  font-weight:800!important;
+  color:#6f7d6c!important;
+}
+body.home2-mode .gs-hero-copy h1{
+  margin-top:27px!important;
+  font-size:clamp(48px,4.3vw,69px)!important;
+  line-height:1.17!important;
+  letter-spacing:-.065em!important;
+  color:#173b2a!important;
+  font-weight:600!important;
+}
+body.home2-mode .gs-hero-copy p{
+  margin-top:25px!important;
+  font-size:17px!important;
+  line-height:1.85!important;
+  color:#697568!important;
+}
+body.home2-mode .gs-hero-actions{margin-top:31px!important;gap:10px!important}
+body.home2-mode .gs-hero-actions button{
+  min-height:50px!important;
+  border-radius:999px!important;
+  padding:0 24px!important;
+  letter-spacing:-.02em;
+}
+body.home2-mode .gs-primary{
+  background:linear-gradient(145deg,#335f42,#274c36)!important;
+  border:1px solid rgba(25,61,40,.88)!important;
+  box-shadow:0 13px 28px rgba(34,69,47,.16),inset 0 1px 0 rgba(255,255,255,.15)!important;
+}
+body.home2-mode .gs-primary:hover{transform:translateY(-2px);box-shadow:0 18px 34px rgba(34,69,47,.23)!important}
+body.home2-mode .gs-ghost{
+  background:rgba(255,254,247,.48)!important;
+  border:1px solid rgba(47,73,52,.30)!important;
+}
+body.home2-mode .gs-hero-edition{
+  margin-top:29px;
+  padding-top:15px;
+  width:min(320px,100%);
+  border-top:1px solid rgba(183,155,97,.33);
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  color:#788274;
+  font-size:9px;letter-spacing:.17em;
+}
+body.home2-mode .gs-hero-edition b{font-size:9px;color:#31523c;letter-spacing:.13em}
+
+/* Premium cards: use the actual 640x520 asset ratio so no fruit is clipped. */
+body.home2-mode .gs-premium{padding-top:82px!important}
+body.home2-mode .gs-section-head h2{letter-spacing:-.055em!important}
+body.home2-mode .gs-premium-grid{gap:18px!important}
+body.home2-mode .gs-premium-card{
+  overflow:hidden;
+  background:rgba(252,251,243,.93)!important;
+  border:1px solid rgba(56,82,59,.095)!important;
+  box-shadow:0 14px 32px rgba(31,53,37,.055)!important;
+}
+body.home2-mode .gs-premium-card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 24px 48px rgba(31,53,37,.105)!important;
+}
+body.home2-mode .gs-photo{
+  aspect-ratio:640/520!important;
+  min-height:0!important;
+  padding:0!important;
+  background:linear-gradient(145deg,#eef1e5,#e3e8d9)!important;
+  border-bottom:1px solid rgba(54,81,58,.08);
+}
+body.home2-mode .gs-photo img{
+  width:100%!important;height:100%!important;
+  object-fit:cover!important;object-position:center!important;
+  padding:0!important;border-radius:0!important;
+  filter:saturate(.98) contrast(1.01)!important;
+}
+body.home2-mode .gs-card-copy{background:linear-gradient(180deg,rgba(255,254,248,.97),rgba(250,250,241,.96))}
+
+/* Daily fruit: full-fruit presentation with no broken-image gap */
+body.home2-mode .gs-daily-list>button:not(.gs-more-fruit) span{
+  overflow:hidden!important;
+  background:
+    radial-gradient(circle at 50% 42%,rgba(255,255,255,.98),rgba(238,241,228,.88) 72%)!important;
+  border:1px solid rgba(50,78,55,.10)!important;
+  border-radius:18px!important;
+}
+body.home2-mode .gs-daily-list>button:not(.gs-more-fruit) span img{
+  display:block!important;
+  width:100%!important;height:100%!important;
+  object-fit:contain!important;object-position:center!important;
+  padding:7px!important;
+  filter:saturate(.98) contrast(1.015);
+}
+body.home2-mode .gs-daily-list>button b{
+  color:#284935!important;
+  letter-spacing:-.025em;
+}
+body.home2-mode .gs-more-fruit{
+  background:linear-gradient(145deg,rgba(250,249,239,.86),rgba(230,236,218,.92))!important;
+  border:1px solid rgba(52,81,56,.12)!important;
+  box-shadow:0 12px 28px rgba(34,57,40,.045);
+}
+
+/* Broken image safety: hide browser broken icon and preserve polished card. */
+body.home2-mode img.is-iroom-fallback{
+  object-fit:contain!important;
+  background:linear-gradient(145deg,#eef2e6,#e2e8d9)!important;
+}
+body.home2-mode .gs-photo.image-recovered:after{
+  content:"IROOM SELECTED";
+  position:absolute;right:11px;bottom:10px;
+  font-size:8px;letter-spacing:.15em;
+  color:rgba(39,70,48,.62);
+  background:rgba(255,255,247,.68);
+  padding:5px 8px;border-radius:999px;
+  backdrop-filter:blur(8px);
+}
+
+@media(max-width:860px){
+  body.home2-mode .gs-hero{border-radius:0 0 22px 22px!important}
+  body.home2-mode .gs-hero:before{
+    background:linear-gradient(180deg,rgba(250,250,238,.03) 0%,rgba(250,250,238,.15) 44%,rgba(248,249,237,.95) 76%,rgba(248,249,237,.99) 100%);
+  }
+  body.home2-mode .gs-hero-copy{
+    border-left:0!important;border-top:1px solid rgba(183,155,97,.25);
+    padding:27px 22px 25px!important;background:rgba(248,249,237,.91)!important;
+  }
+  body.home2-mode .gs-hero-copy h1{font-size:42px!important;line-height:1.2!important;margin-top:18px!important}
+  body.home2-mode .gs-hero-copy p{font-size:15px!important;margin-top:17px!important}
+  body.home2-mode .gs-hero-edition{margin-top:20px}
+  body.home2-mode .gs-premium{padding-top:55px!important}
+  body.home2-mode .gs-photo{aspect-ratio:640/520!important}
+}
