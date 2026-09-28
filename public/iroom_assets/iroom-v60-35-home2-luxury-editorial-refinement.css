@@ -1,0 +1,249 @@
+/* IROOM HOME2 V60.35 — Luxury Editorial Refinement
+   Goal: maison-grade hero, non-cropped fruit presentation, quieter premium UI. */
+body.home2-mode{
+  --v35-forest:#183b2c;
+  --v35-deep:#102c20;
+  --v35-sage:#dfe6d6;
+  --v35-ivory:#fbf8ef;
+  --v35-champagne:#b79a62;
+  --v35-line:rgba(122,101,61,.22);
+  background:
+    radial-gradient(circle at 8% 5%,rgba(255,252,240,.98),transparent 28%),
+    radial-gradient(circle at 88% 22%,rgba(202,214,190,.48),transparent 34%),
+    linear-gradient(180deg,#f6f6ec 0%,#edf1e5 54%,#f5f4e9 100%)!important;
+}
+
+/* Header: quieter luxury */
+body.home2-mode .gs-header{
+  background:rgba(252,250,242,.94)!important;
+  border-bottom:1px solid rgba(70,77,54,.09)!important;
+  box-shadow:0 8px 30px rgba(30,45,32,.035)!important;
+}
+body.home2-mode .gs-nav button{font-weight:650!important;letter-spacing:-.025em!important}
+
+/* HERO — editorial maison treatment */
+body.home2-mode .gs-hero{
+  max-width:1580px!important;
+  margin:18px auto 0!important;
+  min-height:690px!important;
+  border-radius:28px!important;
+  border:1px solid rgba(167,143,92,.22)!important;
+  box-shadow:0 36px 95px rgba(23,44,30,.17),0 1px 0 rgba(255,255,255,.8) inset!important;
+  background:#dce3d2!important;
+}
+body.home2-mode .gs-hero-image{
+  filter:saturate(.91) contrast(1.075) brightness(.975)!important;
+  transform:scale(1.012)!important;
+}
+body.home2-mode .gs-hero:before{
+  background:
+    linear-gradient(90deg,rgba(251,249,236,.985) 0%,rgba(250,248,235,.93) 23%,rgba(247,247,232,.67) 40%,rgba(30,48,33,.02) 60%,rgba(9,24,16,.18) 100%),
+    linear-gradient(180deg,rgba(255,255,255,.05),transparent 60%,rgba(10,27,18,.16))!important;
+}
+body.home2-mode .gs-hero-copy{
+  width:min(620px,45%)!important;
+  max-width:620px!important;
+  margin-left:26px!important;
+  padding:66px 54px 52px!important;
+  border:1px solid rgba(183,154,94,.26)!important;
+  border-left:1px solid rgba(183,154,94,.44)!important;
+  border-radius:22px!important;
+  background:linear-gradient(135deg,rgba(252,250,239,.88),rgba(247,247,233,.54))!important;
+  backdrop-filter:blur(5px)!important;
+  box-shadow:0 22px 54px rgba(31,48,32,.08),inset 0 1px 0 rgba(255,255,255,.66)!important;
+}
+body.home2-mode .gs-hero-copy:before{
+  content:"IROOM FRUIT MAISON";
+  display:block;
+  margin-bottom:19px;
+  color:#9a7d49;
+  font-size:9px;
+  font-weight:800;
+  letter-spacing:.28em;
+}
+body.home2-mode .gs-kicker{
+  margin-bottom:0!important;
+  color:#5e7162!important;
+  font-size:10px!important;
+  letter-spacing:.31em!important;
+}
+body.home2-mode .gs-hero-copy h1{
+  margin:22px 0 0!important;
+  font-size:clamp(52px,4.35vw,72px)!important;
+  line-height:1.12!important;
+  letter-spacing:-.07em!important;
+  color:#173a2b!important;
+  font-weight:600!important;
+  text-shadow:0 1px 0 rgba(255,255,255,.45)!important;
+}
+body.home2-mode .gs-hero-copy p{
+  margin:28px 0 0!important;
+  padding-left:17px!important;
+  border-left:1px solid rgba(176,146,83,.48)!important;
+  color:#657267!important;
+  font-size:16px!important;
+  line-height:1.95!important;
+}
+body.home2-mode .gs-hero-actions{margin-top:32px!important;gap:12px!important}
+body.home2-mode .gs-hero-actions button{height:52px!important;padding:0 26px!important}
+body.home2-mode .gs-primary{
+  background:linear-gradient(145deg,#315e42,#214a34)!important;
+  border:1px solid rgba(173,143,82,.34)!important;
+  box-shadow:0 16px 34px rgba(28,61,41,.20),inset 0 1px 0 rgba(255,255,255,.13)!important;
+}
+body.home2-mode .gs-ghost{
+  background:rgba(255,253,245,.58)!important;
+  border:1px solid rgba(74,91,68,.24)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.7)!important;
+}
+body.home2-mode .gs-hero-edition{
+  margin-top:34px!important;
+  width:100%!important;
+  padding-top:17px!important;
+  border-top:1px solid rgba(182,151,87,.32)!important;
+  color:#8b8878!important;
+}
+body.home2-mode .gs-hero-edition span,body.home2-mode .gs-hero-edition b{font-size:8px!important;letter-spacing:.18em!important}
+
+/* Section framing */
+body.home2-mode .gs-premium{
+  position:relative;
+  margin-top:56px!important;
+  padding:78px 28px 72px!important;
+  background:
+    linear-gradient(180deg,rgba(250,249,239,.48),rgba(235,240,226,.28));
+  border-top:1px solid rgba(178,151,94,.16);
+  border-bottom:1px solid rgba(178,151,94,.12);
+}
+body.home2-mode .gs-section-head>div>span{
+  color:#7d876f!important;
+  letter-spacing:.24em!important;
+  font-size:10px!important;
+}
+body.home2-mode .gs-section-head h2{font-size:38px!important;letter-spacing:-.06em!important;color:#183a2b!important}
+body.home2-mode .gs-section-head p{color:#758071!important}
+body.home2-mode .gs-section-head-split>button{color:#36533e!important;font-weight:700!important}
+
+/* PREMIUM CARDS — gallery, never crop */
+body.home2-mode .gs-premium-grid{gap:20px!important;margin-top:34px!important}
+body.home2-mode .gs-premium-card{
+  border-radius:22px!important;
+  border:1px solid rgba(118,96,56,.14)!important;
+  background:linear-gradient(180deg,rgba(255,253,246,.98),rgba(248,248,238,.98))!important;
+  box-shadow:0 18px 44px rgba(33,50,35,.065),inset 0 1px 0 rgba(255,255,255,.9)!important;
+  overflow:hidden!important;
+}
+body.home2-mode .gs-premium-card:hover{transform:translateY(-5px)!important;box-shadow:0 28px 58px rgba(28,48,33,.12)!important}
+body.home2-mode .gs-photo{
+  position:relative!important;
+  aspect-ratio:900/720!important;
+  padding:12px!important;
+  background:
+    radial-gradient(circle at 50% 38%,rgba(255,255,252,.98),rgba(237,241,228,.9) 75%)!important;
+  border-bottom:1px solid rgba(133,109,66,.12)!important;
+}
+body.home2-mode .gs-photo:before{
+  content:"";
+  position:absolute;inset:11px;
+  border:1px solid rgba(170,143,89,.16);
+  border-radius:15px;
+  pointer-events:none;
+  z-index:2;
+}
+body.home2-mode .gs-photo:after{
+  content:"IROOM SELECTED"!important;
+  position:absolute!important;
+  left:20px!important;right:auto!important;bottom:18px!important;
+  color:rgba(66,76,58,.62)!important;
+  background:rgba(253,251,243,.82)!important;
+  border:1px solid rgba(171,145,91,.16)!important;
+  padding:5px 9px!important;
+  border-radius:999px!important;
+  font-size:7px!important;
+  letter-spacing:.16em!important;
+  backdrop-filter:blur(7px)!important;
+  z-index:3!important;
+}
+body.home2-mode .gs-photo img{
+  width:100%!important;height:100%!important;
+  object-fit:contain!important;object-position:center!important;
+  padding:0!important;
+  border-radius:12px!important;
+  transform:none!important;
+  filter:saturate(.96) contrast(1.01)!important;
+}
+body.home2-mode .gs-card-copy{padding:18px 16px 15px!important;background:transparent!important}
+body.home2-mode .gs-card-copy h3{font-size:18px!important;color:#1d3c2c!important}
+body.home2-mode .gs-card-copy p{color:#7a8274!important}
+body.home2-mode .gs-card-price{border-top:1px solid rgba(138,113,69,.16)!important}
+body.home2-mode .gs-card-price b{font-size:21px!important;color:#294936!important}
+body.home2-mode .gs-card-actions button{border-color:rgba(77,95,71,.22)!important;background:rgba(255,254,248,.82)!important}
+body.home2-mode .gs-card-actions button:first-child{background:linear-gradient(145deg,#3a6041,#294d36)!important;border-color:#34563c!important;box-shadow:0 7px 16px rgba(38,72,48,.12)!important}
+
+/* DAILY FRUITS — same gallery language */
+body.home2-mode .gs-daily{padding-top:54px!important;padding-bottom:62px!important}
+body.home2-mode .gs-daily-list{gap:18px!important}
+body.home2-mode .gs-daily-list>button:not(.gs-more-fruit) span{
+  width:142px!important;height:132px!important;
+  border-radius:20px!important;
+  padding:8px!important;
+  background:linear-gradient(145deg,#fbfaf2,#e9eee1)!important;
+  border:1px solid rgba(142,116,70,.14)!important;
+  box-shadow:0 16px 34px rgba(31,50,34,.06)!important;
+}
+body.home2-mode .gs-daily-list>button:not(.gs-more-fruit) span img{object-fit:contain!important;padding:0!important;border-radius:13px!important}
+body.home2-mode .gs-daily-list>button b{font-family:"Noto Serif KR",serif!important;font-size:15px!important}
+body.home2-mode .gs-more-fruit{border-radius:20px!important}
+
+/* SEARCH MODAL — fruit is displayed, not cropped */
+body.home2-mode .modal-backdrop{background:rgba(23,37,27,.48)!important;backdrop-filter:blur(12px) saturate(.85)!important}
+body.home2-mode .modal-panel{
+  background:linear-gradient(145deg,#fbf9f0,#eef2e7)!important;
+  border:1px solid rgba(173,145,88,.20)!important;
+  box-shadow:0 38px 110px rgba(17,32,22,.28)!important;
+}
+body.home2-mode #searchResults .rich-search-item{
+  background:rgba(255,253,247,.94)!important;
+  border:1px solid rgba(116,96,59,.14)!important;
+  box-shadow:0 11px 27px rgba(30,47,32,.055)!important;
+  border-radius:18px!important;
+  min-height:134px!important;
+}
+body.home2-mode #searchResults .fruit-search-thumb{
+  width:118px!important;height:112px!important;
+  object-fit:contain!important;object-position:center!important;
+  padding:7px!important;
+  border-radius:14px!important;
+  background:linear-gradient(145deg,#faf8ef,#e8ede0)!important;
+  border:1px solid rgba(159,132,79,.14)!important;
+  transform:none!important;
+}
+body.home2-mode #searchResults .rich-search-item b{color:#1f402f!important;font-size:16px!important}
+body.home2-mode #searchResults .rich-search-item strong{color:#2c6647!important}
+
+/* Detail gallery safety */
+body.home2-mode .lux-detail-stage,body.home2-mode .fruit-detail-visual{background:linear-gradient(145deg,#fbfaf2,#e8eee0)!important}
+body.home2-mode .lux-detail-stage>img,body.home2-mode .fruit-detail-visual img{object-fit:contain!important;object-position:center!important;transform:none!important}
+body.home2-mode .lux-detail-thumb img{object-fit:contain!important;padding:4px!important}
+
+@media(max-width:1100px){
+ body.home2-mode .gs-hero-copy{margin-left:18px!important;padding:48px 36px 42px!important;width:min(590px,49%)!important}
+ body.home2-mode .gs-premium-grid{grid-template-columns:repeat(3,1fr)!important}
+}
+@media(max-width:860px){
+ body.home2-mode .gs-hero{margin-top:0!important;min-height:0!important;border-radius:0 0 24px 24px!important}
+ body.home2-mode .gs-hero-copy{width:auto!important;max-width:none!important;margin:0!important;border-radius:0!important;border-left:0!important;border-right:0!important;padding:30px 22px 28px!important;background:rgba(250,249,239,.94)!important}
+ body.home2-mode .gs-hero-copy:before{margin-bottom:13px}
+ body.home2-mode .gs-hero-copy h1{font-size:42px!important;line-height:1.16!important}
+ body.home2-mode .gs-premium{margin-top:28px!important;padding:54px 18px 52px!important}
+ body.home2-mode .gs-premium-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important}
+ body.home2-mode .gs-photo{padding:8px!important}
+ body.home2-mode .gs-photo:before{inset:7px}
+ body.home2-mode .gs-card-copy{padding:14px 12px!important}
+ body.home2-mode .gs-daily-list>button:not(.gs-more-fruit) span{width:124px!important;height:116px!important}
+ body.home2-mode #searchResults .fruit-search-thumb{width:96px!important;height:96px!important}
+}
+@media(max-width:520px){
+ body.home2-mode .gs-premium-grid{grid-template-columns:1fr!important}
+ body.home2-mode .gs-photo{aspect-ratio:900/650!important}
+}

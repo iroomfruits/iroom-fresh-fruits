@@ -1,7 +1,9 @@
-const CACHE='iroom-v60-34-home2-luxury-hero-image-fix';
+const CACHE='iroom-v60-35-home2-luxury-editorial-refinement';
 const CORE=[
+  './iroom_assets/iroom-v60-35-home2-luxury-editorial-refinement.css','./iroom_assets/iroom-v60-35-home2-luxury-editorial-refinement.js',
+  './iroom_assets/luxury_v35/apple.webp','./iroom_assets/luxury_v35/pear.webp','./iroom_assets/luxury_v35/shine.webp','./iroom_assets/luxury_v35/persimmon.webp','./iroom_assets/luxury_v35/pomegranate.webp','./iroom_assets/luxury_v35/grape.webp',
+  './iroom_assets/luxury_v35/banana.webp','./iroom_assets/luxury_v35/mandarin.webp','./iroom_assets/luxury_v35/kiwi.webp','./iroom_assets/luxury_v35/strawberry.webp','./iroom_assets/luxury_v35/blueberry.webp',
   './iroom_assets/iroom-v60-34-home2-luxury-hero-image-fix.css','./iroom_assets/iroom-v60-34-home2-luxury-hero-image-fix.js',
- './iroom_assets/iroom-v60-34-home2-luxury-hero-image-fix.css','./iroom_assets/iroom-v60-34-home2-luxury-hero-image-fix.js',
  './iroom_assets/iroom-v60-32-fruit-images.css','./iroom_assets/iroom-v60-32-fruit-images.js',
   './','./index.html','./home2.html','./manifest.webmanifest','./favicon.ico',
   './iroom_assets/iroom-v60-15.css','./iroom_assets/iroom-v60-15.js',
