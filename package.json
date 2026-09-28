@@ -1,12 +1,12 @@
 {
   "name": "iroom-home1",
-  "version": "60.34.0",
+  "version": "60.35.0",
   "private": true,
-  "description": "IROOM Fresh Fruits V60.34 Home2 Luxury Hero & Image Fix: editorial hero depth, guaranteed premium/daily fruit assets, fallback recovery",
+  "description": "IROOM Fresh Fruits V60.35 Home2 Luxury Editorial Refinement: maison-grade hero, non-cropped premium/search/daily fruit gallery, luxury image assets",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "check": "node --check server.js && node --check public/iroom_assets/iroom-v60-15.js && node --check public/iroom_assets/iroom-v60-30-home2-green-still.js && node --check public/iroom_assets/iroom-v60-32-fruit-images.js && node --check public/iroom_assets/iroom-v60-33-home2-luxury-gallery.js && node --check public/iroom_assets/iroom-v60-34-home2-luxury-hero-image-fix.js && node --check public/sw.js"
+    "check": "node --check server.js && node --check public/iroom_assets/iroom-v60-15.js && node --check public/iroom_assets/iroom-v60-30-home2-green-still.js && node --check public/iroom_assets/iroom-v60-32-fruit-images.js && node --check public/iroom_assets/iroom-v60-33-home2-luxury-gallery.js && node --check public/iroom_assets/iroom-v60-34-home2-luxury-hero-image-fix.js && node --check public/iroom_assets/iroom-v60-35-home2-luxury-editorial-refinement.js && node --check public/sw.js"
   },
   "engines": {
     "node": ">=18"
