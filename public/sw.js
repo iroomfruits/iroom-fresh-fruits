@@ -1,5 +1,7 @@
-const CACHE='iroom-v60-31-home2-daily-fruits';
+const CACHE='iroom-v60-33-home2-luxury-gallery';
 const CORE=[
+ './iroom_assets/iroom-v60-33-home2-luxury-gallery.css','./iroom_assets/iroom-v60-33-home2-luxury-gallery.js',
+ './iroom_assets/iroom-v60-32-fruit-images.css','./iroom_assets/iroom-v60-32-fruit-images.js',
   './','./index.html','./home2.html','./manifest.webmanifest','./favicon.ico',
   './iroom_assets/iroom-v60-15.css','./iroom_assets/iroom-v60-15.js',
   './iroom_assets/iroom-v60-31-home2-daily-fruits.css',
