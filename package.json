@@ -1,12 +1,12 @@
 {
   "name": "iroom-home1",
-  "version": "60.33.0",
+  "version": "60.34.0",
   "private": true,
-  "description": "IROOM Fresh Fruits V60.33 Home2 Luxury Gallery: uncropped fruit cards, image-rich search, premium product detail gallery, reduced decorative leaves",
+  "description": "IROOM Fresh Fruits V60.34 Home2 Luxury Hero & Image Fix: editorial hero depth, guaranteed premium/daily fruit assets, fallback recovery",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "check": "node --check server.js && node --check public/iroom_assets/iroom-v60-15.js && node --check public/iroom_assets/iroom-v60-30-home2-green-still.js && node --check public/iroom_assets/iroom-v60-32-fruit-images.js && node --check public/iroom_assets/iroom-v60-33-home2-luxury-gallery.js && node --check public/sw.js"
+    "check": "node --check server.js && node --check public/iroom_assets/iroom-v60-15.js && node --check public/iroom_assets/iroom-v60-30-home2-green-still.js && node --check public/iroom_assets/iroom-v60-32-fruit-images.js && node --check public/iroom_assets/iroom-v60-33-home2-luxury-gallery.js && node --check public/iroom_assets/iroom-v60-34-home2-luxury-hero-image-fix.js && node --check public/sw.js"
   },
   "engines": {
     "node": ">=18"
