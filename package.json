@@ -1,10 +1,10 @@
 {
   "name":"iroom-home1",
-  "version":"60.36.0",
+  "version":"60.37.0",
   "private":true,
-  "description":"IROOM V60.36 Home2 Editorial Fruit House: non-seasonal premium editorial experience, single-image product cards, magazine-style fruit stories, exact user logo",
+  "description":"IROOM V60.37 Home2 Premium Market + IROOM Fruit Routine: shopping-first structure with IROOM branding and lifestyle curation service",
   "main":"server.js",
-  "scripts":{"start":"node server.js","check":"node --check server.js && node --check public/iroom_assets/iroom-v60-15.js && node --check public/iroom_assets/iroom-v60-36-home2-editorial-fruit-house.js && node --check public/sw.js"},
+  "scripts":{"start":"node server.js","check":"node --check server.js && node --check public/iroom_assets/iroom-v60-15.js && node --check public/iroom_assets/iroom-v60-37-home2-premium-market-routine.js && node --check public/sw.js"},
   "engines":{"node":">=18"},
   "dependencies":{"bcryptjs":"^2.4.3","cookie-parser":"^1.4.7","express":"^4.22.3","jsonwebtoken":"^9.0.2","pg":"^8.23.0"}
 }
