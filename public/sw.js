@@ -1,19 +1,13 @@
-const CACHE='iroom-v60-35-home2-luxury-editorial-refinement';
+const CACHE='iroom-v60-36-home2-editorial-fruit-house';
 const CORE=[
-  './iroom_assets/iroom-v60-35-home2-luxury-editorial-refinement.css','./iroom_assets/iroom-v60-35-home2-luxury-editorial-refinement.js',
-  './iroom_assets/luxury_v35/apple.webp','./iroom_assets/luxury_v35/pear.webp','./iroom_assets/luxury_v35/shine.webp','./iroom_assets/luxury_v35/persimmon.webp','./iroom_assets/luxury_v35/pomegranate.webp','./iroom_assets/luxury_v35/grape.webp',
-  './iroom_assets/luxury_v35/banana.webp','./iroom_assets/luxury_v35/mandarin.webp','./iroom_assets/luxury_v35/kiwi.webp','./iroom_assets/luxury_v35/strawberry.webp','./iroom_assets/luxury_v35/blueberry.webp',
-  './iroom_assets/iroom-v60-34-home2-luxury-hero-image-fix.css','./iroom_assets/iroom-v60-34-home2-luxury-hero-image-fix.js',
- './iroom_assets/iroom-v60-32-fruit-images.css','./iroom_assets/iroom-v60-32-fruit-images.js',
   './','./index.html','./home2.html','./manifest.webmanifest','./favicon.ico',
   './iroom_assets/iroom-v60-15.css','./iroom_assets/iroom-v60-15.js',
-  './iroom_assets/iroom-v60-31-home2-daily-fruits.css',
-  './iroom_assets/green_home2/daily_banana.webp','./iroom_assets/green_home2/daily_mandarin.webp','./iroom_assets/green_home2/daily_kiwi.webp','./iroom_assets/green_home2/daily_strawberry.webp','./iroom_assets/green_home2/daily_blueberry.webp','./iroom_assets/iroom-v60-30-home2-green-still.js',
-  './iroom_assets/green_home2/hero_green_still.webp','./iroom_assets/green_home2/owner_sketch.webp','./iroom_assets/green_home2/gift.webp',
-  './iroom_assets/green_home2/apple.webp','./iroom_assets/green_home2/pear.webp','./iroom_assets/green_home2/shine.webp','./iroom_assets/green_home2/persimmon.webp','./iroom_assets/green_home2/pomegranate.webp','./iroom_assets/green_home2/grape.webp',
-  './iroom_assets/green_home2/banana.webp','./iroom_assets/green_home2/mandarin.webp','./iroom_assets/green_home2/kiwi.webp','./iroom_assets/green_home2/strawberry.webp','./iroom_assets/green_home2/blueberry.webp',
-  './iroom_assets/iroom-logo-final.png','./iroom_assets/kakao-mark.svg',
-  './iroom_assets/iroom-app-icon-32-v60-10.png','./iroom_assets/iroom-app-icon-64-v60-10.png','./iroom_assets/iroom-app-icon-180-v60-10.png','./iroom_assets/iroom-app-icon-192-v60-10.png','./iroom_assets/iroom-app-icon-512-v60-10.png','./iroom_assets/iroom-app-icon-512-maskable-v60-10.png'
+  './iroom_assets/iroom-v60-36-home2-editorial-fruit-house.css','./iroom_assets/iroom-v60-36-home2-editorial-fruit-house.js',
+  './iroom_assets/iroom-logo-user.png',
+  './iroom_assets/editorial_v36/hero.webp','./iroom_assets/editorial_v36/gift.webp',
+  './iroom_assets/editorial_v36/apple.webp','./iroom_assets/editorial_v36/pear.webp','./iroom_assets/editorial_v36/shine.webp','./iroom_assets/editorial_v36/persimmon.webp','./iroom_assets/editorial_v36/pomegranate.webp','./iroom_assets/editorial_v36/grape.webp',
+  './iroom_assets/editorial_v36/strawberry.webp','./iroom_assets/editorial_v36/mandarin.webp','./iroom_assets/editorial_v36/kiwi.webp','./iroom_assets/editorial_v36/blueberry.webp','./iroom_assets/editorial_v36/banana.webp',
+  './iroom_assets/iroom-app-icon-180-v60-10.png','./iroom_assets/iroom-app-icon-192-v60-10.png'
 ];
 self.addEventListener('install',e=>{self.skipWaiting();e.waitUntil(caches.open(CACHE).then(c=>c.addAll(CORE)).catch(()=>{}))});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});
