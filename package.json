@@ -1,14 +1,21 @@
 {
   "name": "iroom-home1",
-  "version": "60.45.0",
+  "version": "60.46.0",
   "private": true,
-  "description": "Home2 reference behavior fix: single-window mega menus, direct image click detail modal, fuller main content",
+  "description": "IROOM Home2 V60.45 UI + Render dependency hotfix",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "check": "node --check public/iroom_assets/iroom-v60-45-home2-reference-fix.js && node --check public/sw.js"
+    "check": "node --check server.js && node --check public/iroom_assets/iroom-v60-45-home2-reference-fix.js && node --check public/sw.js"
   },
   "engines": {
     "node": ">=18"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.7",
+    "express": "^4.22.3",
+    "jsonwebtoken": "^9.0.2",
+    "pg": "^8.23.0"
   }
 }

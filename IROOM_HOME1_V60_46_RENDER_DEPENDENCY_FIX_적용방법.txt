@@ -1,0 +1,21 @@
+IROOM HOME1 V60.46 — RENDER DEPENDENCY FIX
+
+원인
+V60.45 패치의 package.json에 기존 서버 의존성(dependencies)이 빠져 Render가 server.js 실행 시 MODULE_NOT_FOUND로 종료되었습니다.
+
+수정
+기존 이룸홈1 서버에서 사용하던 의존성을 복구했습니다.
+- express
+- pg
+- bcryptjs
+- jsonwebtoken
+- cookie-parser
+
+적용
+1. 이 ZIP을 기존 GitHub 저장소 루트에 그대로 덮어쓰기
+2. GitHub 커밋/푸시
+3. Render에서 새 배포가 시작되면 npm install 후 node server.js가 정상 실행되어야 합니다.
+4. 필요하면 Render에서 Clear build cache & deploy를 1회 실행하세요.
+
+주의
+server.js는 변경하지 않습니다. Home2 V60.45 화면/동작도 그대로 유지합니다.
