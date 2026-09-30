@@ -1,0 +1,50 @@
+(()=>{'use strict';
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const mega=$('[data-mega-panel]'); const views=$$('[data-mega-view]'); const navBtns=$$('[data-mega]'); const body=document.body;
+// V60.39: force all overlay surfaces closed on first paint; only the requested mega view can open.
+const mobilePanel=$('[data-mobile-panel]'), catalogPanel=$('[data-catalog-panel]');
+if(mega) mega.hidden=true; views.forEach(v=>v.hidden=true); if(mobilePanel) mobilePanel.hidden=true; if(catalogPanel) catalogPanel.hidden=true;
+function closeMega(){if(!mega)return;mega.hidden=true;views.forEach(v=>v.hidden=true);$$('.h238-nav [data-mega]').forEach(b=>b.classList.remove('is-active'));body.classList.remove('h238-no-scroll')}
+function openMega(name){if(!mega)return;mega.hidden=false;views.forEach(v=>v.hidden=v.dataset.megaView!==name);$$('.h238-nav [data-mega]').forEach(b=>b.classList.toggle('is-active',b.dataset.mega===name));body.classList.add('h238-no-scroll');const mob=$('[data-mobile-panel]');if(mob)mob.hidden=true}
+navBtns.forEach(b=>b.addEventListener('click',e=>{e.preventDefault();const n=b.dataset.mega;if(!mega.hidden && !($(`[data-mega-view="${n}"]`)?.hidden)){closeMega()}else openMega(n)}));$$('[data-mega-close]').forEach(b=>b.addEventListener('click',closeMega));document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeMega();closeCatalog()}});
+const mm=$('[data-mobile-menu]'), mp=$('[data-mobile-panel]');if(mm&&mp)mm.addEventListener('click',()=>mp.hidden=!mp.hidden);
+const assets={apple:'/iroom_assets/editorial_v36/apple.webp',pear:'/iroom_assets/editorial_v36/pear.webp',shine:'/iroom_assets/editorial_v36/shine.webp',mandarin:'/iroom_assets/editorial_v36/mandarin.webp',strawberry:'/iroom_assets/editorial_v36/strawberry.webp',blueberry:'/iroom_assets/editorial_v36/blueberry.webp',banana:'/iroom_assets/editorial_v36/banana.webp',kiwi:'/iroom_assets/editorial_v36/kiwi.webp',pomegranate:'/iroom_assets/editorial_v36/pomegranate.webp',grape:'/iroom_assets/editorial_v36/grape.webp',gift:'/iroom_assets/editorial_v36/gift.webp',persimmon:'/iroom_assets/editorial_v36/persimmon.webp'};
+const products={
+ apple:[['이지플 사과','국내산 · 3kg (8~10과)','GRADE 프리미엄','당도 14Brix 이상','32,000원','apple','이지플'],['부사 사과','국내산 · 5kg (14~18과)','GRADE 프리미엄','당도 14Brix 이상','45,000원','apple','사과'],['시나노골드','국내산 · 3kg (8~10과)','GRADE 프리미엄','당도 15Brix 이상','35,000원','apple','사과'],['가정용 사과','국내산 · 3kg (10~14과)','GRADE 스탠다드','당도 13Brix 이상','25,000원','apple','사과']],
+ pear:[['나주 신고배','전남 나주 · 5kg','GRADE 프리미엄','시원한 과즙','38,000원','pear','나주배'],['가정용 배','국내산 · 3kg','GRADE 스탠다드','부드러운 단맛','28,000원','pear','나주배'],['프리미엄 배','나주 · 7.5kg','GRADE 프리미엄','선물용 특선','58,000원','pear','나주배'],['배 소과','국내산 · 2kg','GRADE A','가볍게 즐기는 구성','22,000원','pear','나주배']],
+ shine:[['샤인머스캣','경북 상주 · 2kg','GRADE 프리미엄','18Brix 이상','46,000원','shine','샤인머스캣'],['샤인머스캣 실속','국내산 · 1kg','GRADE A','17Brix 이상','25,000원','shine','샤인머스캣'],['프리미엄 포도','국내산 · 2kg','GRADE 프리미엄','당일 선별','32,000원','grape','포도'],['블루베리','국내산 · 500g','GRADE 프리미엄','당일 선별','22,000원','blueberry','블루베리']],
+ mandarin:[['제주 감귤','제주 · 3kg','GRADE 엄선','산뜻·달콤','28,000원','mandarin','감귤'],['제주 감귤 소과','제주 · 2kg','GRADE A','간식용','19,000원','mandarin','감귤'],['한라봉','제주 · 3kg','GRADE 프리미엄','진한 향','38,000원','mandarin','감귤'],['레드향','제주 · 2.5kg','GRADE 프리미엄','높은 당도','42,000원','mandarin','감귤']],
+ stone:[['복숭아','국내산 · 2kg','GRADE 프리미엄','부드러운 과육','34,000원','apple','복숭아'],['자두','국내산 · 1.5kg','GRADE A','새콤달콤','24,000원','pomegranate','자두'],['황도 복숭아','국내산 · 2kg','GRADE 프리미엄','향긋한 단맛','38,000원','apple','복숭아'],['천도 복숭아','국내산 · 1.5kg','GRADE A','산뜻한 풍미','26,000원','apple','복숭아']],
+ melon:[['멜론','국내산 · 2수','GRADE 프리미엄','향긋한 단맛','42,000원','pear','멜론'],['수박','국내산 · 1통','GRADE A','시원한 과즙','25,000원','mandarin','수박'],['미니 멜론','국내산 · 2kg','GRADE A','가정용','24,000원','pear','멜론'],['프리미엄 멜론','국내산 · 3kg','GRADE 프리미엄','선물용','58,000원','pear','멜론']],
+ strawberry:[['설향 딸기','국내산 · 500g','GRADE 프리미엄','12Brix 이상','24,000원','strawberry','딸기'],['금실 딸기','국내산 · 500g','GRADE 프리미엄','향이 진한 품종','28,000원','strawberry','딸기'],['딸기 실속팩','국내산 · 1kg','GRADE A','가정용','36,000원','strawberry','딸기'],['프리미엄 딸기','국내산 · 750g','GRADE 프리미엄','선물용','42,000원','strawberry','딸기']],
+ gift:[['프리미엄 혼합 과일세트','사과 · 배 · 샤인머스캣','PREMIUM GIFT','정성 포장','79,000원','gift','선물세트'],['명품 나주배 선물세트','나주배 특품 구성','PREMIUM GIFT','선물용','68,000원','pear','나주배'],['이지플 사과 선물세트','프리미엄 사과 구성','PREMIUM GIFT','감사·축하','65,000원','apple','이지플'],['샤인머스캣 선물세트','프리미엄 샤인머스캣','PREMIUM GIFT','특별한 날','72,000원','shine','샤인머스캣']]
+};
+const catalogInfo={
+ 'season':['제철 과일','지금 가장 맛있는 과일을 이룸이 엄선했습니다.','과일','apple',['전체','사과','배','샤인머스캣','감귤']],
+ 'apple-pear':['사과 · 배','아삭한 사과와 시원한 과즙의 배를 만나보세요.','과일','apple',['전체','사과','배']],
+ 'grape':['포도 · 샤인머스캣','향긋하고 달콤한 포도류를 골랐습니다.','과일','shine',['전체','샤인머스캣','포도','블루베리']],
+ 'citrus':['감귤 · 만감류','제주 햇살을 머금은 산뜻한 감귤류입니다.','과일','mandarin',['전체','감귤','한라봉','레드향']],
+ 'berry':['딸기 · 베리류','향긋하고 산뜻한 베리류를 골랐습니다.','과일','strawberry',['전체','딸기','블루베리']],
+ 'deep':['석류 · 감','색과 향이 깊은 과일을 골랐습니다.','과일','pomegranate',['전체','석류','감']],
+ 'other':['기타 과일','일상에 가볍게 더하기 좋은 과일입니다.','과일','strawberry',['전체','딸기','키위','바나나','블루베리']],
+ 'gift-mixed':['혼합 과일세트','여러 과일을 균형 있게 담은 이룸의 선물세트입니다.','선물세트','gift',['전체','혼합세트','프리미엄']],
+ 'gift-pear':['배 선물세트','정갈하고 품격 있게 전하는 나주배 선물세트입니다.','선물세트','gift',['전체','배 선물']],
+ 'gift-apple':['사과 선물세트','감사와 축하의 마음을 담기 좋은 사과 선물세트입니다.','선물세트','gift',['전체','사과 선물']],
+ 'gift-premium':['프리미엄 선물','특별한 날을 위한 이룸의 프리미엄 셀렉션입니다.','선물세트','gift',['전체','프리미엄']],
+ 'sweet':['달콤한 과일','당도가 높고 누구나 편하게 즐기기 좋은 과일입니다.','과일','shine',['전체','샤인머스캣','사과','감귤']],
+ 'kids':['아이 간식','먹기 편하고 부드러운 과일을 골랐습니다.','과일','strawberry',['전체','딸기','바나나','감귤']],
+ 'morning':['아침용 과일','상쾌하게 하루를 시작하기 좋은 과일입니다.','과일','mandarin',['전체','감귤','바나나','키위']],
+ 'under30':['3만원대 과일','부담 없이 즐기기 좋은 실속 과일입니다.','과일','strawberry',['전체','딸기','감귤','블루베리']],
+ 'premium':['프리미엄 과일','이룸의 상위 선별 기준으로 고른 과일입니다.','과일','apple',['전체','사과','배','샤인머스캣']]
+};
+const cp=$('[data-catalog-panel]'), cg=$('[data-catalog-grid]'), ct=$('[data-catalog-title]'), ch=$('[data-catalog-heading]'), cd=$('[data-catalog-desc]'), ci=$('[data-catalog-hero-img]'), parent=$('[data-catalog-parent]'), tabs=$('[data-catalog-tabs]');
+function rowsFor(key){if(key.startsWith('gift'))return products.gift;if(key==='grape'||key==='sweet'||key==='premium')return products.shine;if(key==='citrus'||key==='morning')return products.mandarin;if(key==='berry'||key==='other'||key==='kids'||key==='under30')return products.strawberry;if(key==='deep')return [[ '석류','엄선 · 2kg','GRADE 프리미엄','선명한 과즙','28,000원','pomegranate','석류'],['대봉감','국내산 · 3kg','GRADE A','부드러운 단맛','26,000원','persimmon','대봉'],['포도','국내산 · 2kg','GRADE 프리미엄','깊은 향','30,000원','grape','포도'],['블루베리','국내산 · 500g','GRADE 프리미엄','당일 선별','22,000원','blueberry','블루베리']];if(key==='season')return [products.apple[0],products.shine[0],products.pear[0],products.mandarin[0]];return [...products.apple.slice(0,2),...products.pear.slice(0,2)]}
+function renderCards(rows){cg.innerHTML=rows.map(r=>`<article class="h238-cat-card" data-gs-product data-name="${r[6]}"><button class="h238-card-photo" data-fruit="${r[6]}" data-display-name="${r[0]}" data-visual="${assets[r[5]]}"><img src="${assets[r[5]]}" alt="${r[0]}"></button><div><h3>${r[0]}</h3><div class="h238-cat-meta"><span>${r[1]}</span><span>${r[2]}</span><span>${r[3]}</span></div><footer><b data-gs-price>${r[4]}</b><button data-buy-now data-name="${r[6]}" data-display-name="${r[0]}" data-visual="${assets[r[5]]}">🛒</button></footer></div></article>`).join('')}
+function openCatalog(key){const info=catalogInfo[key]||catalogInfo.season;closeMega();ct.textContent=ch.textContent=info[0];cd.textContent=info[1];parent.textContent=info[2];ci.src=assets[info[3]]||assets.apple;ci.alt=info[0];tabs.innerHTML=info[4].map((x,i)=>`<button class="${i===0?'active':''}" type="button">${x}</button>`).join('');renderCards(rowsFor(key));cp.hidden=false;body.style.overflow='hidden';setTimeout(syncPrices,50)}
+function closeCatalog(){if(!cp||cp.hidden)return;cp.hidden=true;body.style.overflow=''}
+$$('[data-catalog]').forEach(b=>b.addEventListener('click',()=>openCatalog(b.dataset.catalog)));$('[data-catalog-close]')?.addEventListener('click',closeCatalog);
+const alias={이지플:['이지플','이지플 사과','사과'],나주배:['나주배','나주 신고배 특선','배'],샤인머스캣:['샤인머스캣','샤인머스켓'],감귤:['감귤','제주감귤','한라봉'],딸기:['딸기','금실딸기','설향딸기'],블루베리:['블루베리']};const norm=s=>String(s||'').replace(/\s+/g,'').toLowerCase();let db=[];
+async function loadDb(){try{const r=await fetch('/api/products',{cache:'no-store'});if(!r.ok)return;const d=await r.json();db=Array.isArray(d)?d:(d.products||d.items||[]);syncPrices()}catch(e){}}
+function syncPrices(){if(!Array.isArray(db)||!db.length)return;$$('[data-gs-product]').forEach(card=>{const key=card.dataset.name,names=alias[key]||[key];const p=db.find(x=>names.some(n=>norm(x.name||x.title||x.product_name)===norm(n)));if(!p)return;const price=Number(p.price??p.sale_price??p.amount);if(Number.isFinite(price)){const el=$('[data-gs-price]',card);if(el)el.textContent=price.toLocaleString('ko-KR')+'원'}})}loadDb();
+const map={이지플:assets.apple,사과:assets.apple,나주배:assets.pear,배:assets.pear,샤인머스캣:assets.shine,샤인머스켓:assets.shine,딸기:assets.strawberry,감귤:assets.mandarin,제주감귤:assets.mandarin,블루베리:assets.blueberry,대봉:assets.persimmon,감:assets.persimmon,석류:assets.pomegranate,포도:assets.grape,키위:assets.kiwi,바나나:assets.banana};function imgFor(t){const n=norm(t);for(const [k,v] of Object.entries(map))if(n.includes(norm(k)))return v;return''}function repair(){const m=$('#modalBody');if(!m)return;const title=$('#modalTitle')?.textContent||'';const src=imgFor(title);if(!src)return;$$('.fruit-detail-visual img,.fruit-detail-thumb img,.fruit-detail-card img,.fruit-detail-gallery img',m).forEach(img=>{img.src=src;img.alt=title;img.style.objectFit='contain'})}const mb=$('#modalBody');if(mb)new MutationObserver(()=>setTimeout(repair,0)).observe(mb,{childList:true,subtree:true});
+})();
