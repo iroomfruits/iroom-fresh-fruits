@@ -1,12 +1,12 @@
 {
   "name": "iroom-home1",
-  "version": "60.43.0",
+  "version": "60.44.0",
   "private": true,
-  "description": "IROOM V60.39 Home2 Mega Overlay Fix: true overlay mega menus, isolated hidden states, cropped IROOM logo",
+  "description": "IROOM Home2 clean reference rebuild: hero-only main, single mega panel per menu, original standalone fruit assets, Home1 glass product detail",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "check": "node --check server.js && node --check public/iroom_assets/iroom-v60-15.js && node --check public/iroom_assets/iroom-v60-39-home2-minimal-selectshop.js && node --check public/sw.js"
+    "check": "node --check server.js && node --check public/iroom_assets/iroom-v60-15.js && node --check public/iroom_assets/iroom-v60-44-home2-clean-reference.js && node --check public/sw.js"
   },
   "engines": {
     "node": ">=18"
