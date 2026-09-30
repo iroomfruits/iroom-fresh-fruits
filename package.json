@@ -1,6 +1,6 @@
 {
   "name": "iroom-home1",
-  "version": "60.40.0",
+  "version": "60.41.0",
   "private": true,
   "description": "IROOM V60.39 Home2 Mega Overlay Fix: true overlay mega menus, isolated hidden states, cropped IROOM logo",
   "main": "server.js",
