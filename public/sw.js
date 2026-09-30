@@ -1,3 +1,23 @@
-const CACHE='iroom-v60-43-home2-verified-layout';
-const CORE=['./','./index.html','./home2.html','./manifest.webmanifest','./favicon.ico','./iroom_assets/iroom-v60-15.css','./iroom_assets/iroom-v60-15.js','./iroom_assets/iroom-v60-43-home2-verified.css','./iroom_assets/iroom-v60-43-home2-verified.js','./iroom_assets/iroom-logo-user.png','./iroom_assets/editorial_v36/hero.webp','./iroom_assets/editorial_v36/gift.webp','./iroom_assets/editorial_v36/apple.webp','./iroom_assets/editorial_v36/pear.webp','./iroom_assets/editorial_v36/shine.webp','./iroom_assets/editorial_v36/persimmon.webp','./iroom_assets/editorial_v36/pomegranate.webp','./iroom_assets/editorial_v36/grape.webp','./iroom_assets/editorial_v36/strawberry.webp','./iroom_assets/editorial_v36/mandarin.webp','./iroom_assets/editorial_v36/kiwi.webp','./iroom_assets/editorial_v36/blueberry.webp','./iroom_assets/editorial_v36/banana.webp','./iroom_assets/iroom-app-icon-180-v60-10.png','./iroom_assets/iroom-app-icon-192-v60-10.png'];
-self.addEventListener('install',e=>{self.skipWaiting();e.waitUntil(caches.open(CACHE).then(c=>c.addAll(CORE)).catch(()=>{}))});self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});self.addEventListener('fetch',e=>{if(e.request.method!=='GET')return;const u=new URL(e.request.url);if(u.origin!==location.origin)return;if(u.pathname.startsWith('/api/')||u.pathname.includes('band-admin.html')||u.pathname.includes('admin-preview')){e.respondWith(fetch(e.request,{cache:'no-store'}));return}e.respondWith(fetch(e.request).then(r=>{const copy=r.clone();caches.open(CACHE).then(c=>c.put(e.request,copy)).catch(()=>{});return r}).catch(()=>caches.match(e.request).then(r=>r||caches.match('./index.html'))))});
+const CACHE='iroom-v60-44-home2-clean-reference';
+const CORE=[
+'./','./index.html','./home2.html','./manifest.webmanifest','./favicon.ico',
+'./iroom_assets/iroom-v60-15.js',
+'./iroom_assets/iroom-v60-44-home2-clean-reference.css',
+'./iroom_assets/iroom-v60-44-home2-clean-reference.js',
+'./iroom_assets/iroom-logo-user.png',
+'./iroom_assets/home2_v6044/hero.webp',
+'./iroom_assets/home2_v6044/apple.webp',
+'./iroom_assets/home2_v6044/pear.webp',
+'./iroom_assets/home2_v6044/shine.webp',
+'./iroom_assets/home2_v6044/mandarin.webp',
+'./iroom_assets/home2_v6044/strawberry.webp',
+'./iroom_assets/home2_v6044/pomegranate.webp',
+'./iroom_assets/home2_v6044/grape.webp',
+'./iroom_assets/home2_v6044/persimmon.webp',
+'./iroom_assets/home2_v6044/gift.webp',
+'./iroom_assets/home2_v6044/blueberry.webp',
+'./iroom_assets/home2_v6044/kiwi.webp'
+];
+self.addEventListener('install',e=>{self.skipWaiting();e.waitUntil(caches.open(CACHE).then(c=>c.addAll(CORE)).catch(()=>{}))});
+self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});
+self.addEventListener('fetch',e=>{if(e.request.method!=='GET')return;const u=new URL(e.request.url);if(u.origin!==location.origin)return;if(u.pathname.startsWith('/api/')||u.pathname.includes('band-admin.html')||u.pathname.includes('admin-preview')){e.respondWith(fetch(e.request,{cache:'no-store'}));return}e.respondWith(fetch(e.request).then(r=>{const copy=r.clone();caches.open(CACHE).then(c=>c.put(e.request,copy)).catch(()=>{});return r}).catch(()=>caches.match(e.request).then(r=>r||caches.match('./index.html'))))});
