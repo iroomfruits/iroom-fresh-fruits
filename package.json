@@ -1,10 +1,10 @@
 {
   "name":"iroom-home1",
-  "version":"60.37.0",
+  "version":"60.38.0",
   "private":true,
-  "description":"IROOM V60.37 Home2 Premium Market + IROOM Fruit Routine: shopping-first structure with IROOM branding and lifestyle curation service",
+  "description":"IROOM V60.38 Home2 Minimal Premium Select Shop: restrained main, rich mega menus, category catalog overlays, IROOM Fruit Routine",
   "main":"server.js",
-  "scripts":{"start":"node server.js","check":"node --check server.js && node --check public/iroom_assets/iroom-v60-15.js && node --check public/iroom_assets/iroom-v60-37-home2-premium-market-routine.js && node --check public/sw.js"},
+  "scripts":{"start":"node server.js","check":"node --check server.js && node --check public/iroom_assets/iroom-v60-15.js && node --check public/iroom_assets/iroom-v60-38-home2-minimal-selectshop.js && node --check public/sw.js"},
   "engines":{"node":">=18"},
   "dependencies":{"bcryptjs":"^2.4.3","cookie-parser":"^1.4.7","express":"^4.22.3","jsonwebtoken":"^9.0.2","pg":"^8.23.0"}
 }
