@@ -1,0 +1,129 @@
+/* IROOM HOME1 V60.50 — 4-season illustration safe test
+   Visual-only layer. Commerce, account, cart, checkout, admin and API behavior are untouched. */
+
+body.season-illustration-test{
+  background:#fbf7f0;
+}
+body.season-illustration-test .site-shell{
+  --season-paper:#fffaf3;
+  --season-ink:#173f35;
+  --season-soft:#f4eadc;
+  --season-line:rgba(64,75,52,.15);
+}
+body.season-illustration-test .site-shell[data-season="spring"]{
+  --season-paper:#fff7f1;--season-soft:#f8e2df;--season-ink:#254839;--accent:#c96f72;
+}
+body.season-illustration-test .site-shell[data-season="summer"]{
+  --season-paper:#fbfbef;--season-soft:#e8f0dc;--season-ink:#184a45;--accent:#4a8aa0;
+}
+body.season-illustration-test .site-shell[data-season="autumn"]{
+  --season-paper:#fff5e9;--season-soft:#f4ddc8;--season-ink:#4f3e2b;--accent:#c86f3d;
+}
+body.season-illustration-test .site-shell[data-season="winter"]{
+  --season-paper:#f8f6ef;--season-soft:#e6ece8;--season-ink:#284b49;--accent:#607f8a;
+}
+
+/* seasonal illustrated hero */
+body.season-illustration-test .hero{
+  min-height:620px;
+  background-color:var(--season-paper)!important;
+  background-size:cover!important;
+  background-position:center center!important;
+  border-bottom:1px solid rgba(78,69,54,.12);
+}
+body.season-illustration-test .site-shell[data-season="spring"] .hero{background-image:url('./season_illustration_v60_50/spring.webp')!important}
+body.season-illustration-test .site-shell[data-season="summer"] .hero{background-image:url('./season_illustration_v60_50/summer.webp')!important}
+body.season-illustration-test .site-shell[data-season="autumn"] .hero{background-image:url('./season_illustration_v60_50/autumn.webp')!important}
+body.season-illustration-test .site-shell[data-season="winter"] .hero{background-image:url('./season_illustration_v60_50/winter.webp')!important}
+body.season-illustration-test .hero:before{
+  content:"";position:absolute;inset:0 43% 0 0;width:auto;height:auto;border-radius:0;filter:none;opacity:1;
+  background:linear-gradient(90deg,rgba(255,251,244,.97) 0%,rgba(255,250,242,.90) 58%,rgba(255,249,240,.50) 82%,transparent 100%);
+}
+body.season-illustration-test .hero:after{
+  content:"";position:absolute;inset:auto 0 0 0;width:auto;height:90px;border-radius:0;filter:none;opacity:1;
+  background:linear-gradient(180deg,transparent,rgba(255,250,242,.34));pointer-events:none;
+}
+body.season-illustration-test .hero-inner{
+  min-height:620px;grid-template-columns:minmax(360px,44%) 1fr;align-items:center;
+}
+body.season-illustration-test .hero-copy{
+  position:relative;z-index:3;max-width:520px;padding:38px 38px 34px 24px;
+}
+body.season-illustration-test .hero-copy:before{
+  content:"SEASONAL ILLUSTRATION";display:block;margin-bottom:12px;
+  font:700 10px/1.2 Georgia,serif;letter-spacing:.22em;color:var(--accent);
+}
+body.season-illustration-test .hero-copy h1{color:var(--season-ink);text-shadow:0 1px 0 rgba(255,255,255,.7)}
+body.season-illustration-test .hero-copy p{color:color-mix(in srgb,var(--season-ink) 72%,#756b60 28%);max-width:420px}
+body.season-illustration-test .hero-rule{background:color-mix(in srgb,var(--accent) 72%,var(--season-ink) 28%)}
+body.season-illustration-test .hero-cta{
+  border-color:color-mix(in srgb,var(--season-ink) 42%,transparent);
+  background:rgba(255,251,245,.76);backdrop-filter:blur(8px);box-shadow:0 8px 22px rgba(76,55,38,.07)
+}
+body.season-illustration-test .hero-fruit-stage{opacity:0;pointer-events:none}
+body.season-illustration-test .hero-side-note{display:none}
+
+/* illustrated editorial rhythm for the rest of HOME1 */
+body.season-illustration-test .today-section,
+body.season-illustration-test .premium-section,
+body.season-illustration-test .seasonal-section,
+body.season-illustration-test .library-section,
+body.season-illustration-test .service-section{
+  position:relative;background:var(--season-paper)!important;
+}
+body.season-illustration-test .today-section:before,
+body.season-illustration-test .premium-section:before,
+body.season-illustration-test .seasonal-section:before{
+  content:"";position:absolute;left:0;right:0;top:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--season-line),transparent);
+}
+body.season-illustration-test .section-head h2,
+body.season-illustration-test .split-head h2{color:var(--season-ink)}
+body.season-illustration-test .eyebrow,
+body.season-illustration-test .split-head .eyebrow,
+body.season-illustration-test .service-card>span{color:var(--accent)}
+
+body.season-illustration-test .today-card,
+body.season-illustration-test .product-card,
+body.season-illustration-test .library-card,
+body.season-illustration-test .service-card{
+  background:rgba(255,252,245,.88)!important;
+  border-color:color-mix(in srgb,var(--season-ink) 10%,transparent)!important;
+  box-shadow:0 14px 34px rgba(74,52,35,.055)!important;
+}
+body.season-illustration-test .today-visual,
+body.season-illustration-test .product-card .image-wrap,
+body.season-illustration-test .library-card .image-wrap{
+  background:linear-gradient(145deg,rgba(255,255,255,.78),color-mix(in srgb,var(--season-soft) 54%,#fff 46%))!important;
+}
+body.season-illustration-test .product-card img,
+body.season-illustration-test .today-card img,
+body.season-illustration-test .library-card img{
+  filter:drop-shadow(0 12px 15px rgba(84,57,35,.07));
+}
+body.season-illustration-test .promise-section{
+  background:linear-gradient(120deg,color-mix(in srgb,var(--season-soft) 72%,#fff 28%),rgba(255,252,246,.95))!important;
+}
+body.season-illustration-test .site-footer{
+  background:linear-gradient(180deg,color-mix(in srgb,var(--season-ink) 92%,#223a32 8%),color-mix(in srgb,var(--season-ink) 80%,#122a25 20%))!important;
+}
+
+/* season-specific accent under headings */
+body.season-illustration-test .today-head:after,
+body.season-illustration-test .split-head:after{
+  content:"";display:block;width:54px;height:3px;border-radius:999px;background:var(--accent);opacity:.58;margin-top:12px;
+}
+body.season-illustration-test .split-head{flex-wrap:wrap}
+body.season-illustration-test .split-head:after{flex-basis:100%}
+
+/* mobile: keep picture visible without burying copy */
+@media(max-width:760px){
+  body.season-illustration-test .hero{min-height:650px;background-position:62% center!important}
+  body.season-illustration-test .hero:before{inset:0;background:linear-gradient(180deg,rgba(255,251,244,.96) 0%,rgba(255,251,244,.88) 38%,rgba(255,251,244,.34) 68%,rgba(255,251,244,.05) 100%)}
+  body.season-illustration-test .hero-inner{min-height:650px;grid-template-columns:1fr;align-items:start;padding-top:42px}
+  body.season-illustration-test .hero-copy{max-width:100%;padding:18px 8px 0}
+  body.season-illustration-test .hero-copy h1{font-size:clamp(38px,12vw,54px)}
+  body.season-illustration-test .hero-copy p{font-size:15px;max-width:330px}
+  body.season-illustration-test .hero-fruit-stage{display:none}
+  body.season-illustration-test .section-pad{padding-top:54px;padding-bottom:54px}
+}
