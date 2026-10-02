@@ -1,0 +1,112 @@
+(()=>{
+'use strict';
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const A='./iroom_assets/home2_v6055/';
+const products={
+ apple:{id:'apple',name:'사과',short:'사과',origin:'경북',pack:'2.5kg (8~10과)',grade:'프리미엄',price:'32,000원',desc:'아삭한 식감과 맑은 단맛을 오래 즐길 수 있는 제철 사과입니다.',image:A+'apple.webp',badge:'추천'},
+ pear:{id:'pear',name:'나주배',short:'나주배',origin:'전남 나주',pack:'3kg (6~8과)',grade:'프리미엄',price:'38,000원',desc:'시원한 과즙과 깨끗한 단맛을 즐길 수 있는 나주배입니다.',image:A+'pear.webp',badge:'인기'},
+ shine:{id:'shine',name:'샤인머스캣',short:'샤인머스캣',origin:'경북',pack:'2kg (3~4송이)',grade:'프리미엄',price:'46,000원',desc:'향긋한 향과 높은 당도, 탱글한 식감이 좋은 샤인머스캣입니다.',image:A+'shine.webp',badge:'추천'},
+ mandarin:{id:'mandarin',name:'제주 감귤',short:'제주 감귤',origin:'제주',pack:'3kg',grade:'프리미엄',price:'28,000원',desc:'제주의 햇살을 머금은 산뜻하고 달콤한 제철 감귤입니다.',image:A+'mandarin.webp',badge:'제철'},
+ peach:{id:'peach',name:'복숭아',short:'복숭아',origin:'경북',pack:'2kg (6~8과)',grade:'프리미엄',price:'34,000원',desc:'부드러운 과즙과 향이 풍성한 제철 복숭아입니다.',image:A+'peach.webp',badge:'제철'},
+ melon:{id:'melon',name:'프리미엄 멜론',short:'멜론',origin:'국내산',pack:'2수 (3kg 내외)',grade:'프리미엄',price:'42,000원',desc:'은은한 향과 촉촉한 과육, 균형 잡힌 단맛이 좋은 프리미엄 멜론입니다.',image:A+'melon.webp',badge:'선별'},
+ pomegranate:{id:'pomegranate',name:'석류',short:'석류',origin:'엄선 산지',pack:'2kg (4~6과)',grade:'프리미엄',price:'36,000원',desc:'선명한 붉은 알과 새콤달콤한 풍미가 매력적인 석류입니다.',image:A+'pomegranate.webp',badge:'특선'},
+ plum:{id:'plum',name:'자두',short:'자두',origin:'경북',pack:'1.5kg (12~16과)',grade:'프리미엄',price:'24,000원',desc:'새콤달콤한 맛과 향이 살아 있는 제철 자두입니다.',image:A+'plum.webp',badge:'제철'},
+ grapefruit:{id:'grapefruit',name:'자몽',short:'자몽',origin:'엄선 수입',pack:'2kg',grade:'프리미엄',price:'29,000원',desc:'산뜻한 산미와 향을 즐길 수 있는 자몽입니다.',image:A+'grapefruit.webp',badge:'상큼'},
+ giftMix:{id:'giftMix',name:'프리미엄 제철 과일 선물세트',short:'프리미엄 제철 과일 선물세트',origin:'국내 산지 엄선',pack:'사과 · 배 · 샤인머스캣 · 감귤 · 복숭아 · 멜론 · 석류',grade:'선물용 프리미엄',price:'89,000원~',desc:'제철에 가장 맛있는 과일을 다양하게 골라 정갈하게 구성한 이룸의 대표 선물세트입니다.',images:['apple','pear','shine','mandarin','peach','melon','pomegranate'],badge:'PREMIUM GIFT'},
+ giftApplePear:{id:'giftApplePear',name:'사과 · 배 정갈 선물세트',short:'사과 · 배 선물세트',origin:'경북 · 전남 나주',pack:'사과 · 나주배',grade:'선물용 프리미엄',price:'62,000원~',desc:'아삭한 사과와 시원한 나주배를 균형 있게 담은 정갈한 기본 선물세트입니다.',images:['apple','pear','apple','pear'],badge:'CLASSIC GIFT'},
+ giftMelonShine:{id:'giftMelonShine',name:'멜론 · 샤인 프리미엄 세트',short:'멜론 · 샤인 세트',origin:'국내 산지 엄선',pack:'멜론 · 샤인머스캣 · 배',grade:'상위 선별',price:'78,000원~',desc:'향긋한 멜론과 샤인머스캣을 중심으로 구성한 밝고 화사한 프리미엄 선물입니다.',images:['melon','shine','pear','shine'],badge:'LUXURY GIFT'},
+ giftSeasonal:{id:'giftSeasonal',name:'제철 과일 선물세트',short:'제철 과일 선물세트',origin:'제철 산지 엄선',pack:'사과 · 배 · 감귤 · 석류 · 복숭아',grade:'선물용 프리미엄',price:'68,000원~',desc:'그 계절에 맛이 오른 과일을 중심으로 균형 있게 구성합니다.',images:['apple','pear','mandarin','pomegranate','peach'],badge:'SEASONAL GIFT'},
+ giftFamily:{id:'giftFamily',name:'가족 과일 선물세트',short:'가족 과일 선물세트',origin:'국내 산지 엄선',pack:'사과 · 배 · 샤인머스캣 · 감귤 · 자두',grade:'패밀리',price:'72,000원~',desc:'온 가족이 편하게 나눠 먹기 좋은 과일을 넉넉하게 구성한 선물세트입니다.',images:['apple','pear','shine','mandarin','plum'],badge:'FAMILY GIFT'},
+ giftBusiness:{id:'giftBusiness',name:'기업 · 단체 과일 선물',short:'기업 · 단체 선물',origin:'국내 산지 엄선',pack:'예산별 4~7종 맞춤 구성',grade:'기업용 프리미엄',price:'상담 견적',desc:'수량과 예산에 맞춰 품목·포장·배송까지 깔끔하게 제안하는 단체 선물 구성입니다.',images:['apple','pear','shine','melon','mandarin','pomegranate'],badge:'BUSINESS GIFT'},
+ curateSweet:{id:'curateSweet',name:'당도 높은 과일 큐레이션',short:'당도 높은 과일',origin:'이룸 엄선 산지',pack:'샤인머스캣 · 복숭아 · 배 · 멜론',grade:'큐레이션',price:'구성별 상이',desc:'달콤한 풍미를 중심으로 골라 한 번에 즐길 수 있도록 구성했습니다.',images:['shine','peach','pear','melon'],badge:'SWEET'},
+ curateKids:{id:'curateKids',name:'아이 간식 과일 큐레이션',short:'아이 간식',origin:'이룸 엄선 산지',pack:'사과 · 배 · 감귤 · 복숭아',grade:'큐레이션',price:'구성별 상이',desc:'먹기 편하고 부드러운 과일을 중심으로 아이 간식용으로 제안합니다.',images:['apple','pear','mandarin','peach'],badge:'KIDS'},
+ curateFresh:{id:'curateFresh',name:'상큼한 과일 큐레이션',short:'상큼한 과일',origin:'이룸 엄선 산지',pack:'자몽 · 감귤 · 석류 · 샤인머스캣',grade:'큐레이션',price:'구성별 상이',desc:'가볍고 산뜻한 풍미가 필요한 순간에 어울리는 과일을 모았습니다.',images:['grapefruit','mandarin','pomegranate','shine'],badge:'FRESH'},
+ curateMorning:{id:'curateMorning',name:'아침 과일 큐레이션',short:'가볍게 즐기는 아침',origin:'이룸 엄선 산지',pack:'사과 · 자몽 · 샤인머스캣 · 감귤',grade:'큐레이션',price:'구성별 상이',desc:'바쁜 아침에도 부담 없이 즐기기 좋은 산뜻한 과일 구성입니다.',images:['apple','grapefruit','shine','mandarin'],badge:'MORNING'},
+ curateFamily:{id:'curateFamily',name:'가족 과일 큐레이션',short:'가족과 함께',origin:'이룸 엄선 산지',pack:'배 · 사과 · 복숭아 · 멜론 · 자두',grade:'큐레이션',price:'구성별 상이',desc:'여러 사람이 함께 즐기기 좋은 식감과 풍미를 골고루 담았습니다.',images:['pear','apple','peach','melon','plum'],badge:'FAMILY'},
+ curatePremium:{id:'curatePremium',name:'이룸 상위 선별 큐레이션',short:'이룸 상위 선별',origin:'전국 엄선 산지',pack:'멜론 · 샤인머스캣 · 배 · 석류',grade:'프리미엄 큐레이션',price:'구성별 상이',desc:'모양과 당도, 선도까지 한 단계 더 엄격하게 고른 이룸의 상위 선별 구성입니다.',images:['melon','shine','pear','pomegranate'],badge:'PREMIUM'}
+};
+const V='./iroom_assets/home2_v6063/';
+Object.assign(products.giftMix,{visual:V+'gift_premium.webp'});
+Object.assign(products.giftApplePear,{visual:V+'gift_classic.webp'});
+Object.assign(products.giftMelonShine,{visual:V+'gift_luxury.webp'});
+Object.assign(products.giftSeasonal,{visual:V+'gift_seasonal.webp'});
+Object.assign(products.giftFamily,{visual:V+'gift_family.webp'});
+Object.assign(products.giftBusiness,{visual:V+'gift_business.webp'});
+Object.assign(products.curateSweet,{visual:V+'curate_sweet.webp'});
+Object.assign(products.curateKids,{visual:V+'curate_kids.webp'});
+Object.assign(products.curateFresh,{visual:V+'curate_fresh.webp'});
+Object.assign(products.curateMorning,{visual:V+'curate_morning.webp'});
+Object.assign(products.curateFamily,{visual:V+'curate_family.webp'});
+Object.assign(products.curatePremium,{visual:V+'curate_premium.webp'});
+const mainFruitOrder=['apple','pear','shine','mandarin','peach','melon','pomegranate','plum'];
+const menuFruitOrder=['apple','pear','shine','mandarin','peach','melon','pomegranate','plum'];
+let cartCount=0,current=null,toastTimer=null,detailOpenedFromMega=false;
+const mega=$('.i2-mega'),dim=$('.i2-menu-dim'),megaTitle=$('[data-mega-title]'),megaKicker=$('[data-mega-kicker]'),megaContent=$('[data-mega-content]');
+
+function applySeason(){const m=new Date().getMonth()+1;const s=(m>=3&&m<=5)?'spring':(m>=6&&m<=8)?'summer':(m>=9&&m<=11)?'autumn':'winter';$('.i2-app').dataset.season=s}
+function productImage(id){return products[id]?.image || products[products[id]?.images?.[0]]?.image || A+'apple.webp'}
+function selectCard(id){const p=products[id];return `<article class="i2-card"><button type="button" class="i2-card-main" data-product="${id}" aria-label="${p.short} 상세보기"><span class="i2-card-photo"><img src="${p.image}" alt="${p.short}"></span><span class="i2-card-copy"><h3>${p.short}</h3><p>${p.grade} · ${p.origin}<br>${p.pack}</p><span class="i2-card-price"><strong>${p.price}</strong></span></span></button></article>`}
+function fruitCard(id){const p=products[id];return `<button type="button" class="i2-mega-fruit" data-product="${id}"><span class="photo"><img src="${p.image}" alt="${p.short}"></span><b>${p.short}</b><small>${p.grade} · ${p.origin}</small><em>${p.pack}</em><strong>${p.price}</strong></button>`}
+function collage(ids){return `<span class="collage">${ids.slice(0,4).map(id=>`<img src="${products[id].image}" alt="">`).join('')}</span>`}
+function giftBoxVisual(ids){const list=(ids||[]).slice(0,6);while(list.length<6)list.push(list[list.length%Math.max(1,list.length)]||'apple');return `<span class="i2-giftbox-stage"><span class="i2-giftbox-lid"><span class="i2-giftbox-brand">IROOM <em>fresh fruits</em></span></span><span class="i2-giftbox-body">${list.map(id=>`<span><img src="${products[id].image}" alt="${products[id].short}"></span>`).join('')}</span></span>`}
+function curationVisual(ids){return `<span class="i2-curation-stage">${(ids||[]).slice(0,5).map((id,i)=>`<img data-stage-index="${i}" src="${products[id].image}" alt="${products[id].short}">`).join('')}</span>`}
+function giftCatalogCard(id){const p=products[id];return `<button type="button" class="i2-shop-card i2-gift-product" data-product="${id}"><span class="i2-shop-visual i2-shop-photo"><img src="${p.visual}" alt="${p.short}"></span><span class="i2-shop-body"><small>${p.badge||'IROOM GIFT'}</small><h3>${p.short}</h3><p>${p.desc}</p><span class="i2-shop-meta"><span><em>구성</em>${p.pack}</span><span><em>산지</em>${p.origin}</span></span><span class="i2-shop-foot"><strong>${p.price}</strong><span>상세보기 →</span></span></span></button>`}
+function curationCatalogCard(id){const p=products[id];return `<button type="button" class="i2-shop-card i2-curation-product" data-product="${id}"><span class="i2-shop-visual i2-shop-photo"><img src="${p.visual}" alt="${p.short}"></span><span class="i2-shop-body"><small>${p.badge||'IROOM CURATION'}</small><h3>${p.short}</h3><p>${p.desc}</p><span class="i2-shop-meta"><span><em>추천 구성</em>${p.pack}</span><span><em>선별 기준</em>${p.grade}</span></span><span class="i2-shop-foot"><strong>${p.price}</strong><span>구성 보기 →</span></span></span></button>`}
+function panelCard(id,kicker){const p=products[id];return `<button type="button" class="i2-panel-card" data-product="${id}">${collage(p.images||[id])}<span><small>${kicker||p.badge||'IROOM'}</small><h3>${p.short}</h3><p>${p.desc}</p></span></button>`}
+function plainPanel(k,t,d,id){return `<button type="button" class="i2-panel-card" ${id?`data-product="${id}"`:''}>${id?collage(products[id].images||[id]):collage(['apple','shine','mandarin','peach'])}<span><small>${k}</small><h3>${t}</h3><p>${d}</p></span></button>`}
+
+function benefitItems(items){return `<div class="i2-window-benefits">${items.map(([k,t])=>`<span><b>${k}</b><em>${t}</em></span>`).join('')}</div>`}
+function editorialFruitCard(id){const p=products[id];const season={apple:'제철 9월 ~ 11월',pear:'제철 9월 ~ 11월',shine:'제철 8월 ~ 10월',mandarin:'제철 11월 ~ 2월',peach:'제철 6월 ~ 8월',melon:'제철 6월 ~ 8월',pomegranate:'제철 9월 ~ 11월',plum:'제철 6월 ~ 8월'}[id]||'제철 과일';return `<button type="button" class="i2-editorial-fruit-card" data-product="${id}"><span class="i2-editorial-fruit-photo"><img src="${p.image}" alt="${p.short}"></span><span class="i2-editorial-fruit-copy"><small>${p.badge||'SEASONAL'}</small><h3>${p.short}</h3><p class="i2-fruit-desc">${p.desc}</p><span class="i2-fruit-pill">${season}</span><em>${p.grade} · ${p.origin} · ${p.pack}</em><span class="i2-fruit-bottom"><strong>${p.price}</strong><i aria-hidden="true">＋</i></span></span></button>`}
+function richGuideCard(id,kicker,title,body,note,asset){const p=products[id];const src=asset||p.visual||p.image;return `<button type="button" class="i2-rich-guide-card" data-product="${id}"><span class="i2-rich-guide-photo"><img src="${src}" alt="${title}"></span><span class="i2-rich-guide-copy"><small>${kicker}</small><h3>${title}</h3><p>${body}</p><em>${note}</em><b>자세히 보기 →</b></span></button>`}
+function philosophyCard(k,t,d){return `<article class="i2-philosophy-card"><small>${k}</small><h3>${t}</h3><p>${d}</p></article>`}
+
+function renderSelect(){$('[data-select-grid]').innerHTML=mainFruitOrder.map(selectCard).join('')}
+function renderMega(type){
+ mega.dataset.type=type;
+ if(type==='fruit'){
+   megaKicker.textContent='SEASONAL FRESH FRUITS';megaTitle.textContent='제철 과일';
+   megaContent.innerHTML=`<div class="i2-window-layout i2-fruit-window"><aside class="i2-window-intro i2-fruit-intro"><img class="i2-window-logo" src="./iroom_assets/iroom-logo-user.png" alt="이룸 fresh fruits"><small>SEASONAL FRUITS</small><h2>제철 과일</h2><p>가장 맛있는 제철의 순간을 이룸이 정성껏 담아 전합니다.</p><p class="i2-window-long">좋은 산지에서 자란 신선한 과일을 엄선하여, 계절마다 가장 맛있는 제철 과일만을 선별합니다.</p>${benefitItems([['01','산지의 신선함'],['02','엄선한 품질'],['03','제철의 맛']])}<img class="i2-intro-art" src="${V}fruit_intro_basket.webp" alt="제철 과일 바구니"></aside><div class="i2-editorial-fruit-grid">${menuFruitOrder.map(editorialFruitCard).join('')}</div></div>`;return
+ }
+ if(type==='gift'){
+   megaKicker.textContent='GIFT SELECTION';megaTitle.textContent='선물세트';
+   megaContent.innerHTML=`<div class="i2-window-layout i2-gift-window"><aside class="i2-window-intro i2-gift-intro"><img class="i2-window-logo" src="./iroom_assets/iroom-logo-user.png" alt="이룸 fresh fruits"><small>PREMIUM GIFTS</small><h2>마음을 전하는<br>이룸 선물</h2><p>받는 분과 예산, 계절에 맞춰 과일의 맛과 구성을 함께 고릅니다.</p>${benefitItems([['01','프리미엄 과일'],['02','산지 직송'],['03','마음을 전하는 구성']])}<span class="i2-window-note">6 GIFT SELECTIONS</span></aside><div class="i2-shop-grid i2-gift-grid">${giftCatalogCard('giftMix')}${giftCatalogCard('giftApplePear')}${giftCatalogCard('giftMelonShine')}${giftCatalogCard('giftSeasonal')}${giftCatalogCard('giftFamily')}${giftCatalogCard('giftBusiness')}</div></div>`;return
+ }
+ if(type==='curation'){
+   megaKicker.textContent='FRUIT CURATION';megaTitle.textContent='과일 큐레이션';
+   megaContent.innerHTML=`<div class="i2-window-layout i2-curation-window"><aside class="i2-window-intro i2-curation-intro"><img class="i2-window-logo" src="./iroom_assets/iroom-logo-user.png" alt="이룸 fresh fruits"><small>IROOM CURATION</small><h2>오늘의 상황에 맞는<br>과일을 고릅니다.</h2><p>당도, 산뜻함, 가족 구성과 먹는 시간을 기준으로 여섯 가지 조합을 제안합니다.</p>${benefitItems([['SWEET','달콤한 풍미'],['FRESH','산뜻한 구성'],['PREMIUM','상위 선별']])}<span class="i2-window-note">6 CURATED EDITS</span></aside><div class="i2-shop-grid i2-curation-grid">${curationCatalogCard('curateSweet')}${curationCatalogCard('curateKids')}${curationCatalogCard('curateFresh')}${curationCatalogCard('curateMorning')}${curationCatalogCard('curateFamily')}${curationCatalogCard('curatePremium')}</div></div>`;return
+ }
+ if(type==='picnic'){
+   megaKicker.textContent='PICNIC ROUTINE';megaTitle.textContent='피크닉 루틴';
+   megaContent.innerHTML=`<div class="i2-rich-story-window"><section class="i2-rich-story-hero i2-rich-picnic"><div class="i2-rich-story-copy"><small>PICNIC ROUTINE</small><h2>과일과 함께하는<br>가벼운 주말</h2><p>싱그러운 제철 과일 한 접시와 작은 피크닉. 이룸이 일상에 어울리는 가벼운 구성을 제안합니다.</p>${benefitItems([['LIGHT','간단한 한 접시'],['WEEKEND','여유로운 주말'],['GIFT','함께 나누는 구성']])}</div><div class="i2-rich-story-media"><img src="./iroom_assets/home2_v6063/picnic_hero.webp" alt="이룸 피크닉 루틴"></div></section><div class="i2-rich-subgrid i2-picnic-subgrid"><button type="button" class="i2-picnic-tile" data-product="curateMorning"><img src="${V}picnic_light.webp" alt="가볍게 준비하는 피크닉"><span><small>PICNIC 01</small><h3>가볍게 준비하는 피크닉</h3><p>간단한 준비로도 충분해요. 좋은 과일만 있으면 언제든 근사한 피크닉이 시작됩니다.</p><b>추천 과일 보기 →</b></span></button><button type="button" class="i2-picnic-tile" data-product="curateFamily"><img src="${V}picnic_weekend.webp" alt="주말 한 접시"><span><small>PICNIC 02</small><h3>주말 한 접시</h3><p>신선한 과일로 채우는 여유로운 주말의 맛. 함께하는 사람들과 더 특별한 시간이 됩니다.</p><b>레시피 보러가기 →</b></span></button><button type="button" class="i2-picnic-tile" data-product="giftSeasonal"><img src="${V}picnic_gift.webp" alt="피크닉 선물 구성"><span><small>PICNIC 03</small><h3>피크닉 선물 구성</h3><p>소중한 사람에게 전하는 계절의 맛과 마음. 이룸의 제철 과일로 작은 선물을 준비하세요.</p><b>선물세트 보러가기 →</b></span></button></div></div>`;return
+ }
+ if(type==='guide'){
+   megaKicker.textContent='FRUIT GUIDE';megaTitle.textContent='과일 가이드';
+   megaContent.innerHTML=`<div class="i2-window-layout i2-guide-window"><aside class="i2-window-intro"><small>FRUIT GUIDE</small><h2>고르는 법부터<br>보관과 손질까지.</h2><p>좋은 과일을 더 맛있게 즐길 수 있도록 이룸이 기본 가이드를 정리했습니다.</p>${benefitItems([['SELECT','고르기'],['STORAGE','보관하기'],['SERVE','맛있게 먹기']])}</aside><div class="i2-rich-guide-grid">${richGuideCard('apple','SELECT','좋은 과일 고르는 법','색과 향, 단단함을 기준으로 신선한 과일을 보는 기본 방법입니다.','선도 · 향 · 촉감',V+'guide_select.webp')}${richGuideCard('melon','STORAGE','오래 보관하는 법','과일별 적정 온도와 후숙 여부를 구분해 보관하면 맛을 더 오래 유지할 수 있습니다.','온도 · 후숙 · 위치',V+'guide_storage.webp')}${richGuideCard('pomegranate','SERVE','더 맛있게 먹는 법','향과 단맛을 더 잘 느낄 수 있는 손질 순서와 먹기 좋은 시점을 소개합니다.','손질 · 온도 · 타이밍',V+'guide_serve.webp')}</div></div>`;return
+ }
+ megaKicker.textContent='OUR PHILOSOPHY';megaTitle.textContent='이룸의 이야기';
+ megaContent.innerHTML=`<div class="i2-rich-story-window"><section class="i2-rich-story-hero i2-rich-brand"><div class="i2-rich-story-media"><img src="./iroom_assets/home2_v6063/clock_hero.webp" alt="좋은 과일은 시간을 담습니다"></div><div class="i2-rich-story-copy"><small>OUR PHILOSOPHY</small><h2>좋은 과일은<br>시간을 담습니다.</h2><p>자연이 키운 제철의 시간, 가장 맛있는 순간, 그리고 그 과일이 놓일 사람의 일상까지 생각합니다.</p>${benefitItems([['01','제철의 시간'],['02','산지의 신선함'],['03','꼼꼼한 선별']])}</div></section><div class="i2-philosophy-grid">${philosophyCard('SEASON','제철의 맛','가장 맛있는 시기의 과일을 먼저 봅니다.')}${philosophyCard('ORIGIN','믿을 수 있는 산지','산지와 선도를 기준으로 정직하게 고릅니다.')}${philosophyCard('SELECT','꼼꼼한 선별','맛과 모양, 선도까지 한 단계 더 확인합니다.')}${philosophyCard('EVERYDAY','일상의 행복','좋은 과일이 좋은 하루로 이어지길 바랍니다.')}</div></div>`
+}
+function openMega(type){renderMega(type);mega.hidden=false;dim.hidden=false;document.body.classList.add('i2-lock');$$('[data-menu]').forEach(b=>b.classList.toggle('is-active',b.dataset.menu===type))}
+function closeMega(){mega.hidden=true;dim.hidden=true;delete mega.dataset.type;$$('[data-menu]').forEach(b=>b.classList.remove('is-active'));if($('#detailModal').getAttribute('aria-hidden')!=='false')document.body.classList.remove('i2-lock');const a=document.activeElement;if(a?.matches?.('[data-menu]'))a.blur()}
+function renderDetailVisual(p){const box=$('#detailVisual');box.innerHTML='';if(p.visual){box.className='i2-detail-visual is-product-visual';const img=document.createElement('img');img.src=p.visual;img.alt=p.name;box.appendChild(img);return}box.className='i2-detail-visual is-single';const img=document.createElement('img');img.src=p.image;img.alt=p.name;box.appendChild(img)}
+function openDetail(id){const p=products[id];if(!p)return;current=p;detailOpenedFromMega=!mega.hidden;renderDetailVisual(p);$('#detailKicker').textContent=(p.badge||'IROOM').toUpperCase()+' · IROOM SELECT';$('#detailTitle').textContent=p.name;$('#detailDesc').textContent=p.desc;$('#detailOrigin').textContent=p.origin;$('#detailPack').textContent=p.pack;$('#detailGrade').textContent=p.grade;$('#detailPrice').textContent=p.price;$('#detailQty').value='1';$('#detailModal').setAttribute('aria-hidden','false');document.body.classList.add('i2-lock')}
+function closeDetail(){$('#detailModal').setAttribute('aria-hidden','true');if(mega.hidden)document.body.classList.remove('i2-lock');detailOpenedFromMega=false;const a=document.activeElement;if(a?.blur)a.blur()}
+function openInfo(k,t,x){$('#infoKicker').textContent=k;$('#infoTitle').textContent=t;$('#infoText').textContent=x;$('#infoModal').setAttribute('aria-hidden','false');document.body.classList.add('i2-lock')}
+function closeInfo(){$('#infoModal').setAttribute('aria-hidden','true');if(mega.hidden&&$('#detailModal').getAttribute('aria-hidden')!=='false')document.body.classList.remove('i2-lock')}
+function updateCart(){const b=$('[data-cart-count]');b.hidden=cartCount<1;b.textContent=String(cartCount)}
+function toast(msg){const t=$('[data-toast]');t.textContent=msg;t.hidden=false;clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.hidden=true,1800)}
+applySeason();renderSelect();updateCart();
+
+document.addEventListener('click',e=>{
+ const menu=e.target.closest('[data-menu]');if(menu){if($('#detailModal').getAttribute('aria-hidden')==='false')closeDetail();openMega(menu.dataset.menu);return}
+ if(e.target.closest('[data-close-mega]')||e.target===dim){closeMega();return}
+ const prod=e.target.closest('[data-product]');if(prod){openDetail(prod.dataset.product);return}
+ if(e.target.closest('[data-close-detail]')||e.target===$('#detailModal')){closeDetail();return}
+ if(e.target.closest('[data-close-info]')||e.target===$('#infoModal')){closeInfo();return}
+ const qty=e.target.closest('[data-qty]');if(qty){const input=$('#detailQty');let v=Math.max(1,parseInt(input.value||'1',10)||1);v+=qty.dataset.qty==='plus'?1:-1;input.value=String(Math.max(1,v));return}
+ if(e.target.closest('[data-cart-add]')){const n=Math.max(1,parseInt($('#detailQty').value||'1',10)||1);cartCount+=n;updateCart();toast(`${current.name} ${n}개를 장바구니에 담았습니다.`);return}
+ if(e.target.closest('[data-buy-now]')){const n=Math.max(1,parseInt($('#detailQty').value||'1',10)||1);openInfo('BUY NOW',`${current.name} 바로구매`,`${current.name} ${n}개를 선택했습니다. 기존 이룸홈1의 바로구매 주문 흐름과 연결하는 진입점입니다.`);return}
+ const inf=e.target.closest('[data-info]');if(inf){const k=inf.dataset.info;if(k==='search')openInfo('SEARCH','과일 검색','상단 과일 메뉴에서 이룸이 준비한 과일을 한 번에 확인할 수 있습니다.');if(k==='login')openInfo('MY IROOM','로그인','기존 이룸홈1 계정 기능과 연결하는 영역입니다.');if(k==='cart')openInfo('CART',cartCount?`장바구니 ${cartCount}건`:'장바구니',cartCount?'선택한 상품이 장바구니에 담겨 있습니다.':'아직 담긴 상품이 없습니다.');return}
+});
+window.addEventListener('keydown',e=>{if(e.key!=='Escape')return;if($('#infoModal').getAttribute('aria-hidden')==='false'){closeInfo();return}if($('#detailModal').getAttribute('aria-hidden')==='false'){closeDetail();return}if(!mega.hidden)closeMega()});
+})();
