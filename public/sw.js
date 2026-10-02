@@ -1,7 +1,39 @@
-const CACHE='iroom-v60-60-home2-editorial-windows';
+const CACHE='iroom-v60-61-home2-premium-shop';
 const CORE=[
-'./home2.html','./iroom_assets/iroom-v60-60-home2-editorial-windows.css','./iroom_assets/iroom-v60-60-home2-editorial-windows.js','./iroom_assets/iroom-logo-user.png','./iroom_assets/home2_v6056_hero_reference.webp',
-'./iroom_assets/home2_v6055/apple.webp','./iroom_assets/home2_v6055/pear.webp','./iroom_assets/home2_v6055/shine.webp','./iroom_assets/home2_v6055/mandarin.webp','./iroom_assets/home2_v6055/peach.webp','./iroom_assets/home2_v6055/melon.webp','./iroom_assets/home2_v6055/pomegranate.webp','./iroom_assets/home2_v6055/plum.webp','./iroom_assets/home2_v6055/grapefruit.webp','./iroom_assets/home2_v6054_picnic.webp','./iroom_assets/home2_v6054_clock.webp'];
+'./home2.html',
+'./iroom_assets/iroom-v60-61-home2-premium-shop.css',
+'./iroom_assets/iroom-v60-61-home2-premium-shop.js',
+'./iroom_assets/iroom-logo-user.png',
+'./iroom_assets/home2_v6056_hero_reference.webp',
+'./iroom_assets/home2_v6055/apple.webp',
+'./iroom_assets/home2_v6055/pear.webp',
+'./iroom_assets/home2_v6055/shine.webp',
+'./iroom_assets/home2_v6055/mandarin.webp',
+'./iroom_assets/home2_v6055/peach.webp',
+'./iroom_assets/home2_v6055/melon.webp',
+'./iroom_assets/home2_v6055/pomegranate.webp',
+'./iroom_assets/home2_v6055/plum.webp',
+'./iroom_assets/home2_v6055/grapefruit.webp',
+'./iroom_assets/home2_v6054_picnic.webp',
+'./iroom_assets/home2_v6054_clock.webp',
+'./iroom_assets/home2_v6061/gift_premium.webp',
+'./iroom_assets/home2_v6061/gift_classic.webp',
+'./iroom_assets/home2_v6061/gift_luxury.webp',
+'./iroom_assets/home2_v6061/gift_seasonal.webp',
+'./iroom_assets/home2_v6061/gift_family.webp',
+'./iroom_assets/home2_v6061/gift_business.webp',
+'./iroom_assets/home2_v6061/curate_sweet.webp',
+'./iroom_assets/home2_v6061/curate_kids.webp',
+'./iroom_assets/home2_v6061/curate_fresh.webp',
+'./iroom_assets/home2_v6061/curate_morning.webp',
+'./iroom_assets/home2_v6061/curate_family.webp',
+'./iroom_assets/home2_v6061/curate_premium.webp',
+'./iroom_assets/home2_v6061/picnic_light.webp',
+'./iroom_assets/home2_v6061/picnic_weekend.webp',
+'./iroom_assets/home2_v6061/picnic_gift.webp',
+'./iroom_assets/home2_v6061/guide_select.webp',
+'./iroom_assets/home2_v6061/guide_storage.webp',
+'./iroom_assets/home2_v6061/guide_serve.webp'];
 self.addEventListener('install',e=>{self.skipWaiting();e.waitUntil(caches.open(CACHE).then(c=>c.addAll(CORE)).catch(()=>{}))});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});
 self.addEventListener('fetch',e=>{if(e.request.method!=='GET')return;const u=new URL(e.request.url);if(u.origin!==location.origin)return;e.respondWith(fetch(e.request).then(r=>{const copy=r.clone();caches.open(CACHE).then(c=>c.put(e.request,copy)).catch(()=>{});return r}).catch(()=>caches.match(e.request)))})

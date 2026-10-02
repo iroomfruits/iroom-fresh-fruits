@@ -1,0 +1,376 @@
+:root{--ink:#123f31;--green:#0c6249;--green2:#0f7254;--paper:#fbfaf6;--cream:#f7f3e8;--line:#e7e2d7;--muted:#7e877f;--red:#ef4d3d;--sage:#dce7d2;--peach:#f5ddd0;--sand:#f3ead5;--blush:#efd8d3;--hero-a:#edf2e6;--hero-b:#f7eddc;--hero-c:#f5ded5}
+*{box-sizing:border-box}html{scroll-behavior:smooth}html,body{margin:0;padding:0;background:#fff;color:var(--ink)}body{font-family:"Pretendard","Noto Sans KR","Apple SD Gothic Neo",Arial,sans-serif;-webkit-font-smoothing:antialiased}button,input{font:inherit;color:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible{outline:2px solid rgba(12,98,73,.28);outline-offset:2px}.i2-app{min-height:100vh;overflow-x:hidden;background:#fff}.i2-app[data-season="spring"]{--hero-a:#edf4e8;--hero-b:#fff0df;--hero-c:#f7dfdc}.i2-app[data-season="summer"]{--hero-a:#e8f2e9;--hero-b:#fff2d6;--hero-c:#e8efe1}.i2-app[data-season="autumn"]{--hero-a:#eef1e4;--hero-b:#f6ead8;--hero-c:#f2dcd5}.i2-app[data-season="winter"]{--hero-a:#eef1ef;--hero-b:#f6f1e9;--hero-c:#e6eceb}.i2-lock{overflow:hidden}
+
+.i2-header{height:76px;position:sticky;top:0;z-index:100;display:grid;grid-template-columns:250px 1fr 126px;align-items:center;padding:0 clamp(26px,5vw,96px);background:rgba(255,255,255,.98);border-bottom:1px solid #efede7}.i2-logo{display:flex;align-items:center}.i2-logo img{width:175px;height:54px;object-fit:contain;object-position:left center}.i2-nav{height:100%;display:flex;justify-content:center;align-items:center;gap:34px}.i2-nav button{height:100%;padding:0 1px;border:0;border-bottom:2px solid transparent;background:transparent;font-size:14px;font-weight:700;white-space:nowrap}.i2-nav button:hover,.i2-nav button.is-active{border-bottom-color:var(--green)}.i2-nav-caret{font-size:12px}.i2-tools{display:flex;justify-content:flex-end;align-items:center;gap:11px}.i2-tools button{position:relative;border:0;background:transparent;width:31px;height:31px;padding:4px}.i2-tools svg{width:22px;height:22px;fill:none;stroke:var(--ink);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}.i2-tools [data-cart-count]{position:absolute;right:-2px;top:-5px;min-width:16px;height:16px;line-height:16px;border-radius:999px;background:var(--green);color:#fff;font-size:10px;padding:0 4px}
+
+.i2-menu-dim{position:fixed;inset:76px 0 0;z-index:104;background:rgba(19,31,25,.18);backdrop-filter:blur(3px)}.i2-menu-dim[hidden],.i2-mega[hidden]{display:none!important}.i2-mega{position:fixed;z-index:110;top:76px;right:clamp(22px,4vw,72px);left:auto;transform:none;width:min(930px,calc(100vw - 72px));max-height:calc(100vh - 104px);overflow:auto;padding:22px 26px 28px;background:#fffdf9;border:1px solid rgba(18,63,49,.08);border-radius:0 0 24px 24px;box-shadow:0 26px 70px rgba(27,41,34,.16)}.i2-mega-head{display:flex;justify-content:space-between;align-items:end;border-bottom:1px solid var(--line);padding:0 2px 15px;margin-bottom:16px}.i2-mega-head small,.i2-story-copy small,.i2-title-row small,.i2-hero-copy small{display:block;font-size:9px;letter-spacing:.28em;color:#829087}.i2-mega-head h2{margin:5px 0 0;font:500 30px/1.2 "Noto Serif KR","Nanum Myeongjo",Batang,serif;letter-spacing:-.04em}.i2-close{border:0;background:transparent;width:39px;height:39px;border-radius:50%;font-size:30px;line-height:1}.i2-close:hover{background:#f2f0e9}.i2-fruit-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}.i2-mega-fruit{border:1px solid #ece7dc;border-radius:16px;background:#fbf8f0;padding:9px 9px 13px;text-align:center;min-width:0}.i2-mega-fruit:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(30,45,37,.06)}.i2-mega-fruit .photo{display:block;height:126px;border-radius:12px;background:linear-gradient(145deg,#fffdf8,#f3f1e8);overflow:hidden}.i2-mega-fruit img{width:100%;height:100%;object-fit:contain;padding:5px}.i2-mega-fruit b,.i2-mega-fruit small,.i2-mega-fruit em,.i2-mega-fruit strong{display:block;font-style:normal}.i2-mega-fruit b{margin-top:8px;font-size:14px}.i2-mega-fruit small,.i2-mega-fruit em{margin-top:3px;color:#818982;font-size:11px}.i2-mega-fruit strong{margin-top:5px;font-size:14px}.i2-panel-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.i2-panel-card{display:grid;grid-template-columns:128px 1fr;gap:16px;align-items:center;min-height:180px;padding:16px;border:1px solid #e8e3d8;border-radius:16px;background:#fbf8f0;text-align:left}.i2-panel-card:hover{box-shadow:0 12px 28px rgba(34,47,40,.06);transform:translateY(-1px)}.i2-panel-card .collage{position:relative;width:128px;height:128px;border-radius:14px;background:linear-gradient(145deg,#fffdf8,#f2efe5);overflow:hidden}.i2-panel-card .collage img{position:absolute;width:72px;height:72px;object-fit:contain}.i2-panel-card .collage img:nth-child(1){left:3px;top:5px}.i2-panel-card .collage img:nth-child(2){right:2px;top:4px}.i2-panel-card .collage img:nth-child(3){left:7px;bottom:1px}.i2-panel-card .collage img:nth-child(4){right:2px;bottom:1px}.i2-panel-card small{font-size:9px;letter-spacing:.2em;color:#8a918c}.i2-panel-card h3{margin:8px 0 6px;font:500 22px/1.35 "Noto Serif KR","Nanum Myeongjo",Batang,serif}.i2-panel-card p{margin:0;color:#7c847e;font-size:12px;line-height:1.65}.i2-brand-panel{display:grid;grid-template-columns:360px 1fr;gap:34px;align-items:center}.i2-brand-art{height:220px;border-radius:18px;background:linear-gradient(145deg,#f4efe4,#eef2e8);display:flex;align-items:center;justify-content:center}.i2-brand-art img{width:205px;height:205px;object-fit:contain}.i2-brand-panel h3{font:500 34px/1.35 "Noto Serif KR","Nanum Myeongjo",Batang,serif;margin:10px 0}.i2-brand-panel p{margin:0;color:#6e7972;line-height:1.8}
+
+.i2-hero{position:relative;min-height:560px;overflow:hidden;display:grid;grid-template-columns:minmax(330px,.68fr) minmax(0,1.32fr);background:linear-gradient(135deg,var(--hero-a) 0%,#fbfaf5 43%,var(--hero-b) 73%,var(--hero-c) 100%)}.i2-hero-wave{position:absolute;pointer-events:none;opacity:.72;filter:none}.i2-wave-a{width:78%;height:46%;left:-12%;top:5%;border-radius:48% 52% 55% 45%/58% 50% 50% 42%;background:rgba(255,255,255,.55);transform:rotate(-7deg)}.i2-wave-b{width:70%;height:35%;left:28%;top:12%;border-radius:50%;background:rgba(211,224,196,.46);transform:rotate(-13deg)}.i2-wave-c{width:74%;height:37%;right:-12%;bottom:4%;border-radius:52% 48% 42% 58%/56% 52% 48% 44%;background:rgba(244,208,198,.46);transform:rotate(-9deg)}.i2-hero-copy{position:relative;z-index:4;padding:86px 30px 52px clamp(48px,6vw,108px)}.i2-hero-copy h1{margin:18px 0 22px;font:500 clamp(46px,4.3vw,67px)/1.13 "Noto Serif KR","Nanum Myeongjo",Batang,serif;letter-spacing:-.06em}.i2-hero-copy p{margin:0 0 26px;color:#5f6b64;font-size:17px;line-height:1.85}.i2-primary,.i2-outline{min-width:168px;padding:13px 18px;font-weight:700;border-radius:2px}.i2-primary{border:1px solid var(--green);background:var(--green);color:#fff}.i2-outline{border:1px solid rgba(12,98,73,.5);background:rgba(255,255,255,.45)}.i2-primary span,.i2-outline span{float:right}.i2-hero-stage{position:relative;z-index:3;min-height:560px}.i2-fruit{position:absolute;object-fit:contain;filter:drop-shadow(0 12px 9px rgba(52,61,46,.07));pointer-events:none}.hero-apple{width:250px;height:250px;left:8%;bottom:105px;z-index:4}.hero-shine{width:268px;height:268px;left:27%;bottom:58px;z-index:6}.hero-pear{width:242px;height:242px;left:55%;bottom:125px;z-index:3}.hero-peach{width:238px;height:238px;left:48%;bottom:45px;z-index:7}.hero-mandarin{width:205px;height:205px;left:73%;bottom:52px;z-index:8}.hero-melon{width:255px;height:255px;left:73%;top:20px;z-index:2}
+
+.i2-select{padding:26px clamp(30px,5.6vw,102px) 18px;background:#fff}.i2-section-head{display:flex;justify-content:space-between;align-items:end;gap:24px;margin-bottom:17px}.i2-title-row{display:flex;align-items:end;gap:18px;flex-wrap:wrap}.i2-title-row small{width:100%}.i2-title-row h2{margin:0;font:500 32px/1.15 "Noto Serif KR","Nanum Myeongjo",Batang,serif;letter-spacing:-.05em}.i2-title-row p{margin:0 0 3px;color:#79827c;font-size:13px}.i2-text-link{border:0;background:transparent;font-weight:700;padding:2px 0}.i2-select-grid{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:12px}.i2-card{position:relative;overflow:hidden;border:1px solid rgba(18,63,49,.11);border-radius:18px;background:#fffdf9;min-width:0}.i2-card-main{width:100%;padding:0;border:0;background:transparent;text-align:left}.i2-card-photo{display:block;height:172px;background:linear-gradient(145deg,#fbf8ef,#f1f0e8)}.i2-card-photo img{width:100%;height:100%;object-fit:contain;padding:10px;transition:transform .22s ease}.i2-card:hover .i2-card-photo img{transform:scale(1.035)}.i2-card-copy{display:block;padding:12px 12px 14px;text-align:center}.i2-card-copy h3{margin:0;font-size:14px}.i2-card-copy p{margin:6px 0 0;min-height:36px;font-size:11px;color:#808780;line-height:1.5}.i2-card-price{display:flex;justify-content:center;align-items:center;gap:8px;margin-top:5px;font-size:14px}.i2-card-price strong{font-size:15px}.i2-card-open{position:absolute;right:10px;bottom:12px;width:30px;height:30px;border:1px solid #d8ded8;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-size:13px}
+
+.i2-editorial{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;padding:16px clamp(20px,3vw,48px) 34px;background:#f8f5ec}.i2-story-card{min-width:0;border:1px solid rgba(18,63,49,.08);border-radius:22px;overflow:hidden;background:#fffdf8}.i2-story-copy{padding:28px 30px 24px}.i2-story-copy h2{margin:11px 0 10px;font:500 28px/1.42 "Noto Serif KR","Nanum Myeongjo",Batang,serif;letter-spacing:-.045em}.i2-story-copy p{margin:0 0 18px;color:#6e7972;font-size:12px;line-height:1.75}.i2-story-image{min-height:250px;display:flex;align-items:center;justify-content:center;background:#f7f3e9;overflow:hidden}.i2-story-image img{width:100%;height:100%;display:block}.i2-picnic-story,.i2-clock-story{display:grid;grid-template-columns:minmax(250px,.82fr) minmax(360px,1.18fr);min-height:300px}.i2-picnic-image img{object-fit:cover;object-position:center}.i2-clock-image{background:#fff8ee}.i2-clock-image img{object-fit:cover;object-position:center}.i2-gift-story{grid-column:1/-1;display:grid;grid-template-columns:minmax(340px,.78fr) minmax(620px,1.52fr);min-height:300px;background:linear-gradient(145deg,#fbf4e7,#f2ead8)}.i2-gift-visual{position:relative;width:100%;height:100%;min-height:300px;border:0;background:linear-gradient(150deg,#f8f1e4,#eee3d1);overflow:hidden}.i2-gift-lid{position:absolute;right:6%;top:20px;width:42%;height:90px;border-radius:8px;background:#174d3b;transform:rotate(3deg);display:flex;align-items:center;justify-content:center;box-shadow:0 10px 20px rgba(42,47,40,.10)}.i2-gift-lid img{width:70%;height:70%;object-fit:contain;filter:brightness(0) invert(1);opacity:.9}.i2-gift-tray{position:absolute;left:5%;bottom:15px;width:66%;height:176px;padding:10px;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,1fr);gap:5px;background:#d4b07d;border:8px solid #c39c69;border-radius:6px;transform:rotate(-2deg);box-shadow:0 13px 22px rgba(65,48,28,.12)}.i2-gift-tray>span{display:flex;align-items:center;justify-content:center;overflow:hidden;background:#f8eed9;border:1px solid rgba(111,78,41,.12)}.i2-gift-tray img{width:92%;height:92%;object-fit:contain}
+
+.i2-footer{display:flex;justify-content:space-between;align-items:center;gap:24px;padding:26px clamp(28px,6vw,110px);background:#153f34;color:#fff}.i2-footer>div{display:flex;align-items:center;gap:38px}.i2-footer img{width:145px;height:48px;object-fit:contain;filter:brightness(0) invert(1)}.i2-footer nav{display:flex;gap:24px;font-size:12px}.i2-footer small{opacity:.65}
+
+.i2-detail-bg,.i2-info-bg{position:fixed;inset:0;z-index:140;display:flex;align-items:center;justify-content:flex-end;padding:20px 4vw;background:rgba(18,31,25,.16);backdrop-filter:blur(11px) saturate(110%);opacity:0;pointer-events:none;transition:opacity .18s ease}.i2-detail-bg[aria-hidden="false"],.i2-info-bg[aria-hidden="false"]{opacity:1;pointer-events:auto}.i2-detail{position:relative;width:min(980px,94vw);max-height:94vh;overflow:auto;border-radius:28px;background:rgba(255,255,255,.62);border:1px solid rgba(255,255,255,.76);backdrop-filter:blur(30px) saturate(128%);box-shadow:0 28px 80px rgba(28,42,35,.18)}.i2-detail-close{position:absolute;right:12px;top:12px;z-index:5;background:rgba(255,255,255,.76)}.i2-detail-grid{display:grid;grid-template-columns:1.04fr .96fr;gap:28px;padding:18px}.i2-detail-visual{position:relative;min-height:500px;border-radius:22px;border:1px solid rgba(255,255,255,.65);background:rgba(255,255,255,.25);overflow:hidden;display:flex;align-items:center;justify-content:center}.i2-detail-visual.is-single img{width:82%;height:82%;object-fit:contain;filter:drop-shadow(0 13px 10px rgba(42,51,44,.08))}.i2-detail-visual.is-mix{background:rgba(255,255,255,.22)}.i2-mix-fruit{position:absolute;object-fit:contain;filter:drop-shadow(0 8px 6px rgba(42,51,44,.06))}.i2-mix-fruit[data-mix-index="0"]{width:38%;height:38%;left:5%;top:10%;z-index:4}.i2-mix-fruit[data-mix-index="1"]{width:35%;height:35%;right:6%;top:8%;z-index:2}.i2-mix-fruit[data-mix-index="2"]{width:39%;height:39%;left:31%;top:27%;z-index:6}.i2-mix-fruit[data-mix-index="3"]{width:31%;height:31%;left:5%;bottom:6%;z-index:5}.i2-mix-fruit[data-mix-index="4"]{width:34%;height:34%;right:8%;bottom:5%;z-index:7}.i2-mix-fruit[data-mix-index="5"]{width:29%;height:29%;left:35%;bottom:0;z-index:3}.i2-mix-fruit[data-mix-index="6"]{width:28%;height:28%;right:24%;top:0;z-index:1}.i2-detail-copy{align-self:center;padding:34px 18px 28px 0}.i2-detail-copy>small{font-size:9px;letter-spacing:.22em;color:#839088}.i2-detail-copy h2{margin:14px 0 14px;font:500 37px/1.25 "Noto Serif KR","Nanum Myeongjo",Batang,serif;letter-spacing:-.05em}.i2-detail-copy>p{margin:0 0 20px;color:#69766e;font-size:14px;line-height:1.75}.i2-detail-copy dl{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:0 0 18px}.i2-detail-copy dl div{min-height:80px;padding:12px;border:1px solid rgba(255,255,255,.7);border-radius:12px;background:rgba(255,255,255,.42)}.i2-detail-copy dt{font-size:10px;color:#869089}.i2-detail-copy dd{margin:6px 0 0;font-size:12px;font-weight:700;line-height:1.4}.i2-detail-price{display:block;font:700 29px/1.2 Georgia,"Noto Serif KR",serif;margin:8px 0 10px}.i2-qty{display:flex;width:148px;height:42px;border-radius:10px;overflow:hidden;background:rgba(255,255,255,.68);margin-bottom:16px}.i2-qty button{width:43px;border:0;background:transparent;font-size:20px}.i2-qty input{width:62px;border:0;background:transparent;text-align:center;appearance:textfield}.i2-detail-actions{display:grid;grid-template-columns:1fr 1fr;gap:9px}.i2-detail-actions button{min-width:0;height:52px}.i2-info-bg{justify-content:center}.i2-info{position:relative;width:min(520px,90vw);padding:34px;border-radius:20px;background:#fffdf8;box-shadow:0 28px 70px rgba(28,42,35,.16)}.i2-info .i2-close{position:absolute;right:10px;top:10px}.i2-info small{font-size:9px;letter-spacing:.22em;color:#849087}.i2-info h2{font:500 28px/1.35 "Noto Serif KR",serif;margin:10px 0}.i2-info p{margin:0;color:#66736b;line-height:1.75}.i2-toast{position:fixed;z-index:180;left:50%;bottom:26px;transform:translateX(-50%);padding:12px 18px;border-radius:999px;background:#163f34;color:#fff;font-size:13px;box-shadow:0 10px 32px rgba(27,42,35,.18)}
+
+@media(max-width:1280px){.i2-nav{gap:22px}.i2-fruit-grid{grid-template-columns:repeat(4,1fr)}.i2-select-grid{grid-template-columns:repeat(4,1fr)}.i2-editorial{grid-template-columns:1fr 1fr}.i2-gift-story{grid-column:1/-1;grid-template-columns:.72fr 1.28fr;grid-template-rows:1fr}.i2-gift-visual{height:100%;min-height:310px}.hero-melon{left:70%}.hero-mandarin{left:72%}}
+@media(max-width:980px){.i2-header{grid-template-columns:190px 1fr 100px;padding:0 22px}.i2-logo img{width:150px}.i2-nav{gap:14px}.i2-nav button{font-size:12px}.i2-hero{grid-template-columns:1fr;min-height:780px}.i2-hero-copy{padding:60px 34px 0}.i2-hero-stage{min-height:470px}.hero-apple{left:8%;bottom:120px}.hero-shine{left:26%;bottom:65px}.hero-pear{left:54%;bottom:130px}.hero-peach{left:48%;bottom:55px}.hero-mandarin{left:73%;bottom:48px}.hero-melon{left:71%;top:14px}.i2-panel-grid{grid-template-columns:repeat(2,1fr)}.i2-detail-bg{justify-content:center}.i2-detail-grid{grid-template-columns:1fr}.i2-detail-visual{min-height:400px}.i2-detail-copy{padding:0 18px 20px}.i2-footer nav{display:none}}
+@media(max-width:760px){.i2-header{height:66px;grid-template-columns:1fr auto;padding:0 16px}.i2-logo img{width:142px;height:46px}.i2-nav{position:fixed;z-index:99;left:0;right:0;bottom:0;height:60px;background:#fff;border-top:1px solid #ece9e1;gap:0;display:grid;grid-template-columns:repeat(6,1fr)}.i2-nav button{font-size:10px;padding:0 4px;border-bottom:0;border-top:2px solid transparent}.i2-nav button.is-active{border-top-color:var(--green)}.i2-tools{grid-column:2}.i2-menu-dim{inset:66px 0 60px}.i2-mega{top:66px;right:9px;left:auto;width:calc(100vw - 18px);max-height:calc(100vh - 138px);padding:18px 14px;border-radius:0 0 20px 20px}.i2-fruit-grid{grid-template-columns:repeat(2,1fr)}.i2-panel-grid{grid-template-columns:1fr}.i2-panel-card{grid-template-columns:96px 1fr}.i2-panel-card .collage{width:96px;height:96px}.i2-panel-card .collage img{width:54px;height:54px}.i2-brand-panel{grid-template-columns:1fr}.i2-brand-art{height:180px}.i2-hero{min-height:690px}.i2-hero-copy{padding:44px 22px 0}.i2-hero-copy h1{font-size:45px}.i2-hero-stage{min-height:420px;transform:scale(.86);transform-origin:center bottom}.i2-select{padding:24px 14px}.i2-select-grid{grid-template-columns:repeat(2,1fr)}.i2-section-head{align-items:flex-start}.i2-title-row p{width:100%}.i2-editorial{grid-template-columns:1fr;padding:10px 10px 74px}.i2-gift-story{grid-column:auto;grid-template-columns:1fr;grid-template-rows:auto 1fr}.i2-gift-visual{min-height:250px}.i2-story-image{height:250px}.i2-footer{margin-bottom:60px;padding:24px 18px}.i2-detail-bg{padding:10px;align-items:flex-end}.i2-detail{width:100%;max-height:90vh;border-radius:24px 24px 0 0}.i2-detail-grid{padding:14px;gap:14px}.i2-detail-visual{min-height:330px}.i2-detail-copy h2{font-size:31px}.i2-detail-copy dl{grid-template-columns:1fr}.i2-detail-copy dl div{min-height:58px}.i2-detail-actions{grid-template-columns:1fr 1fr}}
+
+/* V60.56 — approved Home2 composition lock */
+.i2-nav button:focus-visible{outline:none;box-shadow:none}
+.i2-nav button.is-active{background:transparent}
+
+/* Full-page catalog/selection layer: never a right drawer */
+.i2-menu-dim{display:none!important}
+.i2-mega{top:76px;left:0;right:0;width:100vw;height:calc(100vh - 76px);max-height:none;padding:34px clamp(26px,5vw,88px) 50px;border:0;border-radius:0;box-shadow:none;background:#fbfaf6;overflow:auto}
+.i2-mega-head,.i2-mega-content{width:min(1280px,100%);margin-left:auto;margin-right:auto}
+.i2-mega-head{padding-bottom:20px;margin-bottom:24px}
+.i2-mega-head h2{font-size:38px}
+.i2-fruit-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+.i2-mega-fruit{min-height:276px;padding:14px;border-radius:20px;background:#f8f5ed;border-color:#e6e0d4}
+.i2-mega-fruit .photo{height:156px;border-radius:16px;background:#fffdf8}
+.i2-mega-fruit img{padding:10px}
+.i2-panel-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.i2-panel-card{min-height:210px;border-radius:20px;background:#f8f5ed}
+
+/* Hero is locked to the approved uploaded composition; no extra loose leaves or stones are added in code. */
+.i2-hero{min-height:560px;grid-template-columns:minmax(360px,.70fr) minmax(0,1.30fr);background:#f8f6ee}
+.i2-hero-wave{display:none!important}
+.i2-hero-copy{z-index:3;background:linear-gradient(90deg,#fbfaf6 0%,#fbfaf6 78%,rgba(251,250,246,.25) 100%);padding-top:84px}
+.i2-hero-art{position:relative;min-height:560px;overflow:hidden;background:#f7f2e7}
+.i2-hero-art img{display:block;width:100%;height:100%;min-height:560px;object-fit:cover;object-position:center center}
+
+/* Cleaner, editorial lower cards; remove toy-like skew and heavy box treatment. */
+.i2-editorial{grid-template-columns:1.05fr 1fr 1fr;gap:16px;background:#f8f5ec}
+.i2-story-card{border-radius:22px;background:#fffdf9}
+.i2-gift-story{background:linear-gradient(145deg,#fbf5ea,#f3ecdf)}
+.i2-gift-visual{height:238px;background:linear-gradient(145deg,#faf5ea,#f1eadf)}
+.i2-gift-lid{right:7%;top:24px;width:38%;height:74px;border-radius:10px;transform:none;box-shadow:none;background:#174d3b}
+.i2-gift-tray{left:6%;bottom:16px;width:70%;height:168px;padding:9px;gap:4px;border:2px solid #c9ad82;border-radius:12px;transform:none;box-shadow:none;background:#ead7b9}
+.i2-gift-tray>span{border-radius:8px;background:#fbf5e8;border:1px solid rgba(111,78,41,.08)}
+.i2-gift-tray img{width:88%;height:88%}
+
+/* Detail stays glass, but the blurred color/shadow behind fruit is suppressed. */
+.i2-detail-bg{justify-content:center;background:rgba(28,39,34,.20);backdrop-filter:blur(16px) saturate(105%)}
+.i2-detail{background:rgba(255,255,255,.84);border-color:rgba(255,255,255,.92);backdrop-filter:blur(24px) saturate(112%);box-shadow:0 24px 64px rgba(28,42,35,.14)}
+.i2-detail-visual,.i2-detail-visual.is-mix{background:linear-gradient(145deg,rgba(255,255,255,.78),rgba(247,246,240,.68));border-color:rgba(255,255,255,.9)}
+.i2-detail-visual.is-single img,.i2-mix-fruit{filter:none}
+.i2-detail-copy dl div{background:rgba(255,255,255,.58)}
+
+@media(max-width:980px){
+  .i2-mega{top:76px;height:calc(100vh - 76px);padding:28px 24px 44px}
+  .i2-hero{grid-template-columns:1fr;min-height:auto}
+  .i2-hero-copy{padding:56px 34px 34px;background:#fbfaf6}
+  .i2-hero-art{min-height:430px}
+  .i2-hero-art img{min-height:430px;object-fit:cover}
+  .i2-editorial{grid-template-columns:1fr}
+}
+@media(max-width:760px){
+  .i2-mega{top:66px;height:calc(100vh - 126px);max-height:none;left:0;right:0;width:100vw;padding:22px 14px 84px;border-radius:0}
+  .i2-fruit-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+  .i2-panel-grid{grid-template-columns:1fr}
+  .i2-hero-art{min-height:330px}
+  .i2-hero-art img{min-height:330px;object-fit:cover;object-position:center}
+}
+
+
+/* V60.57 refined full-page catalog — approved direction only */
+.i2-nav-caret{display:none!important}
+.i2-nav button{outline:none!important;box-shadow:none!important}
+.i2-nav button:focus,.i2-nav button:active{outline:none!important;box-shadow:none!important;background:transparent}
+
+/* Fruit catalog: title/description live on the LEFT, products on the RIGHT. */
+.i2-mega[data-type="fruit"]{background:linear-gradient(135deg,#fbfaf6 0%,#faf8f2 55%,#f7f3e9 100%)}
+.i2-mega[data-type="fruit"] .i2-mega-head{position:relative;min-height:42px;padding:0 0 10px;margin-bottom:8px;border-bottom:0}
+.i2-mega[data-type="fruit"] .i2-mega-head>div{visibility:hidden;width:1px;overflow:hidden}
+.i2-mega[data-type="fruit"] .i2-close{position:absolute;right:0;top:0}
+.i2-fruit-catalog{display:grid;grid-template-columns:minmax(210px,248px) minmax(0,1fr);gap:42px;align-items:start}
+.i2-fruit-intro{position:sticky;top:0;padding:14px 28px 22px 4px;border-right:1px solid #e5dfd3;min-height:560px}
+.i2-fruit-intro small{display:block;font-size:9px;letter-spacing:.28em;color:#859088}
+.i2-fruit-intro h2{margin:12px 0 18px;font:500 39px/1.2 "Noto Serif KR","Nanum Myeongjo",Batang,serif;letter-spacing:-.045em}
+.i2-fruit-intro p{margin:0 0 22px;color:#717b74;font-size:14px;line-height:1.9}
+.i2-fruit-intro span{display:inline-block;padding-top:15px;border-top:1px solid #d9d2c5;color:#8a918c;font-size:11px;letter-spacing:.04em}
+.i2-mega[data-type="fruit"] .i2-fruit-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+.i2-mega[data-type="fruit"] .i2-mega-fruit{min-height:270px;background:rgba(255,253,248,.88);border:1px solid #e7e0d4;box-shadow:0 7px 18px rgba(55,61,54,.025);transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease}
+.i2-mega[data-type="fruit"] .i2-mega-fruit:hover{border-color:#d7cfbf;box-shadow:0 12px 26px rgba(46,57,50,.07)}
+
+/* Gift + curation: keep the clean structure, add only restrained luxury detail. */
+.i2-mega[data-type="gift"]{background:linear-gradient(135deg,#fbfaf6 0%,#faf6ed 52%,#f4efe4 100%)}
+.i2-mega[data-type="curation"]{background:linear-gradient(135deg,#fbfaf6 0%,#f8f7f0 58%,#f1f5ed 100%)}
+.i2-mega[data-type="gift"] .i2-mega-head,.i2-mega[data-type="curation"] .i2-mega-head{border-bottom-color:#ddd7ca}
+.i2-mega[data-type="gift"] .i2-panel-card,.i2-mega[data-type="curation"] .i2-panel-card{position:relative;overflow:hidden;background:rgba(255,253,248,.88);border-color:#e4ddcf;box-shadow:0 8px 22px rgba(43,52,46,.025);transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease}
+.i2-mega[data-type="gift"] .i2-panel-card::before,.i2-mega[data-type="curation"] .i2-panel-card::before{content:"";position:absolute;left:16px;right:16px;top:0;height:2px;border-radius:999px;opacity:.9}
+.i2-mega[data-type="gift"] .i2-panel-card::before{background:linear-gradient(90deg,#c7a96d,#d9c69b 58%,transparent)}
+.i2-mega[data-type="curation"] .i2-panel-card::before{background:linear-gradient(90deg,#90a684,#c2cdb4 58%,transparent)}
+.i2-mega[data-type="gift"] .i2-panel-card:hover,.i2-mega[data-type="curation"] .i2-panel-card:hover{transform:translateY(-2px);border-color:#d6cebf;box-shadow:0 14px 30px rgba(44,55,48,.065)}
+.i2-mega[data-type="gift"] .i2-panel-card .collage,.i2-mega[data-type="curation"] .i2-panel-card .collage{background:rgba(255,255,252,.8);border:1px solid rgba(220,214,201,.72)}
+.i2-mega[data-type="gift"] .i2-panel-card h3,.i2-mega[data-type="curation"] .i2-panel-card h3{font-size:23px}
+.i2-mega[data-type="gift"] .i2-panel-card small,.i2-mega[data-type="curation"] .i2-panel-card small{display:inline-block;padding-bottom:5px;border-bottom:1px solid rgba(18,63,49,.16)}
+
+/* Very pale category tones — almost white, never decorative imagery. */
+.i2-mega[data-type="gift"] .i2-panel-card:nth-child(1){background:linear-gradient(145deg,#fffdf9,#faf3e7)}
+.i2-mega[data-type="gift"] .i2-panel-card:nth-child(2){background:linear-gradient(145deg,#fffdf9,#f7f3e9)}
+.i2-mega[data-type="gift"] .i2-panel-card:nth-child(3){background:linear-gradient(145deg,#fffdf9,#f4f4e9)}
+.i2-mega[data-type="gift"] .i2-panel-card:nth-child(4){background:linear-gradient(145deg,#fffdf9,#fbf1e8)}
+.i2-mega[data-type="gift"] .i2-panel-card:nth-child(5){background:linear-gradient(145deg,#fffdf9,#f5f1e9)}
+.i2-mega[data-type="gift"] .i2-panel-card:nth-child(6){background:linear-gradient(145deg,#fffdf9,#eef3eb)}
+.i2-mega[data-type="curation"] .i2-panel-card:nth-child(1){background:linear-gradient(145deg,#fffdf9,#fff5ec)}
+.i2-mega[data-type="curation"] .i2-panel-card:nth-child(2){background:linear-gradient(145deg,#fffdf9,#fbf7ea)}
+.i2-mega[data-type="curation"] .i2-panel-card:nth-child(3){background:linear-gradient(145deg,#fffdf9,#eef6ef)}
+.i2-mega[data-type="curation"] .i2-panel-card:nth-child(4){background:linear-gradient(145deg,#fffdf9,#fff9e8)}
+.i2-mega[data-type="curation"] .i2-panel-card:nth-child(5){background:linear-gradient(145deg,#fffdf9,#f6f0e9)}
+.i2-mega[data-type="curation"] .i2-panel-card:nth-child(6){background:linear-gradient(145deg,#fffdf9,#edf2e9)}
+
+@media(max-width:1100px){
+ .i2-fruit-catalog{grid-template-columns:190px 1fr;gap:26px}
+ .i2-fruit-intro{min-height:0}
+ .i2-mega[data-type="fruit"] .i2-fruit-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media(max-width:760px){
+ .i2-fruit-catalog{grid-template-columns:1fr;gap:18px}
+ .i2-fruit-intro{position:static;min-height:0;border-right:0;border-bottom:1px solid #e5dfd3;padding:0 0 18px}
+ .i2-fruit-intro h2{font-size:31px;margin:8px 0 10px}
+ .i2-fruit-intro p{font-size:12px;margin-bottom:10px}
+ .i2-mega[data-type="fruit"] .i2-fruit-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+
+/* V60.58 premium full-page catalogs — clean product-first refinement */
+.i2-mega[data-type="gift"],.i2-mega[data-type="curation"]{padding-top:30px}
+.i2-mega[data-type="gift"] .i2-mega-head,.i2-mega[data-type="curation"] .i2-mega-head{margin-bottom:22px;padding-bottom:17px}
+.i2-mega[data-type="gift"] .i2-mega-head h2,.i2-mega[data-type="curation"] .i2-mega-head h2{font-size:40px}
+.i2-shop-intro{display:grid;grid-template-columns:minmax(340px,.9fr) minmax(360px,1.15fr) auto;gap:34px;align-items:end;padding:4px 0 28px;margin-bottom:24px;border-bottom:1px solid #e3ddd1}
+.i2-shop-intro small{display:block;margin-bottom:9px;font-size:9px;letter-spacing:.28em;color:#8a918c}
+.i2-shop-intro h3{margin:0;font:500 27px/1.42 "Noto Serif KR","Nanum Myeongjo",Batang,serif;letter-spacing:-.045em}
+.i2-shop-intro p{margin:0 0 2px;color:#737d76;font-size:13px;line-height:1.78}
+.i2-shop-intro>span{align-self:end;padding:7px 0 5px;border-bottom:1px solid rgba(18,63,49,.32);font-size:10px;letter-spacing:.16em;color:#66746c;white-space:nowrap}
+.i2-shop-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+.i2-shop-card{position:relative;display:flex;flex-direction:column;min-width:0;padding:0;border:1px solid #e4ded3;border-radius:22px;overflow:hidden;text-align:left;background:#fffdf9;box-shadow:0 8px 24px rgba(41,52,45,.035);transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease}
+.i2-shop-card:hover{transform:translateY(-3px);border-color:#d4cbbc;box-shadow:0 18px 38px rgba(41,52,45,.075)}
+.i2-shop-visual{display:block;position:relative;height:285px;overflow:hidden;border-bottom:1px solid rgba(18,63,49,.06);background:#f3f2eb}
+.i2-shop-body{display:flex;flex-direction:column;flex:1;padding:18px 20px 19px}
+.i2-shop-body>small{font-size:9px;letter-spacing:.22em;color:#879089}
+.i2-shop-body h3{margin:8px 0 7px;font:500 24px/1.32 "Noto Serif KR","Nanum Myeongjo",Batang,serif;letter-spacing:-.04em}
+.i2-shop-body>p{margin:0 0 14px;color:#737d76;font-size:12px;line-height:1.7;min-height:42px}
+.i2-shop-meta{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding-top:12px;margin-top:auto;border-top:1px solid #ece7dc}
+.i2-shop-meta span{min-width:0;color:#53645b;font-size:11px;line-height:1.55}
+.i2-shop-meta em{display:block;margin-bottom:3px;color:#989f9a;font-size:9px;font-style:normal;letter-spacing:.08em}
+.i2-shop-foot{display:flex;justify-content:space-between;align-items:end;gap:14px;margin-top:15px}
+.i2-shop-foot strong{font:700 18px/1.15 Georgia,"Noto Serif KR",serif}
+.i2-shop-foot>span{font-size:11px;font-weight:700;color:#416252}
+
+/* Gift: restrained product-box display, built from the existing IROOM cut-out fruit assets. */
+.i2-mega[data-type="gift"]{background:linear-gradient(135deg,#fbfaf6 0%,#f9f5ec 56%,#f1eadf 100%)}
+.i2-gift-product:nth-child(1) .i2-shop-visual{background:#e9e9e0}
+.i2-gift-product:nth-child(2) .i2-shop-visual{background:#ecebe4}
+.i2-gift-product:nth-child(3) .i2-shop-visual{background:#e7e8df}
+.i2-gift-product:nth-child(4) .i2-shop-visual{background:#f0ebe2}
+.i2-gift-product:nth-child(5) .i2-shop-visual{background:#ece9e1}
+.i2-gift-product:nth-child(6) .i2-shop-visual{background:#e5ebe3}
+.i2-giftbox-stage{position:absolute;inset:0;display:flex;align-items:flex-end;justify-content:center;padding:34px 26px 22px}
+.i2-giftbox-lid{position:absolute;z-index:4;left:50%;top:36px;width:62%;height:78px;transform:translateX(-50%) perspective(420px) rotateX(-4deg);border-radius:4px 4px 8px 8px;background:linear-gradient(180deg,#1e5b47,#174b3a);box-shadow:0 8px 18px rgba(37,44,39,.12)}
+.i2-giftbox-lid::after{content:"";position:absolute;left:0;right:0;bottom:-9px;height:11px;background:#123f31;opacity:.22;filter:blur(1px)}
+.i2-giftbox-brand{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);color:#f4dfb0;font:600 15px/1.1 Georgia,serif;letter-spacing:.08em;white-space:nowrap}
+.i2-giftbox-brand em{display:block;margin-top:4px;font:italic 9px/1.1 Georgia,serif;letter-spacing:.03em;text-align:center;color:#f5e8c8}
+.i2-giftbox-body{position:relative;z-index:3;width:74%;height:148px;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,1fr);gap:5px;padding:8px;border:8px solid #b68e5e;border-top-width:11px;border-radius:3px;background:#c7a373;box-shadow:0 16px 26px rgba(71,55,35,.13)}
+.i2-giftbox-body>span{display:flex;align-items:center;justify-content:center;overflow:hidden;background:#f5ead8;border:1px solid rgba(104,76,44,.10)}
+.i2-giftbox-body img{width:92%;height:92%;object-fit:contain}
+.i2-gift-product::after{content:"";position:absolute;left:20px;right:20px;top:0;height:2px;background:linear-gradient(90deg,#c2a56e,#dac79c 60%,transparent)}
+
+/* Curation: editorial fruit compositions with soft color fields, no decorative leaves/background photography. */
+.i2-mega[data-type="curation"]{background:linear-gradient(135deg,#fbfaf6 0%,#f8f8f2 57%,#edf3ea 100%)}
+.i2-curation-product:nth-child(1) .i2-shop-visual{background:linear-gradient(145deg,#fff7ee,#f6eee6)}
+.i2-curation-product:nth-child(2) .i2-shop-visual{background:linear-gradient(145deg,#fbf8ec,#f1efe3)}
+.i2-curation-product:nth-child(3) .i2-shop-visual{background:linear-gradient(145deg,#eef6ef,#e7efe8)}
+.i2-curation-product:nth-child(4) .i2-shop-visual{background:linear-gradient(145deg,#fff9e9,#f6f0de)}
+.i2-curation-product:nth-child(5) .i2-shop-visual{background:linear-gradient(145deg,#f7f1ea,#efe9e2)}
+.i2-curation-product:nth-child(6) .i2-shop-visual{background:linear-gradient(145deg,#eef3e9,#e6ede2)}
+.i2-curation-stage{position:absolute;inset:0;display:block}
+.i2-curation-stage::before{content:"";position:absolute;width:60%;height:60%;left:20%;top:22%;border-radius:50%;background:rgba(255,255,255,.56)}
+.i2-curation-stage img{position:absolute;object-fit:contain;filter:none}
+.i2-curation-stage img[data-stage-index="0"]{width:42%;height:42%;left:9%;top:13%;z-index:4}
+.i2-curation-stage img[data-stage-index="1"]{width:39%;height:39%;right:8%;top:10%;z-index:3}
+.i2-curation-stage img[data-stage-index="2"]{width:40%;height:40%;left:29%;bottom:6%;z-index:6}
+.i2-curation-stage img[data-stage-index="3"]{width:34%;height:34%;left:5%;bottom:7%;z-index:2}
+.i2-curation-stage img[data-stage-index="4"]{width:34%;height:34%;right:5%;bottom:4%;z-index:5}
+.i2-curation-product::after{content:"";position:absolute;left:20px;right:20px;top:0;height:2px;background:linear-gradient(90deg,#8fa785,#c2ceb7 62%,transparent)}
+
+/* Fruit catalog gets more breathing room and a stronger product silhouette, without changing its approved layout. */
+.i2-mega[data-type="fruit"] .i2-mega-fruit{padding:13px 13px 16px;background:rgba(255,254,250,.94)}
+.i2-mega[data-type="fruit"] .i2-mega-fruit .photo{height:172px;background:linear-gradient(145deg,#fffefa,#f5f2e9)}
+.i2-mega[data-type="fruit"] .i2-mega-fruit img{padding:8px}
+.i2-mega[data-type="fruit"] .i2-mega-fruit b{margin-top:11px;font-size:15px}
+.i2-mega[data-type="fruit"] .i2-mega-fruit strong{font-size:15px}
+
+@media(max-width:1100px){
+  .i2-shop-intro{grid-template-columns:1fr 1fr;gap:22px}.i2-shop-intro>span{display:none}
+  .i2-shop-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:760px){
+  .i2-shop-intro{grid-template-columns:1fr;gap:12px;padding-bottom:18px;margin-bottom:16px}
+  .i2-shop-intro h3{font-size:23px}.i2-shop-intro p{font-size:12px}
+  .i2-shop-grid{grid-template-columns:1fr;gap:14px}
+  .i2-shop-visual{height:250px}
+  .i2-shop-body h3{font-size:22px}
+  .i2-shop-meta{grid-template-columns:1fr}
+  .i2-giftbox-stage{padding:26px 18px 18px}.i2-giftbox-lid{top:27px;width:64%}.i2-giftbox-body{width:78%;height:140px}
+}
+
+@media (max-width:1100px){.i2-gift-story,.i2-picnic-story,.i2-clock-story{grid-template-columns:1fr}.i2-gift-visual{min-height:270px}.i2-story-image{min-height:270px}.i2-editorial{grid-template-columns:1fr}.i2-gift-story{grid-column:auto}}
+
+/* V60.59 FINAL HOME EDITORIAL LOCK — gift full-width, picnic + fruit-clock below */
+.i2-editorial{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:16px!important;padding:16px clamp(20px,3vw,48px) 34px!important;background:#f8f5ec!important}
+.i2-editorial .i2-gift-story{grid-column:1/-1!important;display:grid!important;grid-template-columns:minmax(340px,.78fr) minmax(620px,1.52fr)!important;grid-template-rows:1fr!important;min-height:300px!important}
+.i2-editorial .i2-gift-visual{height:100%!important;min-height:300px!important}
+.i2-editorial .i2-picnic-story,.i2-editorial .i2-clock-story{display:grid!important;grid-template-columns:minmax(250px,.82fr) minmax(360px,1.18fr)!important;grid-template-rows:1fr!important;min-height:300px!important}
+.i2-editorial .i2-story-image{height:100%!important;min-height:300px!important}
+.i2-editorial .i2-clock-image img{object-fit:cover!important;object-position:center!important;padding:0!important}
+.i2-editorial .i2-picnic-image img{object-fit:cover!important;object-position:center!important}
+@media(max-width:1100px){.i2-editorial{grid-template-columns:1fr!important}.i2-editorial .i2-gift-story{grid-column:auto!important;grid-template-columns:1fr!important}.i2-editorial .i2-picnic-story,.i2-editorial .i2-clock-story{grid-template-columns:1fr!important}.i2-editorial .i2-gift-visual,.i2-editorial .i2-story-image{min-height:270px!important}}
+
+
+/* V60.60 — actual full-page editorial windows, inspired by premium catalog rhythm but rendered as real UI */
+.i2-app[data-season="spring"]{--paint-a:#f8e7e2;--paint-b:#f8f1dc;--paint-c:#eaf3e6;--paint-d:#f2e8ef;--paint-e:#eef4e8;--paint-f:#faeadf}
+.i2-app[data-season="summer"]{--paint-a:#e8f2ed;--paint-b:#fff0d3;--paint-c:#e8f3e2;--paint-d:#e9f1f1;--paint-e:#f4ecd9;--paint-f:#fae2d8}
+.i2-app[data-season="autumn"]{--paint-a:#f7e5dc;--paint-b:#f4ead2;--paint-c:#e9efe1;--paint-d:#f2e3df;--paint-e:#eee8d9;--paint-f:#e8eee3}
+.i2-app[data-season="winter"]{--paint-a:#eef1ef;--paint-b:#f4efe5;--paint-c:#e8efec;--paint-d:#f1e8ea;--paint-e:#edf0e7;--paint-f:#f5ece4}
+.i2-mega{background:linear-gradient(145deg,#fbfaf6 0%,#f8f5ee 100%);padding-top:26px}
+.i2-mega-head{width:min(1460px,100%);margin-bottom:18px;border-bottom:1px solid rgba(18,63,49,.11)}
+.i2-mega-content{width:min(1460px,100%)}
+.i2-mega-head h2{font-size:38px}.i2-mega-head small{letter-spacing:.30em}
+.i2-window-layout{display:grid;grid-template-columns:280px minmax(0,1fr);gap:28px;align-items:start}
+.i2-window-intro{position:sticky;top:0;min-height:640px;padding:26px 28px;border-radius:28px;background:linear-gradient(155deg,rgba(255,255,255,.78),rgba(246,240,226,.85));border:1px solid rgba(18,63,49,.08);box-shadow:0 20px 48px rgba(37,51,43,.05)}
+.i2-window-intro small{display:block;font-size:9px;letter-spacing:.3em;color:#7f8d85}
+.i2-window-intro h2{margin:14px 0 18px;font:500 37px/1.32 "Noto Serif KR","Nanum Myeongjo",Batang,serif;letter-spacing:-.05em}
+.i2-window-intro>p{margin:0;color:#68756e;font-size:13px;line-height:1.9}
+.i2-window-benefits{display:grid;gap:10px;margin:28px 0 24px}
+.i2-window-benefits span{display:grid;grid-template-columns:54px 1fr;gap:9px;align-items:center;padding:12px 0;border-top:1px solid rgba(18,63,49,.10)}
+.i2-window-benefits b{font-size:10px;letter-spacing:.12em;color:#9a7a4a}.i2-window-benefits em{font-style:normal;font-size:12px;font-weight:700;color:#345b4e}
+.i2-window-note{display:block;padding-top:18px;border-top:1px solid rgba(18,63,49,.10);font-size:10px;line-height:1.7;letter-spacing:.03em;color:#849087}
+.i2-editorial-fruit-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.i2-editorial-fruit-card{min-width:0;padding:0 0 18px;border:1px solid rgba(18,63,49,.09);border-radius:24px;overflow:hidden;text-align:left;background:#fffdf8;box-shadow:0 14px 30px rgba(40,55,47,.045);transition:.2s ease}
+.i2-editorial-fruit-card:hover{transform:translateY(-3px);box-shadow:0 20px 38px rgba(40,55,47,.075)}
+.i2-editorial-fruit-card:nth-child(6n+1){background:linear-gradient(180deg,var(--paint-a) 0 56%,#fffdf8 56%)}
+.i2-editorial-fruit-card:nth-child(6n+2){background:linear-gradient(180deg,var(--paint-b) 0 56%,#fffdf8 56%)}
+.i2-editorial-fruit-card:nth-child(6n+3){background:linear-gradient(180deg,var(--paint-c) 0 56%,#fffdf8 56%)}
+.i2-editorial-fruit-card:nth-child(6n+4){background:linear-gradient(180deg,var(--paint-d) 0 56%,#fffdf8 56%)}
+.i2-editorial-fruit-card:nth-child(6n+5){background:linear-gradient(180deg,var(--paint-e) 0 56%,#fffdf8 56%)}
+.i2-editorial-fruit-card:nth-child(6n+6){background:linear-gradient(180deg,var(--paint-f) 0 56%,#fffdf8 56%)}
+.i2-editorial-fruit-photo{display:flex;align-items:center;justify-content:center;height:205px;padding:14px}.i2-editorial-fruit-photo img{width:100%;height:100%;object-fit:contain}
+.i2-editorial-fruit-copy{display:block;padding:16px 18px 0}.i2-editorial-fruit-copy small{display:block;font-size:9px;letter-spacing:.15em;color:#849087}.i2-editorial-fruit-copy h3{margin:7px 0 7px;font-size:16px}.i2-editorial-fruit-copy p,.i2-editorial-fruit-copy em{display:block;margin:0 0 4px;font-style:normal;color:#7d877f;font-size:11px}.i2-editorial-fruit-copy strong{display:block;margin-top:9px;font-size:17px}
+
+/* Gift and curation windows use coordinated seasonal paint fields, large product visuals, and real selectable cards. */
+.i2-shop-grid{gap:18px}.i2-shop-card{border-radius:26px;border-color:rgba(18,63,49,.09);box-shadow:0 14px 34px rgba(39,51,44,.045);background:#fffdfa}.i2-shop-card:hover{box-shadow:0 22px 44px rgba(39,51,44,.08)}
+.i2-shop-card:nth-child(6n+1){background:linear-gradient(145deg,#fffdf9,var(--paint-a))}.i2-shop-card:nth-child(6n+2){background:linear-gradient(145deg,#fffdf9,var(--paint-b))}.i2-shop-card:nth-child(6n+3){background:linear-gradient(145deg,#fffdf9,var(--paint-c))}.i2-shop-card:nth-child(6n+4){background:linear-gradient(145deg,#fffdf9,var(--paint-d))}.i2-shop-card:nth-child(6n+5){background:linear-gradient(145deg,#fffdf9,var(--paint-e))}.i2-shop-card:nth-child(6n+6){background:linear-gradient(145deg,#fffdf9,var(--paint-f))}
+.i2-shop-visual{height:300px;background:rgba(245,243,235,.55)!important}.i2-shop-body{padding:20px 22px 22px}.i2-shop-body h3{font-size:25px}.i2-shop-body>p{font-size:12px;line-height:1.78;min-height:46px}.i2-shop-meta{grid-template-columns:1fr 1fr}.i2-shop-foot strong{font-size:20px}
+.i2-giftbox-stage{padding:26px 20px 20px}.i2-giftbox-lid{top:26px;width:64%;height:82px;background:linear-gradient(180deg,#1d654f,#174a3b);border-radius:7px 7px 10px 10px;box-shadow:0 10px 22px rgba(36,45,39,.12)}
+.i2-giftbox-body{width:78%;height:168px;gap:6px;padding:9px;border-width:9px;border-top-width:12px;border-color:#b88e5e;background:#c9a579;box-shadow:0 18px 30px rgba(66,51,34,.14)}
+.i2-giftbox-body>span{background:#f7ecdc;border-radius:2px}.i2-giftbox-body img{width:94%;height:94%}
+.i2-curation-stage::before{width:66%;height:66%;left:17%;top:18%;background:rgba(255,255,255,.48)}
+.i2-curation-stage img[data-stage-index="0"]{width:46%;height:46%;left:7%;top:12%}.i2-curation-stage img[data-stage-index="1"]{width:43%;height:43%;right:6%;top:9%}.i2-curation-stage img[data-stage-index="2"]{width:44%;height:44%;left:27%;bottom:3%}.i2-curation-stage img[data-stage-index="3"]{width:37%;height:37%;left:4%;bottom:5%}.i2-curation-stage img[data-stage-index="4"]{width:37%;height:37%;right:4%;bottom:3%}
+
+/* Rich lifestyle windows: picnic, guide and philosophy are full editorial pages, not sparse popups. */
+.i2-rich-story-window{display:grid;gap:22px}
+.i2-rich-story-hero{display:grid;grid-template-columns:minmax(320px,.72fr) minmax(0,1.28fr);min-height:390px;border:1px solid rgba(18,63,49,.09);border-radius:30px;overflow:hidden;background:linear-gradient(135deg,#fffdf8,var(--paint-b));box-shadow:0 18px 42px rgba(39,51,44,.05)}
+.i2-rich-brand{grid-template-columns:minmax(0,1.24fr) minmax(320px,.76fr);background:linear-gradient(135deg,var(--paint-c),#fffaf1)}
+.i2-rich-story-copy{padding:44px 46px;display:flex;flex-direction:column;justify-content:center}.i2-rich-story-copy>small{font-size:9px;letter-spacing:.3em;color:#7f8b84}.i2-rich-story-copy h2{margin:13px 0 16px;font:500 38px/1.32 "Noto Serif KR","Nanum Myeongjo",Batang,serif;letter-spacing:-.05em}.i2-rich-story-copy>p{margin:0;color:#6e7972;font-size:14px;line-height:1.9;max-width:560px}
+.i2-rich-story-media{min-height:390px;background:#f4efe5}.i2-rich-story-media img{width:100%;height:100%;object-fit:cover;display:block}.i2-rich-brand .i2-rich-story-media img{object-fit:contain;background:#fff8ee;padding:12px}
+.i2-rich-subgrid,.i2-rich-guide-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.i2-rich-guide-card{display:grid;grid-template-columns:190px 1fr;gap:20px;align-items:center;min-height:220px;padding:18px;border:1px solid rgba(18,63,49,.09);border-radius:24px;text-align:left;background:#fffdf8;box-shadow:0 12px 30px rgba(39,51,44,.04);overflow:hidden}
+.i2-rich-guide-card:nth-child(3n+1){background:linear-gradient(145deg,#fffdf9,var(--paint-a))}.i2-rich-guide-card:nth-child(3n+2){background:linear-gradient(145deg,#fffdf9,var(--paint-c))}.i2-rich-guide-card:nth-child(3n+3){background:linear-gradient(145deg,#fffdf9,var(--paint-f))}
+.i2-rich-guide-photo{display:flex;align-items:center;justify-content:center;height:180px;border-radius:18px;background:rgba(255,255,255,.55)}.i2-rich-guide-photo img{width:100%;height:100%;object-fit:contain;padding:8px}
+.i2-rich-guide-copy small{font-size:9px;letter-spacing:.22em;color:#87918b}.i2-rich-guide-copy h3{margin:9px 0 8px;font:500 24px/1.35 "Noto Serif KR","Nanum Myeongjo",Batang,serif}.i2-rich-guide-copy p{margin:0 0 12px;color:#6e7972;font-size:12px;line-height:1.72}.i2-rich-guide-copy em{display:block;font-style:normal;font-size:10px;color:#8a918c}.i2-rich-guide-copy b{display:block;margin-top:13px;font-size:11px;color:#345c4d}
+.i2-philosophy-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}.i2-philosophy-card{padding:28px 24px;border:1px solid rgba(18,63,49,.08);border-radius:22px;background:#fffdf8}.i2-philosophy-card:nth-child(1){background:var(--paint-a)}.i2-philosophy-card:nth-child(2){background:var(--paint-c)}.i2-philosophy-card:nth-child(3){background:var(--paint-b)}.i2-philosophy-card:nth-child(4){background:var(--paint-f)}.i2-philosophy-card small{font-size:9px;letter-spacing:.2em;color:#8a918c}.i2-philosophy-card h3{margin:10px 0 8px;font:500 23px/1.35 "Noto Serif KR","Nanum Myeongjo",Batang,serif}.i2-philosophy-card p{margin:0;color:#67746d;font-size:12px;line-height:1.75}
+
+/* The main gift feature is a real premium box composition, not a toy-like flat tray. */
+.i2-gift-story{background:linear-gradient(135deg,#fbf6eb,#efe8d9)}.i2-gift-visual{background:linear-gradient(135deg,var(--paint-b),var(--paint-c));overflow:hidden}.i2-gift-visual::before{content:"";position:absolute;inset:0;background:linear-gradient(125deg,rgba(255,255,255,.46),transparent 42%)}
+.i2-gift-lid{right:9%;top:28px;width:36%;height:92px;background:linear-gradient(180deg,#1c5b47,#174839);border-radius:8px;z-index:2;box-shadow:0 14px 28px rgba(37,47,41,.12)}
+.i2-gift-lid img{width:76%;height:64%;filter:none;object-fit:contain}
+.i2-gift-tray{left:9%;bottom:18px;width:61%;height:196px;padding:11px;gap:6px;border:9px solid #b98d5c;border-top-width:13px;border-radius:5px;background:#c7a273;box-shadow:0 20px 35px rgba(72,54,34,.16);z-index:3}
+.i2-gift-tray>span{border-radius:2px;background:#f6ead7}.i2-gift-tray img{width:96%;height:96%}
+
+@media(max-width:1180px){.i2-window-layout{grid-template-columns:230px 1fr}.i2-editorial-fruit-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.i2-rich-guide-card{grid-template-columns:150px 1fr}.i2-rich-guide-photo{height:150px}}
+@media(max-width:900px){.i2-window-layout{grid-template-columns:1fr}.i2-window-intro{position:static;min-height:0}.i2-editorial-fruit-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.i2-rich-story-hero,.i2-rich-brand{grid-template-columns:1fr}.i2-rich-story-media{min-height:300px}.i2-rich-subgrid,.i2-rich-guide-grid{grid-template-columns:1fr}.i2-philosophy-grid{grid-template-columns:repeat(2,1fr)}.i2-shop-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:620px){.i2-editorial-fruit-grid{grid-template-columns:1fr 1fr}.i2-editorial-fruit-photo{height:150px}.i2-shop-grid{grid-template-columns:1fr}.i2-rich-guide-card{grid-template-columns:110px 1fr;padding:12px}.i2-rich-guide-photo{height:110px}.i2-philosophy-grid{grid-template-columns:1fr}.i2-rich-story-copy{padding:28px 24px}.i2-rich-story-copy h2{font-size:31px}}
+
+/* V60.61 — locked Home2 standard: premium merchandise-first windows, no crop-heavy product art */
+.i2-hero-art{background:linear-gradient(135deg,var(--hero-a),var(--hero-b) 66%,var(--hero-c));display:flex;align-items:center;justify-content:center}
+.i2-hero-art img{width:100%;height:100%;min-height:560px;object-fit:contain!important;object-position:center!important;background:transparent}
+.i2-card-open{display:none!important}
+.i2-card-main{height:100%}
+.i2-card-copy{padding-bottom:16px}
+
+/* Main gift feature: one finished product visual, not a DOM-built toy tray. */
+.i2-gift-visual-photo{display:flex;align-items:center;justify-content:center;padding:18px 28px;background:linear-gradient(135deg,var(--paint-b),var(--paint-c))!important}
+.i2-gift-visual-photo::before{display:none!important}
+.i2-gift-visual-photo>img{display:block;width:100%;height:100%;max-height:340px;object-fit:contain;filter:none}
+
+/* Main philosophy clock must remain whole. */
+.i2-editorial .i2-clock-image{padding:14px;background:linear-gradient(145deg,#fffaf1,var(--paint-b))!important}
+.i2-editorial .i2-clock-image img{object-fit:contain!important;object-position:center!important;padding:0!important;border-radius:16px}
+
+/* Full-page menu windows: catalog rhythm, subtle paint fields, generous white space. */
+.i2-mega{background:linear-gradient(145deg,#fbfaf6 0%,#f8f4eb 100%)}
+.i2-mega-head,.i2-mega-content{width:min(1500px,100%)}
+.i2-window-layout{grid-template-columns:292px minmax(0,1fr);gap:34px}
+.i2-window-intro{min-height:660px;padding:32px 30px;background:linear-gradient(155deg,rgba(255,255,255,.9),rgba(247,242,231,.96));box-shadow:0 22px 54px rgba(37,51,43,.045)}
+.i2-editorial-fruit-grid{gap:18px}
+.i2-editorial-fruit-card{border-radius:26px;box-shadow:0 15px 34px rgba(40,55,47,.042)}
+.i2-editorial-fruit-photo{height:220px;padding:18px}.i2-editorial-fruit-photo img{object-fit:contain!important}
+.i2-editorial-fruit-copy{padding:18px 20px 2px}.i2-editorial-fruit-copy h3{font-size:17px}.i2-editorial-fruit-copy strong{font-size:18px}
+
+/* Gift and curation cards use finished, high-resolution merchandise visuals. */
+.i2-shop-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+.i2-shop-card{border-radius:28px;box-shadow:0 16px 38px rgba(39,51,44,.05);border:1px solid rgba(18,63,49,.085);overflow:hidden}
+.i2-shop-card:hover{transform:translateY(-3px);box-shadow:0 24px 52px rgba(39,51,44,.085)}
+.i2-shop-visual.i2-shop-photo{height:330px;display:flex;align-items:center;justify-content:center;padding:10px 12px;background:rgba(255,255,255,.28)!important}
+.i2-shop-photo img{display:block;width:100%;height:100%;object-fit:contain!important;object-position:center!important}
+.i2-gift-product .i2-shop-photo{padding:8px 10px 0}
+.i2-curation-product .i2-shop-photo{padding:10px}
+.i2-shop-body{padding:22px 24px 24px}.i2-shop-body h3{font-size:25px;line-height:1.35}.i2-shop-body>p{min-height:52px;font-size:12.5px;line-height:1.8}.i2-shop-meta{padding-top:14px;margin-top:14px;border-top:1px solid rgba(18,63,49,.08)}
+.i2-shop-foot{margin-top:18px}
+
+/* Remove legacy CSS-built gift/collage visual machinery from the final cards. */
+.i2-giftbox-stage,.i2-giftbox-lid,.i2-giftbox-body,.i2-curation-stage{display:none!important}
+
+/* Lifestyle and guide windows: images are full compositions and never broken/cropped as product art. */
+.i2-rich-story-hero{min-height:430px}
+.i2-rich-story-media{min-height:430px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.i2-rich-picnic .i2-rich-story-media img{object-fit:cover;object-position:center}
+.i2-rich-brand .i2-rich-story-media{padding:18px;background:linear-gradient(145deg,#fffaf0,var(--paint-b))}
+.i2-rich-brand .i2-rich-story-media img{width:100%;height:100%;object-fit:contain!important;object-position:center!important;padding:0;border-radius:20px}
+.i2-rich-subgrid,.i2-rich-guide-grid{gap:20px}
+.i2-rich-guide-card{grid-template-columns:210px 1fr;min-height:238px;border-radius:26px;padding:16px;box-shadow:0 14px 32px rgba(39,51,44,.045)}
+.i2-rich-guide-photo{height:200px;padding:6px;background:rgba(255,255,255,.45)}
+.i2-rich-guide-photo img{width:100%;height:100%;object-fit:contain!important;padding:0;border-radius:14px}
+.i2-rich-guide-copy h3{font-size:25px}
+
+/* Glass detail: only this layer is translucent; merchandise visual stays whole. */
+.i2-detail{background:rgba(255,255,255,.60);backdrop-filter:blur(30px) saturate(125%)}
+.i2-detail-visual.is-product-visual{padding:20px;background:rgba(255,255,255,.40)}
+.i2-detail-visual.is-product-visual img{width:100%;height:100%;max-height:520px;object-fit:contain!important;object-position:center!important;border-radius:18px}
+.i2-detail-visual.is-single img{object-fit:contain!important}
+
+/* Consistent button focus state: no persistent rectangular active outline. */
+.i2-nav button:focus:not(:focus-visible),.i2-card-main:focus:not(:focus-visible),.i2-shop-card:focus:not(:focus-visible),.i2-rich-guide-card:focus:not(:focus-visible){outline:none}
+
+@media(max-width:1180px){
+  .i2-window-layout{grid-template-columns:240px 1fr;gap:22px}
+  .i2-shop-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .i2-shop-visual.i2-shop-photo{height:300px}
+  .i2-rich-guide-card{grid-template-columns:170px 1fr}.i2-rich-guide-photo{height:170px}
+}
+@media(max-width:900px){
+  .i2-window-layout{grid-template-columns:1fr}.i2-window-intro{min-height:0}
+  .i2-shop-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .i2-shop-visual.i2-shop-photo{height:270px}
+  .i2-rich-brand .i2-rich-story-media{min-height:360px}
+}
+@media(max-width:620px){
+  .i2-shop-grid{grid-template-columns:1fr}.i2-shop-visual.i2-shop-photo{height:270px}
+  .i2-rich-guide-card{grid-template-columns:120px 1fr}.i2-rich-guide-photo{height:120px}
+  .i2-gift-visual-photo{padding:14px}.i2-gift-visual-photo>img{max-height:280px}
+  .i2-hero-art img{min-height:330px}
+}
