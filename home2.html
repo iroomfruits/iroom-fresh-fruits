@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>이룸 fresh fruits — Home2 V60.70</title>
+<style>
+:root{--green:#0e4d3d;--paper:#fffdf8;--cream:#f6f0e7;--line:#e5ddd2;--shadow:0 30px 90px rgba(29,39,34,.24)}
+*{box-sizing:border-box}html,body{margin:0;background:#f5efe6;color:var(--green);font-family:"Pretendard","Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif}button,input{font:inherit}button{cursor:pointer}body.lock{overflow:hidden}
+.stage{position:relative;width:100%;max-width:1672px;margin:0 auto;background:#f5efe6;box-shadow:0 0 0 1px rgba(20,70,54,.03)}
+.page-img{display:block;width:100%;height:auto;user-select:none;-webkit-user-drag:none}
+.hotspot{position:absolute;border:0;background:transparent;padding:0;border-radius:9px;outline:0}
+.hotspot:focus-visible{outline:3px solid rgba(11,91,68,.58);outline-offset:2px}
+.hotspot:hover{background:rgba(255,255,255,.025)}
+/* top nav */
+.h-fruit{left:33.5%;top:0.5%;width:5.4%;height:4.3%}.h-gift{left:39.1%;top:.5%;width:4.8%;height:4.3%}.h-curation{left:44.1%;top:.5%;width:6.8%;height:4.3%}.h-picnic{left:50.7%;top:.5%;width:5.8%;height:4.3%}.h-guide{left:56.7%;top:.5%;width:5.8%;height:4.3%}.h-story{left:62.8%;top:.5%;width:6.5%;height:4.3%}
+.h-search{left:77.8%;top:.5%;width:3%;height:4.3%}.h-account{left:80.7%;top:.5%;width:2.4%;height:4.3%}.h-cart{left:83%;top:.5%;width:2.6%;height:4.3%}
+.h-hero{left:15%;top:28.2%;width:12%;height:5.3%}.h-all{left:4.9%;top:50.4%;width:8.5%;height:5.0%}.h-giftcta{left:5.5%;top:74.3%;width:12%;height:4.5%}.h-picniccta{left:5.5%;top:92.4%;width:12%;height:4.3%}.h-storycta{left:51%;top:92.4%;width:12%;height:4.3%}
+.product-hit{top:35.6%;height:20.3%}.p1{left:16.0%;width:9.3%}.p2{left:25.4%;width:9.3%}.p3{left:34.9%;width:9.3%}.p4{left:44.4%;width:9.3%}.p5{left:53.9%;width:9.3%}.p6{left:63.4%;width:9.3%}.p7{left:72.9%;width:9.3%}
+
+/* small season control only appears in account popup, keeping page itself pixel-locked */
+.overlay{position:fixed;inset:0;z-index:500;background:rgba(25,35,30,.34);display:grid;place-items:center;padding:26px;opacity:1;transition:.15s}
+.overlay[hidden]{display:none}.dialog{position:relative;width:min(1160px,92vw);max-height:88vh;overflow:auto;border-radius:26px;background:#fffdf9;border:1px solid rgba(14,77,61,.12);box-shadow:var(--shadow)}
+.close{position:absolute;right:18px;top:18px;width:42px;height:42px;border-radius:50%;border:0;background:#fff;box-shadow:0 8px 25px rgba(25,35,30,.12);font-size:27px;color:var(--green);z-index:3}
+.dhead{padding:40px 46px 18px}.kicker{font-family:Georgia,serif;font-size:11px;letter-spacing:.23em;color:#78847e}.dhead h2{font-family:"Noto Serif KR","Nanum Myeongjo",Batang,serif;font-size:42px;font-weight:500;letter-spacing:-.04em;margin:10px 0 8px}.dhead p{margin:0;color:#65716b;line-height:1.65}.dbody{padding:12px 46px 44px}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.card{overflow:hidden;border-radius:16px;border:1px solid #e7ded2;background:#fff9f2;padding:0;text-align:left}.card:nth-child(3n+2){background:#fff9e6}.card:nth-child(3n){background:#f1f5ed}.card img{display:block;width:100%;height:138px;object-fit:cover;border-bottom:1px solid #eee4d7}.card .b{padding:11px 12px 13px}.card strong{display:block;font-size:16px}.card small{display:block;color:#7c847f;line-height:1.55;margin:4px 0}.price{font-size:18px;font-weight:900}
+.cols{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.box{border:1px solid #e8dfd3;border-radius:18px;padding:22px;background:#fffaf3}.box h3{font-family:"Noto Serif KR","Nanum Myeongjo",Batang,serif;font-size:26px;font-weight:500;margin:7px 0 8px}.box p{font-size:13px;color:#65716b;line-height:1.7;margin:0}.box button{margin-top:16px}
+.primary{height:43px;border:0;border-radius:5px;background:#0e5a46;color:#fff;padding:0 20px;font-weight:800}.outline{height:42px;border:1px solid #0e5a46;border-radius:5px;background:#fff;color:#0e5a46;padding:0 18px;font-weight:800}
+.detail{display:grid;grid-template-columns:1.05fr .95fr;min-height:580px}.detail-photo{background:#f3ede4;display:flex;align-items:center;justify-content:center;padding:34px}.detail-photo img{width:100%;height:100%;object-fit:contain;border-radius:18px}.detail-info{padding:52px 44px}.detail-info h2{font-family:"Noto Serif KR","Nanum Myeongjo",Batang,serif;font-size:44px;font-weight:500;margin:8px 0 12px}.detail-info p{color:#647069;line-height:1.75}.meta{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:22px 0}.meta div{border:1px solid #e8dfd2;border-radius:10px;padding:10px 12px;font-size:12px}.qty{display:flex;gap:7px;align-items:center;margin:20px 0}.qty button{width:36px;height:36px;border:1px solid #ddd4c8;background:#fff;border-radius:9px}.qty input{width:54px;height:36px;text-align:center;border:1px solid #ddd4c8;border-radius:9px}.actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}.actions button{height:48px;font-weight:850;border-radius:7px}.cartadd{border:1px solid #0e5a46;background:#fff;color:#0e5a46}.buy{border:0;background:#0e5a46;color:#fff}
+.season-row{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:18px}.season-row button{height:42px;border-radius:999px;border:1px solid #ddd5c9;background:#fff;font-weight:800}.season-row button.active{background:#0e5a46;color:#fff;border-color:#0e5a46}
+.search{width:100%;height:48px;border:1px solid #ded5c9;border-radius:12px;padding:0 14px}.search-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}
+.cartline{display:grid;grid-template-columns:90px 1fr auto;gap:12px;align-items:center;border:1px solid #e7ded2;border-radius:14px;padding:10px;margin-bottom:10px}.cartline img{width:90px;height:70px;object-fit:cover;border-radius:10px}.cartline small{display:block;color:#76807b;margin-top:4px}.cartline button{border:0;border-radius:8px;background:#f2ece3;padding:8px 10px}
+.toast{position:fixed;z-index:700;left:50%;bottom:28px;transform:translateX(-50%);background:#153e32;color:#fff;padding:11px 16px;border-radius:999px;font-size:12px;box-shadow:0 12px 30px rgba(0,0,0,.16)}.toast[hidden]{display:none}
+.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media(max-width:900px){.stage{min-width:980px}.mobile-scroll{overflow-x:auto}.dialog{width:95vw}.cards,.search-grid{grid-template-columns:repeat(2,1fr)}.cols{grid-template-columns:1fr}.detail{grid-template-columns:1fr}.detail-photo{height:280px}.detail-info{padding:28px 24px}}
+
+/* V60.71: restore the original full-page editorial menu-window direction */
+.dialog.editorial{width:min(1540px,95vw);height:min(850px,90vh);max-height:90vh;overflow:hidden;background:#f4eadf}
+.dialog.editorial .dhead{display:none}
+.dialog.editorial .dbody{padding:0;height:100%;overflow:auto}
+.menu-page{min-height:100%;padding:26px;background:
+ radial-gradient(circle at 12% 10%,rgba(255,255,255,.76),transparent 28%),
+ radial-gradient(circle at 92% 12%,rgba(255,255,255,.40),transparent 24%),
+ linear-gradient(128deg,#f4e6dc 0%,#f8f2e9 46%,#eedcd3 100%);position:relative}
+.menu-page:before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.22;background:
+ repeating-linear-gradient(12deg,rgba(105,82,61,.06) 0 1px,transparent 1px 12px),
+ repeating-linear-gradient(98deg,rgba(255,255,255,.28) 0 2px,transparent 2px 22px)}
+.menu-inner{position:relative;z-index:1;height:100%}
+.menu-side{background:rgba(255,253,248,.82);border:1px solid rgba(14,77,61,.08);border-radius:22px;padding:32px 30px;display:flex;flex-direction:column}
+.menu-logo{width:190px;height:58px;object-fit:contain;object-position:left center;margin-bottom:26px}
+.menu-side h2{font-family:"Noto Serif KR","Nanum Myeongjo",Batang,serif;font-size:clamp(38px,3vw,56px);font-weight:500;line-height:1.12;letter-spacing:-.045em;margin:11px 0 16px}
+.menu-side p{font-size:14px;line-height:1.78;color:#617069;margin:0}
+.menu-side .index-list{margin-top:26px;border-top:1px solid rgba(14,77,61,.14)}
+.index-row{display:grid;grid-template-columns:44px 1fr;gap:10px;align-items:start;padding:16px 0;border-bottom:1px solid rgba(14,77,61,.12);font-size:13px}
+.index-row b{font-family:Georgia,serif;color:#a6754c;letter-spacing:.08em}
+.index-row strong{display:block;font-size:14px;margin-bottom:4px}
+.index-row span{color:#7b837e;font-size:12px}
+.editorial-card{overflow:hidden;border:1px solid rgba(14,77,61,.08);border-radius:17px;background:#fffaf2;min-width:0}
+.editorial-card:nth-child(3n+2){background:#fff7df}.editorial-card:nth-child(3n){background:#f0f5ec}
+.editorial-card img{width:100%;height:58%;object-fit:cover;display:block;border-bottom:1px solid rgba(14,77,61,.06)}
+.editorial-card .ecopy{padding:17px 18px 18px}
+.editorial-card small{font-family:Georgia,serif;letter-spacing:.20em;color:#89918d;font-size:9px}
+.editorial-card h3{font-family:"Noto Serif KR","Nanum Myeongjo",Batang,serif;font-size:25px;font-weight:500;letter-spacing:-.035em;margin:7px 0 8px}
+.editorial-card p{font-size:12px;line-height:1.65;color:#66736d;margin:0}
+.editorial-card button{margin-top:12px;border:0;background:transparent;color:#0e5a46;font-weight:850;padding:0}
+.fruit-page,.curation-page,.gift-page,.guide-page,.story-page{display:grid;grid-template-columns:300px 1fr;gap:16px;min-height:760px}
+.fruit-cards{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:1fr;gap:12px}
+.fruit-cards .editorial-card{cursor:pointer}
+.fruit-cards .editorial-card img{height:58%}
+.curation-cards,.gift-cards{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,1fr);gap:12px}
+.curation-cards .editorial-card img,.gift-cards .editorial-card img{height:57%}
+.picnic-page{display:grid;grid-template-rows:1.2fr .8fr;gap:12px;min-height:760px}
+.picnic-hero{display:grid;grid-template-columns:34% 66%;overflow:hidden;border-radius:22px;background:rgba(255,253,248,.86);border:1px solid rgba(14,77,61,.08)}
+.picnic-hero .pcopy{padding:38px 36px;display:flex;flex-direction:column;justify-content:center}
+.picnic-hero .pcopy h2{font-family:"Noto Serif KR","Nanum Myeongjo",Batang,serif;font-size:48px;font-weight:500;line-height:1.15;letter-spacing:-.045em;margin:10px 0 15px}
+.picnic-hero .pcopy p{color:#65726c;line-height:1.75}
+.picnic-hero img{width:100%;height:100%;object-fit:cover}
+.picnic-bottom{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.picnic-bottom .editorial-card img{height:60%}
+.guide-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.guide-cards .editorial-card img{height:49%}
+.story-canvas{display:grid;grid-template-columns:1.25fr .75fr;gap:12px}
+.story-main,.story-note{border-radius:20px;overflow:hidden;background:rgba(255,253,248,.88);border:1px solid rgba(14,77,61,.08)}
+.story-main img{width:100%;height:56%;object-fit:cover;display:block}
+.story-main .story-copy,.story-note{padding:28px}
+.story-main h3,.story-note h3{font-family:"Noto Serif KR","Nanum Myeongjo",Batang,serif;font-size:34px;font-weight:500;letter-spacing:-.04em;margin:6px 0 10px}
+.story-main p,.story-note p{color:#65716c;line-height:1.75;font-size:13px}
+.story-note img{width:100%;height:250px;object-fit:cover;border-radius:15px;margin-top:16px}
+.menu-page .tiny-action{display:inline-flex;margin-top:18px;align-items:center;gap:8px;border:1px solid #0e5a46;border-radius:4px;background:rgba(255,255,255,.72);height:40px;padding:0 16px;color:#0e5a46;font-weight:800}
+@media(max-width:980px){
+ .dialog.editorial{width:97vw;height:92vh;max-height:92vh}
+ .fruit-page,.curation-page,.gift-page,.guide-page,.story-page{grid-template-columns:240px 1fr;min-height:760px}
+ .fruit-cards{grid-template-columns:repeat(2,1fr)}
+ .curation-cards,.gift-cards{grid-template-columns:repeat(2,1fr);grid-template-rows:auto}
+ .picnic-hero{grid-template-columns:1fr}.picnic-hero img{height:320px}.picnic-bottom{grid-template-columns:1fr}
+ .guide-cards{grid-template-columns:1fr}.story-canvas{grid-template-columns:1fr}
+}
+
+
+/* V60.72 — lock menu windows to the originally approved one-page image structure */
+.dialog.menu-lock{width:min(1672px,98vw);height:auto;max-height:94vh;overflow:hidden;border-radius:0;background:transparent;border:0;box-shadow:none}
+.dialog.menu-lock .dhead{display:none!important}
+.dialog.menu-lock .dbody{padding:0!important;background:transparent}
+.menu-lock-wrap{position:relative;width:100%;aspect-ratio:1672/941;overflow:hidden}
+.menu-lock-wrap>img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block}
+.menu-lock .close{right:2.25%;top:4.0%;background:rgba(255,255,252,.96)}
+.menu-hot{position:absolute;border:0;background:transparent;padding:0;border-radius:12px}
+.menu-hot:focus-visible{outline:3px solid rgba(13,90,70,.55)}
+.menu-hot.nav1{left:33.3%;top:.4%;width:5.8%;height:5.2%}.menu-hot.nav2{left:39.2%;top:.4%;width:5.3%;height:5.2%}.menu-hot.nav3{left:44.6%;top:.4%;width:7%;height:5.2%}.menu-hot.nav4{left:51.5%;top:.4%;width:6%;height:5.2%}.menu-hot.nav5{left:57.5%;top:.4%;width:6%;height:5.2%}.menu-hot.nav6{left:63.6%;top:.4%;width:7%;height:5.2%}
+.menu-prod{position:absolute;border:0;background:transparent;border-radius:14px}
+@media(max-width:900px){.dialog.menu-lock{width:99vw;max-height:92vh}.menu-lock-wrap{min-width:0}}
+
+</style></head>
+<body>
+<div class="mobile-scroll"><main class="stage" id="stage">
+<img class="page-img" id="pageImage" src="./assets/home2-v73/page-autumn.webp" alt="이룸 fresh fruits 4계절 홈페이지">
+<h1 class="sr">이룸 fresh fruits 계절별 프리미엄 과일</h1>
+<button class="hotspot h-fruit" data-menu="fruit" aria-label="제철 과일"></button><button class="hotspot h-gift" data-menu="gift" aria-label="선물세트"></button><button class="hotspot h-curation" data-menu="curation" aria-label="과일 큐레이션"></button><button class="hotspot h-picnic" data-menu="picnic" aria-label="피크닉 루틴"></button><button class="hotspot h-guide" data-menu="guide" aria-label="과일 가이드"></button><button class="hotspot h-story" data-menu="story" aria-label="이룸의 이야기"></button>
+<button class="hotspot h-search" data-search aria-label="검색"></button><button class="hotspot h-account" data-menu="account" aria-label="마이 이룸"></button><button class="hotspot h-cart" data-cart aria-label="장바구니"></button>
+<button class="hotspot h-hero" data-menu="fruit" aria-label="계절 과일 보기"></button><button class="hotspot h-all" data-menu="fruit" aria-label="전체 상품 보기"></button><button class="hotspot h-giftcta" data-menu="gift" aria-label="선물세트 보러가기"></button><button class="hotspot h-picniccta" data-menu="picnic" aria-label="피크닉 아이디어 보기"></button><button class="hotspot h-storycta" data-menu="story" aria-label="이룸 이야기 보기"></button>
+<button class="hotspot product-hit p1" data-pi="0" aria-label="첫 번째 상품"></button><button class="hotspot product-hit p2" data-pi="1" aria-label="두 번째 상품"></button><button class="hotspot product-hit p3" data-pi="2" aria-label="세 번째 상품"></button><button class="hotspot product-hit p4" data-pi="3" aria-label="네 번째 상품"></button><button class="hotspot product-hit p5" data-pi="4" aria-label="다섯 번째 상품"></button><button class="hotspot product-hit p6" data-pi="5" aria-label="여섯 번째 상품"></button><button class="hotspot product-hit p7" data-pi="6" aria-label="일곱 번째 상품"></button>
+</main></div>
+
+<div class="overlay" id="overlay" hidden><section class="dialog" id="mainDialog" role="dialog" aria-modal="true" aria-labelledby="title"><button class="close" data-close>×</button><header class="dhead"><small class="kicker" id="kicker"></small><h2 id="title"></h2><p id="lead"></p></header><div class="dbody" id="body"></div></section></div>
+<div class="overlay" id="detailOverlay" hidden><section class="dialog detail" role="dialog" aria-modal="true" aria-labelledby="detailTitle"><button class="close" data-close>×</button><div class="detail-photo"><img id="detailImg" alt=""></div><div class="detail-info"><small class="kicker" id="detailKick"></small><h2 id="detailTitle"></h2><p id="detailDesc"></p><div class="meta"><div id="origin"></div><div id="pack"></div></div><div class="price" id="detailPrice"></div><div class="qty"><button data-q="-1">−</button><input id="qty" value="1" inputmode="numeric"><button data-q="1">＋</button></div><div class="actions"><button class="cartadd" data-add>장바구니 담기</button><button class="buy" data-buy>BUY NOW</button></div></div></section></div>
+<div class="toast" id="toast" hidden></div>
+<script>
+(()=>{'use strict';
+const DATA={"spring": {"label": "봄", "products": [["strawberry", "딸기", "국내산", "500g (15~20과)", "26,000원", "봄의 산뜻한 향과 달콤함을 담은 제철 딸기.", "spring-strawberry.webp"], ["white-strawberry", "화이트딸기", "국내산", "500g (12~16과)", "48,000원", "은은한 단맛과 부드러운 향의 프리미엄 화이트딸기.", "spring-white-strawberry.webp"], ["cherry", "체리", "미국산", "500g (특대과)", "34,000원", "탱글한 식감과 선명한 단맛이 좋은 체리.", "spring-cherry.webp"], ["shine-muscat", "샤인머스캣", "국내산", "2kg (3~4송이)", "46,000원", "향긋하고 높은 당도의 프리미엄 샤인머스캣.", "spring-shine-muscat.webp"], ["grapefruit", "자몽", "미국산", "3kg (6~8과)", "32,000원", "산뜻한 산미와 깨끗한 풍미의 자몽.", "spring-grapefruit.webp"], ["hallabong", "한라봉", "제주산", "3kg (6~8과)", "38,000원", "풍부한 감귤향과 과즙을 즐기는 제주 한라봉.", "spring-hallabong.webp"], ["kiwi", "키위", "국내산", "2kg (16~20과)", "28,000원", "상큼한 산미와 부드러운 과육의 키위.", "spring-kiwi.webp"]]}, "summer": {"label": "여름", "products": [["watermelon", "수박", "국내산", "6~8kg (1통)", "32,000원", "아삭하고 시원한 과즙이 풍부한 여름 수박.", "summer-watermelon.webp"], ["peach", "복숭아", "국내산", "2kg (6~8과)", "34,000원", "부드러운 과육과 향긋한 단맛의 제철 복숭아.", "summer-peach.webp"], ["melon", "멜론", "국내산", "2수 (2kg 내외)", "42,000원", "은은한 향과 촉촉한 과육의 프리미엄 멜론.", "summer-melon.webp"], ["shine-muscat", "샤인머스캣", "국내산", "2kg (3~4송이)", "46,000원", "청포도 향과 달콤함이 선명한 샤인머스캣.", "summer-shine-muscat.webp"], ["plum", "자두", "국내산", "1.5kg (12~15과)", "24,000원", "새콤달콤하고 탱글한 제철 자두.", "summer-plum.webp"], ["apricot", "살구", "국내산", "1kg (12~16과)", "26,000원", "향긋하고 산뜻한 단맛을 즐기는 살구.", "summer-apricot.webp"], ["nectarine", "천도복숭아", "국내산", "2kg (7~9과)", "32,000원", "산뜻한 향과 탄탄한 식감의 천도복숭아.", "summer-nectarine.webp"]]}, "autumn": {"label": "가을", "products": [["apple", "사과", "국내산", "2.5kg (6~10과)", "32,000원", "아삭한 식감과 맑은 단맛이 오래 이어지는 가을 사과.", "autumn-apple.webp"], ["pear", "배", "국내산", "3kg (5~7과)", "36,000원", "시원한 과즙과 깨끗한 단맛을 즐기는 제철 배.", "autumn-pear.webp"], ["shine-muscat", "샤인머스캣", "국내산", "2kg (3~4송이)", "46,000원", "가을에 당도와 향이 더욱 선명해지는 샤인머스캣.", "autumn-shine-muscat.webp"], ["persimmon", "감", "국내산", "2.5kg (8~12과)", "28,000원", "부드럽고 깊은 단맛이 매력적인 가을 감.", "autumn-persimmon.webp"], ["pomegranate", "석류", "이스라엘", "2kg (5~7과)", "40,000원", "붉은 알과 산뜻한 풍미가 매력적인 석류.", "autumn-pomegranate.webp"], ["fig", "무화과", "국내산", "1.5kg (12~16과)", "32,000원", "부드러운 과육과 은은한 단맛의 무화과.", "autumn-fig.webp"], ["chestnut", "밤", "국내산", "1kg (대과)", "24,000원", "고소하고 포근한 풍미를 즐기는 가을 생밤.", "autumn-chestnut.webp"]]}, "winter": {"label": "겨울", "products": [["strawberry", "딸기", "국내산", "500g (특/1팩)", "19,000원", "선명한 향과 달콤한 과즙의 겨울 딸기.", "winter-strawberry.webp"], ["hallabong", "한라봉", "제주산", "2.5kg (6~10과)", "38,000원", "풍부한 향과 과즙이 특징인 제주 한라봉.", "winter-hallabong.webp"], ["redhyang", "레드향", "제주산", "2kg (5~8과)", "42,000원", "진한 감귤향과 깊은 단맛의 레드향.", "winter-redhyang.webp"], ["cheonhyehyang", "천혜향", "제주산", "2kg (5~8과)", "36,000원", "부드러운 과육과 향긋한 단맛의 천혜향.", "winter-cheonhyehyang.webp"], ["apple", "사과", "국내산", "2.5kg (6~10과)", "32,000원", "차가운 계절에 더욱 아삭한 겨울 사과.", "winter-apple.webp"], ["pear", "배", "국내산", "3kg (6~8과)", "36,000원", "시원한 과즙과 은은한 단맛의 겨울 배.", "winter-pear.webp"], ["mandarin", "감귤", "제주산", "3kg (특/로얄과)", "28,000원", "상큼한 향과 달콤한 과즙의 제주 감귤.", "winter-mandarin.webp"]]}}, A='./assets/home2-v73/', seasons=['spring','summer','autumn','winter'];
+let season='autumn',mode='auto',current=null,cart=[],timer;
+const $=(q,r=document)=>r.querySelector(q), $$=(q,r=document)=>[...r.querySelectorAll(q)];
+const get=k=>{try{return localStorage.getItem(k)}catch(_){return null}}, set=(k,v)=>{try{localStorage.setItem(k,v)}catch(_){}}, del=k=>{try{localStorage.removeItem(k)}catch(_){}};
+const detect=()=>{let m=new Date().getMonth()+1;return m>=3&&m<=5?'spring':m>=6&&m<=8?'summer':m>=9&&m<=11?'autumn':'winter'};
+function normalize(){for(const s of seasons)DATA[s].products=DATA[s].products.map(p=>({slug:p[0],name:p[1],origin:p[2],pack:p[3],price:p[4],desc:p[5],image:p[6],season:s,id:s+':'+p[0]}))}normalize();
+const products=()=>DATA[season].products, all=()=>seasons.flatMap(s=>DATA[s].products), find=id=>all().find(p=>p.id===id);
+function setSeason(s,manual=false){if(s==='auto'){mode='auto';del('iroom-v70-season');s=detect()}else{mode=manual?'manual':'auto';if(manual)set('iroom-v70-season',s)}season=s;$('#pageImage').src=A+'page-'+s+'.png';$('#pageImage').alt='이룸 fresh fruits '+DATA[s].label+' 홈페이지';}
+function open(which='overlay'){$('#overlay').hidden=true;$('#detailOverlay').hidden=true;$('#'+which).hidden=false;document.body.classList.add('lock')}
+function close(){ $('#overlay').hidden=true;$('#detailOverlay').hidden=true;document.body.classList.remove('lock')}
+function toast(m){let t=$('#toast');t.textContent=m;t.hidden=false;clearTimeout(timer);timer=setTimeout(()=>t.hidden=true,1800)}
+function card(p){return `<button class="card" data-prod="${p.id}"><img src="${A+p.image}" alt="${p.name}"><span class="b"><strong>${p.name}</strong><small>프리미엄 · ${p.origin}<br>${p.pack}</small><span class="price">${p.price}</span></span></button>`}
+
+
+function setDialogMode(mode){
+ const d=$('#mainDialog'), h=$('.dhead',d);
+ d.classList.toggle('editorial',mode==='editorial');
+ d.classList.toggle('menu-lock',mode==='lock');
+ if(h)h.style.display=mode==='standard'?'block':'none';
+}
+function lockedMenuHTML(t){
+ let img=A+`menu-${t}-${season}.webp`;
+ let extra='';
+ // The approved seasonal-fruit page has 7 clickable product areas in the 4x2 grid.
+ if(t==='fruit'){
+   const coords=[
+    [26.0,13.0,16.4,38.0],[43.2,13.0,16.4,38.0],[60.4,13.0,16.4,38.0],[77.6,13.0,16.4,38.0],
+    [26.0,53.0,16.4,38.0],[43.2,53.0,16.4,38.0],[60.4,53.0,16.4,38.0]
+   ];
+   extra=coords.map((c,i)=>`<button class="menu-prod" data-pi="${i}" aria-label="${products()[i]?.name||'상품'}" style="left:${c[0]}%;top:${c[1]}%;width:${c[2]}%;height:${c[3]}%"></button>`).join('');
+ }
+ if(t==='gift'){
+   const coords=[[26,13,22,37],[49.2,13,22,37],[72.4,13,22,37],[26,53,22,37],[49.2,53,22,37],[72.4,53,22,37]];
+   extra=coords.map((c,i)=>`<button class="menu-prod" data-toast="선물 구성 ${i+1} 상세 상담을 준비 중입니다." style="left:${c[0]}%;top:${c[1]}%;width:${c[2]}%;height:${c[3]}%"></button>`).join('');
+ }
+ if(t==='curation'){
+   const coords=[[26,13,22,37],[49.2,13,22,37],[72.4,13,22,37],[26,53,22,37],[49.2,53,22,37],[72.4,53,22,37]];
+   extra=coords.map((c,i)=>`<button class="menu-prod" data-toast="큐레이션 ${i+1} 구성을 준비 중입니다." style="left:${c[0]}%;top:${c[1]}%;width:${c[2]}%;height:${c[3]}%"></button>`).join('');
+ }
+ if(t==='picnic'){
+   const coords=[[10,60,27,34],[39,60,27,34],[68,60,27,34]];
+   extra=coords.map((c,i)=>`<button class="menu-prod" data-toast="피크닉 제안 ${i+1}을 준비 중입니다." style="left:${c[0]}%;top:${c[1]}%;width:${c[2]}%;height:${c[3]}%"></button>`).join('');
+ }
+ return `<div class="menu-lock-wrap"><img src="${img}" alt="${DATA[season].label} ${t} 페이지">
+ <button class="menu-hot nav1" data-menu="fruit" aria-label="제철 과일"></button>
+ <button class="menu-hot nav2" data-menu="gift" aria-label="선물세트"></button>
+ <button class="menu-hot nav3" data-menu="curation" aria-label="과일 큐레이션"></button>
+ <button class="menu-hot nav4" data-menu="picnic" aria-label="피크닉 루틴"></button>
+ <button class="menu-hot nav5" data-menu="guide" aria-label="과일 가이드"></button>
+ <button class="menu-hot nav6" data-menu="story" aria-label="이룸의 이야기"></button>${extra}</div>`;
+}
+function showMenu(t){
+ if(t==='account'){
+   setDialogMode('standard');
+   $('#kicker').textContent='MY IROOM';$('#title').textContent='계절 미리보기 · MY IROOM';$('#lead').textContent='메인 화면 디자인을 바꾸지 않도록 계절 선택은 이 창 안에 넣었습니다.';
+   $('#body').innerHTML=`<div class="box"><h3>계절 미리보기</h3><p>자동은 현재 월에 맞춰 봄 3–5월 · 여름 6–8월 · 가을 9–11월 · 겨울 12–2월로 전환합니다.</p><div class="season-row"><button data-season="spring">봄</button><button data-season="summer">여름</button><button data-season="autumn">가을</button><button data-season="winter">겨울</button><button data-season="auto">자동</button></div></div>`;
+   syncSeasonButtons();open();return;
+ }
+ setDialogMode('lock');
+ $('#body').innerHTML=lockedMenuHTML(t);
+ open();
+}
+function detail(p){current=p;$('#detailImg').src=A+p.image;$('#detailKick').textContent=DATA[p.season].label+' SEASON';$('#detailTitle').textContent=p.name;$('#detailDesc').textContent=p.desc;$('#origin').textContent='산지 · '+p.origin;$('#pack').textContent='구성 · '+p.pack;$('#detailPrice').textContent=p.price;$('#qty').value=1;open('detailOverlay')}
+function syncSeasonButtons(){$$('[data-season]').forEach(b=>b.classList.toggle('active',(mode==='auto'&&b.dataset.season==='auto')||(mode==='manual'&&b.dataset.season===season)))}
+function search(){ setDialogMode('standard');$('#kicker').textContent='SEARCH';$('#title').textContent='과일 검색';$('#lead').textContent='봄·여름·가을·겨울 전체 상품에서 검색합니다.';$('#body').innerHTML=`<input class="search" id="searchInput" placeholder="예: 딸기, 사과, 샤인머스캣"><div class="search-grid" id="results">${all().slice(0,16).map(card).join('')}</div>`;open();setTimeout(()=>$('#searchInput').focus(),40)}
+function doSearch(v){let q=v.trim().toLowerCase(), arr=all().filter(p=>!q||p.name.toLowerCase().includes(q)||p.origin.toLowerCase().includes(q));$('#results').innerHTML=arr.map(card).join('')||'<p>검색 결과가 없습니다.</p>'}
+function saveCart(){try{localStorage.setItem('iroom-v70-cart',JSON.stringify(cart))}catch(_){}}
+function loadCart(){try{cart=JSON.parse(localStorage.getItem('iroom-v70-cart')||'[]');if(!Array.isArray(cart))cart=[]}catch(_){cart=[]}}
+function add(p,q){let x=cart.find(x=>x.id===p.id);if(x)x.qty+=q;else cart.push({id:p.id,qty:q});saveCart();toast(p.name+' '+q+'개를 장바구니에 담았습니다.')}
+function cartView(){setDialogMode('standard');let lines=cart.map((x,i)=>{let p=find(x.id);return p?`<div class="cartline"><img src="${A+p.image}" alt=""><div><b>${p.name}</b><small>${DATA[p.season].label} · ${p.price} · ${x.qty}개</small></div><button data-remove="${i}">삭제</button></div>`:''}).join('');$('#kicker').textContent='MY CART';$('#title').textContent='장바구니';$('#lead').textContent='담아둔 상품을 확인합니다.';$('#body').innerHTML=lines||'<div class="box"><p>장바구니가 비어 있습니다.</p></div>';open()}
+document.addEventListener('click',e=>{
+ let c=e.target.closest('[data-close]');if(c||e.target.classList.contains('overlay')){close();return}
+ let m=e.target.closest('[data-menu]');if(m){showMenu(m.dataset.menu);return}
+ let pi=e.target.closest('[data-pi]');if(pi){detail(products()[Number(pi.dataset.pi)]);return}
+ let p=e.target.closest('[data-prod]');if(p){let x=find(p.dataset.prod);if(x)detail(x);return}
+ if(e.target.closest('[data-search]')){search();return}
+ if(e.target.closest('[data-cart]')){cartView();return}
+ let s=e.target.closest('[data-season]');if(s){if(s.dataset.season==='auto'){mode='auto';del('iroom-v70-season');setSeason('auto')}else{mode='manual';setSeason(s.dataset.season,true)}syncSeasonButtons();toast('계절 화면을 '+(mode==='auto'?'자동':' '+DATA[season].label)+'으로 전환했습니다.');return}
+ let q=e.target.closest('[data-q]');if(q){let n=Math.max(1,parseInt($('#qty').value||'1',10)||1);$('#qty').value=Math.max(1,n+Number(q.dataset.q));return}
+ if(e.target.closest('[data-add]')&&current){add(current,Math.max(1,parseInt($('#qty').value||'1',10)||1));return}
+ if(e.target.closest('[data-buy]')){toast('BUY NOW는 실제 결제 API 연결 전 안내 단계입니다.');return}
+ let r=e.target.closest('[data-remove]');if(r){cart.splice(Number(r.dataset.remove),1);saveCart();cartView();return}
+ let tt=e.target.closest('[data-toast]');if(tt){toast(tt.dataset.toast);return}
+ if(e.target.closest('[data-giftprod]')){close();setTimeout(()=>showMenu('fruit'),0);return}
+});
+document.addEventListener('input',e=>{if(e.target.id==='searchInput')doSearch(e.target.value)});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
+loadCart();let saved=get('iroom-v70-season');if(saved&&seasons.includes(saved)){mode='manual';setSeason(saved,false)}else{mode='auto';setSeason('auto')};
+})();
+</script></body></html>
