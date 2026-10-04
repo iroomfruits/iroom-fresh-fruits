@@ -1,0 +1,12 @@
+<!doctype html><meta charset="utf-8"><title>Home2 reset</title>
+<style>body{font-family:sans-serif;display:grid;place-items:center;height:100vh;margin:0;background:#f7f2ea;color:#174c3d}main{text-align:center}a{color:#174c3d;font-weight:700}</style>
+<main><h2>이룸홈2 V60.74 새 버전 열기</h2><p id="msg">브라우저 캐시를 정리하는 중입니다.</p></main>
+<script>
+(async()=>{try{
+ if('serviceWorker'in navigator){const regs=await navigator.serviceWorker.getRegistrations();for(const r of regs)await r.unregister();}
+ if('caches'in window){const ks=await caches.keys();for(const k of ks)await caches.delete(k);}
+}catch(e){}
+document.getElementById('msg').textContent='완료. 새 버전으로 이동합니다.';
+location.replace('./home2-v74.html?build=6074');
+})();
+</script>
