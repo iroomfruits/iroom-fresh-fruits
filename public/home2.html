@@ -32,6 +32,69 @@
 .toast{position:fixed;z-index:700;left:50%;bottom:28px;transform:translateX(-50%);background:#153e32;color:#fff;padding:11px 16px;border-radius:999px;font-size:12px;box-shadow:0 12px 30px rgba(0,0,0,.16)}.toast[hidden]{display:none}
 .sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 @media(max-width:900px){.stage{min-width:980px}.mobile-scroll{overflow-x:auto}.dialog{width:95vw}.cards,.search-grid{grid-template-columns:repeat(2,1fr)}.cols{grid-template-columns:1fr}.detail{grid-template-columns:1fr}.detail-photo{height:280px}.detail-info{padding:28px 24px}}
+
+/* V60.71: restore the original full-page editorial menu-window direction */
+.dialog.editorial{width:min(1540px,95vw);height:min(850px,90vh);max-height:90vh;overflow:hidden;background:#f4eadf}
+.dialog.editorial .dhead{display:none}
+.dialog.editorial .dbody{padding:0;height:100%;overflow:auto}
+.menu-page{min-height:100%;padding:26px;background:
+ radial-gradient(circle at 12% 10%,rgba(255,255,255,.76),transparent 28%),
+ radial-gradient(circle at 92% 12%,rgba(255,255,255,.40),transparent 24%),
+ linear-gradient(128deg,#f4e6dc 0%,#f8f2e9 46%,#eedcd3 100%);position:relative}
+.menu-page:before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.22;background:
+ repeating-linear-gradient(12deg,rgba(105,82,61,.06) 0 1px,transparent 1px 12px),
+ repeating-linear-gradient(98deg,rgba(255,255,255,.28) 0 2px,transparent 2px 22px)}
+.menu-inner{position:relative;z-index:1;height:100%}
+.menu-side{background:rgba(255,253,248,.82);border:1px solid rgba(14,77,61,.08);border-radius:22px;padding:32px 30px;display:flex;flex-direction:column}
+.menu-logo{width:190px;height:58px;object-fit:contain;object-position:left center;margin-bottom:26px}
+.menu-side h2{font-family:"Noto Serif KR","Nanum Myeongjo",Batang,serif;font-size:clamp(38px,3vw,56px);font-weight:500;line-height:1.12;letter-spacing:-.045em;margin:11px 0 16px}
+.menu-side p{font-size:14px;line-height:1.78;color:#617069;margin:0}
+.menu-side .index-list{margin-top:26px;border-top:1px solid rgba(14,77,61,.14)}
+.index-row{display:grid;grid-template-columns:44px 1fr;gap:10px;align-items:start;padding:16px 0;border-bottom:1px solid rgba(14,77,61,.12);font-size:13px}
+.index-row b{font-family:Georgia,serif;color:#a6754c;letter-spacing:.08em}
+.index-row strong{display:block;font-size:14px;margin-bottom:4px}
+.index-row span{color:#7b837e;font-size:12px}
+.editorial-card{overflow:hidden;border:1px solid rgba(14,77,61,.08);border-radius:17px;background:#fffaf2;min-width:0}
+.editorial-card:nth-child(3n+2){background:#fff7df}.editorial-card:nth-child(3n){background:#f0f5ec}
+.editorial-card img{width:100%;height:58%;object-fit:cover;display:block;border-bottom:1px solid rgba(14,77,61,.06)}
+.editorial-card .ecopy{padding:17px 18px 18px}
+.editorial-card small{font-family:Georgia,serif;letter-spacing:.20em;color:#89918d;font-size:9px}
+.editorial-card h3{font-family:"Noto Serif KR","Nanum Myeongjo",Batang,serif;font-size:25px;font-weight:500;letter-spacing:-.035em;margin:7px 0 8px}
+.editorial-card p{font-size:12px;line-height:1.65;color:#66736d;margin:0}
+.editorial-card button{margin-top:12px;border:0;background:transparent;color:#0e5a46;font-weight:850;padding:0}
+.fruit-page,.curation-page,.gift-page,.guide-page,.story-page{display:grid;grid-template-columns:300px 1fr;gap:16px;min-height:760px}
+.fruit-cards{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:1fr;gap:12px}
+.fruit-cards .editorial-card{cursor:pointer}
+.fruit-cards .editorial-card img{height:58%}
+.curation-cards,.gift-cards{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,1fr);gap:12px}
+.curation-cards .editorial-card img,.gift-cards .editorial-card img{height:57%}
+.picnic-page{display:grid;grid-template-rows:1.2fr .8fr;gap:12px;min-height:760px}
+.picnic-hero{display:grid;grid-template-columns:34% 66%;overflow:hidden;border-radius:22px;background:rgba(255,253,248,.86);border:1px solid rgba(14,77,61,.08)}
+.picnic-hero .pcopy{padding:38px 36px;display:flex;flex-direction:column;justify-content:center}
+.picnic-hero .pcopy h2{font-family:"Noto Serif KR","Nanum Myeongjo",Batang,serif;font-size:48px;font-weight:500;line-height:1.15;letter-spacing:-.045em;margin:10px 0 15px}
+.picnic-hero .pcopy p{color:#65726c;line-height:1.75}
+.picnic-hero img{width:100%;height:100%;object-fit:cover}
+.picnic-bottom{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.picnic-bottom .editorial-card img{height:60%}
+.guide-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.guide-cards .editorial-card img{height:49%}
+.story-canvas{display:grid;grid-template-columns:1.25fr .75fr;gap:12px}
+.story-main,.story-note{border-radius:20px;overflow:hidden;background:rgba(255,253,248,.88);border:1px solid rgba(14,77,61,.08)}
+.story-main img{width:100%;height:56%;object-fit:cover;display:block}
+.story-main .story-copy,.story-note{padding:28px}
+.story-main h3,.story-note h3{font-family:"Noto Serif KR","Nanum Myeongjo",Batang,serif;font-size:34px;font-weight:500;letter-spacing:-.04em;margin:6px 0 10px}
+.story-main p,.story-note p{color:#65716c;line-height:1.75;font-size:13px}
+.story-note img{width:100%;height:250px;object-fit:cover;border-radius:15px;margin-top:16px}
+.menu-page .tiny-action{display:inline-flex;margin-top:18px;align-items:center;gap:8px;border:1px solid #0e5a46;border-radius:4px;background:rgba(255,255,255,.72);height:40px;padding:0 16px;color:#0e5a46;font-weight:800}
+@media(max-width:980px){
+ .dialog.editorial{width:97vw;height:92vh;max-height:92vh}
+ .fruit-page,.curation-page,.gift-page,.guide-page,.story-page{grid-template-columns:240px 1fr;min-height:760px}
+ .fruit-cards{grid-template-columns:repeat(2,1fr)}
+ .curation-cards,.gift-cards{grid-template-columns:repeat(2,1fr);grid-template-rows:auto}
+ .picnic-hero{grid-template-columns:1fr}.picnic-hero img{height:320px}.picnic-bottom{grid-template-columns:1fr}
+ .guide-cards{grid-template-columns:1fr}.story-canvas{grid-template-columns:1fr}
+}
+
 </style></head>
 <body>
 <div class="mobile-scroll"><main class="stage" id="stage">
@@ -43,7 +106,7 @@
 <button class="hotspot product-hit p1" data-pi="0" aria-label="첫 번째 상품"></button><button class="hotspot product-hit p2" data-pi="1" aria-label="두 번째 상품"></button><button class="hotspot product-hit p3" data-pi="2" aria-label="세 번째 상품"></button><button class="hotspot product-hit p4" data-pi="3" aria-label="네 번째 상품"></button><button class="hotspot product-hit p5" data-pi="4" aria-label="다섯 번째 상품"></button><button class="hotspot product-hit p6" data-pi="5" aria-label="여섯 번째 상품"></button><button class="hotspot product-hit p7" data-pi="6" aria-label="일곱 번째 상품"></button>
 </main></div>
 
-<div class="overlay" id="overlay" hidden><section class="dialog" role="dialog" aria-modal="true" aria-labelledby="title"><button class="close" data-close>×</button><header class="dhead"><small class="kicker" id="kicker"></small><h2 id="title"></h2><p id="lead"></p></header><div class="dbody" id="body"></div></section></div>
+<div class="overlay" id="overlay" hidden><section class="dialog" id="mainDialog" role="dialog" aria-modal="true" aria-labelledby="title"><button class="close" data-close>×</button><header class="dhead"><small class="kicker" id="kicker"></small><h2 id="title"></h2><p id="lead"></p></header><div class="dbody" id="body"></div></section></div>
 <div class="overlay" id="detailOverlay" hidden><section class="dialog detail" role="dialog" aria-modal="true" aria-labelledby="detailTitle"><button class="close" data-close>×</button><div class="detail-photo"><img id="detailImg" alt=""></div><div class="detail-info"><small class="kicker" id="detailKick"></small><h2 id="detailTitle"></h2><p id="detailDesc"></p><div class="meta"><div id="origin"></div><div id="pack"></div></div><div class="price" id="detailPrice"></div><div class="qty"><button data-q="-1">−</button><input id="qty" value="1" inputmode="numeric"><button data-q="1">＋</button></div><div class="actions"><button class="cartadd" data-add>장바구니 담기</button><button class="buy" data-buy>BUY NOW</button></div></div></section></div>
 <div class="toast" id="toast" hidden></div>
 <script>
@@ -60,25 +123,88 @@ function open(which='overlay'){$('#overlay').hidden=true;$('#detailOverlay').hid
 function close(){ $('#overlay').hidden=true;$('#detailOverlay').hidden=true;document.body.classList.remove('lock')}
 function toast(m){let t=$('#toast');t.textContent=m;t.hidden=false;clearTimeout(timer);timer=setTimeout(()=>t.hidden=true,1800)}
 function card(p){return `<button class="card" data-prod="${p.id}"><img src="${A+p.image}" alt="${p.name}"><span class="b"><strong>${p.name}</strong><small>프리미엄 · ${p.origin}<br>${p.pack}</small><span class="price">${p.price}</span></span></button>`}
+
+function setDialogMode(editorial){
+ const d=$('#mainDialog'), h=$('.dhead',d);
+ d.classList.toggle('editorial',!!editorial);
+ if(h)h.style.display=editorial?'none':'block';
+}
+function pimg(i){const ps=products(); return A+(ps[Math.min(i,ps.length-1)]?.image||ps[0].image)}
+function side(title,lead,rows=''){
+ return `<aside class="menu-side"><img class="menu-logo" src="${A}logo.png" alt="이룸 fresh fruits"><small class="kicker">IROOM ${DATA[season].label.toUpperCase?.()||''}</small><h2>${title}</h2><p>${lead}</p>${rows}</aside>`;
+}
+function indexRows(items){return `<div class="index-list">${items.map((x,i)=>`<div class="index-row"><b>${String(i+1).padStart(2,'0')}</b><div><strong>${x[0]}</strong><span>${x[1]}</span></div></div>`).join('')}</div>`}
+function menuPage(t){
+ const d=DATA[season], ps=products();
+ if(t==='fruit'){
+   return `<div class="menu-page"><div class="menu-inner fruit-page">
+   ${side('제철 과일','가장 맛있는 제철의 순간을 이룸이 정성껏 담아 전합니다.',indexRows([['산지의 신선함','좋은 산지에서 자란 믿을 수 있는 과일'],['엄선한 품질','까다로운 기준으로 선별한 프리미엄 과일'],['제철의 맛','지금 가장 맛있는 계절의 달콤함']]))}
+   <section class="fruit-cards">${ps.map((p,i)=>`<article class="editorial-card" data-prod="${p.id}"><img src="${A+p.image}" alt="${p.name}"><div class="ecopy"><small>${i<2?'추천':i<4?'인기':'제철'}</small><h3>${p.name}</h3><p>${p.desc}<br>${p.origin} · ${p.pack}</p><button type="button">상세보기 →</button></div></article>`).join('')}</section>
+   </div></div>`;
+ }
+ if(t==='curation'){
+   const cards=[
+    ['SWEET','당도 높은 과일','달콤한 풍미를 중심으로 골라 한 번에 즐기기 좋은 구성입니다.',0],
+    ['KIDS','아이 간식','먹기 편하고 부드러운 과일을 중심으로 아이 간식용으로 제안합니다.',1],
+    ['FRESH','상큼한 과일','가볍고 산뜻한 풍미가 필요한 순간에 어울립니다.',2],
+    ['MORNING','가볍게 즐기는 아침','바쁜 아침에도 부담 없이 즐기기 좋은 산뜻한 구성입니다.',3],
+    ['FAMILY','가족과 함께','여러 사람이 함께 즐기기 좋은 식감과 풍미를 골고루 담았습니다.',4],
+    ['PREMIUM','이룸 상위 선별','모양과 당도, 선도까지 한 단계 더 엄격하게 고른 구성입니다.',5],
+   ];
+   return `<div class="menu-page"><div class="menu-inner curation-page">
+   ${side('오늘의 상황에 맞는 과일을 고릅니다.','당도, 산뜻함, 가족 구성과 먹는 시간을 기준으로 여섯 가지 조합을 제안합니다.',indexRows([['SWEET','달콤한 풍미'],['FRESH','산뜻한 구성'],['PREMIUM','상위 선별']]))}
+   <section class="curation-cards">${cards.map(c=>`<article class="editorial-card"><img src="${pimg(c[3])}" alt=""><div class="ecopy"><small>${c[0]}</small><h3>${c[1]}</h3><p>${c[2]}</p><button type="button" data-toast="${c[1]} 구성을 준비 중입니다.">구성 보기 →</button></div></article>`).join('')}</section>
+   </div></div>`;
+ }
+ if(t==='gift'){
+   const imgs=[`gift-${season}.webp`,`gift-${season}.webp`,`gift-${season}.webp`,`picnic-${season}.webp`,`gift-${season}.webp`,`brand-${season}.webp`];
+   const cards=[['PREMIUM GIFT','프리미엄 제철 과일 선물세트','제철에 가장 맛있는 과일을 다양하게 골라 정갈하게 구성합니다.','89,000원~'],['CLASSIC GIFT','사과 · 배 선물세트','아삭한 사과와 시원한 배를 균형 있게 담은 기본 선물입니다.','62,000원~'],['LUXURY GIFT','멜론 · 샤인 세트','향긋한 멜론과 샤인머스캣을 중심으로 구성한 고급 선물입니다.','78,000원~'],['SEASONAL GIFT','제철 과일 선물세트','그 계절에 맛이 오른 과일을 중심으로 균형 있게 구성합니다.','64,000원~'],['FAMILY GIFT','가족 과일 선물세트','온 가족이 편하게 나눠 먹기 좋은 과일을 넉넉하게 담았습니다.','72,000원~'],['BUSINESS GIFT','기업 · 단체 선물','수량과 예산에 맞춰 품목·포장·배송까지 제안합니다.','90,000원~']];
+   return `<div class="menu-page"><div class="menu-inner gift-page">
+   ${side('마음을 전하는 이룸 선물','받는 분과 예산, 계절에 맞춰 과일의 맛과 구성을 정성껏 담아 마음을 전합니다.',indexRows([['프리미엄 제철 과일','가장 맛있는 제철 과일만 엄선'],['산지 직송','산지에서 전하는 신선함'],['마음을 전하는 구성','소중한 분께 어울리는 선물 제안']]))}
+   <section class="gift-cards">${cards.map((c,i)=>`<article class="editorial-card"><img src="${A+imgs[i]}" alt=""><div class="ecopy"><small>${c[0]}</small><h3>${c[1]}</h3><p>${c[2]}</p><div class="price" style="margin-top:8px">${c[3]}</div><button type="button" data-toast="${c[1]} 상담 구성을 준비 중입니다.">상세보기 →</button></div></article>`).join('')}</section>
+   </div></div>`;
+ }
+ if(t==='picnic'){
+   const cards=[['PICNIC 01','가볍게 준비하는 피크닉','간단한 준비로도 충분해요. 좋은 과일만 있으면 언제든 근사한 피크닉이 시작됩니다.',`picnic-${season}.webp`],['PICNIC 02','주말 한 접시','신선한 과일로 채우는 여유로운 주말의 맛.',`hero-${season}.webp`],['PICNIC 03','피크닉 선물 구성','소중한 사람에게 전하는 계절의 맛과 마음.',`gift-${season}.webp`]];
+   return `<div class="menu-page"><div class="menu-inner picnic-page">
+   <section class="picnic-hero"><div class="pcopy"><small class="kicker">PICNIC ROUTINE</small><h2>과일과 함께하는<br>가벼운 주말</h2><p>싱그러운 제철 과일 한 접시와 작은 피크닉.<br>이룸이 일상에 어울리는 가벼운 구성을 제안합니다.</p>${indexRows([['LIGHT','간단한 한 접시'],['WEEKEND','여유로운 주말'],['GIFT','함께 나누는 구성']])}</div><img src="${A}picnic-${season}.webp" alt=""></section>
+   <section class="picnic-bottom">${cards.map(c=>`<article class="editorial-card"><img src="${A+c[3]}" alt=""><div class="ecopy"><small>${c[0]}</small><h3>${c[1]}</h3><p>${c[2]}</p><button type="button" data-toast="${c[1]} 아이디어를 준비 중입니다.">→</button></div></article>`).join('')}</section>
+   </div></div>`;
+ }
+ if(t==='guide'){
+   const cards=[['SELECT','좋은 과일 고르는 법','색과 향, 단단함을 기준으로 신선한 과일을 보는 기본 방법입니다.',0],['STORAGE','오래 보관하는 법','과일별 적정 온도와 후숙 여부를 구분해 보관하면 맛을 오래 유지할 수 있습니다.',1],['SERVE','더 맛있게 먹는 법','향과 당도가 더 잘 느껴지는 손질 순서와 먹기 좋은 온도를 소개합니다.',2]];
+   return `<div class="menu-page"><div class="menu-inner guide-page">
+   ${side('고르는 법부터<br>보관과 손질까지','좋은 과일을 더 맛있게 즐길 수 있도록 이룸이 기본 가이드를 정리했습니다.',indexRows([['SELECT','고르기'],['STORAGE','보관하기'],['SERVE','맛있게 먹기']]))}
+   <section class="guide-cards">${cards.map(c=>`<article class="editorial-card"><img src="${pimg(c[3])}" alt=""><div class="ecopy"><small>${c[0]}</small><h3>${c[1]}</h3><p>${c[2]}</p><button type="button" data-toast="${c[1]} 가이드를 준비 중입니다.">자세히 보기 →</button></div></article>`).join('')}</section>
+   </div></div>`;
+ }
+ if(t==='story'){
+   return `<div class="menu-page"><div class="menu-inner story-page">
+   ${side('좋은 과일,<br>좋은 일상','이룸은 제철의 맛과 선도, 보기 좋은 구성의 균형을 중요하게 생각합니다.',indexRows([['제철','계절에 가장 맛이 오른 과일'],['선별','맛·선도·외관의 균형'],['일상','매일 편하게 즐기는 과일']]))}
+   <section class="story-canvas"><article class="story-main"><img src="${A}brand-${season}.webp" alt=""><div class="story-copy"><small class="kicker">BRAND STORY</small><h3>보기 쉽게, 고르기 쉽게.</h3><p>좋은 과일을 고르는 일이 어렵지 않도록 계절의 맛과 기준을 정리해 제안합니다. 선물뿐 아니라 매일의 식탁과 작은 휴식에도 잘 어울리는 과일을 전합니다.</p><button class="tiny-action" data-toast="이룸 브랜드 이야기를 준비 중입니다.">이룸의 이야기 더 보기 →</button></div></article><aside class="story-note"><small class="kicker">GOOD FRUITS</small><h3>좋은 과일이<br>일상을 밝힙니다.</h3><p>산지의 신선함, 엄선한 품질, 제철의 맛. 세 가지 기준으로 이룸의 과일을 고릅니다.</p><img src="${A}hero-${season}.webp" alt=""></aside></section>
+   </div></div>`;
+ }
+ return '';
+}
 function showMenu(t){
- let d=DATA[season], h={k:'',t:'',l:'',b:''};
- if(t==='fruit')h={k:'SEASONAL FRESH FRUITS',t:d.label+' 제철 과일',l:'지금 가장 맛있는 '+d.label+' 과일을 한눈에 만나보세요.',b:`<div class="cards">${products().map(card).join('')}</div>`};
- if(t==='gift')h={k:'PREMIUM GIFTS',t:'마음을 전하는 이룸 선물',l:'계절의 맛과 받는 분을 생각해 정갈하게 구성합니다.',b:`<div class="cols"><div class="box"><small class="kicker">01</small><h3>프리미엄 제철 과일</h3><p>${d.label}에 가장 맛있는 과일을 중심으로 구성합니다.</p><button class="outline" data-giftprod>구성 보기</button></div><div class="box"><small class="kicker">02</small><h3>가족 과일 선물</h3><p>여러 사람이 편하게 나눠 먹기 좋은 조합으로 구성합니다.</p></div><div class="box"><small class="kicker">03</small><h3>기업 · 단체 선물</h3><p>수량과 예산에 맞춰 품목, 포장, 배송 구성을 제안합니다.</p></div></div>`};
- if(t==='curation')h={k:'IROOM CURATION',t:'오늘의 상황에 맞는 과일을 고릅니다.',l:'당도, 산뜻함, 먹는 시간과 가족 구성을 기준으로 제안합니다.',b:`<div class="cols"><div class="box"><small class="kicker">SWEET</small><h3>당도 높은 과일</h3><p>달콤한 풍미를 중심으로 골라 한 번에 즐기기 좋은 구성입니다.</p></div><div class="box"><small class="kicker">FRESH</small><h3>상큼한 과일</h3><p>가볍고 산뜻한 풍미가 필요한 순간에 어울리는 과일을 모았습니다.</p></div><div class="box"><small class="kicker">FAMILY</small><h3>가족과 함께</h3><p>식감과 풍미를 다양하게 섞어 여러 사람이 나누기 좋게 구성합니다.</p></div></div>`};
- if(t==='picnic')h={k:'PICNIC ROUTINE',t:'과일과 함께하는 가벼운 주말',l:'제철 과일 한 접시와 작은 준비로 일상을 조금 더 특별하게.',b:`<div class="cols"><div class="box"><small class="kicker">LIGHT</small><h3>가볍게 준비하는 피크닉</h3><p>먹기 편한 과일과 작은 보냉백만으로 충분합니다.</p></div><div class="box"><small class="kicker">WEEKEND</small><h3>주말 한 접시</h3><p>${d.label} 제철 과일을 식감과 색이 다르게 3~4가지 고릅니다.</p></div><div class="box"><small class="kicker">GIFT</small><h3>피크닉 선물 구성</h3><p>함께하는 사람에게 전하기 좋은 작은 계절 과일 구성을 제안합니다.</p></div></div>`};
- if(t==='guide')h={k:'FRUIT GUIDE',t:'고르는 법부터 보관과 손질까지',l:'좋은 과일을 더 맛있게 즐길 수 있도록 기본 가이드를 정리했습니다.',b:`<div class="cols"><div class="box"><small class="kicker">SELECT</small><h3>좋은 과일 고르는 법</h3><p>색, 향, 무게감과 단단함을 함께 보고 신선한 과일을 고릅니다.</p></div><div class="box"><small class="kicker">STORAGE</small><h3>오래 보관하는 법</h3><p>과일별 적정 온도와 후숙 여부를 나눠 보관하면 선도를 오래 유지할 수 있습니다.</p></div><div class="box"><small class="kicker">SERVE</small><h3>더 맛있게 먹는 법</h3><p>향과 당도가 살아나는 온도와 손질 타이밍을 맞춰 즐깁니다.</p></div></div>`};
- if(t==='story')h={k:'BRAND STORY',t:'좋은 과일, 좋은 일상',l:'이룸은 제철의 맛과 선도, 보기 좋은 구성의 균형을 중요하게 생각합니다.',b:`<div class="cols"><div class="box"><small class="kicker">01</small><h3>제철</h3><p>계절에 가장 맛이 오른 과일을 우선합니다.</p></div><div class="box"><small class="kicker">02</small><h3>선별</h3><p>맛과 선도, 외관을 균형 있게 확인해 구성합니다.</p></div><div class="box"><small class="kicker">03</small><h3>일상</h3><p>선물뿐 아니라 매일 편하게 즐길 수 있는 과일을 제안합니다.</p></div></div>`};
- if(t==='account')h={k:'MY IROOM',t:'계절 미리보기 · MY IROOM',l:'화면 디자인을 바꾸지 않도록 계절 선택은 이 창 안에 넣었습니다.',b:`<div class="box"><h3>계절 미리보기</h3><p>자동은 현재 월에 맞춰 봄 3–5월 · 여름 6–8월 · 가을 9–11월 · 겨울 12–2월로 전환합니다.</p><div class="season-row"><button data-season="spring">봄</button><button data-season="summer">여름</button><button data-season="autumn">가을</button><button data-season="winter">겨울</button><button data-season="auto">자동</button></div></div>`};
- $('#kicker').textContent=h.k;$('#title').textContent=h.t;$('#lead').textContent=h.l;$('#body').innerHTML=h.b;syncSeasonButtons();open();
+ if(t==='account'){
+   setDialogMode(false);
+   $('#kicker').textContent='MY IROOM';$('#title').textContent='계절 미리보기 · MY IROOM';$('#lead').textContent='메인 화면 디자인을 바꾸지 않도록 계절 선택은 이 창 안에 넣었습니다.';
+   $('#body').innerHTML=`<div class="box"><h3>계절 미리보기</h3><p>자동은 현재 월에 맞춰 봄 3–5월 · 여름 6–8월 · 가을 9–11월 · 겨울 12–2월로 전환합니다.</p><div class="season-row"><button data-season="spring">봄</button><button data-season="summer">여름</button><button data-season="autumn">가을</button><button data-season="winter">겨울</button><button data-season="auto">자동</button></div></div>`;
+   syncSeasonButtons();open();return;
+ }
+ setDialogMode(true);
+ $('#body').innerHTML=menuPage(t);
+ open();
 }
 function detail(p){current=p;$('#detailImg').src=A+p.image;$('#detailKick').textContent=DATA[p.season].label+' SEASON';$('#detailTitle').textContent=p.name;$('#detailDesc').textContent=p.desc;$('#origin').textContent='산지 · '+p.origin;$('#pack').textContent='구성 · '+p.pack;$('#detailPrice').textContent=p.price;$('#qty').value=1;open('detailOverlay')}
 function syncSeasonButtons(){$$('[data-season]').forEach(b=>b.classList.toggle('active',(mode==='auto'&&b.dataset.season==='auto')||(mode==='manual'&&b.dataset.season===season)))}
-function search(){ $('#kicker').textContent='SEARCH';$('#title').textContent='과일 검색';$('#lead').textContent='봄·여름·가을·겨울 전체 상품에서 검색합니다.';$('#body').innerHTML=`<input class="search" id="searchInput" placeholder="예: 딸기, 사과, 샤인머스캣"><div class="search-grid" id="results">${all().slice(0,16).map(card).join('')}</div>`;open();setTimeout(()=>$('#searchInput').focus(),40)}
+function search(){ setDialogMode(false);$('#kicker').textContent='SEARCH';$('#title').textContent='과일 검색';$('#lead').textContent='봄·여름·가을·겨울 전체 상품에서 검색합니다.';$('#body').innerHTML=`<input class="search" id="searchInput" placeholder="예: 딸기, 사과, 샤인머스캣"><div class="search-grid" id="results">${all().slice(0,16).map(card).join('')}</div>`;open();setTimeout(()=>$('#searchInput').focus(),40)}
 function doSearch(v){let q=v.trim().toLowerCase(), arr=all().filter(p=>!q||p.name.toLowerCase().includes(q)||p.origin.toLowerCase().includes(q));$('#results').innerHTML=arr.map(card).join('')||'<p>검색 결과가 없습니다.</p>'}
 function saveCart(){try{localStorage.setItem('iroom-v70-cart',JSON.stringify(cart))}catch(_){}}
 function loadCart(){try{cart=JSON.parse(localStorage.getItem('iroom-v70-cart')||'[]');if(!Array.isArray(cart))cart=[]}catch(_){cart=[]}}
 function add(p,q){let x=cart.find(x=>x.id===p.id);if(x)x.qty+=q;else cart.push({id:p.id,qty:q});saveCart();toast(p.name+' '+q+'개를 장바구니에 담았습니다.')}
-function cartView(){let lines=cart.map((x,i)=>{let p=find(x.id);return p?`<div class="cartline"><img src="${A+p.image}" alt=""><div><b>${p.name}</b><small>${DATA[p.season].label} · ${p.price} · ${x.qty}개</small></div><button data-remove="${i}">삭제</button></div>`:''}).join('');$('#kicker').textContent='MY CART';$('#title').textContent='장바구니';$('#lead').textContent='담아둔 상품을 확인합니다.';$('#body').innerHTML=lines||'<div class="box"><p>장바구니가 비어 있습니다.</p></div>';open()}
+function cartView(){setDialogMode(false);let lines=cart.map((x,i)=>{let p=find(x.id);return p?`<div class="cartline"><img src="${A+p.image}" alt=""><div><b>${p.name}</b><small>${DATA[p.season].label} · ${p.price} · ${x.qty}개</small></div><button data-remove="${i}">삭제</button></div>`:''}).join('');$('#kicker').textContent='MY CART';$('#title').textContent='장바구니';$('#lead').textContent='담아둔 상품을 확인합니다.';$('#body').innerHTML=lines||'<div class="box"><p>장바구니가 비어 있습니다.</p></div>';open()}
 document.addEventListener('click',e=>{
  let c=e.target.closest('[data-close]');if(c||e.target.classList.contains('overlay')){close();return}
  let m=e.target.closest('[data-menu]');if(m){showMenu(m.dataset.menu);return}
@@ -91,6 +217,7 @@ document.addEventListener('click',e=>{
  if(e.target.closest('[data-add]')&&current){add(current,Math.max(1,parseInt($('#qty').value||'1',10)||1));return}
  if(e.target.closest('[data-buy]')){toast('BUY NOW는 실제 결제 API 연결 전 안내 단계입니다.');return}
  let r=e.target.closest('[data-remove]');if(r){cart.splice(Number(r.dataset.remove),1);saveCart();cartView();return}
+ let tt=e.target.closest('[data-toast]');if(tt){toast(tt.dataset.toast);return}
  if(e.target.closest('[data-giftprod]')){close();setTimeout(()=>showMenu('fruit'),0);return}
 });
 document.addEventListener('input',e=>{if(e.target.id==='searchInput')doSearch(e.target.value)});
