@@ -1,0 +1,256 @@
+{
+  "spring": {
+    "label": "봄",
+    "products": [
+      {
+        "id": "spring-strawberry",
+        "name": "딸기",
+        "origin": "국내산",
+        "pack": "500g (12~16과)",
+        "price": "24,000원",
+        "detail": "detail-v78-spring-strawberry.webp"
+      },
+      {
+        "id": "spring-chamoe",
+        "name": "참외",
+        "origin": "국내산",
+        "pack": "2kg (4~7과)",
+        "price": "28,000원",
+        "detail": "detail-v78-spring-chamoe.webp"
+      },
+      {
+        "id": "spring-shine",
+        "name": "샤인머스켓",
+        "origin": "국내산",
+        "pack": "2kg (3~4송이)",
+        "price": "46,000원",
+        "detail": "detail-v78-spring-shine.webp"
+      },
+      {
+        "id": "spring-cherry",
+        "name": "체리",
+        "origin": "미국산",
+        "pack": "1kg (특)",
+        "price": "42,000원",
+        "detail": "detail-v78-spring-cherry.webp"
+      },
+      {
+        "id": "spring-apricot",
+        "name": "살구",
+        "origin": "국내산",
+        "pack": "1kg (18~24과)",
+        "price": "36,000원",
+        "detail": "detail-v78-spring-apricot.webp"
+      },
+      {
+        "id": "spring-hallabong",
+        "name": "한라봉",
+        "origin": "제주산",
+        "pack": "2kg (5~8과)",
+        "price": "34,000원",
+        "detail": "detail-v78-spring-hallabong.webp"
+      },
+      {
+        "id": "spring-peach",
+        "name": "복숭아",
+        "origin": "국내산",
+        "pack": "2kg (6~8과)",
+        "price": "34,000원",
+        "detail": "detail-v78-spring-peach.webp"
+      }
+    ]
+  },
+  "summer": {
+    "label": "여름",
+    "products": [
+      {
+        "id": "summer-watermelon",
+        "name": "수박",
+        "origin": "국내산",
+        "pack": "6~8kg (1통)",
+        "price": "32,000원",
+        "detail": "detail-v78-summer-watermelon.webp"
+      },
+      {
+        "id": "summer-peach",
+        "name": "복숭아",
+        "origin": "국내산",
+        "pack": "2kg (6~8과)",
+        "price": "34,000원",
+        "detail": "detail-v78-summer-peach.webp"
+      },
+      {
+        "id": "summer-melon",
+        "name": "멜론",
+        "origin": "국내산",
+        "pack": "2수 (2kg 내외)",
+        "price": "42,000원",
+        "detail": "detail-v78-summer-melon.webp"
+      },
+      {
+        "id": "summer-shine",
+        "name": "샤인머스켓",
+        "origin": "국내산",
+        "pack": "2kg (3~4송이)",
+        "price": "46,000원",
+        "detail": "detail-v78-summer-shine.webp"
+      },
+      {
+        "id": "summer-plum",
+        "name": "자두",
+        "origin": "국내산",
+        "pack": "1.5kg (12~15과)",
+        "price": "24,000원",
+        "detail": "detail-v78-summer-plum.webp"
+      },
+      {
+        "id": "summer-apricot",
+        "name": "살구",
+        "origin": "국내산",
+        "pack": "1kg (12~16과)",
+        "price": "26,000원",
+        "detail": "detail-v78-summer-apricot.webp"
+      },
+      {
+        "id": "summer-nectarine",
+        "name": "천도복숭아",
+        "origin": "국내산",
+        "pack": "2kg (7~9과)",
+        "price": "32,000원",
+        "detail": "detail-v78-summer-nectarine.webp"
+      }
+    ]
+  },
+  "autumn": {
+    "label": "가을",
+    "products": [
+      {
+        "id": "autumn-apple",
+        "name": "사과",
+        "origin": "경북",
+        "pack": "2.5kg (8~10과)",
+        "price": "32,000원",
+        "detail": "detail-v78-autumn-apple.webp"
+      },
+      {
+        "id": "autumn-pear",
+        "name": "신고배",
+        "origin": "전남 나주",
+        "pack": "3kg (6~8과)",
+        "price": "38,000원",
+        "detail": "detail-v78-autumn-pear.webp"
+      },
+      {
+        "id": "autumn-shine",
+        "name": "샤인머스켓",
+        "origin": "경북",
+        "pack": "2kg (3~4송이)",
+        "price": "46,000원",
+        "detail": "detail-v78-autumn-shine.webp"
+      },
+      {
+        "id": "autumn-sweet-persimmon",
+        "name": "단감",
+        "origin": "경남",
+        "pack": "3kg",
+        "price": "28,000원",
+        "detail": "detail-v78-autumn-sweet-persimmon.webp"
+      },
+      {
+        "id": "autumn-daebong",
+        "name": "대봉감",
+        "origin": "경남",
+        "pack": "3kg (4~6과)",
+        "price": "34,000원",
+        "detail": "detail-v78-autumn-daebong.webp"
+      },
+      {
+        "id": "autumn-chestnut",
+        "name": "밤",
+        "origin": "충남 공주",
+        "pack": "1kg",
+        "price": "42,000원",
+        "detail": "detail-v78-autumn-chestnut.webp"
+      },
+      {
+        "id": "autumn-jujube",
+        "name": "대추",
+        "origin": "경북",
+        "pack": "1kg",
+        "price": "24,000원",
+        "detail": "detail-v78-autumn-jujube.webp"
+      }
+    ],
+    "extra": [
+      {
+        "id": "autumn-easypple",
+        "name": "이지플",
+        "origin": "경북",
+        "pack": "1.2kg (12~16과)",
+        "price": "36,000원",
+        "detail": "detail-v78-autumn-easypple.webp"
+      }
+    ]
+  },
+  "winter": {
+    "label": "겨울",
+    "products": [
+      {
+        "id": "winter-strawberry",
+        "name": "딸기",
+        "origin": "국내산",
+        "pack": "500g (12~16과)",
+        "price": "24,000원",
+        "detail": "detail-v78-winter-strawberry.webp"
+      },
+      {
+        "id": "winter-hallabong",
+        "name": "한라봉",
+        "origin": "제주산",
+        "pack": "2kg (6~10과)",
+        "price": "28,000원",
+        "detail": "detail-v78-winter-hallabong.webp"
+      },
+      {
+        "id": "winter-redhyang",
+        "name": "레드향",
+        "origin": "제주산",
+        "pack": "2kg (6~10과)",
+        "price": "46,000원",
+        "detail": "detail-v78-winter-redhyang.webp"
+      },
+      {
+        "id": "winter-cheonhyehyang",
+        "name": "천혜향",
+        "origin": "제주산",
+        "pack": "2kg (6~10과)",
+        "price": "42,000원",
+        "detail": "detail-v78-winter-cheonhyehyang.webp"
+      },
+      {
+        "id": "winter-apple",
+        "name": "사과",
+        "origin": "국내산",
+        "pack": "1.5kg (6~8과)",
+        "price": "36,000원",
+        "detail": "detail-v78-winter-apple.webp"
+      },
+      {
+        "id": "winter-pear",
+        "name": "배",
+        "origin": "국내산",
+        "pack": "2kg (4~6과)",
+        "price": "34,000원",
+        "detail": "detail-v78-winter-pear.webp"
+      },
+      {
+        "id": "winter-kiwi",
+        "name": "키위",
+        "origin": "국내산",
+        "pack": "1kg (8~12과)",
+        "price": "34,000원",
+        "detail": "detail-v78-winter-kiwi.webp"
+      }
+    ]
+  }
+}
