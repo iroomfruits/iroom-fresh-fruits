@@ -199,5 +199,5 @@ async function bootstrapBackend(){
  const q=new URLSearchParams(location.search);if(q.get('kakao')==='success'){toast('카카오 로그인이 완료되었습니다.');history.replaceState({},'',location.pathname+location.hash)}else if(q.get('kakao')==='error'){toast('카카오 로그인에 실패했습니다.');history.replaceState({},'',location.pathname+location.hash)}
 }
 preloadCurrent();setNotice();loadCart();const h=location.hash.slice(1);route=['fruits','curation','gifts','story'].includes(h)?h:'home';render();bootstrapBackend();
-// IROOM HOME2 V60.98.1 — Kakao return + Seasonal Picks ESC close fix
+// IROOM HOME2 V60.98.2 — hard Kakao Home2 return + clear header icons
 })();
