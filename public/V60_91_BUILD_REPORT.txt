@@ -1,0 +1,42 @@
+IROOM HOME2 V60.91 FINAL CANDIDATE
+Date: 2026-10-07
+
+LOCKED VISUAL / UX
+- Keeps the approved IROOM Home2 sage/stone visual system and original IROOM logo.
+- IROOM NOTICE remains a single-line vertical rolling notice.
+- Main page contains: hero -> 4-up seasonal slider -> fruit curation -> brand story.
+- Gift sets do NOT appear on the main page. They are only inside Gift Selection.
+
+IMAGE SYSTEM
+- All regular fruit display assets are normalized to 1400x1400 transparent canvases.
+- Main hero assets are 1600x1050 transparent canvases.
+- CSS provides the solid sage canvas; fruit artwork itself has transparent surroundings.
+- object-fit: contain is used throughout to prevent bottom/edge cropping.
+- Large card + smaller fruit + generous whitespace rule is applied consistently.
+
+SEASONAL SLIDER
+- Desktop: 4 cards visible.
+- Tablet: 2 cards visible.
+- Mobile: 1 card visible.
+- Left/right controls, dot navigation, touch swipe.
+- Auto movement every ~3.9 seconds using a gentle ping-pong motion; pauses on hover/focus.
+
+GIFT SELECTION
+- Six true gift-set visuals, not single-fruit placeholders.
+- No jujube or sweet persimmon in gift-set compositions.
+- Uses premium combinations centered on Shine Muscat, apple, pear and melon.
+- Gift cards open a real detail sheet with quantity, cart and BUY NOW placeholder flow.
+
+FUNCTION CHECKS PERFORMED
+- JavaScript syntax: PASS (node --check).
+- 1440px main: 4-up seasonal layout rendered.
+- Main hero image loaded at 1600x1050.
+- First four seasonal card images loaded at 1400x1400.
+- Seasonal slider auto movement confirmed by transform change.
+- Gift Selection: 6 gift cards rendered; first gift image 1600x1000.
+- Product/gift detail opens and ESC closes in browser QA.
+- Page-error count in targeted browser QA: 0.
+
+BACKEND LIMITATION
+- BUY NOW remains a front-end placeholder until the existing backend/payment/order flow is connected.
+- Actual production deployment has not been verified on the user's server yet.
