@@ -1,0 +1,21 @@
+IROOM_HOME2_V60_92_FINAL_INTEGRATION
+
+Base:
+- IROOM_HOME2_V60_91_FINAL_CANDIDATE
+
+Applied:
+- Main visual/layout preserved.
+- Seasonal Picks remains 4-up desktop horizontal slider with auto movement, arrows, dots and swipe.
+- Hero auto slider preserved.
+- Product / curation / gift images open the product detail view.
+- All product/hero/detail visuals use object-fit: contain to prevent clipping.
+- Gift Selection updated with six accepted gift-set compositions with visible cover boxes and no ribbon bands.
+- Gift contents exclude jujube and persimmon; uses shine muscat, apple, pear and hallabong combinations.
+- Footer based on IROOM_HOME1 footer structure added to every route.
+- Footer includes terms/privacy/delivery/guest-order/customer center/app-install, Band, Kakao ID copy, Share, mailto and business information.
+- Header search and MY IROOM utility panels made functional on the front-end.
+- Cart/localStorage preserved, now v92 key with v91/v90 fallback.
+- ESC closes detail first, then utility, then cart.
+
+Backend limitation:
+- Actual non-member order lookup, PG payment and admin backend require connection to the existing Home1 backend/API.
