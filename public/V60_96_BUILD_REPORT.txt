@@ -1,0 +1,28 @@
+IROOM HOME2 V60.96 — CURATION BUILDER + IROOM CARE
+
+Base: V60.95 LOCKED
+Changes:
+1. Seasonal Picks product image click opens product detail.
+   - Removed pointer capture that retargeted clicks to the slider viewport.
+   - Horizontal swipe/drag remains available.
+2. Fruit Curation upgraded from single-fruit cards to multi-fruit combinations.
+   - Home curation cards visually compose 3 fruits.
+   - Clicking a curation combination opens the full Curation page with the 3 fruits preselected.
+   - Users can select up to 6 fruits, remove items, clear, see running total, add selected fruits to cart, or open Kakao consultation.
+3. Added IROOM HOME1-style lower customer-care sections before the footer using HTML/CSS only.
+   - Fresh Promise
+   - Budget/purpose consultation CTA
+   - Kakao consultation
+   - App install
+   - IROOM note
+4. No new generated image assets added. Existing V60.95 fruit/gift assets are reused.
+
+Validation:
+- JavaScript syntax: PASS (node --check)
+- Browser DOM interaction test: PASS
+  - Seasonal product image click -> detail opens
+  - Curation preset -> 3 selected
+  - Additional fruit selection -> multi-select works
+  - Add selected fruits -> cart badge updated
+  - IROOM care section rendered
+  - page errors: 0
