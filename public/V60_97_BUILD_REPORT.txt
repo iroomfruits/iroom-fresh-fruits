@@ -1,0 +1,8 @@
+IROOM HOME2 V60.97 PROFILE TRUST NOTE
+
+Base: V60.96
+Changes:
+- No image generation. Uses the user-uploaded portrait artwork as-is, only web-resized.
+- Replaces the IROOM NOTE initial mark with a subtle circular profile image.
+- Keeps all V60.96 seasonal detail click, multi-fruit curation, Kakao, footer, sliders, and commerce behavior unchanged.
+Rollback: V60.95 locked baseline remains preserved.
