@@ -1,0 +1,23 @@
+IROOM HOME2 V60.95 — GOUACHE ASSET UNIFY + SEAMLESS CARD FIX
+
+Base: V60.94 / official IROOM HOME2 baseline line.
+No new image generation in this build. Existing already-created soft gouache/painterly fruit artwork was reused and programmatically isolated from its pale background.
+
+Changed fruit assets:
+- 공주 밤, 경북 대추, 대봉감, 이지플 사과
+- 살구, 자두, 천도복숭아
+- 한라봉, 레드향, 천혜향, 키위
+- Matching hero assets for chestnut, apricot, plum, hallabong, redhyang, cheonhyehyang
+
+Visual fixes:
+- Removed the visible inner-square / pasted-image look by using transparent WebP cutouts on the existing sage product field.
+- Hero chestnut no longer carries a baked rectangular background.
+- Existing layout, gift page, footer, Kakao integration, cart, and navigation are preserved.
+
+Interaction:
+- Seasonal/product image areas are explicit buttons with data-product IDs.
+- Clicking a fruit image opens the existing product detail sheet.
+- ESC closes detail as before.
+
+Rollback:
+- V60.93 locked baseline remains untouched. V60.95 uses a new assets/home2-v95 folder and cache-busted URLs.
