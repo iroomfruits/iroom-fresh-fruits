@@ -1,0 +1,65 @@
+IROOM HOME2 V60.98 — BACKEND + SECURITY INTEGRATION
+===================================================
+Base: V60.97 (visual design preserved)
+Date: 2026-10-08
+
+Applied without changing the approved Home2 visual direction:
+
+[HOME1 -> HOME2 operational integration]
+- Product price/stock/id loads from /api/site/products and overlays the Home2 visual catalog.
+- Final order submits to /api/orders; server re-checks database price/stock and handles the transaction.
+- BUY NOW and cart checkout now open a real order form.
+- Login / signup / logout / MY IROOM order history connected to existing Home1 APIs.
+- Guest order lookup uses POST /api/orders/lookup.
+- Fruit Curation consultation can be stored through /api/consultations.
+- Footer policies load from /api/site/footer-config.
+- Kakao consultation uses server footer configuration first, existing open-chat fallback second.
+- Admin link opens the new security gateway, then the existing band-admin center.
+- Existing manifest / service worker are registered for Home2 PWA install flow.
+
+[SECURITY]
+- security-v98.js is preloaded before the existing server.js. Existing Home1 server code is not replaced.
+- Helmet added as an additional response-header safety layer.
+- Home2 removes inline JavaScript and uses external home2-v98.js.
+- Home2 adds a page-level CSP with script-src 'self'.
+  (style-src keeps 'unsafe-inline' because the current horizontal slider uses runtime style transforms.)
+- Home2 state-changing API calls use a signed CSRF token + SameSite cookie.
+- Legacy GET /api/order/:orderNo?phone=... is retired with HTTP 410; POST lookup remains.
+- PostgreSQL-backed durable rate limiting added on login, signup, admin login, order lookup,
+  order creation and consultation endpoints; existing in-process rate limit remains as a second layer.
+- Default JSON request body is clamped to 1 MB; only the existing visual-editor/store endpoints keep 30 MB.
+- URL-encoded forms are clamped to 256 KB / 200 parameters.
+- Request ID and X-Iroom-Security:v60.98 response marker added.
+- Administrator TOTP MFA added with encrypted DB storage.
+  Setup UI: /admin-security-v98.html
+  After activation, admin login requires password + 6-digit authenticator code.
+  Backup/password/store/site-setting sensitive operations also require the TOTP code.
+- MFA secret is encrypted with AES-256-GCM using a key derived from JWT_SECRET.
+- Environment variable ADMIN_TOTP_SECRET remains supported as an alternative managed-secret mode.
+- Dependabot npm updates configured weekly.
+- GitHub Actions security workflow added: dependency install, npm audit (high+), syntax checks.
+
+[INTENTIONALLY DEFERRED UNTIL PUBLIC SALES]
+- Render PostgreSQL plan upgrade / managed backup-PITR switch.
+  render.yaml intentionally keeps the current free database plan in V60.98.
+
+[IMPORTANT]
+- Keep JWT_SECRET stable and strong. Changing JWT_SECRET after enabling DB-stored MFA makes the encrypted
+  MFA secret unreadable; in that case reconfigure MFA.
+- Do not place payment Secret Keys, JWT_SECRET, ADMIN_PASSWORD, or MFA secrets in GitHub files.
+- Toss payment is not exposed in Home2 checkout yet; bank-transfer order flow is used until the server-side
+  Toss approval/webhook flow is completed and verified before public sales.
+
+Changed/new files:
+- security-v98.js
+- package.json
+- render.yaml
+- public/home2.html
+- public/home2-v98.html
+- public/home2-v98.css
+- public/home2-v98.js
+- public/admin-security-v98.html
+- public/admin-security-v98.css
+- public/admin-security-v98.js
+- .github/dependabot.yml
+- .github/workflows/security-audit.yml

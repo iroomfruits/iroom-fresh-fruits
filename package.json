@@ -1,12 +1,13 @@
 {
   "name": "iroom-home1",
-  "version": "60.46.0",
+  "version": "60.98.0",
   "private": true,
-  "description": "IROOM Home2 V60.45 UI + Render dependency hotfix",
+  "description": "IROOM Home2 V60.98 backend integration + security hardening",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
-    "check": "node --check server.js && node --check public/iroom_assets/iroom-v60-45-home2-reference-fix.js && node --check public/sw.js"
+    "start": "node -r ./security-v98.js server.js",
+    "check": "node --check server.js && node --check security-v98.js && node --check public/home2-v98.js && node --check public/sw.js",
+    "security:check": "npm audit --audit-level=high"
   },
   "engines": {
     "node": ">=18"
@@ -15,6 +16,7 @@
     "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.7",
     "express": "^4.22.3",
+    "helmet": "^8.0.0",
     "jsonwebtoken": "^9.0.2",
     "pg": "^8.23.0"
   }
