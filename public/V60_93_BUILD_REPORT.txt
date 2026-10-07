@@ -1,0 +1,7 @@
+IROOM HOME2 V60.93 GIFT NATURAL + KAKAO
+- Base: V60.92 final integration
+- Gift Selection: replaced 6 cut/pasted-looking gift visuals with natural full gift-box crops from the approved catalog visual
+- Gift images remain clickable and open the existing product detail overlay
+- Kakao buttons now open the existing IROOM Kakao Open Chat directly: https://open.kakao.com/o/sd7wnrKi
+- No changes to locked main layout, seasonal 4-up auto slider, fruit curation, story, cart, ESC close behavior
+- New gift asset path: public/assets/home2-v93/
