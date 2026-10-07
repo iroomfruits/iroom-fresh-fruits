@@ -1,0 +1,24 @@
+IROOM HOME2 V60.98.1 — KAKAO RETURN + ESC HOTFIX
+=================================================
+Base: V60.98
+Date: 2026-10-08
+
+Fixed:
+1) Kakao login return path
+- V60.98 security preload created a hardened Kakao state cookie but did not create the legacy state/next cookies expected by the existing Home1 callback.
+- The callback therefore fell back to / and could show the old/unstyled homepage after Kakao login.
+- V60.98.1 keeps the hardened state cookie, mirrors the legacy state cookie for callback compatibility, and stores /home2.html as the default return path.
+- Kakao state errors now return to /home2.html?kakao=error instead of /.
+- The Home2 Kakao login button explicitly requests next=/home2.html.
+
+2) Seasonal Picks / full fruit page ESC
+- When the full fruit page (#fruits) is open and no detail/modal/cart is on top, ESC now closes it and returns to the Home2 main page.
+- Existing priority is preserved: product detail -> utility modal -> cart -> full fruit page.
+
+3) Cache refresh
+- Home2 HTML/JS cache-busters and service-worker registration query were bumped to 60.98.1.
+
+Deployment:
+- Overlay these files on V60.98 at repository root.
+- Keep the existing server.js and assets unchanged.
+- Render npm start remains: node -r ./security-v98.js server.js
