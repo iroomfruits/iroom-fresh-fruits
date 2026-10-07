@@ -1,0 +1,19 @@
+IROOM HOME2 V60.98.2 HOTFIX
+
+1) Kakao login return hard-fix
+- Callback now forces the legacy server next target to /home2.html.
+- Any callback redirect to /, /?..., or /#... is rewritten to /home2.html while preserving query/hash.
+- This prevents the unstyled legacy root page from appearing after Kakao login.
+- Callback response is no-store.
+
+2) Header utility icons
+- Replaced ambiguous Unicode glyphs with inline SVG icons.
+- Search: standard magnifying glass.
+- Login/MY IROOM: standard user-in-circle.
+- Cart: standard shopping cart with wheels.
+- Added subtle circular button surface, hover/focus states, and preserved cart badge.
+
+3) Existing V60.98.1 ESC behavior retained
+- Seasonal Picks full fruit page closes back to Home2 on ESC after overlays/drawer are closed.
+
+Upload this ZIP at the GitHub repository root and overwrite matching files, then redeploy Render.
