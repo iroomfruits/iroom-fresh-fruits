@@ -1,0 +1,14 @@
+IROOM HOME2 V60.94 — FOUR FRUIT STYLE SWAP
+
+Base: IROOM_HOME2 V60.93 LOCKED
+Changed only the requested uploaded fruit artwork:
+- 공주 밤: uploaded soft gouache/painterly chestnut
+- 경북 대추: uploaded soft gouache/painterly jujube
+- 대봉감: uploaded soft gouache/painterly persimmon
+- 이지플 사과: uploaded soft gouache/painterly apple
+- hero autumn chestnut also replaced with the same uploaded artwork
+
+No new AI image generation was used for this patch.
+The uploaded 2x2 image was only cropped/padded for the existing website slots.
+Seasonal product images remain clickable via existing data-product handlers and open product detail.
+V60.93 locked baseline is untouched for rollback.
