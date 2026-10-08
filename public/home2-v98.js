@@ -12,7 +12,7 @@ const DATA={
   {id:'autumn-pear',name:'신고배',origin:'국내산',pack:'3kg (6~8과)',price:38000,asset:'card-approved-pear.png',grade:'GRADE AA'},
   {id:'autumn-apple',name:'감홍 사과',origin:'국내산',pack:'2.5kg (8~10과)',price:32000,asset:'card-approved-apple.png',grade:'GRADE AA'},
   {id:'autumn-sweet-persimmon',name:'단감',origin:'국내산',pack:'3kg',price:28000,asset:'card-approved-persimmon.png',grade:'GRADE AA'},
-  {id:'autumn-chestnut',name:'공주 밤',origin:'국내산',pack:'1kg',price:42000,asset:'card-approved-chestnut.png',grade:'GRADE AA'},
+  {id:'autumn-chestnut',name:'밤',origin:'국내산',pack:'1kg',price:42000,asset:'card-approved-chestnut.png',grade:'GRADE AA'},
   {id:'autumn-jujube',name:'사과대추',origin:'국내산',pack:'1kg',price:24000,asset:'card-approved-jujube.png',grade:'GRADE AA'},
   {id:'autumn-daebong',name:'대봉감',origin:'국내산',pack:'3kg (4~6과)',price:34000,asset:'soft-autumn-daebong.webp',grade:'GRADE AA'},
   {id:'autumn-easypple',name:'부사',origin:'국내산',pack:'1.2kg (12~16과)',price:36000,asset:'soft-autumn-easypple.webp',grade:'GRADE AA'}
@@ -58,8 +58,8 @@ const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const fmt=n=>n.toLocaleString('ko-KR')+'원';
 const img=(p,kind='canvas')=>{
  if(p.isGift)return G+p.asset;
- if(kind==='hero'&&V95_HERO.has(p.id))return V95+'hero-'+p.id+'.webp?v=60.95';
- if(kind!=='hero'&&V95_CARD.has(p.id))return V95+p.id+'.webp?v=60.95';
+ if(kind==='hero'&&V95_HERO.has(p.id))return V95+'hero-'+p.id+'.webp?v=60.99.1';
+ if(kind!=='hero'&&V95_CARD.has(p.id))return V95+p.id+'.webp?v=60.99.1';
  return A+(kind==='hero'?'hero-':'')+p.id+'.webp';
 };
 const products=()=>Object.values(DATA).flat();
@@ -74,7 +74,7 @@ const nl2br=v=>esc(v).replace(/\n/g,'<br>');
 const normalizeName=v=>String(v||'').toLowerCase().replace(/\s+/g,'').replace(/[·ㆍ.\-_/()]/g,'');
 const SERVER_NAME_ALIASES={
  '샤인머스켓':['샤인머스켓'], '신고배':['신고배','나주배','배'], '감홍사과':['감홍사과','사과'], '단감':['단감'],
- '공주밤':['공주밤','밤'], '사과대추':['사과대추','경북대추','대추'], '대봉감':['대봉감'], '부사':['부사','이지플','이지플사과'],
+ '밤':['밤','공주밤'], '사과대추':['사과대추','경북대추','대추'], '대봉감':['대봉감'], '부사':['부사','이지플','이지플사과'],
  '딸기':['딸기'], '참외':['참외'], '체리':['체리'], '살구':['살구'], '복숭아':['복숭아'], '수박':['수박'], '멜론':['멜론'],
  '자두':['자두'], '천도복숭아':['천도복숭아'], '한라봉':['한라봉'], '레드향':['레드향'], '천혜향':['천혜향'], '키위':['키위']
 };
