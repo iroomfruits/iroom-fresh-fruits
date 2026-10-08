@@ -1,6 +1,6 @@
 'use strict';
 
-// IROOM HOME2 V60.98.3 security preload — hard Kakao Home2 return fix.
+// IROOM HOME2 V60.98 security preload.
 // Loaded before server.js via: node -r ./security-v98.js server.js
 // It strengthens the existing server without rewriting the proven Home1 backend.
 
@@ -268,37 +268,8 @@ const installed = new WeakSet();
 function kakaoStateGuard(req, res, next) {
   const expected = cookieValue(req, KAKAO_STATE_COOKIE);
   const actual = String(req.query?.state || '');
-  if (!expected || !actual || !timingSafeEqualText(expected, actual)) return res.redirect('/home2.html?kakao=error');
+  if (!expected || !actual || !timingSafeEqualText(expected, actual)) return res.redirect('/?kakao=error');
   res.setHeader('Set-Cookie', `${KAKAO_STATE_COOKIE}=; Path=/; SameSite=Lax; HttpOnly${SECURE ? '; Secure' : ''}; Max-Age=0`);
-  next();
-}
-
-// Home2 owns the Kakao login button. The legacy Home1 callback still defaults to `/`,
-// so force both its parsed next-cookie and any root redirect back to Home2.
-function kakaoHome2Return(req, res, next) {
-  try {
-    if (req.cookies && typeof req.cookies === 'object') req.cookies.iroom_kakao_next = '/home2.html';
-  } catch (_) {}
-
-  const originalRedirect = res.redirect.bind(res);
-  res.redirect = function patchedKakaoRedirect(...args) {
-    const targetIndex = args.length - 1;
-    let target = String(args[targetIndex] || '');
-    try {
-      if (target === '/' || target.startsWith('/?') || target.startsWith('/#')) {
-        target = '/home2.html' + target.slice(1);
-      } else if (/^https?:\/\//i.test(target)) {
-        const u = new URL(target);
-        const requestOrigin = `${req.protocol}://${req.get('host')}`;
-        if (u.origin === requestOrigin && (u.pathname === '/' || u.pathname === '')) {
-          target = '/home2.html' + u.search + u.hash;
-        }
-      }
-    } catch (_) {}
-    args[targetIndex] = target;
-    return originalRedirect(...args);
-  };
-  res.setHeader('Cache-Control', 'no-store');
   next();
 }
 
@@ -315,7 +286,7 @@ function installSecurity(app) {
   }
 
   originalUse.call(app, (req, res, next) => {
-    res.setHeader('X-Iroom-Security', 'v60.98.3');
+    res.setHeader('X-Iroom-Security', 'v60.98');
     if (!res.getHeader('X-Request-ID')) res.setHeader('X-Request-ID', crypto.randomUUID());
     next();
   });
@@ -386,21 +357,8 @@ function installSecurity(app) {
     if (!clientId) return res.status(503).send('카카오 로그인 설정이 아직 완료되지 않았습니다.');
     const redirect = String(process.env.KAKAO_REDIRECT_URI || `${PUBLIC_BASE_URL || `${req.protocol}://${req.get('host')}`}/api/auth/kakao/callback`).trim();
     const state = crypto.randomBytes(18).toString('base64url');
-    const rawNext = String(req.query?.next || '/home2.html');
-    const next = rawNext.startsWith('/') && !rawNext.startsWith('//') ? rawNext.slice(0, 300) : '/home2.html';
-    const mode = req.query?.mode === 'join' ? 'join' : 'login';
-    const secureFlag = SECURE ? '; Secure' : '';
-    const cookies = [
-      `${KAKAO_STATE_COOKIE}=${state}; Path=/; SameSite=Lax; HttpOnly${secureFlag}; Max-Age=600; Priority=High`,
-      `iroom_kakao_next=${encodeURIComponent(next)}; Path=/; SameSite=Lax; HttpOnly${secureFlag}; Max-Age=600; Priority=High`,
-      `iroom_kakao_mode=${mode}; Path=/; SameSite=Lax; HttpOnly${secureFlag}; Max-Age=600; Priority=High`
-    ];
-    // The existing Home1 Kakao callback still validates the legacy state cookie.
-    // Keep the hardened __Host cookie AND the legacy cookie in sync so both guards pass.
-    if (KAKAO_STATE_COOKIE !== 'iroom_kakao_state') {
-      cookies.push(`iroom_kakao_state=${state}; Path=/; SameSite=Lax; HttpOnly${secureFlag}; Max-Age=600; Priority=High`);
-    }
-    res.setHeader('Set-Cookie', cookies);
+    const stateCookie = `${KAKAO_STATE_COOKIE}=${state}; Path=/; SameSite=Lax; HttpOnly${SECURE ? '; Secure' : ''}; Max-Age=600; Priority=High`;
+    res.setHeader('Set-Cookie', stateCookie);
     const u = new URL('https://kauth.kakao.com/oauth/authorize');
     u.searchParams.set('client_id', clientId);
     u.searchParams.set('redirect_uri', redirect);
@@ -422,7 +380,7 @@ express.application.get = function patchedGet(path, ...handlers) {
       res.status(410).json({ error: '이 주문조회 방식은 보안상 종료되었습니다. POST /api/orders/lookup을 이용해주세요.' });
     });
   }
-  if (path === '/api/auth/kakao/callback') { handlers.unshift(kakaoHome2Return); handlers.unshift(kakaoStateGuard); }
+  if (path === '/api/auth/kakao/callback') handlers.unshift(kakaoStateGuard);
   if (path === '/api/admin/backup') handlers.unshift(sensitiveAdminTotp);
   return originalGet.call(this, path, ...handlers);
 };
@@ -447,4 +405,4 @@ express.application.put = function patchedPut(path, ...handlers) {
   return originalPut.call(this, path, ...handlers);
 };
 
-console.log('[IROOM SECURITY] V60.98.3 preload active');
+console.log('[IROOM SECURITY] V60.98 preload active');
