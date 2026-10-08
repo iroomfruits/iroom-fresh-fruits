@@ -99,3 +99,32 @@ button,a,input,select{-webkit-tap-highlight-color:transparent}button:focus,a:foc
 
 
 /* V60.98.2 — clearer universal search/account/cart icons */
+
+
+/* V61.02 WORLD FRUIT SELECT */
+.worldSection{margin-top:10px;margin-bottom:18px;padding-top:38px;padding-bottom:38px;border-radius:30px;background:linear-gradient(135deg,rgba(244,239,224,.92),rgba(232,239,229,.82));border:1px solid rgba(24,60,50,.07)}
+.worldIntro{display:flex;align-items:end;justify-content:space-between;gap:30px;margin-bottom:20px}
+.worldIntro h2{font-family:var(--serif);font-size:32px;font-weight:600;letter-spacing:-.035em;margin:7px 0 8px}
+.worldIntro p{margin:0;color:#66726b;font-size:11px;line-height:1.8}
+.worldGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.worldProductCard{background:rgba(255,255,252,.94)}
+.worldProductCard .productImgBtn{background:rgba(225,228,215,.90);padding:22px}
+.worldProductCard .productImgBtn img{width:92%;height:92%}
+.worldBadge{display:inline-flex;margin-left:8px;padding:3px 7px;border-radius:99px;background:#203c33;color:#fff;font-family:Arial,sans-serif;font-size:7px;letter-spacing:.12em;vertical-align:middle}
+.worldInquiry{background:#203c33;color:#fff;border-color:#203c33}
+.worldNote{margin:14px 3px 0;color:#79817d;font-size:9px;line-height:1.6}
+.seasonTab[data-season="import"].active{background:#745728;color:#fff}
+@media(max-width:1100px){.worldGrid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:760px){
+ .worldSection{margin-left:8px;margin-right:8px;padding:28px 12px;border-radius:22px}
+ .worldIntro{display:block}.worldIntro .textLink{margin-top:12px}
+ .worldIntro h2{font-size:27px}.worldIntro p br{display:none}
+ .worldGrid{grid-template-columns:1fr 1fr;gap:10px}
+ .worldGrid .productCard{min-height:350px;padding:9px}
+ .worldGrid .productImgBtn{height:190px;padding:14px}
+ .worldGrid .productName{font-size:17px}
+ .worldBadge{display:block;width:max-content;margin:5px 0 0}
+ .worldGrid .productSpec{font-size:9px}
+ .worldGrid .productPrice{font-size:13px}
+ .worldGrid .cartBar{font-size:9px}
+}
