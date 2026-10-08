@@ -1,6 +1,6 @@
 'use strict';
 
-// IROOM HOME2 V60.98.1 security preload — Kakao return compatibility fix.
+// IROOM HOME2 V60.98.2 security preload — hard Kakao Home2 return fix.
 // Loaded before server.js via: node -r ./security-v98.js server.js
 // It strengthens the existing server without rewriting the proven Home1 backend.
 
@@ -273,6 +273,35 @@ function kakaoStateGuard(req, res, next) {
   next();
 }
 
+// Home2 owns the Kakao login button. The legacy Home1 callback still defaults to `/`,
+// so force both its parsed next-cookie and any root redirect back to Home2.
+function kakaoHome2Return(req, res, next) {
+  try {
+    if (req.cookies && typeof req.cookies === 'object') req.cookies.iroom_kakao_next = '/home2.html';
+  } catch (_) {}
+
+  const originalRedirect = res.redirect.bind(res);
+  res.redirect = function patchedKakaoRedirect(...args) {
+    const targetIndex = args.length - 1;
+    let target = String(args[targetIndex] || '');
+    try {
+      if (target === '/' || target.startsWith('/?') || target.startsWith('/#')) {
+        target = '/home2.html' + target.slice(1);
+      } else if (/^https?:\/\//i.test(target)) {
+        const u = new URL(target);
+        const requestOrigin = `${req.protocol}://${req.get('host')}`;
+        if (u.origin === requestOrigin && (u.pathname === '/' || u.pathname === '')) {
+          target = '/home2.html' + u.search + u.hash;
+        }
+      }
+    } catch (_) {}
+    args[targetIndex] = target;
+    return originalRedirect(...args);
+  };
+  res.setHeader('Cache-Control', 'no-store');
+  next();
+}
+
 function installSecurity(app) {
   if (installed.has(app)) return;
   installed.add(app);
@@ -286,7 +315,7 @@ function installSecurity(app) {
   }
 
   originalUse.call(app, (req, res, next) => {
-    res.setHeader('X-Iroom-Security', 'v60.98.1');
+    res.setHeader('X-Iroom-Security', 'v60.98.2');
     if (!res.getHeader('X-Request-ID')) res.setHeader('X-Request-ID', crypto.randomUUID());
     next();
   });
@@ -393,7 +422,7 @@ express.application.get = function patchedGet(path, ...handlers) {
       res.status(410).json({ error: '이 주문조회 방식은 보안상 종료되었습니다. POST /api/orders/lookup을 이용해주세요.' });
     });
   }
-  if (path === '/api/auth/kakao/callback') handlers.unshift(kakaoStateGuard);
+  if (path === '/api/auth/kakao/callback') { handlers.unshift(kakaoHome2Return); handlers.unshift(kakaoStateGuard); }
   if (path === '/api/admin/backup') handlers.unshift(sensitiveAdminTotp);
   return originalGet.call(this, path, ...handlers);
 };
@@ -418,4 +447,4 @@ express.application.put = function patchedPut(path, ...handlers) {
   return originalPut.call(this, path, ...handlers);
 };
 
-console.log('[IROOM SECURITY] V60.98.1 preload active');
+console.log('[IROOM SECURITY] V60.98.2 preload active');
