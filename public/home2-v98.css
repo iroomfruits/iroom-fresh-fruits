@@ -128,3 +128,94 @@ button,a,input,select{-webkit-tap-highlight-color:transparent}button:focus,a:foc
  .worldGrid .productPrice{font-size:13px}
  .worldGrid .cartBar{font-size:9px}
 }
+
+
+/* V61.03 — VISUAL HIERARCHY SWAP
+   Positions stay exactly the same.
+   Seasonal Picks becomes the visual hero section.
+   World Fruit Select becomes quieter/open like the old seasonal section. */
+
+.seasonalFeatureSection{
+  margin-top:10px;
+  margin-bottom:18px;
+  padding-top:38px;
+  padding-bottom:38px;
+  border-radius:30px;
+  background:linear-gradient(135deg,rgba(244,239,224,.92),rgba(232,239,229,.82));
+  border:1px solid rgba(24,60,50,.07)
+}
+.seasonalFeatureIntro{
+  display:flex;
+  align-items:end;
+  justify-content:space-between;
+  gap:30px;
+  margin-bottom:20px
+}
+.seasonalFeatureIntro h2{
+  font-family:var(--serif);
+  font-size:32px;
+  font-weight:600;
+  letter-spacing:-.035em;
+  margin:7px 0 8px
+}
+.seasonalFeatureIntro p{
+  margin:0;
+  color:#66726b;
+  font-size:11px;
+  line-height:1.8
+}
+
+/* World section deliberately loses the highlighted box. */
+.worldSimpleSection{
+  margin-top:0;
+  margin-bottom:0;
+  padding-top:28px;
+  padding-bottom:28px;
+  border-radius:0;
+  background:transparent;
+  border:0
+}
+.worldSimpleSection .worldGrid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:16px
+}
+.worldSimpleSection .worldProductCard{
+  background:rgba(255,255,252,.90)
+}
+.worldSimpleSection .worldProductCard .productImgBtn{
+  background:#d8ddd2
+}
+
+/* Neutralize the older highlighted world wrapper if any cached markup survives. */
+.worldSection{
+  background:transparent;
+  border:0;
+  border-radius:0
+}
+
+@media(max-width:1100px){
+  .worldSimpleSection .worldGrid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:760px){
+  .seasonalFeatureSection{
+    margin-left:8px;
+    margin-right:8px;
+    padding:28px 12px;
+    border-radius:22px
+  }
+  .seasonalFeatureIntro{display:block}
+  .seasonalFeatureIntro .textLink{margin-top:12px}
+  .seasonalFeatureIntro h2{font-size:27px}
+  .seasonalFeatureIntro p br{display:none}
+  .worldSimpleSection{
+    margin-left:0;
+    margin-right:0;
+    padding-left:16px;
+    padding-right:16px
+  }
+  .worldSimpleSection .worldGrid{
+    grid-template-columns:1fr 1fr;
+    gap:10px
+  }
+}
