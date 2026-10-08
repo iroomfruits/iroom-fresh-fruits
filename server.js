@@ -517,7 +517,8 @@ app.get('/api/auth/kakao/callback',async(req,res)=>{
       );
       u=r.rows[0];
     }else{
-      await pool.query('UPDATE users SET last_login_at=NOW() WHERE id=$1',[u.id]).catch(()=>{});
+     const updated=await pool.query('UPDATE users SET name=$1,last_login_at=NOW() WHERE id=$2 RETURNING *',[name,u.id]);
+u=updated.rows[0]||u;
     }
 
     setAuthCookie(res,token({userId:u.id,username:u.username,email:u.email,name:u.name}));
