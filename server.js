@@ -1028,14 +1028,47 @@ app.get("/api/payment/config",(req,res)=>{
 app.get("/band-order.html",(req,res)=>res.sendFile(path.join(__dirname,"public","band-order.html")));
 app.get("/band-admin.html",(req,res)=>res.sendFile(path.join(__dirname,"public","band-admin.html")));
 app.get("/healthz",(req,res)=>res.json({ok:true,time:new Date().toISOString()}));
+app.get("/api/site/home-style",async(req,res)=>{
+  try{
+    const style=await getSetting("public_home_style","home1");
+    const v=String(style?.setting_value??style??"home1");
+    res.json({ok:true,style:["home1","home2"].includes(v)?v:"home1"});
+  }catch(e){
+    res.json({ok:true,style:"home1"});
+  }
+});
+
+app.get("/api/admin/site/home-style",requireAdmin,async(req,res)=>{
+  const style=await getSetting("public_home_style","home1");
+  const v=String(style?.setting_value??style??"home1");
+  res.json({ok:true,style:["home1","home2"].includes(v)?v:"home1"});
+});
+
+app.put("/api/admin/site/home-style",requireAdmin,async(req,res)=>{
+  const style=String(req.body?.style||"").trim();
+  if(!["home1","home2"].includes(style)){
+    return res.status(400).json({ok:false,error:"홈페이지 버전을 확인해 주세요."});
+  }
+  await putSetting("public_home_style",style);
+  logSecurity("admin_home_style_updated","admin",req,style);
+  res.json({ok:true,style});
+});
 app.get("/home1",(req,res)=>res.sendFile(path.join(__dirname,"public","index.html")));
 app.get("/home2",(req,res)=>res.sendFile(path.join(__dirname,"public","home2.html")));
 app.get("/home1/",(req,res)=>res.redirect(301,"/home1"));
 app.get("/home2/",(req,res)=>res.redirect(301,"/home2"));
 // static site — Home2 is the public root. HTML must never be served from a stale cache after OAuth return.
-app.get("/",(req,res)=>{
+app.get("/",async(req,res)=>{
   res.setHeader("Cache-Control","no-store");
-  res.sendFile(path.join(__dirname,"public","home2.html"));
+  try{
+    const style=await getSetting("public_home_style","home1");
+    const v=String(style?.setting_value??style??"home1");
+    return res.sendFile(
+      path.join(__dirname,"public",v==="home2"?"home2.html":"index.html")
+    );
+  }catch(_){
+    return res.sendFile(path.join(__dirname,"public","index.html"));
+  }
 });
 app.use(express.static(path.join(__dirname,"public"),{
   etag:true,maxAge:"5m",setHeaders(res,file){
