@@ -4,12 +4,30 @@ const G='./assets/home2-v93/';
 const V95='./assets/home2-v95/';
 const V95_CARD=new Set(['autumn-chestnut','autumn-jujube','autumn-daebong','autumn-easypple','spring-apricot','summer-plum','summer-nectarine','winter-hallabong','winter-redhyang','winter-cheonhyehyang','winter-kiwi']);
 const V95_HERO=new Set(['autumn-chestnut','spring-apricot','summer-plum','winter-hallabong','winter-redhyang','winter-cheonhyehyang']);
-const IMPORT_ASSET_PATH='./assets/home2-v100/';
+const IMPORT_ASSET_PATH='./assets/home2-v101/';
 const IMPORT_CARD_ASSETS={
- 'world-cherry':'import-cherry.png',
- 'world-orange':'import-orange.png',
- 'world-mango':'import-mango.png',
- 'world-grapefruit':'import-grapefruit.png'
+ 'world-cherry':'world-cherry.webp',
+ 'world-orange':'world-orange.webp',
+ 'world-mango':'world-mango.webp',
+ 'world-grapefruit':'world-grapefruit.webp',
+ 'world-lemon':'world-lemon.webp',
+ 'world-blueberry':'world-blueberry.webp',
+ 'world-kiwi':'world-kiwi.webp',
+ 'world-pineapple':'world-pineapple.webp',
+ 'world-avocado':'world-avocado.webp',
+ 'world-dragonfruit':'world-dragonfruit.webp',
+ 'world-banana':'world-banana.webp',
+ 'world-green-grape':'world-green-grape.webp',
+ 'world-red-grape':'world-red-grape.webp',
+ 'world-papaya':'world-papaya.webp',
+ 'world-coconut':'world-coconut.webp',
+ 'world-lime':'world-lime.webp',
+ 'world-pomegranate':'world-pomegranate.webp',
+ 'world-passionfruit':'world-passionfruit.webp',
+ 'world-lychee':'world-lychee.webp',
+ 'world-mangosteen':'world-mangosteen.webp',
+ 'world-pomelo':'world-pomelo.webp',
+ 'world-fig':'world-fig.webp'
 };
 const KAKAO_OPEN_CHAT='https://open.kakao.com/o/sd7wnrKi';
 const NOTICE=['IROOM NOTICE','오늘 받은 과일의 맛이나 상태가 기대에 미치지 않으면 상담 후 정성껏 다시 도와드립니다.','지금 가장 맛있는 과일을 엄선해 소개합니다.','신선한 과일은 상태에 맞춰 안전하게 포장해 보내드립니다.'];
@@ -58,10 +76,28 @@ const GIFTS=[
  {id:'gift-thanks',isGift:true,name:'마음 담은 과일 선물',origin:'이룸 셀렉트',pack:'감홍 사과 · 신고배 · 샤인머스켓 · 한라봉',price:69000,asset:'gift-thanks.webp',grade:'PREMIUM GIFT'}
 ];
 const WORLD_FRUITS=[
- {id:'world-cherry',name:'체리',origin:'원산지 입고별 안내',pack:'입고 규격별',price:0,asset:'import-cherry.png',grade:'WORLD SELECT',imported:true},
- {id:'world-orange',name:'오렌지',origin:'원산지 입고별 안내',pack:'입고 규격별',price:0,asset:'import-orange.png',grade:'WORLD SELECT',imported:true},
- {id:'world-mango',name:'망고',origin:'원산지 입고별 안내',pack:'입고 규격별',price:0,asset:'import-mango.png',grade:'WORLD SELECT',imported:true},
- {id:'world-grapefruit',name:'자몽',origin:'원산지 입고별 안내',pack:'입고 규격별',price:0,asset:'import-grapefruit.png',grade:'WORLD SELECT',imported:true}
+ {id:'world-cherry',name:'체리',origin:'원산지 입고별 안내',pack:'입고 규격별',price:0,asset:IMPORT_CARD_ASSETS['world-cherry'],grade:'WORLD SELECT',imported:true},
+ {id:'world-orange',name:'오렌지',origin:'원산지 입고별 안내',pack:'입고 규격별',price:0,asset:IMPORT_CARD_ASSETS['world-orange'],grade:'WORLD SELECT',imported:true},
+ {id:'world-mango',name:'망고',origin:'원산지 입고별 안내',pack:'입고 규격별',price:0,asset:IMPORT_CARD_ASSETS['world-mango'],grade:'WORLD SELECT',imported:true},
+ {id:'world-grapefruit',name:'자몽',origin:'원산지 입고별 안내',pack:'입고 규격별',price:0,asset:IMPORT_CARD_ASSETS['world-grapefruit'],grade:'WORLD SELECT',imported:true},
+ {id:'world-banana',name:'바나나',origin:'원산지 입고별 안내',pack:'입고 규격별',price:0,asset:IMPORT_CARD_ASSETS['world-banana'],grade:'WORLD SELECT',imported:true},
+ {id:'world-pineapple',name:'파인애플',origin:'원산지 입고별 안내',pack:'입고 규격별',price:0,asset:IMPORT_CARD_ASSETS['world-pineapple'],grade:'WORLD SELECT',imported:true},
+ {id:'world-avocado',name:'아보카도',origin:'원산지 입고별 안내',pack:'입고 규격별',price:0,asset:IMPORT_CARD_ASSETS['world-avocado'],grade:'WORLD SELECT',imported:true},
+ {id:'world-blueberry',name:'블루베리',origin:'원산지 입고별 안내',pack:'입고 규격별',price:0,asset:IMPORT_CARD_ASSETS['world-blueberry'],grade:'WORLD SELECT',imported:true},
+ {id:'world-lemon',name:'레몬',origin:'원산지 입고별 안내',pack:'입고 규격별',price:0,asset:IMPORT_CARD_ASSETS['world-lemon'],grade:'WORLD SELECT',imported:true},
+ {id:'world-kiwi',name:'그린키위',origin:'원산지 입고별 안내',pack:'입고 규격별',price:0,asset:IMPORT_CARD_ASSETS['world-kiwi'],grade:'WORLD SELECT',imported:true},
+ {id:'world-dragonfruit',name:'용과',origin:'원산지 입고별 안내',pack:'입고 규격별',price:0,asset:IMPORT_CARD_ASSETS['world-dragonfruit'],grade:'WORLD SELECT',imported:true},
+ {id:'world-green-grape',name:'청포도',origin:'원산지 입고별 안내',pack:'입고 규격별',price:0,asset:IMPORT_CARD_ASSETS['world-green-grape'],grade:'WORLD SELECT',imported:true},
+ {id:'world-red-grape',name:'적포도',origin:'원산지 입고별 안내',pack:'입고 규격별',price:0,asset:IMPORT_CARD_ASSETS['world-red-grape'],grade:'WORLD SELECT',imported:true},
+ {id:'world-papaya',name:'파파야',origin:'원산지 입고별 안내',pack:'입고 규격별',price:0,asset:IMPORT_CARD_ASSETS['world-papaya'],grade:'WORLD SELECT',imported:true},
+ {id:'world-coconut',name:'코코넛',origin:'원산지 입고별 안내',pack:'입고 규격별',price:0,asset:IMPORT_CARD_ASSETS['world-coconut'],grade:'WORLD SELECT',imported:true},
+ {id:'world-lime',name:'라임',origin:'원산지 입고별 안내',pack:'입고 규격별',price:0,asset:IMPORT_CARD_ASSETS['world-lime'],grade:'WORLD SELECT',imported:true},
+ {id:'world-pomegranate',name:'석류',origin:'원산지 입고별 안내',pack:'입고 규격별',price:0,asset:IMPORT_CARD_ASSETS['world-pomegranate'],grade:'WORLD SELECT',imported:true},
+ {id:'world-passionfruit',name:'패션프루트',origin:'원산지 입고별 안내',pack:'입고 규격별',price:0,asset:IMPORT_CARD_ASSETS['world-passionfruit'],grade:'WORLD SELECT',imported:true},
+ {id:'world-lychee',name:'리치',origin:'원산지 입고별 안내',pack:'입고 규격별',price:0,asset:IMPORT_CARD_ASSETS['world-lychee'],grade:'WORLD SELECT',imported:true},
+ {id:'world-mangosteen',name:'망고스틴',origin:'원산지 입고별 안내',pack:'입고 규격별',price:0,asset:IMPORT_CARD_ASSETS['world-mangosteen'],grade:'WORLD SELECT',imported:true},
+ {id:'world-pomelo',name:'포멜로',origin:'원산지 입고별 안내',pack:'입고 규격별',price:0,asset:IMPORT_CARD_ASSETS['world-pomelo'],grade:'WORLD SELECT',imported:true},
+ {id:'world-fig',name:'무화과',origin:'원산지 입고별 안내',pack:'입고 규격별',price:0,asset:IMPORT_CARD_ASSETS['world-fig'],grade:'WORLD SELECT',imported:true}
 ];
 const month=(new Date()).getMonth()+1;
 const CURRENT_SEASON=month>=3&&month<=5?'spring':month>=6&&month<=8?'summer':month>=9&&month<=11?'autumn':'winter';
@@ -69,12 +105,12 @@ const labels={spring:'봄',summer:'여름',autumn:'가을',winter:'겨울',impor
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const fmt=n=>n.toLocaleString('ko-KR')+'원';
 const displayPrice=p=>p.imported&&!p.serverLinked?'입고 시세':fmt(p.price);
-const importSelection=()=>WORLD_FRUITS;
+const importSelection=()=>WORLD_FRUITS.slice(0,8);
 const img=(p,kind='canvas')=>{
  if(p.isGift)return G+p.asset;
- if(kind!=='hero'&&IMPORT_CARD_ASSETS[p.id])return IMPORT_ASSET_PATH+IMPORT_CARD_ASSETS[p.id]+'?v=61.03.0';
- if(kind==='hero'&&V95_HERO.has(p.id))return V95+'hero-'+p.id+'.webp?v=61.03.0';
- if(kind!=='hero'&&V95_CARD.has(p.id))return V95+p.id+'.webp?v=61.03.0';
+ if(kind!=='hero'&&IMPORT_CARD_ASSETS[p.id])return IMPORT_ASSET_PATH+IMPORT_CARD_ASSETS[p.id]+'?v=61.04.0';
+ if(kind==='hero'&&V95_HERO.has(p.id))return V95+'hero-'+p.id+'.webp?v=61.04.0';
+ if(kind!=='hero'&&V95_CARD.has(p.id))return V95+p.id+'.webp?v=61.04.0';
  return A+(kind==='hero'?'hero-':'')+p.id+'.webp';
 };
 const domesticProducts=()=>Object.values(DATA).flat();
@@ -93,7 +129,11 @@ const SERVER_NAME_ALIASES={
  '밤':['밤','공주밤'], '사과대추':['사과대추','경북대추','대추'], '대봉감':['대봉감'], '부사':['부사','이지플','이지플사과'],
  '딸기':['딸기'], '참외':['참외'], '체리':['체리'], '살구':['살구'], '복숭아':['복숭아'], '수박':['수박'], '멜론':['멜론'],
  '자두':['자두'], '천도복숭아':['천도복숭아'], '한라봉':['한라봉'], '레드향':['레드향'], '천혜향':['천혜향'], '키위':['키위'],
- '오렌지':['오렌지'], '망고':['망고'], '자몽':['자몽']
+ '오렌지':['오렌지'], '망고':['망고'], '자몽':['자몽'], '체리':['체리'],
+ '바나나':['바나나'], '파인애플':['파인애플'], '아보카도':['아보카도'], '블루베리':['블루베리'],
+ '레몬':['레몬'], '그린키위':['그린키위'], '용과':['용과','드래곤프루트'], '청포도':['청포도'], '적포도':['적포도'],
+ '파파야':['파파야'], '코코넛':['코코넛'], '라임':['라임'], '석류':['석류'], '패션프루트':['패션프루트'],
+ '리치':['리치','여지'], '망고스틴':['망고스틴'], '포멜로':['포멜로'], '무화과':['무화과']
 };
 async function ensureCsrf(){
  if(csrfChecked)return csrfToken;
@@ -199,7 +239,7 @@ function openSearch(){openUtility('상품 검색',`<div class="searchBox"><input
 async function copyText(v){try{await navigator.clipboard.writeText(v);return true}catch{}try{const ta=document.createElement('textarea');ta.value=v;ta.className='clipboardHelper';document.body.appendChild(ta);ta.select();const ok=document.execCommand('copy');ta.remove();return ok}catch{return false}}
 function kakaoAction(){const url=currentKakao();const w=window.open(url,'_blank','noopener,noreferrer');if(w){try{w.opener=null}catch{}}else{location.href=url}}
 async function shareAction(){try{if(navigator.share){await navigator.share({title:'이룸 fresh fruits',text:'좋은 과일로 마음을 전합니다.',url:location.href});return}}catch{}const ok=await copyText(location.href);toast(ok?'현재 페이지 주소를 복사했습니다.':'주소 복사를 지원하지 않는 브라우저입니다.')}
-async function installAction(){if(installPrompt){installPrompt.prompt();try{await installPrompt.userChoice}catch{}installPrompt=null;return}if('serviceWorker' in navigator&&location.protocol!=='file:'){try{await navigator.serviceWorker.register('/sw.js?v=61.03.0')}catch(_){}}toast('브라우저 메뉴의 홈 화면에 추가/앱 설치 기능을 이용해 주세요.')}
+async function installAction(){if(installPrompt){installPrompt.prompt();try{await installPrompt.userChoice}catch{}installPrompt=null;return}if('serviceWorker' in navigator&&location.protocol!=='file:'){try{await navigator.serviceWorker.register('/sw.js?v=61.04.0')}catch(_){}}toast('브라우저 메뉴의 홈 화면에 추가/앱 설치 기능을 이용해 주세요.')}
 function toast(t){const el=$('#toast');el.textContent=t;el.hidden=false;clearTimeout(timer);timer=setTimeout(()=>el.hidden=true,1600)}
 function qty(){return Math.max(1,parseInt($('#qty')?.value||'1'))}
 document.addEventListener('click',e=>{const r=e.target.closest('[data-route]');if(r){go(r.dataset.route);return}const cp=e.target.closest('[data-curation]');if(cp){setCurationPreset(cp.dataset.curation.split(','));return}const pick=e.target.closest('[data-pick]');if(pick){const id=pick.dataset.pick;if(curationSelected.has(id))curationSelected.delete(id);else if(curationSelected.size<6)curationSelected.add(id);else{toast('맞춤 구성은 최대 6종까지 선택할 수 있어요.');return}renderCurationSelected();return}const rp=e.target.closest('[data-remove-pick]');if(rp){curationSelected.delete(rp.dataset.removePick);renderCurationSelected();return}if(e.target.closest('[data-clear-picks]')){curationSelected.clear();renderCurationSelected();return}if(e.target.closest('[data-add-picks]')){if(!curationSelected.size){toast('먼저 과일을 골라주세요.');return}[...curationSelected].forEach(id=>add(id,1,true));saveCart();toast(`${curationSelected.size}가지 과일을 장바구니에 담았습니다.`);return}if(e.target.closest('[data-consult]')){openConsultation();return}if(e.target.closest('[data-search]')){openSearch();return}if(e.target.closest('[data-account]')){openAccount();return}if(e.target.closest('[data-open-login]')){openLogin();return}if(e.target.closest('[data-open-signup]')){openSignup();return}if(e.target.closest('[data-open-import]')){route='fruits';season='import';history.pushState({},'','#fruits');render();scrollTo({top:0,behavior:'smooth'});return}if(e.target.closest('[data-my-orders]')){openMyOrders();return}if(e.target.closest('[data-logout]')){logout();return}if(e.target.closest('[data-kakao-login]')){location.href='/api/auth/kakao/start?next='+encodeURIComponent('/home2.html');return}if(e.target.closest('[data-utility-close]')||e.target.id==='utilityOverlay'){closeUtility();return}const fi=e.target.closest('[data-footer-info]');if(fi){footerInfo(fi.dataset.footerInfo);return}if(e.target.closest('[data-kakao]')){kakaoAction();return}if(e.target.closest('[data-share]')){shareAction();return}if(e.target.closest('[data-install]')){installAction();return}if(e.target.closest('[data-search-go]')){renderSearch($('#siteSearch')?.value||'');return}const p=e.target.closest('[data-product]');if(p){if(!$('#utilityOverlay').hidden)closeUtility();openDetail(p.dataset.product);return}const a=e.target.closest('[data-add]');if(a){add(a.dataset.add);return}if(e.target.closest('[data-cart]')){openCart();return}if(e.target.closest('[data-checkout]')){closeCart();openCheckout();return}if(e.target.closest('[data-close-cart]')||e.target.id==='scrim'){closeCart();return}if(e.target.closest('[data-detail-close]')||e.target.id==='detailOverlay'){closeDetail();return}const da=e.target.closest('[data-detail-add]');if(da){add(da.dataset.detailAdd,qty());return}const buy=e.target.closest('[data-buy-now]');if(buy){const id=buy.dataset.buyNow,q=qty();closeDetail();openCheckout(id,q);return}const q=e.target.closest('[data-qty]');if(q){const i=$('#qty'),p=find($('#detailOverlay').dataset.id);const limit=p?.serverLinked?Math.max(1,Number(p.stock)||1):20;i.value=Math.min(limit,Math.max(1,qty()+Number(q.dataset.qty)));$('#sum').textContent=fmt(p.price*qty());return}const cq=e.target.closest('[data-cqty]');if(cq){const [i,d]=cq.dataset.cqty.split(':').map(Number),p=find(cart[i]?.id);const limit=p?.serverLinked?Math.max(1,Number(p.stock)||1):20;cart[i].qty=Math.min(limit,Math.max(1,cart[i].qty+d));saveCart();return}const rm=e.target.closest('[data-remove]');if(rm){cart.splice(Number(rm.dataset.remove),1);saveCart();return}const ss=e.target.closest('[data-season]');if(ss){season=ss.dataset.season;render();return}const hb=e.target.closest('[data-hero]');if(hb){heroIndex=Number(hb.dataset.hero);syncHero();startHeroTimer();return}if(e.target.closest('[data-hero-next]')){heroIndex=(heroIndex+1)%heroCount();syncHero();startHeroTimer();return}if(e.target.closest('[data-hero-prev]')){heroIndex=(heroIndex-1+heroCount())%heroCount();syncHero();startHeroTimer();return}if(e.target.closest('[data-slide-next]')){slideBy(1);return}if(e.target.closest('[data-slide-prev]')){slideBy(-1);return}const sd=e.target.closest('[data-slide-dot]');if(sd){slideIndex=Number(sd.dataset.slideDot);updateSlider();startSlideTimer();return}})
@@ -213,9 +253,9 @@ function preloadCurrent(){homeProducts().slice(0,5).forEach(p=>{const h=new Imag
 async function bootstrapBackend(){
  await Promise.allSettled([ensureCsrf(),loadServerProducts(),loadSiteConfig(),loadPaymentConfig(),loadMe()]);
  render();
- if('serviceWorker' in navigator&&location.protocol!=='file:'){navigator.serviceWorker.register('/sw.js?v=61.03.0').catch(()=>{})}
+ if('serviceWorker' in navigator&&location.protocol!=='file:'){navigator.serviceWorker.register('/sw.js?v=61.04.0').catch(()=>{})}
  const q=new URLSearchParams(location.search);if(q.get('kakao')==='success'){toast('카카오 로그인이 완료되었습니다.');history.replaceState({},'',location.pathname+location.hash)}else if(q.get('kakao')==='error'){toast('카카오 로그인에 실패했습니다.');history.replaceState({},'',location.pathname+location.hash)}
 }
 preloadCurrent();setNotice();loadCart();const h=location.hash.slice(1);route=['fruits','curation','gifts','story'].includes(h)?h:'home';render();bootstrapBackend();
-// IROOM HOME2 V61.03.0 — world fruit select section + imported fruit assets
+// IROOM HOME2 V61.04.0 — world fruit select section + imported fruit assets
 })();
