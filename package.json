@@ -1,12 +1,12 @@
 {
   "name": "iroom-home1",
-  "version": "60.98.2",
+  "version": "60.98.5",
   "private": true,
-  "description": "IROOM Home2 V60.98.2 hard Kakao return + recognizable header icons",
+  "description": "IROOM Home1/Home2 Kakao login return split patch",
   "main": "server.js",
   "scripts": {
-    "start": "node -r ./security-v98.js server.js",
-    "check": "node --check server.js && node --check security-v98.js && node --check public/home2-v98.js && node --check public/sw.js",
+    "start": "node -r ./security-v98.js -r ./security-home1-kakao.js server.js",
+    "check": "node --check server.js && node --check security-v98.js && node --check security-home1-kakao.js && node --check public/home2-v98.js && node --check public/iroom_assets/home1-kakao-login-v1.js && node --check public/sw.js",
     "security:check": "npm audit --audit-level=high"
   },
   "engines": {
