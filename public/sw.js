@@ -1,6 +1,6 @@
 /* IROOM Fresh Fruits — V60.98.3 stale-page prevention service worker.
    OAuth/navigation HTML is always network-first and old caches are removed on activation. */
-const VERSION = 'iroom-v60-98-3-kakao-root-fix';
+const VERSION = 'iroom-v60-99-home2-fruit-refresh';
 const STATIC_CACHE = `${VERSION}-static`;
 
 self.addEventListener('install', event => {

@@ -8,14 +8,14 @@ const KAKAO_OPEN_CHAT='https://open.kakao.com/o/sd7wnrKi';
 const NOTICE=['IROOM NOTICE','오늘 받은 과일의 맛이나 상태가 기대에 미치지 않으면 상담 후 정성껏 다시 도와드립니다.','지금 가장 맛있는 과일을 엄선해 소개합니다.','신선한 과일은 상태에 맞춰 안전하게 포장해 보내드립니다.'];
 const DATA={
  autumn:[
-  {id:'autumn-shine',name:'샤인머스켓',origin:'경북',pack:'2kg (3~4송이)',price:46000,asset:'card-approved-shine.png',heroAsset:'hero-approved-shine.png',grade:'GRADE AA'},
-  {id:'autumn-pear',name:'나주배',origin:'전남 나주',pack:'3kg (6~8과)',price:38000,asset:'card-approved-pear.png',grade:'GRADE AA'},
-  {id:'autumn-apple',name:'감홍 사과',origin:'경북',pack:'2.5kg (8~10과)',price:32000,asset:'card-approved-apple.png',grade:'GRADE AA'},
-  {id:'autumn-sweet-persimmon',name:'단감',origin:'경남',pack:'3kg',price:28000,asset:'card-approved-persimmon.png',grade:'GRADE AA'},
-  {id:'autumn-chestnut',name:'공주 밤',origin:'충남 공주',pack:'1kg',price:42000,asset:'card-approved-chestnut.png',grade:'GRADE AA'},
-  {id:'autumn-jujube',name:'경북 대추',origin:'경북',pack:'1kg',price:24000,asset:'card-approved-jujube.png',grade:'GRADE AA'},
-  {id:'autumn-daebong',name:'대봉감',origin:'경남',pack:'3kg (4~6과)',price:34000,asset:'soft-autumn-daebong.webp',grade:'GRADE AA'},
-  {id:'autumn-easypple',name:'이지플 사과',origin:'경북',pack:'1.2kg (12~16과)',price:36000,asset:'soft-autumn-easypple.webp',grade:'GRADE AA'}
+  {id:'autumn-shine',name:'샤인머스켓',origin:'국내산',pack:'2kg (3~4송이)',price:46000,asset:'card-approved-shine.png',heroAsset:'hero-approved-shine.png',grade:'GRADE AA'},
+  {id:'autumn-pear',name:'신고배',origin:'국내산',pack:'3kg (6~8과)',price:38000,asset:'card-approved-pear.png',grade:'GRADE AA'},
+  {id:'autumn-apple',name:'감홍 사과',origin:'국내산',pack:'2.5kg (8~10과)',price:32000,asset:'card-approved-apple.png',grade:'GRADE AA'},
+  {id:'autumn-sweet-persimmon',name:'단감',origin:'국내산',pack:'3kg',price:28000,asset:'card-approved-persimmon.png',grade:'GRADE AA'},
+  {id:'autumn-chestnut',name:'공주 밤',origin:'국내산',pack:'1kg',price:42000,asset:'card-approved-chestnut.png',grade:'GRADE AA'},
+  {id:'autumn-jujube',name:'사과대추',origin:'국내산',pack:'1kg',price:24000,asset:'card-approved-jujube.png',grade:'GRADE AA'},
+  {id:'autumn-daebong',name:'대봉감',origin:'국내산',pack:'3kg (4~6과)',price:34000,asset:'soft-autumn-daebong.webp',grade:'GRADE AA'},
+  {id:'autumn-easypple',name:'부사',origin:'국내산',pack:'1.2kg (12~16과)',price:36000,asset:'soft-autumn-easypple.webp',grade:'GRADE AA'}
  ],
  spring:[
   {id:'spring-strawberry',name:'딸기',origin:'국내산',pack:'500g',price:24000,asset:'soft-spring-strawberry.webp',grade:'GRADE AA'},
@@ -35,21 +35,21 @@ const DATA={
  ],
  winter:[
   {id:'winter-strawberry',name:'딸기',origin:'국내산',pack:'500g',price:24000,asset:'soft-winter-strawberry.webp',grade:'GRADE AA'},
-  {id:'winter-hallabong',name:'한라봉',origin:'제주산',pack:'2kg',price:28000,asset:'soft-winter-hallabong.webp',grade:'GRADE AA'},
-  {id:'winter-redhyang',name:'레드향',origin:'제주산',pack:'2kg',price:46000,asset:'soft-winter-redhyang.webp',grade:'GRADE AA'},
-  {id:'winter-cheonhyehyang',name:'천혜향',origin:'제주산',pack:'2kg',price:42000,asset:'soft-winter-cheonhyehyang.webp',grade:'GRADE AA'},
+  {id:'winter-hallabong',name:'한라봉',origin:'국내산',pack:'2kg',price:28000,asset:'soft-winter-hallabong.webp',grade:'GRADE AA'},
+  {id:'winter-redhyang',name:'레드향',origin:'국내산',pack:'2kg',price:46000,asset:'soft-winter-redhyang.webp',grade:'GRADE AA'},
+  {id:'winter-cheonhyehyang',name:'천혜향',origin:'국내산',pack:'2kg',price:42000,asset:'soft-winter-cheonhyehyang.webp',grade:'GRADE AA'},
   {id:'winter-apple',name:'사과',origin:'국내산',pack:'1.5kg',price:36000,asset:'soft-winter-apple.webp',grade:'GRADE AA'},
-  {id:'winter-pear',name:'배',origin:'국내산',pack:'2kg',price:34000,asset:'soft-winter-pear.webp',grade:'GRADE AA'},
+  {id:'winter-pear',name:'신고배',origin:'국내산',pack:'2kg',price:34000,asset:'soft-winter-pear.webp',grade:'GRADE AA'},
   {id:'winter-kiwi',name:'키위',origin:'국내산',pack:'1kg',price:34000,asset:'soft-winter-kiwi.webp',grade:'GRADE AA'}
  ]
  };
 const GIFTS=[
- {id:'gift-premium',isGift:true,name:'프리미엄 제철 선물',origin:'이룸 셀렉트',pack:'샤인머스켓 · 프리미엄 배',price:76000,asset:'gift-premium.webp',grade:'PREMIUM GIFT'},
- {id:'gift-apple-pear',isGift:true,name:'사과·배 정성 선물',origin:'이룸 셀렉트',pack:'감홍 사과 · 프리미엄 배',price:62000,asset:'gift-apple-pear.webp',grade:'PREMIUM GIFT'},
- {id:'gift-corporate',isGift:true,name:'기업·단체 선물',origin:'이룸 비즈니스 셀렉트',pack:'샤인머스켓 · 프리미엄 배 · 한라봉',price:68000,asset:'gift-corporate.webp',grade:'PREMIUM GIFT'},
- {id:'gift-family',isGift:true,name:'가족 과일 선물',origin:'이룸 셀렉트',pack:'감홍 사과 · 샤인머스켓 · 프리미엄 배',price:54000,asset:'gift-family.webp',grade:'PREMIUM GIFT'},
- {id:'gift-select',isGift:true,name:'이룸 셀렉트 선물',origin:'이룸 프리미엄',pack:'샤인머스켓 · 감홍 사과 · 배 · 한라봉',price:89000,asset:'gift-select.webp',grade:'PREMIUM GIFT'},
- {id:'gift-thanks',isGift:true,name:'마음 담은 과일 선물',origin:'이룸 셀렉트',pack:'감홍 사과 · 배 · 샤인머스켓 · 한라봉',price:69000,asset:'gift-thanks.webp',grade:'PREMIUM GIFT'}
+ {id:'gift-premium',isGift:true,name:'프리미엄 제철 선물',origin:'이룸 셀렉트',pack:'샤인머스켓 · 신고배',price:76000,asset:'gift-premium.webp',grade:'PREMIUM GIFT'},
+ {id:'gift-apple-pear',isGift:true,name:'사과·신고배 정성 선물',origin:'이룸 셀렉트',pack:'감홍 사과 · 신고배',price:62000,asset:'gift-apple-pear.webp',grade:'PREMIUM GIFT'},
+ {id:'gift-corporate',isGift:true,name:'기업·단체 선물',origin:'이룸 비즈니스 셀렉트',pack:'샤인머스켓 · 신고배 · 한라봉',price:68000,asset:'gift-corporate.webp',grade:'PREMIUM GIFT'},
+ {id:'gift-family',isGift:true,name:'가족 과일 선물',origin:'이룸 셀렉트',pack:'감홍 사과 · 샤인머스켓 · 신고배',price:54000,asset:'gift-family.webp',grade:'PREMIUM GIFT'},
+ {id:'gift-select',isGift:true,name:'이룸 셀렉트 선물',origin:'이룸 프리미엄',pack:'샤인머스켓 · 감홍 사과 · 신고배 · 한라봉',price:89000,asset:'gift-select.webp',grade:'PREMIUM GIFT'},
+ {id:'gift-thanks',isGift:true,name:'마음 담은 과일 선물',origin:'이룸 셀렉트',pack:'감홍 사과 · 신고배 · 샤인머스켓 · 한라봉',price:69000,asset:'gift-thanks.webp',grade:'PREMIUM GIFT'}
 ];
 const month=(new Date()).getMonth()+1;
 const CURRENT_SEASON=month>=3&&month<=5?'spring':month>=6&&month<=8?'summer':month>=9&&month<=11?'autumn':'winter';
@@ -73,8 +73,8 @@ const esc=v=>String(v??'').replace(/[&<>\"']/g,m=>({'&':'&amp;','<':'&lt;','>':'
 const nl2br=v=>esc(v).replace(/\n/g,'<br>');
 const normalizeName=v=>String(v||'').toLowerCase().replace(/\s+/g,'').replace(/[·ㆍ.\-_/()]/g,'');
 const SERVER_NAME_ALIASES={
- '샤인머스켓':['샤인머스켓'], '나주배':['나주배','배'], '감홍사과':['감홍사과','사과'], '단감':['단감'],
- '공주밤':['공주밤','밤'], '경북대추':['경북대추','대추'], '대봉감':['대봉감'], '이지플사과':['이지플','이지플사과'],
+ '샤인머스켓':['샤인머스켓'], '신고배':['신고배','나주배','배'], '감홍사과':['감홍사과','사과'], '단감':['단감'],
+ '공주밤':['공주밤','밤'], '사과대추':['사과대추','경북대추','대추'], '대봉감':['대봉감'], '부사':['부사','이지플','이지플사과'],
  '딸기':['딸기'], '참외':['참외'], '체리':['체리'], '살구':['살구'], '복숭아':['복숭아'], '수박':['수박'], '멜론':['멜론'],
  '자두':['자두'], '천도복숭아':['천도복숭아'], '한라봉':['한라봉'], '레드향':['레드향'], '천혜향':['천혜향'], '키위':['키위']
 };
@@ -82,7 +82,7 @@ async function ensureCsrf(){
  if(csrfChecked)return csrfToken;
  csrfChecked=true;
  try{
-  const r=await fetch('/api/security/csrf',{credentials:'same-origin',headers:{'Accept':'application/json','X-Iroom-Client':'home2-v98'}});
+  const r=await fetch('/api/security/csrf',{credentials:'same-origin',headers:{'Accept':'application/json','X-Iroom-Client':'home2-v99-fruit-refresh'}});
   if(r.ok){const d=await r.json();csrfToken=String(d.token||'')}
  }catch(_){csrfToken=''}
  return csrfToken;
@@ -92,7 +92,7 @@ async function api(path,{method='GET',body=null,headers={}}={}){
  const h={'Accept':'application/json',...headers};
  if(!['GET','HEAD','OPTIONS'].includes(method)){
   const token=await ensureCsrf();
-  if(token){h['X-Iroom-Client']='home2-v98';h['X-CSRF-Token']=token}
+  if(token){h['X-Iroom-Client']='home2-v99-fruit-refresh';h['X-CSRF-Token']=token}
   if(body!==null && !(body instanceof FormData) && !h['Content-Type'])h['Content-Type']='application/json';
  }
  const r=await fetch(path,{method,body,headers:h,credentials:'same-origin'});
@@ -132,7 +132,7 @@ function home(){const ps=homeProducts();const h=ps[heroIndex%Math.min(ps.length,
 <section class="homeSection"><div class="storyStrip"><span class="eyebrow">BRAND STORY</span><h3>좋은 과일이 만드는<br>더 나은 일상, 이룸</h3><p>제철의 신선함을 쉽게 고르고 편하게 받을 수 있도록,<br>이룸은 좋은 과일을 정성껏 선별합니다.</p><button class="storyBtn" data-route="story">이룸의 이야기 보기 →</button></div></section>
 </div>`}
 function fruitsPage(){let ps=season==='all'?products():DATA[season];return `<section class="routePage"><div class="routeHero"><div><span class="eyebrow">SEASONAL PICKS</span><h1>제철 과일</h1></div><p>계절에 맞는 과일을 한눈에 비교하고 바로 고를 수 있도록 정리했습니다.</p></div><div class="seasonTabs"><button class="seasonTab ${season==='all'?'active':''}" data-season="all">전체</button>${Object.keys(DATA).map(s=>`<button class="seasonTab ${s===season?'active':''}" data-season="${s}">${labels[s]}</button>`).join('')}</div><div class="catalogGrid">${ps.map(p=>card(p)).join('')}</div></section>`}
-function curationPage(){const ps=homeProducts().concat(DATA.winter,DATA.spring,DATA.summer).filter((p,i,a)=>a.findIndex(x=>x.id===p.id)===i).slice(0,15);return `<section class="routePage"><div class="routeHero"><div><span class="eyebrow">FRUIT CURATION</span><h1>맞춤 과일</h1></div><p>한 가지 과일만 고르는 대신, 원하는 과일을 여러 가지 골라 나만의 구성을 만들 수 있습니다.</p></div><div class="curationBuilder"><div class="pickPanel"><h2>원하는 과일을 골라보세요</h2><p class="pickPanelLead">최대 6종까지 자유롭게 선택할 수 있어요. 선택한 과일은 오른쪽 구성표에 바로 담깁니다.</p><div class="pickGrid">${ps.map(p=>`<button class="pickFruit ${curationSelected.has(p.id)?'selected':''}" data-pick="${p.id}" aria-pressed="${curationSelected.has(p.id)}"><img src="${img(p)}" alt="${p.name}" decoding="async"><span><b>${p.name}</b><small>${p.origin} · ${fmt(p.price)}</small></span></button>`).join('')}</div></div><aside class="pickSummary"><h2>나만의 과일 구성</h2><p class="pickSummaryLead">선택한 과일을 한 번에 장바구니에 담거나 카카오로 구성 상담을 받을 수 있습니다.</p><div class="selectedList" id="selectedList"></div><div class="pickTotal"><span>선택 합계</span><strong id="pickTotal">0원</strong></div><div class="pickActions"><button data-clear-picks>비우기</button><button class="dark" data-add-picks>선택 과일 담기</button><button data-consult class="wideAction">카카오로 맞춤 상담</button></div><p class="pickHint">실제 선물 포장·중량·예산별 구성은 상담 과정에서 조정할 수 있습니다.</p></aside></div><div class="sectionHead sectionHeadSpaced"><h2>추천 조합</h2></div><div class="curationGrid">${curation(0,'아침을 여는 구성','사과·배·샤인머스켓처럼 산뜻하게',[ps[0],ps[1],ps[2]])}${curation(1,'가족과 함께','서로 다른 맛을 골고루',[ps[1],ps[3],ps[4]])}${curation(2,'마음을 전하는 구성','선물하기 좋은 과일을 함께',[ps[0],ps[2],ps[5]])}</div></section>`}
+function curationPage(){const ps=homeProducts().concat(DATA.winter,DATA.spring,DATA.summer).filter((p,i,a)=>a.findIndex(x=>x.id===p.id)===i).slice(0,15);return `<section class="routePage"><div class="routeHero"><div><span class="eyebrow">FRUIT CURATION</span><h1>맞춤 과일</h1></div><p>한 가지 과일만 고르는 대신, 원하는 과일을 여러 가지 골라 나만의 구성을 만들 수 있습니다.</p></div><div class="curationBuilder"><div class="pickPanel"><h2>원하는 과일을 골라보세요</h2><p class="pickPanelLead">최대 6종까지 자유롭게 선택할 수 있어요. 선택한 과일은 오른쪽 구성표에 바로 담깁니다.</p><div class="pickGrid">${ps.map(p=>`<button class="pickFruit ${curationSelected.has(p.id)?'selected':''}" data-pick="${p.id}" aria-pressed="${curationSelected.has(p.id)}"><img src="${img(p)}" alt="${p.name}" decoding="async"><span><b>${p.name}</b><small>${p.origin} · ${fmt(p.price)}</small></span></button>`).join('')}</div></div><aside class="pickSummary"><h2>나만의 과일 구성</h2><p class="pickSummaryLead">선택한 과일을 한 번에 장바구니에 담거나 카카오로 구성 상담을 받을 수 있습니다.</p><div class="selectedList" id="selectedList"></div><div class="pickTotal"><span>선택 합계</span><strong id="pickTotal">0원</strong></div><div class="pickActions"><button data-clear-picks>비우기</button><button class="dark" data-add-picks>선택 과일 담기</button><button data-consult class="wideAction">카카오로 맞춤 상담</button></div><p class="pickHint">실제 선물 포장·중량·예산별 구성은 상담 과정에서 조정할 수 있습니다.</p></aside></div><div class="sectionHead sectionHeadSpaced"><h2>추천 조합</h2></div><div class="curationGrid">${curation(0,'아침을 여는 구성','사과·신고배·샤인머스켓처럼 산뜻하게',[ps[0],ps[1],ps[2]])}${curation(1,'가족과 함께','서로 다른 맛을 골고루',[ps[1],ps[3],ps[4]])}${curation(2,'마음을 전하는 구성','선물하기 좋은 과일을 함께',[ps[0],ps[2],ps[5]])}</div></section>`}
 function giftsPage(){return `<section class="routePage"><div class="routeHero"><div><span class="eyebrow">GIFT SELECTION</span><h1>선물세트</h1></div><p>받는 분과 예산에 맞춰 사과·배·샤인머스켓·한라봉 등 선물에 어울리는 과일을 정갈하게 구성합니다.</p></div><div class="giftGrid giftGridSpaced">${GIFTS.map(g=>`<article class="giftCard"><button class="giftVisual" data-product="${g.id}" aria-label="${g.name} 상세보기"><img src="${img(g)}" alt="${g.name}" decoding="async"></button><div><h3>${g.name}</h3><p>${g.pack} · ${fmt(g.price)}</p><button class="outlineBtn" data-product="${g.id}">선물 보기 →</button></div></article>`).join('')}</div></section>`}
 function storyPage(){return `<section class="routePage"><div class="routeHero"><div><span class="eyebrow">BRAND STORY</span><h1>좋은 과일을 더 잘 고르고,<br>더 쉽게 전합니다.</h1></div><p>이룸은 계절에 가장 좋은 과일을 고르고, 이해하기 쉽게 보여주고, 편하게 주문할 수 있도록 만듭니다.</p></div><div class="storyPageGrid"><div class="storyBlock"><span class="eyebrow">OUR STANDARD</span><h3>이룸의 기준</h3><p>신선함, 선별, 일상. 세 가지 기준으로 지금 가장 좋은 과일을 고릅니다.</p></div><div class="storyBlock"><span class="eyebrow">01</span><h3>신선함</h3><p>입고와 선도를 우선해 설명합니다.</p></div><div class="storyBlock"><span class="eyebrow">02</span><h3>선별</h3><p>크기보다 맛과 균형을 함께 봅니다.</p></div><div class="storyBlock"><span class="eyebrow">03</span><h3>일상</h3><p>쉽게 비교하고 바로 주문할 수 있게 만듭니다.</p></div></div></section>`}
 function heroCount(){return Math.min(homeProducts().length,5)}
