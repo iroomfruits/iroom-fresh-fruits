@@ -1028,7 +1028,10 @@ app.get("/api/payment/config",(req,res)=>{
 app.get("/band-order.html",(req,res)=>res.sendFile(path.join(__dirname,"public","band-order.html")));
 app.get("/band-admin.html",(req,res)=>res.sendFile(path.join(__dirname,"public","band-admin.html")));
 app.get("/healthz",(req,res)=>res.json({ok:true,time:new Date().toISOString()}));
-
+app.get("/home1",(req,res)=>res.sendFile(path.join(__dirname,"public","index.html")));
+app.get("/home2",(req,res)=>res.sendFile(path.join(__dirname,"public","home2.html")));
+app.get("/home1/",(req,res)=>res.redirect(301,"/home1"));
+app.get("/home2/",(req,res)=>res.redirect(301,"/home2"));
 // static site — Home2 is the public root. HTML must never be served from a stale cache after OAuth return.
 app.get("/",(req,res)=>{
   res.setHeader("Cache-Control","no-store");
