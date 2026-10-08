@@ -1,8 +1,8 @@
 {
   "name": "iroom-home1",
-  "version": "60.98.2",
+  "version": "60.98.3",
   "private": true,
-  "description": "IROOM Home2 V60.98.2 hard Kakao return + recognizable header icons",
+  "description": "IROOM Home2 V60.98.3 direct Kakao callback + public-root + stale-cache hard fix",
   "main": "server.js",
   "scripts": {
     "start": "node -r ./security-v98.js server.js",

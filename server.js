@@ -8,64 +8,43 @@ const { Pool } = require("pg");
 
 const app = express();
 const PORT = Number(process.env.PORT || 3000);
-const NODE_ENV = String(process.env.NODE_ENV || "development").trim();
-const IS_PROD = NODE_ENV === "production";
 const JWT_SECRET = process.env.JWT_SECRET || crypto.randomBytes(32).toString("hex");
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "";
-const ADMIN_SESSION_HOURS = Math.min(12, Math.max(1, Number(process.env.ADMIN_SESSION_HOURS || 4) || 4));
 if(!process.env.JWT_SECRET) console.warn("[SECURITY] JWT_SECRET is not configured. A temporary secret is being used; set JWT_SECRET in Render Environment.");
-if(process.env.JWT_SECRET && String(process.env.JWT_SECRET).length < 48) console.warn("[SECURITY] JWT_SECRET should be at least 48 random characters.");
-if(!ADMIN_PASSWORD) console.warn("[SECURITY] ADMIN_PASSWORD is not configured. Admin login is disabled until it is set or changed in DB.");
+if(!ADMIN_PASSWORD) console.warn("[SECURITY] ADMIN_PASSWORD is not configured. Admin login is disabled until it is set.");
 const BASE_URL = process.env.PUBLIC_BASE_URL || `http://localhost:${PORT}`;
 const OPENAI_API_KEY = String(process.env.OPENAI_API_KEY || "").trim();
 const OPENAI_MODEL = String(process.env.OPENAI_MODEL || "gpt-5.6-luna").trim();
 const KAKAO_REST_API_KEY = String(process.env.KAKAO_REST_API_KEY || "").trim();
 const KAKAO_CLIENT_SECRET = String(process.env.KAKAO_CLIENT_SECRET || "").trim();
 const KAKAO_REDIRECT_URI = String(process.env.KAKAO_REDIRECT_URI || `${BASE_URL}/api/auth/kakao/callback`).trim();
-const AUTH_COOKIE = IS_PROD ? "__Host-iroom_token" : "iroom_token";
 
 if (!process.env.DATABASE_URL) {
   console.error("DATABASE_URL is required. Create a PostgreSQL database and set DATABASE_URL.");
   process.exit(1);
 }
 
-const dbLocal = /localhost|127\.0\.0\.1/.test(process.env.DATABASE_URL);
-const dbUrl = new URL(process.env.DATABASE_URL);
-const dbSslMode = String(dbUrl.searchParams.get("sslmode") || process.env.PGSSLMODE || "").toLowerCase();
-const dbWantsTls = ["require","verify-ca","verify-full"].includes(dbSslMode);
-const rejectUnauthorized = String(process.env.PGSSL_REJECT_UNAUTHORIZED || "false").toLowerCase() === "true";
-const poolOptions = { connectionString: process.env.DATABASE_URL, max: Math.max(2, Math.min(20, Number(process.env.PGPOOL_MAX || 10) || 10)), idleTimeoutMillis:30000, connectionTimeoutMillis:10000 };
-// Render internal DATABASE_URL normally has no sslmode and should not be forced through TLS.
-// Render external URLs use sslmode=require; their managed/self-signed chain commonly needs rejectUnauthorized=false unless a CA is supplied.
-if(!dbLocal && dbWantsTls) poolOptions.ssl={rejectUnauthorized};
-const pool = new Pool(poolOptions);
-pool.on("error",err=>console.error("[DB POOL]",err.message));
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: process.env.DATABASE_URL.includes("localhost") ? false : { rejectUnauthorized: false }
+});
 
-app.use(express.json({ limit: "30mb", strict:true }));
-app.use(express.urlencoded({ extended: false, limit:"1mb" }));
-app.use(cookieParser());
+app.use(express.json({ limit: "6mb" }));
+app.use(express.urlencoded({ extended: true }));
 
 app.set("trust proxy",1);
 app.disable("x-powered-by");
 
-// V60 security headers: strict by default, with the minimum exceptions required by the current static admin UI.
+// Security headers without adding new runtime dependencies.
 app.use((req,res,next)=>{
-  const isAdminPreview=req.path==="/admin-preview";
-  const frameAncestors=isAdminPreview?"'self'":"'none'";
-  const upgrade=IS_PROD?"; upgrade-insecure-requests":"";
   res.setHeader("X-Content-Type-Options","nosniff");
-  res.setHeader("X-Frame-Options",isAdminPreview?"SAMEORIGIN":"DENY");
+  res.setHeader("X-Frame-Options","DENY");
   res.setHeader("Referrer-Policy","strict-origin-when-cross-origin");
-  res.setHeader("Permissions-Policy","camera=(), microphone=(), geolocation=(), payment=(self), usb=(), serial=()");
+  res.setHeader("Permissions-Policy","camera=(), microphone=(), geolocation=(), payment=(self)");
   res.setHeader("Cross-Origin-Opener-Policy","same-origin-allow-popups");
-  res.setHeader("Cross-Origin-Resource-Policy","same-origin");
-  res.setHeader("X-Permitted-Cross-Domain-Policies","none");
-  res.setHeader("Content-Security-Policy",`default-src 'self'; script-src 'self' 'unsafe-inline' https://t1.kakaocdn.net; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://kauth.kakao.com https://kapi.kakao.com https://api.openai.com https://api.brevo.com; media-src 'self' data: https:; worker-src 'self'; manifest-src 'self'; frame-src 'self'; frame-ancestors ${frameAncestors}; object-src 'none'; base-uri 'self'; form-action 'self'${upgrade}`);
-  if(req.secure || IS_PROD) res.setHeader("Strict-Transport-Security","max-age=31536000; includeSubDomains");
-  if(req.path.startsWith("/api/admin") || req.path.startsWith("/api/auth") || req.path==="/api/me" || req.path==="/band-admin.html" || isAdminPreview){
-    res.setHeader("Cache-Control","no-store, no-cache, must-revalidate, proxy-revalidate");
-    res.setHeader("Pragma","no-cache");
-  }
+  res.setHeader("Content-Security-Policy","frame-ancestors 'none'; object-src 'none'; base-uri 'self'; form-action 'self'");
+  if(req.secure || process.env.NODE_ENV==="production") res.setHeader("Strict-Transport-Security","max-age=31536000; includeSubDomains");
+  if(req.path.startsWith("/api/admin") || req.path==="/api/me") res.setHeader("Cache-Control","no-store");
   next();
 });
 
@@ -86,82 +65,21 @@ function simpleRateLimit({windowMs,max,keyPrefix,message}){
 }
 setInterval(()=>{const n=Date.now();for(const [k,v] of rateBuckets)if(n>v.reset)rateBuckets.delete(k)},10*60*1000).unref();
 
-function requestOrigin(req){
-  const forwardedProto=String(req.get("x-forwarded-proto")||"").split(",")[0].trim();
-  const forwardedHost=String(req.get("x-forwarded-host")||"").split(",")[0].trim();
-  const proto=forwardedProto || req.protocol || "https";
-  const host=forwardedHost || String(req.get("host")||"").trim();
-  if(!host)return "";
-  try{return new URL(`${proto}://${host}`).origin}catch(_){return ""}
-}
-function allowedRequestOrigins(req){
-  const allowed=new Set();
-  try{if(BASE_URL)allowed.add(new URL(BASE_URL).origin)}catch(_){}
-  const live=requestOrigin(req);
-  if(live)allowed.add(live);
-  // Optional comma-separated custom domains, useful while moving between Render/custom domains.
-  for(const item of String(process.env.ALLOWED_ORIGINS||"").split(",")){
-    const value=item.trim();
-    if(!value)continue;
-    try{allowed.add(new URL(value).origin)}catch(_){}
-  }
-  return allowed;
-}
 function sameOriginGuard(req,res,next){
   if(["GET","HEAD","OPTIONS"].includes(req.method)) return next();
-  const fetchSite=String(req.get("sec-fetch-site")||"").toLowerCase();
-  if(fetchSite==="cross-site") return res.status(403).json({error:"교차 사이트 요청이 차단되었습니다."});
-  let source=String(req.get("origin")||"").trim();
-  if(!source){
-    const ref=String(req.get("referer")||"").trim();
-    if(ref){try{source=new URL(ref).origin}catch(_){source=""}}
-  }
-  if(source){
-    try{
-      const sourceOrigin=new URL(source).origin;
-      if(!allowedRequestOrigins(req).has(sourceOrigin))return res.status(403).json({error:"허용되지 않은 요청입니다."});
-    }catch(_){return res.status(403).json({error:"허용되지 않은 요청입니다."})}
-  }else if(req.cookies?.[AUTH_COOKIE] || req.cookies?.iroom_token){
-    return res.status(403).json({error:"요청 출처를 확인할 수 없습니다."});
-  }
+  const origin=req.get("origin");
+  if(!origin) return next();
+  try{
+    const expected=`${req.protocol}://${req.get("host")}`;
+    if(new URL(origin).origin!==new URL(expected).origin) return res.status(403).json({error:"허용되지 않은 요청입니다."});
+  }catch{return res.status(403).json({error:"허용되지 않은 요청입니다."})}
   next();
 }
 app.use("/api",sameOriginGuard);
 
-function cleanText(v,max=200){return String(v??"").replace(/\0/g,"").trim().slice(0,max)}
-function cleanEmail(v){const s=cleanText(v,180).toLowerCase();return s && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s)?s:""}
+function cleanText(v,max=200){return String(v??"").replace(/\\0/g,"").trim().slice(0,max)}
+function cleanEmail(v){const s=cleanText(v,180).toLowerCase();return s && /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(s)?s:""}
 function cleanPhone(v){return cleanText(v,30).replace(/[^0-9+ \-]/g,"")}
-function safeHttpsUrl(v,max=1000){const s=cleanText(v,max);if(!s)return "";try{const u=new URL(s);return u.protocol==="https:"?u.toString().slice(0,max):""}catch(_){return ""}}
-function safeLocalOrHttpsUrl(v,max=2000){
-  const s=cleanText(v,max);
-  if(!s)return "";
-  if(s.startsWith("/") && !s.startsWith("//"))return s.slice(0,max);
-  return safeHttpsUrl(s,max);
-}
-function sanitizeConfigValue(value,depth=0){
-  if(depth>10)return null;
-  if(value===null || typeof value==="boolean")return value;
-  if(typeof value==="number")return Number.isFinite(value)?value:0;
-  if(typeof value==="string"){
-    const x=value.replace(/\0/g,"");
-    if(/^data:image\/(?:jpeg|jpg|png|webp);base64,/i.test(x))return x.length<=900000?x:"";
-    return x.slice(0,12000);
-  }
-  if(Array.isArray(value))return value.slice(0,250).map(v=>sanitizeConfigValue(v,depth+1));
-  if(typeof value==="object"){
-    const out={};
-    for(const [k,v] of Object.entries(value).slice(0,300)){
-      const key=String(k).slice(0,100);
-      if(["__proto__","prototype","constructor"].includes(key))continue;
-      out[key]=sanitizeConfigValue(v,depth+1);
-    }
-    return out;
-  }
-  return null;
-}
-function configRevision(value){return crypto.createHash("sha256").update(JSON.stringify(value||{})).digest("hex").slice(0,20)}
-function cleanNonNegative(v,max=100000000){const n=Number(v);return Number.isFinite(n)?Math.max(0,Math.min(max,Math.round(n))):0}
-function passwordBytes(v){return Buffer.byteLength(String(v||""),"utf8")}
 function safeEqual(a,b){const x=Buffer.from(String(a)),y=Buffer.from(String(b));return x.length===y.length && crypto.timingSafeEqual(x,y)}
 function ipHash(req){return crypto.createHash("sha256").update(String(req.ip)+JWT_SECRET.slice(0,16)).digest("hex").slice(0,20)}
 async function logSecurity(type,actor,req,detail=""){
@@ -241,19 +159,6 @@ async function putSetting(key,value){
   `,[key,JSON.stringify(value)]);
   return r.rows[0];
 }
-
-async function getPaymentBankInfo(){
-  let site={};
-  try{
-    const saved=await getSetting("iroom1_store",{});
-    site=(saved&&saved.site)||{};
-  }catch(_){}
-  return {
-    name:String(site.bankName||process.env.BANK_NAME||"우리은행").trim(),
-    account:String(site.bankAccount||process.env.BANK_ACCOUNT||"1005-203-135891").trim(),
-    holder:String(site.bankOwner||process.env.BANK_HOLDER||"한효철").trim()
-  };
-}
 function extractOpenAIResult(data){
   const texts=[], sources=[];
   for(const item of (data?.output||[])){
@@ -313,7 +218,6 @@ ${cleanLongText(details,3500)}
 }
 async function notifyOrder(order,items){
   const c=mailSettings();
-  const bank=await getPaymentBankInfo();
   const lines=items.map(i=>`${i.product_name} × ${i.qty} = ${money(i.line_total)}`).join("\n");
   const status={seller:{sent:false,reason:""},customer:{sent:false,reason:""}};
 
@@ -323,16 +227,13 @@ async function notifyOrder(order,items){
 연락처: ${order.phone}
 이메일: ${order.email||"-"}
 배송지: ${order.postcode||""} ${order.address1||""} ${order.address2||""}
-배송지역: ${{normal:"일반지역",jeju:"제주도",remote:"제주 외 도서산간"}[order.shipping_region]||"일반지역"}
 배송메모: ${order.memo||"-"}
 
 ${lines}
 
-상품금액: ${money(order.subtotal||Math.max(0,Number(order.total_amount||0)-Number(order.shipping_fee||0)))}
-배송비: ${Number(order.shipping_fee||0)===0?"무료":money(order.shipping_fee)}
 총금액: ${money(order.total_amount)}
-입금계좌: ${bank.name} ${bank.account}
-예금주: ${bank.holder}`;
+입금계좌: 우리은행 1005-203-135891
+예금주: 이룸 fresh fruits`;
 
   if(!c.orderEmail){
     status.seller.reason="ORDER_EMAIL_MISSING";
@@ -352,15 +253,12 @@ ${lines}
     const customer=`${order.customer_name} 고객님, 이룸 fresh fruits 주문이 접수되었습니다.
 
 주문번호: ${order.order_no}
-배송지역: ${{normal:"일반지역",jeju:"제주도",remote:"제주 외 도서산간"}[order.shipping_region]||"일반지역"}
 
 ${lines}
 
-상품금액: ${money(order.subtotal||Math.max(0,Number(order.total_amount||0)-Number(order.shipping_fee||0)))}
-배송비: ${Number(order.shipping_fee||0)===0?"무료":money(order.shipping_fee)}
 총금액: ${money(order.total_amount)}
-${bank.name} ${bank.account}
-예금주: ${bank.holder}
+우리은행 1005-203-135891
+예금주: 이룸 fresh fruits
 
 입금 확인 후 정성껏 선별·포장해 배송하겠습니다.`;
     try{
@@ -377,6 +275,8 @@ ${bank.name} ${bank.account}
   return status;
 }
 
+
+app.use(cookieParser());
 
 function nowIso(){ return new Date().toISOString(); }
 function orderNo(){
@@ -418,51 +318,31 @@ async function initOptionalTables(){
   }
 }
 
-function token(payload, expires="7d"){
-  return jwt.sign(payload, JWT_SECRET, {
-    expiresIn:expires,
-    issuer:"iroom-home1",
-    audience:"iroom-web",
-    jwtid:crypto.randomBytes(12).toString("hex")
-  });
-}
+function token(payload, expires="7d"){ return jwt.sign(payload, JWT_SECRET, { expiresIn: expires }); }
 function readToken(req){
-  const raw = req.cookies?.[AUTH_COOKIE] || req.cookies?.iroom_token || (req.headers.authorization||"").replace(/^Bearer\s+/i,"");
+  const raw = req.cookies.iroom_token || (req.headers.authorization||"").replace(/^Bearer\s+/i,"");
   if(!raw) return null;
-  try { return jwt.verify(raw, JWT_SECRET,{issuer:"iroom-home1",audience:"iroom-web"}); } catch { return null; }
+  try { return jwt.verify(raw, JWT_SECRET); } catch { return null; }
 }
 function requireUser(req,res,next){
   const u = readToken(req);
   if(!u || !u.userId) return res.status(401).json({error:"로그인이 필요합니다."});
   req.user=u; next();
 }
-let adminSessionCache={value:1,ts:0};
-async function getAdminSessionVersion(force=false){
-  if(!force && Date.now()-adminSessionCache.ts<30000)return adminSessionCache.value;
-  try{
-    const saved=await getSetting("admin_session_version",{version:1});
-    const value=Math.max(1,Number(saved?.version||1)||1);
-    adminSessionCache={value,ts:Date.now()};return value;
-  }catch(_){return adminSessionCache.value||1}
+function requireAdmin(req,res,next){
+  const u = readToken(req);
+  if(!u || !u.admin) return res.status(401).json({error:"관리자 로그인이 필요합니다."});
+  req.user=u; next();
 }
-async function requireAdmin(req,res,next){
-  try{
-    const u=readToken(req);
-    if(!u || !u.admin)return res.status(401).json({error:"관리자 로그인이 필요합니다."});
-    const version=await getAdminSessionVersion();
-    if(Number(u.adminSessionVersion||1)!==version)return res.status(401).json({error:"관리자 세션이 만료되었습니다. 다시 로그인해주세요."});
-    req.user=u;next();
-  }catch(e){next(e)}
-}
-function setAuthCookie(res,tok,admin=false){
-  const secure=IS_PROD || BASE_URL.startsWith("https://");
-  const opts={httpOnly:true,sameSite:"strict",secure,path:"/",priority:"high",maxAge:(admin?ADMIN_SESSION_HOURS*60*60:7*24*60*60)*1000};
-  res.cookie(AUTH_COOKIE,tok,opts);
-  if(AUTH_COOKIE!=="iroom_token")res.clearCookie("iroom_token",{path:"/"});
-}
-function clearAuthCookie(res){
-  res.clearCookie(AUTH_COOKIE,{path:"/"});
-  res.clearCookie("iroom_token",{path:"/"});
+function setAuthCookie(res,tok){
+  res.cookie("iroom_token", tok, {
+    httpOnly:true,
+    sameSite:"strict",
+    secure:process.env.NODE_ENV==="production" || BASE_URL.startsWith("https://"),
+    path:"/",
+    priority:"high",
+    maxAge:7*24*60*60*1000
+  });
 }
 
 async function initDb(){
@@ -531,7 +411,6 @@ async function initDb(){
       created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
     );
     CREATE INDEX IF NOT EXISTS idx_security_events_created ON security_events(created_at DESC);
-    DELETE FROM security_events WHERE created_at < NOW() - INTERVAL '180 days';
     CREATE TABLE IF NOT EXISTS site_settings(
       setting_key TEXT PRIMARY KEY,
       setting_value JSONB NOT NULL DEFAULT '{}'::jsonb,
@@ -546,18 +425,13 @@ async function initDb(){
   await pool.query(`ALTER TABLE users ADD COLUMN IF NOT EXISTS kakao_id TEXT`);
   await pool.query(`ALTER TABLE users ADD COLUMN IF NOT EXISTS auth_provider TEXT DEFAULT 'local'`);
   await pool.query(`CREATE UNIQUE INDEX IF NOT EXISTS idx_users_kakao_id_unique ON users(kakao_id) WHERE kakao_id IS NOT NULL`);
-  await pool.query(`ALTER TABLE orders ADD COLUMN IF NOT EXISTS subtotal INTEGER NOT NULL DEFAULT 0`).catch(()=>{});
-  await pool.query(`ALTER TABLE orders ADD COLUMN IF NOT EXISTS shipping_fee INTEGER NOT NULL DEFAULT 0`).catch(()=>{});
-  await pool.query(`ALTER TABLE orders ADD COLUMN IF NOT EXISTS shipping_region TEXT NOT NULL DEFAULT 'normal'`).catch(()=>{});
-  await pool.query(`ALTER TABLE orders ADD COLUMN IF NOT EXISTS privacy_agreed_at TIMESTAMPTZ`).catch(()=>{});
-  await pool.query(`ALTER TABLE orders ADD COLUMN IF NOT EXISTS terms_agreed_at TIMESTAMPTZ`).catch(()=>{});
   await pool.query(`ALTER TABLE users ALTER COLUMN email DROP NOT NULL`).catch(()=>{});
   await pool.query(`CREATE UNIQUE INDEX IF NOT EXISTS idx_users_username_unique ON users(username) WHERE username IS NOT NULL`);
 
   const seed = [
     ["shine-muscat","샤인머스켓","향긋한 머스캣 향과 높은 당도가 특징인 프리미엄 포도입니다.","2kg (3~4송이)",28000,30,"/assets/prod-shine.jpg","과일",10],
     ["naju-pear","나주 신고배 특선","아삭한 식감과 풍부한 과즙이 좋은 나주 신고배 특선입니다.","5kg (7~9과)",38000,30,"/assets/prod-pear.jpg","과일",20],
-    ["red-apple","이지플","달콤하면서도 진한 맛이 특징인 국내 육성 사과 이지플입니다.","3kg",32000,30,"/assets/prod-apple.jpg","과일",30],
+    ["red-apple","경북 홍사과","산뜻한 향과 달콤한 맛이 균형 잡힌 경북 홍사과입니다.","3kg",32000,30,"/assets/prod-apple.jpg","과일",30],
     ["hallabong","제주 한라봉","향이 진하고 과즙이 풍부한 제주 한라봉입니다.","3kg",28000,30,"/assets/prod-hallabong.jpg","과일",40],
     ["premium-gift","프리미엄 과일세트","받는 분과 예산에 맞춰 엄선한 과일을 품격 있게 구성한 선물세트입니다.","혼합 구성",85000,20,"/assets/prod-gift.jpg","선물세트",50],
     ["white-peach","복숭아 백도","부드러운 과육과 향긋한 단맛이 좋은 백도 복숭아입니다.","4kg",29000,30,"/assets/prod-peach.jpg","과일",60]
@@ -569,95 +443,93 @@ async function initDb(){
       ON CONFLICT(slug) DO NOTHING
     `,p);
   }
-
-  // V37 commerce starters: exact storefront names so every visible sale fruit can
-  // resolve to a real product id. Prices/stock are starter values and remain
-  // editable from the existing admin product manager as market prices change.
-  const commerceSeed = [
-    ["v37-geumsil-strawberry","금실딸기","향긋하고 산뜻한 프리미엄 딸기입니다.","1kg 내외",25000,30,"/iroom_assets/fruits/01_딸기_strawberry.png","과일",101],
-    ["v37-seongju-melon","성주참외","아삭하고 맑은 단맛의 성주 참외입니다.","2kg",24000,30,"/iroom_assets/fruits/02_참외_korean_melon.png","과일",102],
-    ["v37-daejeo-tomato","대저토마토","신선하고 산뜻한 자연의 맛을 살린 대저토마토입니다.","2kg",18000,30,"/iroom_assets/fruits/37_토마토_tomato.png","과일",103],
-    ["v37-shine-muscat","샤인머스캣","향긋하고 맑은 달콤함이 좋은 샤인머스캣입니다.","2kg (3~4송이)",28000,30,"/iroom_assets/fruits/12_샤인머스캣_shine_muscat.png","과일",104],
-    ["v37-cherry","체리","상큼하고 진한 과즙을 즐기는 체리입니다.","1kg",32000,30,"/iroom_assets/fruits/04_체리_cherry.png","과일",105],
-    ["v37-white-peach","백도복숭아","부드럽고 향긋한 여름 단맛의 백도복숭아입니다.","4kg",29000,30,"/iroom_assets/fruits/06_복숭아_peach.png","과일",106],
-    ["v37-high-sugar-watermelon","고당도수박","시원하고 풍부한 과즙을 즐기는 고당도수박입니다.","1통",25000,30,"/iroom_assets/fruits/05_수박_watermelon.png","과일",107],
-    ["v37-musk-melon","머스크멜론","부드럽고 은은한 달콤함의 머스크멜론입니다.","2수",26000,30,"/iroom_assets/fruits/28_멜론_melon.png","과일",108],
-    ["v37-plum","자두","새콤달콤한 과즙이 좋은 자두입니다.","2kg",19000,30,"/iroom_assets/fruits/27_자두_plum.png","과일",109],
-    ["v37-purple-grape","포도","풍부한 향과 진한 단맛의 포도입니다.","2kg",26000,30,"/iroom_assets/fruits/08_포도_purple_grape.png","과일",110],
-    ["v37-hongro-apple","이지플","달콤하면서도 진한 맛이 좋은 국내 육성 사과 이지플입니다.","3kg",32000,30,"/iroom_assets/fruits/09_사과_apple.png","과일",111],
-    ["v37-naju-pear","나주배","시원하고 풍부한 과즙의 나주배입니다.","5kg (7~9과)",38000,30,"/iroom_assets/fruits/10_배_pear.png","과일",112],
-    ["v37-daebong","대봉","후숙할수록 부드럽고 깊어지는 단맛의 대봉입니다.","3kg",26000,30,"/iroom_assets/fruits/11_감_persimmon.png","과일",113],
-    ["v37-pomegranate","석류","선명하고 진한 가을빛의 석류입니다.","2kg",28000,30,"/iroom_assets/fruits/24_석류_pomegranate.png","과일",114],
-    ["v37-jeju-mandarin","제주감귤","새콤달콤하고 산뜻한 겨울 맛의 제주감귤입니다.","5kg",25000,30,"/iroom_assets/fruits/21_오렌지_orange.png","과일",115],
-    ["v37-busa-apple","부사사과","아삭하고 선명한 달콤함의 부사사과입니다.","3kg",32000,30,"/iroom_assets/fruits/09_사과_apple.png","과일",116],
-    ["v37-kiwi","키위","상큼하고 깊은 달콤함의 키위입니다.","2kg",22000,30,"/iroom_assets/fruits/19_키위_kiwi.png","과일",117],
-    ["v37-blueberry","블루베리","작지만 깊고 산뜻한 맛의 블루베리입니다.","500g",24000,30,"/iroom_assets/fruits/16_블루베리_blueberry.png","과일",118],
-    ["v37-grapefruit","자몽","상큼하고 깨끗한 균형의 자몽입니다.","6과",22000,30,"/iroom_assets/fruits/15_자몽_grapefruit.png","과일",119],
-    ["v37-mango","망고","부드럽고 진한 열대의 달콤함을 즐기는 망고입니다.","2~3과",29000,30,"/iroom_assets/fruits/07_망고_mango.png","과일",120],
-    ["v37-pineapple","파인애플","상큼하고 풍부한 과즙의 파인애플입니다.","2수",18000,30,"/iroom_assets/fruits/18_파인애플_pineapple.png","과일",121],
-    ["v37-blackberry","블랙베리","짙은 향과 산뜻한 균형의 블랙베리입니다.","500g",26000,30,"/iroom_assets/fruits/34_블랙베리_blackberry.png","과일",122],
-    ["v37-kumquat","금귤","작고 향긋한 상큼함의 금귤입니다.","2kg",23000,30,"/iroom_assets/fruits/35_금귤_kumquat.png","과일",123],
-    ["v37-apple","사과","아삭하고 선명한 달콤함의 사과입니다.","3kg",32000,30,"/iroom_assets/fruits/09_사과_apple.png","과일",124],
-    ["v37-pear","배","시원하고 풍부한 과즙의 배입니다.","5kg (7~9과)",38000,30,"/iroom_assets/fruits/10_배_pear.png","과일",125],
-    ["v37-persimmon","감","깊고 진한 계절의 단맛을 즐기는 감입니다.","3kg",24000,30,"/iroom_assets/fruits/11_감_persimmon.png","과일",126],
-    ["v37-strawberry","딸기","향긋하고 산뜻한 단맛의 딸기입니다.","1kg 내외",22000,30,"/iroom_assets/fruits/01_딸기_strawberry.png","과일",127],
-    ["v37-korean-melon","참외","아삭하고 맑은 달콤함의 참외입니다.","2kg",22000,30,"/iroom_assets/fruits/02_참외_korean_melon.png","과일",128],
-    ["v37-tomato","토마토","신선하고 산뜻한 자연의 맛을 즐기는 토마토입니다.","2kg",16000,30,"/iroom_assets/fruits/37_토마토_tomato.png","과일",129],
-    ["v37-watermelon","수박","시원하고 풍부한 과즙의 수박입니다.","1통",25000,30,"/iroom_assets/fruits/05_수박_watermelon.png","과일",130],
-    ["v37-peach","복숭아","부드럽고 향긋한 여름 단맛의 복숭아입니다.","4kg",29000,30,"/iroom_assets/fruits/06_복숭아_peach.png","과일",131],
-    ["v37-melon","멜론","부드럽고 은은한 달콤함의 멜론입니다.","2수",24000,30,"/iroom_assets/fruits/28_멜론_melon.png","과일",132],
-    ["v37-green-grape","청포도","청량하고 향긋한 단맛의 청포도입니다.","2kg",24000,30,"/iroom_assets/fruits/03_청포도_green_grape.png","과일",133]
-    ,["v40-avocado","아보카도","고소하고 부드러운 식감의 프리미엄 아보카도입니다.","5~6과",23000,30,"/iroom_assets/fruits/22_아보카도_avocado.png","수입과일",134]
-    ,["v40-dragonfruit","용과","담백하고 청량한 열대의 맛을 즐기는 용과입니다.","3~4과",26000,30,"/iroom_assets/fruits/23_용과_dragonfruit.png","수입과일",135]
-    ,["v40-banana","바나나","부드럽고 편안한 달콤함의 바나나입니다.","1.5kg 내외",12000,30,"/iroom_assets/fruits/29_바나나_banana.png","수입과일",136]
-    ,["v40-lime","라임","또렷하고 상쾌한 시트러스 향의 라임입니다.","8~10과",16000,30,"/iroom_assets/fruits/30_라임_lime.png","수입과일",137]
-    ,["v40-passionfruit","패션후르츠","향긋하고 선명한 새콤달콤함의 패션후르츠입니다.","1kg",24000,30,"/iroom_assets/fruits/31_패션후르츠_passionfruit.png","수입과일",138]
-    ,["v40-mangosteen","망고스틴","부드럽고 깨끗한 열대의 단맛을 즐기는 망고스틴입니다.","1kg",35000,30,"/iroom_assets/fruits/32_망고스틴_mangosteen.png","수입과일",139]
-    ,["v40-lychee","리치","은은한 꽃향과 맑은 단맛의 리치입니다.","1kg",26000,30,"/iroom_assets/fruits/33_리치_lychee.png","수입과일",140]
-    ,["v40-lemon","레몬","깨끗하고 산뜻한 시트러스 향의 레몬입니다.","8~10과",15000,30,"/iroom_assets/fruits/14_레몬_lemon.png","수입과일",141]
-    ,["v40-orange","오렌지","풍부한 과즙과 산뜻한 향의 오렌지입니다.","8~10과",18000,30,"/iroom_assets/fruits/21_오렌지_orange.png","수입과일",142]
-    ,["v40-raspberry","라즈베리","화사한 산미와 부드러운 향의 라즈베리입니다.","500g",28000,30,"/iroom_assets/fruits/17_라즈베리_raspberry.png","수입과일",143]
-    ,["v40-chestnut","밤","포근하고 고소한 가을 풍미의 국내산 밤입니다.","2kg",22000,30,"/iroom_assets/fruits/26_밤_chestnut.png","과일",144]
-  ];
-  for(const p of commerceSeed){
-    await pool.query(`
-      INSERT INTO products(slug,name,description,unit,price,stock,image,category,sort_order)
-      VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9)
-      ON CONFLICT(slug) DO NOTHING
-    `,p);
-  }
-
-  // V60.24: autumn apple refresh — replace storefront Hongro labels with Eazypple (이지플).
-  // Historical order_items are intentionally left unchanged; only the current product catalog
-  // and saved homepage configuration are migrated so existing customer order records remain accurate.
-  await pool.query(`
-    UPDATE products
-       SET name='이지플',
-           description='달콤하면서도 진한 맛이 좋은 국내 육성 사과 이지플입니다.',
-           updated_at=NOW()
-     WHERE slug IN ('red-apple','v37-hongro-apple')
-        OR name IN ('홍로사과','경북 홍사과')
-  `).catch(()=>{});
-  await pool.query(`
-    UPDATE site_settings
-       SET setting_value = replace(replace(setting_value::text, '"홍로사과"', '"이지플"'), '"경북 홍사과"', '"이지플"')::jsonb,
-           updated_at=NOW()
-     WHERE setting_value::text LIKE '%홍로사과%'
-        OR setting_value::text LIKE '%경북 홍사과%'
-  `).catch(()=>{});
-  // Keep only the commerce-era Easypple item active to avoid duplicate storefront products.
-  await pool.query(`
-    UPDATE products
-       SET is_active=FALSE, updated_at=NOW()
-     WHERE slug='red-apple'
-       AND EXISTS (SELECT 1 FROM products WHERE slug='v37-hongro-apple')
-  `).catch(()=>{});
 }
 
 // Health
 app.get("/api/health", async(req,res)=>{
   try{ await pool.query("SELECT 1"); res.json({ok:true,time:nowIso()}); }
-  catch(e){ console.error("[HEALTH]",e.message);res.status(503).json({ok:false,error:"database_unavailable"}); }
+  catch(e){ res.status(500).json({ok:false,error:e.message}); }
+});
+
+
+// Kakao OAuth: one-click login / signup
+function safeNextPath(v){
+  const s=String(v||'/home2.html');
+  if(s==='/' || s.startsWith('/?') || s.startsWith('/#')) return '/home2.html';
+  return s.startsWith('/') && !s.startsWith('//') ? s.slice(0,300) : '/home2.html';
+}
+app.get('/api/auth/kakao/start',(req,res)=>{
+  if(!KAKAO_REST_API_KEY) return res.status(503).send('Kakao Login is not configured. Set KAKAO_REST_API_KEY in Render Environment.');
+  const state=crypto.randomBytes(24).toString('hex');
+  const mode=req.query.mode==='join'?'join':'login';
+  const next=safeNextPath(req.query.next||'/home2.html');
+  res.cookie('iroom_kakao_state',state,{httpOnly:true,sameSite:'lax',secure:req.secure||process.env.NODE_ENV==='production',maxAge:10*60*1000});
+  res.cookie('iroom_kakao_next',next,{httpOnly:true,sameSite:'lax',secure:req.secure||process.env.NODE_ENV==='production',maxAge:10*60*1000});
+  res.cookie('iroom_kakao_mode',mode,{httpOnly:true,sameSite:'lax',secure:req.secure||process.env.NODE_ENV==='production',maxAge:10*60*1000});
+  const q=new URLSearchParams({response_type:'code',client_id:KAKAO_REST_API_KEY,redirect_uri:KAKAO_REDIRECT_URI,state});
+  res.redirect('https://kauth.kakao.com/oauth/authorize?'+q.toString());
+});
+
+app.get('/api/auth/kakao/callback',async(req,res)=>{
+  const next=safeNextPath(req.cookies.iroom_kakao_next||'/home2.html');
+  const fail=(code)=>res.redirect('/home2.html?kakao='+encodeURIComponent(code));
+  try{
+    if(req.query.error) return fail('cancel');
+    const state=String(req.query.state||'');
+    const saved=String(req.cookies.iroom_kakao_state||'');
+    if(!state || !saved || !safeEqual(state,saved)) return fail('state');
+    const code=String(req.query.code||'');
+    if(!code) return fail('code');
+
+    const body=new URLSearchParams({grant_type:'authorization_code',client_id:KAKAO_REST_API_KEY,redirect_uri:KAKAO_REDIRECT_URI,code});
+    if(KAKAO_CLIENT_SECRET) body.set('client_secret',KAKAO_CLIENT_SECRET);
+    const tr=await fetch('https://kauth.kakao.com/oauth/token',{
+      method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded;charset=utf-8'},body
+    });
+    const td=await tr.json().catch(()=>({}));
+    if(!tr.ok || !td.access_token) throw new Error('KAKAO_TOKEN_'+tr.status);
+
+    const ur=await fetch('https://kapi.kakao.com/v2/user/me',{headers:{Authorization:'Bearer '+td.access_token}});
+    const kd=await ur.json().catch(()=>({}));
+    if(!ur.ok || !kd.id) throw new Error('KAKAO_USER_'+ur.status);
+
+    const kakaoId=String(kd.id);
+    const account=kd.kakao_account||{};
+    const profile=account.profile||kd.properties||{};
+    const email=cleanEmail(account.email||'');
+    const name=cleanText(profile.nickname||('카카오회원'+kakaoId.slice(-4)),60);
+
+    let u=(await pool.query('SELECT * FROM users WHERE kakao_id=$1 LIMIT 1',[kakaoId])).rows[0];
+    if(!u && email){
+      u=(await pool.query('SELECT * FROM users WHERE LOWER(COALESCE(email,\'\'))=$1 LIMIT 1',[email])).rows[0];
+      if(u){
+        const r=await pool.query("UPDATE users SET kakao_id=$1, auth_provider=CASE WHEN auth_provider='local' THEN 'local+kakao' ELSE auth_provider END, last_login_at=NOW() WHERE id=$2 RETURNING *",[kakaoId,u.id]);
+        u=r.rows[0];
+      }
+    }
+    if(!u){
+      let username=('kakao_'+kakaoId).slice(0,20);
+      const hash=await bcrypt.hash(crypto.randomBytes(32).toString('hex'),12);
+      const r=await pool.query(
+        `INSERT INTO users(username,email,password_hash,name,kakao_id,auth_provider,last_login_at)
+         VALUES($1,$2,$3,$4,$5,'kakao',NOW()) RETURNING *`,
+        [username,email||null,hash,name,kakaoId]
+      );
+      u=r.rows[0];
+    }else{
+      await pool.query('UPDATE users SET last_login_at=NOW() WHERE id=$1',[u.id]).catch(()=>{});
+    }
+
+    setAuthCookie(res,token({userId:u.id,username:u.username,email:u.email,name:u.name}));
+    logSecurity('kakao_login_success',u.username||String(u.id),req).catch(()=>{});
+    res.clearCookie('iroom_kakao_state');res.clearCookie('iroom_kakao_next');res.clearCookie('iroom_kakao_mode');
+    const sep=next.includes('?')?'&':'?';
+    return res.redirect(next+sep+'kakao=success');
+  }catch(e){
+    console.error('kakao oauth error',e);
+    logSecurity('kakao_login_failed','kakao',req,String(e.message||e).slice(0,120)).catch(()=>{});
+    return fail('error');
+  }
 });
 
 // Auth
@@ -667,7 +539,7 @@ app.post("/api/signup", simpleRateLimit({windowMs:15*60*1000,max:8,keyPrefix:"si
   const safeName=cleanText(name,60),safeEmail=cleanEmail(email),safePhone=cleanPhone(phone),safePost=cleanText(postcode,12),safeAddr1=cleanText(address1,180),safeAddr2=cleanText(address2,120);
   if(!user||!password||!safeName) return res.status(400).json({error:"아이디, 비밀번호, 이름을 입력해주세요."});
   if(!/^[a-z0-9_]{4,20}$/.test(user)) return res.status(400).json({error:"아이디는 영문·숫자·밑줄로 4~20자 입력해주세요."});
-  if(String(password).length<10 || passwordBytes(password)>72) return res.status(400).json({error:"비밀번호는 10자 이상, 72바이트 이하로 설정해주세요."});
+  if(password.length<8) return res.status(400).json({error:"비밀번호는 8자 이상이어야 합니다."});
   try{
     const hash=await bcrypt.hash(password,12);
     const r=await pool.query(
@@ -691,7 +563,6 @@ app.post("/api/login", simpleRateLimit({windowMs:15*60*1000,max:12,keyPrefix:"lo
   if(!account||!password){
     return res.status(400).json({error:"아이디와 비밀번호를 입력해주세요."});
   }
-  if(account.length>180 || passwordBytes(password)>72) return res.status(400).json({error:"입력값을 확인해주세요."});
 
   // V79: 아이디 로그인 우선. 과거 이메일 회원도 이메일로 계속 로그인 가능.
   const r=await pool.query(
@@ -702,6 +573,7 @@ app.post("/api/login", simpleRateLimit({windowMs:15*60*1000,max:12,keyPrefix:"lo
     [account]
   );
   const u=r.rows[0];
+  console.log("[AUTH LOGIN]", account, u ? "USER_FOUND" : "USER_NOT_FOUND");
 
   if(!u || !(await bcrypt.compare(password,u.password_hash))){
     logSecurity("user_login_failed",account,req);
@@ -732,47 +604,12 @@ app.post("/api/login", simpleRateLimit({windowMs:15*60*1000,max:12,keyPrefix:"lo
   });
 });
 
-app.post("/api/logout",(req,res)=>{clearAuthCookie(res);res.json({ok:true});});
+app.post("/api/logout",(req,res)=>{res.clearCookie("iroom_token");res.json({ok:true});});
 app.get("/api/me", async(req,res)=>{
   const t=readToken(req); if(!t) return res.json({user:null});
   if(t.admin) return res.json({admin:true});
   const r=await pool.query("SELECT id,username,email,name,phone,postcode,address1,address2,created_at FROM users WHERE id=$1",[t.userId]);
   res.json({user:r.rows[0]||null});
-});
-
-
-// Kakao Login: JavaScript SDK obtains an authorization code, server exchanges it for tokens.
-app.get("/api/auth/kakao/callback", simpleRateLimit({windowMs:10*60*1000,max:20,keyPrefix:"kakao"}), async(req,res)=>{
-  const code=String(req.query.code||"").trim();
-  const error=String(req.query.error||"").trim();
-  if(error||!code) return res.redirect("/?kakao=error");
-  if(!KAKAO_REST_API_KEY) return res.status(503).send("KAKAO_REST_API_KEY가 설정되지 않았습니다.");
-  try{
-    const form=new URLSearchParams({grant_type:"authorization_code",client_id:KAKAO_REST_API_KEY,redirect_uri:KAKAO_REDIRECT_URI,code});
-    if(KAKAO_CLIENT_SECRET)form.set("client_secret",KAKAO_CLIENT_SECRET);
-    const tr=await fetch("https://kauth.kakao.com/oauth/token",{method:"POST",headers:{"Content-Type":"application/x-www-form-urlencoded;charset=utf-8"},body:form.toString()});
-    const td=await tr.json().catch(()=>({}));
-    if(!tr.ok||!td.access_token)throw new Error(td.error_description||td.error||`TOKEN_${tr.status}`);
-    const ur=await fetch("https://kapi.kakao.com/v2/user/me",{headers:{Authorization:`Bearer ${td.access_token}`,"Content-Type":"application/x-www-form-urlencoded;charset=utf-8"}});
-    const ud=await ur.json().catch(()=>({}));
-    if(!ur.ok||!ud.id)throw new Error(ud.msg||`USER_${ur.status}`);
-    const kakaoId=String(ud.id),account=ud.kakao_account||{},profile=account.profile||{};
-    const email=cleanEmail(account.email||"");
-    const name=cleanText(profile.nickname||`카카오회원${kakaoId.slice(-4)}`,60);
-    let user=null;
-    let q=await pool.query("SELECT * FROM users WHERE kakao_id=$1 LIMIT 1",[kakaoId]);user=q.rows[0];
-    if(!user&&email){q=await pool.query("SELECT * FROM users WHERE LOWER(COALESCE(email,''))=$1 LIMIT 1",[email]);user=q.rows[0];}
-    if(user){
-      const r=await pool.query("UPDATE users SET kakao_id=$1,auth_provider='kakao',last_login_at=NOW(),name=CASE WHEN name='' THEN $2 ELSE name END WHERE id=$3 RETURNING *",[kakaoId,name,user.id]);user=r.rows[0];
-    }else{
-      const username=`kakao_${kakaoId}`.slice(0,20);
-      const hash=await bcrypt.hash(crypto.randomBytes(32).toString("hex"),12);
-      const r=await pool.query("INSERT INTO users(username,email,password_hash,name,kakao_id,auth_provider,last_login_at) VALUES($1,$2,$3,$4,$5,'kakao',NOW()) RETURNING *",[username,email||null,hash,name,kakaoId]);user=r.rows[0];
-    }
-    setAuthCookie(res,token({userId:user.id,username:user.username,email:user.email,name:user.name}));
-    logSecurity("kakao_login_success",user.username||kakaoId,req).catch(()=>{});
-    res.redirect("/?kakao=success");
-  }catch(e){console.error("[KAKAO LOGIN]",e.message);logSecurity("kakao_login_failed","kakao",req,e.message).catch(()=>{});res.redirect("/?kakao=error")}
 });
 
 // Products
@@ -783,48 +620,32 @@ app.get("/api/products", async(req,res)=>{
 
 // Orders
 app.post("/api/orders", simpleRateLimit({windowMs:10*60*1000,max:20,keyPrefix:"order"}), async(req,res)=>{
-  const {items,customer_name,phone,email="",postcode="",address1,address2="",memo="",payment_method="무통장입금",shipping_region="normal",privacy_consent=false,terms_consent=false}=req.body||{};
+  const {items,customer_name,phone,email="",postcode="",address1,address2="",memo="",payment_method="무통장입금"}=req.body||{};
   const safeCustomer=cleanText(customer_name,60),safePhone=cleanPhone(phone),safeEmail=cleanEmail(email),safePost=cleanText(postcode,12),safeAddr1=cleanText(address1,180),safeAddr2=cleanText(address2,120),safeMemo=cleanText(memo,500);
-  const privacyAgreed=privacy_consent===true || String(privacy_consent).toLowerCase()==="yes" || String(privacy_consent)==="1";
-  const termsAgreed=terms_consent===true || String(terms_consent).toLowerCase()==="yes" || String(terms_consent)==="1";
-  const safeShippingRegion=["normal","jeju","remote"].includes(String(shipping_region))?String(shipping_region):"normal";
-  const safePayment=["무통장입금","토스결제"].includes(String(payment_method))?String(payment_method):"무통장입금";
   if(!Array.isArray(items)||!items.length||items.length>30) return res.status(400).json({error:"주문 상품이 없습니다."});
   if(!safeCustomer||!safePhone||!safeAddr1) return res.status(400).json({error:"주문자명, 연락처, 배송지를 입력해주세요."});
-  if(!privacyAgreed||!termsAgreed) return res.status(400).json({error:"개인정보 수집·이용과 구매조건 확인에 동의해주세요."});
 
   const client=await pool.connect();
   try{
     await client.query("BEGIN");
-    let subtotal=0;
+    let total=0;
     const finalItems=[];
     for(const it of items){
       const pid=Number(it.product_id||it.id);
-      const qty=Math.max(1,Math.min(20,Math.floor(Number(it.qty||1)||1)));
+      const qty=Math.max(1,Number(it.qty||1));
       const pr=await client.query("SELECT id,name,price,stock,is_active FROM products WHERE id=$1 FOR UPDATE",[pid]);
       const p=pr.rows[0];
       if(!p||!p.is_active) throw new Error("판매하지 않는 상품이 포함되어 있습니다.");
       if(p.stock<qty) throw new Error(`${p.name} 재고가 부족합니다.`);
-      const line=p.price*qty; subtotal+=line;
+      const line=p.price*qty; total+=line;
       finalItems.push({p,qty,line});
     }
-    const savedStore=await getSetting("iroom1_store",{});
-    const savedValue=savedStore?.setting_value||savedStore||{};
-    const site=savedValue.site||{};
-    const baseShipping=Math.max(0,Number(site.shippingFee ?? 4000)||0);
-    const freeFrom=Math.max(0,Number(site.freeShippingFrom ?? 50000)||0);
-    const jejuExtra=Math.max(0,Number(site.jejuShippingExtra ?? 4000)||0);
-    const remoteExtra=Math.max(0,Number(site.remoteShippingExtra ?? 5000)||0);
-    const baseFee=(freeFrom>0 && subtotal>=freeFrom)?0:baseShipping;
-    const regionalExtra=safeShippingRegion==="jeju"?jejuExtra:safeShippingRegion==="remote"?remoteExtra:0;
-    const shippingFee=baseFee+regionalExtra;
-    const total=subtotal+shippingFee;
     const t=readToken(req);
     const ono=orderNo();
     const or=await client.query(`
-      INSERT INTO orders(order_no,user_id,customer_name,phone,email,postcode,address1,address2,memo,payment_method,subtotal,shipping_fee,total_amount,shipping_region,privacy_agreed_at,terms_agreed_at)
-      VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,NOW(),NOW()) RETURNING *
-    `,[ono,t?.userId||null,safeCustomer,safePhone,safeEmail,safePost,safeAddr1,safeAddr2,safeMemo,safePayment,subtotal,shippingFee,total,safeShippingRegion]);
+      INSERT INTO orders(order_no,user_id,customer_name,phone,email,postcode,address1,address2,memo,payment_method,total_amount)
+      VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11) RETURNING *
+    `,[ono,t?.userId||null,safeCustomer,safePhone,safeEmail,safePost,safeAddr1,safeAddr2,safeMemo,cleanText(payment_method,40),total]);
     const order=or.rows[0];
     for(const x of finalItems){
       await client.query(`
@@ -840,37 +661,17 @@ app.post("/api/orders", simpleRateLimit({windowMs:10*60*1000,max:20,keyPrefix:"o
     }));
     const mail_status=await notifyOrder(orderForMail,itemsForMail);
     res.json({
-      ok:true,order_no:ono,subtotal,shipping_fee:shippingFee,total_amount:total,free_shipping_from:freeFrom,shipping_region:safeShippingRegion,shipping_region_label:({normal:"일반지역",jeju:"제주도",remote:"제주 외 도서산간"}[safeShippingRegion]),regional_extra:regionalExtra,mail_status,
-      bank:await getPaymentBankInfo()
+      ok:true,order_no:ono,total_amount:total,mail_status,
+      bank:{
+        name:process.env.BANK_NAME||"우리은행",
+        account:process.env.BANK_ACCOUNT||"1005-203-135891",
+        holder:process.env.BANK_HOLDER||"이룸 fresh fruits"
+      }
     });
   }catch(e){
     await client.query("ROLLBACK");
     res.status(400).json({error:e.message||"주문 처리 중 오류가 발생했습니다."});
   }finally{client.release();}
-});
-
-app.post("/api/orders/lookup", simpleRateLimit({windowMs:10*60*1000,max:10,keyPrefix:"guest_order_lookup",message:"주문조회 요청이 많습니다. 잠시 후 다시 시도해주세요."}), async(req,res)=>{
-  const ono=cleanText(req.body?.order_no,40).toUpperCase();
-  const phoneDigits=cleanPhone(req.body?.phone).replace(/\D/g,"");
-  if(!ono || phoneDigits.length<9) return res.status(400).json({error:"주문번호와 주문자 연락처를 정확히 입력해주세요."});
-  const r=await pool.query(`
-    SELECT o.id,o.order_no,o.status,o.payment_status,o.payment_method,o.subtotal,o.shipping_fee,o.total_amount,o.shipping_region,o.created_at,o.updated_at,
-      COALESCE(json_agg(json_build_object(
-        'product_name',oi.product_name,'unit_price',oi.unit_price,'qty',oi.qty,'line_total',oi.line_total
-      ) ORDER BY oi.id) FILTER (WHERE oi.id IS NOT NULL),'[]'::json) items
-    FROM orders o LEFT JOIN order_items oi ON oi.order_id=o.id
-    WHERE UPPER(o.order_no)=UPPER($1) AND regexp_replace(o.phone,'[^0-9]','','g')=$2
-    GROUP BY o.id
-    LIMIT 1
-  `,[ono,phoneDigits]);
-  if(!r.rows[0]) return res.status(404).json({error:"일치하는 주문을 찾지 못했습니다. 주문번호와 연락처를 다시 확인해주세요."});
-  const order=r.rows[0];
-  res.setHeader("Cache-Control","no-store");
-  res.json({ok:true,order:{
-    order_no:order.order_no,status:order.status,payment_status:order.payment_status,payment_method:order.payment_method,
-    subtotal:order.subtotal,shipping_fee:order.shipping_fee,total_amount:order.total_amount,shipping_region:order.shipping_region,
-    created_at:order.created_at,updated_at:order.updated_at,items:order.items
-  }});
 });
 
 app.get("/api/my/orders", requireUser, async(req,res)=>{
@@ -900,52 +701,26 @@ app.get("/api/order/:orderNo", simpleRateLimit({windowMs:10*60*1000,max:20,keyPr
 });
 
 // Admin auth
-app.post("/api/admin/login",simpleRateLimit({windowMs:30*60*1000,max:8,keyPrefix:"admin"}),async(req,res)=>{
+app.post("/api/admin/login",simpleRateLimit({windowMs:30*60*1000,max:8,keyPrefix:"admin"}),(req,res)=>{
   const {password}=req.body||{};
-  let valid=false;
-  try{
-    const saved=await getSetting("admin_password_hash",{});
-    const hash=String(saved?.hash||"");
-    if(hash) valid=!!password && await bcrypt.compare(String(password),hash);
-    else valid=!!password && !!ADMIN_PASSWORD && safeEqual(String(password),ADMIN_PASSWORD);
-  }catch(_){valid=!!password && !!ADMIN_PASSWORD && safeEqual(String(password),ADMIN_PASSWORD)}
-  if(!ADMIN_PASSWORD){
-    try{const saved=await getSetting("admin_password_hash",{});if(!saved?.hash)return res.status(503).json({error:"관리자 비밀번호가 서버에 설정되지 않았습니다."})}catch(_){return res.status(503).json({error:"관리자 비밀번호가 서버에 설정되지 않았습니다."})}
-  }
-  if(!valid){
+  if(!ADMIN_PASSWORD) return res.status(503).json({error:"관리자 비밀번호가 서버에 설정되지 않았습니다."});
+  if(!password || !safeEqual(password,ADMIN_PASSWORD)){
     logSecurity("admin_login_failed","admin",req);
     return res.status(401).json({error:"관리자 비밀번호가 올바르지 않습니다."});
   }
   logSecurity("admin_login_success","admin",req);
-  const adminSessionVersion=await getAdminSessionVersion();
-  setAuthCookie(res,token({admin:true,scope:"admin",adminSessionVersion},`${ADMIN_SESSION_HOURS}h`),true); res.json({ok:true,expires_hours:ADMIN_SESSION_HOURS});
+  setAuthCookie(res,token({admin:true},"12h")); res.json({ok:true});
 });
-app.post("/api/admin/logout",(req,res)=>{clearAuthCookie(res);res.json({ok:true});});
-app.get("/api/admin/me",requireAdmin,(req,res)=>res.json({admin:true}));
-app.get("/api/admin/session",requireAdmin,(req,res)=>res.json({authenticated:true}));
-
-app.post("/api/admin/password",requireAdmin,async(req,res)=>{
-  try{
-    const password=String(req.body?.password||"");
-    if(password.length<12 || passwordBytes(password)>72)return res.status(400).json({error:"관리자 비밀번호는 12자 이상, 72바이트 이하로 설정해 주세요."});
-    const hash=await bcrypt.hash(password,12);
-    await putSetting("admin_password_hash",{hash,updatedAt:new Date().toISOString()});
-    const nextVersion=(await getAdminSessionVersion(true))+1;
-    await putSetting("admin_session_version",{version:nextVersion,updatedAt:new Date().toISOString()});
-    adminSessionCache={value:nextVersion,ts:Date.now()};
-    setAuthCookie(res,token({admin:true,scope:"admin",adminSessionVersion:nextVersion},`${ADMIN_SESSION_HOURS}h`),true);
-    logSecurity("admin_password_changed","admin",req,"all older admin sessions invalidated");
-    res.json({ok:true,message:"관리자 비밀번호가 변경되었고 기존 관리자 세션은 모두 만료되었습니다."});
-  }catch(e){res.status(500).json({error:"관리자 비밀번호 변경에 실패했습니다."})}
-});
+app.post("/api/admin/logout",(req,res)=>{res.clearCookie("iroom_token");res.json({ok:true});});
+app.get("/api/admin/me",(req,res)=>{const t=readToken(req);res.json({admin:!!t?.admin});});
+app.get("/api/admin/session",(req,res)=>{const t=readToken(req);if(!t?.admin)return res.status(401).json({authenticated:false});res.json({authenticated:true});});
 
 
 app.post("/api/consultations",simpleRateLimit({windowMs:10*60*1000,max:12,keyPrefix:"consult"}),async(req,res)=>{
   const b=req.body||{};
-  const guideType=cleanText(b.guide_type,40);
-  const name=cleanText(b.customer_name,60);
-  const phone=cleanPhone(b.phone);
-  const email=cleanEmail(b.email);
+  const guideType=String(b.guide_type||"").trim();
+  const name=String(b.customer_name||"").trim();
+  const phone=String(b.phone||"").trim();
   if(!guideType||!name||!phone) return res.status(400).json({error:"상담 유형, 이름, 연락처를 입력해주세요."});
   const consultNo="C"+Date.now().toString(36).toUpperCase()+crypto.randomBytes(2).toString("hex").toUpperCase();
   try{
@@ -955,10 +730,10 @@ app.post("/api/consultations",simpleRateLimit({windowMs:10*60*1000,max:12,keyPre
         consult_no,user_id,guide_type,customer_name,phone,email,recipient,budget,quantity_note,
         preferred_fruits,avoid_fruits,taste_preference,packaging,delivery_date,message
       ) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15) RETURNING *
-    `,[consultNo,auth?.userId||null,guideType,name,phone,email,cleanText(b.recipient,160),
-       cleanText(b.budget,100),cleanText(b.quantity_note,160),cleanText(b.preferred_fruits,500),
-       cleanText(b.avoid_fruits,500),cleanText(b.taste_preference,300),cleanText(b.packaging,200),
-       cleanText(b.delivery_date,60),cleanLongText(b.message,1800)]);
+    `,[consultNo,auth?.userId||null,guideType,name,phone,String(b.email||"").trim(),String(b.recipient||"").trim(),
+       String(b.budget||"").trim(),String(b.quantity_note||"").trim(),String(b.preferred_fruits||"").trim(),
+       String(b.avoid_fruits||"").trim(),String(b.taste_preference||"").trim(),String(b.packaging||"").trim(),
+       String(b.delivery_date||"").trim(),String(b.message||"").trim()]);
     const cst=r.rows[0], c=mailSettings();
     if(c.orderEmail){
       const text=`[이룸 과일 추천 상담요청]
@@ -1079,108 +854,21 @@ app.post("/api/admin/ai/assist",
 );
 
 
-
-// Public-safe payment information. Uses admin site settings first, then Render env, then safe defaults.
-app.get("/api/site/payment-info",async(req,res)=>{
-  try{res.json({ok:true,bank:await getPaymentBankInfo()})}
-  catch(e){res.status(500).json({ok:false,error:"입금계좌 정보를 불러오지 못했습니다."})}
-});
-
-const DEFAULT_POLICIES={
-  termsText:`이룸 fresh fruits는 상품의 산지·중량·구성·가격·재고·배송 예정일을 상품 화면에 안내합니다.
-계절 과일은 산지와 기상, 당일 입고 상태에 따라 색상·크기·구성이 달라질 수 있으며, 주문 시 표시된 상품 정보와 결제 안내가 우선 적용됩니다.
-회원과 비회원은 정확한 주문·배송 정보를 입력해야 하며, 부정한 이용이나 서비스 운영을 방해하는 행위는 제한될 수 있습니다.
-결제·배송·청약철회·환불 등에 관한 사항은 관련 법령과 이룸의 배송·교환·환불 안내에 따릅니다.`,
-  privacyText:`이룸 fresh fruits는 주문, 배송, 상담, 회원관리 및 고객지원에 필요한 범위에서 이름, 연락처, 이메일, 배송지, 주문내역 등의 정보를 처리합니다.
-수집한 정보는 해당 목적과 관계 법령상 보관 의무가 있는 기간 동안만 보관하며, 목적이 달성되고 법적 보관 의무가 끝나면 안전한 방법으로 파기합니다.
-결제대행사, 배송사, 이메일 발송 서비스 등 주문 이행에 필요한 외부 서비스에는 필요한 범위에서만 정보가 전달될 수 있습니다.
-개인정보 관련 문의는 홈페이지에 표시된 고객센터 또는 이메일로 접수할 수 있습니다.`,
-  shippingPolicyText:`기본 배송비는 4,000원이며 상품 합계 50,000원 이상은 기본 배송비가 무료입니다.
-제주 지역은 4,000원, 제주 외 도서산간 지역은 5,000원의 추가 운임이 발생할 수 있으며 지역 추가 운임은 무료배송 여부와 별도로 적용될 수 있습니다.
-신선식품 특성상 산지·입고·택배사 사정, 기상 상황에 따라 출고 또는 도착 일정이 달라질 수 있습니다. 출고 전 변경 사항이 있으면 주문자에게 안내합니다.
-수령 즉시 상품 상태를 확인해 주세요. 파손, 오배송, 심각한 품질 이상이 있는 경우 수령 당일 또는 확인 가능한 가장 빠른 시점에 사진과 함께 고객센터로 문의해 주세요.
-단순 변심에 의한 교환·반품은 신선식품의 가치가 현저히 감소할 우려가 있는 경우 제한될 수 있으며, 실제 처리는 전자상거래 관련 법령과 상품별 안내를 따릅니다.`
-};
-
-// Public-safe footer/review configuration for IROOM4 storefront.
-app.get("/api/site/footer-config",async(req,res)=>{
-  try{
-    const saved=await getSetting("iroom1_store",{});
-    const value=saved?.setting_value||saved||{};
-    const site=value.site||{};
-    const reviews=Array.isArray(value.reviews)?value.reviews.filter(x=>x&&x.show!==false).slice(0,3).map(x=>({text:cleanLongText(x.text,1200),author:cleanText(x.author,120),verified:Boolean(x.verified),rating:Math.max(0,Math.min(5,Number(x.rating)||0))})):[];
-    const policies={
-      termsText:cleanLongText(site.termsText||DEFAULT_POLICIES.termsText,12000),
-      privacyText:cleanLongText(site.privacyText||DEFAULT_POLICIES.privacyText,12000),
-      shippingPolicyText:cleanLongText(site.shippingPolicyText||DEFAULT_POLICIES.shippingPolicyText,12000)
-    };
-    res.json({
-      ok:true,
-      site:{
-        siteName:String(site.siteName||"이룸 fresh fruits"),
-        representative:String(site.representative||"한효철"),
-        phone:String(site.phone||"070-7762-3651"),
-        email:String(site.email||"iroom4562@naver.com"),
-        address:String(site.address||"서울특별시 송파구 송이로 15길 33"),
-        businessNo:String(site.businessNo||"775-97-00292"),
-        mailOrderNo:String(site.mailOrderNo||"제 2025-서울 송파 -1052호"),
-        hostingProvider:String(site.hostingProvider||"Render"),
-        bandUrl:String(site.bandUrl||"https://band.us/@iroomfruits"),
-        kakaoUrl:String(site.kakaoUrl||""),
-        kakaoJoinUrl:String(site.kakaoJoinUrl||""),
-        kakaoEnabled:Boolean(site.kakaoEnabled),
-        kakaoJsKey:String(site.kakaoJsKey||process.env.KAKAO_JAVASCRIPT_KEY||""),
-        kakaoRedirectUri:KAKAO_REDIRECT_URI,
-        naverUrl:String(site.naverUrl||""),
-        shippingFee:Number.isFinite(Number(site.shippingFee))?Number(site.shippingFee):4000,
-        freeShippingFrom:Number.isFinite(Number(site.freeShippingFrom))?Number(site.freeShippingFrom):50000,
-        jejuShippingExtra:Number.isFinite(Number(site.jejuShippingExtra))?Number(site.jejuShippingExtra):4000,
-        remoteShippingExtra:Number.isFinite(Number(site.remoteShippingExtra))?Number(site.remoteShippingExtra):5000,
-        courier:String(site.courier||"")
-      },
-      reviews,
-      policies
-    });
-  }catch(e){
-    console.error("[FOOTER CONFIG]",e.message);
-    res.status(500).json({ok:false,error:"홈페이지 하단 정보를 불러오지 못했습니다."});
-  }
-});
-
-
-app.get("/api/site/home-style",async(req,res)=>{
-  try{const style=await getSetting("public_home_style","home1");const v=String(style?.setting_value??style??"home1");res.json({ok:true,style:["home1","home2"].includes(v)?v:"home1"})}
-  catch(e){res.json({ok:true,style:"home1"})}
-});
-app.get("/api/admin/site/home-style",requireAdmin,async(req,res)=>{
-  const style=await getSetting("public_home_style","home1");const v=String(style?.setting_value??style??"home1");res.json({ok:true,style:["home1","home2"].includes(v)?v:"home1"});
-});
-app.put("/api/admin/site/home-style",requireAdmin,async(req,res)=>{
-  const style=String(req.body?.style||"").trim();if(!["home1","home2"].includes(style))return res.status(400).json({ok:false,error:"홈페이지 버전을 확인해 주세요."});
-  await putSetting("public_home_style",style);logSecurity("admin_home_style_updated","admin",req,style);res.json({ok:true,style});
-});
-
 app.get("/api/site/homepage-config",async(req,res)=>{
-  res.set("Cache-Control","no-store, no-cache, must-revalidate, proxy-revalidate");
-  res.set("Pragma","no-cache");
-  res.set("Expires","0");
-  try{const config=await getSetting("homepage_config",{});res.json({ok:true,config,revision:configRevision(config)})}
+  try{res.json({ok:true,config:await getSetting("homepage_config",{})})}
   catch(e){res.status(500).json({ok:false,error:"홈페이지 설정을 불러오지 못했습니다."})}
 });
 app.get("/api/admin/site/homepage-config",requireAdmin,async(req,res)=>{
-  res.set("Cache-Control","no-store, no-cache, must-revalidate, proxy-revalidate");
-  const config=await getSetting("homepage_config",{});res.json({ok:true,config,revision:configRevision(config)});
+  res.json({ok:true,config:await getSetting("homepage_config",{})});
 });
 app.put("/api/admin/site/homepage-config",requireAdmin,async(req,res)=>{
   try{
-    const incoming=req.body&&typeof req.body.config==="object"?req.body.config:{};
-    const raw=sanitizeConfigValue(incoming);
+    const raw=req.body&&typeof req.body.config==="object"?req.body.config:{};
     const json=JSON.stringify(raw);
-    if(json.length>25000000)return res.status(413).json({ok:false,error:"상품 화면 편집 데이터가 너무 큽니다. 고해상도 사진 수를 줄이거나 이미지 보관함 경로를 사용해 주세요."});
+    if(json.length>3500000)return res.status(413).json({ok:false,error:"설정/이미지 용량이 너무 큽니다. 사진 수나 크기를 줄여주세요."});
     const saved=await putSetting("homepage_config",raw);
-    const revision=configRevision(saved.setting_value);
-    logSecurity("admin_homepage_config_updated","admin",req,`homepage_config:${revision}`);
-    res.json({ok:true,config:saved.setting_value,revision,updatedAt:saved.updated_at});
+    logSecurity("admin_homepage_config_updated","admin",req,"homepage_config");
+    res.json({ok:true,config:saved.setting_value,updatedAt:saved.updated_at});
   }catch(e){console.error("[HOME CONFIG]",e.message);res.status(500).json({ok:false,error:"홈페이지 설정 저장 중 오류가 발생했습니다."})}
 });
 
@@ -1214,64 +902,13 @@ app.get("/api/store",requireAdmin,async(req,res)=>{
 });
 async function saveIroom1Store(req,res){
   try{
-    const incoming=req.body&&typeof req.body==="object"?req.body:{};
-    const data={...incoming};
+    const data={...(req.body||{})};
+    // Products/orders/members are stored in their real tables, not duplicated into settings.
     delete data.products; delete data.orders; delete data.members;
-    if(data.site&&typeof data.site==="object"){
-      const x=data.site;
-      data.site={
-        siteName:cleanText(x.siteName||"이룸 fresh fruits",120),
-        representative:cleanText(x.representative||"한효철",80),
-        phone:cleanPhone(x.phone||"070-7762-3651"),
-        email:cleanEmail(x.email||"iroom4562@naver.com")||"iroom4562@naver.com",
-        address:cleanText(x.address||"서울특별시 송파구 송이로 15길 33",300),
-        businessNo:cleanText(x.businessNo||"775-97-00292",60),
-        mailOrderNo:cleanText(x.mailOrderNo||"제 2025-서울 송파 -1052호",100),
-        hostingProvider:cleanText(x.hostingProvider||"Render",100),
-        bankName:cleanText(x.bankName||"우리은행",50),
-        bankAccount:cleanText(x.bankAccount||"1005-203-135891",80),
-        bankOwner:cleanText(x.bankOwner||"한효철",80),
-        tossClientKey:cleanText(x.tossClientKey,300),
-        tossSecretKey:"",
-        tossEnabled:Boolean(x.tossEnabled),
-        bandUrl:safeHttpsUrl(x.bandUrl,1000),
-        kakaoUrl:safeHttpsUrl(x.kakaoUrl,1000),
-        kakaoJoinUrl:safeHttpsUrl(x.kakaoJoinUrl,1000),
-        kakaoEnabled:Boolean(x.kakaoEnabled),
-        kakaoJsKey:cleanText(x.kakaoJsKey,300),
-        naverUrl:safeHttpsUrl(x.naverUrl,1000),
-        shippingFee:cleanNonNegative(x.shippingFee,1000000),
-        freeShippingFrom:cleanNonNegative(x.freeShippingFrom,100000000),
-        jejuShippingExtra:cleanNonNegative(x.jejuShippingExtra,1000000),
-        remoteShippingExtra:cleanNonNegative(x.remoteShippingExtra,1000000),
-        courier:cleanText(x.courier,100),
-        emailNotify:Boolean(x.emailNotify),
-        stockNotify:Boolean(x.stockNotify),
-        termsText:cleanLongText(x.termsText||DEFAULT_POLICIES.termsText,12000),
-        privacyText:cleanLongText(x.privacyText||DEFAULT_POLICIES.privacyText,12000),
-        shippingPolicyText:cleanLongText(x.shippingPolicyText||DEFAULT_POLICIES.shippingPolicyText,12000)
-      };
-    }
-    if(Array.isArray(data.images)){
-      data.images=data.images.slice(0,100).map(x=>({
-        name:cleanText(x?.name,160),
-        data:safeMediaValue(x?.data),
-        createdAt:cleanText(x?.createdAt,60)
-      })).filter(x=>x.data);
-    }
-    if(Array.isArray(data.reviews)){
-      data.reviews=data.reviews.slice(0,100).map(x=>({
-        text:cleanLongText(x?.text,1200),
-        author:cleanText(x?.author,120),
-        show:x?.show!==false,
-        verified:Boolean(x?.verified),
-        rating:Math.max(0,Math.min(5,Number(x?.rating)||0))
-      })).filter(x=>x.text);
-    }
+    if(data.site&&data.site.tossSecretKey) data.site={...data.site,tossSecretKey:""};
     data.updatedAt=new Date().toISOString();
     await putSetting("iroom1_store",data);
-    logSecurity("admin_store_updated","admin",req,"iroom1_store");
-    res.json({ok:true,message:"관리자 설정을 서버에 저장했습니다.",updatedAt:data.updatedAt});
+    res.json({ok:true,message:"관리자 설정을 서버에 저장했습니다."});
   }catch(e){console.error("[IROOM1 STORE SAVE]",e.message);res.status(500).json({error:"관리자 데이터 저장에 실패했습니다."})}
 }
 app.post("/api/store",requireAdmin,saveIroom1Store);
@@ -1294,14 +931,8 @@ app.get("/api/admin/all",requireAdmin,async(req,res)=>{
   }catch(e){console.error("[ADMIN ALL]",e.message);res.status(500).json({error:"관리자 데이터를 불러오지 못했습니다."})}
 });
 app.post("/api/admin/settings",requireAdmin,async(req,res)=>{
-  try{
-    const settings=sanitizeConfigValue(req.body||{});
-    const serialized=JSON.stringify(settings);
-    if(serialized.length>1000000)return res.status(413).json({error:"설정 데이터가 너무 큽니다."});
-    const saved=await putSetting("iroom1_settings",settings);
-    logSecurity("admin_settings_updated","admin",req,`settings:${configRevision(saved.setting_value)}`);
-    res.json({ok:true,settings:saved.setting_value});
-  }catch(e){res.status(500).json({error:"설정 저장 실패"})}
+  try{const saved=await putSetting("iroom1_settings",req.body||{});res.json({ok:true,settings:saved.setting_value})}
+  catch(e){res.status(500).json({error:"설정 저장 실패"})}
 });
 app.get("/api/admin/dashboard",requireAdmin,async(req,res)=>{
   const [p,o,u,today]=await Promise.all([
@@ -1318,24 +949,15 @@ app.get("/api/admin/products",requireAdmin,async(req,res)=>{
 });
 app.post("/api/admin/products",requireAdmin,async(req,res)=>{
   const p=req.body||{};
-  const name=cleanText(p.name||"새 상품",100),description=cleanLongText(p.description,1800),unit=cleanText(p.unit,80),category=cleanText(p.category||"과일",60);
-  const price=Math.max(0,Math.floor(Number(p.price||0)||0)),stock=Math.max(0,Math.floor(Number(p.stock||0)||0)),sortOrder=Math.floor(Number(p.sort_order||0)||0);
-  const image=safeMediaValue(p.image)||cleanText(p.image,800);
-  if(!name)return res.status(400).json({error:"상품명을 입력해주세요."});
-  if(price>100000000||stock>1000000)return res.status(400).json({error:"가격 또는 재고 값을 확인해주세요."});
-  const slug=(p.slug||name||"product").toLowerCase().replace(/[^a-z0-9가-힣]+/g,"-").replace(/^-|-$/g,"").slice(0,80)+"-"+crypto.randomBytes(2).toString("hex");
+  const slug=(p.slug||p.name||"product").toLowerCase().replace(/[^a-z0-9가-힣]+/g,"-").replace(/^-|-$/g,"")+"-"+crypto.randomBytes(2).toString("hex");
   const r=await pool.query(`
     INSERT INTO products(slug,name,description,unit,price,stock,image,category,is_active,sort_order)
     VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10) RETURNING *
-  `,[slug,name,description,unit,price,stock,image,category,p.is_active!==false,sortOrder]);
-  logSecurity("admin_product_created","admin",req,`product:${r.rows[0].id}`);
+  `,[slug,p.name||"새 상품",p.description||"",p.unit||"",Number(p.price||0),Number(p.stock||0),p.image||"",p.category||"과일",p.is_active!==false,Number(p.sort_order||0)]);
   res.json({ok:true,product:r.rows[0]});
 });
 app.put("/api/admin/products/:id",requireAdmin,async(req,res)=>{
   const p=req.body||{};
-  const price=p.price===undefined?null:Math.max(0,Math.floor(Number(p.price)||0));
-  const stock=p.stock===undefined?null:Math.max(0,Math.floor(Number(p.stock)||0));
-  if((price!==null&&price>100000000)||(stock!==null&&stock>1000000))return res.status(400).json({error:"가격 또는 재고 값을 확인해주세요."});
   const r=await pool.query(`
     UPDATE products SET
       name=COALESCE($1,name),description=COALESCE($2,description),unit=COALESCE($3,unit),
@@ -1343,8 +965,8 @@ app.put("/api/admin/products/:id",requireAdmin,async(req,res)=>{
       category=COALESCE($7,category),is_active=COALESCE($8,is_active),
       sort_order=COALESCE($9,sort_order),updated_at=NOW()
     WHERE id=$10 RETURNING *
-  `,[p.name===undefined?null:cleanText(p.name,100),p.description===undefined?null:cleanLongText(p.description,1800),p.unit===undefined?null:cleanText(p.unit,80),price,stock,
-     p.image===undefined?null:(safeMediaValue(p.image)||cleanText(p.image,800)),p.category===undefined?null:cleanText(p.category,60),p.is_active===undefined?null:!!p.is_active,p.sort_order===undefined?null:Math.floor(Number(p.sort_order)||0),req.params.id]);
+  `,[p.name??null,p.description??null,p.unit??null,p.price===undefined?null:Number(p.price),p.stock===undefined?null:Number(p.stock),
+     p.image??null,p.category??null,p.is_active===undefined?null:!!p.is_active,p.sort_order===undefined?null:Number(p.sort_order),req.params.id]);
   if(!r.rows[0]) return res.status(404).json({error:"상품을 찾을 수 없습니다."});
   logSecurity("admin_product_updated","admin",req,`product:${req.params.id}`);
   res.json({ok:true,product:r.rows[0]});
@@ -1369,16 +991,10 @@ app.get("/api/admin/orders",requireAdmin,async(req,res)=>{
 });
 app.put("/api/admin/orders/:id",requireAdmin,async(req,res)=>{
   const {status,payment_status}=req.body||{};
-  const allowedStatus=["주문접수","입금확인","상품준비","배송중","배송완료","취소","환불완료"];
-  const allowedPayment=["입금대기","결제대기","결제완료","입금확인","결제취소","환불완료"];
-  const nextStatus=status===undefined?null:(allowedStatus.includes(String(status))?String(status):null);
-  const nextPayment=payment_status===undefined?null:(allowedPayment.includes(String(payment_status))?String(payment_status):null);
-  if(status!==undefined && nextStatus===null)return res.status(400).json({error:"허용되지 않은 주문 상태입니다."});
-  if(payment_status!==undefined && nextPayment===null)return res.status(400).json({error:"허용되지 않은 결제 상태입니다."});
   const r=await pool.query(`
     UPDATE orders SET status=COALESCE($1,status),payment_status=COALESCE($2,payment_status),updated_at=NOW()
     WHERE id=$3 RETURNING *
-  `,[nextStatus,nextPayment,req.params.id]);
+  `,[status||null,payment_status||null,req.params.id]);
   if(!r.rows[0]) return res.status(404).json({error:"주문을 찾을 수 없습니다."});
   logSecurity("admin_order_updated","admin",req,`order:${req.params.id}`);
   res.json({ok:true,order:r.rows[0]});
@@ -1395,80 +1011,6 @@ app.get("/api/admin/users",requireAdmin,async(req,res)=>{
   `);
   res.json({users:r.rows});
 });
-app.get("/api/admin/operations",requireAdmin,async(req,res)=>{
-  try{
-    const [db,pc,oc,uc]=await Promise.all([
-      pool.query("SELECT NOW() now"),
-      pool.query("SELECT COUNT(*)::int count,COALESCE(SUM(stock),0)::int stock FROM products"),
-      pool.query("SELECT COUNT(*)::int count FROM orders"),
-      pool.query("SELECT COUNT(*)::int count FROM users")
-    ]);
-    const saved=await getSetting("admin_password_hash",{}).catch(()=>({}));
-    const jwtConfigured=!!process.env.JWT_SECRET;
-    const baseHttps=/^https:\/\//i.test(BASE_URL);
-    const dbTransportOk=dbLocal || !dbWantsTls || (dbWantsTls && /^require|verify-ca|verify-full$/.test(dbSslMode));
-    const email=mailSettings();
-    const flags={
-      database:true,
-      jwtSecretConfigured:jwtConfigured,
-      jwtSecretStrong:jwtConfigured && String(process.env.JWT_SECRET).length>=48,
-      adminPasswordConfigured:!!ADMIN_PASSWORD || !!saved?.hash,
-      publicBaseHttps:baseHttps,
-      dbTransportAppropriate:dbTransportOk,
-      emailConfigured:!!(email.apiKey&&email.senderEmail&&email.orderEmail),
-      tossClientConfigured:!!process.env.TOSS_CLIENT_KEY,
-      tossSecretConfigured:!!process.env.TOSS_SECRET_KEY,
-      kakaoConfigured:!!KAKAO_REST_API_KEY,
-      openaiConfigured:!!OPENAI_API_KEY,
-      pwaConfigured:true
-    };
-    const warnings=[];
-    if(!flags.jwtSecretStrong)warnings.push("JWT_SECRET를 48자 이상의 충분히 긴 난수로 설정하세요.");
-    if(!flags.adminPasswordConfigured)warnings.push("관리자 비밀번호가 설정되지 않았습니다.");
-    if(IS_PROD&&!flags.publicBaseHttps)warnings.push("PUBLIC_BASE_URL을 https:// 주소로 설정하세요.");
-    if(!flags.dbTransportAppropriate)warnings.push("PostgreSQL 연결 방식을 확인하세요. Render 내부 URL은 사설망 연결, 외부 URL은 sslmode=require 사용을 권장합니다.");
-    if(!flags.emailConfigured)warnings.push("주문 이메일 알림(Brevo) 설정이 완전하지 않습니다.");
-    if(!flags.tossClientConfigured||!flags.tossSecretConfigured)warnings.push("토스 결제 운영키가 아직 완전하게 연결되지 않았습니다.");
-    res.json({ok:true,version:"60.15.0",time:db.rows[0].now,flags,warnings,counts:{products:pc.rows[0].count,stock:pc.rows[0].stock,orders:oc.rows[0].count,users:uc.rows[0].count}});
-  }catch(e){
-    console.error("[OPERATIONS]",e.message);
-    res.status(500).json({ok:false,error:"운영 상태를 점검하지 못했습니다."});
-  }
-});
-
-app.get("/api/admin/backup",requireAdmin,async(req,res)=>{
-  try{
-    const [store,home,today,products,orders,items,users,consults,events]=await Promise.all([
-      getSetting("iroom1_store",{}),
-      getSetting("homepage_config",{}),
-      getSetting("today_pick",{}),
-      pool.query("SELECT * FROM products ORDER BY id"),
-      pool.query("SELECT * FROM orders ORDER BY id DESC LIMIT 5000"),
-      pool.query("SELECT * FROM order_items ORDER BY id DESC LIMIT 20000"),
-      pool.query("SELECT id,username,email,name,phone,postcode,address1,address2,created_at,last_login_at,kakao_id,auth_provider FROM users ORDER BY id DESC LIMIT 5000"),
-      pool.query("SELECT * FROM consultations ORDER BY id DESC LIMIT 5000").catch(()=>({rows:[]})),
-      pool.query("SELECT id,event_type,actor,ip_hash,detail,created_at FROM security_events ORDER BY id DESC LIMIT 500")
-    ]);
-    const payload={
-      meta:{product:"IROOM HOME1",version:"60.15.0",createdAt:new Date().toISOString(),notice:"비밀번호 해시, JWT 비밀키, 결제 Secret Key는 백업에 포함하지 않습니다."},
-      store:store?.setting_value||store||{},
-      homepageConfig:home?.setting_value||home||{},
-      todayPick:today?.setting_value||today||{},
-      products:products.rows,orders:orders.rows,orderItems:items.rows,users:users.rows,
-      consultations:consults.rows,securityEvents:events.rows
-    };
-    const filename=`iroom-home1-backup-${new Date().toISOString().slice(0,10)}.json`;
-    res.setHeader("Content-Type","application/json; charset=utf-8");
-    res.setHeader("Content-Disposition",`attachment; filename="${filename}"`);
-    res.setHeader("Cache-Control","no-store");
-    logSecurity("admin_backup_downloaded","admin",req,filename);
-    res.send(JSON.stringify(payload,null,2));
-  }catch(e){
-    console.error("[BACKUP]",e.message);
-    res.status(500).json({error:"운영 백업 생성에 실패했습니다."});
-  }
-});
-
 app.get("/api/admin/security-events",requireAdmin,async(req,res)=>{
   const r=await pool.query("SELECT id,event_type,actor,ip_hash,detail,created_at FROM security_events ORDER BY created_at DESC LIMIT 200");
   res.json({events:r.rows});
@@ -1485,49 +1027,29 @@ app.get("/api/payment/config",(req,res)=>{
 
 app.get("/band-order.html",(req,res)=>res.sendFile(path.join(__dirname,"public","band-order.html")));
 app.get("/band-admin.html",(req,res)=>res.sendFile(path.join(__dirname,"public","band-admin.html")));
-app.get("/admin-preview",(req,res)=>{res.setHeader("Cache-Control","no-store");res.sendFile(path.join(__dirname,"public","index.html"))});
 app.get("/healthz",(req,res)=>res.json({ok:true,time:new Date().toISOString()}));
 
-// static site + dual public homes
-app.get("/home1",(req,res)=>res.sendFile(path.join(__dirname,"public","index.html")));
-app.get("/home2",(req,res)=>res.sendFile(path.join(__dirname,"public","home2.html")));
-app.get("/home1/",(req,res)=>res.redirect(301,"/home1"));
-app.get("/home2/",(req,res)=>res.redirect(301,"/home2"));
-app.get("/",async(req,res)=>{
-  try{const style=await getSetting("public_home_style","home1");const v=String(style?.setting_value??style??"home1");return res.sendFile(path.join(__dirname,"public",v==="home2"?"home2.html":"index.html"))}
-  catch(_){return res.sendFile(path.join(__dirname,"public","index.html"))}
+// static site — Home2 is the public root. HTML must never be served from a stale cache after OAuth return.
+app.get("/",(req,res)=>{
+  res.setHeader("Cache-Control","no-store");
+  res.sendFile(path.join(__dirname,"public","home2.html"));
 });
 app.use(express.static(path.join(__dirname,"public"),{
-  etag:true,maxAge:"5m",setHeaders(res,file){if(file.endsWith("sw.js")||file.endsWith("service-worker.js")||file.endsWith("manifest.webmanifest"))res.setHeader("Cache-Control","no-cache");}
+  etag:true,maxAge:"5m",setHeaders(res,file){
+    if(file.endsWith(".html")||file.endsWith("sw.js")||file.endsWith("service-worker.js")||file.endsWith("manifest.webmanifest")) res.setHeader("Cache-Control","no-store");
+  }
 }));
-app.get("*",(req,res)=>res.sendFile(path.join(__dirname,"public","index.html")));
-
-app.use((err,req,res,next)=>{
-  console.error("[UNHANDLED REQUEST ERROR]",err?.message||err);
-  if(res.headersSent)return next(err);
-  res.status(500).json({error:"요청 처리 중 오류가 발생했습니다."});
+app.get("*",(req,res)=>{
+  res.setHeader("Cache-Control","no-store");
+  res.sendFile(path.join(__dirname,"public","index.html"));
 });
 
 let serverStarted=false;
-let httpServer=null;
 function startHttp(){
   if(serverStarted)return;
   serverStarted=true;
-  httpServer=app.listen(PORT,()=>console.log(`IROOM HOME1 V60.18 DUAL HOME listening on ${PORT}`));
-  httpServer.requestTimeout=30000;
-  httpServer.headersTimeout=35000;
-  httpServer.keepAliveTimeout=5000;
+  app.listen(PORT,()=>console.log(`IROOM V83 SECURE COMMERCE listening on ${PORT}`));
 }
-async function shutdown(signal){
-  console.log(`[SHUTDOWN] ${signal}`);
-  const force=setTimeout(()=>process.exit(1),10000);force.unref();
-  if(httpServer)await new Promise(resolve=>httpServer.close(()=>resolve()));
-  await pool.end().catch(()=>{});
-  clearTimeout(force);
-  process.exit(0);
-}
-process.once("SIGTERM",()=>shutdown("SIGTERM"));
-process.once("SIGINT",()=>shutdown("SIGINT"));
 initDb().then(async()=>{
   await initOptionalTables();
   startHttp();

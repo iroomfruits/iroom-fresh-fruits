@@ -1,0 +1,19 @@
+IROOM HOME2 V60.98.3 — Kakao return hard fix
+
+Why V60.98.2 could still show the old unstyled page:
+- V60.98.2 relied partly on loading security-v98.js with `node -r` from npm start.
+- A Render service can keep a manually configured Start Command such as `node server.js`, bypassing that preload.
+- The public root `/` also still pointed at the legacy public/index.html, so any callback that reached `/` could show the old Home1 document.
+- A service worker/browser cache could preserve that old navigation document.
+
+V60.98.3 fixes all three layers directly:
+1) server.js itself forces Kakao start/callback defaults to /home2.html.
+2) server.js serves public/home2.html at `/` and disables HTML caching.
+3) public/index.html is now the same Home2 document, so even a root fallback cannot show the old page.
+4) public/sw.js clears old caches and uses network-first/no-store for navigation HTML.
+5) Existing recognizable search/account/cart SVG icons and ESC close behavior are retained.
+
+Apply:
+- Upload this ZIP contents to the GitHub repository root and overwrite same-name files.
+- Render redeploy.
+- After deploy, reload once. The new service worker activates and removes old caches.

@@ -1,6 +1,6 @@
 'use strict';
 
-// IROOM HOME2 V60.98.2 security preload — hard Kakao Home2 return fix.
+// IROOM HOME2 V60.98.3 security preload — hard Kakao Home2 return fix.
 // Loaded before server.js via: node -r ./security-v98.js server.js
 // It strengthens the existing server without rewriting the proven Home1 backend.
 
@@ -315,7 +315,7 @@ function installSecurity(app) {
   }
 
   originalUse.call(app, (req, res, next) => {
-    res.setHeader('X-Iroom-Security', 'v60.98.2');
+    res.setHeader('X-Iroom-Security', 'v60.98.3');
     if (!res.getHeader('X-Request-ID')) res.setHeader('X-Request-ID', crypto.randomUUID());
     next();
   });
@@ -447,4 +447,4 @@ express.application.put = function patchedPut(path, ...handlers) {
   return originalPut.call(this, path, ...handlers);
 };
 
-console.log('[IROOM SECURITY] V60.98.2 preload active');
+console.log('[IROOM SECURITY] V60.98.3 preload active');
