@@ -240,3 +240,27 @@ button,a,input,select{-webkit-tap-highlight-color:transparent}button:focus,a:foc
 @media(max-width:760px){
   .worldSimpleSection .worldGrid{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
+
+
+/* V61.05 — home world fruit refinement */
+.worldSimpleSection .worldGrid{
+  grid-template-columns:repeat(4,minmax(0,1fr));
+}
+.worldSimpleSection .worldProductCard .productImgBtn{
+  background:#d8ddd2;
+  overflow:hidden;
+  padding:22px;
+}
+.worldSimpleSection .worldProductCard .productImgBtn img{
+  width:76%;
+  height:76%;
+  object-fit:contain;
+  margin:auto;
+  filter:drop-shadow(0 12px 14px rgba(32,60,51,.14));
+}
+@media(max-width:1100px){
+  .worldSimpleSection .worldGrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:760px){
+  .worldSimpleSection .worldGrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
