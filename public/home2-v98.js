@@ -114,9 +114,9 @@ const importSelection=()=>{
 };
 const img=(p,kind='canvas')=>{
  if(p.isGift)return G+p.asset;
- if(kind!=='hero'&&IMPORT_CARD_ASSETS[p.id])return IMPORT_ASSET_PATH+IMPORT_CARD_ASSETS[p.id]+'?v=61.12.0';
- if(kind==='hero'&&V95_HERO.has(p.id))return V95+'hero-'+p.id+'.webp?v=61.12.0';
- if(kind!=='hero'&&V95_CARD.has(p.id))return V95+p.id+'.webp?v=61.12.0';
+ if(kind!=='hero'&&IMPORT_CARD_ASSETS[p.id])return IMPORT_ASSET_PATH+IMPORT_CARD_ASSETS[p.id]+'?v=61.13.0';
+ if(kind==='hero'&&V95_HERO.has(p.id))return V95+'hero-'+p.id+'.webp?v=61.13.0';
+ if(kind!=='hero'&&V95_CARD.has(p.id))return V95+p.id+'.webp?v=61.13.0';
  return A+(kind==='hero'?'hero-':'')+p.id+'.webp';
 };
 const domesticProducts=()=>Object.values(DATA).flat();
@@ -480,7 +480,7 @@ function openSearch(){openUtility('과일 찾기',`<div class="topSearchGuide"><
 async function copyText(v){try{await navigator.clipboard.writeText(v);return true}catch{}try{const ta=document.createElement('textarea');ta.value=v;ta.className='clipboardHelper';document.body.appendChild(ta);ta.select();const ok=document.execCommand('copy');ta.remove();return ok}catch{return false}}
 function kakaoAction(){const url=currentKakao();const w=window.open(url,'_blank','noopener,noreferrer');if(w){try{w.opener=null}catch{}}else{location.href=url}}
 async function shareAction(){try{if(navigator.share){await navigator.share({title:'이룸 fresh fruits',text:'좋은 과일로 마음을 전합니다.',url:location.href});return}}catch{}const ok=await copyText(location.href);toast(ok?'현재 페이지 주소를 복사했습니다.':'주소 복사를 지원하지 않는 브라우저입니다.')}
-async function installAction(){if(installPrompt){installPrompt.prompt();try{await installPrompt.userChoice}catch{}installPrompt=null;return}if('serviceWorker' in navigator&&location.protocol!=='file:'){try{await navigator.serviceWorker.register('/sw.js?v=61.12.0')}catch(_){}}toast('브라우저 메뉴의 홈 화면에 추가/앱 설치 기능을 이용해 주세요.')}
+async function installAction(){if(installPrompt){installPrompt.prompt();try{await installPrompt.userChoice}catch{}installPrompt=null;return}if('serviceWorker' in navigator&&location.protocol!=='file:'){try{await navigator.serviceWorker.register('/sw.js?v=61.13.0')}catch(_){}}toast('브라우저 메뉴의 홈 화면에 추가/앱 설치 기능을 이용해 주세요.')}
 function toast(t){const el=$('#toast');el.textContent=t;el.hidden=false;clearTimeout(timer);timer=setTimeout(()=>el.hidden=true,1600)}
 function qty(){return Math.max(1,parseInt($('#qty')?.value||'1'))}
 document.addEventListener('click',e=>{const r=e.target.closest('[data-route]');if(r){if(!$('#utilityOverlay').hidden)closeUtility();go(r.dataset.route);return}const cp=e.target.closest('[data-curation]');if(cp){setCurationPreset(cp.dataset.curation.split(','));return}const pick=e.target.closest('[data-pick]');if(pick){const id=pick.dataset.pick;if(curationSelected.has(id))curationSelected.delete(id);else if(curationSelected.size<6)curationSelected.add(id);else{toast('맞춤 구성은 최대 6종까지 선택할 수 있어요.');return}renderCurationSelected();return}const rp=e.target.closest('[data-remove-pick]');if(rp){curationSelected.delete(rp.dataset.removePick);renderCurationSelected();return}if(e.target.closest('[data-clear-picks]')){curationSelected.clear();renderCurationSelected();return}if(e.target.closest('[data-add-picks]')){if(!curationSelected.size){toast('먼저 과일을 골라주세요.');return}[...curationSelected].forEach(id=>add(id,1,true));saveCart();toast(`${curationSelected.size}가지 과일을 장바구니에 담았습니다.`);return}if(e.target.closest('[data-consult]')){openConsultation();return}if(e.target.closest('[data-search]')){openSearch();return}if(e.target.closest('[data-account]')){openAccount();return}if(e.target.closest('[data-open-login]')){openLogin();return}if(e.target.closest('[data-open-signup]')){openSignup();return}if(e.target.closest('[data-open-import]')){route='fruits';season='import';history.pushState({},'','#fruits');render();scrollTo({top:0,behavior:'smooth'});return}if(e.target.closest('[data-my-orders]')){openMyOrders();return}if(e.target.closest('[data-logout]')){logout();return}if(e.target.closest('[data-kakao-login]')){location.href='/api/auth/kakao/start?next='+encodeURIComponent('/home2.html');return}if(e.target.closest('[data-utility-close]')||e.target.id==='utilityOverlay'){closeUtility();return}const fi=e.target.closest('[data-footer-info]');if(fi){footerInfo(fi.dataset.footerInfo);return}if(e.target.closest('[data-kakao]')){kakaoAction();return}if(e.target.closest('[data-share]')){shareAction();return}if(e.target.closest('[data-install]')){installAction();return}if(e.target.closest('[data-search-go]')){renderSearch($('#siteSearch')?.value||'');return}
@@ -527,9 +527,9 @@ function preloadCurrent(){homeProducts().slice(0,5).forEach(p=>{const h=new Imag
 async function bootstrapBackend(){
  await Promise.allSettled([ensureCsrf(),loadServerProducts(),loadSiteConfig(),loadHome2Ux(),loadPaymentConfig(),loadMe()]);
  render();
- if('serviceWorker' in navigator&&location.protocol!=='file:'){navigator.serviceWorker.register('/sw.js?v=61.12.0').catch(()=>{})}
+ if('serviceWorker' in navigator&&location.protocol!=='file:'){navigator.serviceWorker.register('/sw.js?v=61.13.0').catch(()=>{})}
  const q=new URLSearchParams(location.search);if(q.get('kakao')==='success'){toast('카카오 로그인이 완료되었습니다.');history.replaceState({},'',location.pathname+location.hash)}else if(q.get('kakao')==='error'){toast('카카오 로그인에 실패했습니다.');history.replaceState({},'',location.pathname+location.hash)}
 }
 preloadCurrent();setNotice();loadCart();ensureTopNav();const h=location.hash.slice(1);route=['fruits','weekly','curation','gifts','story'].includes(h)?h:'home';render();bootstrapBackend();
-// IROOM HOME2 V61.12.0 — world fruit select section + imported fruit assets
+// IROOM HOME2 V61.13.0 — world fruit select section + imported fruit assets
 })();

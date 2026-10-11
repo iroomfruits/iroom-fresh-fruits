@@ -659,3 +659,82 @@ button,a,input,select{-webkit-tap-highlight-color:transparent}button:focus,a:foc
  .weeklyFlowItem{min-height:auto}
  .weeklyBehindSteps{grid-template-columns:1fr 1fr}
 }
+
+
+/* V61.13 — Weekly Pick bright color refresh + lively fruit motion */
+.weeklyTeaserV12{background:linear-gradient(120deg,#fff4d6 0%,#ffe9dc 42%,#f8efe5 72%,#eff6e8 100%);border-color:rgba(24,60,50,.08);box-shadow:0 24px 54px rgba(24,60,50,.08)}
+.weeklyTeaserV12::before{width:230px;height:24px;background:#f19786;top:18px;left:-24px;border-radius:55% 45% 60% 40%;transform:rotate(-3deg)}
+.weeklyTeaserV12::after{content:"";position:absolute;right:-36px;bottom:26px;width:220px;height:34px;background:rgba(143,184,123,.38);border-radius:50%;filter:blur(1px);transform:rotate(-8deg)}
+.weeklyTeaserLead>.eyebrow{background:#184536}
+.weeklyPrimaryCta{background:linear-gradient(120deg,#174838,#0f5a45);box-shadow:0 10px 22px rgba(24,60,50,.16)}
+.weeklyPlanMini span{background:rgba(255,255,255,.85)}
+.weeklyMiniFruits button,.weeklyMiniFruits>span{box-shadow:0 12px 24px rgba(24,60,50,.05);transition:transform .22s ease, box-shadow .22s ease}
+.weeklyMiniFruits button:nth-child(1){background:#fff4b9}
+.weeklyMiniFruits button:nth-child(2){background:#ffe0d2}
+.weeklyMiniFruits button:nth-child(3){background:#e9f0df}
+.weeklyMiniFruits button:nth-child(4){background:#efe8ff}
+.weeklyMiniFruits button:hover{transform:translateY(-4px);box-shadow:0 18px 30px rgba(24,60,50,.11)}
+.weeklyMiniFlow{background:rgba(255,255,255,.72)}
+
+.weeklyStoryHero{padding:24px 0 34px}
+.weeklyStoryCopy .eyebrow{display:inline-block;background:#184536;color:#fff;border-radius:999px;padding:7px 11px;letter-spacing:.13em}
+.weeklyStoryIllustration{background:linear-gradient(125deg,#fff3d1 0%,#ffe7d9 46%,#eaf4e1 100%);box-shadow:0 20px 45px rgba(24,60,50,.06)}
+.weeklyStoryIllustration::before{width:210px;height:26px;background:#f09f7f;top:28px;right:-20px;transform:rotate(8deg);border-radius:55% 45% 60% 40%}
+.weeklyStoryIllustration::after{content:"";position:absolute;left:-18px;bottom:24px;width:160px;height:26px;background:rgba(144,187,126,.34);transform:rotate(-10deg);border-radius:50%}
+.weeklySketchCard{background:rgba(255,255,255,.92)}
+.weeklySketchCard.fruit{background:linear-gradient(180deg,#fff7d6,#fff1e8)}
+.weeklySketchCard.box{background:linear-gradient(180deg,#f5ffe7,#f5f0ff)}
+.weeklySketchArrow{font-size:32px;color:#7e7e74}
+
+.weeklyStoryFlow .weeklyFlowItem:nth-child(1){background:linear-gradient(180deg,#fffaf0,#fff3db)}
+.weeklyStoryFlow .weeklyFlowItem:nth-child(3){background:linear-gradient(180deg,#fff8f2,#ffeade)}
+.weeklyStoryFlow .weeklyFlowItem:nth-child(5){background:linear-gradient(180deg,#f9fff4,#ecf7e8)}
+.weeklyStoryFlow .weeklyFlowItem:nth-child(7){background:linear-gradient(180deg,#fbf8ff,#f0ebff)}
+.weeklyFlowIcon{background:#fff;border:1px solid rgba(24,60,50,.10)}
+
+.weeklyPlanSection{margin-top:36px}
+.weeklyPlanGrid{gap:16px}
+.weeklyPlan{background:linear-gradient(180deg,#fffefa,#fff8f0);box-shadow:0 8px 18px rgba(24,60,50,.04)}
+.weeklyPlan:nth-child(1){background:linear-gradient(180deg,#fff9eb,#fff3d8)}
+.weeklyPlan:nth-child(2){background:linear-gradient(180deg,#fff3ef,#ffe7db)}
+.weeklyPlan:nth-child(3){background:linear-gradient(180deg,#f5fff3,#eaf6e5)}
+.weeklyPlan.featured{border-color:rgba(24,60,50,.17)}
+.weeklyPlan button{transition:transform .18s ease, box-shadow .18s ease}
+.weeklyPlan button:hover{transform:translateY(-2px);box-shadow:0 10px 18px rgba(24,60,50,.10)}
+
+.weeklyFruitSectionV12{margin-top:48px}
+.weeklyChoiceCounter{background:rgba(255,255,255,.78)}
+.weeklyFruit.weeklyChoice{background:rgba(255,255,255,.74);box-shadow:0 10px 24px rgba(24,60,50,.04);transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease}
+.weeklyFruit.weeklyChoice:hover{transform:translateY(-4px);box-shadow:0 18px 32px rgba(24,60,50,.09)}
+.weeklyFruit.weeklyChoice button{position:relative;overflow:hidden}
+.weeklyFruit.weeklyChoice button::before{content:"";position:absolute;left:50%;bottom:14px;transform:translateX(-50%);width:88px;height:18px;border-radius:50%;background:rgba(24,60,50,.10);filter:blur(7px)}
+.weeklyFruit.weeklyChoice:nth-child(4n+1) button{background:linear-gradient(180deg,#eef4e8,#dde7d7)}
+.weeklyFruit.weeklyChoice:nth-child(4n+2) button{background:linear-gradient(180deg,#f4efe0,#e8dfc7)}
+.weeklyFruit.weeklyChoice:nth-child(4n+3) button{background:linear-gradient(180deg,#f7ebe8,#eadbd7)}
+.weeklyFruit.weeklyChoice:nth-child(4n+4) button{background:linear-gradient(180deg,#eef2e8,#dfe7dc)}
+.weeklyFruit.weeklyChoice img{animation:weeklyFruitDance 4.6s ease-in-out infinite;transform-origin:center bottom;position:relative;z-index:2}
+.weeklyFruit.weeklyChoice:nth-child(2n) img{animation-duration:5.2s}
+.weeklyFruit.weeklyChoice:nth-child(3n) img{animation-duration:4.2s}
+.weeklyFruit.weeklyChoice:nth-child(4n) img{animation-duration:5.6s}
+.weeklyFruit.weeklyChoice:nth-child(1) img,.weeklyFruit.weeklyChoice:nth-child(5) img,.weeklyFruit.weeklyChoice:nth-child(9) img{animation-delay:.15s}
+.weeklyFruit.weeklyChoice:nth-child(2) img,.weeklyFruit.weeklyChoice:nth-child(6) img,.weeklyFruit.weeklyChoice:nth-child(10) img{animation-delay:.55s}
+.weeklyFruit.weeklyChoice:nth-child(3) img,.weeklyFruit.weeklyChoice:nth-child(7) img,.weeklyFruit.weeklyChoice:nth-child(11) img{animation-delay:1s}
+.weeklyFruit.weeklyChoice:nth-child(4) img,.weeklyFruit.weeklyChoice:nth-child(8) img,.weeklyFruit.weeklyChoice:nth-child(12) img{animation-delay:1.45s}
+@keyframes weeklyFruitDance{0%,100%{transform:translateY(0) rotate(0deg) scale(1)}20%{transform:translateY(-5px) rotate(-1.2deg) scale(1.015)}50%{transform:translateY(-10px) rotate(1.2deg) scale(1.03)}80%{transform:translateY(-4px) rotate(-.8deg) scale(1.015)}}
+.weeklyChoice.selected{border-color:#d88068;box-shadow:0 0 0 2px rgba(216,128,104,.16),0 16px 28px rgba(24,60,50,.08)}
+.weeklyChoice.selected button{background:linear-gradient(180deg,#fff3df,#ffe8d7)!important}
+.weeklyChoice.selected .weeklyChoiceMark{background:#d88068;color:#fff;border-color:#d88068}
+.weeklyChoiceMark{box-shadow:0 4px 10px rgba(24,60,50,.08)}
+
+.weeklySelectionSummary{background:linear-gradient(120deg,#fff9ef,#f7fbf2)}
+.weeklySelectedChips button{background:#fff}
+
+.weeklyBehind{background:linear-gradient(135deg,#204336,#295442);box-shadow:0 18px 36px rgba(24,60,50,.10)}
+.weeklyBottomV12{background:linear-gradient(120deg,#fff2d2,#ffe8dd 52%,#eef6e8)!important;box-shadow:0 16px 32px rgba(24,60,50,.06)}
+
+@media(max-width:760px){
+ .weeklyTeaserV12::before{width:160px;height:20px}
+ .weeklyTeaserV12::after{width:130px;height:24px;bottom:18px}
+ .weeklyStoryIllustration::before{width:120px;height:20px;right:-20px}
+ .weeklyStoryIllustration::after{width:90px;height:20px;left:-14px}
+}
