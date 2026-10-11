@@ -886,3 +886,103 @@ body[data-route="story"] .navItem[data-route="story"]:after{left:18px;right:18px
  .fruitSmileFx .cheek{top:25px;width:10px;height:6px}.fruitSmileFx .cheek.left{left:10px}.fruitSmileFx .cheek.right{right:10px}
  .fruitSmileFx .mouth{width:25px;height:13px;border-width:3px;bottom:8px}
 }
+
+
+/* V61.17 — interaction repair: seasonal motion, reliable detail, weekly scale, gift restore */
+/* Seasonal Picks: visible but premium motion. */
+.fruitsRoutePage .catalogGrid .productImgBtn{overflow:visible!important}
+.fruitsRoutePage .catalogGrid .productImgBtn img{
+  width:82%!important;
+  height:82%!important;
+  padding:0!important;
+  object-fit:contain!important;
+  transform-origin:center bottom!important;
+  animation:seasonalFruitAlive 3.9s ease-in-out infinite!important;
+  will-change:transform;
+}
+.fruitsRoutePage .catalogGrid .productCard:nth-child(2n) .productImgBtn img{animation-duration:4.5s!important;animation-delay:.35s!important}
+.fruitsRoutePage .catalogGrid .productCard:nth-child(3n) .productImgBtn img{animation-duration:3.6s!important;animation-delay:.7s!important}
+@keyframes seasonalFruitAlive{
+  0%,100%{transform:translateY(0) rotate(0deg) scale(1)}
+  25%{transform:translateY(-7px) rotate(-.8deg) scale(1.015)}
+  52%{transform:translateY(-14px) rotate(1deg) scale(1.035)}
+  76%{transform:translateY(-5px) rotate(-.5deg) scale(1.012)}
+}
+.fruitsRoutePage .catalogGrid .productImgBtn:hover img{animation-play-state:paused!important;transform:translateY(-8px) scale(1.035)!important}
+
+/* Weekly Pick: restore generous whitespace; fruit must not fill the card. */
+.weeklyFruitView{
+  height:190px!important;
+  padding:18px!important;
+  overflow:hidden!important;
+}
+.weeklyFruitView img{
+  width:72%!important;
+  height:72%!important;
+  max-width:150px!important;
+  max-height:132px!important;
+  padding:0!important;
+  object-fit:contain!important;
+  animation:weeklyFruitDance 4.8s ease-in-out infinite!important;
+  transform-origin:center bottom!important;
+}
+.weeklyFruit.weeklyChoice:nth-child(2n) .weeklyFruitView img{animation-delay:.35s!important}
+.weeklyFruit.weeklyChoice:nth-child(3n) .weeklyFruitView img{animation-delay:.8s!important}
+
+/* Curation: keep lively motion, but retain small fruit scale and reliable image click target. */
+.curationRoutePage .pickFruitVisual{overflow:visible!important}
+.curationRoutePage .pickFruitVisual img{
+  width:78%!important;
+  height:78%!important;
+  max-width:120px!important;
+  max-height:96px!important;
+  padding:0!important;
+  object-fit:contain!important;
+  animation:seasonalFruitAlive 4.6s ease-in-out infinite!important;
+}
+
+/* Gift Selection: no motion, no hover lift, and restore safe uncropped card proportions. */
+.giftsRoutePage .giftCard,
+.giftsRoutePage .giftCard:hover{
+  transform:none!important;
+  transition:box-shadow .18s ease!important;
+  min-height:0!important;
+  grid-template-rows:auto auto!important;
+  overflow:visible!important;
+}
+.giftsRoutePage .giftVisual{
+  height:auto!important;
+  aspect-ratio:16/10!important;
+  overflow:hidden!important;
+  padding:10px!important;
+  background:#e2e7de!important;
+}
+.giftsRoutePage .giftVisual img,
+.giftsRoutePage .giftCard:hover .giftVisual img{
+  width:100%!important;
+  height:100%!important;
+  max-width:100%!important;
+  max-height:100%!important;
+  padding:0!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  animation:none!important;
+  transform:none!important;
+}
+
+/* Smile face must render above the image without altering layout. */
+.productImgBtn,.weeklyFruitView,.pickFruitVisual{isolation:isolate;position:relative!important}
+.fruitSmileFx{z-index:40!important}
+
+@media(max-width:760px){
+  .fruitsRoutePage .catalogGrid .productImgBtn img{width:78%!important;height:78%!important}
+  .weeklyFruitView{height:145px!important;padding:14px!important}
+  .weeklyFruitView img{width:68%!important;height:68%!important;max-width:110px!important;max-height:92px!important}
+  .giftsRoutePage .giftVisual{aspect-ratio:16/10!important;padding:8px!important}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .fruitsRoutePage .catalogGrid .productImgBtn img,
+  .weeklyFruitView img,
+  .curationRoutePage .pickFruitVisual img{animation:none!important}
+}
