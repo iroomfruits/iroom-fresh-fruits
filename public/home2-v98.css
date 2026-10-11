@@ -738,3 +738,97 @@ button,a,input,select{-webkit-tap-highlight-color:transparent}button:focus,a:foc
  .weeklyStoryIllustration::before{width:120px;height:20px;right:-20px}
  .weeklyStoryIllustration::after{width:90px;height:20px;left:-14px}
 }
+
+
+/* V61.14 — Seasonal Picks subtle motion + smile click effect */
+.routeHeroTheme{border:1px solid rgba(24,60,50,.08);border-radius:30px;padding:28px 30px 32px;margin-bottom:12px;background:rgba(255,255,252,.78);box-shadow:0 14px 32px rgba(24,60,50,.04)}
+.routeHeroTheme h1{letter-spacing:-.03em}
+.routeHeroTheme .eyebrow{display:inline-block;background:#183c32;color:#fff;border-radius:999px;padding:7px 11px;letter-spacing:.13em}
+.seasonalRouteHero{background:linear-gradient(120deg,#fff5df 0%,#f7efe3 42%,#eef5e9 100%)}
+.curationRouteHero{background:linear-gradient(120deg,#fff8e9 0%,#f5efe9 42%,#edf5ef 100%)}
+
+.fruitsRoutePage .catalogGrid .productCard,
+.curationRoutePage .pickFruit{position:relative;overflow:hidden;box-shadow:0 12px 26px rgba(24,60,50,.045);transition:transform .24s ease,box-shadow .24s ease,border-color .24s ease}
+.fruitsRoutePage .catalogGrid .productCard:hover,
+.curationRoutePage .pickFruit:hover{transform:translateY(-5px);box-shadow:0 20px 36px rgba(24,60,50,.09)}
+.fruitsRoutePage .catalogGrid .productImgBtn,
+.curationRoutePage .pickFruit{position:relative;overflow:hidden}
+.fruitsRoutePage .catalogGrid .productImgBtn::before,
+.curationRoutePage .pickFruit::before{content:"";position:absolute;left:50%;bottom:18px;transform:translateX(-50%);width:94px;height:18px;border-radius:50%;background:rgba(24,60,50,.10);filter:blur(7px)}
+.fruitsRoutePage .catalogGrid .productCard:nth-child(4n+1) .productImgBtn{background:linear-gradient(180deg,#eef4e8,#dde7d7)}
+.fruitsRoutePage .catalogGrid .productCard:nth-child(4n+2) .productImgBtn{background:linear-gradient(180deg,#f4efe0,#e8dfc7)}
+.fruitsRoutePage .catalogGrid .productCard:nth-child(4n+3) .productImgBtn{background:linear-gradient(180deg,#f7ebe8,#eadbd7)}
+.fruitsRoutePage .catalogGrid .productCard:nth-child(4n+4) .productImgBtn{background:linear-gradient(180deg,#eef2e8,#dfe7dc)}
+.fruitsRoutePage .catalogGrid .productCard:nth-child(4n+1){background:linear-gradient(180deg,rgba(255,255,252,.95),rgba(250,252,246,.92))}
+.fruitsRoutePage .catalogGrid .productCard:nth-child(4n+2){background:linear-gradient(180deg,rgba(255,255,252,.95),rgba(252,248,243,.92))}
+.fruitsRoutePage .catalogGrid .productCard:nth-child(4n+3){background:linear-gradient(180deg,rgba(255,255,252,.95),rgba(252,246,244,.92))}
+.fruitsRoutePage .catalogGrid .productCard:nth-child(4n+4){background:linear-gradient(180deg,rgba(255,255,252,.95),rgba(247,250,246,.92))}
+.fruitsRoutePage .catalogGrid .productImgBtn img,
+.curationRoutePage .pickFruit img{position:relative;z-index:2;transform-origin:center bottom;animation:seasonalFruitFloat 5.2s ease-in-out infinite}
+.fruitsRoutePage .catalogGrid .productCard:nth-child(2n) .productImgBtn img,
+.curationRoutePage .pickFruit:nth-child(2n) img{animation-duration:5.9s}
+.fruitsRoutePage .catalogGrid .productCard:nth-child(3n) .productImgBtn img,
+.curationRoutePage .pickFruit:nth-child(3n) img{animation-duration:4.6s}
+.fruitsRoutePage .catalogGrid .productCard:nth-child(4n) .productImgBtn img,
+.curationRoutePage .pickFruit:nth-child(4n) img{animation-duration:6.1s}
+.fruitsRoutePage .catalogGrid .productCard:nth-child(odd) .productImgBtn img,
+.curationRoutePage .pickFruit:nth-child(odd) img{animation-delay:.45s}
+.curationRoutePage .pickPanel{background:linear-gradient(180deg,rgba(255,255,252,.92),rgba(248,250,244,.84))}
+.curationRoutePage .pickSummary{background:linear-gradient(180deg,rgba(255,255,252,.94),rgba(250,248,244,.86))}
+.curationRoutePage .pickFruit:nth-child(4n+1){background:linear-gradient(180deg,#eef4e8,#e4ecdf)}
+.curationRoutePage .pickFruit:nth-child(4n+2){background:linear-gradient(180deg,#f4efe0,#ece4d4)}
+.curationRoutePage .pickFruit:nth-child(4n+3){background:linear-gradient(180deg,#f7ebe8,#efdfdb)}
+.curationRoutePage .pickFruit:nth-child(4n+4){background:linear-gradient(180deg,#edf2ea,#e0e8df)}
+.curationRoutePage .pickFruit.selected{border-color:#d88068;box-shadow:0 0 0 2px rgba(216,128,104,.16),0 16px 30px rgba(24,60,50,.08);background:linear-gradient(180deg,#fff3df,#ffe9da)!important}
+
+.smilePulse img{animation:seasonalSmileBounce .75s ease}
+.fruitSmileFx{pointer-events:none;position:absolute;left:50%;top:50%;width:90px;height:58px;transform:translate(-50%,-60%);z-index:5;animation:fruitFacePop 1s ease forwards}
+.fruitSmileFx .eye{position:absolute;top:16px;width:10px;height:14px;border-radius:50%;background:#183c32}
+.fruitSmileFx .eye.left{left:24px}.fruitSmileFx .eye.right{right:24px}
+.fruitSmileFx .mouth{position:absolute;left:50%;bottom:12px;width:34px;height:18px;border:4px solid #183c32;border-top:0;border-left-color:transparent;border-right-color:transparent;border-bottom-left-radius:28px;border-bottom-right-radius:28px;transform:translateX(-50%)}
+@keyframes seasonalFruitFloat{0%,100%{transform:translateY(0) rotate(0deg) scale(1)}25%{transform:translateY(-4px) rotate(-1deg) scale(1.015)}50%{transform:translateY(-9px) rotate(1deg) scale(1.03)}75%{transform:translateY(-3px) rotate(-.7deg) scale(1.015)}}
+@keyframes seasonalSmileBounce{0%{transform:translateY(0) scale(1)}30%{transform:translateY(-7px) scale(1.04)}60%{transform:translateY(-2px) scale(1.02)}100%{transform:translateY(0) scale(1)}}
+@keyframes fruitFacePop{0%{opacity:0;transform:translate(-50%,-52%) scale(.72)}15%{opacity:1;transform:translate(-50%,-60%) scale(1)}75%{opacity:1;transform:translate(-50%,-62%) scale(1)}100%{opacity:0;transform:translate(-50%,-68%) scale(.95)}}
+
+@media(max-width:760px){
+ .routeHeroTheme{padding:22px 18px 24px;border-radius:24px}
+ .routeHeroTheme h1{font-size:38px}
+ .fruitSmileFx{width:70px;height:46px}
+ .fruitSmileFx .eye{top:12px;width:8px;height:11px}
+ .fruitSmileFx .eye.left{left:18px}.fruitSmileFx .eye.right{right:18px}
+ .fruitSmileFx .mouth{width:26px;height:14px;border-width:3px;bottom:10px}
+}
+
+/* V61.15 — route color themes for top navigation and topic pages */
+body[data-route="fruits"] .navItem[data-route="fruits"],
+body[data-route="weekly"] .navItem[data-route="weekly"],
+body[data-route="curation"] .navItem[data-route="curation"],
+body[data-route="gifts"] .navItem[data-route="gifts"],
+body[data-route="story"] .navItem[data-route="story"]{
+  border-radius:18px;
+  margin:0 4px;
+  height:64%;
+  padding:0 24px;
+}
+body[data-route="fruits"] .navItem[data-route="fruits"]{background:linear-gradient(180deg,rgba(255,245,223,.95),rgba(241,247,234,.92));}
+body[data-route="weekly"] .navItem[data-route="weekly"]{background:linear-gradient(180deg,rgba(255,244,209,.96),rgba(255,232,224,.92));}
+body[data-route="curation"] .navItem[data-route="curation"]{background:linear-gradient(180deg,rgba(255,248,233,.95),rgba(239,247,238,.92));}
+body[data-route="gifts"] .navItem[data-route="gifts"]{background:linear-gradient(180deg,rgba(255,242,238,.95),rgba(247,239,232,.92));}
+body[data-route="story"] .navItem[data-route="story"]{background:linear-gradient(180deg,rgba(239,246,237,.95),rgba(232,238,229,.92));}
+body[data-route="fruits"] .navItem[data-route="fruits"]:after,
+body[data-route="weekly"] .navItem[data-route="weekly"]:after,
+body[data-route="curation"] .navItem[data-route="curation"]:after,
+body[data-route="gifts"] .navItem[data-route="gifts"]:after,
+body[data-route="story"] .navItem[data-route="story"]:after{left:18px;right:18px;bottom:7px;height:2px;border-radius:999px}
+
+.giftsRouteHero{background:linear-gradient(120deg,#fff2ef 0%,#f8eee6 46%,#f1f5eb 100%)}
+.storyRouteHero{background:linear-gradient(120deg,#eef5eb 0%,#f6f1e5 46%,#edf4ef 100%)}
+.giftsRoutePage .giftCard{background:linear-gradient(180deg,rgba(255,255,252,.95),rgba(252,246,242,.92));box-shadow:0 12px 28px rgba(24,60,50,.05);transition:transform .24s ease,box-shadow .24s ease}
+.giftsRoutePage .giftCard:hover{transform:translateY(-5px);box-shadow:0 20px 36px rgba(24,60,50,.09)}
+.giftsRoutePage .giftCard:nth-child(3n+1) .giftVisual{background:linear-gradient(180deg,#f4efe0,#e9e1cf)}
+.giftsRoutePage .giftCard:nth-child(3n+2) .giftVisual{background:linear-gradient(180deg,#f7ebe8,#eaded7)}
+.giftsRoutePage .giftCard:nth-child(3n+3) .giftVisual{background:linear-gradient(180deg,#eef4e8,#dfe8db)}
+.giftsRoutePage .giftVisual img{animation:seasonalFruitFloat 5.4s ease-in-out infinite}
+.storyRoutePage .storyBlock{background:linear-gradient(180deg,rgba(255,255,252,.90),rgba(245,248,241,.85));box-shadow:0 10px 24px rgba(24,60,50,.04);transition:transform .24s ease,box-shadow .24s ease}
+.storyRoutePage .storyBlock:hover{transform:translateY(-4px);box-shadow:0 18px 34px rgba(24,60,50,.08)}
+.storyRoutePage .storyBlock:first-child{background:linear-gradient(135deg,rgba(255,247,230,.92),rgba(237,245,235,.88))}
