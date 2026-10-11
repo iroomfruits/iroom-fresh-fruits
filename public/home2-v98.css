@@ -417,3 +417,31 @@ button,a,input,select{-webkit-tap-highlight-color:transparent}button:focus,a:foc
     font-size:18px
   }
 }
+
+
+/* V61.10 — single header search + functional Weekly Pick visual selection */
+.topSearchGuide{margin:-4px 0 14px;padding:12px 14px;border-radius:14px;background:#eef3eb}
+.topSearchGuide p{margin:0 0 9px;font-size:10px;color:var(--muted)}
+.topSearchGuide>div{display:flex;gap:7px;flex-wrap:wrap}
+.topSearchGuide button{border:1px solid rgba(24,60,50,.14);background:#fff;border-radius:999px;padding:7px 11px;font-size:9px;font-weight:800;color:var(--ink)}
+.searchBoxWide input{font-size:13px}
+
+.weeklySelectionSummary{margin-top:14px;border:1px solid rgba(24,60,50,.14);border-radius:20px;background:#fffefa;padding:16px;display:grid;grid-template-columns:1fr auto;gap:18px;align-items:center}
+.weeklySelectionEmpty{display:flex;flex-direction:column;gap:4px}.weeklySelectionEmpty b{font-family:var(--serif);font-size:18px}.weeklySelectionEmpty span{font-size:10px;color:var(--muted)}
+.weeklySelectionSummary h3{font-family:var(--serif);font-size:20px;margin:3px 0}.weeklySelectionSummary h3 b{font-family:var(--sans);font-size:10px;margin-left:6px;background:#203c33;color:#fff;border-radius:999px;padding:4px 7px}.weeklySelectionSummary p{margin:0;font-size:10px;color:var(--muted)}
+.weeklySelectedChips{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}.weeklySelectedChips button{position:relative;border:1px solid rgba(24,60,50,.12);background:#eef2ea;border-radius:12px;padding:5px 22px 5px 5px;display:flex;align-items:center;gap:5px}.weeklySelectedChips img{width:38px;height:38px;object-fit:contain}.weeklySelectedChips span{font-size:9px;font-weight:800}.weeklySelectedChips i{position:absolute;right:7px;font-style:normal}
+.weeklySelectionActions{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end;max-width:320px}.weeklySelectionActions small{width:100%;text-align:right;font-size:9px;color:var(--muted)}.weeklySelectionActions button{border:1px solid var(--ink);background:#fff;border-radius:999px;padding:9px 12px;font-size:9px;font-weight:800}.weeklySelectionActions button:nth-last-child(2){background:var(--ink);color:#fff}
+
+.weeklyModalChoiceSection{grid-column:1/-1;border-top:1px solid var(--line);padding-top:15px}
+.weeklyModalChoiceHead{display:flex;align-items:end;justify-content:space-between;gap:12px;margin-bottom:9px}.weeklyModalChoiceHead>div{display:flex;flex-direction:column;gap:3px}.weeklyModalChoiceHead b{font-family:var(--serif);font-size:18px}.weeklyModalChoiceHead span{font-size:9px;color:var(--muted)}.weeklyModalChoiceHead strong{font-size:10px}.weeklyModalChoiceHead i{font-style:normal;font-size:15px}
+.weeklyModalFruitGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}
+.weeklyModalFruit{border:1px solid rgba(24,60,50,.10);background:#f4f6f0;border-radius:12px;padding:6px;text-align:left;color:var(--ink)}
+.weeklyModalImg{position:relative;display:block;height:82px;border-radius:9px;background:#dce2d7}.weeklyModalImg img{width:100%;height:100%;object-fit:contain;padding:8px}.weeklyModalImg i{position:absolute;right:5px;top:5px;width:20px;height:20px;border-radius:50%;display:grid;place-items:center;background:#fff;font-style:normal;font-weight:900}
+.weeklyModalFruit b{display:block;font-family:var(--serif);font-size:12px;margin:5px 2px 0}.weeklyModalFruit small{display:block;font-size:8px;color:var(--muted);margin:1px 2px}
+.weeklyModalFruit.selected{border-color:#204c3e;box-shadow:0 0 0 1px #204c3e}.weeklyModalFruit.selected .weeklyModalImg{background:#cad8c9}.weeklyModalFruit.selected .weeklyModalImg i{background:#204c3e;color:#fff}
+.weeklyModalFruit.blocked{opacity:.42}
+.weeklyModalChoiceSection.exclude .weeklyModalFruit.selected{border-color:#9b5a4f;box-shadow:0 0 0 1px #9b5a4f}.weeklyModalChoiceSection.exclude .weeklyModalFruit.selected .weeklyModalImg{background:#eadbd7}.weeklyModalChoiceSection.exclude .weeklyModalFruit.selected .weeklyModalImg i{background:#9b5a4f;color:#fff}
+@media(max-width:760px){
+ .weeklySelectionSummary{grid-template-columns:1fr}.weeklySelectionActions{justify-content:flex-start;max-width:none}.weeklySelectionActions small{text-align:left}.weeklySelectionActions button{flex:1}
+ .weeklyModalFruitGrid{grid-template-columns:repeat(3,1fr)}.weeklyModalImg{height:70px}
+}

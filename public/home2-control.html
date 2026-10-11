@@ -26,11 +26,10 @@
 <main class="wrap">
  <section class="intro"><h2>소비자 편의 중심 설정</h2><p>검색·필터·모바일 빠른 메뉴·비회원 주문 안내·해외과일 대표노출을 여기서 바로 켜고 끌 수 있습니다. 상품 가격·재고·주문·회원은 기존 전체 관리자에서 관리합니다.</p></section>
  <div class="grid">
-  <section class="card"><h3>찾기 쉽게</h3>
-   <label class="switch"><input id="showHomeSearch" type="checkbox"><span>메인 빠른 검색 표시</span></label>
+  <section class="card"><h3>상단 검색 설정</h3>
    <label class="switch"><input id="searchAutocomplete" type="checkbox"><span>검색 자동추천 사용</span></label>
    <label class="switch"><input id="showFilterBar" type="checkbox"><span>전체과일 필터·정렬 표시</span></label>
-   <div class="field"><label>검색창 안내문구</label><input id="searchPlaceholder"></div>
+   <div class="field"><label>상단 검색창 안내문구</label><input id="searchPlaceholder"></div><div class="small">메인 가운데 별도 검색창은 제거하고, 상단 돋보기 검색 하나로 통합했습니다.</div>
   </section>
   <section class="card"><h3>모바일 · 주문 편의</h3>
    <label class="switch"><input id="showMobileDock" type="checkbox"><span>모바일 하단 빠른메뉴</span></label>
@@ -93,14 +92,14 @@ let rawConfig={},ux={...DEFAULTS};
 const $=s=>document.querySelector(s);
 function options(selected){return ASSETS.map(x=>`<option value="${x.id}" ${x.id===selected?'selected':''}>${x.name}</option>`).join('')}
 function render(){
- ['showHomeSearch','searchAutocomplete','showFilterBar','showTrustBar','showMobileDock','guestCheckoutHint','showWorldSection','showWorldTab','weeklyEnabled','showWeeklyTeaser','weeklyMiniEnabled','weeklyRegularEnabled','weeklyFamilyEnabled'].forEach(k=>$('#'+k).checked=!!ux[k]);
+ ['searchAutocomplete','showFilterBar','showTrustBar','showMobileDock','guestCheckoutHint','showWorldSection','showWorldTab','weeklyEnabled','showWeeklyTeaser','weeklyMiniEnabled','weeklyRegularEnabled','weeklyFamilyEnabled'].forEach(k=>$('#'+k).checked=!!ux[k]);
  ['searchPlaceholder','trust1','trust2','trust3','trust4','worldFeaturedCount','weeklyTitle','weeklySubtitle','weeklyDeadline','weeklyShipDate','weeklyLimit','weeklyFruitNames','weeklyMiniName','weeklyMiniLabel','weeklyMiniPrice','weeklyMiniComposition','weeklyRegularName','weeklyRegularLabel','weeklyRegularPrice','weeklyRegularComposition','weeklyFamilyName','weeklyFamilyLabel','weeklyFamilyPrice','weeklyFamilyComposition'].forEach(k=>$('#'+k).value=ux[k]??'');
  const ids=Array.isArray(ux.worldFeaturedIds)?ux.worldFeaturedIds:DEFAULTS.worldFeaturedIds;
  $('#featureGrid').innerHTML=[0,1,2,3].map(i=>`<div class="field"><label>대표 ${i+1}</label><select data-feature="${i}">${options(ids[i]||DEFAULTS.worldFeaturedIds[i])}</select></div>`).join('');
  $('#library').innerHTML=ASSETS.map(x=>`<div class="fruit"><img src="${x.src}" alt="${x.name}"><b>${x.name}</b><button data-copy="${x.src}">이미지 주소복사</button></div>`).join('');
 }
 function collect(){
- ['showHomeSearch','searchAutocomplete','showFilterBar','showTrustBar','showMobileDock','guestCheckoutHint','showWorldSection','showWorldTab','weeklyEnabled','showWeeklyTeaser','weeklyMiniEnabled','weeklyRegularEnabled','weeklyFamilyEnabled'].forEach(k=>ux[k]=$('#'+k).checked);
+ ['searchAutocomplete','showFilterBar','showTrustBar','showMobileDock','guestCheckoutHint','showWorldSection','showWorldTab','weeklyEnabled','showWeeklyTeaser','weeklyMiniEnabled','weeklyRegularEnabled','weeklyFamilyEnabled'].forEach(k=>ux[k]=$('#'+k).checked);
  ['searchPlaceholder','trust1','trust2','trust3','trust4','weeklyTitle','weeklySubtitle','weeklyDeadline','weeklyShipDate','weeklyFruitNames','weeklyMiniName','weeklyMiniLabel','weeklyMiniComposition','weeklyRegularName','weeklyRegularLabel','weeklyRegularComposition','weeklyFamilyName','weeklyFamilyLabel','weeklyFamilyComposition'].forEach(k=>ux[k]=$('#'+k).value.trim());
  ux.weeklyLimit=Math.max(1,Number($('#weeklyLimit').value)||20);ux.weeklyMiniPrice=Math.max(0,Number($('#weeklyMiniPrice').value)||0);ux.weeklyRegularPrice=Math.max(0,Number($('#weeklyRegularPrice').value)||0);ux.weeklyFamilyPrice=Math.max(0,Number($('#weeklyFamilyPrice').value)||0);
  ux.worldFeaturedCount=Math.max(0,Math.min(8,Number($('#worldFeaturedCount').value)||0));
