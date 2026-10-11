@@ -445,3 +445,142 @@ button,a,input,select{-webkit-tap-highlight-color:transparent}button:focus,a:foc
  .weeklySelectionSummary{grid-template-columns:1fr}.weeklySelectionActions{justify-content:flex-start;max-width:none}.weeklySelectionActions small{text-align:left}.weeklySelectionActions button{flex:1}
  .weeklyModalFruitGrid{grid-template-columns:repeat(3,1fr)}.weeklyModalImg{height:70px}
 }
+
+
+/* V61.11 — WEEKLY PICK as the lively focal accent on an otherwise calm home */
+.weeklyTeaser{
+  position:relative;
+  isolation:isolate;
+  overflow:hidden;
+  border:1px solid rgba(22,59,50,.12)!important;
+  border-radius:30px!important;
+  padding:34px 34px!important;
+  margin-top:30px!important;
+  margin-bottom:28px!important;
+  background:
+    radial-gradient(circle at 11% 20%, rgba(255,215,75,.55) 0 12%, transparent 35%),
+    radial-gradient(circle at 78% 18%, rgba(255,142,115,.37) 0 14%, transparent 34%),
+    radial-gradient(circle at 95% 95%, rgba(44,98,199,.20) 0 12%, transparent 34%),
+    linear-gradient(120deg,#fff7d9 0%,#fff0e5 44%,#edf2e8 100%)!important;
+  box-shadow:0 24px 55px rgba(51,68,57,.10);
+}
+.weeklyTeaser::before{
+  content:"";
+  position:absolute;
+  z-index:-1;
+  width:310px;
+  height:46px;
+  left:-44px;
+  top:13px;
+  transform:rotate(-5deg);
+  background:#2f62c7;
+  opacity:.90;
+  border-radius:42% 58% 48% 52% / 55% 43% 57% 45%;
+}
+.weeklyTeaser::after{
+  content:"WEEKLY · SMALL FRUIT BOX";
+  position:absolute;
+  right:28px;
+  bottom:14px;
+  color:rgba(24,60,50,.20);
+  font-size:9px;
+  font-weight:900;
+  letter-spacing:.18em;
+}
+.weeklyTeaserCopy{
+  position:relative;
+  z-index:2;
+}
+.weeklyTeaserCopy>.eyebrow{
+  display:inline-flex;
+  align-items:center;
+  min-height:28px;
+  padding:4px 12px;
+  border-radius:999px;
+  background:#183c32;
+  color:#fff;
+  letter-spacing:.15em;
+  box-shadow:0 7px 18px rgba(24,60,50,.14);
+}
+.weeklyTeaserCopy h2{
+  font-size:36px!important;
+  line-height:1.14;
+  margin-top:12px!important;
+  color:#173d32;
+}
+.weeklyTeaserCopy p{
+  color:#53665b!important;
+  font-size:12px!important;
+  max-width:580px;
+}
+.weeklyPlanMini span{
+  background:rgba(255,255,255,.82)!important;
+  border-color:rgba(24,60,50,.14)!important;
+  box-shadow:0 7px 20px rgba(78,78,55,.07);
+}
+.weeklyTeaserCopy .outlineBtn{
+  background:#183c32!important;
+  color:#fff!important;
+  border-color:#183c32!important;
+  box-shadow:0 9px 22px rgba(24,60,50,.17);
+}
+.weeklyTeaserFruits{
+  position:relative;
+  z-index:2;
+  gap:10px!important;
+}
+.weeklyTeaserFruits button,
+.weeklyTeaserFruits .weeklyTextFruit{
+  min-height:144px!important;
+  background:rgba(255,255,255,.70)!important;
+  border:1px solid rgba(24,60,50,.10)!important;
+  box-shadow:0 14px 26px rgba(67,74,62,.08);
+  transition:transform .18s ease,box-shadow .18s ease;
+}
+.weeklyTeaserFruits button:hover{
+  transform:translateY(-4px);
+  box-shadow:0 18px 30px rgba(67,74,62,.13);
+}
+.weeklyTeaserFruits button:nth-child(1){background:rgba(255,246,183,.82)!important}
+.weeklyTeaserFruits button:nth-child(2){background:rgba(255,224,205,.82)!important}
+.weeklyTeaserFruits button:nth-child(3){background:rgba(223,235,213,.88)!important}
+.weeklyTeaserFruits button:nth-child(4){background:rgba(221,230,250,.88)!important}
+.weeklyTeaserFruits img{
+  width:96px!important;
+  height:88px!important;
+}
+.weeklyTeaserFruits b{
+  color:#173d32;
+  font-size:13px!important;
+}
+
+/* Simpler reserve selector: clicking again is the only way to remove a fruit. */
+.weeklyModalChoiceSection:not(.exclude){
+  border-top:0;
+  padding-top:4px;
+}
+.weeklyModalChoiceHead span::after{
+  content:" · 다시 누르면 선택 해제";
+  color:#7b857d;
+}
+
+/* Hide obsolete exclude styles from older cached markup. */
+.weeklyModalChoiceSection.exclude{display:none!important}
+
+@media(max-width:760px){
+ .weeklyTeaser{
+   margin:18px 8px 0!important;
+   padding:25px 16px!important;
+   border-radius:23px!important;
+ }
+ .weeklyTeaser::before{
+   width:230px;
+   height:34px;
+   left:-55px;
+   top:10px;
+ }
+ .weeklyTeaser::after{display:none}
+ .weeklyTeaserCopy h2{font-size:29px!important}
+ .weeklyTeaserFruits button,.weeklyTeaserFruits .weeklyTextFruit{min-height:108px!important}
+ .weeklyTeaserFruits img{width:68px!important;height:62px!important}
+}
