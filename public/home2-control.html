@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>이룸홈2 편의설정</title>
+<style>
+:root{--ink:#183c32;--muted:#6b746e;--line:#d9e1d8;--paper:#f3f5ef;--white:#fffefa}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:Arial,"Pretendard","Noto Sans KR",sans-serif}button,input,select{font:inherit}button{cursor:pointer}[hidden]{display:none!important}
+.top{position:sticky;top:0;z-index:10;background:rgba(255,254,250,.97);border-bottom:1px solid var(--line);padding:12px 18px;display:flex;align-items:center;gap:10px}.top h1{font-size:20px;margin:0}.spacer{flex:1}.btn{border:1px solid var(--line);background:#fff;border-radius:11px;padding:10px 13px;font-weight:800;color:var(--ink)}.btn.primary{background:var(--ink);color:#fff;border-color:var(--ink)}
+.wrap{max-width:1180px;margin:20px auto 70px;padding:0 14px}.intro{background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px;margin-bottom:14px}.intro h2{margin:0 0 6px}.intro p{margin:0;color:var(--muted);font-size:13px;line-height:1.7}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:17px}.card h3{margin:0 0 13px;font-size:16px}.switch{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid #eef1ec}.switch:last-child{border-bottom:0}.switch input{width:18px;height:18px}.switch span{font-weight:700;font-size:13px}.field{margin:10px 0}.field label{display:block;font-size:11px;font-weight:800;margin-bottom:5px}.field input,.field select{width:100%;padding:10px 11px;border:1px solid var(--line);border-radius:10px;background:#fff}
+.feature-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}.feature-grid select{width:100%;padding:9px;border:1px solid var(--line);border-radius:10px}
+.library{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}.fruit{background:#fff;border:1px solid var(--line);border-radius:14px;padding:8px}.fruit img{width:100%;aspect-ratio:1/1;object-fit:contain;background:#dfe5da;border-radius:10px}.fruit b{display:block;margin:7px 0 5px;font-size:12px}.fruit button{width:100%;border:1px solid var(--line);background:#fff;border-radius:8px;padding:6px;font-size:10px}
+.notice{margin-top:10px;padding:10px 12px;border-radius:11px;background:#edf5ef;font-size:12px}.login{position:fixed;inset:0;background:#f3f5ef;z-index:50;display:flex;align-items:center;justify-content:center}.loginbox{width:min(420px,calc(100% - 28px));background:#fff;border:1px solid var(--line);border-radius:20px;padding:22px}.loginbox input{width:100%;padding:12px;border:1px solid var(--line);border-radius:10px;margin:10px 0}.loginbox button{width:100%}.small{color:var(--muted);font-size:11px;line-height:1.6}
+@media(max-width:850px){.grid{grid-template-columns:1fr}.library{grid-template-columns:repeat(3,1fr)}.feature-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.top h1{font-size:16px}.library{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<div class="login" id="loginGate">
+ <div class="loginbox"><h2>관리자 로그인</h2><div class="small">이룸홈2 편의설정은 관리자만 변경할 수 있습니다.</div><input id="pw" type="password" placeholder="관리자 비밀번호"><button class="btn primary" id="loginBtn">관리자 설정 열기</button><div class="small" id="loginMsg" style="margin-top:8px"></div></div>
+</div>
+<header class="top"><h1>이룸홈2 편의설정</h1><span id="status" class="small">불러오는 중</span><div class="spacer"></div><button class="btn" onclick="window.open('/home2','_blank')">홈2 미리보기</button><button class="btn" onclick="location.href='/band-admin.html'">전체 관리자</button><button class="btn primary" id="saveBtn">저장</button></header>
+<main class="wrap">
+ <section class="intro"><h2>소비자 편의 중심 설정</h2><p>검색·필터·모바일 빠른 메뉴·비회원 주문 안내·해외과일 대표노출을 여기서 바로 켜고 끌 수 있습니다. 상품 가격·재고·주문·회원은 기존 전체 관리자에서 관리합니다.</p></section>
+ <div class="grid">
+  <section class="card"><h3>찾기 쉽게</h3>
+   <label class="switch"><input id="showHomeSearch" type="checkbox"><span>메인 빠른 검색 표시</span></label>
+   <label class="switch"><input id="searchAutocomplete" type="checkbox"><span>검색 자동추천 사용</span></label>
+   <label class="switch"><input id="showFilterBar" type="checkbox"><span>전체과일 필터·정렬 표시</span></label>
+   <label class="switch"><input id="showRecent" type="checkbox"><span>최근 본 과일 표시</span></label>
+   <div class="field"><label>검색창 안내문구</label><input id="searchPlaceholder"></div>
+  </section>
+  <section class="card"><h3>모바일 · 주문 편의</h3>
+   <label class="switch"><input id="showMobileDock" type="checkbox"><span>모바일 하단 빠른메뉴</span></label>
+   <label class="switch"><input id="showTrustBar" type="checkbox"><span>메인 안심 안내바</span></label>
+   <label class="switch"><input id="guestCheckoutHint" type="checkbox"><span>비회원 주문 안내 강조</span></label>
+   <div class="field"><label>안내 1</label><input id="trust1"></div><div class="field"><label>안내 2</label><input id="trust2"></div><div class="field"><label>안내 3</label><input id="trust3"></div><div class="field"><label>안내 4</label><input id="trust4"></div>
+  </section>
+  <section class="card"><h3>해외 과일 노출</h3>
+   <label class="switch"><input id="showWorldSection" type="checkbox"><span>메인 해외과일 섹션 표시</span></label>
+   <label class="switch"><input id="showWorldTab" type="checkbox"><span>전체과일의 해외 셀렉트 탭 표시</span></label>
+   <div class="field"><label>메인 노출 개수 (0~8)</label><input id="worldFeaturedCount" type="number" min="0" max="8"></div>
+   <div class="feature-grid" id="featureGrid"></div>
+   <div class="small" style="margin-top:8px">대표 과일 순서를 바꾸면 메인의 해외과일 1~4번째가 바로 바뀝니다.</div>
+  </section>
+  <section class="card"><h3>운영 바로가기</h3>
+   <div class="small">홈2 편의설정은 공개 홈페이지 설정에 저장됩니다. 기존 전체 관리자 설정과 충돌하지 않도록 별도 <b>home2Ux</b> 영역만 변경합니다.</div>
+   <div class="notice" id="saveNote">변경 후 위의 저장 버튼을 누르세요.</div>
+   <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px"><button class="btn" onclick="location.href='/band-admin.html'">상품·주문·회원 관리</button><button class="btn" onclick="window.open('/home2#fruits','_blank')">전체 과일 확인</button></div>
+  </section>
+ </div>
+ <section class="card" style="margin-top:14px"><h3>이룸홈2 프리미엄 과일 이미지 보관함</h3><div class="small" style="margin-bottom:10px">지금까지 만든 해외과일 이미지입니다. 주소를 복사해 상품 이미지나 홈페이지 편집에 바로 사용할 수 있습니다.</div><div class="library" id="library"></div></section>
+</main>
+<script>
+const ASSETS=[{"id": "world-cherry", "name": "체리", "src": "/assets/home2-v102/world-cherry.png"}, {"id": "world-orange", "name": "오렌지", "src": "/assets/home2-v102/world-orange.png"}, {"id": "world-mango", "name": "망고", "src": "/assets/home2-v102/world-mango.png"}, {"id": "world-grapefruit", "name": "자몽", "src": "/assets/home2-v102/world-grapefruit.png"}, {"id": "world-banana", "name": "바나나", "src": "/assets/home2-v102/world-banana.png"}, {"id": "world-pineapple", "name": "파인애플", "src": "/assets/home2-v102/world-pineapple.png"}, {"id": "world-avocado", "name": "아보카도", "src": "/assets/home2-v102/world-avocado.png"}, {"id": "world-blueberry", "name": "블루베리", "src": "/assets/home2-v102/world-blueberry.png"}, {"id": "world-lemon", "name": "레몬", "src": "/assets/home2-v102/world-lemon.png"}, {"id": "world-kiwi", "name": "그린키위", "src": "/assets/home2-v102/world-kiwi.png"}, {"id": "world-dragonfruit", "name": "용과", "src": "/assets/home2-v102/world-dragonfruit.png"}, {"id": "world-green-grape", "name": "청포도", "src": "/assets/home2-v102/world-green-grape.png"}, {"id": "world-red-grape", "name": "적포도", "src": "/assets/home2-v102/world-red-grape.png"}, {"id": "world-papaya", "name": "파파야", "src": "/assets/home2-v102/world-papaya.png"}, {"id": "world-coconut", "name": "코코넛", "src": "/assets/home2-v102/world-coconut.png"}, {"id": "world-lime", "name": "라임", "src": "/assets/home2-v102/world-lime.png"}, {"id": "world-pomegranate", "name": "석류", "src": "/assets/home2-v102/world-pomegranate.png"}, {"id": "world-passionfruit", "name": "패션프루트", "src": "/assets/home2-v102/world-passionfruit.png"}, {"id": "world-lychee", "name": "리치", "src": "/assets/home2-v102/world-lychee.png"}, {"id": "world-mangosteen", "name": "망고스틴", "src": "/assets/home2-v102/world-mangosteen.png"}, {"id": "world-pomelo", "name": "포멜로", "src": "/assets/home2-v102/world-pomelo.png"}, {"id": "world-fig", "name": "무화과", "src": "/assets/home2-v102/world-fig.png"}];
+const DEFAULTS={
+ showHomeSearch:true,searchAutocomplete:true,showFilterBar:true,showTrustBar:true,showRecent:true,showMobileDock:true,guestCheckoutHint:true,showWorldSection:true,showWorldTab:true,worldFeaturedCount:4,
+ worldFeaturedIds:['world-cherry','world-orange','world-mango','world-grapefruit'],
+ searchPlaceholder:'과일 이름·품종을 검색하세요',trust1:'비회원도 바로 주문',trust2:'당일 상태 확인',trust3:'5만원 이상 기본배송 무료',trust4:'카카오 빠른 상담'
+};
+let rawConfig={},ux={...DEFAULTS};
+const $=s=>document.querySelector(s);
+function options(selected){return ASSETS.map(x=>`<option value="${x.id}" ${x.id===selected?'selected':''}>${x.name}</option>`).join('')}
+function render(){
+ ['showHomeSearch','searchAutocomplete','showFilterBar','showTrustBar','showRecent','showMobileDock','guestCheckoutHint','showWorldSection','showWorldTab'].forEach(k=>$('#'+k).checked=!!ux[k]);
+ ['searchPlaceholder','trust1','trust2','trust3','trust4','worldFeaturedCount'].forEach(k=>$('#'+k).value=ux[k]??'');
+ const ids=Array.isArray(ux.worldFeaturedIds)?ux.worldFeaturedIds:DEFAULTS.worldFeaturedIds;
+ $('#featureGrid').innerHTML=[0,1,2,3].map(i=>`<div class="field"><label>대표 ${i+1}</label><select data-feature="${i}">${options(ids[i]||DEFAULTS.worldFeaturedIds[i])}</select></div>`).join('');
+ $('#library').innerHTML=ASSETS.map(x=>`<div class="fruit"><img src="${x.src}" alt="${x.name}"><b>${x.name}</b><button data-copy="${x.src}">이미지 주소복사</button></div>`).join('');
+}
+function collect(){
+ ['showHomeSearch','searchAutocomplete','showFilterBar','showTrustBar','showRecent','showMobileDock','guestCheckoutHint','showWorldSection','showWorldTab'].forEach(k=>ux[k]=$('#'+k).checked);
+ ['searchPlaceholder','trust1','trust2','trust3','trust4'].forEach(k=>ux[k]=$('#'+k).value.trim());
+ ux.worldFeaturedCount=Math.max(0,Math.min(8,Number($('#worldFeaturedCount').value)||0));
+ ux.worldFeaturedIds=[...document.querySelectorAll('[data-feature]')].sort((a,b)=>Number(a.dataset.feature)-Number(b.dataset.feature)).map(x=>x.value);
+}
+async function checkAdmin(){
+ try{const r=await fetch('/api/admin/me',{cache:'no-store',credentials:'same-origin'});const d=await r.json();if(r.ok&&d.admin){$('#loginGate').hidden=true;await load();return}}catch(e){}
+ $('#loginGate').hidden=false;
+}
+async function login(){
+ const pw=$('#pw').value;if(!pw)return;
+ $('#loginMsg').textContent='확인 중...';
+ const r=await fetch('/api/admin/login',{method:'POST',headers:{'Content-Type':'application/json'},credentials:'same-origin',body:JSON.stringify({password:pw})});
+ const d=await r.json().catch(()=>({}));if(!r.ok){$('#loginMsg').textContent=d.error||'로그인 실패';return}
+ $('#loginGate').hidden=true;$('#pw').value='';await load();
+}
+async function load(){
+ $('#status').textContent='설정 불러오는 중';
+ const r=await fetch('/api/admin/site/homepage-config?ts='+Date.now(),{cache:'no-store',credentials:'same-origin'});
+ const d=await r.json().catch(()=>({}));if(!r.ok){$('#status').textContent='불러오기 실패';return}
+ rawConfig=d.config&&typeof d.config==='object'?d.config:{};
+ ux={...DEFAULTS,...(rawConfig.home2Ux||{})};
+ render();$('#status').textContent='설정 준비 완료';
+}
+async function save(){
+ collect();$('#status').textContent='저장 중';$('#saveNote').textContent='공개 홈페이지에 저장 중입니다.';
+ rawConfig={...rawConfig,home2Ux:ux};
+ const r=await fetch('/api/admin/site/homepage-config?ts='+Date.now(),{method:'PUT',credentials:'same-origin',headers:{'Content-Type':'application/json','Cache-Control':'no-store'},body:JSON.stringify({config:rawConfig})});
+ const d=await r.json().catch(()=>({}));if(!r.ok){$('#status').textContent='저장 실패';$('#saveNote').textContent=d.error||'저장 실패';return}
+ rawConfig=d.config||rawConfig;$('#status').textContent='저장 완료';$('#saveNote').textContent='저장되었습니다. 홈2 새로고침 후 바로 반영됩니다.';
+}
+document.addEventListener('click',e=>{const c=e.target.closest('[data-copy]');if(c)navigator.clipboard.writeText(c.dataset.copy).then(()=>{c.textContent='복사됨';setTimeout(()=>c.textContent='이미지 주소복사',900)})})
+$('#loginBtn').onclick=login;$('#pw').addEventListener('keydown',e=>{if(e.key==='Enter')login()});$('#saveBtn').onclick=save;checkAdmin();
+</script>
+</body></html>
