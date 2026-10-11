@@ -584,3 +584,78 @@ button,a,input,select{-webkit-tap-highlight-color:transparent}button:focus,a:foc
  .weeklyTeaserFruits button,.weeklyTeaserFruits .weeklyTextFruit{min-height:108px!important}
  .weeklyTeaserFruits img{width:68px!important;height:62px!important}
 }
+
+
+/* V61.12 — WEEKLY PICK visual story flow */
+.weeklyTeaserV12{max-width:1380px;margin:30px auto 24px;padding:30px 32px;border-radius:28px;border:1px solid rgba(24,60,50,.10);background:linear-gradient(120deg,#fffaf0 0%,#f8efe4 52%,#eef3ea 100%);display:grid;grid-template-columns:1.05fr .95fr;gap:34px;align-items:center;box-shadow:0 18px 45px rgba(24,60,50,.07);position:relative;overflow:hidden}
+.weeklyTeaserV12::before{content:"";position:absolute;width:260px;height:28px;left:-32px;top:20px;background:#315fae;border-radius:60% 40% 55% 45%;transform:rotate(-4deg);opacity:.92}
+.weeklyTeaserLead{position:relative;z-index:2}
+.weeklyTeaserLead>.eyebrow{display:inline-block;background:#183c32;color:#fff;border-radius:999px;padding:7px 11px;letter-spacing:.13em}
+.weeklyTeaserLead h2{font-family:var(--serif);font-size:34px;line-height:1.15;margin:12px 0 8px}
+.weeklyTeaserLead p{max-width:560px;color:var(--muted);font-size:11px;line-height:1.75}
+.weeklyPrimaryCta{border:0;background:#183c32;color:#fff;border-radius:999px;padding:12px 17px;font-weight:800;box-shadow:0 8px 20px rgba(24,60,50,.15)}
+.weeklyTeaserVisual{display:flex;flex-direction:column;gap:12px}
+.weeklyMiniFruits{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.weeklyMiniFruits button,.weeklyMiniFruits>span{border:1px solid rgba(24,60,50,.09);background:rgba(255,255,255,.78);border-radius:17px;min-height:132px;padding:9px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px}
+.weeklyMiniFruits img{width:84px;height:76px;object-fit:contain;animation:weeklyFloat 4.8s ease-in-out infinite}
+.weeklyMiniFruits button:nth-child(2) img{animation-delay:.6s}.weeklyMiniFruits button:nth-child(3) img{animation-delay:1.2s}.weeklyMiniFruits button:nth-child(4) img{animation-delay:1.8s}
+.weeklyMiniFruits b{font-family:var(--serif);font-size:12px}
+.weeklyMiniFlow{display:grid;grid-template-columns:1fr auto 1fr auto 1fr auto 1fr;gap:6px;align-items:center;padding:10px 12px;border-radius:15px;background:rgba(255,255,255,.62);border:1px solid rgba(24,60,50,.08)}
+.weeklyMiniFlow div{text-align:center;display:flex;flex-direction:column;gap:3px}.weeklyMiniFlow i{font-style:normal;font-size:12px}.weeklyMiniFlow b{font-size:9px}.weeklyMiniFlow>span{color:#8b968f;font-size:11px}
+@keyframes weeklyFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+
+.weeklyStoryHero{display:grid;grid-template-columns:1.2fr .8fr;gap:32px;align-items:center;padding:28px 0 30px;border-bottom:1px solid var(--line)}
+.weeklyStoryCopy h1{font-family:var(--serif);font-size:50px;line-height:1.12;letter-spacing:-.045em;margin:8px 0 12px}
+.weeklyStoryCopy>p{max-width:720px;font-size:12px;line-height:1.8;color:var(--muted)}
+.weeklyStoryIllustration{min-height:250px;border-radius:28px;background:linear-gradient(145deg,#fff6df,#eef2e8);display:flex;align-items:center;justify-content:center;gap:12px;padding:24px;border:1px solid rgba(24,60,50,.08);position:relative;overflow:hidden}
+.weeklyStoryIllustration::before{content:"";position:absolute;width:190px;height:24px;background:#3266be;top:30px;right:-35px;border-radius:50%;transform:rotate(9deg);opacity:.85}
+.weeklySketchCard{position:relative;z-index:2;width:150px;height:160px;background:rgba(255,255,255,.84);border:1px solid rgba(24,60,50,.10);border-radius:22px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;box-shadow:0 12px 24px rgba(24,60,50,.08);animation:weeklyFloat 5.2s ease-in-out infinite}
+.weeklySketchCard.box{animation-delay:.9s}
+.weeklySketchCard>span{font-size:42px;margin-bottom:10px}.weeklySketchCard b{font-family:var(--serif);font-size:17px}.weeklySketchCard small{font-size:9px;color:var(--muted);margin-top:4px}
+.weeklySketchArrow{position:relative;z-index:2;font-size:28px;color:#68796f}
+
+.weeklyStoryFlow{display:grid;grid-template-columns:1fr 30px 1fr 30px 1fr 30px 1fr;align-items:stretch;gap:5px;margin:28px 0 34px}
+.weeklyFlowItem{border:1px solid rgba(24,60,50,.10);background:#fffefa;border-radius:20px;padding:20px;display:flex;gap:12px;min-height:128px}
+.weeklyFlowIcon{flex:0 0 36px;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:#e7eee4;font-weight:900}
+.weeklyFlowItem b{font-family:var(--serif);font-size:17px}.weeklyFlowItem p{font-size:10px;line-height:1.65;color:var(--muted);margin:6px 0 0}
+.weeklyFlowLine{position:relative}.weeklyFlowLine::after{content:"→";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:#8b968f}
+
+.weeklyPlanSection{margin:32px 0}
+.weeklySectionLead{text-align:center;margin-bottom:14px}.weeklySectionLead h2{font-family:var(--serif);font-size:30px;margin:6px 0}.weeklySectionLead p{font-size:10px;color:var(--muted)}
+.weeklyFruitSectionV12{margin-top:44px;padding-top:32px;border-top:1px solid rgba(24,60,50,.10)}
+
+.weeklyBehind{margin-top:40px;border-radius:28px;background:#203c33;color:#fff;padding:30px;display:grid;grid-template-columns:1.05fr .95fr;gap:32px;align-items:center}
+.weeklyBehindCopy h2{font-family:var(--serif);font-size:30px;line-height:1.25;margin:7px 0 10px}
+.weeklyBehindCopy p{color:rgba(255,255,255,.72);font-size:10px;line-height:1.8;max-width:650px}
+.weeklyBehindSteps{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.weeklyBehindSteps div{border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06);border-radius:14px;padding:14px}
+.weeklyBehindSteps span{font-size:9px;color:rgba(255,255,255,.55)}.weeklyBehindSteps b{display:block;font-size:12px;margin-top:5px}
+
+.weeklyBottomV12{background:linear-gradient(120deg,#f5e9d7,#eef3e9)!important;color:#183c32!important;border:1px solid rgba(24,60,50,.08)}
+.weeklyBottomV12 p{color:#627067!important}
+.weeklyBottomV12 button{background:#183c32!important;color:#fff!important;border-color:#183c32!important}
+
+@media(max-width:980px){
+ .weeklyTeaserV12{grid-template-columns:1fr}
+ .weeklyStoryHero{grid-template-columns:1fr}
+ .weeklyStoryFlow{grid-template-columns:1fr 1fr;gap:10px}
+ .weeklyFlowLine{display:none}
+ .weeklyBehind{grid-template-columns:1fr}
+ .weeklyMiniFlow{grid-template-columns:1fr 1fr;gap:7px}
+ .weeklyMiniFlow>span{display:none}
+}
+@media(max-width:760px){
+ .weeklyTeaserV12{margin:18px 8px 0;padding:24px 16px;border-radius:23px}
+ .weeklyTeaserLead h2{font-size:28px}
+ .weeklyMiniFruits{grid-template-columns:repeat(4,1fr)}
+ .weeklyMiniFruits button,.weeklyMiniFruits>span{min-height:100px;padding:5px}
+ .weeklyMiniFruits img{width:62px;height:58px}
+ .weeklyMiniFlow{grid-template-columns:1fr 1fr}
+ .weeklyStoryCopy h1{font-size:39px}
+ .weeklyStoryIllustration{min-height:210px;padding:16px}
+ .weeklySketchCard{width:120px;height:135px}
+ .weeklySketchCard>span{font-size:34px}
+ .weeklyStoryFlow{grid-template-columns:1fr}
+ .weeklyFlowItem{min-height:auto}
+ .weeklyBehindSteps{grid-template-columns:1fr 1fr}
+}
