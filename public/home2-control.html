@@ -13,7 +13,8 @@
 .feature-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}.feature-grid select{width:100%;padding:9px;border:1px solid var(--line);border-radius:10px}
 .library{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}.fruit{background:#fff;border:1px solid var(--line);border-radius:14px;padding:8px}.fruit img{width:100%;aspect-ratio:1/1;object-fit:contain;background:#dfe5da;border-radius:10px}.fruit b{display:block;margin:7px 0 5px;font-size:12px}.fruit button{width:100%;border:1px solid var(--line);background:#fff;border-radius:8px;padding:6px;font-size:10px}
 .notice{margin-top:10px;padding:10px 12px;border-radius:11px;background:#edf5ef;font-size:12px}.login{position:fixed;inset:0;background:#f3f5ef;z-index:50;display:flex;align-items:center;justify-content:center}.loginbox{width:min(420px,calc(100% - 28px));background:#fff;border:1px solid var(--line);border-radius:20px;padding:22px}.loginbox input{width:100%;padding:12px;border:1px solid var(--line);border-radius:10px;margin:10px 0}.loginbox button{width:100%}.small{color:var(--muted);font-size:11px;line-height:1.6}
-@media(max-width:850px){.grid{grid-template-columns:1fr}.library{grid-template-columns:repeat(3,1fr)}.feature-grid{grid-template-columns:1fr 1fr}}
+.weekly-admin-plans{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}.plan-admin{border:1px solid var(--line);border-radius:14px;padding:12px;background:#fbfcf8}
+@media(max-width:850px){.grid{grid-template-columns:1fr}.library{grid-template-columns:repeat(3,1fr)}.feature-grid{grid-template-columns:1fr 1fr}.weekly-admin-plans{grid-template-columns:1fr}}
 @media(max-width:520px){.top h1{font-size:16px}.library{grid-template-columns:repeat(2,1fr)}}
 </style>
 </head>
@@ -29,7 +30,6 @@
    <label class="switch"><input id="showHomeSearch" type="checkbox"><span>메인 빠른 검색 표시</span></label>
    <label class="switch"><input id="searchAutocomplete" type="checkbox"><span>검색 자동추천 사용</span></label>
    <label class="switch"><input id="showFilterBar" type="checkbox"><span>전체과일 필터·정렬 표시</span></label>
-   <label class="switch"><input id="showRecent" type="checkbox"><span>최근 본 과일 표시</span></label>
    <div class="field"><label>검색창 안내문구</label><input id="searchPlaceholder"></div>
   </section>
   <section class="card"><h3>모바일 · 주문 편의</h3>
@@ -51,28 +51,58 @@
    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px"><button class="btn" onclick="location.href='/band-admin.html'">상품·주문·회원 관리</button><button class="btn" onclick="window.open('/home2#fruits','_blank')">전체 과일 확인</button></div>
   </section>
  </div>
+
+ <section class="card weekly-admin" style="margin-top:14px"><h3>WEEKLY PICK · 이번 주 과일</h3>
+  <div class="small">메인에는 맛보기만 보여주고, 상단의 <b>Weekly Pick / 이번 주 과일</b> 메뉴에서 한 페이지로 자세히 보여줍니다.</div>
+  <div class="grid" style="margin-top:12px">
+   <div>
+    <label class="switch"><input id="weeklyEnabled" type="checkbox"><span>Weekly Pick 페이지 사용</span></label>
+    <label class="switch"><input id="showWeeklyTeaser" type="checkbox"><span>메인에 작은 맛보기 영역 표시</span></label>
+    <div class="field"><label>대표 제목</label><input id="weeklyTitle"></div>
+    <div class="field"><label>설명</label><input id="weeklySubtitle"></div>
+    <div class="field"><label>이번 주 과일 이름</label><input id="weeklyFruitNames" placeholder="비워두면 현재 제철과일 4개 자동 사용"></div>
+   </div>
+   <div>
+    <div class="field"><label>주문 마감 안내</label><input id="weeklyDeadline" placeholder="예: 화요일 밤 주문 마감"></div>
+    <div class="field"><label>발송 안내</label><input id="weeklyShipDate" placeholder="예: 목~금 순차 발송"></div>
+    <div class="field"><label>한정 수량</label><input id="weeklyLimit" type="number" min="1"></div>
+    <div class="notice">정기결제는 넣지 않고 <b>1회 예약</b>으로 시작합니다. 예약은 기존 상담 DB에 저장되어 초기 재고·자본 부담을 줄이는 구조입니다.</div>
+   </div>
+  </div>
+  <div class="weekly-admin-plans">
+   <div class="plan-admin"><label class="switch"><input id="weeklyMiniEnabled" type="checkbox"><span>MINI 사용</span></label><div class="field"><label>이름</label><input id="weeklyMiniName"></div><div class="field"><label>한글 설명</label><input id="weeklyMiniLabel"></div><div class="field"><label>가격</label><input id="weeklyMiniPrice" type="number"></div><div class="field"><label>구성</label><input id="weeklyMiniComposition"></div></div>
+   <div class="plan-admin"><label class="switch"><input id="weeklyRegularEnabled" type="checkbox"><span>REGULAR 사용</span></label><div class="field"><label>이름</label><input id="weeklyRegularName"></div><div class="field"><label>한글 설명</label><input id="weeklyRegularLabel"></div><div class="field"><label>가격</label><input id="weeklyRegularPrice" type="number"></div><div class="field"><label>구성</label><input id="weeklyRegularComposition"></div></div>
+   <div class="plan-admin"><label class="switch"><input id="weeklyFamilyEnabled" type="checkbox"><span>FAMILY 사용</span></label><div class="field"><label>이름</label><input id="weeklyFamilyName"></div><div class="field"><label>한글 설명</label><input id="weeklyFamilyLabel"></div><div class="field"><label>가격</label><input id="weeklyFamilyPrice" type="number"></div><div class="field"><label>구성</label><input id="weeklyFamilyComposition"></div></div>
+  </div>
+  <div style="margin-top:12px"><button class="btn" onclick="window.open('/home2#weekly','_blank')">Weekly Pick 미리보기</button></div>
+ </section>
  <section class="card" style="margin-top:14px"><h3>이룸홈2 프리미엄 과일 이미지 보관함</h3><div class="small" style="margin-bottom:10px">지금까지 만든 해외과일 이미지입니다. 주소를 복사해 상품 이미지나 홈페이지 편집에 바로 사용할 수 있습니다.</div><div class="library" id="library"></div></section>
 </main>
 <script>
 const ASSETS=[{"id": "world-cherry", "name": "체리", "src": "/assets/home2-v102/world-cherry.png"}, {"id": "world-orange", "name": "오렌지", "src": "/assets/home2-v102/world-orange.png"}, {"id": "world-mango", "name": "망고", "src": "/assets/home2-v102/world-mango.png"}, {"id": "world-grapefruit", "name": "자몽", "src": "/assets/home2-v102/world-grapefruit.png"}, {"id": "world-banana", "name": "바나나", "src": "/assets/home2-v102/world-banana.png"}, {"id": "world-pineapple", "name": "파인애플", "src": "/assets/home2-v102/world-pineapple.png"}, {"id": "world-avocado", "name": "아보카도", "src": "/assets/home2-v102/world-avocado.png"}, {"id": "world-blueberry", "name": "블루베리", "src": "/assets/home2-v102/world-blueberry.png"}, {"id": "world-lemon", "name": "레몬", "src": "/assets/home2-v102/world-lemon.png"}, {"id": "world-kiwi", "name": "그린키위", "src": "/assets/home2-v102/world-kiwi.png"}, {"id": "world-dragonfruit", "name": "용과", "src": "/assets/home2-v102/world-dragonfruit.png"}, {"id": "world-green-grape", "name": "청포도", "src": "/assets/home2-v102/world-green-grape.png"}, {"id": "world-red-grape", "name": "적포도", "src": "/assets/home2-v102/world-red-grape.png"}, {"id": "world-papaya", "name": "파파야", "src": "/assets/home2-v102/world-papaya.png"}, {"id": "world-coconut", "name": "코코넛", "src": "/assets/home2-v102/world-coconut.png"}, {"id": "world-lime", "name": "라임", "src": "/assets/home2-v102/world-lime.png"}, {"id": "world-pomegranate", "name": "석류", "src": "/assets/home2-v102/world-pomegranate.png"}, {"id": "world-passionfruit", "name": "패션프루트", "src": "/assets/home2-v102/world-passionfruit.png"}, {"id": "world-lychee", "name": "리치", "src": "/assets/home2-v102/world-lychee.png"}, {"id": "world-mangosteen", "name": "망고스틴", "src": "/assets/home2-v102/world-mangosteen.png"}, {"id": "world-pomelo", "name": "포멜로", "src": "/assets/home2-v102/world-pomelo.png"}, {"id": "world-fig", "name": "무화과", "src": "/assets/home2-v102/world-fig.png"}];
 const DEFAULTS={
- showHomeSearch:true,searchAutocomplete:true,showFilterBar:true,showTrustBar:true,showRecent:true,showMobileDock:true,guestCheckoutHint:true,showWorldSection:true,showWorldTab:true,worldFeaturedCount:4,
+ showHomeSearch:true,searchAutocomplete:true,showFilterBar:true,showTrustBar:true,showMobileDock:true,guestCheckoutHint:true,showWorldSection:true,showWorldTab:true,worldFeaturedCount:4,
  worldFeaturedIds:['world-cherry','world-orange','world-mango','world-grapefruit'],
- searchPlaceholder:'과일 이름·품종을 검색하세요',trust1:'비회원도 바로 주문',trust2:'당일 상태 확인',trust3:'5만원 이상 기본배송 무료',trust4:'카카오 빠른 상담'
+ searchPlaceholder:'과일 이름·품종을 검색하세요',trust1:'비회원도 바로 주문',trust2:'당일 상태 확인',trust3:'5만원 이상 기본배송 무료',trust4:'카카오 빠른 상담',
+ weeklyEnabled:true,showWeeklyTeaser:true,weeklyTitle:'이번 주 맛있는 과일을 조금씩',weeklySubtitle:'많이 사지 않아도 여러 과일을 맛볼 수 있게, 이번 주 좋은 과일만 조금씩 골라드립니다.',weeklyDeadline:'화요일 밤 주문 마감',weeklyShipDate:'목~금 순차 발송',weeklyLimit:20,weeklyFruitNames:'',
+ weeklyMiniEnabled:true,weeklyMiniName:'MINI',weeklyMiniLabel:'혼자 가볍게',weeklyMiniPrice:19900,weeklyMiniComposition:'3~4종 소분 구성',
+ weeklyRegularEnabled:true,weeklyRegularName:'REGULAR',weeklyRegularLabel:'둘이 골고루',weeklyRegularPrice:29900,weeklyRegularComposition:'4~5종 소분 구성',
+ weeklyFamilyEnabled:true,weeklyFamilyName:'FAMILY',weeklyFamilyLabel:'가족과 넉넉하게',weeklyFamilyPrice:39900,weeklyFamilyComposition:'5~6종 넉넉한 구성'
 };
 let rawConfig={},ux={...DEFAULTS};
 const $=s=>document.querySelector(s);
 function options(selected){return ASSETS.map(x=>`<option value="${x.id}" ${x.id===selected?'selected':''}>${x.name}</option>`).join('')}
 function render(){
- ['showHomeSearch','searchAutocomplete','showFilterBar','showTrustBar','showRecent','showMobileDock','guestCheckoutHint','showWorldSection','showWorldTab'].forEach(k=>$('#'+k).checked=!!ux[k]);
- ['searchPlaceholder','trust1','trust2','trust3','trust4','worldFeaturedCount'].forEach(k=>$('#'+k).value=ux[k]??'');
+ ['showHomeSearch','searchAutocomplete','showFilterBar','showTrustBar','showMobileDock','guestCheckoutHint','showWorldSection','showWorldTab','weeklyEnabled','showWeeklyTeaser','weeklyMiniEnabled','weeklyRegularEnabled','weeklyFamilyEnabled'].forEach(k=>$('#'+k).checked=!!ux[k]);
+ ['searchPlaceholder','trust1','trust2','trust3','trust4','worldFeaturedCount','weeklyTitle','weeklySubtitle','weeklyDeadline','weeklyShipDate','weeklyLimit','weeklyFruitNames','weeklyMiniName','weeklyMiniLabel','weeklyMiniPrice','weeklyMiniComposition','weeklyRegularName','weeklyRegularLabel','weeklyRegularPrice','weeklyRegularComposition','weeklyFamilyName','weeklyFamilyLabel','weeklyFamilyPrice','weeklyFamilyComposition'].forEach(k=>$('#'+k).value=ux[k]??'');
  const ids=Array.isArray(ux.worldFeaturedIds)?ux.worldFeaturedIds:DEFAULTS.worldFeaturedIds;
  $('#featureGrid').innerHTML=[0,1,2,3].map(i=>`<div class="field"><label>대표 ${i+1}</label><select data-feature="${i}">${options(ids[i]||DEFAULTS.worldFeaturedIds[i])}</select></div>`).join('');
  $('#library').innerHTML=ASSETS.map(x=>`<div class="fruit"><img src="${x.src}" alt="${x.name}"><b>${x.name}</b><button data-copy="${x.src}">이미지 주소복사</button></div>`).join('');
 }
 function collect(){
- ['showHomeSearch','searchAutocomplete','showFilterBar','showTrustBar','showRecent','showMobileDock','guestCheckoutHint','showWorldSection','showWorldTab'].forEach(k=>ux[k]=$('#'+k).checked);
- ['searchPlaceholder','trust1','trust2','trust3','trust4'].forEach(k=>ux[k]=$('#'+k).value.trim());
+ ['showHomeSearch','searchAutocomplete','showFilterBar','showTrustBar','showMobileDock','guestCheckoutHint','showWorldSection','showWorldTab','weeklyEnabled','showWeeklyTeaser','weeklyMiniEnabled','weeklyRegularEnabled','weeklyFamilyEnabled'].forEach(k=>ux[k]=$('#'+k).checked);
+ ['searchPlaceholder','trust1','trust2','trust3','trust4','weeklyTitle','weeklySubtitle','weeklyDeadline','weeklyShipDate','weeklyFruitNames','weeklyMiniName','weeklyMiniLabel','weeklyMiniComposition','weeklyRegularName','weeklyRegularLabel','weeklyRegularComposition','weeklyFamilyName','weeklyFamilyLabel','weeklyFamilyComposition'].forEach(k=>ux[k]=$('#'+k).value.trim());
+ ux.weeklyLimit=Math.max(1,Number($('#weeklyLimit').value)||20);ux.weeklyMiniPrice=Math.max(0,Number($('#weeklyMiniPrice').value)||0);ux.weeklyRegularPrice=Math.max(0,Number($('#weeklyRegularPrice').value)||0);ux.weeklyFamilyPrice=Math.max(0,Number($('#weeklyFamilyPrice').value)||0);
  ux.worldFeaturedCount=Math.max(0,Math.min(8,Number($('#worldFeaturedCount').value)||0));
  ux.worldFeaturedIds=[...document.querySelectorAll('[data-feature]')].sort((a,b)=>Number(a.dataset.feature)-Number(b.dataset.feature)).map(x=>x.value);
 }
