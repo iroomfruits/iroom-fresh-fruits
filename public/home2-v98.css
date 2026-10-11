@@ -740,249 +740,58 @@ button,a,input,select{-webkit-tap-highlight-color:transparent}button:focus,a:foc
 }
 
 
-/* V61.14 — Seasonal Picks subtle motion + smile click effect */
-.routeHeroTheme{border:1px solid rgba(24,60,50,.08);border-radius:30px;padding:28px 30px 32px;margin-bottom:12px;background:rgba(255,255,252,.78);box-shadow:0 14px 32px rgba(24,60,50,.04)}
-.routeHeroTheme h1{letter-spacing:-.03em}
+/* V61.18 SAFE INTERACTION — rebuilt from stable V61.13 */
+.routeHeroTheme{border:1px solid rgba(24,60,50,.08);border-radius:30px;padding:28px 30px 32px;margin-bottom:12px;box-shadow:0 14px 32px rgba(24,60,50,.04)}
 .routeHeroTheme .eyebrow{display:inline-block;background:#183c32;color:#fff;border-radius:999px;padding:7px 11px;letter-spacing:.13em}
-.seasonalRouteHero{background:linear-gradient(120deg,#fff5df 0%,#f7efe3 42%,#eef5e9 100%)}
-.curationRouteHero{background:linear-gradient(120deg,#fff8e9 0%,#f5efe9 42%,#edf5ef 100%)}
+.seasonalRouteHero{background:linear-gradient(120deg,#fff5df 0%,#f6efe2 48%,#eef5e9 100%)}
+.curationRouteHero{background:linear-gradient(120deg,#fff4e8 0%,#f7e9e7 48%,#eef3e9 100%)}
+.giftsRouteHero{background:linear-gradient(120deg,#fff4eb 0%,#f4eee5 52%,#f2f5ec 100%)}
+.storyRouteHero{background:linear-gradient(120deg,#eef5eb 0%,#f6f1e5 52%,#edf4ef 100%)}
+body[data-theme-route="fruits"] .navItem[data-route="fruits"]{background:#eef4e8;border-radius:16px}
+body[data-theme-route="weekly"] .navItem[data-route="weekly"]{background:#fff0d9;border-radius:16px}
+body[data-theme-route="curation"] .navItem[data-route="curation"]{background:#f7e8e5;border-radius:16px}
+body[data-theme-route="gifts"] .navItem[data-route="gifts"]{background:#f4ede1;border-radius:16px}
+body[data-theme-route="story"] .navItem[data-route="story"]{background:#eaf1e7;border-radius:16px}
 
-.fruitsRoutePage .catalogGrid .productCard,
-.curationRoutePage .pickFruit{position:relative;overflow:hidden;box-shadow:0 12px 26px rgba(24,60,50,.045);transition:transform .24s ease,box-shadow .24s ease,border-color .24s ease}
-.fruitsRoutePage .catalogGrid .productCard:hover,
-.curationRoutePage .pickFruit:hover{transform:translateY(-5px);box-shadow:0 20px 36px rgba(24,60,50,.09)}
-.fruitsRoutePage .catalogGrid .productImgBtn,
-.curationRoutePage .pickFruit{position:relative;overflow:hidden}
-.fruitsRoutePage .catalogGrid .productImgBtn::before,
-.curationRoutePage .pickFruit::before{content:"";position:absolute;left:50%;bottom:18px;transform:translateX(-50%);width:94px;height:18px;border-radius:50%;background:rgba(24,60,50,.10);filter:blur(7px)}
-.fruitsRoutePage .catalogGrid .productCard:nth-child(4n+1) .productImgBtn{background:linear-gradient(180deg,#eef4e8,#dde7d7)}
-.fruitsRoutePage .catalogGrid .productCard:nth-child(4n+2) .productImgBtn{background:linear-gradient(180deg,#f4efe0,#e8dfc7)}
-.fruitsRoutePage .catalogGrid .productCard:nth-child(4n+3) .productImgBtn{background:linear-gradient(180deg,#f7ebe8,#eadbd7)}
-.fruitsRoutePage .catalogGrid .productCard:nth-child(4n+4) .productImgBtn{background:linear-gradient(180deg,#eef2e8,#dfe7dc)}
-.fruitsRoutePage .catalogGrid .productCard:nth-child(4n+1){background:linear-gradient(180deg,rgba(255,255,252,.95),rgba(250,252,246,.92))}
-.fruitsRoutePage .catalogGrid .productCard:nth-child(4n+2){background:linear-gradient(180deg,rgba(255,255,252,.95),rgba(252,248,243,.92))}
-.fruitsRoutePage .catalogGrid .productCard:nth-child(4n+3){background:linear-gradient(180deg,rgba(255,255,252,.95),rgba(252,246,244,.92))}
-.fruitsRoutePage .catalogGrid .productCard:nth-child(4n+4){background:linear-gradient(180deg,rgba(255,255,252,.95),rgba(247,250,246,.92))}
-.fruitsRoutePage .catalogGrid .productImgBtn img,
-.curationRoutePage .pickFruit img{position:relative;z-index:2;transform-origin:center bottom;animation:seasonalFruitFloat 5.2s ease-in-out infinite}
-.fruitsRoutePage .catalogGrid .productCard:nth-child(2n) .productImgBtn img,
-.curationRoutePage .pickFruit:nth-child(2n) img{animation-duration:5.9s}
-.fruitsRoutePage .catalogGrid .productCard:nth-child(3n) .productImgBtn img,
-.curationRoutePage .pickFruit:nth-child(3n) img{animation-duration:4.6s}
-.fruitsRoutePage .catalogGrid .productCard:nth-child(4n) .productImgBtn img,
-.curationRoutePage .pickFruit:nth-child(4n) img{animation-duration:6.1s}
-.fruitsRoutePage .catalogGrid .productCard:nth-child(odd) .productImgBtn img,
-.curationRoutePage .pickFruit:nth-child(odd) img{animation-delay:.45s}
-.curationRoutePage .pickPanel{background:linear-gradient(180deg,rgba(255,255,252,.92),rgba(248,250,244,.84))}
-.curationRoutePage .pickSummary{background:linear-gradient(180deg,rgba(255,255,252,.94),rgba(250,248,244,.86))}
-.curationRoutePage .pickFruit:nth-child(4n+1){background:linear-gradient(180deg,#eef4e8,#e4ecdf)}
-.curationRoutePage .pickFruit:nth-child(4n+2){background:linear-gradient(180deg,#f4efe0,#ece4d4)}
-.curationRoutePage .pickFruit:nth-child(4n+3){background:linear-gradient(180deg,#f7ebe8,#efdfdb)}
-.curationRoutePage .pickFruit:nth-child(4n+4){background:linear-gradient(180deg,#edf2ea,#e0e8df)}
-.curationRoutePage .pickFruit.selected{border-color:#d88068;box-shadow:0 0 0 2px rgba(216,128,104,.16),0 16px 30px rgba(24,60,50,.08);background:linear-gradient(180deg,#fff3df,#ffe9da)!important}
+.fruitsRoutePage .catalogGrid .productImgBtn{position:relative;isolation:isolate}
+.fruitsRoutePage .catalogGrid .productImgBtn img{animation:seasonalAliveV18 3.8s ease-in-out infinite!important;transform-origin:center bottom;will-change:transform}
+.fruitsRoutePage .catalogGrid .productCard:nth-child(2n) .productImgBtn img{animation-duration:4.5s!important;animation-delay:.28s!important}
+.fruitsRoutePage .catalogGrid .productCard:nth-child(3n) .productImgBtn img{animation-duration:3.45s!important;animation-delay:.62s!important}
+@keyframes seasonalAliveV18{0%,100%{transform:translateY(0) rotate(0deg)}28%{transform:translateY(-5px) rotate(-.7deg)}55%{transform:translateY(-11px) rotate(.9deg)}78%{transform:translateY(-4px) rotate(-.4deg)}}
 
-.smilePulse img{animation:seasonalSmileBounce .75s ease}
-.fruitSmileFx{pointer-events:none;position:absolute;left:50%;top:50%;width:90px;height:58px;transform:translate(-50%,-60%);z-index:5;animation:fruitFacePop 1s ease forwards}
-.fruitSmileFx .eye{position:absolute;top:16px;width:10px;height:14px;border-radius:50%;background:#183c32}
-.fruitSmileFx .eye.left{left:24px}.fruitSmileFx .eye.right{right:24px}
-.fruitSmileFx .mouth{position:absolute;left:50%;bottom:12px;width:34px;height:18px;border:4px solid #183c32;border-top:0;border-left-color:transparent;border-right-color:transparent;border-bottom-left-radius:28px;border-bottom-right-radius:28px;transform:translateX(-50%)}
-@keyframes seasonalFruitFloat{0%,100%{transform:translateY(0) rotate(0deg) scale(1)}25%{transform:translateY(-4px) rotate(-1deg) scale(1.015)}50%{transform:translateY(-9px) rotate(1deg) scale(1.03)}75%{transform:translateY(-3px) rotate(-.7deg) scale(1.015)}}
-@keyframes seasonalSmileBounce{0%{transform:translateY(0) scale(1)}30%{transform:translateY(-7px) scale(1.04)}60%{transform:translateY(-2px) scale(1.02)}100%{transform:translateY(0) scale(1)}}
-@keyframes fruitFacePop{0%{opacity:0;transform:translate(-50%,-52%) scale(.72)}15%{opacity:1;transform:translate(-50%,-60%) scale(1)}75%{opacity:1;transform:translate(-50%,-62%) scale(1)}100%{opacity:0;transform:translate(-50%,-68%) scale(.95)}}
+.weeklyFruit.weeklyChoice{position:relative}
+.weeklyFruitImage{width:100%!important;height:190px!important;border:0!important;background:#dce2d7!important;border-radius:14px!important;padding:0!important;display:grid!important;place-items:center!important;position:relative!important;overflow:hidden!important;isolation:isolate}
+.weeklyFruitImage img{width:100%!important;height:100%!important;object-fit:contain!important;padding:18px!important;animation:weeklyFruitDance 4.6s ease-in-out infinite!important;transform-origin:center bottom}
+.weeklyChoiceToggle{position:absolute!important;right:17px!important;top:17px!important;z-index:8!important;width:auto!important;height:30px!important;min-width:54px!important;padding:0 9px!important;border-radius:999px!important;border:1px solid rgba(24,60,50,.12)!important;background:rgba(255,255,255,.92)!important;display:flex!important;align-items:center!important;justify-content:center!important;gap:5px!important;box-shadow:0 5px 12px rgba(24,60,50,.08)!important;font-size:8px!important;font-weight:800!important}
+.weeklyChoiceToggle .weeklyChoiceMark{position:static!important;width:auto!important;height:auto!important;border:0!important;background:transparent!important;color:inherit!important;font-size:10px!important}
+.weeklyChoice.selected .weeklyChoiceToggle{background:#d77f67!important;color:#fff!important;border-color:#d77f67!important}
+.weeklyChoice.selected .weeklyFruitImage{background:#f3dfd6!important}
 
-@media(max-width:760px){
- .routeHeroTheme{padding:22px 18px 24px;border-radius:24px}
- .routeHeroTheme h1{font-size:38px}
- .fruitSmileFx{width:70px;height:46px}
- .fruitSmileFx .eye{top:12px;width:8px;height:11px}
- .fruitSmileFx .eye.left{left:18px}.fruitSmileFx .eye.right{right:18px}
- .fruitSmileFx .mouth{width:26px;height:14px;border-width:3px;bottom:10px}
-}
+.curationRoutePage .pickFruit{position:relative;overflow:hidden;display:grid;grid-template-rows:118px auto;gap:9px;transition:transform .22s ease,box-shadow .22s ease}
+.curationRoutePage .pickFruit::after{display:none!important}
+.curationRoutePage .pickFruit:hover{transform:translateY(-4px);box-shadow:0 16px 30px rgba(24,60,50,.08)}
+.pickFruitImage{width:100%;height:118px;border:0;background:transparent;padding:0;display:grid;place-items:center;position:relative;overflow:hidden;isolation:isolate;border-radius:12px}
+.pickFruitImage img{width:100%;height:118px;object-fit:contain;padding:12px;animation:curationAliveV18 4.6s ease-in-out infinite!important;transform-origin:center bottom}
+.curationRoutePage .pickFruit:nth-child(2n) .pickFruitImage img{animation-delay:.4s!important;animation-duration:5.2s!important}
+.curationRoutePage .pickFruit:nth-child(3n) .pickFruitImage img{animation-delay:.75s!important;animation-duration:4.1s!important}
+@keyframes curationAliveV18{0%,100%{transform:translateY(0) rotate(0deg)}35%{transform:translateY(-4px) rotate(-.8deg)}62%{transform:translateY(-8px) rotate(.8deg)}82%{transform:translateY(-3px) rotate(-.35deg)}}
+.pickFruitMeta{display:block;min-width:0}.pickFruitMeta b{font-family:var(--serif);font-size:16px}.pickFruitMeta small{display:block;margin-top:3px;color:#718079;font-size:10px}
+.pickFruitToggle{position:absolute;right:10px;top:10px;z-index:8;width:27px;height:27px;border-radius:50%;border:1px solid rgba(24,60,50,.25);background:rgba(255,255,255,.92);font-weight:900;display:grid;place-items:center}
+.curationRoutePage .pickFruit.selected .pickFruitToggle{background:#183c32;color:#fff;border-color:#183c32}
 
-/* V61.15 — route color themes for top navigation and topic pages */
-body[data-route="fruits"] .navItem[data-route="fruits"],
-body[data-route="weekly"] .navItem[data-route="weekly"],
-body[data-route="curation"] .navItem[data-route="curation"],
-body[data-route="gifts"] .navItem[data-route="gifts"],
-body[data-route="story"] .navItem[data-route="story"]{
-  border-radius:18px;
-  margin:0 4px;
-  height:64%;
-  padding:0 24px;
-}
-body[data-route="fruits"] .navItem[data-route="fruits"]{background:linear-gradient(180deg,rgba(255,245,223,.95),rgba(241,247,234,.92));}
-body[data-route="weekly"] .navItem[data-route="weekly"]{background:linear-gradient(180deg,rgba(255,244,209,.96),rgba(255,232,224,.92));}
-body[data-route="curation"] .navItem[data-route="curation"]{background:linear-gradient(180deg,rgba(255,248,233,.95),rgba(239,247,238,.92));}
-body[data-route="gifts"] .navItem[data-route="gifts"]{background:linear-gradient(180deg,rgba(255,242,238,.95),rgba(247,239,232,.92));}
-body[data-route="story"] .navItem[data-route="story"]{background:linear-gradient(180deg,rgba(239,246,237,.95),rgba(232,238,229,.92));}
-body[data-route="fruits"] .navItem[data-route="fruits"]:after,
-body[data-route="weekly"] .navItem[data-route="weekly"]:after,
-body[data-route="curation"] .navItem[data-route="curation"]:after,
-body[data-route="gifts"] .navItem[data-route="gifts"]:after,
-body[data-route="story"] .navItem[data-route="story"]:after{left:18px;right:18px;bottom:7px;height:2px;border-radius:999px}
+.productImgBtn,.weeklyFruitImage,.pickFruitImage,.weeklyMiniFruits button{position:relative;isolation:isolate}
+.fruitSmilePlay img{animation:fruitHappyBounceV18 .86s ease!important}
+.fruitSmileFx{pointer-events:none;position:absolute;left:50%;top:50%;width:82px;height:54px;transform:translate(-50%,-58%);z-index:30;animation:fruitFaceV18 1.08s ease forwards}
+.fruitSmileFx .eye{position:absolute;top:13px;width:9px;height:12px;border-radius:50%;background:#173f34;box-shadow:0 0 0 2px rgba(255,255,255,.35)}
+.fruitSmileFx .eye.left{left:21px}.fruitSmileFx .eye.right{right:21px}
+.fruitSmileFx .cheek{position:absolute;top:30px;width:12px;height:7px;border-radius:50%;background:rgba(238,126,118,.72)}
+.fruitSmileFx .cheek.left{left:11px}.fruitSmileFx .cheek.right{right:11px}
+.fruitSmileFx .mouth{position:absolute;left:50%;bottom:7px;width:29px;height:15px;border:4px solid #173f34;border-top:0;border-left-color:transparent;border-right-color:transparent;border-bottom-left-radius:26px;border-bottom-right-radius:26px;transform:translateX(-50%)}
+@keyframes fruitHappyBounceV18{0%{transform:translateY(0) scale(1)}34%{transform:translateY(-10px) scale(1.045)}68%{transform:translateY(-3px) scale(1.02)}100%{transform:translateY(0) scale(1)}}
+@keyframes fruitFaceV18{0%{opacity:0;transform:translate(-50%,-48%) scale(.72)}15%{opacity:1;transform:translate(-50%,-58%) scale(1)}72%{opacity:1;transform:translate(-50%,-61%) scale(1)}100%{opacity:0;transform:translate(-50%,-66%) scale(.92)}}
 
-.giftsRouteHero{background:linear-gradient(120deg,#fff2ef 0%,#f8eee6 46%,#f1f5eb 100%)}
-.storyRouteHero{background:linear-gradient(120deg,#eef5eb 0%,#f6f1e5 46%,#edf4ef 100%)}
-.giftsRoutePage .giftCard{background:linear-gradient(180deg,rgba(255,255,252,.95),rgba(252,246,242,.92));box-shadow:0 12px 28px rgba(24,60,50,.05);transition:transform .24s ease,box-shadow .24s ease}
-.giftsRoutePage .giftCard:hover{transform:translateY(-5px);box-shadow:0 20px 36px rgba(24,60,50,.09)}
-.giftsRoutePage .giftCard:nth-child(3n+1) .giftVisual{background:linear-gradient(180deg,#f4efe0,#e9e1cf)}
-.giftsRoutePage .giftCard:nth-child(3n+2) .giftVisual{background:linear-gradient(180deg,#f7ebe8,#eaded7)}
-.giftsRoutePage .giftCard:nth-child(3n+3) .giftVisual{background:linear-gradient(180deg,#eef4e8,#dfe8db)}
-.giftsRoutePage .giftVisual img{animation:seasonalFruitFloat 5.4s ease-in-out infinite}
-.storyRoutePage .storyBlock{background:linear-gradient(180deg,rgba(255,255,252,.90),rgba(245,248,241,.85));box-shadow:0 10px 24px rgba(24,60,50,.04);transition:transform .24s ease,box-shadow .24s ease}
-.storyRoutePage .storyBlock:hover{transform:translateY(-4px);box-shadow:0 18px 34px rgba(24,60,50,.08)}
-.storyRoutePage .storyBlock:first-child{background:linear-gradient(135deg,rgba(255,247,230,.92),rgba(237,245,235,.88))}
-
-
-/* V61.16 — interaction repair: detail click + visible smile + correct motion scope */
-/* Gift Selection stays premium and still: no fruit/card motion. */
-.giftsRoutePage .giftCard,.giftsRoutePage .giftCard:hover{transform:none!important;transition:box-shadow .18s ease!important}
+.giftsRoutePage .giftCard,.giftsRoutePage .giftCard:hover{transform:none!important}
 .giftsRoutePage .giftVisual img,.giftsRoutePage .giftCard:hover .giftVisual img{animation:none!important;transform:none!important}
 
-/* Seasonal Picks remains the calm motion page. */
-.fruitsRoutePage .catalogGrid .productImgBtn{position:relative;overflow:hidden}
-.fruitsRoutePage .catalogGrid .productImgBtn img{animation:seasonalFruitFloat 5.25s ease-in-out infinite!important;transform-origin:center bottom}
-.fruitsRoutePage .catalogGrid .productCard:nth-child(2n) .productImgBtn img{animation-duration:5.9s!important}
-.fruitsRoutePage .catalogGrid .productCard:nth-child(3n) .productImgBtn img{animation-duration:4.7s!important}
-
-/* Weekly Pick: image opens detail, small button selects. */
-.weeklyFruit.weeklyChoice{position:relative}
-.weeklyFruitView{width:100%!important;height:190px!important;border:0!important;border-radius:14px!important;position:relative!important;overflow:hidden!important;padding:0!important;display:grid!important;place-items:center!important}
-.weeklyFruitView img{width:100%!important;height:100%!important;object-fit:contain!important;padding:18px!important;animation:weeklyFruitDance 4.8s ease-in-out infinite!important;transform-origin:center bottom}
-.weeklyChoiceToggle{width:auto!important;height:30px!important;min-height:0!important;position:absolute!important;right:18px!important;top:18px!important;z-index:7!important;padding:0 9px!important;border-radius:999px!important;border:1px solid rgba(24,60,50,.16)!important;background:rgba(255,255,255,.92)!important;display:flex!important;align-items:center!important;justify-content:center!important;gap:5px!important;box-shadow:0 5px 13px rgba(24,60,50,.08)!important}
-.weeklyChoiceMark{position:static!important;width:18px!important;height:18px!important;font-size:10px!important;border:0!important;background:transparent!important;box-shadow:none!important}
-.weeklyChoiceLabel{font-size:8px;font-weight:800}
-.weeklyChoice.selected .weeklyChoiceToggle{background:#d88068!important;color:#fff!important;border-color:#d88068!important}
-.weeklyChoice.selected .weeklyChoiceMark{background:transparent!important;color:#fff!important}
-
-/* Fruit Curation: image opens detail; + button controls the selected set. */
-.curationRoutePage .pickFruit{display:grid!important;grid-template-rows:118px auto!important;gap:9px!important;padding:10px!important;position:relative!important;overflow:hidden!important}
-.curationRoutePage .pickFruit::after{display:none!important}
-.curationRoutePage .pickFruitVisual{height:118px;border:0;background:transparent;border-radius:13px;position:relative;z-index:1;display:grid;place-items:center;padding:0;overflow:hidden}
-.curationRoutePage .pickFruitVisual img{width:100%;height:118px;object-fit:contain;padding:12px;animation:seasonalFruitFloat 5.2s ease-in-out infinite;transform-origin:center bottom}
-.curationRoutePage .pickFruitMeta{display:block;padding-right:30px;position:relative;z-index:2}
-.curationRoutePage .pickFruitMeta b{font-family:var(--serif);font-size:16px}.curationRoutePage .pickFruitMeta small{display:block;margin-top:3px;color:#718079;font-size:10px}
-.curationRoutePage .pickFruitToggle{position:absolute;right:10px;top:10px;z-index:7;width:27px;height:27px;border-radius:50%;display:grid;place-items:center;border:1px solid rgba(24,60,50,.28);background:rgba(255,255,255,.92);font-size:15px;font-weight:800;padding:0}
-.curationRoutePage .pickFruit.selected .pickFruitToggle{background:#d88068;color:#fff;border-color:#d88068}
-
-/* Smile is intentionally short and obvious without turning the fruit into a permanent cartoon. */
-.productImgBtn,.weeklyFruitView,.pickFruitVisual,.weeklyMiniFruits button{position:relative}
-.fruitSmileFx{pointer-events:none;position:absolute;left:50%;top:49%;width:94px;height:62px;transform:translate(-50%,-60%);z-index:20;animation:fruitFacePop 1s ease forwards;filter:drop-shadow(0 2px 2px rgba(255,255,255,.65))}
-.fruitSmileFx .eye{position:absolute;top:15px;width:9px;height:13px;border-radius:50%;background:#183c32}
-.fruitSmileFx .eye.left{left:25px}.fruitSmileFx .eye.right{right:25px}
-.fruitSmileFx .cheek{position:absolute;top:32px;width:13px;height:7px;border-radius:50%;background:rgba(235,135,125,.66)}
-.fruitSmileFx .cheek.left{left:14px}.fruitSmileFx .cheek.right{right:14px}
-.fruitSmileFx .mouth{position:absolute;left:50%;bottom:10px;width:32px;height:17px;border:4px solid #183c32;border-top:0;border-left-color:transparent;border-right-color:transparent;border-bottom-left-radius:28px;border-bottom-right-radius:28px;transform:translateX(-50%)}
-.smilePulse img{animation:seasonalSmileBounce .75s ease!important}
-
-@media(max-width:760px){
- .weeklyFruitView{height:145px!important}
- .weeklyChoiceToggle{right:13px!important;top:13px!important;height:28px!important}
- .weeklyChoiceLabel{display:none}
- .curationRoutePage .pickFruit{grid-template-rows:90px auto!important}
- .curationRoutePage .pickFruitVisual,.curationRoutePage .pickFruitVisual img{height:90px}
- .fruitSmileFx{width:72px;height:48px}
- .fruitSmileFx .eye{top:11px;width:8px;height:11px}.fruitSmileFx .eye.left{left:19px}.fruitSmileFx .eye.right{right:19px}
- .fruitSmileFx .cheek{top:25px;width:10px;height:6px}.fruitSmileFx .cheek.left{left:10px}.fruitSmileFx .cheek.right{right:10px}
- .fruitSmileFx .mouth{width:25px;height:13px;border-width:3px;bottom:8px}
-}
-
-
-/* V61.17 — interaction repair: seasonal motion, reliable detail, weekly scale, gift restore */
-/* Seasonal Picks: visible but premium motion. */
-.fruitsRoutePage .catalogGrid .productImgBtn{overflow:visible!important}
-.fruitsRoutePage .catalogGrid .productImgBtn img{
-  width:82%!important;
-  height:82%!important;
-  padding:0!important;
-  object-fit:contain!important;
-  transform-origin:center bottom!important;
-  animation:seasonalFruitAlive 3.9s ease-in-out infinite!important;
-  will-change:transform;
-}
-.fruitsRoutePage .catalogGrid .productCard:nth-child(2n) .productImgBtn img{animation-duration:4.5s!important;animation-delay:.35s!important}
-.fruitsRoutePage .catalogGrid .productCard:nth-child(3n) .productImgBtn img{animation-duration:3.6s!important;animation-delay:.7s!important}
-@keyframes seasonalFruitAlive{
-  0%,100%{transform:translateY(0) rotate(0deg) scale(1)}
-  25%{transform:translateY(-7px) rotate(-.8deg) scale(1.015)}
-  52%{transform:translateY(-14px) rotate(1deg) scale(1.035)}
-  76%{transform:translateY(-5px) rotate(-.5deg) scale(1.012)}
-}
-.fruitsRoutePage .catalogGrid .productImgBtn:hover img{animation-play-state:paused!important;transform:translateY(-8px) scale(1.035)!important}
-
-/* Weekly Pick: restore generous whitespace; fruit must not fill the card. */
-.weeklyFruitView{
-  height:190px!important;
-  padding:18px!important;
-  overflow:hidden!important;
-}
-.weeklyFruitView img{
-  width:72%!important;
-  height:72%!important;
-  max-width:150px!important;
-  max-height:132px!important;
-  padding:0!important;
-  object-fit:contain!important;
-  animation:weeklyFruitDance 4.8s ease-in-out infinite!important;
-  transform-origin:center bottom!important;
-}
-.weeklyFruit.weeklyChoice:nth-child(2n) .weeklyFruitView img{animation-delay:.35s!important}
-.weeklyFruit.weeklyChoice:nth-child(3n) .weeklyFruitView img{animation-delay:.8s!important}
-
-/* Curation: keep lively motion, but retain small fruit scale and reliable image click target. */
-.curationRoutePage .pickFruitVisual{overflow:visible!important}
-.curationRoutePage .pickFruitVisual img{
-  width:78%!important;
-  height:78%!important;
-  max-width:120px!important;
-  max-height:96px!important;
-  padding:0!important;
-  object-fit:contain!important;
-  animation:seasonalFruitAlive 4.6s ease-in-out infinite!important;
-}
-
-/* Gift Selection: no motion, no hover lift, and restore safe uncropped card proportions. */
-.giftsRoutePage .giftCard,
-.giftsRoutePage .giftCard:hover{
-  transform:none!important;
-  transition:box-shadow .18s ease!important;
-  min-height:0!important;
-  grid-template-rows:auto auto!important;
-  overflow:visible!important;
-}
-.giftsRoutePage .giftVisual{
-  height:auto!important;
-  aspect-ratio:16/10!important;
-  overflow:hidden!important;
-  padding:10px!important;
-  background:#e2e7de!important;
-}
-.giftsRoutePage .giftVisual img,
-.giftsRoutePage .giftCard:hover .giftVisual img{
-  width:100%!important;
-  height:100%!important;
-  max-width:100%!important;
-  max-height:100%!important;
-  padding:0!important;
-  object-fit:contain!important;
-  object-position:center!important;
-  animation:none!important;
-  transform:none!important;
-}
-
-/* Smile face must render above the image without altering layout. */
-.productImgBtn,.weeklyFruitView,.pickFruitVisual{isolation:isolate;position:relative!important}
-.fruitSmileFx{z-index:40!important}
-
-@media(max-width:760px){
-  .fruitsRoutePage .catalogGrid .productImgBtn img{width:78%!important;height:78%!important}
-  .weeklyFruitView{height:145px!important;padding:14px!important}
-  .weeklyFruitView img{width:68%!important;height:68%!important;max-width:110px!important;max-height:92px!important}
-  .giftsRoutePage .giftVisual{aspect-ratio:16/10!important;padding:8px!important}
-}
-
-@media(prefers-reduced-motion:reduce){
-  .fruitsRoutePage .catalogGrid .productImgBtn img,
-  .weeklyFruitView img,
-  .curationRoutePage .pickFruitVisual img{animation:none!important}
-}
+@media(max-width:760px){.routeHeroTheme{padding:22px 18px 24px;border-radius:24px}.weeklyFruitImage{height:145px!important}.weeklyChoiceToggle{right:13px!important;top:13px!important;height:28px!important;min-width:48px!important;padding:0 7px!important}.fruitSmileFx{width:66px;height:44px}}
+@media(prefers-reduced-motion:reduce){.fruitsRoutePage .catalogGrid .productImgBtn img{animation:seasonalAliveV18 4.8s ease-in-out infinite!important}.weeklyFruitImage img{animation:weeklyFruitDance 5.2s ease-in-out infinite!important}.curationRoutePage .pickFruitImage img{animation:curationAliveV18 5.4s ease-in-out infinite!important}.fruitSmilePlay img{animation:fruitHappyBounceV18 .86s ease!important}.fruitSmileFx{animation:fruitFaceV18 1.08s ease forwards!important}}
