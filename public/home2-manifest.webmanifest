@@ -1,0 +1,32 @@
+{
+  "id": "/home2",
+  "name": "이룸 fresh fruits",
+  "short_name": "이룸",
+  "description": "이룸 fresh fruits 모바일 쇼핑",
+  "start_url": "/home2",
+  "scope": "/home2",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#f6f3ea",
+  "theme_color": "#183c32",
+  "icons": [
+    {
+      "src": "/iroom_assets/home2-pwa/iroom-home2-icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/iroom_assets/home2-pwa/iroom-home2-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/iroom_assets/home2-pwa/iroom-home2-icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

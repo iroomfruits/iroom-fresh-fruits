@@ -1,6 +1,6 @@
 /* IROOM Fresh Fruits — V61.01.0 world-fruit cache refresh service worker.
    OAuth/navigation HTML is always network-first and old caches are removed on activation. */
-const VERSION = 'iroom-v61-24-home2-visual-admin-all-products';
+const VERSION = 'iroom-v61-25-home2-pwa-logo';
 const STATIC_CACHE = `${VERSION}-static`;
 
 self.addEventListener('install', event => {
