@@ -920,3 +920,20 @@ body[data-theme-route="story"] .navItem[data-route="story"]{background:#eaf1e7;b
 .weeklyModalFruit small{
   line-height:1.45;
 }
+
+
+/* V61.22 — exact Weekly Pick unit prices + weekly-only detail pricing */
+.weeklyDetailPrice{color:#b45f46}
+.weeklyDetailNotice{
+  margin:10px 0 16px;
+  padding:12px 14px;
+  border-radius:14px;
+  background:#fff4df;
+  border:1px solid rgba(180,95,70,.14);
+  color:#6b554c;
+  font-size:10px;
+  line-height:1.7;
+}
+.weeklyDetailNotice b{color:#b45f46}
+.weeklyDetailActions button:first-child{background:#fffefa}
+.weeklyItemPrice{color:#b45f46}
