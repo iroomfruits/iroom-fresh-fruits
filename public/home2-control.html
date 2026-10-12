@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>이룸홈2 화면 편집 · 설정</title>
+<title>이룸홈2 전체 상품 화면 편집 · 설정</title>
 <style>
 :root{--ink:#183c32;--muted:#6b746e;--line:#d9e1d8;--paper:#f3f5ef;--white:#fffefa}
 *{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:Arial,"Pretendard","Noto Sans KR",sans-serif}button,input,select{font:inherit}button{cursor:pointer}[hidden]{display:none!important}
@@ -26,20 +26,33 @@
 @media(max-width:980px){.editorLayout{grid-template-columns:1fr}.editorInspector{border-left:0;border-top:1px solid var(--line)}.editorCards{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:680px){.editorCanvas{padding:12px}.editorCards,.editorCards.gifts{grid-template-columns:repeat(2,1fr)}.editorProductImage{height:120px}.editorProductImage img{width:68%;height:68%}.visualEditorHead{padding:16px}.editorTabs{margin-left:0;width:100%}.editorTab{flex:1}.editorForm .two{grid-template-columns:1fr}}
 
+
+/* V61.24 visual admin — all products + add product */
+.editorAddBtn{margin-left:auto}.visualEditorHead .editorTabs{margin-left:0;width:100%;order:3}.editorTab{flex:0 0 auto}
+.editorProduct .seasonBadge{display:inline-flex;margin:4px 3px 0;padding:3px 6px;border-radius:999px;background:#eef2ea;color:#657269;font-size:8px;font-weight:800}
+.editorProduct .customBadge{position:absolute;left:15px;top:15px;background:#fff2d9;border:1px solid #ead8b2;padding:5px 7px;border-radius:999px;font-size:8px;font-weight:900}
+.editorCreateTitle{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:12px}.editorCreateTitle h3{margin:0}.editorCreateTitle button{border:1px solid var(--line);background:#fff;border-radius:9px;padding:7px 9px}
+.editorChecks{display:grid;grid-template-columns:1fr 1fr;gap:7px}.editorChecks label{display:flex!important;grid-template-columns:auto 1fr!important;align-items:center;gap:7px!important;border:1px solid var(--line);border-radius:10px;padding:8px;background:#fff}.editorChecks input{width:16px!important;height:16px!important;margin:0}
+.editorForm select{width:100%;border:1px solid var(--line);border-radius:10px;padding:10px;background:#fff}
+.editorDanger{border-color:#e4c7bf!important;color:#9a4938!important}.editorSaveNew{width:100%;padding:11px!important;background:var(--ink)!important;color:#fff!important;border-color:var(--ink)!important}
+.editorCanvasHint{margin:0 2px 12px;padding:9px 11px;border-radius:11px;background:rgba(255,255,255,.66);font-size:10px;color:#67736c}
+@media(max-width:680px){.editorAddBtn{margin-left:0}.editorChecks{grid-template-columns:1fr}}
+
 </style>
 </head>
 <body>
 <div class="login" id="loginGate">
  <div class="loginbox"><h2>관리자 로그인</h2><div class="small">이룸홈2 화면과 운영 설정은 관리자만 변경할 수 있습니다.</div><input id="pw" type="password" placeholder="관리자 비밀번호"><button class="btn primary" id="loginBtn">관리자 설정 열기</button><div class="small" id="loginMsg" style="margin-top:8px"></div></div>
 </div>
-<header class="top"><h1>이룸홈2 화면 편집 · 설정</h1><span id="status" class="small">불러오는 중</span><div class="spacer"></div><button class="btn" onclick="window.open('/home2','_blank')">홈2 미리보기</button><button class="btn" onclick="location.href='/band-admin.html'">전체 관리자</button><button class="btn primary" id="saveBtn">저장</button></header>
+<header class="top"><h1>이룸홈2 전체 상품 화면 편집 · 설정</h1><span id="status" class="small">불러오는 중</span><div class="spacer"></div><button class="btn" onclick="window.open('/home2','_blank')">홈2 미리보기</button><button class="btn" onclick="location.href='/band-admin.html'">전체 관리자</button><button class="btn primary" id="saveBtn">저장</button></header>
 <main class="wrap">
- <section class="intro"><h2>화면을 보면서 바로 편집하세요</h2><p>아래 미리보기에서 과일 카드를 누르면 오른쪽에서 이미지와 Weekly Pick 가격을 바로 바꿀 수 있습니다. 변경 내용은 이룸홈2 화면에 저장되며, 일반 상품의 재고·박스 판매가는 기존 전체 관리자에서 계속 관리합니다.</p></section>
+ <section class="intro"><h2>화면을 보면서 바로 편집하세요</h2><p>아래 편집기에서 제철·해외·맞춤·Weekly Pick·선물세트 상품을 전체 확인할 수 있습니다. 카드 클릭으로 수정하고, ＋ 상품 추가로 새 상품을 원하는 영역에 바로 등록할 수 있습니다.</p></section>
 
  <section class="visualEditor" id="visualEditor">
   <div class="visualEditorHead">
-   <div><h2>상품 화면 편집</h2><p>실제 Home2 카드와 비슷한 화면을 보면서 클릭해 편집합니다. <b>Weekly Pick</b>에서는 이미지·판매단위·가격을 함께 수정할 수 있습니다.</p></div>
-   <div class="editorTabs"><button class="editorTab active" data-editor-tab="weekly">Weekly Pick</button><button class="editorTab" data-editor-tab="seasonal">제철 과일</button><button class="editorTab" data-editor-tab="gifts">선물세트</button></div>
+   <div><h2>상품 화면 편집</h2><p>등록된 과일을 빠짐없이 보면서 이미지·가격을 수정하고, 필요한 상품은 이 화면에서 바로 추가할 수 있습니다.</p></div>
+   <button class="btn primary editorAddBtn" type="button" data-add-product>＋ 상품 추가</button>
+   <div class="editorTabs"><button class="editorTab active" data-editor-tab="weekly">Weekly Pick</button><button class="editorTab" data-editor-tab="seasonal">제철 과일 전체</button><button class="editorTab" data-editor-tab="world">해외 과일</button><button class="editorTab" data-editor-tab="curation">맞춤 과일</button><button class="editorTab" data-editor-tab="gifts">선물세트</button></div>
   </div>
   <div class="editorLayout">
    <div class="editorCanvas">
@@ -105,7 +118,7 @@
 </main>
 <script>
 const ASSETS=[{"id": "world-cherry", "name": "체리", "src": "/assets/home2-v102/world-cherry.png"}, {"id": "world-orange", "name": "오렌지", "src": "/assets/home2-v102/world-orange.png"}, {"id": "world-mango", "name": "망고", "src": "/assets/home2-v102/world-mango.png"}, {"id": "world-grapefruit", "name": "자몽", "src": "/assets/home2-v102/world-grapefruit.png"}, {"id": "world-banana", "name": "바나나", "src": "/assets/home2-v102/world-banana.png"}, {"id": "world-pineapple", "name": "파인애플", "src": "/assets/home2-v102/world-pineapple.png"}, {"id": "world-avocado", "name": "아보카도", "src": "/assets/home2-v102/world-avocado.png"}, {"id": "world-blueberry", "name": "블루베리", "src": "/assets/home2-v102/world-blueberry.png"}, {"id": "world-lemon", "name": "레몬", "src": "/assets/home2-v102/world-lemon.png"}, {"id": "world-kiwi", "name": "그린키위", "src": "/assets/home2-v102/world-kiwi.png"}, {"id": "world-dragonfruit", "name": "용과", "src": "/assets/home2-v102/world-dragonfruit.png"}, {"id": "world-green-grape", "name": "청포도", "src": "/assets/home2-v102/world-green-grape.png"}, {"id": "world-red-grape", "name": "적포도", "src": "/assets/home2-v102/world-red-grape.png"}, {"id": "world-papaya", "name": "파파야", "src": "/assets/home2-v102/world-papaya.png"}, {"id": "world-coconut", "name": "코코넛", "src": "/assets/home2-v102/world-coconut.png"}, {"id": "world-lime", "name": "라임", "src": "/assets/home2-v102/world-lime.png"}, {"id": "world-pomegranate", "name": "석류", "src": "/assets/home2-v102/world-pomegranate.png"}, {"id": "world-passionfruit", "name": "패션프루트", "src": "/assets/home2-v102/world-passionfruit.png"}, {"id": "world-lychee", "name": "리치", "src": "/assets/home2-v102/world-lychee.png"}, {"id": "world-mangosteen", "name": "망고스틴", "src": "/assets/home2-v102/world-mangosteen.png"}, {"id": "world-pomelo", "name": "포멜로", "src": "/assets/home2-v102/world-pomelo.png"}, {"id": "world-fig", "name": "무화과", "src": "/assets/home2-v102/world-fig.png"}];
-const EDITOR_PRODUCTS=[{"id":"autumn-pear","name":"신고배","origin":"국내산","pack":"3kg (6~8과)","price":38000,"image":"/assets/home2-v91/autumn-pear.webp","season":"autumn"},{"id":"autumn-apple","name":"감홍 사과","origin":"국내산","pack":"2.5kg (8~10과)","price":32000,"image":"/assets/home2-v91/autumn-apple.webp","season":"autumn"},{"id":"autumn-sweet-persimmon","name":"단감","origin":"국내산","pack":"3kg","price":28000,"image":"/assets/home2-v91/autumn-sweet-persimmon.webp","season":"autumn"},{"id":"autumn-chestnut","name":"밤","origin":"국내산","pack":"1kg","price":42000,"image":"/assets/home2-v95/autumn-chestnut.webp","season":"autumn"},{"id":"autumn-jujube","name":"사과대추","origin":"국내산","pack":"1kg","price":24000,"image":"/assets/home2-v95/autumn-jujube.webp","season":"autumn"},{"id":"autumn-daebong","name":"대봉감","origin":"국내산","pack":"3kg (4~6과)","price":34000,"image":"/assets/home2-v95/autumn-daebong.webp","season":"autumn"},{"id":"autumn-easypple","name":"부사","origin":"국내산","pack":"1.2kg (12~16과)","price":36000,"image":"/assets/home2-v95/autumn-easypple.webp","season":"autumn"},{"id":"spring-strawberry","name":"딸기","origin":"국내산","pack":"500g","price":24000,"image":"/assets/home2-v91/spring-strawberry.webp","season":"spring"},{"id":"spring-chamoe","name":"참외","origin":"국내산","pack":"2kg","price":28000,"image":"/assets/home2-v91/spring-chamoe.webp","season":"spring"},{"id":"spring-shine","name":"샤인머스켓","origin":"국내산","pack":"2kg","price":46000,"image":"/assets/home2-v91/spring-shine.webp","season":"spring"},{"id":"spring-apricot","name":"살구","origin":"국내산","pack":"1kg","price":36000,"image":"/assets/home2-v95/spring-apricot.webp","season":"spring"},{"id":"spring-peach","name":"복숭아","origin":"국내산","pack":"2kg","price":34000,"image":"/assets/home2-v91/spring-peach.webp","season":"spring"},{"id":"summer-watermelon","name":"수박","origin":"국내산","pack":"6~8kg","price":32000,"image":"/assets/home2-v91/summer-watermelon.webp","season":"summer"},{"id":"summer-peach","name":"복숭아","origin":"국내산","pack":"2kg","price":34000,"image":"/assets/home2-v91/summer-peach.webp","season":"summer"},{"id":"summer-melon","name":"멜론","origin":"국내산","pack":"2수","price":42000,"image":"/assets/home2-v91/summer-melon.webp","season":"summer"},{"id":"summer-shine","name":"샤인머스켓","origin":"국내산","pack":"2kg","price":46000,"image":"/assets/home2-v91/summer-shine.webp","season":"summer"},{"id":"summer-plum","name":"자두","origin":"국내산","pack":"1.5kg","price":24000,"image":"/assets/home2-v95/summer-plum.webp","season":"summer"},{"id":"summer-nectarine","name":"천도복숭아","origin":"국내산","pack":"2kg","price":32000,"image":"/assets/home2-v95/summer-nectarine.webp","season":"summer"},{"id":"winter-strawberry","name":"딸기","origin":"국내산","pack":"500g","price":24000,"image":"/assets/home2-v91/winter-strawberry.webp","season":"winter"},{"id":"winter-hallabong","name":"한라봉","origin":"국내산","pack":"2kg","price":28000,"image":"/assets/home2-v95/winter-hallabong.webp","season":"winter"},{"id":"winter-redhyang","name":"레드향","origin":"국내산","pack":"2kg","price":46000,"image":"/assets/home2-v95/winter-redhyang.webp","season":"winter"},{"id":"winter-cheonhyehyang","name":"천혜향","origin":"국내산","pack":"2kg","price":42000,"image":"/assets/home2-v95/winter-cheonhyehyang.webp","season":"winter"},{"id":"winter-apple","name":"사과","origin":"국내산","pack":"1.5kg","price":36000,"image":"/assets/home2-v91/winter-apple.webp","season":"winter"},{"id":"winter-pear","name":"신고배","origin":"국내산","pack":"2kg","price":34000,"image":"/assets/home2-v91/winter-pear.webp","season":"winter"},{"id":"winter-kiwi","name":"키위","origin":"국내산","pack":"1kg","price":34000,"image":"/assets/home2-v95/winter-kiwi.webp","season":"winter"},{"id":"gift-premium","name":"프리미엄 제철 선물","origin":"이룸 셀렉트","pack":"샤인머스켓 · 신고배","price":76000,"image":"/assets/home2-v93/gift-premium.webp","season":"gift"},{"id":"gift-apple-pear","name":"사과·신고배 정성 선물","origin":"이룸 셀렉트","pack":"감홍 사과 · 신고배","price":62000,"image":"/assets/home2-v93/gift-apple-pear.webp","season":"gift"},{"id":"gift-corporate","name":"기업·단체 선물","origin":"이룸 비즈니스 셀렉트","pack":"샤인머스켓 · 신고배 · 한라봉","price":68000,"image":"/assets/home2-v93/gift-corporate.webp","season":"gift"},{"id":"gift-family","name":"가족 과일 선물","origin":"이룸 셀렉트","pack":"감홍 사과 · 샤인머스켓 · 신고배","price":54000,"image":"/assets/home2-v93/gift-family.webp","season":"gift"},{"id":"gift-select","name":"이룸 셀렉트 선물","origin":"이룸 프리미엄","pack":"샤인머스켓 · 감홍 사과 · 신고배 · 한라봉","price":89000,"image":"/assets/home2-v93/gift-select.webp","season":"gift"},{"id":"gift-thanks","name":"마음 담은 과일 선물","origin":"이룸 셀렉트","pack":"감홍 사과 · 신고배 · 샤인머스켓 · 한라봉","price":69000,"image":"/assets/home2-v93/gift-thanks.webp","season":"gift"},{"id":"world-cherry","name":"체리","origin":"원산지 입고별 안내","pack":"입고 규격별","price":0,"image":"/assets/home2-v102/world-cherry.png","season":"world"},{"id":"world-orange","name":"오렌지","origin":"원산지 입고별 안내","pack":"입고 규격별","price":0,"image":"/assets/home2-v102/world-orange.png","season":"world"},{"id":"world-mango","name":"망고","origin":"원산지 입고별 안내","pack":"입고 규격별","price":0,"image":"/assets/home2-v102/world-mango.png","season":"world"},{"id":"world-grapefruit","name":"자몽","origin":"원산지 입고별 안내","pack":"입고 규격별","price":0,"image":"/assets/home2-v102/world-grapefruit.png","season":"world"},{"id":"world-banana","name":"바나나","origin":"원산지 입고별 안내","pack":"입고 규격별","price":0,"image":"/assets/home2-v102/world-banana.png","season":"world"},{"id":"world-pineapple","name":"파인애플","origin":"원산지 입고별 안내","pack":"입고 규격별","price":0,"image":"/assets/home2-v102/world-pineapple.png","season":"world"},{"id":"world-avocado","name":"아보카도","origin":"원산지 입고별 안내","pack":"입고 규격별","price":0,"image":"/assets/home2-v102/world-avocado.png","season":"world"},{"id":"world-blueberry","name":"블루베리","origin":"원산지 입고별 안내","pack":"입고 규격별","price":0,"image":"/assets/home2-v102/world-blueberry.png","season":"world"},{"id":"world-lemon","name":"레몬","origin":"원산지 입고별 안내","pack":"입고 규격별","price":0,"image":"/assets/home2-v102/world-lemon.png","season":"world"},{"id":"world-kiwi","name":"그린키위","origin":"원산지 입고별 안내","pack":"입고 규격별","price":0,"image":"/assets/home2-v102/world-kiwi.png","season":"world"},{"id":"world-dragonfruit","name":"용과","origin":"원산지 입고별 안내","pack":"입고 규격별","price":0,"image":"/assets/home2-v102/world-dragonfruit.png","season":"world"},{"id":"world-green-grape","name":"청포도","origin":"원산지 입고별 안내","pack":"입고 규격별","price":0,"image":"/assets/home2-v102/world-green-grape.png","season":"world"},{"id":"world-red-grape","name":"적포도","origin":"원산지 입고별 안내","pack":"입고 규격별","price":0,"image":"/assets/home2-v102/world-red-grape.png","season":"world"},{"id":"world-papaya","name":"파파야","origin":"원산지 입고별 안내","pack":"입고 규격별","price":0,"image":"/assets/home2-v102/world-papaya.png","season":"world"},{"id":"world-coconut","name":"코코넛","origin":"원산지 입고별 안내","pack":"입고 규격별","price":0,"image":"/assets/home2-v102/world-coconut.png","season":"world"},{"id":"world-lime","name":"라임","origin":"원산지 입고별 안내","pack":"입고 규격별","price":0,"image":"/assets/home2-v102/world-lime.png","season":"world"},{"id":"world-pomegranate","name":"석류","origin":"원산지 입고별 안내","pack":"입고 규격별","price":0,"image":"/assets/home2-v102/world-pomegranate.png","season":"world"},{"id":"world-passionfruit","name":"패션프루트","origin":"원산지 입고별 안내","pack":"입고 규격별","price":0,"image":"/assets/home2-v102/world-passionfruit.png","season":"world"},{"id":"world-lychee","name":"리치","origin":"원산지 입고별 안내","pack":"입고 규격별","price":0,"image":"/assets/home2-v102/world-lychee.png","season":"world"},{"id":"world-mangosteen","name":"망고스틴","origin":"원산지 입고별 안내","pack":"입고 규격별","price":0,"image":"/assets/home2-v102/world-mangosteen.png","season":"world"},{"id":"world-pomelo","name":"포멜로","origin":"원산지 입고별 안내","pack":"입고 규격별","price":0,"image":"/assets/home2-v102/world-pomelo.png","season":"world"},{"id":"world-fig","name":"무화과","origin":"원산지 입고별 안내","pack":"입고 규격별","price":0,"image":"/assets/home2-v102/world-fig.png","season":"world"}];
+const EDITOR_PRODUCTS=[{"id":"autumn-shine","name":"샤인머스켓","origin":"국내산","pack":"2kg (3~4송이)","price":46000,"image":"/assets/home2-v91/autumn-shine.webp","season":"autumn"},{"id":"autumn-pear","name":"신고배","origin":"국내산","pack":"3kg (6~8과)","price":38000,"image":"/assets/home2-v91/autumn-pear.webp","season":"autumn"},{"id":"autumn-apple","name":"감홍 사과","origin":"국내산","pack":"2.5kg (8~10과)","price":32000,"image":"/assets/home2-v91/autumn-apple.webp","season":"autumn"},{"id":"autumn-sweet-persimmon","name":"단감","origin":"국내산","pack":"3kg","price":28000,"image":"/assets/home2-v91/autumn-sweet-persimmon.webp","season":"autumn"},{"id":"autumn-chestnut","name":"밤","origin":"국내산","pack":"1kg","price":42000,"image":"/assets/home2-v95/autumn-chestnut.webp","season":"autumn"},{"id":"autumn-jujube","name":"사과대추","origin":"국내산","pack":"1kg","price":24000,"image":"/assets/home2-v95/autumn-jujube.webp","season":"autumn"},{"id":"autumn-daebong","name":"대봉감","origin":"국내산","pack":"3kg (4~6과)","price":34000,"image":"/assets/home2-v95/autumn-daebong.webp","season":"autumn"},{"id":"autumn-easypple","name":"부사","origin":"국내산","pack":"1.2kg (12~16과)","price":36000,"image":"/assets/home2-v95/autumn-easypple.webp","season":"autumn"},{"id":"spring-strawberry","name":"딸기","origin":"국내산","pack":"500g","price":24000,"image":"/assets/home2-v91/spring-strawberry.webp","season":"spring"},{"id":"spring-chamoe","name":"참외","origin":"국내산","pack":"2kg","price":28000,"image":"/assets/home2-v91/spring-chamoe.webp","season":"spring"},{"id":"spring-shine","name":"샤인머스켓","origin":"국내산","pack":"2kg","price":46000,"image":"/assets/home2-v91/spring-shine.webp","season":"spring"},{"id":"spring-apricot","name":"살구","origin":"국내산","pack":"1kg","price":36000,"image":"/assets/home2-v95/spring-apricot.webp","season":"spring"},{"id":"spring-peach","name":"복숭아","origin":"국내산","pack":"2kg","price":34000,"image":"/assets/home2-v91/spring-peach.webp","season":"spring"},{"id":"summer-watermelon","name":"수박","origin":"국내산","pack":"6~8kg","price":32000,"image":"/assets/home2-v91/summer-watermelon.webp","season":"summer"},{"id":"summer-peach","name":"복숭아","origin":"국내산","pack":"2kg","price":34000,"image":"/assets/home2-v91/summer-peach.webp","season":"summer"},{"id":"summer-melon","name":"멜론","origin":"국내산","pack":"2수","price":42000,"image":"/assets/home2-v91/summer-melon.webp","season":"summer"},{"id":"summer-shine","name":"샤인머스켓","origin":"국내산","pack":"2kg","price":46000,"image":"/assets/home2-v91/summer-shine.webp","season":"summer"},{"id":"summer-plum","name":"자두","origin":"국내산","pack":"1.5kg","price":24000,"image":"/assets/home2-v95/summer-plum.webp","season":"summer"},{"id":"summer-nectarine","name":"천도복숭아","origin":"국내산","pack":"2kg","price":32000,"image":"/assets/home2-v95/summer-nectarine.webp","season":"summer"},{"id":"winter-strawberry","name":"딸기","origin":"국내산","pack":"500g","price":24000,"image":"/assets/home2-v91/winter-strawberry.webp","season":"winter"},{"id":"winter-hallabong","name":"한라봉","origin":"국내산","pack":"2kg","price":28000,"image":"/assets/home2-v95/winter-hallabong.webp","season":"winter"},{"id":"winter-redhyang","name":"레드향","origin":"국내산","pack":"2kg","price":46000,"image":"/assets/home2-v95/winter-redhyang.webp","season":"winter"},{"id":"winter-cheonhyehyang","name":"천혜향","origin":"국내산","pack":"2kg","price":42000,"image":"/assets/home2-v95/winter-cheonhyehyang.webp","season":"winter"},{"id":"winter-apple","name":"사과","origin":"국내산","pack":"1.5kg","price":36000,"image":"/assets/home2-v91/winter-apple.webp","season":"winter"},{"id":"winter-pear","name":"신고배","origin":"국내산","pack":"2kg","price":34000,"image":"/assets/home2-v91/winter-pear.webp","season":"winter"},{"id":"winter-kiwi","name":"키위","origin":"국내산","pack":"1kg","price":34000,"image":"/assets/home2-v95/winter-kiwi.webp","season":"winter"},{"id":"gift-premium","name":"프리미엄 제철 선물","origin":"이룸 셀렉트","pack":"샤인머스켓 · 신고배","price":76000,"image":"/assets/home2-v93/gift-premium.webp","season":"gift"},{"id":"gift-apple-pear","name":"사과·신고배 정성 선물","origin":"이룸 셀렉트","pack":"감홍 사과 · 신고배","price":62000,"image":"/assets/home2-v93/gift-apple-pear.webp","season":"gift"},{"id":"gift-corporate","name":"기업·단체 선물","origin":"이룸 비즈니스 셀렉트","pack":"샤인머스켓 · 신고배 · 한라봉","price":68000,"image":"/assets/home2-v93/gift-corporate.webp","season":"gift"},{"id":"gift-family","name":"가족 과일 선물","origin":"이룸 셀렉트","pack":"감홍 사과 · 샤인머스켓 · 신고배","price":54000,"image":"/assets/home2-v93/gift-family.webp","season":"gift"},{"id":"gift-select","name":"이룸 셀렉트 선물","origin":"이룸 프리미엄","pack":"샤인머스켓 · 감홍 사과 · 신고배 · 한라봉","price":89000,"image":"/assets/home2-v93/gift-select.webp","season":"gift"},{"id":"gift-thanks","name":"마음 담은 과일 선물","origin":"이룸 셀렉트","pack":"감홍 사과 · 신고배 · 샤인머스켓 · 한라봉","price":69000,"image":"/assets/home2-v93/gift-thanks.webp","season":"gift"},{"id":"world-cherry","name":"체리","origin":"원산지 입고별 안내","pack":"입고 규격별","price":0,"image":"/assets/home2-v102/world-cherry.png","season":"world"},{"id":"world-orange","name":"오렌지","origin":"원산지 입고별 안내","pack":"입고 규격별","price":0,"image":"/assets/home2-v102/world-orange.png","season":"world"},{"id":"world-mango","name":"망고","origin":"원산지 입고별 안내","pack":"입고 규격별","price":0,"image":"/assets/home2-v102/world-mango.png","season":"world"},{"id":"world-grapefruit","name":"자몽","origin":"원산지 입고별 안내","pack":"입고 규격별","price":0,"image":"/assets/home2-v102/world-grapefruit.png","season":"world"},{"id":"world-banana","name":"바나나","origin":"원산지 입고별 안내","pack":"입고 규격별","price":0,"image":"/assets/home2-v102/world-banana.png","season":"world"},{"id":"world-pineapple","name":"파인애플","origin":"원산지 입고별 안내","pack":"입고 규격별","price":0,"image":"/assets/home2-v102/world-pineapple.png","season":"world"},{"id":"world-avocado","name":"아보카도","origin":"원산지 입고별 안내","pack":"입고 규격별","price":0,"image":"/assets/home2-v102/world-avocado.png","season":"world"},{"id":"world-blueberry","name":"블루베리","origin":"원산지 입고별 안내","pack":"입고 규격별","price":0,"image":"/assets/home2-v102/world-blueberry.png","season":"world"},{"id":"world-lemon","name":"레몬","origin":"원산지 입고별 안내","pack":"입고 규격별","price":0,"image":"/assets/home2-v102/world-lemon.png","season":"world"},{"id":"world-kiwi","name":"그린키위","origin":"원산지 입고별 안내","pack":"입고 규격별","price":0,"image":"/assets/home2-v102/world-kiwi.png","season":"world"},{"id":"world-dragonfruit","name":"용과","origin":"원산지 입고별 안내","pack":"입고 규격별","price":0,"image":"/assets/home2-v102/world-dragonfruit.png","season":"world"},{"id":"world-green-grape","name":"청포도","origin":"원산지 입고별 안내","pack":"입고 규격별","price":0,"image":"/assets/home2-v102/world-green-grape.png","season":"world"},{"id":"world-red-grape","name":"적포도","origin":"원산지 입고별 안내","pack":"입고 규격별","price":0,"image":"/assets/home2-v102/world-red-grape.png","season":"world"},{"id":"world-papaya","name":"파파야","origin":"원산지 입고별 안내","pack":"입고 규격별","price":0,"image":"/assets/home2-v102/world-papaya.png","season":"world"},{"id":"world-coconut","name":"코코넛","origin":"원산지 입고별 안내","pack":"입고 규격별","price":0,"image":"/assets/home2-v102/world-coconut.png","season":"world"},{"id":"world-lime","name":"라임","origin":"원산지 입고별 안내","pack":"입고 규격별","price":0,"image":"/assets/home2-v102/world-lime.png","season":"world"},{"id":"world-pomegranate","name":"석류","origin":"원산지 입고별 안내","pack":"입고 규격별","price":0,"image":"/assets/home2-v102/world-pomegranate.png","season":"world"},{"id":"world-passionfruit","name":"패션프루트","origin":"원산지 입고별 안내","pack":"입고 규격별","price":0,"image":"/assets/home2-v102/world-passionfruit.png","season":"world"},{"id":"world-lychee","name":"리치","origin":"원산지 입고별 안내","pack":"입고 규격별","price":0,"image":"/assets/home2-v102/world-lychee.png","season":"world"},{"id":"world-mangosteen","name":"망고스틴","origin":"원산지 입고별 안내","pack":"입고 규격별","price":0,"image":"/assets/home2-v102/world-mangosteen.png","season":"world"},{"id":"world-pomelo","name":"포멜로","origin":"원산지 입고별 안내","pack":"입고 규격별","price":0,"image":"/assets/home2-v102/world-pomelo.png","season":"world"},{"id":"world-fig","name":"무화과","origin":"원산지 입고별 안내","pack":"입고 규격별","price":0,"image":"/assets/home2-v102/world-fig.png","season":"world"}];
 const EDITOR_UNIT_DEFAULTS={"autumn-shine":{"unit":"1송이","price":15000},"autumn-pear":{"unit":"1개","price":5500},"autumn-apple":{"unit":"1개","price":3500},"autumn-sweet-persimmon":{"unit":"1개","price":2800},"autumn-chestnut":{"unit":"100g","price":4200},"autumn-jujube":{"unit":"200g","price":4900},"autumn-daebong":{"unit":"1개","price":6500},"autumn-easypple":{"unit":"1개","price":2500},"spring-strawberry":{"unit":"250g","price":12000},"spring-chamoe":{"unit":"1개","price":3500},"spring-shine":{"unit":"1송이","price":15000},"spring-apricot":{"unit":"200g","price":7200},"spring-peach":{"unit":"1개","price":4500},"summer-watermelon":{"unit":"1통","price":32000},"summer-peach":{"unit":"1개","price":4500},"summer-melon":{"unit":"1통","price":21000},"summer-shine":{"unit":"1송이","price":15000},"summer-plum":{"unit":"300g","price":4800},"summer-nectarine":{"unit":"1개","price":4000},"winter-strawberry":{"unit":"250g","price":12000},"winter-hallabong":{"unit":"1개","price":3500},"winter-redhyang":{"unit":"1개","price":5500},"winter-cheonhyehyang":{"unit":"1개","price":5000},"winter-apple":{"unit":"1개","price":3500},"winter-pear":{"unit":"1개","price":5500},"winter-kiwi":{"unit":"1개","price":2500},"world-cherry":{"unit":"200g","price":7900},"world-orange":{"unit":"1개","price":2500},"world-mango":{"unit":"1개","price":5900},"world-grapefruit":{"unit":"1개","price":2900},"world-banana":{"unit":"1송이","price":3900},"world-pineapple":{"unit":"1통","price":6900},"world-avocado":{"unit":"1개","price":2500},"world-blueberry":{"unit":"1팩","price":4900},"world-lemon":{"unit":"1개","price":1500},"world-kiwi":{"unit":"1개","price":1800},"world-dragonfruit":{"unit":"1개","price":4900},"world-green-grape":{"unit":"1팩","price":6900},"world-red-grape":{"unit":"1팩","price":6900},"world-papaya":{"unit":"1개","price":5900},"world-coconut":{"unit":"1통","price":4900},"world-lime":{"unit":"1개","price":1200},"world-pomegranate":{"unit":"1개","price":3900},"world-passionfruit":{"unit":"1개","price":1800},"world-lychee":{"unit":"1팩","price":5900},"world-mangosteen":{"unit":"1팩","price":7900},"world-pomelo":{"unit":"1통","price":6900},"world-fig":{"unit":"1팩","price":6900}};
 
 const DEFAULTS={
@@ -116,42 +129,132 @@ const DEFAULTS={
  weeklyMiniEnabled:true,weeklyMiniName:'MINI',weeklyMiniLabel:'혼자 가볍게',weeklyMiniPrice:19900,weeklyMiniComposition:'원하는 과일 자유 선택',
  weeklyRegularEnabled:true,weeklyRegularName:'REGULAR',weeklyRegularLabel:'둘이 골고루',weeklyRegularPrice:29900,weeklyRegularComposition:'원하는 과일 자유 선택',
  weeklyFamilyEnabled:true,weeklyFamilyName:'FAMILY',weeklyFamilyLabel:'가족과 넉넉하게',weeklyFamilyPrice:39900,weeklyFamilyComposition:'원하는 과일 자유 선택',
- weeklyUnitPrices:{},productImageOverrides:{}
+ weeklyUnitPrices:{},productImageOverrides:{},customProducts:[]
 };
 let rawConfig={},ux={...DEFAULTS};
 const $=s=>document.querySelector(s);
-let editorTab='weekly',editorSelected='';
+let editorTab='weekly',editorSelected='',editorCreateMode=false;
+const dbDirtyCustomIds=new Set();
 const currentSeason=(()=>{const m=(new Date()).getMonth()+1;return m>=3&&m<=5?'spring':m>=6&&m<=8?'summer':m>=9&&m<=11?'autumn':'winter'})();
-function ensureEditorMaps(){if(!ux.weeklyUnitPrices||typeof ux.weeklyUnitPrices!=='object'||Array.isArray(ux.weeklyUnitPrices))ux.weeklyUnitPrices={};if(!ux.productImageOverrides||typeof ux.productImageOverrides!=='object'||Array.isArray(ux.productImageOverrides))ux.productImageOverrides={}}
-function editorRows(){
- if(editorTab==='gifts')return EDITOR_PRODUCTS.filter(p=>p.season==='gift');
- if(editorTab==='seasonal')return EDITOR_PRODUCTS.filter(p=>p.season===currentSeason);
- const seasonal=EDITOR_PRODUCTS.filter(p=>p.season===currentSeason),world=EDITOR_PRODUCTS.filter(p=>p.season==='world').slice(0,8);
- return [...seasonal,...world];
+const seasonLabel={spring:'봄',summer:'여름',autumn:'가을',winter:'겨울',world:'해외',gift:'선물'};
+function ensureEditorMaps(){
+ if(!ux.weeklyUnitPrices||typeof ux.weeklyUnitPrices!=='object'||Array.isArray(ux.weeklyUnitPrices))ux.weeklyUnitPrices={};
+ if(!ux.productImageOverrides||typeof ux.productImageOverrides!=='object'||Array.isArray(ux.productImageOverrides))ux.productImageOverrides={};
+ if(!Array.isArray(ux.customProducts))ux.customProducts=[];
 }
+function customEditorRows(){ensureEditorMaps();return ux.customProducts.filter(p=>p&&p.id&&p.active!==false).map(p=>({...p,custom:true,image:p.image||''}))}
+function allEditorProducts(){return [...EDITOR_PRODUCTS,...customEditorRows()]}
+function placementsOf(p){return p?.placements&&typeof p.placements==='object'?p.placements:{}}
+function editorRows(){
+ const rows=allEditorProducts();
+ if(editorTab==='gifts')return rows.filter(p=>p.season==='gift'||placementsOf(p).gifts);
+ if(editorTab==='world')return rows.filter(p=>p.season==='world'||placementsOf(p).world);
+ if(editorTab==='seasonal')return rows.filter(p=>['spring','summer','autumn','winter'].includes(p.season)||placementsOf(p).seasonal);
+ if(editorTab==='curation')return rows.filter(p=>['spring','summer','autumn','winter'].includes(p.season)||placementsOf(p).curation);
+ return rows.filter(p=>p.season!=='gift'&&!placementsOf(p).gifts);
+}
+function findEditorProduct(id){return allEditorProducts().find(x=>x.id===id)}
 function editorDefaultUnit(id){return EDITOR_UNIT_DEFAULTS[id]||{unit:'1개',price:0}}
 function editorUnit(id){ensureEditorMaps();const s=ux.weeklyUnitPrices[id],d=editorDefaultUnit(id);return s&&s.unit&&Number(s.price)>0?{unit:String(s.unit),price:Number(s.price)}:{...d}}
 function editorImage(p){ensureEditorMaps();return String(ux.productImageOverrides[p.id]||p.image||'')}
 function won(n){return (Number(n)||0).toLocaleString('ko-KR')+'원'}
-function editorMeta(p){if(editorTab==='weekly'){const u=editorUnit(p.id);return `${u.unit} ${won(u.price)}`}return p.price?`${p.pack} · ${won(p.price)}`:p.pack}
+function editorMeta(p){if(editorTab==='weekly'){const u=editorUnit(p.id);return `${u.unit} ${won(u.price)}`}return Number(p.price)>0?`${p.pack||''} · ${won(p.price)}`:(p.pack||'가격 문의')}
+function tabTitle(){return {weekly:['PICK YOUR FAVORITES','Weekly Pick 전체 과일'],seasonal:['SEASONAL PICKS','제철 과일 전체'],world:['WORLD FRUIT SELECT','해외 과일 전체'],curation:['FRUIT CURATION','맞춤 과일 전체'],gifts:['GIFT SELECTION','선물세트 전체']}[editorTab]}
 function renderVisualEditor(){
- ensureEditorMaps();const rows=editorRows();if(!rows.length)return;
- if(!editorSelected||!rows.some(p=>p.id===editorSelected))editorSelected=rows[0].id;
+ ensureEditorMaps();const rows=editorRows();
  document.querySelectorAll('[data-editor-tab]').forEach(b=>b.classList.toggle('active',b.dataset.editorTab===editorTab));
- const titles={weekly:['PICK YOUR FAVORITES','이번 주 선택 가능 과일'],seasonal:['SEASONAL PICKS','제철 과일'],gifts:['GIFT SELECTION','선물세트']};
- $('#editorEyebrow').textContent=titles[editorTab][0];$('#editorTitle').textContent=titles[editorTab][1];$('#editorCount').textContent=rows.length+'개 표시';
+ const titles=tabTitle();$('#editorEyebrow').textContent=titles[0];$('#editorTitle').textContent=titles[1];$('#editorCount').textContent=rows.length+'개 전체 표시';
  const cards=$('#editorCards');cards.className='editorCards'+(editorTab==='gifts'?' gifts':'');
- cards.innerHTML=rows.map(p=>`<button type="button" class="editorProduct ${p.id===editorSelected?'active':''}" data-editor-product="${p.id}"><span class="editBadge">편집</span><span class="editorProductImage"><img src="${editorImage(p)}" alt=""></span><b>${p.name}</b><strong>${editorMeta(p)}</strong><small>${p.origin}</small></button>`).join('');
+ cards.innerHTML=rows.map(p=>`<button type="button" class="editorProduct ${p.id===editorSelected&&!editorCreateMode?'active':''}" data-editor-product="${p.id}">${p.custom?'<span class="customBadge">추가상품</span>':''}<span class="editBadge">편집</span><span class="editorProductImage"><img src="${editorImage(p)}" alt=""></span><b>${p.name}</b><strong>${editorMeta(p)}</strong><small>${p.origin||''}</small><span class="seasonBadge">${seasonLabel[p.season]||'직접추가'}</span></button>`).join('');
+ if(editorCreateMode){renderCreateInspector();return}
+ if(!editorSelected||!rows.some(p=>p.id===editorSelected))editorSelected=rows[0]?.id||'';
  renderInspector();
 }
+function placementCheckboxes(values={}){
+ return `<div class="editorChecks">
+ <label><input type="checkbox" id="placeSeasonal" ${values.seasonal?'checked':''}><span>제철 과일</span></label>
+ <label><input type="checkbox" id="placeWeekly" ${values.weekly?'checked':''}><span>Weekly Pick</span></label>
+ <label><input type="checkbox" id="placeWorld" ${values.world?'checked':''}><span>해외 과일</span></label>
+ <label><input type="checkbox" id="placeCuration" ${values.curation?'checked':''}><span>맞춤 과일</span></label>
+ <label><input type="checkbox" id="placeGifts" ${values.gifts?'checked':''}><span>선물세트</span></label>
+ </div>`;
+}
+function defaultPlacements(){return {seasonal:editorTab==='seasonal',weekly:editorTab==='weekly',world:editorTab==='world',curation:editorTab==='curation',gifts:editorTab==='gifts'}}
+function renderCreateInspector(){
+ const p=defaultPlacements();
+ $('#editorInspector').innerHTML=`<div class="editorCreateTitle"><h3>새 상품 추가</h3><button type="button" data-cancel-add>취소</button></div><div class="editorForm">
+ <label>상품명<input id="newName" placeholder="예: 황금향"></label>
+ <div class="two"><label>계절<select id="newSeason"><option value="spring">봄</option><option value="summer">여름</option><option value="autumn" ${currentSeason==='autumn'?'selected':''}>가을</option><option value="winter" ${currentSeason==='winter'?'selected':''}>겨울</option></select></label><label>원산지<input id="newOrigin" value="국내산"></label></div>
+ <label>상품 규격<input id="newPack" placeholder="예: 2kg / 6~8과"></label>
+ <div class="two"><label>일반 판매가<input id="newPrice" type="number" min="0" step="100" value="0"></label><label>재고<input id="newStock" type="number" min="0" value="20"></label></div>
+ <label>이미지 주소<input id="newImage" placeholder="/assets/... 또는 https://..."></label>
+ <div class="editorHelp">노출할 위치를 여러 곳 선택할 수 있습니다. 제철 과일을 선택하면 위 계절에 맞춰 노출됩니다.</div>${placementCheckboxes(p)}
+ <div class="two"><label>Weekly 판매단위<input id="newWeeklyUnit" value="1개" placeholder="1개 / 1송이 / 1팩"></label><label>Weekly 가격<input id="newWeeklyPrice" type="number" min="0" step="100" value="0"></label></div>
+ <button type="button" class="editorSaveNew" data-create-product>상품 추가하고 저장</button>
+ <div class="notice">상품 추가 시 기존 <b>상품 DB</b>에도 함께 등록되고, 선택한 Home2 영역에 바로 연결됩니다. 서버 코드나 DB 구조는 변경하지 않습니다.</div>
+ </div>`;
+}
 function renderInspector(){
- const p=EDITOR_PRODUCTS.find(x=>x.id===editorSelected);if(!p)return;const weekly=editorTab==='weekly',u=editorUnit(p.id),custom=!!ux.productImageOverrides?.[p.id];
- $('#editorInspector').innerHTML=`<h3>${weekly?'Weekly Pick 카드':'상품 카드'} 편집</h3><div class="selectedName">${p.name}</div><div class="editorThumb"><img id="editorThumbImage" src="${editorImage(p)}" alt=""></div><div class="editorForm"><label>이미지 주소<input id="editorImageInput" value="${String(editorImage(p)).replace(/&/g,'&amp;').replace(/\"/g,'&quot;')}"></label><div class="editorButtons"><button type="button" data-reset-image>기본 이미지로</button><button type="button" data-open-home2>실제 화면 열기</button></div>${weekly?`<div class="two"><label>판매 단위<input id="editorUnitInput" value="${u.unit}" placeholder="예: 1개 / 1송이 / 200g"></label><label>가격<input id="editorPriceInput" type="number" min="0" step="100" value="${u.price}"></label></div><div class="editorHelp">카드와 Weekly 상세보기 모두 이 가격으로 표시됩니다. 저장 후 공개 Home2에 반영됩니다.</div><div class="editorButtons"><button type="button" data-reset-unit>기본 가격으로</button></div>`:`<label>현재 일반 판매가<input class="editorReadonly" readonly value="${p.price?won(p.price):'전체 관리자에서 관리'}"></label><div class="editorHelp">제철과일·선물세트의 일반 박스/팩 판매가는 기존 전체 관리자에서 관리하고, 여기서는 이미지를 화면을 보며 바꿀 수 있습니다.</div>`}<div class="notice"><span class="dirtyDot"></span>위쪽 <b>저장</b> 버튼을 누르면 공개 Home2에 적용됩니다.${custom?' 현재 이미지 변경값이 있습니다.':''}</div></div>`;
+ const p=findEditorProduct(editorSelected);if(!p){$('#editorInspector').innerHTML='<div class="editorHelp">편집할 상품을 선택하세요.</div>';return}
+ const weekly=editorTab==='weekly',u=editorUnit(p.id),custom=!!p.custom,imgChanged=!!ux.productImageOverrides?.[p.id];
+ if(custom){
+  const pl=placementsOf(p);
+  $('#editorInspector').innerHTML=`<h3>추가 상품 편집</h3><div class="selectedName">${p.name}</div><div class="editorThumb"><img id="editorThumbImage" src="${editorImage(p)}" alt=""></div><div class="editorForm">
+   <label>상품명<input id="editorCustomName" value="${String(p.name||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;')}"></label>
+   <div class="two"><label>계절<select id="editorCustomSeason">${['spring','summer','autumn','winter'].map(s=>`<option value="${s}" ${p.season===s?'selected':''}>${seasonLabel[s]}</option>`).join('')}</select></label><label>원산지<input id="editorCustomOrigin" value="${String(p.origin||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;')}"></label></div>
+   <label>상품 규격<input id="editorCustomPack" value="${String(p.pack||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;')}"></label>
+   <div class="two"><label>일반 판매가<input id="editorCustomPrice" type="number" min="0" step="100" value="${Number(p.price)||0}"></label><label>재고<input id="editorCustomStock" type="number" min="0" value="${Number(p.stock)||0}"></label></div>
+   <label>이미지 주소<input id="editorImageInput" value="${String(editorImage(p)).replace(/&/g,'&amp;').replace(/"/g,'&quot;')}"></label>
+   <div class="editorHelp">노출 위치</div>${placementCheckboxes(pl)}
+   <div class="two"><label>Weekly 판매단위<input id="editorUnitInput" value="${u.unit}"></label><label>Weekly 가격<input id="editorPriceInput" type="number" min="0" step="100" value="${u.price}"></label></div>
+   <div class="editorButtons"><button type="button" data-open-home2>실제 화면 열기</button><button type="button" class="editorDanger" data-remove-custom>Home2에서 제거</button></div>
+   <div class="notice"><span class="dirtyDot"></span>위쪽 <b>저장</b>을 누르면 상품 DB와 Home2 설정을 함께 갱신합니다.</div></div>`;
+  return;
+ }
+ $('#editorInspector').innerHTML=`<h3>${weekly?'Weekly Pick 카드':'상품 카드'} 편집</h3><div class="selectedName">${p.name}</div><div class="editorThumb"><img id="editorThumbImage" src="${editorImage(p)}" alt=""></div><div class="editorForm"><label>이미지 주소<input id="editorImageInput" value="${String(editorImage(p)).replace(/&/g,'&amp;').replace(/"/g,'&quot;')}"></label><div class="editorButtons"><button type="button" data-reset-image>기본 이미지로</button><button type="button" data-open-home2>실제 화면 열기</button></div>${weekly?`<div class="two"><label>판매 단위<input id="editorUnitInput" value="${u.unit}" placeholder="예: 1개 / 1송이 / 200g"></label><label>가격<input id="editorPriceInput" type="number" min="0" step="100" value="${u.price}"></label></div><div class="editorHelp">Weekly 카드와 Weekly 상세보기 모두 이 가격으로 표시됩니다.</div><div class="editorButtons"><button type="button" data-reset-unit>기본 가격으로</button></div>`:`<label>현재 일반 판매가<input class="editorReadonly" readonly value="${p.price?won(p.price):'전체 관리자에서 관리'}"></label><div class="editorHelp">기존 상품의 일반 판매가·재고는 전체 관리자에서 관리하고, 여기서는 이미지를 화면을 보며 바꿀 수 있습니다.</div>`}<div class="notice"><span class="dirtyDot"></span>위쪽 <b>저장</b> 버튼을 누르면 공개 Home2에 적용됩니다.${imgChanged?' 현재 이미지 변경값이 있습니다.':''}</div></div>`;
 }
 function refreshEditorSelectedCard(){
- const p=EDITOR_PRODUCTS.find(x=>x.id===editorSelected),card=document.querySelector(`[data-editor-product="${editorSelected}"]`);if(!p||!card)return;const img=card.querySelector('img');if(img)img.src=editorImage(p);const s=card.querySelector('strong');if(s)s.textContent=editorMeta(p);const ti=$('#editorThumbImage');if(ti)ti.src=editorImage(p);
+ const p=findEditorProduct(editorSelected),card=document.querySelector(`[data-editor-product="${editorSelected}"]`);if(!p||!card)return;
+ const img=card.querySelector('img');if(img)img.src=editorImage(p);const s=card.querySelector('strong');if(s)s.textContent=editorMeta(p);const ti=$('#editorThumbImage');if(ti)ti.src=editorImage(p);
+ const b=card.querySelector('b');if(b)b.textContent=p.name;
 }
-function collectVisualEditor(){ensureEditorMaps();const p=EDITOR_PRODUCTS.find(x=>x.id===editorSelected);if(!p)return;const ii=$('#editorImageInput');if(ii){const v=ii.value.trim();if(v&&v!==p.image)ux.productImageOverrides[p.id]=v;else delete ux.productImageOverrides[p.id]}if(editorTab==='weekly'){const unit=$('#editorUnitInput')?.value.trim()||'',price=Math.max(0,Number($('#editorPriceInput')?.value)||0),d=editorDefaultUnit(p.id);if(unit&&price&&(unit!==d.unit||price!==Number(d.price)))ux.weeklyUnitPrices[p.id]={unit,price};else delete ux.weeklyUnitPrices[p.id]}}
+function readPlacements(){return {seasonal:!!$('#placeSeasonal')?.checked,weekly:!!$('#placeWeekly')?.checked,world:!!$('#placeWorld')?.checked,curation:!!$('#placeCuration')?.checked,gifts:!!$('#placeGifts')?.checked}}
+function collectVisualEditor(){
+ ensureEditorMaps();if(editorCreateMode)return;const p=findEditorProduct(editorSelected);if(!p)return;
+ const ii=$('#editorImageInput');if(ii){const v=ii.value.trim();if(p.custom){p.image=v}else if(v&&v!==p.image)ux.productImageOverrides[p.id]=v;else delete ux.productImageOverrides[p.id]}
+ const unit=$('#editorUnitInput')?.value.trim()||'',price=Math.max(0,Number($('#editorPriceInput')?.value)||0);if(unit&&price)ux.weeklyUnitPrices[p.id]={unit,price};
+ if(p.custom){
+  p.name=$('#editorCustomName')?.value.trim()||p.name;p.season=$('#editorCustomSeason')?.value||p.season;p.origin=$('#editorCustomOrigin')?.value.trim()||p.origin;p.pack=$('#editorCustomPack')?.value.trim()||p.pack;p.price=Math.max(0,Number($('#editorCustomPrice')?.value)||0);p.stock=Math.max(0,Number($('#editorCustomStock')?.value)||0);p.placements=readPlacements();p.imported=!!p.placements.world;p.isGift=!!p.placements.gifts;p.grade=p.isGift?'PREMIUM GIFT':p.imported?'WORLD SELECT':'GRADE AA';dbDirtyCustomIds.add(p.id);
+ }
+}
+async function persistConfigOnly(){
+ rawConfig={...rawConfig,home2Ux:ux};
+ const r=await fetch('/api/admin/site/homepage-config?ts='+Date.now(),{method:'PUT',credentials:'same-origin',headers:{'Content-Type':'application/json','Cache-Control':'no-store'},body:JSON.stringify({config:rawConfig})});
+ const d=await r.json().catch(()=>({}));if(!r.ok)throw new Error(d.error||'설정 저장 실패');rawConfig=d.config||rawConfig;
+}
+async function updateDirtyCustomProducts(){
+ for(const id of [...dbDirtyCustomIds]){
+  const p=ux.customProducts.find(x=>x.id===id);if(!p||!p.serverId)continue;
+  const r=await fetch('/api/admin/products/'+p.serverId,{method:'PUT',credentials:'same-origin',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:p.name,unit:p.pack||'',price:Number(p.price)||0,stock:Number(p.stock)||0,image:p.image||'',category:p.isGift?'선물세트':p.imported?'해외과일':'과일',is_active:true})});
+  const d=await r.json().catch(()=>({}));if(!r.ok)throw new Error(d.error||`${p.name} 상품 저장 실패`);
+ }
+ dbDirtyCustomIds.clear();
+}
+async function createProductFromEditor(){
+ const name=$('#newName')?.value.trim()||'',origin=$('#newOrigin')?.value.trim()||'국내산',pack=$('#newPack')?.value.trim()||'',price=Math.max(0,Number($('#newPrice')?.value)||0),stock=Math.max(0,Number($('#newStock')?.value)||0),image=$('#newImage')?.value.trim()||'',season=$('#newSeason')?.value||currentSeason,placements=readPlacements(),weeklyUnit=$('#newWeeklyUnit')?.value.trim()||'1개',weeklyPrice=Math.max(0,Number($('#newWeeklyPrice')?.value)||0);
+ if(!name){$('#saveNote').textContent='상품명을 입력해주세요.';return}
+ if(!Object.values(placements).some(Boolean)){ $('#saveNote').textContent='노출 위치를 하나 이상 선택해주세요.';return }
+ $('#status').textContent='상품 추가 중';
+ try{
+  const category=placements.gifts?'선물세트':placements.world?'해외과일':'과일';
+  const r=await fetch('/api/admin/products',{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json'},body:JSON.stringify({name,description:'Home2 화면 편집에서 추가',unit:pack,price,stock,image,category,is_active:true,sort_order:900})});
+  const d=await r.json().catch(()=>({}));if(!r.ok)throw new Error(d.error||'상품 DB 등록 실패');
+  const db=d.product||{};const id='home2-custom-'+String(db.id||Date.now());
+  const cp={id,custom:true,serverId:Number(db.id)||0,name,origin,pack,price,stock,image,season,imported:!!placements.world,isGift:!!placements.gifts,grade:placements.gifts?'PREMIUM GIFT':placements.world?'WORLD SELECT':'GRADE AA',placements,active:true};
+  ux.customProducts.push(cp);if(placements.weekly&&weeklyPrice>0)ux.weeklyUnitPrices[id]={unit:weeklyUnit,price:weeklyPrice};
+  await persistConfigOnly();editorCreateMode=false;editorSelected=id;renderVisualEditor();$('#status').textContent='상품 추가 완료';$('#saveNote').textContent=`${name} 상품이 추가되어 선택한 Home2 영역에 연결되었습니다.`;
+ }catch(e){$('#status').textContent='상품 추가 실패';$('#saveNote').textContent=e.message||'상품 추가 실패'}
+}
 function options(selected){return ASSETS.map(x=>`<option value="${x.id}" ${x.id===selected?'selected':''}>${x.name}</option>`).join('')}
 function normalizeWeeklyPlanText(){['weeklyMiniComposition','weeklyRegularComposition','weeklyFamilyComposition'].forEach(k=>{if(/\d+\s*[~～-]\s*\d+\s*종|소분 구성|넉넉한 구성/.test(String(ux[k]||'')))ux[k]='원하는 과일 자유 선택'});}
 function render(){
@@ -191,25 +294,31 @@ async function load(){
  render();$('#status').textContent='설정 준비 완료';
 }
 async function save(){
- collect();$('#status').textContent='저장 중';$('#saveNote').textContent='공개 홈페이지에 저장 중입니다.';
- rawConfig={...rawConfig,home2Ux:ux};
- const r=await fetch('/api/admin/site/homepage-config?ts='+Date.now(),{method:'PUT',credentials:'same-origin',headers:{'Content-Type':'application/json','Cache-Control':'no-store'},body:JSON.stringify({config:rawConfig})});
- const d=await r.json().catch(()=>({}));if(!r.ok){$('#status').textContent='저장 실패';$('#saveNote').textContent=d.error||'저장 실패';return}
- rawConfig=d.config||rawConfig;$('#status').textContent='저장 완료';$('#saveNote').textContent='저장되었습니다. 홈2 새로고침 후 바로 반영됩니다.';
+ collect();$('#status').textContent='저장 중';$('#saveNote').textContent='공개 홈페이지와 상품 정보를 저장 중입니다.';
+ try{
+  await updateDirtyCustomProducts();
+  await persistConfigOnly();
+  $('#status').textContent='저장 완료';$('#saveNote').textContent='저장되었습니다. 홈2 새로고침 후 바로 반영됩니다.';renderVisualEditor();
+ }catch(e){$('#status').textContent='저장 실패';$('#saveNote').textContent=e.message||'저장 실패'}
 }
 document.addEventListener('click',e=>{
- const tab=e.target.closest('[data-editor-tab]');if(tab){collectVisualEditor();editorTab=tab.dataset.editorTab;editorSelected='';renderVisualEditor();return}
- const ep=e.target.closest('[data-editor-product]');if(ep){collectVisualEditor();editorSelected=ep.dataset.editorProduct;renderVisualEditor();return}
- if(e.target.closest('[data-reset-image]')){const p=EDITOR_PRODUCTS.find(x=>x.id===editorSelected);if(p){delete ux.productImageOverrides[p.id];renderVisualEditor()}return}
+ if(e.target.closest('[data-add-product]')){collectVisualEditor();editorCreateMode=true;editorSelected='';renderVisualEditor();return}
+ if(e.target.closest('[data-cancel-add]')){editorCreateMode=false;renderVisualEditor();return}
+ if(e.target.closest('[data-create-product]')){createProductFromEditor();return}
+ const tab=e.target.closest('[data-editor-tab]');if(tab){collectVisualEditor();editorCreateMode=false;editorTab=tab.dataset.editorTab;editorSelected='';renderVisualEditor();return}
+ const ep=e.target.closest('[data-editor-product]');if(ep){collectVisualEditor();editorCreateMode=false;editorSelected=ep.dataset.editorProduct;renderVisualEditor();return}
+ if(e.target.closest('[data-reset-image]')){const p=findEditorProduct(editorSelected);if(p){delete ux.productImageOverrides[p.id];renderVisualEditor()}return}
  if(e.target.closest('[data-reset-unit]')){delete ux.weeklyUnitPrices[editorSelected];renderVisualEditor();return}
- if(e.target.closest('[data-open-home2]')){const hash=editorTab==='weekly'?'#weekly':editorTab==='gifts'?'#gifts':'#fruits';window.open('/home2'+hash,'_blank');return}
- const use=e.target.closest('[data-use-image]');if(use){const p=EDITOR_PRODUCTS.find(x=>x.id===editorSelected);if(p){ux.productImageOverrides[p.id]=use.dataset.useImage;const inp=$('#editorImageInput');if(inp)inp.value=use.dataset.useImage;refreshEditorSelectedCard();$('#saveNote').textContent=`${p.name} 이미지가 미리보기에 적용되었습니다. 저장 버튼을 눌러 확정하세요.`}return}
+ if(e.target.closest('[data-open-home2]')){const hash=editorTab==='weekly'?'#weekly':editorTab==='gifts'?'#gifts':editorTab==='curation'?'#curation':'#fruits';window.open('/home2'+hash,'_blank');return}
+ if(e.target.closest('[data-remove-custom]')){const p=findEditorProduct(editorSelected);if(p?.custom&&confirm(`${p.name}을(를) Home2에서 제거할까요? 상품 DB 기록은 전체 관리자에 남습니다.`)){p.active=false;delete ux.weeklyUnitPrices[p.id];delete ux.productImageOverrides[p.id];dbDirtyCustomIds.delete(p.id);editorSelected='';persistConfigOnly().then(()=>{renderVisualEditor();$('#saveNote').textContent=`${p.name}을 Home2에서 제거했습니다.`}).catch(err=>$('#saveNote').textContent=err.message)}return}
+ const use=e.target.closest('[data-use-image]');if(use){const p=findEditorProduct(editorSelected);if(p){if(p.custom){p.image=use.dataset.useImage;dbDirtyCustomIds.add(p.id)}else ux.productImageOverrides[p.id]=use.dataset.useImage;const inp=$('#editorImageInput');if(inp)inp.value=use.dataset.useImage;refreshEditorSelectedCard();$('#saveNote').textContent=`${p.name} 이미지가 미리보기에 적용되었습니다. 저장 버튼을 눌러 확정하세요.`}return}
  const c=e.target.closest('[data-copy]');if(c)navigator.clipboard.writeText(c.dataset.copy).then(()=>{c.textContent='복사됨';setTimeout(()=>c.textContent='이미지 주소복사',900)})
 })
 document.addEventListener('input',e=>{
- const p=EDITOR_PRODUCTS.find(x=>x.id===editorSelected);if(!p)return;
- if(e.target.id==='editorImageInput'){const v=e.target.value.trim();if(v&&v!==p.image)ux.productImageOverrides[p.id]=v;else delete ux.productImageOverrides[p.id];refreshEditorSelectedCard()}
+ const p=findEditorProduct(editorSelected);if(!p||editorCreateMode)return;
+ if(e.target.id==='editorImageInput'){const v=e.target.value.trim();if(p.custom){p.image=v;dbDirtyCustomIds.add(p.id)}else if(v&&v!==p.image)ux.productImageOverrides[p.id]=v;else delete ux.productImageOverrides[p.id];refreshEditorSelectedCard()}
  if(e.target.id==='editorUnitInput'||e.target.id==='editorPriceInput'){const unit=$('#editorUnitInput')?.value.trim()||'',price=Math.max(0,Number($('#editorPriceInput')?.value)||0);if(unit&&price)ux.weeklyUnitPrices[p.id]={unit,price};refreshEditorSelectedCard()}
+ if(p.custom&&['editorCustomName','editorCustomOrigin','editorCustomPack','editorCustomPrice','editorCustomStock','editorCustomSeason','placeSeasonal','placeWeekly','placeWorld','placeCuration','placeGifts'].includes(e.target.id)){collectVisualEditor();refreshEditorSelectedCard()}
 })
 $('#loginBtn').onclick=login;$('#pw').addEventListener('keydown',e=>{if(e.key==='Enter')login()});$('#saveBtn').onclick=save;checkAdmin();
 </script>

@@ -937,3 +937,6 @@ body[data-theme-route="story"] .navItem[data-route="story"]{background:#eaf1e7;b
 .weeklyDetailNotice b{color:#b45f46}
 .weeklyDetailActions button:first-child{background:#fffefa}
 .weeklyItemPrice{color:#b45f46}
+
+/* V61.24 — custom catalog products use the same visual language */
+.productCard[data-custom="1"] .productImgBtn img{object-fit:contain}
