@@ -899,3 +899,24 @@ body[data-theme-route="story"] .navItem[data-route="story"]{background:#eaf1e7;b
 .weeklySelectionActions button{white-space:nowrap}
 .weeklyModalFruit small{line-height:1.35}
 .weeklyChoiceCounter{display:flex;align-items:center;gap:3px}
+
+
+/* V61.21 — Weekly Pick unit-price display */
+.weeklyItemPrice{
+  display:block;
+  margin:5px 4px 2px;
+  font-size:13px;
+  font-weight:900;
+  color:#b45f46;
+  letter-spacing:-.02em;
+}
+.weeklySelectedChips small{
+  display:block;
+  margin-top:2px;
+  color:#b45f46;
+  font-size:8px;
+  font-weight:800;
+}
+.weeklyModalFruit small{
+  line-height:1.45;
+}

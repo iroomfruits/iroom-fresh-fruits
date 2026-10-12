@@ -291,6 +291,36 @@ function weeklyPlans(){
 }
 function weeklyPrice(v){return Number(v)>0?fmt(Number(v)):'가격 문의'}
 function weeklyMinPrice(v){return Number(v)>0?`${fmt(Number(v))} 이상`:'최소금액 문의'}
+function weeklyUnitPrice(p){
+ if(!p)return '개당 가격 안내';
+ if(p.imported&&!p.serverLinked)return '개당 · 입고 시세';
+ const pack=String(p.pack||'');
+ const price=Number(p.price)||0;
+ if(!price)return '개당 · 입고 시세';
+
+ const range=pack.match(/(\d+)\s*[~～-]\s*(\d+)\s*(과|송이|수|개)/);
+ const exact=pack.match(/(?:^|[\s(])(\d+)\s*(과|송이|수|개)(?:[\s)]|$)/);
+
+ const unitName=u=>u==='송이'?'송이당':u==='수'?'개당':'개당';
+ const round100=n=>Math.max(100,Math.round(n/100)*100);
+
+ if(range){
+  const a=Number(range[1]),b=Number(range[2]),u=range[3];
+  if(a>0&&b>0){
+   const low=round100(price/Math.max(a,b));
+   const high=round100(price/Math.min(a,b));
+   return `${unitName(u)} 약 ${low.toLocaleString('ko-KR')}~${high.toLocaleString('ko-KR')}원`;
+  }
+ }
+ if(exact){
+  const n=Number(exact[1]),u=exact[2];
+  if(n>0){
+   const each=round100(price/n);
+   return `${unitName(u)} 약 ${each.toLocaleString('ko-KR')}원`;
+  }
+ }
+ return `개당 · 입고별 안내`;
+}
 function weeklyPlanNote(plan){
  const text=String(plan?.composition||'').trim();
  if(!text||/\d+\s*[~～-]\s*\d+\s*종|소분 구성|넉넉한 구성/.test(text))return '원하는 과일 자유 선택';
@@ -309,7 +339,7 @@ function weeklySelectedProducts(){return [...weeklyPreferred].map(find).filter(B
 function weeklySelectionSummary(){
  const selected=weeklySelectedProducts(),plans=weeklyPlans();
  if(!selected.length)return `<div class="weeklySelectionSummary" id="weeklySelectionSummary"><div class="weeklySelectionEmpty"><b>원하는 과일을 자유롭게 골라보세요.</b><span>품목 수를 정해두지 않습니다. 각 과일의 표시 가격을 보고 필요한 만큼 직접 고르면 됩니다.</span></div><div class="weeklySelectionActions">${plans.map(x=>`<button data-weekly-plan="${x.key}">${esc(x.name)} ${weeklyMinPrice(x.price)}</button>`).join('')}</div></div>`;
- return `<div class="weeklySelectionSummary hasSelection" id="weeklySelectionSummary"><div><span class="eyebrow">MY WEEKLY PICK</span><h3>내가 고른 과일 <b>${selected.length}종</b></h3><p>품목 수 제한 없이 직접 고른 과일입니다. 다시 누르면 선택을 해제할 수 있어요.</p><div class="weeklySelectedChips">${selected.map(p=>`<button type="button" data-weekly-choice="${p.id}" title="${esc(p.name)} 선택 해제"><img src="${img(p)}" alt=""><span><b>${esc(p.name)}</b><small>${displayPrice(p)}</small></span><i>×</i></button>`).join('')}</div></div><div class="weeklySelectionActions"><small>MINI / REGULAR / FAMILY는 고정 구성이 아니라 최소 주문금액 기준입니다.</small>${plans.map(x=>`<button data-weekly-plan="${x.key}">${esc(x.name)} ${weeklyMinPrice(x.price)}</button>`).join('')}</div></div>`;
+ return `<div class="weeklySelectionSummary hasSelection" id="weeklySelectionSummary"><div><span class="eyebrow">MY WEEKLY PICK</span><h3>내가 고른 과일 <b>${selected.length}종</b></h3><p>품목 수 제한 없이 직접 고른 과일입니다. 다시 누르면 선택을 해제할 수 있어요.</p><div class="weeklySelectedChips">${selected.map(p=>`<button type="button" data-weekly-choice="${p.id}" title="${esc(p.name)} 선택 해제"><img src="${img(p)}" alt=""><span><b>${esc(p.name)}</b><small>${weeklyUnitPrice(p)}</small></span><i>×</i></button>`).join('')}</div></div><div class="weeklySelectionActions"><small>MINI / REGULAR / FAMILY는 고정 구성이 아니라 최소 주문금액 기준입니다.</small>${plans.map(x=>`<button data-weekly-plan="${x.key}">${esc(x.name)} ${weeklyMinPrice(x.price)}</button>`).join('')}</div></div>`;
 }
 function refreshWeeklySelectionUI(){
  const c=$('#weeklyChoiceCount');if(c)c.textContent=weeklyPreferred.size;
@@ -324,7 +354,7 @@ function refreshWeeklySelectionUI(){
 function weeklyModalFruitGrid(){
  return weeklyChoicePool().map(p=>{
   const on=weeklyPreferred.has(p.id);
-  return `<button type="button" class="weeklyModalFruit ${on?'selected':''}" data-weekly-modal-prefer="${p.id}"><span class="weeklyModalImg"><img src="${img(p)}" alt="${esc(p.name)}"><i>${on?'✓':'+'}</i></span><b>${esc(p.name)}</b><small>${p.imported?'해외':'제철'} · ${displayPrice(p)}</small></button>`;
+  return `<button type="button" class="weeklyModalFruit ${on?'selected':''}" data-weekly-modal-prefer="${p.id}"><span class="weeklyModalImg"><img src="${img(p)}" alt="${esc(p.name)}"><i>${on?'✓':'+'}</i></span><b>${esc(p.name)}</b><small>${p.imported?'해외':'제철'} · ${weeklyUnitPrice(p)}</small></button>`;
  }).join('');
 }
 function refreshWeeklyModalUI(){
@@ -334,7 +364,7 @@ function refreshWeeklyModalUI(){
 }
 
 function weeklyFruitGrid(){
- return weeklyChoicePool().map(p=>`<article class="weeklyFruit weeklyChoice ${weeklyPreferred.has(p.id)?'selected':''}" data-weekly-choice-card="${p.id}"><button type="button" class="weeklyFruitImage" data-weekly-detail="${p.id}" aria-label="${esc(p.name)} 상세보기"><img src="${img(p)}" alt="${esc(p.name)}"></button><button type="button" class="weeklyChoiceToggle" data-weekly-choice="${p.id}" aria-pressed="${weeklyPreferred.has(p.id)?'true':'false'}"><span class="weeklyChoiceMark">${weeklyPreferred.has(p.id)?'✓':'+'}</span><span class="weeklyChoiceLabel">${weeklyPreferred.has(p.id)?'선택됨':'선택'}</span></button><b>${esc(p.name)}</b><strong class="weeklyItemPrice">${displayPrice(p)}</strong><small>${p.imported?'해외 셀렉트':labels[CURRENT_SEASON]+' 제철'} · ${esc(p.origin||'입고 기준')}</small></article>`).join('');
+ return weeklyChoicePool().map(p=>`<article class="weeklyFruit weeklyChoice ${weeklyPreferred.has(p.id)?'selected':''}" data-weekly-choice-card="${p.id}"><button type="button" class="weeklyFruitImage" data-weekly-detail="${p.id}" aria-label="${esc(p.name)} 상세보기"><img src="${img(p)}" alt="${esc(p.name)}"></button><button type="button" class="weeklyChoiceToggle" data-weekly-choice="${p.id}" aria-pressed="${weeklyPreferred.has(p.id)?'true':'false'}"><span class="weeklyChoiceMark">${weeklyPreferred.has(p.id)?'✓':'+'}</span><span class="weeklyChoiceLabel">${weeklyPreferred.has(p.id)?'선택됨':'선택'}</span></button><b>${esc(p.name)}</b><strong class="weeklyItemPrice">${weeklyUnitPrice(p)}</strong><small>${p.imported?'해외 셀렉트':labels[CURRENT_SEASON]+' 제철'} · ${esc(p.origin||'입고 기준')}</small></article>`).join('');
 }
 function weeklyPage(){
  if(!home2Ux.weeklyEnabled)return `<section class="routePage"><div class="routeHero"><div><span class="eyebrow">WEEKLY PICK</span><h1>이번 주 과일</h1></div><p>현재 이번 주 과일 예약을 준비하고 있습니다.</p></div><div class="weeklyClosed"><b>이번 주 PICK 준비 중</b><span>구성이 확정되면 다시 열어드릴게요.</span><button data-kakao>카카오로 문의</button></div></section>`;
@@ -346,7 +376,7 @@ function weeklyPage(){
 
   <section class="weeklyPlanSection"><div class="weeklySectionLead"><span class="eyebrow">CHOOSE YOUR BOX</span><h2>이번 주 예산 기준 선택</h2><p>플랜은 고정 구성표가 아니라 최소 주문금액 기준입니다. 과일은 아래에서 직접 고르세요.</p></div><div class="weeklyPlanGrid">${plans.map((x,i)=>`<article class="weeklyPlan ${i===1?'featured':''}"><span class="weeklyPlanNo">0${i+1}</span><small>${esc(x.label)}</small><h2>${esc(x.name)}</h2><p>${esc(weeklyPlanNote(x))}<br><small>품목 수 제한 없음 · 과일별 가격 적용</small></p><strong>${weeklyMinPrice(x.price)}</strong><button data-weekly-plan="${x.key}">${esc(x.name)} 기준으로 예약</button></article>`).join('')}</div></section>
 
-  <section class="weeklyFruitSection weeklyFruitSectionV12"><div class="sectionHead"><div><span class="eyebrow">PICK YOUR FAVORITES</span><h2>이번 주 선택 가능 과일</h2><p>각 과일의 가격을 확인하고 원하는 품목을 자유롭게 고르세요. 품목 수 제한 없이 선택한 내용이 예약 신청서로 이어집니다.</p></div><div class="weeklyChoiceCounter"><b id="weeklyChoiceCount">${weeklyPreferred.size}</b>종 선택</div></div><div class="weeklyFruitGrid" id="weeklyFruitGrid">${weeklyFruitGrid()}</div>${weeklySelectionSummary()}</section>
+  <section class="weeklyFruitSection weeklyFruitSectionV12"><div class="sectionHead"><div><span class="eyebrow">PICK YOUR FAVORITES</span><h2>이번 주 선택 가능 과일</h2><p>각 과일의 낱개·낱송이 기준 가격을 확인하고 원하는 품목을 자유롭게 고르세요. 품목 수 제한 없이 선택한 내용이 예약 신청서로 이어집니다.</p></div><div class="weeklyChoiceCounter"><b id="weeklyChoiceCount">${weeklyPreferred.size}</b>종 선택</div></div><div class="weeklyFruitGrid" id="weeklyFruitGrid">${weeklyFruitGrid()}</div>${weeklySelectionSummary()}</section>
 
   <section class="weeklyBehind"><div class="weeklyBehindCopy"><span class="eyebrow">HOW IROOM PREPARES</span><h2>주문받고 준비하니까<br>재고 부담을 줄일 수 있어요.</h2><p>예약 수량을 먼저 확인한 뒤 그 주 경매와 입고 상태를 보고 좋은 과일을 고릅니다. 그래서 매주 똑같은 구성보다 그 주 맛있는 과일을 더 유연하게 담을 수 있습니다.</p></div><div class="weeklyBehindSteps"><div><span>01</span><b>예약 수량 확인</b></div><div><span>02</span><b>경매 · 매입</b></div><div><span>03</span><b>선별 · 소분</b></div><div><span>04</span><b>포장 · 발송</b></div></div></section>
 
@@ -356,7 +386,7 @@ function weeklyPage(){
 function openWeeklyReserve(key){
  const plan=weeklyPlans().find(x=>x.key===key)||weeklyPlans()[0];if(!plan)return;
  openUtility('이번 주 과일 예약',`<div class="weeklyReserveIntro"><span>WEEKLY PICK · ${esc(plan.name)}</span><b>${esc(plan.label)} · ${weeklyMinPrice(plan.price)}</b><p>고정 구성이나 품목 수 제한 없이, 각 과일 가격을 보고 직접 고르는 이번 주 1회 예약입니다.</p></div><form class="formGrid" id="weeklyReserveForm" data-plan="${esc(plan.key)}"><label>이름<input id="weeklyName" required autocomplete="name" value="${esc(authUser?.name||'')}"></label><label>연락처<input id="weeklyPhone" required inputmode="tel" autocomplete="tel" value="${esc(authUser?.phone||'')}"></label><label>이메일 <small>(선택)</small><input id="weeklyEmail" type="email" autocomplete="email" value="${esc(authUser?.email||'')}"></label><label>맛 취향<select id="weeklyTaste"><option>골고루</option><option>달콤한 과일 위주</option><option>새콤달콤</option><option>부드러운 과일 위주</option></select></label>
- <section class="weeklyModalChoiceSection full"><div class="weeklyModalChoiceHead"><div><b>고르고 싶은 과일</b><span>각 품목 가격을 보고 원하는 만큼 자유롭게 골라주세요.</span></div><strong><i id="weeklyModalPreferCount">${weeklyPreferred.size}</i>종</strong></div><div class="weeklyModalFruitGrid" id="weeklyModalPreferGrid">${weeklyModalFruitGrid()}</div></section>
+ <section class="weeklyModalChoiceSection full"><div class="weeklyModalChoiceHead"><div><b>고르고 싶은 과일</b><span>각 과일의 개당·송이당 가격을 보고 원하는 만큼 자유롭게 골라주세요.</span></div><strong><i id="weeklyModalPreferCount">${weeklyPreferred.size}</i>종</strong></div><div class="weeklyModalFruitGrid" id="weeklyModalPreferGrid">${weeklyModalFruitGrid()}</div></section>
  <label class="full">요청사항 <small>(선택)</small><textarea id="weeklyMemo" rows="3" maxlength="1000" placeholder="알레르기, 수령 관련 요청 등을 적어주세요."></textarea></label><button class="primaryFormBtn full" type="submit">선택 내용으로 이번 주 1회 예약 신청</button></form>`);
 }
 async function submitWeeklyReserve(form){
@@ -365,10 +395,10 @@ async function submitWeeklyReserve(form){
   const taste=$('#weeklyTaste').value,memo=$('#weeklyMemo').value.trim();
   const picked=weeklySelectedProducts();
   const preferred=picked.map(p=>p.name).join(', ');
-  const priced=picked.map(p=>`${p.name} (${displayPrice(p)})`).join(', ');
+  const priced=picked.map(p=>`${p.name} (${weeklyUnitPrice(p)})`).join(', ');
   const message=[`예산 기준: ${plan.name} · ${weeklyMinPrice(plan.price)}`,priced?`선택 과일: ${priced}`:'선택 과일: 선택 없음',`취향: ${taste}`,memo?`추가 요청: ${memo}`:''].filter(Boolean).join('\n');
   const d=await api('/api/consultations',{method:'POST',body:JSON.stringify({guide_type:'이룸홈2 Weekly Pick 자유선택 예약',customer_name:$('#weeklyName').value,phone:$('#weeklyPhone').value,email:$('#weeklyEmail').value,budget:weeklyMinPrice(plan.price),preferred_fruits:preferred||'선택 없음',message})});
-  openUtility('이번 주 예약이 접수되었습니다',`<div class="orderSuccess"><span>예약 상담번호</span><b>${esc(d.consult_no)}</b><p>고른 과일과 각 품목 가격을 기준으로 확인한 뒤 입고 상태와 최종 구성을 안내드리겠습니다.</p></div><div class="utilityActions"><button class="dark" data-kakao>카카오로 이어서 상담</button></div>`);
+  openUtility('이번 주 예약이 접수되었습니다',`<div class="orderSuccess"><span>예약 상담번호</span><b>${esc(d.consult_no)}</b><p>고른 과일과 카드에 표시된 개당·송이당 가격을 기준으로 확인한 뒤 입고 상태와 최종 구성을 안내드리겠습니다.</p></div><div class="utilityActions"><button class="dark" data-kakao>카카오로 이어서 상담</button></div>`);
  }catch(e){toast(e.message)}
 }
 
@@ -492,7 +522,7 @@ function openSearch(){openUtility('과일 찾기',`<div class="topSearchGuide"><
 async function copyText(v){try{await navigator.clipboard.writeText(v);return true}catch{}try{const ta=document.createElement('textarea');ta.value=v;ta.className='clipboardHelper';document.body.appendChild(ta);ta.select();const ok=document.execCommand('copy');ta.remove();return ok}catch{return false}}
 function kakaoAction(){const url=currentKakao();const w=window.open(url,'_blank','noopener,noreferrer');if(w){try{w.opener=null}catch{}}else{location.href=url}}
 async function shareAction(){try{if(navigator.share){await navigator.share({title:'이룸 fresh fruits',text:'좋은 과일로 마음을 전합니다.',url:location.href});return}}catch{}const ok=await copyText(location.href);toast(ok?'현재 페이지 주소를 복사했습니다.':'주소 복사를 지원하지 않는 브라우저입니다.')}
-async function installAction(){if(installPrompt){installPrompt.prompt();try{await installPrompt.userChoice}catch{}installPrompt=null;return}if('serviceWorker' in navigator&&location.protocol!=='file:'){try{await navigator.serviceWorker.register('/sw.js?v=61.20.0')}catch(_){}}toast('브라우저 메뉴의 홈 화면에 추가/앱 설치 기능을 이용해 주세요.')}
+async function installAction(){if(installPrompt){installPrompt.prompt();try{await installPrompt.userChoice}catch{}installPrompt=null;return}if('serviceWorker' in navigator&&location.protocol!=='file:'){try{await navigator.serviceWorker.register('/sw.js?v=61.21.0')}catch(_){}}toast('브라우저 메뉴의 홈 화면에 추가/앱 설치 기능을 이용해 주세요.')}
 function toast(t){const el=$('#toast');el.textContent=t;el.hidden=false;clearTimeout(timer);timer=setTimeout(()=>el.hidden=true,1600)}
 function qty(){return Math.max(1,parseInt($('#qty')?.value||'1'))}
 document.addEventListener('click',e=>{const wd=e.target.closest('[data-weekly-detail]');if(wd){e.preventDefault();smileThenDetail(wd,wd.dataset.weeklyDetail);return}const cd=e.target.closest('[data-curation-detail]');if(cd){e.preventDefault();smileThenDetail(cd,cd.dataset.curationDetail);return}const r=e.target.closest('[data-route]');if(r){if(!$('#utilityOverlay').hidden)closeUtility();go(r.dataset.route);return}const cp=e.target.closest('[data-curation]');if(cp){setCurationPreset(cp.dataset.curation.split(','));return}const pick=e.target.closest('[data-pick]');if(pick){e.preventDefault();const card=pick.closest('[data-pick-card]');playFruitSmile(card?.querySelector('.pickFruitImage'));const id=pick.dataset.pick;if(curationSelected.has(id))curationSelected.delete(id);else if(curationSelected.size<6)curationSelected.add(id);else{toast('맞춤 구성은 최대 6종까지 선택할 수 있어요.');return}renderCurationSelected();return}const rp=e.target.closest('[data-remove-pick]');if(rp){curationSelected.delete(rp.dataset.removePick);renderCurationSelected();return}if(e.target.closest('[data-clear-picks]')){curationSelected.clear();renderCurationSelected();return}if(e.target.closest('[data-add-picks]')){if(!curationSelected.size){toast('먼저 과일을 골라주세요.');return}[...curationSelected].forEach(id=>add(id,1,true));saveCart();toast(`${curationSelected.size}가지 과일을 장바구니에 담았습니다.`);return}if(e.target.closest('[data-consult]')){openConsultation();return}if(e.target.closest('[data-search]')){openSearch();return}if(e.target.closest('[data-account]')){openAccount();return}if(e.target.closest('[data-open-login]')){openLogin();return}if(e.target.closest('[data-open-signup]')){openSignup();return}if(e.target.closest('[data-open-import]')){route='fruits';season='import';history.pushState({},'','#fruits');render();scrollTo({top:0,behavior:'smooth'});return}if(e.target.closest('[data-my-orders]')){openMyOrders();return}if(e.target.closest('[data-logout]')){logout();return}if(e.target.closest('[data-kakao-login]')){location.href='/api/auth/kakao/start?next='+encodeURIComponent('/home2.html');return}if(e.target.closest('[data-utility-close]')||e.target.id==='utilityOverlay'){closeUtility();return}const fi=e.target.closest('[data-footer-info]');if(fi){footerInfo(fi.dataset.footerInfo);return}if(e.target.closest('[data-kakao]')){kakaoAction();return}if(e.target.closest('[data-share]')){shareAction();return}if(e.target.closest('[data-install]')){installAction();return}if(e.target.closest('[data-search-go]')){renderSearch($('#siteSearch')?.value||'');return}
@@ -540,7 +570,7 @@ function preloadCurrent(){homeProducts().slice(0,5).forEach(p=>{const h=new Imag
 async function bootstrapBackend(){
  await Promise.allSettled([ensureCsrf(),loadServerProducts(),loadSiteConfig(),loadHome2Ux(),loadPaymentConfig(),loadMe()]);
  render();
- if('serviceWorker' in navigator&&location.protocol!=='file:'){navigator.serviceWorker.register('/sw.js?v=61.20.0').catch(()=>{})}
+ if('serviceWorker' in navigator&&location.protocol!=='file:'){navigator.serviceWorker.register('/sw.js?v=61.21.0').catch(()=>{})}
  const q=new URLSearchParams(location.search);if(q.get('kakao')==='success'){toast('카카오 로그인이 완료되었습니다.');history.replaceState({},'',location.pathname+location.hash)}else if(q.get('kakao')==='error'){toast('카카오 로그인에 실패했습니다.');history.replaceState({},'',location.pathname+location.hash)}
 }
 preloadCurrent();setNotice();loadCart();ensureTopNav();const h=location.hash.slice(1);route=['fruits','weekly','curation','gifts','story'].includes(h)?h:'home';render();bootstrapBackend();
