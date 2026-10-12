@@ -405,20 +405,16 @@ function weeklyTeaser(){
 function weeklySelectedProducts(){return [...weeklyPreferred].map(find).filter(Boolean)}
 function weeklySelectionSummary(){
  const selected=weeklySelectedProducts(),plans=weeklyPlans(),total=weeklySelectionTotal(),totalQty=weeklyTotalQty();
- if(!selected.length)return `<div class="weeklySelectionSummary" id="weeklySelectionSummary"><div class="weeklySelectionEmpty"><b>원하는 과일을 자유롭게 골라보세요.</b><span>과일을 고른 뒤 각 상품의 수량도 원하는 만큼 조절할 수 있습니다.</span></div><div class="weeklySelectionActions">${plans.map(x=>`<button data-weekly-plan="${x.key}">${esc(x.name)} ${weeklyMinPrice(x.price)}</button>`).join('')}</div></div>`;
+ if(!selected.length)return `<div class="weeklySelectionSummary" id="weeklySelectionSummary"><div class="weeklySelectionEmpty"><b>원하는 과일을 골라보세요.</b><span>상품을 눌러 상세보기에서 수량을 정할 수 있습니다.</span></div><div class="weeklySelectionActions">${plans.map(x=>`<button data-weekly-plan="${x.key}">${esc(x.name)} ${weeklyMinPrice(x.price)}</button>`).join('')}</div></div>`;
  return `<div class="weeklySelectionSummary hasSelection" id="weeklySelectionSummary">
   <div>
    <span class="eyebrow">MY WEEKLY PICK</span>
    <h3>내가 고른 과일 <b>${selected.length}종 · 총 ${totalQty}개 단위</b></h3>
-   <p>각 과일별로 수량을 조절할 수 있어요. 1에서 −를 누르면 선택이 해제됩니다.</p>
+   <p>수량 변경은 각 상품 상세보기에서 할 수 있어요.</p>
    <div class="weeklySelectedRows">${selected.map(p=>`<article class="weeklySelectedRow">
-    <img src="${img(p)}" alt="">
-    <div class="weeklySelectedInfo"><b>${esc(p.name)}</b><small>${weeklyUnitPrice(p)}</small><strong>${fmt(weeklyLineTotal(p))}</strong></div>
-    <div class="weeklyQtyStepper" aria-label="${esc(p.name)} 수량">
-      <button type="button" data-weekly-qty="${p.id}:-1" aria-label="${esc(p.name)} 수량 줄이기">−</button>
-      <span>${weeklyQtyOf(p.id)}</span>
-      <button type="button" data-weekly-qty="${p.id}:1" aria-label="${esc(p.name)} 수량 늘리기">＋</button>
-    </div>
+    <button type="button" class="weeklySelectedOpen" data-weekly-detail="${p.id}" aria-label="${esc(p.name)} 상세보기"><img src="${img(p)}" alt=""></button>
+    <div class="weeklySelectedInfo"><b>${esc(p.name)}</b><small>${weeklyUnitPrice(p)} · ${weeklyQtyText(p)}</small><strong>${fmt(weeklyLineTotal(p))}</strong></div>
+    <button type="button" class="weeklySelectedEdit" data-weekly-detail="${p.id}">수량변경</button>
     <button type="button" class="weeklyRemovePick" data-weekly-remove="${p.id}" aria-label="${esc(p.name)} 선택 해제">×</button>
    </article>`).join('')}</div>
    <div class="weeklySelectionTotal"><span>현재 선택 합계</span><strong>${fmt(total)}</strong></div>
@@ -430,14 +426,11 @@ function refreshWeeklySelectionUI(){
  const c=$('#weeklyChoiceCount');if(c)c.textContent=weeklyPreferred.size;
  const tq=$('#weeklyTotalQty');if(tq)tq.textContent=weeklyTotalQty();
  $$('#weeklyFruitGrid [data-weekly-choice-card]').forEach(card=>{
-  const id=card.dataset.weeklyChoiceCard,on=weeklyPreferred.has(id),q=weeklyQtyOf(id);
+  const id=card.dataset.weeklyChoiceCard,on=weeklyPreferred.has(id);
   card.classList.toggle('selected',on);
   const btn=card.querySelector('[data-weekly-choice]');if(btn)btn.setAttribute('aria-pressed',on?'true':'false');
   const mark=card.querySelector('.weeklyChoiceMark');if(mark)mark.textContent=on?'✓':'+';
   const label=card.querySelector('.weeklyChoiceLabel');if(label)label.textContent=on?'선택됨':'선택';
-  const qtyWrap=card.querySelector('.weeklyCardQty');if(qtyWrap)qtyWrap.classList.toggle('active',on);
-  const qtyText=card.querySelector('.weeklyCardQtyValue');if(qtyText)qtyText.textContent=on?q:'0';
-  const sub=card.querySelector('.weeklyCardSubtotal');if(sub)sub.textContent=on?fmt((weeklyUnitInfo(find(id)).price||0)*q):'';
  });
  const box=$('#weeklySelectionSummary');if(box)box.outerHTML=weeklySelectionSummary();
  const reserve=$('#weeklyReserveTotal');if(reserve)reserve.textContent=fmt(weeklySelectionTotal());
@@ -449,17 +442,12 @@ function refreshWeeklySelectionUI(){
 }
 function weeklyModalFruitGrid(){
  return weeklyChoicePool().map(p=>{
-  const on=weeklyPreferred.has(p.id),q=weeklyQtyOf(p.id);
+  const on=weeklyPreferred.has(p.id);
   return `<article class="weeklyModalFruit ${on?'selected':''}">
-   <button type="button" class="weeklyModalPickMain" data-weekly-modal-prefer="${p.id}">
+   <button type="button" class="weeklyModalPickMain" data-weekly-detail="${p.id}">
     <span class="weeklyModalImg"><img src="${img(p)}" alt="${esc(p.name)}"><i>${on?'✓':'+'}</i></span>
-    <b>${esc(p.name)}</b><small>${p.imported?'해외':'제철'} · ${weeklyUnitPrice(p)}</small>
+    <b>${esc(p.name)}</b><small>${p.imported?'해외':'제철'} · ${weeklyUnitPrice(p)}${on?` · ${weeklyQtyText(p)}`:''}</small>
    </button>
-   <div class="weeklyModalQty ${on?'active':''}">
-    <button type="button" data-weekly-qty="${p.id}:-1" aria-label="${esc(p.name)} 수량 줄이기">−</button>
-    <span>${on?q:0}</span>
-    <button type="button" data-weekly-qty="${p.id}:1" aria-label="${esc(p.name)} 수량 늘리기">＋</button>
-   </div>
   </article>`;
  }).join('');
 }
@@ -475,20 +463,11 @@ function refreshWeeklyModalUI(){
 
 function weeklyFruitGrid(){
  return weeklyChoicePool().map(p=>{
-  const on=weeklyPreferred.has(p.id),q=weeklyQtyOf(p.id);
+  const on=weeklyPreferred.has(p.id);
   return `<article class="weeklyFruit weeklyChoice ${on?'selected':''}" data-weekly-choice-card="${p.id}">
    <button type="button" class="weeklyFruitImage" data-weekly-detail="${p.id}" aria-label="${esc(p.name)} 상세보기"><img src="${img(p)}" alt="${esc(p.name)}"></button>
    <button type="button" class="weeklyChoiceToggle" data-weekly-choice="${p.id}" aria-pressed="${on?'true':'false'}"><span class="weeklyChoiceMark">${on?'✓':'+'}</span><span class="weeklyChoiceLabel">${on?'선택됨':'선택'}</span></button>
    <b>${esc(p.name)}</b><strong class="weeklyItemPrice">${weeklyUnitPrice(p)}</strong>
-   <div class="weeklyCardQty ${on?'active':''}">
-    <span class="weeklyQtyCaption">수량</span>
-    <div class="weeklyQtyStepper">
-     <button type="button" data-weekly-qty="${p.id}:-1" aria-label="${esc(p.name)} 수량 줄이기">−</button>
-     <span class="weeklyCardQtyValue">${on?q:0}</span>
-     <button type="button" data-weekly-qty="${p.id}:1" aria-label="${esc(p.name)} 수량 늘리기">＋</button>
-    </div>
-    <strong class="weeklyCardSubtotal">${on?fmt((weeklyUnitInfo(p).price||0)*q):''}</strong>
-   </div>
    <small>${p.imported?'해외 셀렉트':labels[CURRENT_SEASON]+' 제철'} · ${esc(p.origin||'입고 기준')}</small>
   </article>`;
  }).join('');
@@ -628,39 +607,33 @@ function openCart(){drawCart();$('#scrim').hidden=false;$('#drawer').hidden=fals
 
 function openWeeklyDetail(id){
  const p=find(id);if(!p)return;
- rememberViewed(id);lastFocus=document.activeElement;
- const x=weeklyUnitInfo(p),selected=weeklyPreferred.has(id);
- $('#detailSheet').innerHTML=`<button class="detailClose" data-detail-close>×</button>
- <div class="detailTop">
-  <div class="detailVisual"><img src="${img(p)}" alt="${esc(p.name)}" decoding="async"></div>
-  <div class="detailInfo">
-   <span class="eyebrow">WEEKLY PICK UNIT</span>
-   <h1>${esc(p.name)}</h1>
-   <div class="detailPrice weeklyDetailPrice">${weeklyUnitPrice(p)}</div>
-   <div class="weeklyDetailNotice">Weekly Pick에서 선택할 때 적용되는 <b>개별 가격</b>입니다. 일반 상품의 박스·팩 판매가는 별도입니다.</div>
-   <div class="infoRows">
-    <div class="infoRow"><span>판매 기준</span><b>${esc(x.unit)}</b></div>
-    <div class="infoRow"><span>Weekly 단가</span><b>${weeklyUnitPrice(p)}</b></div>
-    <div class="infoRow"><span>원산지</span><b>${esc(p.origin||'입고 기준')}</b></div>
-    <div class="infoRow"><span>기존 상품 규격</span><b>${esc(p.pack||'입고 규격별')}</b></div>
-    <div class="infoRow"><span>안내</span><b>실제 입고 상태에 따라 추후 조정 가능</b></div>
+ const x=weeklyUnitInfo(p),on=weeklyPreferred.has(id),q=weeklyQtyOf(id);
+ openUtility(esc(p.name),`<div class="weeklyDetailView">
+  <div class="weeklyDetailVisual"><img src="${img(p)}" alt="${esc(p.name)}"></div>
+  <div class="weeklyDetailBody">
+   <span class="eyebrow">WEEKLY PICK</span>
+   <h2>${esc(p.name)}</h2>
+   <div class="weeklyDetailPrice"><strong>${fmt(x.price)}</strong><span>/ ${esc(x.unit)}</span></div>
+   <dl class="weeklyDetailMeta">
+    <div><dt>판매단위</dt><dd>${esc(x.unit)}</dd></div>
+    <div><dt>원산지</dt><dd>${esc(p.origin||'입고 기준 안내')}</dd></div>
+    <div><dt>기존 규격</dt><dd>${esc(p.pack||'입고 기준 안내')}</dd></div>
+   </dl>
+   <div class="weeklyDetailQty">
+    <div><b>수량 선택</b><span>같은 과일을 여러 개 담을 수 있어요.</span></div>
+    <div class="weeklyQtyStepper weeklyDetailQtyStepper">
+      <button type="button" data-weekly-detail-qty="${p.id}:-1" aria-label="${esc(p.name)} 수량 줄이기">−</button>
+      <span id="weeklyDetailQtyValue">${on?q:1}</span>
+      <button type="button" data-weekly-detail-qty="${p.id}:1" aria-label="${esc(p.name)} 수량 늘리기">＋</button>
+    </div>
    </div>
-   <div class="detailActions weeklyDetailActions">
-    <button data-weekly-detail-toggle="${p.id}">${selected?'선택 해제':'이 과일 선택'}</button>
-    <button class="dark" data-weekly-plan="mini">예약으로 이어가기</button>
+   <div class="weeklyDetailTotal"><span>선택 금액</span><strong id="weeklyDetailTotalPrice">${fmt(x.price*(on?q:1))}</strong></div>
+   <div class="weeklyDetailActions">
+    <button type="button" class="outlineBtn" data-weekly-detail-select="${p.id}">${on?'선택 해제':'이 과일 선택'}</button>
+    <button type="button" class="fillBtn" data-weekly-plan="regular">예약하기</button>
    </div>
   </div>
- </div>
- <div class="detailNotes">
-  <div><span class="eyebrow">WEEKLY PRICE</span><h3>개별 단가</h3><p>이 페이지에서는 박스 가격이 아니라 Weekly Pick에서 선택할 때 사용하는 개별 단가를 보여줍니다.</p></div>
-  <div><span class="eyebrow">SELECT</span><h3>자유 선택</h3><p>정해진 품목 수 없이 원하는 과일을 직접 고를 수 있습니다.</p></div>
-  <div><span class="eyebrow">PRICE GUIDE</span><h3>가격 안내</h3><p>Weekly Pick 개별 가격은 입고와 시세에 맞춰 관리자가 수시로 조정할 수 있습니다.</p></div>
- </div>`;
- $('#detailOverlay').dataset.id=id;
- $('#detailOverlay').dataset.weekly='1';
- $('#detailOverlay').hidden=false;
- document.body.classList.add('lock');
- requestAnimationFrame(()=>$('#detailSheet .detailClose')?.focus());
+ </div>`);
 }
 function openDetail(id){const p=find(id);if(!p)return;rememberViewed(id);lastFocus=document.activeElement;const gift=p.isGift,sold=p.serverLinked&&Number(p.stock)<=0,pending=p.imported&&!p.serverLinked;$('#detailSheet').innerHTML=`<button class="detailClose" data-detail-close>×</button><div class="detailTop"><div class="detailVisual ${gift?'giftVisualDetail':''}"><img src="${img(p)}" alt="${p.name}" decoding="async"></div><div class="detailInfo"><span class="eyebrow">${gift?'GIFT SELECTION':'IROOM SELECT'}</span><h1>${p.name}</h1><div class="detailPrice">${displayPrice(p)}</div><div class="infoRows"><div class="infoRow"><span>${gift?'분류':'등급'}</span><b>${p.grade}</b></div><div class="infoRow"><span>${gift?'선별':'산지'}</span><b>${p.origin}</b></div><div class="infoRow"><span>구성</span><b>${p.pack}</b></div><div class="infoRow"><span>재고</span><b>${pending?'입고 확인 후 안내':p.serverLinked?(sold?'품절':`${p.stock}개`):'온라인 판매 연결 확인 중'}</b></div><div class="infoRow"><span>배송</span><b>신선식품 전용 포장 · 출고 안내</b></div></div><div class="qtyLine"><div class="qty"><button data-qty="-1">−</button><input id="qty" value="1" inputmode="numeric" aria-label="수량"><button data-qty="1">＋</button></div><strong id="sum">${fmt(p.price)}</strong></div><div class="detailActions">${pending?`<button data-kakao>입고 · 시세 문의</button><button class="dark" data-kakao>카카오 상담</button>`:`<button data-detail-add="${p.id}" ${sold?'disabled':''}>${sold?'품절':'장바구니 담기'}</button><button class="dark" data-buy-now="${p.id}" ${sold?'disabled':''}>BUY NOW</button>`}</div></div></div><div class="detailNotes"><div><span class="eyebrow">PRODUCT</span><h3>${gift?'선물 구성':'상품 안내'}</h3><p>${gift?'과일의 입고 상태에 따라 같은 품질 범위에서 구성이 조정될 수 있습니다.':'입고 상태에 따라 크기와 색감에는 자연스러운 차이가 있습니다.'}</p></div><div><span class="eyebrow">STORAGE</span><h3>보관 가이드</h3><p>수령 후 상태와 후숙 여부에 맞춰 보관하세요.</p></div><div><span class="eyebrow">DELIVERY</span><h3>배송 안내</h3><p>신선식품 특성에 맞춰 안전하게 포장해 출고합니다.</p></div></div>`;$('#detailOverlay').dataset.id=id;$('#detailOverlay').hidden=false;document.body.classList.add('lock');requestAnimationFrame(()=>$('#detailSheet .detailClose')?.focus())}
 function closeDetail(){if($('#detailOverlay').hidden)return;$('#detailOverlay').hidden=true;$('#detailOverlay').removeAttribute('data-weekly');$('#detailSheet').innerHTML='';if($('#utilityOverlay').hidden&&$('#drawer').hidden)document.body.classList.remove('lock');if(lastFocus&&lastFocus.focus){const f=lastFocus;requestAnimationFrame(()=>f.focus());}lastFocus=null}
@@ -690,7 +663,7 @@ function openSearch(){openUtility('과일 찾기',`<div class="topSearchGuide"><
 async function copyText(v){try{await navigator.clipboard.writeText(v);return true}catch{}try{const ta=document.createElement('textarea');ta.value=v;ta.className='clipboardHelper';document.body.appendChild(ta);ta.select();const ok=document.execCommand('copy');ta.remove();return ok}catch{return false}}
 function kakaoAction(){const url=currentKakao();const w=window.open(url,'_blank','noopener,noreferrer');if(w){try{w.opener=null}catch{}}else{location.href=url}}
 async function shareAction(){try{if(navigator.share){await navigator.share({title:'이룸 fresh fruits',text:'좋은 과일로 마음을 전합니다.',url:location.href});return}}catch{}const ok=await copyText(location.href);toast(ok?'현재 페이지 주소를 복사했습니다.':'주소 복사를 지원하지 않는 브라우저입니다.')}
-async function installAction(){if(matchMedia('(display-mode: standalone)').matches||navigator.standalone){toast('이미 홈 화면 앱으로 실행 중입니다.');return}if(installPrompt){installPrompt.prompt();try{await installPrompt.userChoice}catch{}installPrompt=null;return}const isiOS=/iphone|ipad|ipod/i.test(navigator.userAgent);if(isiOS){openUtility('iPhone 홈 화면에 추가',`<div class="mobileInstallHelp"><img src="/iroom_assets/home2-pwa/iroom-home2-icon-180.png" alt="이룸"><p><b>Safari에서</b> 하단의 <strong>공유 버튼</strong>을 누른 뒤 <strong>‘홈 화면에 추가’</strong>를 선택하세요.</p><small>추가 후 홈 화면의 이룸 아이콘으로 앱처럼 바로 열 수 있습니다.</small></div>`);return}if('serviceWorker' in navigator&&location.protocol!=='file:'){try{await navigator.serviceWorker.register('/sw.js?v=61.28.0')}catch(_){}}toast('브라우저 메뉴에서 앱 설치 또는 홈 화면에 추가를 선택해 주세요.')}
+async function installAction(){if(matchMedia('(display-mode: standalone)').matches||navigator.standalone){toast('이미 홈 화면 앱으로 실행 중입니다.');return}if(installPrompt){installPrompt.prompt();try{await installPrompt.userChoice}catch{}installPrompt=null;return}const isiOS=/iphone|ipad|ipod/i.test(navigator.userAgent);if(isiOS){openUtility('iPhone 홈 화면에 추가',`<div class="mobileInstallHelp"><img src="/iroom_assets/home2-pwa/iroom-home2-icon-180.png" alt="이룸"><p><b>Safari에서</b> 하단의 <strong>공유 버튼</strong>을 누른 뒤 <strong>‘홈 화면에 추가’</strong>를 선택하세요.</p><small>추가 후 홈 화면의 이룸 아이콘으로 앱처럼 바로 열 수 있습니다.</small></div>`);return}if('serviceWorker' in navigator&&location.protocol!=='file:'){try{await navigator.serviceWorker.register('/sw.js?v=61.29.0')}catch(_){}}toast('브라우저 메뉴에서 앱 설치 또는 홈 화면에 추가를 선택해 주세요.')}
 function toast(t){const el=$('#toast');el.textContent=t;el.hidden=false;clearTimeout(timer);timer=setTimeout(()=>el.hidden=true,1600)}
 function qty(){return Math.max(1,parseInt($('#qty')?.value||'1'))}
 document.addEventListener('click',e=>{const wd=e.target.closest('[data-weekly-detail]');if(wd){e.preventDefault();smileThenWeeklyDetail(wd,wd.dataset.weeklyDetail);return}const cd=e.target.closest('[data-curation-detail]');if(cd){e.preventDefault();smileThenDetail(cd,cd.dataset.curationDetail);return}const r=e.target.closest('[data-route]');if(r){if(!$('#utilityOverlay').hidden)closeUtility();go(r.dataset.route);return}const cp=e.target.closest('[data-curation]');if(cp){setCurationPreset(cp.dataset.curation.split(','));return}const pick=e.target.closest('[data-pick]');if(pick){e.preventDefault();const card=pick.closest('[data-pick-card]');playFruitSmile(card?.querySelector('.pickFruitImage'));const id=pick.dataset.pick;if(curationSelected.has(id))curationSelected.delete(id);else if(curationSelected.size<6)curationSelected.add(id);else{toast('맞춤 구성은 최대 6종까지 선택할 수 있어요.');return}renderCurationSelected();return}const rp=e.target.closest('[data-remove-pick]');if(rp){curationSelected.delete(rp.dataset.removePick);renderCurationSelected();return}if(e.target.closest('[data-clear-picks]')){curationSelected.clear();renderCurationSelected();return}if(e.target.closest('[data-add-picks]')){if(!curationSelected.size){toast('먼저 과일을 골라주세요.');return}[...curationSelected].forEach(id=>add(id,1,true));saveCart();toast(`${curationSelected.size}가지 과일을 장바구니에 담았습니다.`);return}if(e.target.closest('[data-consult]')){openConsultation();return}if(e.target.closest('[data-search]')){openSearch();return}if(e.target.closest('[data-account]')){openAccount();return}if(e.target.closest('[data-open-login]')){openLogin();return}if(e.target.closest('[data-open-signup]')){openSignup();return}if(e.target.closest('[data-open-import]')){route='fruits';season='import';history.pushState({},'','#fruits');render();scrollTo({top:0,behavior:'smooth'});return}if(e.target.closest('[data-my-orders]')){openMyOrders();return}if(e.target.closest('[data-logout]')){logout();return}if(e.target.closest('[data-kakao-login]')){location.href='/api/auth/kakao/start?next='+encodeURIComponent('/home2.html');return}if(e.target.closest('[data-utility-close]')||e.target.id==='utilityOverlay'){closeUtility();return}const fi=e.target.closest('[data-footer-info]');if(fi){footerInfo(fi.dataset.footerInfo);return}if(e.target.closest('[data-kakao]')){kakaoAction();return}if(e.target.closest('[data-share]')){shareAction();return}if(e.target.closest('[data-install]')){installAction();return}if(e.target.closest('[data-search-go]')){renderSearch($('#siteSearch')?.value||'');return}
@@ -726,6 +699,22 @@ const wq=e.target.closest('[data-weekly-qty]');if(wq){
  refreshWeeklySelectionUI();refreshWeeklyModalUI();return
 }
 const wr=e.target.closest('[data-weekly-remove]');if(wr){weeklyPreferred.delete(wr.dataset.weeklyRemove);weeklyQty.delete(wr.dataset.weeklyRemove);refreshWeeklySelectionUI();refreshWeeklyModalUI();return}
+const wdq=e.target.closest('[data-weekly-detail-qty]');if(wdq){
+ e.preventDefault();
+ const raw=wdq.dataset.weeklyDetailQty||'',cut=raw.lastIndexOf(':'),id=raw.slice(0,cut),delta=Number(raw.slice(cut+1))||0,p=find(id);if(!p)return;
+ let current=weeklyPreferred.has(id)?weeklyQtyOf(id):Number($('#weeklyDetailQtyValue')?.textContent||1);
+ let next=Math.max(1,Math.min(20,current+delta));
+ if(weeklyPreferred.has(id))weeklyQty.set(id,next);
+ const qv=$('#weeklyDetailQtyValue');if(qv)qv.textContent=next;
+ const total=$('#weeklyDetailTotalPrice');if(total)total.textContent=fmt((weeklyUnitInfo(p).price||0)*next);
+ refreshWeeklySelectionUI();refreshWeeklyModalUI();return
+}
+const wds=e.target.closest('[data-weekly-detail-select]');if(wds){
+ const id=wds.dataset.weeklyDetailSelect,p=find(id);if(!p)return;
+ if(weeklyPreferred.has(id)){weeklyPreferred.delete(id);weeklyQty.delete(id);wds.textContent='이 과일 선택'}
+ else{const q=Math.max(1,Number($('#weeklyDetailQtyValue')?.textContent||1));setWeeklyQty(id,q);wds.textContent='선택 해제'}
+ refreshWeeklySelectionUI();refreshWeeklyModalUI();return
+}
 const wp=e.target.closest('[data-weekly-plan]');if(wp){openWeeklyReserve(wp.dataset.weeklyPlan);return}
 const wc=e.target.closest('[data-weekly-choice]');if(wc){
  e.preventDefault();const card=wc.closest('[data-weekly-choice-card]');playFruitSmile(card?.querySelector('.weeklyFruitImage'));
@@ -780,7 +769,7 @@ async function bootstrapBackend(){
  await loadHome2Ux();
  await Promise.allSettled([ensureCsrf(),loadServerProducts(),loadSiteConfig(),loadPaymentConfig(),loadMe()]);
  render();
- if('serviceWorker' in navigator&&location.protocol!=='file:'){navigator.serviceWorker.register('/sw.js?v=61.28.0').catch(()=>{})}
+ if('serviceWorker' in navigator&&location.protocol!=='file:'){navigator.serviceWorker.register('/sw.js?v=61.29.0').catch(()=>{})}
  const q=new URLSearchParams(location.search);if(q.get('kakao')==='success'){toast('카카오 로그인이 완료되었습니다.');history.replaceState({},'',location.pathname+location.hash)}else if(q.get('kakao')==='error'){toast('카카오 로그인에 실패했습니다.');history.replaceState({},'',location.pathname+location.hash)}
 }
 preloadCurrent();setNotice();loadCart();ensureTopNav();const h=location.hash.slice(1);route=['fruits','weekly','curation','gifts','story'].includes(h)?h:'home';render();bootstrapBackend();
