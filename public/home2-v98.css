@@ -940,3 +940,244 @@ body[data-theme-route="story"] .navItem[data-route="story"]{background:#eaf1e7;b
 
 /* V61.24 — custom catalog products use the same visual language */
 .productCard[data-custom="1"] .productImgBtn img{object-fit:contain}
+
+
+/* V61.27 — Home2 mobile app layout + native swipe */
+.mobileInstallCard{display:none}
+.mobileInstallHelp{text-align:center;padding:8px 4px 4px}
+.mobileInstallHelp img{width:86px;height:86px;object-fit:cover;border-radius:22px;margin:0 auto 14px;box-shadow:0 10px 24px rgba(24,60,50,.12)}
+.mobileInstallHelp p{font-size:13px;line-height:1.8;color:#42554d}.mobileInstallHelp small{display:block;font-size:10px;line-height:1.7;color:#7a837e}
+
+@media(max-width:760px){
+ html,body{overflow-x:hidden}
+ body{padding-bottom:calc(78px + env(safe-area-inset-bottom,0px))}
+ .site{min-height:100dvh}
+ .notice{display:none!important}
+ .headerWrap{top:0;padding:8px 8px 0;background:linear-gradient(180deg,rgba(231,236,228,.98),rgba(231,236,228,.90) 78%,rgba(231,236,228,0))}
+ .header{height:58px;border-radius:20px;grid-template-columns:minmax(112px,1fr) auto;padding:0 10px;gap:6px}
+ .logoBtn img{width:138px!important;height:48px!important;object-fit:contain!important;object-position:left center!important}
+ .nav{display:none!important}
+ .tools{gap:4px}
+ .tool{width:34px;height:34px}
+ .toolSvg{width:19px;height:19px}
+ .badge{right:-4px;top:-4px}
+ .shell{width:100%}
+ .homeSection{padding-left:14px!important;padding-right:14px!important}
+
+ /* Home hero: compact, swipeable, app-like */
+ .hero{min-height:auto!important;display:flex!important;flex-direction:column!important;padding-top:14px!important;padding-bottom:18px!important;gap:4px}
+ .heroCopy{width:100%;padding:14px 4px 0!important;text-align:left}
+ .heroCopy h1{font-size:36px!important;line-height:1.16!important;margin:10px 0 10px!important}
+ .heroCopy p{font-size:11px!important;line-height:1.65!important;margin-bottom:14px!important}
+ .outlineBtn{height:39px;padding:0 17px;font-size:10px}
+ .heroDots{margin-top:13px;gap:11px}
+ .heroVisual{width:100%;height:300px!important;margin-top:-4px;touch-action:pan-y}
+ .heroVisual img{width:82%!important;height:88%!important;object-fit:contain!important;transform:none!important}
+ .heroArrows{display:none!important}
+ .heroMeta{display:none!important}
+ .dotBtn{font-size:10px}
+
+ /* Seasonal Picks: native finger swipe with a visible next-card peek */
+ .seasonalFeatureSection{margin:6px 8px 18px!important;padding:24px 0 25px!important;border-radius:24px!important}
+ .seasonalFeatureIntro{padding:0 14px;margin-bottom:15px!important;display:block!important}
+ .seasonalFeatureIntro h2{font-size:25px!important;line-height:1.25}
+ .seasonalFeatureIntro p{font-size:10px!important}
+ .seasonalFeatureIntro .textLink{display:inline-block;margin-top:10px}
+ .sliderWrap{padding:0}
+ .cardsViewport{
+   overflow-x:auto!important;
+   overflow-y:hidden!important;
+   padding:0 14px 4px!important;
+   scroll-snap-type:x mandatory;
+   scroll-padding-left:14px;
+   -webkit-overflow-scrolling:touch;
+   overscroll-behavior-x:contain;
+   touch-action:pan-x pan-y;
+   scrollbar-width:none;
+ }
+ .cardsViewport::-webkit-scrollbar{display:none}
+ .cardsTrack{gap:12px!important;transform:none!important;transition:none!important;width:max-content}
+ .cardsViewport .productCard{
+   flex:0 0 min(82vw,330px)!important;
+   width:min(82vw,330px)!important;
+   min-height:372px!important;
+   scroll-snap-align:start;
+   scroll-snap-stop:always;
+ }
+ .cardsViewport .productImgBtn{height:225px!important;padding:26px!important}
+ .sliderBtn,.sliderDots{display:none!important}
+
+ /* World fruits: horizontal browse instead of tiny two-column squeeze */
+ .worldSimpleSection{padding-left:0!important;padding-right:0!important}
+ .worldSimpleSection .sectionHead{padding:0 14px}
+ .worldSimpleSection .worldGrid{
+   display:flex!important;
+   overflow-x:auto;
+   gap:12px!important;
+   padding:0 14px 6px;
+   scroll-snap-type:x mandatory;
+   -webkit-overflow-scrolling:touch;
+   scrollbar-width:none;
+ }
+ .worldSimpleSection .worldGrid::-webkit-scrollbar{display:none}
+ .worldSimpleSection .worldProductCard{
+   flex:0 0 min(78vw,310px)!important;
+   width:min(78vw,310px)!important;
+   scroll-snap-align:start;
+ }
+ .worldNote{padding:0 14px}
+
+ /* Weekly teaser and box plans can be swiped horizontally */
+ .weeklyTeaserV12{margin:18px 8px!important;padding:24px 16px 20px!important}
+ .weeklyMiniFruits{
+   display:flex!important;
+   overflow-x:auto;
+   gap:9px!important;
+   padding-bottom:4px;
+   scroll-snap-type:x mandatory;
+   -webkit-overflow-scrolling:touch;
+   scrollbar-width:none;
+ }
+ .weeklyMiniFruits::-webkit-scrollbar{display:none}
+ .weeklyMiniFruits button,.weeklyMiniFruits>span{
+   flex:0 0 42%!important;
+   min-height:108px!important;
+   scroll-snap-align:start;
+ }
+ .weeklyMiniFruits img{width:62px!important;height:58px!important}
+ .weeklyMiniFlow{grid-template-columns:1fr 1fr!important;gap:7px!important}
+ .weeklyMiniFlow>span{display:none!important}
+ .weeklyPageV12 .weeklyPlanGrid{
+   display:flex!important;
+   overflow-x:auto;
+   gap:12px!important;
+   margin-left:-2px;
+   margin-right:-2px;
+   padding:0 2px 6px;
+   scroll-snap-type:x mandatory;
+   -webkit-overflow-scrolling:touch;
+   scrollbar-width:none;
+ }
+ .weeklyPageV12 .weeklyPlanGrid::-webkit-scrollbar{display:none}
+ .weeklyPageV12 .weeklyPlan{
+   flex:0 0 min(84vw,340px)!important;
+   min-height:235px!important;
+   scroll-snap-align:start;
+ }
+ .weeklyPageV12 .weeklyFruitGrid{grid-template-columns:1fr 1fr!important;gap:8px!important}
+ .weeklyPageV12 .weeklyFruit{padding:8px!important}
+ .weeklyPageV12 .weeklyFruitImage{height:138px!important}
+ .weeklyPageV12 .weeklyFruitImage img{max-width:48%!important;max-height:58%!important}
+ .weeklySelectionSummary{grid-template-columns:1fr!important}
+ .weeklySelectionActions{justify-content:flex-start!important;max-width:none!important}
+ .weeklySelectionActions small{text-align:left!important}
+
+ /* Curation stays easy to tap */
+ .curationBuilder{display:block!important}
+ .pickPanel,.pickSummary{border-radius:20px!important;padding:16px!important}
+ .pickSummary{margin-top:14px!important;position:static!important}
+ .pickGrid{grid-template-columns:1fr 1fr!important;gap:8px!important}
+ .pickFruit{min-width:0!important}
+ .pickFruitImage{height:108px!important}
+ .curationGrid{grid-template-columns:1fr!important}
+
+ /* Product/catalog pages */
+ .routePage{padding:20px 12px 34px!important}
+ .routeHeroTheme{padding:20px 16px 22px!important;border-radius:22px!important}
+ .routeHero{display:block!important}
+ .routeHero h1{font-size:34px!important}
+ .routeHero p{font-size:10px!important;margin-top:10px}
+ .fruitFinderRow{display:grid!important;grid-template-columns:1fr 1fr!important;gap:7px!important}
+ .catalogGrid{grid-template-columns:1fr 1fr!important;gap:8px!important}
+ .catalogGrid .productCard{padding:8px!important;min-height:320px!important;border-radius:17px!important}
+ .catalogGrid .productImgBtn{height:170px!important;padding:18px!important;border-radius:13px!important}
+ .catalogGrid .productName{font-size:16px!important}
+ .catalogGrid .productSpec{font-size:9px!important}
+ .catalogGrid .productPrice{font-size:13px!important}
+ .catalogGrid .cartBar{height:34px!important;font-size:9px!important}
+
+ /* Gift cards: one clean card, no nested-frame effect */
+ .giftGrid{grid-template-columns:1fr!important;gap:12px!important}
+ .giftsRoutePage .giftCard{min-height:0!important;border-radius:20px!important}
+ .giftsRoutePage .giftVisual{height:auto!important;aspect-ratio:1.58/1!important}
+ .giftsRoutePage .giftVisual img{object-fit:cover!important}
+ .giftsRoutePage .giftCard>div:last-child{padding:15px 16px 17px!important}
+
+ /* Detail, cart, forms */
+ .detailSheet{border-radius:22px 22px 0 0!important;max-height:94dvh!important}
+ .detailVisual{height:285px!important;padding:18px!important}
+ .detailInfo{padding:17px 18px 26px!important}
+ .detailInfo h1{font-size:29px!important}
+ .detailActions{position:sticky;bottom:0;background:#fffefa;padding-top:10px;z-index:2}
+ .drawer{width:min(94vw,410px)!important}
+ .utilitySheet{max-height:92dvh!important;overflow:auto}
+ .formGrid{grid-template-columns:1fr!important}
+
+ /* App-like persistent bottom bar */
+ .home2QuickDock{
+   position:fixed!important;
+   left:8px!important;
+   right:8px!important;
+   bottom:calc(7px + env(safe-area-inset-bottom,0px))!important;
+   z-index:180!important;
+   display:grid!important;
+   grid-template-columns:repeat(5,1fr)!important;
+   min-height:62px!important;
+   padding:6px 5px!important;
+   border-radius:21px!important;
+   background:rgba(255,254,250,.96)!important;
+   border:1px solid rgba(24,60,50,.10)!important;
+   box-shadow:0 12px 34px rgba(24,60,50,.17)!important;
+   backdrop-filter:blur(16px);
+ }
+ .home2QuickDock button{
+   position:relative;
+   border:0!important;
+   background:transparent!important;
+   min-width:0;
+   padding:4px 1px!important;
+   display:flex!important;
+   flex-direction:column!important;
+   align-items:center!important;
+   justify-content:center!important;
+   gap:2px!important;
+   color:#68766f!important;
+   border-radius:15px!important;
+ }
+ .home2QuickDock button.active{background:#edf2e9!important;color:#183c32!important}
+ .home2QuickDock button>span{font-size:17px!important;line-height:1}
+ .home2QuickDock button>b{font-size:8px!important;white-space:nowrap}
+ .home2QuickDock button>i{
+   position:absolute;right:9px;top:2px;min-width:15px;height:15px;padding:0 3px;border-radius:99px;background:#183c32;color:#fff;font-size:8px;font-style:normal;display:grid;place-items:center
+ }
+
+ .mobileInstallCard{
+   display:grid;
+   grid-template-columns:50px 1fr auto;
+   gap:11px;
+   align-items:center;
+   margin:16px 14px 22px;
+   padding:13px;
+   border-radius:19px;
+   background:linear-gradient(120deg,#fff3da,#edf5e9);
+   border:1px solid rgba(24,60,50,.08);
+ }
+ .mobileInstallCard img{width:50px;height:50px;border-radius:13px;object-fit:cover}
+ .mobileInstallCard div{min-width:0}.mobileInstallCard b{display:block;font-family:var(--serif);font-size:14px}.mobileInstallCard span{display:block;margin-top:3px;font-size:8px;line-height:1.45;color:#6f7973}
+ .mobileInstallCard button{height:34px;border:0;border-radius:18px;background:#183c32;color:#fff;padding:0 12px;font-size:9px;font-weight:800}
+
+ .siteFooter{padding-bottom:92px!important}
+}
+
+@media(max-width:390px){
+ .header{grid-template-columns:minmax(102px,1fr) auto}
+ .logoBtn img{width:124px!important}
+ .tool{width:32px;height:32px}
+ .heroCopy h1{font-size:33px!important}
+ .catalogGrid .productImgBtn{height:155px!important}
+ .weeklyPageV12 .weeklyFruitImage{height:126px!important}
+}
+
+@media(display-mode:standalone){
+ .mobileInstallCard{display:none!important}
+}
