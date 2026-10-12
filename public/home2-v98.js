@@ -113,10 +113,12 @@ const importSelection=()=>{
  return [...ordered,...fallback].slice(0,count);
 };
 const img=(p,kind='canvas')=>{
+ const custom=home2Ux?.productImageOverrides&&typeof home2Ux.productImageOverrides==='object'?String(home2Ux.productImageOverrides[p.id]||'').trim():'';
+ if(custom&&kind!=='hero')return custom;
  if(p.isGift)return G+p.asset;
- if(kind!=='hero'&&IMPORT_CARD_ASSETS[p.id])return IMPORT_ASSET_PATH+IMPORT_CARD_ASSETS[p.id]+'?v=61.13.0';
- if(kind==='hero'&&V95_HERO.has(p.id))return V95+'hero-'+p.id+'.webp?v=61.13.0';
- if(kind!=='hero'&&V95_CARD.has(p.id))return V95+p.id+'.webp?v=61.13.0';
+ if(kind!=='hero'&&IMPORT_CARD_ASSETS[p.id])return IMPORT_ASSET_PATH+IMPORT_CARD_ASSETS[p.id]+'?v=61.23.0';
+ if(kind==='hero'&&V95_HERO.has(p.id))return V95+'hero-'+p.id+'.webp?v=61.23.0';
+ if(kind!=='hero'&&V95_CARD.has(p.id))return V95+p.id+'.webp?v=61.23.0';
  return A+(kind==='hero'?'hero-':'')+p.id+'.webp';
 };
 const domesticProducts=()=>Object.values(DATA).flat();
@@ -155,17 +157,19 @@ const HOME2_UX_DEFAULTS={
  weeklyMiniName:'MINI',
  weeklyMiniLabel:'혼자 가볍게',
  weeklyMiniPrice:19900,
- weeklyMiniComposition:'3~4종 소분 구성',
+ weeklyMiniComposition:'원하는 과일 자유 선택',
  weeklyRegularEnabled:true,
  weeklyRegularName:'REGULAR',
  weeklyRegularLabel:'둘이 골고루',
  weeklyRegularPrice:29900,
- weeklyRegularComposition:'4~5종 소분 구성',
+ weeklyRegularComposition:'원하는 과일 자유 선택',
  weeklyFamilyEnabled:true,
  weeklyFamilyName:'FAMILY',
  weeklyFamilyLabel:'가족과 넉넉하게',
  weeklyFamilyPrice:39900,
- weeklyFamilyComposition:'5~6종 넉넉한 구성'
+ weeklyFamilyComposition:'원하는 과일 자유 선택',
+ weeklyUnitPrices:{},
+ productImageOverrides:{}
 };
 let home2Ux={...HOME2_UX_DEFAULTS};
 let fruitQuery='',fruitAvailability='all',fruitSort='recommended';
@@ -230,6 +234,8 @@ async function loadHome2Ux(){
   const saved=d?.config?.home2Ux&&typeof d.config.home2Ux==='object'?d.config.home2Ux:{};
   home2Ux={...HOME2_UX_DEFAULTS,...saved};
   if(!Array.isArray(home2Ux.worldFeaturedIds))home2Ux.worldFeaturedIds=[...HOME2_UX_DEFAULTS.worldFeaturedIds];
+  if(!home2Ux.weeklyUnitPrices||typeof home2Ux.weeklyUnitPrices!=='object'||Array.isArray(home2Ux.weeklyUnitPrices))home2Ux.weeklyUnitPrices={};
+  if(!home2Ux.productImageOverrides||typeof home2Ux.productImageOverrides!=='object'||Array.isArray(home2Ux.productImageOverrides))home2Ux.productImageOverrides={};
  }catch(e){console.warn('[HOME2 UX]',e.message);home2Ux={...HOME2_UX_DEFAULTS}}
 }
 function loadRecentViewed(){
@@ -344,6 +350,11 @@ const WEEKLY_UNIT_PRICE={
 };
 function weeklyUnitInfo(p){
  if(!p)return {unit:'1개',price:0};
+ const saved=home2Ux?.weeklyUnitPrices&&typeof home2Ux.weeklyUnitPrices==='object'?home2Ux.weeklyUnitPrices[p.id]:null;
+ if(saved&&typeof saved==='object'){
+  const unit=String(saved.unit||'').trim();const price=Math.max(0,Number(saved.price)||0);
+  if(unit&&price)return {unit,price};
+ }
  return WEEKLY_UNIT_PRICE[p.id]||{unit:'1개',price:0};
 }
 function weeklyUnitPrice(p){
@@ -404,7 +415,7 @@ function weeklyPage(){
 
   <section class="weeklyPlanSection"><div class="weeklySectionLead"><span class="eyebrow">CHOOSE YOUR BOX</span><h2>이번 주 예산 기준 선택</h2><p>플랜은 고정 구성표가 아니라 최소 주문금액 기준입니다. 과일은 아래에서 직접 고르세요.</p></div><div class="weeklyPlanGrid">${plans.map((x,i)=>`<article class="weeklyPlan ${i===1?'featured':''}"><span class="weeklyPlanNo">0${i+1}</span><small>${esc(x.label)}</small><h2>${esc(x.name)}</h2><p>${esc(weeklyPlanNote(x))}<br><small>품목 수 제한 없음 · 과일별 가격 적용</small></p><strong>${weeklyMinPrice(x.price)}</strong><button data-weekly-plan="${x.key}">${esc(x.name)} 기준으로 예약</button></article>`).join('')}</div></section>
 
-  <section class="weeklyFruitSection weeklyFruitSectionV12"><div class="sectionHead"><div><span class="eyebrow">PICK YOUR FAVORITES</span><h2>이번 주 선택 가능 과일</h2><p>각 과일의 1개·1송이·1팩 기준 단가를 확인하고 원하는 품목을 자유롭게 고르세요. 현재는 Weekly Pick 운영용 임시 단가로 표시됩니다.</p></div><div class="weeklyChoiceCounter"><b id="weeklyChoiceCount">${weeklyPreferred.size}</b>종 선택</div></div><div class="weeklyFruitGrid" id="weeklyFruitGrid">${weeklyFruitGrid()}</div>${weeklySelectionSummary()}</section>
+  <section class="weeklyFruitSection weeklyFruitSectionV12"><div class="sectionHead"><div><span class="eyebrow">PICK YOUR FAVORITES</span><h2>이번 주 선택 가능 과일</h2><p>각 과일의 1개·1송이·1팩 기준 가격을 확인하고 원하는 품목을 자유롭게 고르세요. 가격은 관리자에서 바로 조정할 수 있습니다.</p></div><div class="weeklyChoiceCounter"><b id="weeklyChoiceCount">${weeklyPreferred.size}</b>종 선택</div></div><div class="weeklyFruitGrid" id="weeklyFruitGrid">${weeklyFruitGrid()}</div>${weeklySelectionSummary()}</section>
 
   <section class="weeklyBehind"><div class="weeklyBehindCopy"><span class="eyebrow">HOW IROOM PREPARES</span><h2>주문받고 준비하니까<br>재고 부담을 줄일 수 있어요.</h2><p>예약 수량을 먼저 확인한 뒤 그 주 경매와 입고 상태를 보고 좋은 과일을 고릅니다. 그래서 매주 똑같은 구성보다 그 주 맛있는 과일을 더 유연하게 담을 수 있습니다.</p></div><div class="weeklyBehindSteps"><div><span>01</span><b>예약 수량 확인</b></div><div><span>02</span><b>경매 · 매입</b></div><div><span>03</span><b>선별 · 소분</b></div><div><span>04</span><b>포장 · 발송</b></div></div></section>
 
@@ -426,7 +437,7 @@ async function submitWeeklyReserve(form){
   const priced=picked.map(p=>`${p.name} (${weeklyUnitPrice(p)})`).join(', ');
   const message=[`예산 기준: ${plan.name} · ${weeklyMinPrice(plan.price)}`,priced?`선택 과일: ${priced}`:'선택 과일: 선택 없음',`취향: ${taste}`,memo?`추가 요청: ${memo}`:''].filter(Boolean).join('\n');
   const d=await api('/api/consultations',{method:'POST',body:JSON.stringify({guide_type:'이룸홈2 Weekly Pick 자유선택 예약',customer_name:$('#weeklyName').value,phone:$('#weeklyPhone').value,email:$('#weeklyEmail').value,budget:weeklyMinPrice(plan.price),preferred_fruits:preferred||'선택 없음',message})});
-  openUtility('이번 주 예약이 접수되었습니다',`<div class="orderSuccess"><span>예약 상담번호</span><b>${esc(d.consult_no)}</b><p>고른 과일과 카드에 표시된 Weekly Pick 개별 단가를 기준으로 확인한 뒤 입고 상태와 최종 구성을 안내드리겠습니다.</p></div><div class="utilityActions"><button class="dark" data-kakao>카카오로 이어서 상담</button></div>`);
+  openUtility('이번 주 예약이 접수되었습니다',`<div class="orderSuccess"><span>예약 상담번호</span><b>${esc(d.consult_no)}</b><p>고른 과일과 카드에 표시된 Weekly Pick 가격을 기준으로 확인한 뒤 입고 상태와 최종 구성을 안내드리겠습니다.</p></div><div class="utilityActions"><button class="dark" data-kakao>카카오로 이어서 상담</button></div>`);
  }catch(e){toast(e.message)}
 }
 
@@ -534,7 +545,7 @@ function openWeeklyDetail(id){
    <span class="eyebrow">WEEKLY PICK UNIT</span>
    <h1>${esc(p.name)}</h1>
    <div class="detailPrice weeklyDetailPrice">${weeklyUnitPrice(p)}</div>
-   <div class="weeklyDetailNotice">Weekly Pick에서 고르기 쉽게 표시한 <b>임시 개별 단가</b>입니다. 일반 상품의 박스·팩 판매가는 별도입니다.</div>
+   <div class="weeklyDetailNotice">Weekly Pick에서 선택할 때 적용되는 <b>개별 가격</b>입니다. 일반 상품의 박스·팩 판매가는 별도입니다.</div>
    <div class="infoRows">
     <div class="infoRow"><span>판매 기준</span><b>${esc(x.unit)}</b></div>
     <div class="infoRow"><span>Weekly 단가</span><b>${weeklyUnitPrice(p)}</b></div>
@@ -551,7 +562,7 @@ function openWeeklyDetail(id){
  <div class="detailNotes">
   <div><span class="eyebrow">WEEKLY PRICE</span><h3>개별 단가</h3><p>이 페이지에서는 박스 가격이 아니라 Weekly Pick에서 선택할 때 사용하는 개별 단가를 보여줍니다.</p></div>
   <div><span class="eyebrow">SELECT</span><h3>자유 선택</h3><p>정해진 품목 수 없이 원하는 과일을 직접 고를 수 있습니다.</p></div>
-  <div><span class="eyebrow">NOTICE</span><h3>임시 단가</h3><p>현재 단가는 운영 테스트용이며 실제 입고·경매 상황에 따라 관리자가 조정할 수 있습니다.</p></div>
+  <div><span class="eyebrow">PRICE GUIDE</span><h3>가격 안내</h3><p>Weekly Pick 개별 가격은 입고와 시세에 맞춰 관리자가 수시로 조정할 수 있습니다.</p></div>
  </div>`;
  $('#detailOverlay').dataset.id=id;
  $('#detailOverlay').dataset.weekly='1';
@@ -587,7 +598,7 @@ function openSearch(){openUtility('과일 찾기',`<div class="topSearchGuide"><
 async function copyText(v){try{await navigator.clipboard.writeText(v);return true}catch{}try{const ta=document.createElement('textarea');ta.value=v;ta.className='clipboardHelper';document.body.appendChild(ta);ta.select();const ok=document.execCommand('copy');ta.remove();return ok}catch{return false}}
 function kakaoAction(){const url=currentKakao();const w=window.open(url,'_blank','noopener,noreferrer');if(w){try{w.opener=null}catch{}}else{location.href=url}}
 async function shareAction(){try{if(navigator.share){await navigator.share({title:'이룸 fresh fruits',text:'좋은 과일로 마음을 전합니다.',url:location.href});return}}catch{}const ok=await copyText(location.href);toast(ok?'현재 페이지 주소를 복사했습니다.':'주소 복사를 지원하지 않는 브라우저입니다.')}
-async function installAction(){if(installPrompt){installPrompt.prompt();try{await installPrompt.userChoice}catch{}installPrompt=null;return}if('serviceWorker' in navigator&&location.protocol!=='file:'){try{await navigator.serviceWorker.register('/sw.js?v=61.22.0')}catch(_){}}toast('브라우저 메뉴의 홈 화면에 추가/앱 설치 기능을 이용해 주세요.')}
+async function installAction(){if(installPrompt){installPrompt.prompt();try{await installPrompt.userChoice}catch{}installPrompt=null;return}if('serviceWorker' in navigator&&location.protocol!=='file:'){try{await navigator.serviceWorker.register('/sw.js?v=61.23.0')}catch(_){}}toast('브라우저 메뉴의 홈 화면에 추가/앱 설치 기능을 이용해 주세요.')}
 function toast(t){const el=$('#toast');el.textContent=t;el.hidden=false;clearTimeout(timer);timer=setTimeout(()=>el.hidden=true,1600)}
 function qty(){return Math.max(1,parseInt($('#qty')?.value||'1'))}
 document.addEventListener('click',e=>{const wd=e.target.closest('[data-weekly-detail]');if(wd){e.preventDefault();smileThenWeeklyDetail(wd,wd.dataset.weeklyDetail);return}const cd=e.target.closest('[data-curation-detail]');if(cd){e.preventDefault();smileThenDetail(cd,cd.dataset.curationDetail);return}const r=e.target.closest('[data-route]');if(r){if(!$('#utilityOverlay').hidden)closeUtility();go(r.dataset.route);return}const cp=e.target.closest('[data-curation]');if(cp){setCurationPreset(cp.dataset.curation.split(','));return}const pick=e.target.closest('[data-pick]');if(pick){e.preventDefault();const card=pick.closest('[data-pick-card]');playFruitSmile(card?.querySelector('.pickFruitImage'));const id=pick.dataset.pick;if(curationSelected.has(id))curationSelected.delete(id);else if(curationSelected.size<6)curationSelected.add(id);else{toast('맞춤 구성은 최대 6종까지 선택할 수 있어요.');return}renderCurationSelected();return}const rp=e.target.closest('[data-remove-pick]');if(rp){curationSelected.delete(rp.dataset.removePick);renderCurationSelected();return}if(e.target.closest('[data-clear-picks]')){curationSelected.clear();renderCurationSelected();return}if(e.target.closest('[data-add-picks]')){if(!curationSelected.size){toast('먼저 과일을 골라주세요.');return}[...curationSelected].forEach(id=>add(id,1,true));saveCart();toast(`${curationSelected.size}가지 과일을 장바구니에 담았습니다.`);return}if(e.target.closest('[data-consult]')){openConsultation();return}if(e.target.closest('[data-search]')){openSearch();return}if(e.target.closest('[data-account]')){openAccount();return}if(e.target.closest('[data-open-login]')){openLogin();return}if(e.target.closest('[data-open-signup]')){openSignup();return}if(e.target.closest('[data-open-import]')){route='fruits';season='import';history.pushState({},'','#fruits');render();scrollTo({top:0,behavior:'smooth'});return}if(e.target.closest('[data-my-orders]')){openMyOrders();return}if(e.target.closest('[data-logout]')){logout();return}if(e.target.closest('[data-kakao-login]')){location.href='/api/auth/kakao/start?next='+encodeURIComponent('/home2.html');return}if(e.target.closest('[data-utility-close]')||e.target.id==='utilityOverlay'){closeUtility();return}const fi=e.target.closest('[data-footer-info]');if(fi){footerInfo(fi.dataset.footerInfo);return}if(e.target.closest('[data-kakao]')){kakaoAction();return}if(e.target.closest('[data-share]')){shareAction();return}if(e.target.closest('[data-install]')){installAction();return}if(e.target.closest('[data-search-go]')){renderSearch($('#siteSearch')?.value||'');return}
@@ -643,7 +654,7 @@ function preloadCurrent(){homeProducts().slice(0,5).forEach(p=>{const h=new Imag
 async function bootstrapBackend(){
  await Promise.allSettled([ensureCsrf(),loadServerProducts(),loadSiteConfig(),loadHome2Ux(),loadPaymentConfig(),loadMe()]);
  render();
- if('serviceWorker' in navigator&&location.protocol!=='file:'){navigator.serviceWorker.register('/sw.js?v=61.22.0').catch(()=>{})}
+ if('serviceWorker' in navigator&&location.protocol!=='file:'){navigator.serviceWorker.register('/sw.js?v=61.23.0').catch(()=>{})}
  const q=new URLSearchParams(location.search);if(q.get('kakao')==='success'){toast('카카오 로그인이 완료되었습니다.');history.replaceState({},'',location.pathname+location.hash)}else if(q.get('kakao')==='error'){toast('카카오 로그인에 실패했습니다.');history.replaceState({},'',location.pathname+location.hash)}
 }
 preloadCurrent();setNotice();loadCart();ensureTopNav();const h=location.hash.slice(1);route=['fruits','weekly','curation','gifts','story'].includes(h)?h:'home';render();bootstrapBackend();
