@@ -1,6 +1,2 @@
 User-agent: *
-Allow: /
-Disallow: /band-admin.html
-Disallow: /admin-preview
-Disallow: /api/
-Sitemap: https://iroom-fresh-fruits.onrender.com/sitemap.xml
+Disallow: /

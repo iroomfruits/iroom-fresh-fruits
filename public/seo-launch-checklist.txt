@@ -1,0 +1,29 @@
+이룸 fresh fruits — 검색엔진 오픈 전 준비상태
+기준: V61.26
+
+현재 상태: 검색 노출 차단
+- robots.txt: 전체 차단
+- Home2 meta robots: noindex,nofollow
+- Google/Naver 등록은 아직 하지 않는 상태
+
+이미 준비된 것
+- 검색 제목 / 설명
+- canonical: https://iroom-fresh-fruits.onrender.com/home2
+- Open Graph 공유 정보
+- Twitter 카드 정보
+- 이룸 확정 앱 로고 연결
+- 구조화 데이터(WebSite + Store)
+- sitemap.xml
+- 오픈용 robots 템플릿
+
+실제 오픈할 때 해야 할 일
+1. Home2의 robots 메타를 index,follow로 변경
+2. robots.txt를 robots-OPEN_WHEN_LAUNCH.txt 내용으로 변경
+3. Google Search Console에 사이트 등록 및 sitemap.xml 제출
+4. 네이버 서치어드바이저에 사이트 등록 및 sitemap.xml 제출
+5. 필요하면 네이버 사이트 소유확인 코드를 meta 태그에 입력
+6. 커스텀 도메인을 붙이면 canonical / sitemap 주소도 새 도메인으로 변경
+
+주의
+- 지금 상태에서는 사이트가 우연히 크롤링되더라도 검색 결과에 노출되지 않도록 막아두었습니다.
+- 오픈한다고 말씀하시면 '검색 공개 전환 패치'만 따로 만들어 적용하면 됩니다.
