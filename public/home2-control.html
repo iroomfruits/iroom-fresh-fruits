@@ -65,13 +65,13 @@
     <div class="field"><label>주문 마감 안내</label><input id="weeklyDeadline" placeholder="예: 화요일 밤 주문 마감"></div>
     <div class="field"><label>발송 안내</label><input id="weeklyShipDate" placeholder="예: 목~금 순차 발송"></div>
     <div class="field"><label>한정 수량</label><input id="weeklyLimit" type="number" min="1"></div>
-    <div class="notice">정기결제는 넣지 않고 <b>1회 예약</b>으로 시작합니다. 예약은 기존 상담 DB에 저장됩니다. 고객은 원하는 과일을 이미지로 고르고, 다시 누르면 선택을 해제합니다.</div>
+    <div class="notice">정기결제는 넣지 않고 <b>1회 예약</b>으로 시작합니다. 예약은 기존 상담 DB에 저장됩니다. 고객은 각 과일 가격을 보고 품목 수 제한 없이 자유롭게 고르고, 다시 누르면 선택을 해제합니다. MINI/REGULAR/FAMILY 가격은 고정 판매가가 아니라 최소 주문금액입니다.</div>
    </div>
   </div>
   <div class="weekly-admin-plans">
-   <div class="plan-admin"><label class="switch"><input id="weeklyMiniEnabled" type="checkbox"><span>MINI 사용</span></label><div class="field"><label>이름</label><input id="weeklyMiniName"></div><div class="field"><label>한글 설명</label><input id="weeklyMiniLabel"></div><div class="field"><label>가격</label><input id="weeklyMiniPrice" type="number"></div><div class="field"><label>구성</label><input id="weeklyMiniComposition"></div></div>
-   <div class="plan-admin"><label class="switch"><input id="weeklyRegularEnabled" type="checkbox"><span>REGULAR 사용</span></label><div class="field"><label>이름</label><input id="weeklyRegularName"></div><div class="field"><label>한글 설명</label><input id="weeklyRegularLabel"></div><div class="field"><label>가격</label><input id="weeklyRegularPrice" type="number"></div><div class="field"><label>구성</label><input id="weeklyRegularComposition"></div></div>
-   <div class="plan-admin"><label class="switch"><input id="weeklyFamilyEnabled" type="checkbox"><span>FAMILY 사용</span></label><div class="field"><label>이름</label><input id="weeklyFamilyName"></div><div class="field"><label>한글 설명</label><input id="weeklyFamilyLabel"></div><div class="field"><label>가격</label><input id="weeklyFamilyPrice" type="number"></div><div class="field"><label>구성</label><input id="weeklyFamilyComposition"></div></div>
+   <div class="plan-admin"><label class="switch"><input id="weeklyMiniEnabled" type="checkbox"><span>MINI 사용</span></label><div class="field"><label>이름</label><input id="weeklyMiniName"></div><div class="field"><label>한글 설명</label><input id="weeklyMiniLabel"></div><div class="field"><label>최소금액</label><input id="weeklyMiniPrice" type="number"></div><div class="field"><label>안내 문구</label><input id="weeklyMiniComposition" placeholder="원하는 과일 자유 선택"></div></div>
+   <div class="plan-admin"><label class="switch"><input id="weeklyRegularEnabled" type="checkbox"><span>REGULAR 사용</span></label><div class="field"><label>이름</label><input id="weeklyRegularName"></div><div class="field"><label>한글 설명</label><input id="weeklyRegularLabel"></div><div class="field"><label>최소금액</label><input id="weeklyRegularPrice" type="number"></div><div class="field"><label>안내 문구</label><input id="weeklyRegularComposition" placeholder="원하는 과일 자유 선택"></div></div>
+   <div class="plan-admin"><label class="switch"><input id="weeklyFamilyEnabled" type="checkbox"><span>FAMILY 사용</span></label><div class="field"><label>이름</label><input id="weeklyFamilyName"></div><div class="field"><label>한글 설명</label><input id="weeklyFamilyLabel"></div><div class="field"><label>최소금액</label><input id="weeklyFamilyPrice" type="number"></div><div class="field"><label>안내 문구</label><input id="weeklyFamilyComposition" placeholder="원하는 과일 자유 선택"></div></div>
   </div>
   <div style="margin-top:12px"><button class="btn" onclick="window.open('/home2#weekly','_blank')">Weekly Pick 미리보기</button></div>
  </section>
@@ -84,14 +84,16 @@ const DEFAULTS={
  worldFeaturedIds:['world-cherry','world-orange','world-mango','world-grapefruit'],
  searchPlaceholder:'과일 이름·품종을 검색하세요',trust1:'비회원도 바로 주문',trust2:'당일 상태 확인',trust3:'5만원 이상 기본배송 무료',trust4:'카카오 빠른 상담',
  weeklyEnabled:true,showWeeklyTeaser:true,weeklyTitle:'이번 주 맛있는 과일을 조금씩',weeklySubtitle:'많이 사지 않아도 여러 과일을 맛볼 수 있게, 이번 주 좋은 과일만 조금씩 골라드립니다.',weeklyDeadline:'화요일 밤 주문 마감',weeklyShipDate:'목~금 순차 발송',weeklyLimit:20,weeklyFruitNames:'',
- weeklyMiniEnabled:true,weeklyMiniName:'MINI',weeklyMiniLabel:'혼자 가볍게',weeklyMiniPrice:19900,weeklyMiniComposition:'3~4종 소분 구성',
- weeklyRegularEnabled:true,weeklyRegularName:'REGULAR',weeklyRegularLabel:'둘이 골고루',weeklyRegularPrice:29900,weeklyRegularComposition:'4~5종 소분 구성',
- weeklyFamilyEnabled:true,weeklyFamilyName:'FAMILY',weeklyFamilyLabel:'가족과 넉넉하게',weeklyFamilyPrice:39900,weeklyFamilyComposition:'5~6종 넉넉한 구성'
+ weeklyMiniEnabled:true,weeklyMiniName:'MINI',weeklyMiniLabel:'혼자 가볍게',weeklyMiniPrice:19900,weeklyMiniComposition:'원하는 과일 자유 선택',
+ weeklyRegularEnabled:true,weeklyRegularName:'REGULAR',weeklyRegularLabel:'둘이 골고루',weeklyRegularPrice:29900,weeklyRegularComposition:'원하는 과일 자유 선택',
+ weeklyFamilyEnabled:true,weeklyFamilyName:'FAMILY',weeklyFamilyLabel:'가족과 넉넉하게',weeklyFamilyPrice:39900,weeklyFamilyComposition:'원하는 과일 자유 선택'
 };
 let rawConfig={},ux={...DEFAULTS};
 const $=s=>document.querySelector(s);
 function options(selected){return ASSETS.map(x=>`<option value="${x.id}" ${x.id===selected?'selected':''}>${x.name}</option>`).join('')}
+function normalizeWeeklyPlanText(){['weeklyMiniComposition','weeklyRegularComposition','weeklyFamilyComposition'].forEach(k=>{if(/\d+\s*[~～-]\s*\d+\s*종|소분 구성|넉넉한 구성/.test(String(ux[k]||'')))ux[k]='원하는 과일 자유 선택'});}
 function render(){
+ normalizeWeeklyPlanText();
  ['searchAutocomplete','showFilterBar','showTrustBar','showMobileDock','guestCheckoutHint','showWorldSection','showWorldTab','weeklyEnabled','showWeeklyTeaser','weeklyMiniEnabled','weeklyRegularEnabled','weeklyFamilyEnabled'].forEach(k=>$('#'+k).checked=!!ux[k]);
  ['searchPlaceholder','trust1','trust2','trust3','trust4','worldFeaturedCount','weeklyTitle','weeklySubtitle','weeklyDeadline','weeklyShipDate','weeklyLimit','weeklyFruitNames','weeklyMiniName','weeklyMiniLabel','weeklyMiniPrice','weeklyMiniComposition','weeklyRegularName','weeklyRegularLabel','weeklyRegularPrice','weeklyRegularComposition','weeklyFamilyName','weeklyFamilyLabel','weeklyFamilyPrice','weeklyFamilyComposition'].forEach(k=>$('#'+k).value=ux[k]??'');
  const ids=Array.isArray(ux.worldFeaturedIds)?ux.worldFeaturedIds:DEFAULTS.worldFeaturedIds;

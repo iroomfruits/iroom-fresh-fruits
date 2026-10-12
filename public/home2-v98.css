@@ -887,3 +887,15 @@ body[data-theme-route="story"] .navItem[data-route="story"]{background:#eaf1e7;b
   .giftsRoutePage .giftCard{grid-template-rows:235px auto!important;min-height:380px!important}
   .giftsRoutePage .giftVisual{height:235px!important}
 }
+
+
+/* V61.20 — Weekly Pick flexible minimum-budget pricing */
+.weeklyItemPrice{display:block;margin:3px 4px 2px;font-size:13px;font-weight:900;color:#174638}
+.weeklyFruit>small{display:block}
+.weeklyPlan p small{display:inline-block;margin-top:5px;font-size:9px;color:#7b756d}
+.weeklySelectedChips button>span{display:flex;flex-direction:column;align-items:flex-start;gap:1px}
+.weeklySelectedChips button>span b{font-size:9px}
+.weeklySelectedChips button>span small{font-size:8px;color:#7a817c;font-weight:600}
+.weeklySelectionActions button{white-space:nowrap}
+.weeklyModalFruit small{line-height:1.35}
+.weeklyChoiceCounter{display:flex;align-items:center;gap:3px}
